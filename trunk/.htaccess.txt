@@ -1,0 +1,19 @@
+# Подробнее на http://myopencart.ru
+
+Options +FollowSymlinks
+
+# Запретить листинг директорий 
+Options -Indexes
+
+# Закрыть доступ к файлам шаблонов
+<FilesMatch "\.tpl">
+Order deny,allow
+Deny from all
+</FilesMatch>
+
+# Необходимо для ЧПУ.
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)\?*$ index.php?_route_=$1 [L,QSA]
