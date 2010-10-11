@@ -4,7 +4,7 @@ class ControllerPaymentFlSberBank extends Controller {
 		$this->language->load('payment/fl_sberbank');
 		
 		$this->data['text_instruction'] = $this->language->get('text_instruction');
-		$this->data['text_instruction_2'] = $this->language->get('text_instruction_2');
+		$this->data['text_instruction_2'] = str_replace('{server}', HTTPS_SERVER, $this->language->get('text_instruction_2'));
 		$this->data['text_instruction_3'] = $this->language->get('text_instruction_3');
 		$this->data['text_payment'] = $this->language->get('text_payment');
 		$this->data['text_printpay'] = $this->language->get('text_printpay');
@@ -132,7 +132,7 @@ class ControllerPaymentFlSberBank extends Controller {
 		$comment .= $this->config->get('fl_sberbank_bankuser_' . $this->config->get('config_language_id')) . "\n\n";
 		$comment .= $this->config->get('fl_sberbank_bik_' . $this->config->get('config_language_id')) . "\n\n";
 		$comment .= $this->config->get('fl_sberbank_ks_' . $this->config->get('config_language_id')) . "\n\n";*/
-		$comment .= $this->language->get('text_instruction_2') . $this->data['order_id'] = $order_info['order_id'] .  $this->language->get('text_instruction_3') . "\n\n";
+		$comment .= str_replace('{server}', HTTPS_SERVER, $this->language->get('text_instruction_2')) . $this->data['order_id'] = $order_info['order_id'] .  $this->language->get('text_instruction_3') . "\n\n";
 		$comment .= $this->language->get('text_payment');
 		
 		$this->model_checkout_order->confirm($this->session->data['order_id'], $this->config->get('fl_sberbank_order_status_id'), $comment);
