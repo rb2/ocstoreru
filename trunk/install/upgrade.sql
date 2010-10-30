@@ -613,9 +613,14 @@ ALTER TABLE `oc_category` ADD INDEX ( `sort_order` );
 
 ALTER TABLE `oc_product` ADD INDEX ( `status` );
 
-ALTER TABLE `oc_product_option` ADD INDEX ( `product_id` )
-ALTER TABLE `oc_product_image` ADD INDEX ( `product_id` )
-ALTER TABLE `oc_order_product` ADD INDEX ( `product_id` )
-ALTER TABLE `oc_product_featured` ADD PRIMARY KEY ( `product_id` )
-ALTER TABLE `oc_order_product` ADD INDEX ( `order_id` )
-ALTER TABLE `oc_order` ADD INDEX ( `order_status_id` )
+ALTER TABLE `oc_product_option` ADD INDEX ( `product_id` );
+ALTER TABLE `oc_product_image` ADD INDEX ( `product_id` );
+ALTER TABLE `oc_order_product` ADD INDEX ( `product_id` );
+ALTER TABLE `oc_product_featured` ADD PRIMARY KEY ( `product_id` );
+ALTER TABLE `oc_order_product` ADD INDEX ( `order_id` );
+ALTER TABLE `oc_order` ADD INDEX ( `order_status_id` );
+
+### Start ocStore 0.1.4
+ALTER TABLE `oc_product_discount` ADD INDEX ( `product_id` );
+ALTER TABLE `oc_product_special` ADD INDEX ( `product_id` );
+ALTER TABLE `oc_review` ADD INDEX ( `product_id` );
