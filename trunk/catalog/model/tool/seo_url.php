@@ -27,6 +27,8 @@ class ModelToolSeoUrl extends Model {
 				
 						if ($query->num_rows) {
 							$url .= '/' . $query->row['keyword'];
+						} else {
+							return $link;
 						}							
 					}
 					
