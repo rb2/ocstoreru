@@ -39,6 +39,7 @@ $_['entry_city']              = 'Город:';
 $_['entry_postcode']          = 'Индекс:';
 $_['entry_country']           = 'Страна:';
 $_['entry_zone']              = 'Регион / Область:';
+$_['entry_default']           = 'Адрес по умолчанию:';
 
 // Error
 $_['error_permission']        = 'У Вас нет прав для изменения покупателей!';

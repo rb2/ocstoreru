@@ -624,3 +624,6 @@ ALTER TABLE `oc_order` ADD INDEX ( `order_status_id` );
 ALTER TABLE `oc_product_discount` ADD INDEX ( `product_id` );
 ALTER TABLE `oc_product_special` ADD INDEX ( `product_id` );
 ALTER TABLE `oc_review` ADD INDEX ( `product_id` );
+
+DELETE FROM `oc_zone` WHERE `code` = 'CMA';
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, 222, 'CMA', 'Cumbria', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
