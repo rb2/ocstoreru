@@ -43,7 +43,7 @@ $_['entry_status']           = 'Статус:';
 $_['entry_tax_class']        = 'Налог:';
 $_['entry_cost']             = 'Стоимость:<br/><span class="help">Cтоимость товара для отчета по прибыли</span>';
 $_['entry_price']            = 'Цена:';
-$_['entry_subtract']         = 'Наценка:';
+$_['entry_subtract']         = 'Вычитать со склада:';
 $_['entry_weight_class']     = 'Класс веса:';
 $_['entry_weight']           = 'Вес:';
 $_['entry_length']           = 'Единица измерения:';
