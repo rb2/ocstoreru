@@ -621,28 +621,29 @@ CREATE TABLE `oc_extension` (
   `type` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `key` varchar(32) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=294 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `oc_extension`
 --
 
 INSERT INTO `oc_extension` (`extension_id`, `type`, `key`) VALUES
-(23, 'payment', 'cod'),
-(22, 'total', 'shipping'),
-(57, 'total', 'sub_total'),
-(58, 'total', 'tax'),
-(59, 'total', 'total'),
-(77, 'module', 'cart'),
-(78, 'module', 'category'),
-(224, 'module', 'information'),
-(81, 'module', 'manufacturer'),
-(115, 'module', 'bestseller'),
-(284, 'payment', 'nochex'),
-(128, 'total', 'coupon'),
-(293, 'shipping', 'flat'),
+(NULL, 'payment', 'cod'),
+(NULL, 'total', 'shipping'),
+(NULL, 'total', 'sub_total'),
+(NULL, 'total', 'tax'),
+(NULL, 'total', 'total'),
+(NULL, 'module', 'cart'),
+(NULL, 'module', 'category'),
+(NULL, 'module', 'information'),
+(NULL, 'module', 'manufacturer'),
+(NULL, 'module', 'bestseller'),
+(NULL, 'payment', 'nochex'),
+(NULL, 'total', 'coupon'),
+(NULL, 'shipping', 'flat'),
 (NULL, 'module', 'latest'),
-(NULL, 'module', 'featured');
+(NULL, 'module', 'featured'),
+(NULL, 'module', 'blinks');
 
 -- --------------------------------------------------------
 
@@ -1717,7 +1718,11 @@ INSERT INTO `oc_setting` (`setting_id`, `group`, `key`, `value`) VALUES
 (NULL, 'latest', 'latest_position', 'home'),
 (NULL, 'latest', 'latest_status', '1'),
 (NULL, 'latest', 'latest_sort_order', '0'),
-(NULL, 'config', 'config_error_filename', 'error.txt');
+(NULL, 'config', 'config_error_filename', 'error.txt'),
+(NULL, 'blinks', 'blinks_position', 'right'),
+(NULL, 'blinks', 'blinks_status', '1'),
+(NULL, 'blinks', 'blinks_sort_order', '10'),
+(NULL, 'blinks', 'blinks_links', '&lt;a href=&quot;http://myopencart.ru&quot;&gt;myOpenCart.ru&lt;/a&gt; \r\n &lt;a href=&quot;http://myopencart.ru/wiki/&quot;&gt;Документация&lt;/a&gt; \r\n &lt;a href=&quot;http://forum.myopencart.ru&quot;&gt;Форум поддержки&lt;/a&gt;  \r\n &lt;a href=&quot;http://domenam.ru&quot;&gt;Хостинг для OpenCart&lt;/a&gt;');
 
 -- --------------------------------------------------------
 
