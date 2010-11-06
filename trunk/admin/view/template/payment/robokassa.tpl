@@ -102,6 +102,10 @@
             <?php } ?>
           </select></td>
       	</tr>
+      	 <tr>
+          <td><?php echo $entry_sort_order; ?></td>
+          <td><input type="text" name="robokassa_sort_order" value="<?php echo $robokassa_sort_order; ?>" size="1" /></td>
+        </tr>
 
       </table>
     </form>
