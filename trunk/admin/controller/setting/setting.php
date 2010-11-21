@@ -845,7 +845,7 @@ class ControllerSettingSetting extends Controller {
 			$this->error['title'] = $this->language->get('error_title');
 		}	
 
-    	if ((strlen(utf8_decode($this->request->post['config_email'])) > 96) || (!preg_match(EMAIL_PATTERN, $this->request->post['config_email']))) {
+    	if ((strlen(utf8_decode($this->request->post['config_email'])) > 96) || (!preg_match( EMAIL_PATTERN , $this->request->post['config_email']))) {
       		$this->error['email'] = $this->language->get('error_email');
     	}
 

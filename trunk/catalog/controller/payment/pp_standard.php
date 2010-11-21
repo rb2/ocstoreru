@@ -15,6 +15,8 @@ class ControllerPaymentPPStandard extends Controller {
 		}
 
 		$this->load->model('checkout/order');
+		
+		$this->language->load('payment/pp_standard');
 
 		$this->order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
@@ -28,6 +30,7 @@ class ControllerPaymentPPStandard extends Controller {
 
 		// Get all totals
 		$total = 0;
+		$total_data = array();
 		$taxes = $this->cart->getTaxes();
 
 		$this->load->model('checkout/extension');
@@ -55,7 +58,7 @@ class ControllerPaymentPPStandard extends Controller {
 		$total = $this->currency->format($total, $currency, FALSE, FALSE);
 		$shipping_total = 0;
 		// Create form fields
-		$this->fields = array();
+		$this->data['fields'] = array();
 		$this->data['fields']['cmd'] = '_cart';
 		$this->data['fields']['upload'] = '1';
 		if ($this->cart->hasShipping()) {
@@ -90,7 +93,33 @@ class ControllerPaymentPPStandard extends Controller {
             $i++;
         }
 
-		$this->data['fields']['discount_amount_cart'] = number_format($discount_total, 2, '.', '');
+		// Hack to bypass paypal's discount limitation: https://www.x.com/thread/47330
+		if ($discount_total < $this->cart->getSubTotal()) {
+			$this->data['fields']['discount_amount_cart'] = $this->currency->format($discount_total, $currency, FALSE, FALSE);
+		} elseif ($discount_total) {
+			// Set Shipping as a line item
+			$this->data['fields']['item_number_' . $i . ''] = $this->session->data['shipping_method']['id'];
+			$this->data['fields']['item_name_' . $i . ''] = $this->session->data['shipping_method']['title'];
+			$this->data['fields']['amount_' . $i . ''] = $shipping_total;
+			$this->data['fields']['quantity_' . $i . ''] = 1;
+			$this->data['fields']['weight_' . $i . ''] = $this->cart->getWeight();
+			$product_total += $shipping_total;
+			$i++;
+	
+			// Set Tax as a line item
+			$this->data['fields']['item_number_' . $i . ''] = $this->language->get('text_tax');
+			$this->data['fields']['item_name_' . $i . ''] = $this->language->get('text_tax');
+			$this->data['fields']['amount_' . $i . ''] = $tax_total;
+			$this->data['fields']['quantity_' . $i . ''] = 1;
+			$this->data['fields']['weight_' . $i . ''] = 0;
+			$product_total += $tax_total;
+			$i++;
+		
+			// Since shipping & tax are now line items, remove the actual shipping & tax value
+			$this->data['fields']['shipping_1'] = '0.00';
+			$this->data['fields']['tax_cart'] = '0.00';
+			$this->data['fields']['discount_amount_cart'] = $this->currency->format($discount_total, $currency, FALSE, FALSE);
+		}
 
 		$remaining_total = $total - $product_total - $tax_total - $shipping_total + $discount_total;
 
@@ -111,7 +140,6 @@ class ControllerPaymentPPStandard extends Controller {
 		$this->data['fields']['invoice'] = $this->session->data['order_id'] . ' - ' . html_entity_decode($this->order_info['payment_firstname'], ENT_QUOTES, 'UTF-8') . ' ' . html_entity_decode($this->order_info['payment_lastname'], ENT_QUOTES, 'UTF-8');
 		$this->data['fields']['lc'] = $this->session->data['language'];
 		$this->data['fields']['rm'] = '2';
-		$this->data['fields']['address_override'] = '1';
 		
 
 		if (!$this->config->get('pp_standard_transaction')) {

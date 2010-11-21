@@ -53,6 +53,11 @@ $(document).ready(function(){
 	});
 });
 </script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	$(".list tr:even").css("background-color", "#F4F4F8");
+});
+</script>
 </head>
 <body>
 <div id="container">
