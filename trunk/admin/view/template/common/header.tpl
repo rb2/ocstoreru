@@ -88,6 +88,7 @@ $(document).ready(function(){
         <li><a href="<?php echo $payment; ?>"><?php echo $text_payment; ?></a></li>
         <li><a href="<?php echo $total; ?>"><?php echo $text_total; ?></a></li>
         <li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>
+        <li><a href="<?php echo $dataexchange; ?>"><?php echo $text_dataexchange; ?></a></li>
       </ul>
     </li>
     <li id="sale"><a class="top"><?php echo $text_sale; ?></a>

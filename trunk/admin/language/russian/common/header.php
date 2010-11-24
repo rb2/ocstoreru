@@ -18,6 +18,7 @@ $_['text_download']          = 'Загрузки';
 $_['text_error_log']         = 'Журнал ошибок';
 $_['text_extension']         = 'Дополнения';
 $_['text_feed']              = 'Каналы товаров';
+$_['text_dataexchange']		 = 'Импорт/Экспорт';
 $_['text_front']             = 'Магазин';
 $_['text_geo_zone']          = 'Географические зоны';
 $_['text_help']              = 'Помощь';
