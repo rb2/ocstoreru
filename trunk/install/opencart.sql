@@ -107,16 +107,16 @@ CREATE TABLE `oc_category_description` (
 -- Дамп данных таблицы `oc_category_description`
 --
 
-INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `meta_description`, `description`) VALUES
-(18, 1, 'Ноутбуки и нетбуки', '', '', ''),
-(28, 1, 'Мониторы', '', '', ''),
-(20, 1, 'Компьютеры', '', 'Пример описания категории', '&lt;p&gt;\r\n      Пример описания категории&lt;/p&gt;\r\n'),
-(34, 1, 'MP3 плееры', '', '', ''),
-(33, 1, 'Фотоаппараты', '', '', ''),
-(32, 1, 'Веб-камеры', '', '', ''),
-(31, 1, 'Сканеры', '', '', ''),
-(30, 1, 'Принтеры', '', '', ''),
-(29, 1, 'Периферия', '', '', ''),
+INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `meta_keywords`, `meta_description`, `description`) VALUES
+(18, 1, 'Laptops &amp; Notebooks', '','', ''),
+(28, 1, 'Monitors', '', '', ''),
+(20, 1, 'Desktops', '', 'Example of category description', '&lt;p&gt;\r\n	Example of category description text&lt;/p&gt;\r\n'),
+(34, 1, 'MP3 Players', '', '', ''),
+(33, 1, 'Cameras', '', '', ''),
+(32, 1, 'Web Cameras', '', '', ''),
+(31, 1, 'Scanners', '', '', ''),
+(30, 1, 'Printers', '', '', ''),
+(29, 1, 'Mice and Trackballs', '', '', ''),
 (27, 1, 'Mac', '', '', ''),
 (26, 1, 'PC', '', '', ''),
 (17, 1, 'Программное обеспечение', '', '', ''),
@@ -1147,7 +1147,7 @@ CREATE TABLE `oc_product_description` (
 --
 
 INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `meta_keywords`, `meta_description`, `description`) VALUES
-(35, 1, 'Товар 8', '', '', '&lt;p&gt;\r\n	Товар 8&lt;/p&gt;\r\n'),
+(35, 1, 'Товар 8', '', '', '&lt;p&gt;\r\ Товар 8&lt;/p&gt;\r\n'),
 (36, 1, 'iPod Nano', '', '', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Video in your pocket.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Its the small iPod with one very big idea: video. The worlds most popular music player now lets you enjoy movies, TV shows, and more on a two-inch display thats 65% brighter than before.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;strong&gt;&amp;nbsp;&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Sleek and colorful.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With an anodized aluminum and polished stainless steel enclosure and a choice of five colors, iPod nano is dressed to impress.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;iTunes.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Available as a free download, iTunes makes it easy to browse and buy millions of songs, movies, TV shows, audiobooks, and games and download free podcasts all at the iTunes Store. And you can import your own music, manage your whole media library, and sync your iPod or iPhone with ease.&lt;/p&gt;\r\n&lt;/div&gt;\r\n'),
 (48, 1, 'iPod Classic', '', '', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;'),
 (40, 1, 'iPhone', '', '', '&lt;p class=&quot;intro&quot;&gt;\r\n	iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n'),
@@ -1580,7 +1580,7 @@ CREATE TABLE `oc_review` (
 
 INSERT INTO `oc_review` (`review_id`, `product_id`, `customer_id`, `author`, `text`, `rating`, `status`, `date_added`, `date_modified`) VALUES
 (58, 42, 0, 'Дмитрий', 'Отличный товар', 3, 1, '2010-01-02 03:14:24', '0000-00-00 00:00:00'),
-(59, 42, 0, 'Александр', 'test test  test test test ', 2, 1, '2010-02-26 22:06:32', '0000-00-00 00:00:00'),
+(59, 42, 0, 'Александр', 'test test test ', 2, 1, '2010-02-26 22:06:32', '0000-00-00 00:00:00'),
 (60, 47, 0, 'Михаил', ' test test', 3, 1, '2010-03-05 21:10:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -1886,13 +1886,13 @@ CREATE TABLE `oc_url_alias` (
 
 INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 (464, 'product_id=48', 'ipod_classic'),
-(487, 'category_id=20', 'Компьютеры'),
+(487, 'category_id=20', 'desktops'),
 (442, 'category_id=26', 'pc'),
 (443, 'category_id=27', 'mac'),
 (453, 'manufacturer_id=8', 'apple'),
-(455, 'information_id=4', 'О нас'),
-(485, 'product_id=42', 'Тест'),
-(444, 'category_id=34', 'MP3 плееры');
+(455, 'information_id=4', 'about_us'),
+(485, 'product_id=42', 'test'),
+(444, 'category_id=34', 'mp3-players');
 
 -- --------------------------------------------------------
 
