@@ -25,8 +25,8 @@ $_['column_action']          = 'Действие';
 
 // Entry
 $_['entry_name']             = 'Название товара:';
-$_['entry_meta_keywords'] 	 = 'Ключевые слова мета-теги:';
-$_['entry_meta_description'] = 'Мета-теги:';
+$_['entry_meta_keywords'] 	 = 'Ключевые слова для мета-тегов:';
+$_['entry_meta_description'] = 'Описание для мета-тегов:';
 $_['entry_description']      = 'Описание:';
 $_['entry_store']            = 'Магазины:';
 $_['entry_keyword']          = 'Псевдоним:';
@@ -38,7 +38,7 @@ $_['entry_shipping']         = 'Доставка:';
 $_['entry_date_available']   = 'Дата поступления:';
 $_['entry_quantity']         = 'Количество:';
 $_['entry_minimum']          = 'Минимальное количество:<br/><span class="help">Указание минимально количества в заказе</span>';
-$_['entry_stock_status']     = 'Состояние склада:';
+$_['entry_stock_status']     = 'Остутствие на складе:<br /><span class="help">Статус, показываемый, когда товара нет на складе</span>';
 $_['entry_status']           = 'Статус:';
 $_['entry_tax_class']        = 'Налог:';
 $_['entry_cost']             = 'Стоимость:<br/><span class="help">Cтоимость товара для отчета по прибыли</span>';
@@ -60,7 +60,7 @@ $_['entry_prefix']           = 'Префикс:';
 $_['entry_category']         = 'Категории:';
 $_['entry_download']         = 'Загрузки:';
 $_['entry_related']          = 'Рекомендуемые:';
-$_['entry_tags']          	 = 'Теги:<br /><span class="help">разделяются запятой</span>';
+$_['entry_tags']          	 = 'Теги товара:<br /><span class="help">разделяются запятой</span>';
 
 // Error
 $_['error_permission']       = 'У Вас нет прав для изменения товаров!';
