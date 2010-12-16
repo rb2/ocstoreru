@@ -3,26 +3,20 @@ final class Sms{
 
 	private $smsgate;
 	
-	public function __construct($registry) {
+	public function __construct($gate, $param = array()) {
 	
-		$this->config = $registry->get('config');
-		
-		$smsgate = $this->config->get('sms_gatename');
-		
-		if(!$smsgate) $smsgate = 'testsmsgate';
+			
+		if(!$gate) $gate = 'testsmsgate';
 		
   		if(! defined('DIR_SMSGATE')) define('DIR_SMSGATE', DIR_SYSTEM . 'smsgate/');
   	
-		if (file_exists(DIR_SMSGATE . $smsgate . '.php')) {
-			require_once(DIR_SMSGATE . $smsgate . '.php');
+		if (file_exists(DIR_SMSGATE . $gate . '.php')) {
+			require_once(DIR_SMSGATE . $gate . '.php');
 		} else {
-			exit('Error: Could not load database file ' . $smsgate . '!');
+			exit('Error: Could not load database file ' . $gate . '!');
 		}
 				
-		$this->smsgate = new $smsgate();
-		
-		$this->smsgate->setUsername($this->config->get('sms_username'));
-		$this->smsgate->setPassword($this->config->get('sms_password'));
+		$this->smsgate = new $gate();
 	}
 	
 	public function setTo($to) {
