@@ -205,13 +205,13 @@ $('#search input').keydown(function(e) {
 	}
 });
 
-function moduleSearch() {
+function moduleSearch() {	
 	pathArray = location.pathname.split( '/' );
 	
-	url = location.protocol + "//" + location.host + "/" + pathArray[1] + '/';	
-	
+	url = location.protocol + "//" + location.host + "/" + pathArray[1] + '/';
+		
 	url += 'index.php?route=product/search';
-	
+		
 	var filter_keyword = $('#filter_keyword').attr('value')
 	
 	if (filter_keyword) {

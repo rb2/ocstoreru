@@ -9,7 +9,7 @@
   </div>
   <div class="middle">
     <?php if ($description) { ?>
-		<div><?php echo $description; ?></div>
+	<div><?php echo $description; ?></div>
 	<?php } ?>
 	<?php if (!$categories && !$products) { ?>
     <div class="content"><?php echo $text_error; ?></div>

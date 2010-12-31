@@ -1,7 +1,16 @@
 <?php
 class ModelAccountCustomer extends Model {
 	public function addCustomer($data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', password = '" . $this->db->escape(md5($data['password'])) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "', status = '1', date_added = NOW()");
+      	
+		$data['firstname'] = ucwords(strtolower(trim($data['firstname'])));
+		$data['lastname'] = ucwords(strtolower(trim($data['lastname'])));
+		$data['company'] = ucwords(strtolower(trim($data['company'])));
+		$data['address_1'] = ucwords(strtolower(trim($data['address_1'])));
+		$data['address_2'] = ucwords(strtolower(trim($data['address_2'])));
+		$data['city'] = ucwords(strtolower(trim($data['city'])));
+		$data['postcode'] = strtoupper(trim($data['postcode']));
+	
+		$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', password = '" . $this->db->escape(md5($data['password'])) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "', status = '1', date_added = NOW()");
       	
 		$customer_id = $this->db->getLastId();
 			
@@ -17,6 +26,9 @@ class ModelAccountCustomer extends Model {
 	}
 	
 	public function editCustomer($data) {
+		$data['firstname'] = ucwords(strtolower(trim($data['firstname'])));
+		$data['lastname'] = ucwords(strtolower(trim($data['lastname'])));
+		
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	}
 

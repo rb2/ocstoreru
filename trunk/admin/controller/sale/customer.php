@@ -906,7 +906,7 @@ class ControllerSaleCustomer extends Controller {
       		$this->error['lastname'] = $this->language->get('error_lastname');
     	}
     	
-		if ((strlen(utf8_decode($this->request->post['email'])) > 96) || (!preg_match( EMAIL_PATTERN , $this->request->post['email']))) {
+		if ((strlen(utf8_decode($this->request->post['email'])) > 96) || (!preg_match(EMAIL_PATTERN, $this->request->post['email']))) {
       		$this->error['email'] = $this->language->get('error_email');
     	}
 

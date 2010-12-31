@@ -90,6 +90,11 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_smtp_port'] = $this->language->get('entry_smtp_port');
 		$this->data['entry_smtp_timeout'] = $this->language->get('entry_smtp_timeout');
 		$this->data['entry_alert_mail'] = $this->language->get('entry_alert_mail');
+		$this->data['entry_sms'] = $this->language->get('entry_sms');
+		$this->data['entry_sms_gatename'] = $this->language->get('entry_sms_gatename');
+		$this->data['entry_sms_admin_phone'] = $this->language->get('entry_sms_admin_phone');
+		$this->data['entry_alert_sms'] = $this->language->get('entry_alert_sms');
+		$this->data['entry_alert_smss'] = $this->language->get('entry_alert_smss');
 		$this->data['entry_ssl'] = $this->language->get('entry_ssl');
 		$this->data['entry_encryption'] = $this->language->get('entry_encryption');
 		$this->data['entry_seo_url'] = $this->language->get('entry_seo_url');
@@ -116,6 +121,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['tab_option'] = $this->language->get('tab_option');
 		$this->data['tab_image'] = $this->language->get('tab_image');
 		$this->data['tab_mail'] = $this->language->get('tab_mail');
+		$this->data['tab_sms'] = $this->language->get('tab_sms');
 		$this->data['tab_server'] = $this->language->get('tab_server');
 
 		$this->data['token'] = $this->session->data['token'];
@@ -262,6 +268,15 @@ class ControllerSettingSetting extends Controller {
 			'name' => $this->language->get('text_default'),
 			'href' => HTTPS_SERVER . 'index.php?route=setting/setting&token=' . $this->session->data['token']
 		); 
+		
+		
+		$this->data['sms_gatenames'] = array();
+	
+		$files = glob(DIR_SMSGATE . '*.php');
+		
+		foreach ($files as $file) {
+			$this->data['sms_gatenames'][] =  basename($file, '.php');
+		}
 		
 		$this->load->model('setting/store');
 		
@@ -586,7 +601,7 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_icon'] = $this->config->get('config_icon');			
 		}
 		
-		if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
+		if ($this->config->get('config_icon') && file_exists(DIR_IMAGE . $this->config->get('config_icon'))) {
 			$this->data['preview_icon'] = HTTPS_IMAGE . $this->config->get('config_icon');		
 		} else {
 			$this->data['preview_icon'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
@@ -732,6 +747,30 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_mail_parameter'] = $this->request->post['config_mail_parameter'];
 		} else {
 			$this->data['config_mail_parameter'] = $this->config->get('config_mail_parameter');
+		}
+		
+		if (isset($this->request->post['config_sms_gatename'])) {
+			$this->data['config_sms_gatename'] = $this->request->post['config_sms_gatename'];
+		} else {
+			$this->data['config_sms_gatename'] = $this->config->get('config_sms_gatename');
+		}
+		
+		if (isset($this->request->post['config_sms_admin_phone'])) {
+			$this->data['config_sms_admin_phone'] = $this->request->post['config_sms_admin_phone'];
+		} else {
+			$this->data['config_sms_admin_phone'] = $this->config->get('config_sms_admin_phone');
+		}
+
+		if (isset($this->request->post['config_alert_sms'])) {
+			$this->data['config_alert_sms'] = $this->request->post['config_alert_sms'];
+		} else {
+			$this->data['config_alert_sms'] = $this->config->get('config_alert_sms');
+		}
+		
+		if (isset($this->request->post['config_alert_smss'])) {
+			$this->data['config_alert_smss'] = $this->request->post['config_alert_smss'];
+		} else {
+			$this->data['config_alert_smss'] = $this->config->get('config_alert_smss');
 		}
 		
 		if (isset($this->request->post['config_ssl'])) {

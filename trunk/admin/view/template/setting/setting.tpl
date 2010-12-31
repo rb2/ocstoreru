@@ -19,7 +19,7 @@
       &nbsp;<a onclick="location = '<?php echo $insert; ?>'" class="button"><span><?php echo $button_add_store; ?></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
   </div>
   <div class="content">
-    <div id="tabs" class="htabs"><a tab="#tab_general"><?php echo $tab_general; ?></a><a tab="#tab_store"><?php echo $tab_store; ?></a><a tab="#tab_local"><?php echo $tab_local; ?></a><a tab="#tab_option"><?php echo $tab_option; ?></a><a tab="#tab_image"><?php echo $tab_image; ?></a><a tab="#tab_mail"><?php echo $tab_mail; ?></a><a tab="#tab_server"><?php echo $tab_server; ?></a></div>
+    <div id="tabs" class="htabs"><a tab="#tab_general"><?php echo $tab_general; ?></a><a tab="#tab_store"><?php echo $tab_store; ?></a><a tab="#tab_local"><?php echo $tab_local; ?></a><a tab="#tab_option"><?php echo $tab_option; ?></a><a tab="#tab_image"><?php echo $tab_image; ?></a><a tab="#tab_mail"><?php echo $tab_mail; ?></a><a tab="#tab_sms"><?php echo $tab_sms; ?></a><a tab="#tab_server"><?php echo $tab_server; ?></a></div>
     <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
       <div id="tab_general">
         <table class="form">
@@ -602,6 +602,42 @@
           <tr>
             <td><?php echo $entry_alert_emails; ?></td>
             <td><textarea name="config_alert_emails" cols="40" rows="5"><?php echo $config_alert_emails; ?></textarea></td>
+          </tr>
+        </table>
+      </div>
+       <div id="tab_sms">
+        <table class="form">
+          <tr>
+            <td><?php echo $entry_sms_gatename; ?></td>
+            <td>
+            	<select name="config_sms_gatename">
+            		<?php foreach($sms_gatenames as $sms_gatename){?>
+					<option value="<?php echo $sms_gatename; ?>" <?php if($config_sms_gatename == $sms_gatename ) {?> selected="selected" <?php } ?> ><?php echo $sms_gatename; ?></option>
+					<?}?>
+              	</select>
+             </td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_sms_admin_phone; ?></td>
+            <td><input type="text" name="config_sms_admin_phone" value="<?php echo $config_sms_admin_phone; ?>" /></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_alert_sms; ?></td>
+            <td><?php if ($config_alert_sms) { ?>
+              <input type="radio" name="config_alert_sms" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="config_alert_sms" value="0" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_alert_sms" value="1" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="config_alert_sms" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_alert_smss; ?></td>
+            <td><textarea name="config_alert_smss" cols="40" rows="5"><?php echo $config_alert_smss; ?></textarea></td>
           </tr>
         </table>
       </div>

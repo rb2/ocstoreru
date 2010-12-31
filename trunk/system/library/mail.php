@@ -31,11 +31,11 @@ final class Mail {
 	}
 	
 	public function setSender($sender) {
-		$this->sender = $sender;
+		$this->sender = html_entity_decode($sender, ENT_COMPAT, 'UTF-8');
 	}
 	
 	public function setSubject($subject) {
-		$this->subject = $subject;
+		$this->subject = html_entity_decode($subject, ENT_COMPAT, 'UTF-8');
 	}
 	
 	public function setText($text) {

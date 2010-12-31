@@ -19,6 +19,7 @@ $_['text_option_value']      = 'Значение опции';
 $_['column_name']            = 'Название товара';
 $_['column_model']           = 'Модель';
 $_['column_image']           = 'Изображения';
+$_['column_price']           = 'Цена';
 $_['column_quantity']        = 'Количество';
 $_['column_status']          = 'Статус';
 $_['column_action']          = 'Действие';

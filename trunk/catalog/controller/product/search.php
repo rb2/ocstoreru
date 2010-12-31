@@ -203,7 +203,7 @@ class ControllerProductSearch extends Controller {
             			'options' => $options,
 						'special' => $special,
 						//'href'    => $this->model_tool_seo_url->rewrite(HTTP_SERVER . 'index.php?route=product/product&keyword=' . $this->request->get['keyword'] . $url . '&product_id=' . $result['product_id']),
-						'href'    => $this->model_tool_seo_url->rewrite(HTTP_SERVER . 'index.php?route=product/product&keyword=' . urlencode($this->request->get['keyword']) . $url . '&product_id=' . $result['product_id']),
+						'href'    => $this->model_tool_seo_url->rewrite(HTTP_SERVER . 'index.php?route=product/product&keyword=' . urlencode($this->request->get['keyword']) . $url . '&product_id=' . $result['product_id']), 
 						'add'	  => $add
           			);
         		}
@@ -270,17 +270,19 @@ class ControllerProductSearch extends Controller {
 					'href'  => HTTP_SERVER . 'index.php?route=product/search' . $url . '&sort=p.price&order=DESC'
 				); 
 				
-				$this->data['sorts'][] = array(
-					'text'  => $this->language->get('text_rating_desc'),
-					'value' => 'rating-DESC',
-					'href'  => HTTP_SERVER . 'index.php?route=product/search' . $url . '&sort=rating&order=DESC'
-				); 
-				
-				$this->data['sorts'][] = array(
-					'text'  => $this->language->get('text_rating_asc'),
-					'value' => 'rating-ASC',
-					'href'  => HTTP_SERVER . 'index.php?route=product/search' . $url . '&sort=rating&order=ASC'
-				);
+				if ($this->config->get('config_review')) {
+					$this->data['sorts'][] = array(
+						'text'  => $this->language->get('text_rating_desc'),
+						'value' => 'rating-DESC',
+						'href'  => HTTP_SERVER . 'index.php?route=product/search' . $url . '&sort=rating&order=DESC'
+					); 
+					
+					$this->data['sorts'][] = array(
+						'text'  => $this->language->get('text_rating_asc'),
+						'value' => 'rating-ASC',
+						'href'  => HTTP_SERVER . 'index.php?route=product/search' . $url . '&sort=rating&order=ASC'
+					);
+				}
 				
 				$this->data['sorts'][] = array(
 					'text'  => $this->language->get('text_model_asc'),
