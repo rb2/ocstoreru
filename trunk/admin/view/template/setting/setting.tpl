@@ -606,6 +606,7 @@
         </table>
       </div>
        <div id="tab_sms">
+       <div class="warning">Running in test mode!!!</div>
         <table class="form">
           <tr>
             <td><?php echo $entry_sms_gatename; ?></td>
