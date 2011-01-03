@@ -272,7 +272,7 @@ class ControllerSettingSetting extends Controller {
 		
 		$this->data['sms_gatenames'] = array();
 	
-		$files = glob(DIR_SMSGATE . '*.php');
+		$files = glob(DIR_SYSTEM . 'smsgate/' . '*.php');
 		
 		foreach ($files as $file) {
 			$this->data['sms_gatenames'][] =  basename($file, '.php');
