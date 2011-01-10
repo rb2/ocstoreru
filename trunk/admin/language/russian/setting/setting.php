@@ -27,7 +27,7 @@ $_['entry_country']           = 'Страна:';
 $_['entry_zone']              = 'Регион / Область:';
 $_['entry_language']          = 'Язык:';
 $_['entry_admin_language']    = 'Язык администратора:';
-$_['entry_currency']          = 'Валюта:<br /><span class="help">Change the default currency. Clear your browser cache to see the change and reset your existing cookie.</span>';
+$_['entry_currency']          = 'Валюта:<br /><span class="help">Изменение валюты по умолчанию. Необходимо очистить кэш браузера для просмотра изменений и сбрасывания cookie.</span>';
 $_['entry_currency_auto']     = 'Автоматическое обновление валют:<br /><span class="help">Задать ежедневное автоматическое обновление валют.</span>';
 $_['entry_weight_class']      = 'Вес:';
 $_['entry_length_class']      = 'Единица измерения:';
