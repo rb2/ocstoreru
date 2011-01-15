@@ -614,7 +614,7 @@
             	<select name="config_sms_gatename">
             		<?php foreach($sms_gatenames as $sms_gatename){?>
 					<option value="<?php echo $sms_gatename; ?>" <?php if($config_sms_gatename == $sms_gatename ) {?> selected="selected" <?php } ?> ><?php echo $sms_gatename; ?></option>
-					<?}?>
+					<?php }?>
               	</select>
              </td>
           </tr>
