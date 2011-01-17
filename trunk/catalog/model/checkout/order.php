@@ -440,8 +440,24 @@ class ModelCheckoutOrder extends Model {
 				$mail->setText($text);
 				$mail->send();
 				*/
-			}		
+			}
+			
+			if($this->config->get('config_alert_sms')) {
+			
+				$message = str_replace(array('{ID}'), array($order_id), $this->config->get('config_sms_message'));
+			
+				$sms = new Sms($this->config->get('config_sms_gatename'));
+				$sms->setTo($this->config->get('config_sms_admin_phone'));
+				$sms->setText( $message );
+				$sms->setUsername($this->config->get('config_sms_gate_username'));
+				$sms->setPassword($this->config->get('config_sms_gate_password'));
+				$sms->setFrom($this->config->get('config_sms_from'));
+				$sms->send(); 
+				
+			}
+		
 		}
+		
 	}
 	
 	public function update($order_id, $order_status_id, $comment = '', $notify = FALSE) {
@@ -493,6 +509,8 @@ class ModelCheckoutOrder extends Model {
 				$mail->setSubject($subject);
 				$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 				$mail->send();
+				
+				exit;
 			}
 		}
 	}

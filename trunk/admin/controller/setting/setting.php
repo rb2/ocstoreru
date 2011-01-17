@@ -93,8 +93,12 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_sms'] = $this->language->get('entry_sms');
 		$this->data['entry_sms_gatename'] = $this->language->get('entry_sms_gatename');
 		$this->data['entry_sms_admin_phone'] = $this->language->get('entry_sms_admin_phone');
+		$this->data['entry_sms_message'] = $this->language->get('entry_sms_message');
+		$this->data['entry_sms_gate_username'] = $this->language->get('entry_sms_gate_username');
+		$this->data['entry_sms_gate_password'] = $this->language->get('entry_sms_gate_password');
 		$this->data['entry_alert_sms'] = $this->language->get('entry_alert_sms');
 		$this->data['entry_alert_smss'] = $this->language->get('entry_alert_smss');
+		$this->data['entry_sms_from'] = $this->language->get('entry_sms_from');
 		$this->data['entry_ssl'] = $this->language->get('entry_ssl');
 		$this->data['entry_encryption'] = $this->language->get('entry_encryption');
 		$this->data['entry_seo_url'] = $this->language->get('entry_seo_url');
@@ -759,6 +763,30 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_sms_admin_phone'] = $this->request->post['config_sms_admin_phone'];
 		} else {
 			$this->data['config_sms_admin_phone'] = $this->config->get('config_sms_admin_phone');
+		}
+		
+		if (isset($this->request->post['config_sms_from'])) {
+			$this->data['config_sms_from'] = $this->request->post['config_sms_from'];
+		} else {
+			$this->data['config_sms_from'] = $this->config->get('config_sms_from');
+		}
+		
+		if (isset($this->request->post['config_sms_message'])) {
+			$this->data['config_sms_message'] = $this->request->post['config_sms_message'];
+		} else {
+			$this->data['config_sms_message'] = $this->config->get('config_sms_message');
+		}
+		
+		if (isset($this->request->post['config_sms_gate_username'])) {
+			$this->data['config_sms_gate_username'] = $this->request->post['config_sms_gate_username'];
+		} else {
+			$this->data['config_sms_gate_username'] = $this->config->get('config_sms_gate_username');
+		}
+		
+		if (isset($this->request->post['config_sms_gate_password'])) {
+			$this->data['config_sms_gate_password'] = $this->request->post['config_sms_gate_password'];
+		} else {
+			$this->data['config_sms_gate_password'] = $this->config->get('config_sms_gate_password');
 		}
 
 		if (isset($this->request->post['config_alert_sms'])) {

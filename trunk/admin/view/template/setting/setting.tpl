@@ -623,6 +623,22 @@
             <td><input type="text" name="config_sms_admin_phone" value="<?php echo $config_sms_admin_phone; ?>" /></td>
           </tr>
           <tr>
+            <td><?php echo $entry_sms_from; ?></td>
+            <td><input type="text" name="config_sms_from" value="<?php echo $config_sms_from; ?>" /></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_sms_message; ?></td>
+            <td><input type="text" name="config_sms_message" value="<?php echo $config_sms_message; ?>" /></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_sms_gate_username; ?></td>
+            <td><input type="text" name="config_sms_gate_username" value="<?php echo $config_sms_gate_username; ?>" /></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_sms_gate_password; ?></td>
+            <td><input type="text" name="config_sms_gate_password" value="<?php echo $config_sms_gate_password; ?>" /></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_alert_sms; ?></td>
             <td><?php if ($config_alert_sms) { ?>
               <input type="radio" name="config_alert_sms" value="1" checked="checked" />
