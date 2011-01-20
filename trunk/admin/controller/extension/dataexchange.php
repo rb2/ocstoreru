@@ -118,7 +118,7 @@ class ControllerExtensionDataexchange extends Controller {
 			$this->model_user_user_group->addPermission($this->user->getId(), 'modify', 'dataexchange/' . $this->request->get['extension']);
 		
 			require_once(DIR_APPLICATION . 'controller/dataexchange/' . $this->request->get['extension'] . '.php');
-			$class = 'ControllerFeed' . str_replace('_', '', $this->request->get['extension']);
+			$class = 'ControllerDataexchange' . str_replace('_', '', $this->request->get['extension']);
 			$class = new $class($this->registry);
 			
 			if (method_exists($class, 'install')) {
@@ -143,7 +143,7 @@ class ControllerExtensionDataexchange extends Controller {
 			$this->model_setting_setting->deleteSetting($this->request->get['extension']);
 		
 			require_once(DIR_APPLICATION . 'controller/dataexchange/' . $this->request->get['extension'] . '.php');
-			$class = 'ControllerFeed' . str_replace('_', '', $this->request->get['extension']);
+			$class = 'ControllerDataexchange' . str_replace('_', '', $this->request->get['extension']);
 			$class = new $class($this->registry);
 			
 			if (method_exists($class, 'uninstall')) {
