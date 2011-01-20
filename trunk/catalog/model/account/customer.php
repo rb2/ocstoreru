@@ -5,10 +5,10 @@ class ModelAccountCustomer extends Model {
 		$data['firstname'] = mb_convert_case( trim( $data['firstname'] ), MB_CASE_TITLE, "UTF-8");
 		$data['lastname'] = mb_convert_case( trim( $data['lastname'] ), MB_CASE_TITLE, "UTF-8");
 		
-		$data['company'] = ucwords(strtolower(trim($data['company'])));
-		$data['address_1'] = ucwords(strtolower(trim($data['address_1'])));
-		$data['address_2'] = ucwords(strtolower(trim($data['address_2'])));
-		$data['city'] = ucwords(strtolower(trim($data['city'])));
+		$data['company'] = mb_convert_case( trim( $data['company'] ), MB_CASE_TITLE, "UTF-8");
+		$data['address_1'] = mb_convert_case( trim( $data['address_1'] ), MB_CASE_TITLE, "UTF-8");
+		$data['address_2'] = mb_convert_case( trim( $data['address_2'] ), MB_CASE_TITLE, "UTF-8");
+		$data['city'] = mb_convert_case( trim( $data['city'] ), MB_CASE_TITLE, "UTF-8");
 		$data['postcode'] = strtoupper(trim($data['postcode']));
 	
 		$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', password = '" . $this->db->escape(md5($data['password'])) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "', status = '1', date_added = NOW()");
@@ -27,8 +27,9 @@ class ModelAccountCustomer extends Model {
 	}
 	
 	public function editCustomer($data) {
-		$data['firstname'] = ucwords(strtolower(trim($data['firstname'])));
-		$data['lastname'] = ucwords(strtolower(trim($data['lastname'])));
+	
+		$data['firstname'] = mb_convert_case( trim( $data['firstname'] ), MB_CASE_TITLE, "UTF-8");
+		$data['lastname'] = mb_convert_case( trim( $data['lastname'] ), MB_CASE_TITLE, "UTF-8");
 		
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	}
