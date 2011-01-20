@@ -2,8 +2,9 @@
 class ModelAccountCustomer extends Model {
 	public function addCustomer($data) {
       	
-		$data['firstname'] = ucwords(strtolower(trim($data['firstname'])));
-		$data['lastname'] = ucwords(strtolower(trim($data['lastname'])));
+		$data['firstname'] = mb_convert_case( trim( $data['firstname'] ), MB_CASE_TITLE, "UTF-8");
+		$data['lastname'] = mb_convert_case( trim( $data['lastname'] ), MB_CASE_TITLE, "UTF-8");
+		
 		$data['company'] = ucwords(strtolower(trim($data['company'])));
 		$data['address_1'] = ucwords(strtolower(trim($data['address_1'])));
 		$data['address_2'] = ucwords(strtolower(trim($data['address_2'])));
