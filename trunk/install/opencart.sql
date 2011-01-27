@@ -108,15 +108,15 @@ CREATE TABLE `oc_category_description` (
 --
 
 INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `meta_keywords`, `meta_description`, `description`) VALUES
-(18, 1, 'Laptops &amp; Notebooks', '','', ''),
-(28, 1, 'Monitors', '', '', ''),
-(20, 1, 'Desktops', '', 'Example of category description', '&lt;p&gt;\r\n	Example of category description text&lt;/p&gt;\r\n'),
-(34, 1, 'MP3 Players', '', '', ''),
-(33, 1, 'Cameras', '', '', ''),
-(32, 1, 'Web Cameras', '', '', ''),
-(31, 1, 'Scanners', '', '', ''),
-(30, 1, 'Printers', '', '', ''),
-(29, 1, 'Mice and Trackballs', '', '', ''),
+(18, 1, 'Ноутбуки', '','', ''),
+(28, 1, 'Мониторы', '', '', ''),
+(20, 1, 'Стационарные компьютеры', '', 'Пример описания категории', '&lt;p&gt;\r\n	Пример текстового описания категории&lt;/p&gt;\r\n'),
+(34, 1, 'MP3 Плееры', '', '', ''),
+(33, 1, 'Камеры', '', '', ''),
+(32, 1, 'Веб-камеры', '', '', ''),
+(31, 1, 'Сканеры', '', '', ''),
+(30, 1, 'Принтеры', '', '', ''),
+(29, 1, 'Мышки', '', '', ''),
 (27, 1, 'Mac', '', '', ''),
 (26, 1, 'PC', '', '', ''),
 (17, 1, 'Программное обеспечение', '', '', ''),
@@ -665,8 +665,7 @@ CREATE TABLE `oc_geo_zone` (
 --
 
 INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`, `date_added`) VALUES
-(3, 'UK VAT Zone', 'UK VAT', '2010-02-26 22:33:24', '2009-01-06 23:26:25'),
-(4, 'UK Shipping', 'UK Shipping Zones', '2010-03-05 17:26:04', '2009-06-23 01:14:53');
+(3, 'НДС', 'Облагаемые НДС', '2010-02-26 22:33:24', '2009-01-06 23:26:25');
 
 -- --------------------------------------------------------
 
@@ -802,7 +801,6 @@ CREATE TABLE `oc_length_class_description` (
 INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `title`, `unit`) VALUES
 (1, 1, 'Сантиметр', 'cm'),
 (2, 1, 'Миллиметр', 'mm'),
-(3, 1, 'Дюйм', 'in');
 
 -- --------------------------------------------------------
 
@@ -1980,10 +1978,8 @@ CREATE TABLE `oc_weight_class_description` (
 --
 
 INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `title`, `unit`) VALUES
-(1, 1, 'Килограммы', 'kg'),
-(2, 1, 'Граммы', 'g'),
-(5, 1, 'Фунты', 'lb'),
-(6, 1, 'Унции', 'oz');
+(1, 1, 'Килограммы', 'кг'),
+(2, 1, 'Граммы', 'г');
 
 -- --------------------------------------------------------
 
