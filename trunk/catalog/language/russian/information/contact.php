@@ -10,9 +10,9 @@ $_['text_fax']       = 'Факс:';
 $_['text_message']   = '<p>Ваш запрос был успешно отправлен владельцу магазина!</p>';
 
 // Entry Fields
-$_['entry_name']     = 'Имя:';
-$_['entry_email']    = 'E-Mail:';
-$_['entry_enquiry']  = 'Вопрос:';
+$_['entry_name']     = 'Ваше имя:';
+$_['entry_email']    = 'Ваш E-Mail:';
+$_['entry_enquiry']  = 'Ваш вопрос:';
 $_['entry_captcha']  = 'Введите код, указанный на картинке:';
 
 // Email

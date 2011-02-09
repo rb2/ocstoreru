@@ -4,7 +4,7 @@ $_['heading_title']          = 'Товары';
 
 // Tab
 $_['tab_shipping']           = 'Доставка';
-$_['tab_links']              = 'Ссылки';
+$_['tab_links']              = 'Связи';
 
 // Text  
 $_['text_success']           = 'Список товаров обновлен!';
@@ -26,28 +26,28 @@ $_['column_action']          = 'Действие';
 
 // Entry
 $_['entry_name']             = 'Название товара:';
-$_['entry_meta_keywords'] 	 = 'Ключевые слова для мета-тегов:';
-$_['entry_meta_description'] = 'Описание для мета-тегов:';
+$_['entry_meta_keywords'] 	 = 'Мета-тег "Ключевые слова":';
+$_['entry_meta_description'] = 'Мета-тег "Описание":';
 $_['entry_description']      = 'Описание:';
 $_['entry_store']            = 'Магазины:';
-$_['entry_keyword']          = 'Псевдоним:';
+$_['entry_keyword']          = 'SEO Псевдоним:';
 $_['entry_model']            = 'Модель:';
 $_['entry_sku']              = 'Единица учета складских запасов (SKU):';
 $_['entry_location']         = 'Расположение:';
 $_['entry_manufacturer']     = 'Произоводитель:';
-$_['entry_shipping']         = 'Доставка:'; 
+$_['entry_shipping']         = 'Необходима доставка:'; 
 $_['entry_date_available']   = 'Дата поступления:';
 $_['entry_quantity']         = 'Количество:';
 $_['entry_minimum']          = 'Минимальное количество:<br/><span class="help">Указание минимально количества в заказе</span>';
 $_['entry_stock_status']     = 'Остутствие на складе:<br /><span class="help">Статус, показываемый, когда товара нет на складе</span>';
 $_['entry_status']           = 'Статус:';
 $_['entry_tax_class']        = 'Налог:';
-$_['entry_cost']             = 'Стоимость:<br/><span class="help">Cтоимость товара для отчета по прибыли</span>';
+$_['entry_cost']             = 'Закупочная цена/стоимость:<br/><span class="help">Cтоимость товара для отчета по прибыли</span>';
 $_['entry_price']            = 'Цена:';
 $_['entry_subtract']         = 'Вычитать со склада:';
-$_['entry_weight_class']     = 'Класс веса:';
+$_['entry_weight_class']     = 'Единица измерения веса:';
 $_['entry_weight']           = 'Вес:';
-$_['entry_length']           = 'Единица измерения:';
+$_['entry_length']           = 'Единица измерения длины:';
 $_['entry_dimension']        = 'Размеры (длина x ширина x высота):';
 $_['entry_image']            = 'Изображение товара:';
 $_['entry_customer_group']   = 'Группа покупателей:';

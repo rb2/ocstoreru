@@ -5,7 +5,7 @@ $_['heading_title']     	= 'Без регистрации - Шаг 1';
 // Text
 $_['text_cart']         	= 'Корзина';
 $_['text_guest_step_1'] 	= 'Без регистрации - Шаг 1';
-$_['text_your_details'] 	= 'Ваши персональные данные';
+$_['text_your_details'] 	= '<font size=2>Ваши персональные данные:</font><br><i>&nbsp&nbsp&nbsp<font color=Red size=1>* поля отмеченные звёздочками обязательны для заполнения</font></i>';
 $_['text_your_address'] 	= 'Ваш адрес';
 $_['text_shipping_address']	= 'Адрес доставки';
 $_['text_indicator'] 		= 'Отметьте здесь, если у Вас есть отдельный адрес доставки.';

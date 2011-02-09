@@ -14,8 +14,8 @@ $_['column_action']          = 'Действие';
 
 // Entry
 $_['entry_name']             = 'Название категории:';
-$_['entry_meta_keywords'] 	 = 'Ключевые слова мета-теги:';
-$_['entry_meta_description'] = 'Мета-теги:';
+$_['entry_meta_keywords'] 	 = 'Мета-тег "Ключевые слова":';
+$_['entry_meta_description'] = 'Мета-тег "Описание":';
 $_['entry_description']      = 'Описание:';
 $_['entry_status']           = 'Статус:';
 $_['entry_category']         = 'Родительская категория:';

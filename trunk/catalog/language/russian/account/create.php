@@ -6,7 +6,7 @@ $_['heading_title']        = 'Регистрация';
 $_['text_account']         = 'Личный Кабинет';
 $_['text_create']          = 'Регистрация';
 $_['text_account_already'] = 'Если у Вас уже есть Личный Кабинет, пожалуйста <a href="%s">авторизуйтесь</a>.';
-$_['text_your_details']    = 'Ваши личные данные';
+$_['text_your_details']    = '<font size=2>Ваши персональные данные:</font><br><i>&nbsp&nbsp&nbsp<font color=Red size=1>* поля отмеченные звёздочками обязательны для заполнения</font></i>';
 $_['text_your_address']    = 'Ваш адрес';
 $_['text_newsletter']      = 'Подписка';
 $_['text_your_password']   = 'Ваш пароль';
