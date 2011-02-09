@@ -1,9 +1,9 @@
 <?php
 // Version
-define('VERSION', '0.1.6');
+define('VERSION', '1.0.2');
 
 // Configuration
-require_once('config.php');
+require_once('../admin/config.php');
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
@@ -131,12 +131,6 @@ $registry->set('user', new User($registry));
 // Front Controller
 $controller = new Front($registry);
 
-// Login
-//$controller->addPreAction(new Action('common/home/login'));
-
-// Permission
-//$controller->addPreAction(new Action('common/home/permission'));
-
 // Router
 if (isset($request->get['mode'])) {
 
@@ -161,9 +155,6 @@ if (isset($request->get['mode'])) {
 		exit;
 	}
 	
-	//echo "success\n";
-
-
 
 } else {
 	echo "success\n";

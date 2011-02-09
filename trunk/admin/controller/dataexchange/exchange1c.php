@@ -104,7 +104,9 @@ class ControllerDataexchangeExchange1c extends Controller {
 			$this->data['exchange1c_status'] = $this->request->post['exchange1c_status'];
 		} else {
 			$this->data['exchange1c_status'] = $this->config->get('exchange1c_status');
-		}		
+		}	
+		
+		$this->data['exchange1c_lic_type'] = 'TEST';	
 				
 		$this->template = 'dataexchange/exchange1c.tpl';
 		$this->children = array(
@@ -223,7 +225,7 @@ class ControllerDataexchangeExchange1c extends Controller {
 			$importFile = $cache . $this->request->get['filename'];
 		} else {
 			echo "failure\n";
-			echo "ERROR 10: Nof file name variable" . $this->request->get['filename'];
+			echo "ERROR 10: No file name variable" . $this->request->get['filename'];
 			return 0;
 		}
 		
