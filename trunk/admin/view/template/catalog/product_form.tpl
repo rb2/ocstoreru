@@ -37,6 +37,14 @@
               <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_description]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea></td>
             </tr>
             <tr>
+              <td><?php echo $entry_title; ?></td>
+              <td><input type="text" name="product_description[<?php echo $language['language_id']; ?>][title]" size="100" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['title'] : ''; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_h1; ?></td>
+              <td><input type="text" name="product_description[<?php echo $language['language_id']; ?>][h1]" size="100" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['h1'] : ''; ?>" /></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_description; ?></td>
               <td><textarea name="product_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea></td>
             </tr>

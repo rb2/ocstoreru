@@ -627,3 +627,9 @@ ALTER TABLE `oc_review` ADD INDEX ( `product_id` );
 
 DELETE FROM `oc_zone` WHERE `code` = 'CMA';
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, 222, 'CMA', 'Cumbria', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
+
+### Start ocStore 0.1.8
+ALTER TABLE  `oc_product_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE  `oc_product_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
+
+ALTER TABLE  `oc_category_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;

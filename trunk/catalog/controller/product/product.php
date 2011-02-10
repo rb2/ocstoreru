@@ -110,7 +110,7 @@ class ControllerProductProduct extends Controller {
 				'separator' => $this->language->get('text_separator')
 			);			
 			
-			$this->document->title = $product_info['name'];
+			$this->document->title = ($product_info['title']) ? $product_info['title'] : $product_info['name'];
 			
 			$this->document->keywords = $product_info['meta_keywords'];
 			
@@ -123,7 +123,7 @@ class ControllerProductProduct extends Controller {
 				'rel'  => 'canonical'
 			);
 
-			$this->data['heading_title'] = $product_info['name'];
+			$this->data['heading_title'] = ($product_info['h1']) ? $product_info['h1'] : $product_info['name'];
 
 			$this->data['text_enlarge'] = $this->language->get('text_enlarge');
 			$this->data['text_discount'] = $this->language->get('text_discount');

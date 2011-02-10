@@ -800,7 +800,7 @@ CREATE TABLE `oc_length_class_description` (
 
 INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `title`, `unit`) VALUES
 (1, 1, 'Сантиметр', 'см'),
-(2, 1, 'Миллиметр', 'мм'),
+(2, 1, 'Миллиметр', 'мм');
 
 -- --------------------------------------------------------
 
@@ -1136,6 +1136,8 @@ CREATE TABLE `oc_product_description` (
   `meta_keywords` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `description` text COLLATE utf8_general_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `h1` varchar(255) COLLATE utf8_general_ci NOT NULL,	
   PRIMARY KEY (`product_id`,`language_id`),
   KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=49 ;

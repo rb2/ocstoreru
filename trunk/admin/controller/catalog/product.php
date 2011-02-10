@@ -539,6 +539,8 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_meta_keywords'] = $this->language->get('entry_meta_keywords');
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
+		$this->data['entry_title'] = $this->language->get('entry_title');
+		$this->data['entry_h1'] = $this->language->get('entry_h1');
 		$this->data['entry_description'] = $this->language->get('entry_description');
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
@@ -606,6 +608,12 @@ class ControllerCatalogProduct extends Controller {
 			$this->data['error_meta_description'] = $this->error['meta_description'];
 		} else {
 			$this->data['error_meta_description'] = '';
+		}
+		
+		if (isset($this->error['title'])) {
+			$this->data['error_title'] = $this->error['title'];
+		} else {
+			$this->data['error_title'] = '';
 		}
 
    		if (isset($this->error['description'])) {
