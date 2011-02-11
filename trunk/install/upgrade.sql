@@ -633,3 +633,4 @@ ALTER TABLE  `oc_product_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
 ALTER TABLE  `oc_product_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
 
 ALTER TABLE  `oc_category_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE  `oc_category_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
