@@ -79,6 +79,10 @@
           <td><?php echo $entry_sort_order; ?></td>
           <td><input type="text" name="qiwi_sort_order" value="<?php echo $qiwi_sort_order; ?>" size="1" /></td>
         </tr>
+        <tr>
+          <td><?php echo $entry_soap_lib; ?></td>
+          <td><?php if($flag_soap) { ?> <span style="color: green;"><?php echo $text_enabled; ?></span> <?php } else {?> <span style="color: red;"><?php echo $text_disabled; ?></span><?php }?></td>
+        </tr>
       </table>
     </form>
   </div>

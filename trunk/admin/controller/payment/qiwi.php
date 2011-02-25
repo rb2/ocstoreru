@@ -25,6 +25,9 @@ class ControllerPaymentQiwi extends Controller {
 		
 		$this->data['entry_shop_id'] = $this->language->get('entry_shop_id');
 		$this->data['entry_password'] = $this->language->get('entry_password');
+		$this->data['entry_soap_lib'] = $this->language->get('entry_soap_lib');
+		
+		
 		
 		
 		
@@ -97,14 +100,12 @@ class ControllerPaymentQiwi extends Controller {
 			$this->data['qiwi_shop_id'] = $this->config->get('qiwi_shop_id');
 		}
 		
-		// zp_merhant_key
 		if (isset($this->request->post['qiwi_password'])) {
 			$this->data['qiwi_password'] = $this->request->post['qiwi_password'];
 		} else {
 			$this->data['qiwi_password'] = $this->config->get('qiwi_password');
 		}
-		
-		
+				
 		// URL
 		$this->data['webmoney_result_url'] 		= HTTP_CATALOG . 'index.php?route=payment/qiwi/callback';
 		$this->data['webmoney_success_url'] 	= HTTP_CATALOG . 'index.php?route=payment/qiwi/success';
@@ -117,6 +118,12 @@ class ControllerPaymentQiwi extends Controller {
 			$this->data['qiwi_order_status_id'] = $this->config->get('qiwi_order_status_id'); 
 		} 
 		
+		// Проверка на наличие SOAP сервера
+		if( class_exists('SoapServer') ) {
+			$this->data['flag_soap'] = 1;
+		} else {
+			$this->data['flag_soap'] = 0;
+		}
 
 		$this->load->model('localisation/order_status');
 		

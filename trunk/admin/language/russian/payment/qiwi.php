@@ -19,6 +19,7 @@ $_['entry_order_status']    = 'Статус заказа после оплаты
 $_['entry_geo_zone']        = 'Географическая зона:';
 $_['entry_status']          = 'Статус:';
 $_['entry_sort_order']      = 'Порядок сортировки:';
+$_['entry_soap_lib']		= 'SOAP библиотека (<a target="_blank" href="http://ru.php.net/manual/en/book.soap.php">подробнее</a>):';
 
 // Error
 $_['error_permission']      = 'У Вас нет прав для управления этим модулем!';
