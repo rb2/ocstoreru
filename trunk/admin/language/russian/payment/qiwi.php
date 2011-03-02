@@ -1,11 +1,11 @@
 <?php
 // Heading
-$_['heading_title']         = 'QIWI';
+$_['heading_title']         = 'QIWI Кошелек';
 
 // Text
 $_['text_payment']          = 'Оплата';
 $_['text_success']          = 'Настройки модуля обновлены!';
-$_['text_qiwi']             = '';
+$_['text_qiwi']             = '<img height="25" src="view/image/payment/qiwi.jpeg" alt="QIWI Кошелек" title="QIWI Кошелек" style="border: 1px solid #EEEEEE;" />';
 
 // Entry
 $_['entry_shop_id']         = 'Номер магазина:';
