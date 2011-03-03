@@ -606,7 +606,6 @@
         </table>
       </div>
        <div id="tab_sms">
-       <div class="warning">Running in test mode!!!</div>
         <table class="form">
           <tr>
             <td><?php echo $entry_sms_gatename; ?></td>
@@ -628,7 +627,7 @@
           </tr>
           <tr>
             <td><?php echo $entry_sms_message; ?></td>
-            <td><input type="text" name="config_sms_message" value="<?php echo $config_sms_message; ?>" /></td>
+            <td><textarea name="config_sms_message" cols="40" rows="5"><?php echo $config_sms_message; ?></textarea></td>
           </tr>
           <tr>
             <td><?php echo $entry_sms_gate_username; ?></td>

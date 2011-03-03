@@ -93,6 +93,7 @@ class ModelCheckoutOrder extends Model {
 	}
 
 	public function confirm($order_id, $order_status_id, $comment = '') {
+		
 		$order_query = $this->db->query("SELECT *, l.filename AS filename, l.directory AS directory FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "language l ON (o.language_id = l.language_id) WHERE o.order_id = '" . (int)$order_id . "' AND o.order_status_id = '0'");
 		 
 		if ($order_query->num_rows) {
@@ -444,7 +445,9 @@ class ModelCheckoutOrder extends Model {
 			
 			if($this->config->get('config_alert_sms')) {
 			
-				$message = str_replace(array('{ID}'), array($order_id), $this->config->get('config_sms_message'));
+			
+			
+				$message = str_replace(array('{ID}', '{DATE}', '{TIME}', '{SUM}'), array($order_id, date('d.m.Y'), date('H:i'), floatval($order_query->row['total'])), $this->config->get('config_sms_message'));
 			
 				$sms = new Sms($this->config->get('config_sms_gatename'));
 				$sms->setTo($this->config->get('config_sms_admin_phone'));
