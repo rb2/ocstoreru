@@ -88,6 +88,18 @@ form {
 .button .button_cancel {
 	background: url('../image/button_cancel.png') no-repeat;
 }
+.good { color: green; }
+.bad  { color: red; }
+pre.prettyprint {
+	background: none repeat scroll 0 0 #F8F8F8;
+	border: 1px solid #C9C9C9;
+	font-size: 11px;
+	line-height: 140%;
+	margin-left: 10px;
+	margin-top: 0;
+	overflow: auto;
+	padding: 5px;
+}
 #container {
 	margin-top: 20px;
 	width: 860px;

@@ -17,6 +17,7 @@ class ControllerStep2 extends Controller {
 
 		$this->data['config_catalog'] = DIR_OPENCART . 'config.php';
 		$this->data['config_admin'] = DIR_OPENCART . 'admin/config.php';
+		$this->data['config_files_cmd'] = DIR_OPENCART . '{config.php,admin/config.php}';
 		
 		$this->data['cache'] = DIR_SYSTEM . 'cache';
 		$this->data['logs'] = DIR_SYSTEM . 'logs';
@@ -24,6 +25,7 @@ class ControllerStep2 extends Controller {
 		$this->data['image_cache'] = DIR_OPENCART . 'image/cache';
 		$this->data['image_data'] = DIR_OPENCART . 'image/data';
 		$this->data['download'] = DIR_OPENCART . 'download';
+		$this->data['config_dirs_cmd'] = DIR_SYSTEM . '{cache,logs} ' . DIR_OPENCART . '{image,image/cache,image/data,download}';
 
 		$this->children = array(
 			'header',

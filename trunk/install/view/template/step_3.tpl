@@ -11,8 +11,15 @@
         <table>
           <tr>
             <td width="185"><span class="required">*</span>Сервер БД:</td>
-            <td><input type="text" name="db_host" value="<?php echo $db_host; ?>" />
-              <br />
+            <td><input type="text" name="db_host" value="<?php echo $db_host; ?>" /><sup>*</sup></td>
+          </tr>
+          <tr>
+            <td colspan=2><small>*Если вместо имени хоста Вы хотите указать путь к сокету UNIX, то первым символом
+            вставьте знак двоеточия (пример: ":/var/run/mysqld/mysqld.sock")</small></td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td>
               <?php if ($error_db_host) { ?>
               <span class="required"><?php echo $error_db_host; ?></span>
               <?php } ?></td>

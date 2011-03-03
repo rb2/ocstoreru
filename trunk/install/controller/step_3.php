@@ -208,7 +208,7 @@ class ControllerStep3 extends Controller {
 		}
 
 		if (!$connection = @mysql_connect($this->request->post['db_host'], $this->request->post['db_user'], $this->request->post['db_password'])) {
-			$this->error['warning'] = 'Невозможно подключиться к БД, проверьте правильность сервера, имени пользователя и пароля!';
+			$this->error['warning'] = 'Невозможно подключиться к БД, проверьте правильность сервера, имени пользователя и пароля!<br><b>' . mysql_error() . '</b>';
 		} else {
 			if (!@mysql_select_db($this->request->post['db_name'], $connection)) {
 				$this->error['warning'] = 'БД не существует!';

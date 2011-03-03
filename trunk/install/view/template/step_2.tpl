@@ -99,7 +99,9 @@
           </tr>
         </table>
       </div>
-      <p>4. Убедитесь, что перечисленные ниже директории имеют разрешение на запись.</p>
+        <p><small>Если вы не смогли установить необходимые права на файлы, то попросите техподдержку выполнить следующую команду:
+        <pre class="prettyprint">chmod 0666 <?php echo $config_files_cmd; ?></pre></small></p>
+      <p>4. Убедитесь, что перечисленные ниже каталоги, а также все их подкаталоги и файлы в них имеют разрешение на запись.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table width="100%">
           <tr>
@@ -132,6 +134,8 @@
           </tr>
         </table>
       </div>
+        <p><small>Если вы не смогли установить необходимые права на каталоги, то попросите техподдержку выполнить следующую команду:
+        <pre class="prettyprint">chmod -R a=rwX <?php echo $config_dirs_cmd; ?></pre></small></p>
       <div style="text-align: right;"><a onclick="document.getElementById('form').submit()" class="button"><span class="button_left button_continue"></span><span class="button_middle">Продолжить</span><span class="button_right"></span></a></div>
     </form>
   </div>
