@@ -99,6 +99,8 @@ CREATE TABLE `oc_category_description` (
   `meta_keywords` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `description` text COLLATE utf8_general_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `h1` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`category_id`,`language_id`),
   KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

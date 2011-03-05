@@ -173,7 +173,9 @@ class ModelDataexchangeExchange1c extends Model {
 						'name' =>  strval($category->Наименование),
 						'meta_keywords' => '',
 						'meta_description' => '',
-						'description' => ''
+						'description' => '',
+						'title'	=> '',
+						'h1' => ''
 					),
 				);
 				$data['status'] = 1;
@@ -214,6 +216,8 @@ class ModelDataexchangeExchange1c extends Model {
 				'meta_keywords' => '',
 				'meta_description' => '',
 				'description' => '',
+				'title' => '',
+				'h1' => ''
 			),
 		);
 		

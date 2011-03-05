@@ -131,6 +131,32 @@ class ControllerDataexchangeExchange1c extends Controller {
 	
 	// --- 
 	public function modeCheckauth() {
+	
+		//  Проверяем включен или нет модуль
+		if( ! $this->config->get('exchange1c_status') ) {
+			echo "failure\n";
+			echo "1c module OFF";
+			exit;
+		}
+		
+		// Проверяем логин и пароль на доступ
+		if( ! isset($_SERVER['PHP_AUTH_USER']) OR ! isset($_SERVER['PHP_AUTH_PW']) ) {
+			echo "failure\n";
+			echo "no login/password";
+			exit;
+		}
+		
+		// Авторизуем
+		if( $_SERVER['PHP_AUTH_USER'] != $this->config->get('exchange1c_username') ) {
+			echo "failure\n";
+			echo "error login";
+		}
+		
+		if( $_SERVER['PHP_AUTH_PW'] != $this->config->get('exchange1c_password') ) {
+			echo "failure\n";
+			echo "error password";
+			exit;
+		}
 		
 		echo "success\n";
 		echo session_name()."\n";

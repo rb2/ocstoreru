@@ -80,9 +80,35 @@
             <td>On</td>
             <td align="center"><?php echo extension_loaded('zlib') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
           </tr>
+          <tr>
+            <td>mbstring:</td>
+            <td><?php echo extension_loaded('mbstring') ? 'On' : 'Off'; ?></td>
+            <td>On</td>
+            <td align="center"><?php echo extension_loaded('mbstring') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+          </tr>
         </table>
       </div>
-      <p>3. Убедитесь, что перечисленные ниже файлы имеют разрешение на запись.</p>
+       <p>3. Расширения для доп. модулей.</p>
+      <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
+        <table width="100%">
+          <tr>
+            <th width="35%" align="left"><b>Расширения</b></th>
+            <th width="50%" align="left"><b>Модуль</b></th>
+            <th width="15%" align="center"><b>Состояние</b></th>
+          </tr>
+          <tr>
+            <td>XMLReader:</td>
+            <td>Обмен данными с 1Сv8.X</td>
+            <td align="center"><?php echo extension_loaded('xmlreader') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+          </tr>
+          <tr>
+            <td>SOAP:</td>
+            <td>Модуль QIWI Кошелек</td>
+            <td align="center"><?php echo extension_loaded('soap') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+          </tr>
+        </table>
+      </div>
+      <p>4. Убедитесь, что перечисленные ниже файлы имеют разрешение на запись.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table width="100%">
           <tr>
