@@ -58,7 +58,7 @@ class ModelToolSeoUrl extends Model {
 					}
 				}
 
-				return $url_data['scheme'] . '://' . $url_data['host'] . (isset($url_data['port']) ? ':' . $url_data['port'] : '') . str_replace('/index.php', '', $url_data['path']) . str_replace(' ', '_', $url) . '/' . $query;
+				return $url_data['scheme'] . '://' . $url_data['host'] . (isset($url_data['port']) ? ':' . $url_data['port'] : '') . str_replace('/index.php', '', $url_data['path']) . str_replace(' ', '_', $url) . $this->config->get('config_seo_url_auto') . $query;
 			} else {
 				return $link;
 			}

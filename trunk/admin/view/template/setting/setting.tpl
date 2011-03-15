@@ -706,6 +706,10 @@
               <?php } ?></td>
           </tr>
           <tr>
+            <td><?php echo $entry_seo_url_auto; ?></td>
+            <td><input type="text" name="config_seo_url_auto" value="<?php echo $config_seo_url_auto; ?>" /></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_compression; ?></td>
             <td><input type="text" name="config_compression" value="<?php echo $config_compression; ?>" size="3" /></td>
           </tr>
