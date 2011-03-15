@@ -57,8 +57,12 @@ class ModelToolSeoUrl extends Model {
 						$query = '?' . trim($query, '&');
 					}
 				}
+				
+				if( $this->config->get('config_seo_url_replace') ) {
+					$url = str_replace(' ', '_', $url);
+				}
 
-				return $url_data['scheme'] . '://' . $url_data['host'] . (isset($url_data['port']) ? ':' . $url_data['port'] : '') . str_replace('/index.php', '', $url_data['path']) . str_replace(' ', '_', $url) . $this->config->get('config_seo_url_auto') . $query;
+				return $url_data['scheme'] . '://' . $url_data['host'] . (isset($url_data['port']) ? ':' . $url_data['port'] : '') . str_replace('/index.php', '', $url_data['path']) . $url . $this->config->get('config_seo_url_auto') . $query;
 			} else {
 				return $link;
 			}

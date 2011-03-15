@@ -5,8 +5,10 @@ class ControllerCommonSeoUrl extends Controller {
 			$parts = explode('/', $this->request->get['_route_']);
 			
 			foreach ($parts as $part) {
-				
-				$part = str_replace('_', ' ', $part);
+			
+				if( $this->config->get('config_seo_url_replace') ) {
+					$part = str_replace('_', ' ', $part);
+				}
 			
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "'");
 				
