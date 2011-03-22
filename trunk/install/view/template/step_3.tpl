@@ -9,7 +9,15 @@
       <p>1 . Введите настройки БД.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table>
-          <tr>
+        <tr>
+	    <td width="185"><span class="required">*</span>Драйвер БД:</td>
+	    <td><select name="db_driver">
+	    <option value="mysql" <?php if ($db_driver == "mysql") { echo 'selected'; } ?>>MySQL</option>
+	    <option value="mysql_cached" <?php if ($db_driver == "mysql_cached") { echo 'selected'; } ?>>MySQL с кэшированием</option>
+<!--	    <option value="postgre" <?php if ($db_driver == "postgre") { echo 'selected'; } ?>>PostgreSQL</option> -->
+	    </select></td>
+        </tr>
+        <tr>
             <td width="185"><span class="required">*</span>Сервер БД:</td>
             <td><input type="text" name="db_host" value="<?php echo $db_host; ?>" /><sup>*</sup></td>
           </tr>
@@ -85,7 +93,7 @@
           </tr>
       </table>
       </div>
-      
+
       <div style="text-align: right;"><a onclick="document.getElementById('form').submit()" class="button"><span class="button_left button_continue"></span><span class="button_middle">Продолжить</span><span class="button_right"></span></a></div>
     </form>
   </div>
