@@ -17,9 +17,9 @@ $_['entry_description'] 	= 'Описание:';
 $_['entry_status']          = 'Статус:';
 $_['entry_store']       	= 'Магазины:';
 $_['entry_keyword']     	= 'Псевдоним:';
-$_['entry_sort_order']  	= 'Порядок сортировки:';
+$_['entry_sort_order']  	= 'Порядок сортировки:<br/><span class="help">-1 для скрытия</span>';
 
-// Error 
+// Error
 $_['error_permission']  	= 'У Вас нет прав для изменения статей!';
 $_['error_title']       	= 'Название статьи должно быть от 3 до 64 символов!';
 $_['error_description'] 	= 'Описание должно быть не менее 3 символов!';

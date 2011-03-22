@@ -20,10 +20,6 @@
             <?php } ?></td>
         </tr>
         <tr>
-          <td><span class="required">*</span> <?php echo $entry_password; ?></td>
-          <td><input type="text" name="usps_password" value="<?php echo $usps_password; ?>" /></td>
-        </tr>
-        <tr>
           <td><span class="required">*</span> <?php echo $entry_postcode; ?></td>
           <td><input type="text" name="usps_postcode" value="<?php echo $usps_postcode; ?>" />
             <?php if ($error_postcode) { ?>

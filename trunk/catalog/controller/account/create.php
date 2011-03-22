@@ -57,6 +57,11 @@ class ControllerAccountCreate extends Controller {
 	  		$mail->setSubject($subject);
 			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
       		$mail->send();
+			
+			if ($this->config->get('config_account_mail')) {
+				$mail->setTo($this->config->get('config_email'));
+				$mail->send();
+			}
 	  	  
 	  		$this->redirect(HTTPS_SERVER . 'index.php?route=account/success');
     	} 

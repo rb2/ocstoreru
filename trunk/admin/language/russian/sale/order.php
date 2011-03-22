@@ -8,7 +8,8 @@ $_['text_success_address']  = 'Адрес доставки обновлен!';
 $_['text_invoice']          = 'Счет-фактура';
 $_['text_order_id']         = '№ заказа:';
 $_['text_invoice_id']       = '№ счета:';
-$_['text_date_added']       = 'Дата выписки счета:';
+$_['text_date_added']       = 'Дата заказа:';
+$_['text_invoice_date']     = 'Дата выписки счета:';
 $_['text_telephone']        = 'Телефон';
 $_['text_fax']              = 'Факс';
 $_['text_to']               = 'Адрес оплаты';
@@ -34,7 +35,7 @@ $_['column_comment']        = 'Комментарий';
 $_['column_action']         = 'Действие';
 $_['column_add_product']    = 'Добавить товар(ы)';
 
-// Entry 
+// Entry
 $_['entry_order_id']        = '№ заказа:';
 $_['entry_invoice_id']      = '№ счета:';
 $_['entry_customer']        = 'Пользователь:';
@@ -42,6 +43,7 @@ $_['entry_firstname']       = 'Имя, Отчество:';
 $_['entry_lastname']        = 'Фамилия:';
 $_['entry_customer_group']  = 'Группа покупателей:';
 $_['entry_email']           = 'E-Mail:';
+$_['entry_ip']              = 'IP:';
 $_['entry_telephone']       = 'Номер телефона:';
 $_['entry_fax']             = 'Факс:';
 $_['entry_store_name']      = 'Название магазина:';

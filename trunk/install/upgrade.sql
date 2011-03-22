@@ -494,7 +494,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 ### Start 1.4.3
 ALTER TABLE oc_store ADD `ssl` int(1) NOT NULL DEFAULT '0' COMMENT '' AFTER url;
 
-	
+
 ### Start 1.4.5
 ALTER TABLE oc_customer ADD store_id int(11) NOT NULL DEFAULT '0' COMMENT '' AFTER customer_id;
 
@@ -616,7 +616,6 @@ ALTER TABLE `oc_product` ADD INDEX ( `status` );
 ALTER TABLE `oc_product_option` ADD INDEX ( `product_id` );
 ALTER TABLE `oc_product_image` ADD INDEX ( `product_id` );
 ALTER TABLE `oc_order_product` ADD INDEX ( `product_id` );
-ALTER TABLE `oc_product_featured` ADD PRIMARY KEY ( `product_id` );
 ALTER TABLE `oc_order_product` ADD INDEX ( `order_id` );
 ALTER TABLE `oc_order` ADD INDEX ( `order_status_id` );
 
@@ -629,8 +628,26 @@ DELETE FROM `oc_zone` WHERE `code` = 'CMA';
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, 222, 'CMA', 'Cumbria', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
 
 ### Start ocStore 0.1.8
-ALTER TABLE  `oc_product_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
-ALTER TABLE  `oc_product_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
+#ALTER TABLE  `oc_product_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
+#ALTER TABLE  `oc_product_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
 
-ALTER TABLE  `oc_category_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
-ALTER TABLE  `oc_category_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
+#ALTER TABLE  `oc_category_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
+#ALTER TABLE  `oc_category_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
+
+### Start ocStore 0.1.9
+ALTER TABLE `oc_order` ADD `invoice_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER invoice_prefix;
+
+ALTER TABLE `oc_order` MODIFY `invoice_prefix` varchar(24) COLLATE utf8_bin NOT NULL;
+
+INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES (NULL, 'Channel Islands', 'CI', 'CHI', '', 0, 1) ON DUPLICATE KEY UPDATE country_id=country_id;
+
+SET @cid='';
+SELECT @cid:=`country_id` FROM oc_country WHERE `iso_code_2` = 'CI' and `name` = 'Channel Islands';
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'JER', 'Jersey', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'GUE', 'Guernsey', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'ALD', 'Alderney', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'SRK', 'Sark', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'HRM', 'Herm', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
+
+### Start 1.5.0
+#DROP TABLE `oc_product_featured`;

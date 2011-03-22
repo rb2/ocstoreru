@@ -62,7 +62,6 @@ class ControllerShippingUsps extends Controller {
 		$this->data['text_international_21'] = $this->language->get('text_international_21');
 		
 		$this->data['entry_user_id'] = $this->language->get('entry_user_id');
-		$this->data['entry_password'] = $this->language->get('entry_password');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
 		$this->data['entry_domestic'] = $this->language->get('entry_domestic');
 		$this->data['entry_international'] = $this->language->get('entry_international');
@@ -132,12 +131,6 @@ class ControllerShippingUsps extends Controller {
 			$this->data['usps_user_id'] = $this->config->get('usps_user_id');
 		}
 		
-		if (isset($this->request->post['usps_password'])) {
-			$this->data['usps_password'] = $this->request->post['usps_password'];
-		} else {
-			$this->data['usps_password'] = $this->config->get('usps_password');
-		}
-
 		if (isset($this->request->post['usps_postcode'])) {
 			$this->data['usps_postcode'] = $this->request->post['usps_postcode'];
 		} else {
@@ -370,11 +363,6 @@ class ControllerShippingUsps extends Controller {
 		$this->data['sizes'][] = array(
 			'text'  => $this->language->get('text_large'),
 			'value' => 'LARGE'
-		);
-		
-		$this->data['sizes'][] = array(
-			'text'  => $this->language->get('text_oversize'),
-			'value' => 'OVERSIZE'
 		);
 
 		if (isset($this->request->post['usps_container'])) {

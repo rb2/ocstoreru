@@ -27,6 +27,7 @@ final class Cache {
 
 			    if ($time < time()) {
 					    if (file_exists($file)) {
+						    @touch($file);
 						    @unlink($file);
 					    }
 				}
@@ -45,19 +46,8 @@ final class Cache {
 		$files = glob(DIR_CACHE . 'cache.' . $key . '.*');
 
 		if ($files) {
-    		foreach ($files as $file) {
-      			$cache = '';
-
-				$handle = fopen($file, 'r');
-
-				if ($handle) {
-					$cache = fread($handle, filesize($file));
-
-					fclose($handle);
-				}
-
-	      		return unserialize($cache);
-   		 	}
+		    $cache = file_get_contents($files[0]);
+		    return unserialize($cache);
 		}
 	    }
   	}
