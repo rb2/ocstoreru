@@ -265,11 +265,14 @@ body > #container {
 	vertical-align: middle;
 	padding: 0px 5px;
 }
-.list tbody tr:odd {
+.list tbody tr:nth-child(odd) {
 	background: #FFFFFF;
 }
-.list tbody tr:even {
+.list tbody tr:nth-child(even) {
 	background: #E4EEF7;
+}
+.list tbody tr:hover {
+	background: moccasin !important;
 }
 .list .left {
 	text-align: left;
