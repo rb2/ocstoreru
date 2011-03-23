@@ -628,11 +628,11 @@ DELETE FROM `oc_zone` WHERE `code` = 'CMA';
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, 222, 'CMA', 'Cumbria', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
 
 ### Start ocStore 0.1.8
-#ALTER TABLE  `oc_product_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
-#ALTER TABLE  `oc_product_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE  `oc_product_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE  `oc_product_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
 
-#ALTER TABLE  `oc_category_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
-#ALTER TABLE  `oc_category_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE  `oc_category_description` ADD  `title` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE  `oc_category_description` ADD  `h1` VARCHAR( 255 ) NOT NULL ;
 
 ### Start ocStore 0.1.9
 ALTER TABLE `oc_order` ADD `invoice_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER invoice_prefix;

@@ -221,7 +221,6 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (40, 'Каймановы острова', 'KY', 'CYM', '', 1),
 (41, 'Центрально-Африканская Республика', 'CF', 'CAF', '', 1),
 (42, 'Чад', 'TD', 'TCD', '', 1),
-(240, 'Channel Islands', 'CI', 'CHI', '', 0, 1),
 (43, 'Чили', 'CL', 'CHL', '', 1),
 (44, 'Китайская Народная Республика', 'CN', 'CHN', '', 1),
 (45, 'Остров Рождества', 'CX', 'CXR', '', 1),
@@ -418,7 +417,8 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 (236, 'Сербия и Черногория', 'SCG', 'CS', '', 1),
 (237, 'Заир', 'ZR', 'ZAR', '', 1),
 (238, 'Замбия', 'ZM', 'ZMB', '', 1),
-(239, 'Зимбабве', 'ZW', 'ZWE', '', 1);
+(239, 'Зимбабве', 'ZW', 'ZWE', '', 1),
+(240, 'Channel Islands', 'CI', 'CHI', '', 1);
 -- --------------------------------------------------------
 
 --
@@ -864,7 +864,7 @@ INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 CREATE TABLE `oc_order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_id` int(11) NOT NULL DEFAULT '0',
-  `invoice_prefix` varchar(24) COLLATE utf8_bin NOT NULL,
+  `invoice_prefix` varchar(24) COLLATE utf8_general_ci NOT NULL,
   `invoice_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `store_id` int(11) NOT NULL DEFAULT '0',
   `store_name` varchar(64) COLLATE utf8_general_ci NOT NULL,

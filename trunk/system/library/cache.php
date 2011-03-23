@@ -3,11 +3,14 @@ final class Cache {
 	private $expire;
 	private $memcache;
 	private $ismemcache = false;
+	private $cachedriver;
 
   	public function __construct($exp = 3600) {
   		$this->expire = $exp;
+  		
+  		if( defined('CACHE_DRIVER') ) $this->cachedriver = CACHE_DRIVER;
 
-  		if (CACHE_DRIVER == 'memcached')
+  		if ( $this->cachedriver == 'memcached')
   		{
 		    $mc = new Memcache;
 		    if ($mc->pconnect(MEMCACHE_HOSTNAME, MEMCACHE_PORT))
@@ -37,7 +40,7 @@ final class Cache {
   	}
 
 	public function get($key) {
-	    if ((CACHE_DRIVER == 'memcached') && $this->ismemcache)
+	    if (($this->cachedriver == 'memcached') && $this->ismemcache)
 	    {
 		return($this->memcache->get(MEMCACHE_NAMESPACE . $key, 0));
 	    }
@@ -53,7 +56,7 @@ final class Cache {
   	}
 
   	public function set($key, $value) {
-	    if ((CACHE_DRIVER == 'memcached') && $this->ismemcache)
+	    if (($this->cachedriver == 'memcached') && $this->ismemcache)
 	    {
 		$this->memcache->set(MEMCACHE_NAMESPACE . $key, $value, 0, $this->expire);
 	    }
@@ -73,7 +76,7 @@ final class Cache {
   	}
 
   	public function delete($key) {
-	    if ((CACHE_DRIVER == 'memcached') && $this->ismemcache)
+	    if (($this->cachedriver == 'memcached') && $this->ismemcache)
 	    {
 		$this->memcache->delete(MEMCACHE_NAMESPACE . $key);
 	    }
