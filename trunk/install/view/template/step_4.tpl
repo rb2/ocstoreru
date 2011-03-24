@@ -1,5 +1,5 @@
 <?php echo $header; ?>
-<h1 style="background: url('view/image/finished.png') no-repeat;">Шаг 4 - Окончание!</h1>
+<h1 style="background: url('view/image/finished.png') no-repeat;">Шаг 4 - Установка завершена!</h1>
 <div style="width: 100%; display: inline-block;">
   <div style="float: left; width: 569px;">
     <div class="warning">Не забудьте удалить установочную директорию!</div>

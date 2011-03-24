@@ -717,7 +717,17 @@
           </tr>
           <tr>
             <td><?php echo $entry_seo_url_auto; ?></td>
-            <td><input type="text" name="config_seo_url_auto" value="<?php echo $config_seo_url_auto; ?>" /></td>
+            <td><?php if ($config_seo_url_auto) { ?>
+              <input type="radio" name="config_seo_url_auto" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="config_seo_url_auto" value="0" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="config_seo_url_auto" value="1" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="config_seo_url_auto" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } ?></td>
           </tr>
           <tr>
             <td><?php echo $entry_seo_url_replace; ?></td>

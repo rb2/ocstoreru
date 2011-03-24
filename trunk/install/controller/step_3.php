@@ -137,7 +137,13 @@ class ControllerStep3 extends Controller {
 
 		$this->data['action'] = HTTP_SERVER . 'index.php?route=step_3';
 
-		$this->data['db_driver'] = $this->request->post['db_driver'];
+		
+		if (isset($this->request->post['db_driver'])) {
+			$this->data['db_driver'] = $this->request->post['db_driver'];
+		} else {
+			$this->data['db_driver'] = 'mysql';
+		}
+		
 
 		if (isset($this->request->post['db_host'])) {
 			$this->data['db_host'] = $this->request->post['db_host'];

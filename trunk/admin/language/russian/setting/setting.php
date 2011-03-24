@@ -69,14 +69,14 @@ $_['entry_sms_gatename']      = 'SMS гейт:<br/><span class="help">Серви
 $_['entry_sms_admin_phone']   = 'Телефон администратора:<br/><span class="help">Формат: 7926xxxxxxx</span>';
 $_['entry_sms_from']		  = 'Псевдоним отправителя: <br/><span class="help">Например: Domenam.ru</span>';
 $_['entry_sms_message']		  = 'Текст сообщения: <br/><span class="help">Можно использовать теги: <br/> {ID} - номре заказа <br/> {DATE},{TIME}  - дата и время формирования заказа <br/> {SUM} - сумма заказа</span>';
-$_['entry_sms_gate_username'] = 'Лонин на SMS гейт:';
+$_['entry_sms_gate_username'] = 'Логин на SMS гейт:';
 $_['entry_sms_gate_password'] = 'Пароль на SMS гейт:';
 $_['entry_alert_sms']   	  = 'Включить SMS уведомления:';
 $_['entry_alert_smss']   	  = 'Дополнительные номера:<br/><span class="help">Дополнительные телефонные номера для отправки SMS</span>';
 $_['entry_ssl']               = 'Использовать SSL:<br /><span class="help">Для использования SSL убедитесь что Ваш хостинг поддерживает SSL сертификат и пропишите SSL адреса в файле конфигурации.</span>';
 $_['entry_encryption']        = 'Ключ шифрования:<br /><span class="help">Ключ, который будет использоваться для шифрования конфиденциальной информации при обработке заказов.</span>';
 $_['entry_seo_url']           = 'Использование SEO-url:';
-$_['entry_seo_url_auto'] 	  = 'Автоподстановка окончаний SEO-url:';
+$_['entry_seo_url_auto'] 	  = 'Автоподстановка окончаний SEO-url:<span class="help">Добавляет / в конце УРЛ</span>';
 $_['entry_seo_url_replace']   = 'Заменять пробелы на "_" в SEO-url:';
 $_['entry_compression']       = 'Уровень сжатия:<br /><span class="help">Задайте значение от 0 до 9.</span>';
 $_['entry_error_display']     = 'Показывать ошибки:';
