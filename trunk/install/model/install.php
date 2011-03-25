@@ -153,7 +153,7 @@ class ModelInstall extends Model {
 		    }
 
 		    foreach ($data as $table) {
-			pg_query($connection, 'DROP table ' . $table);
+			pg_query($connection, 'DROP table "' . $table . '"');
 		    }
 		};
 
