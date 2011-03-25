@@ -138,7 +138,7 @@ class ModelInstall extends Model {
 		    }
 
 		    foreach ($data as $table) {
-			mysql_query('DROP table ' . $table , $connection);
+			mysql_query('DROP table `' . $table . '`', $connection);
 		    }
 		}
 		elseif ($db_driver == 'postgre')
