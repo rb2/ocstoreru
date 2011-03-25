@@ -165,7 +165,8 @@ if (!isset($session->data['language']) || $session->data['language'] != $code) {
 }
 
 if (!isset($request->cookie['language']) || $request->cookie['language'] != $code) {
-	setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
+	// do not use $request->server['HTTP_HOST'] as 'domain' because this may be broken if back-end server is used
+	setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', '');
 }
 
 $config->set('config_language_id', $languages[$code]['language_id']);
