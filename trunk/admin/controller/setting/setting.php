@@ -30,6 +30,7 @@ class ControllerSettingSetting extends Controller {
 		# Load language file
 		$this->data = array_merge($this->data, $this->load->language('setting/setting'));
 
+		$this->data['lang'] = $this->language->get('code');
 		$this->data['token'] = $this->session->data['token'];
 
 		# Error array

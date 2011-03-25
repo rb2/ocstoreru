@@ -118,6 +118,7 @@ class ControllerSaleContact extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
 
+		$this->data['lang'] = $this->language->get('code');
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_newsletter'] = $this->language->get('text_newsletter');

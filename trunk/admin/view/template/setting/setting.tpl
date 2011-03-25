@@ -809,6 +809,7 @@
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
 CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
+	language: '<?php echo $lang; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',

@@ -262,6 +262,7 @@ class ControllerCatalogInformation extends Controller {
 	}
 
 	private function getForm() {
+		$this->data['lang'] = $this->language->get('code');
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_default'] = $this->language->get('text_default');

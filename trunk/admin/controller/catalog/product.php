@@ -516,14 +516,15 @@ class ControllerCatalogProduct extends Controller {
 		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
   	}
 
-  	private function getForm() {
-    	$this->data['heading_title'] = $this->language->get('heading_title');
+	private function getForm() {
+		$this->data['lang'] = $this->language->get('code');
+		$this->data['heading_title'] = $this->language->get('heading_title');
 
-    	$this->data['text_enabled'] = $this->language->get('text_enabled');
-    	$this->data['text_disabled'] = $this->language->get('text_disabled');
-    	$this->data['text_none'] = $this->language->get('text_none');
-    	$this->data['text_yes'] = $this->language->get('text_yes');
-    	$this->data['text_no'] = $this->language->get('text_no');
+		$this->data['text_enabled'] = $this->language->get('text_enabled');
+		$this->data['text_disabled'] = $this->language->get('text_disabled');
+		$this->data['text_none'] = $this->language->get('text_none');
+		$this->data['text_yes'] = $this->language->get('text_yes');
+		$this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_plus'] = $this->language->get('text_plus');
 		$this->data['text_minus'] = $this->language->get('text_minus');
 		$this->data['text_default'] = $this->language->get('text_default');
