@@ -182,12 +182,13 @@ class ControllerLocalisationZone extends Controller {
 			);
 					
 			$this->data['zones'][] = array(
-				'zone_id'  => $result['zone_id'],
-				'country'  => $result['country'],
-				'name'     => $result['name'] . (($result['zone_id'] == $this->config->get('config_zone_id')) ? $this->language->get('text_default') : NULL),
-				'code'     => $result['code'],
-				'selected' => isset($this->request->post['selected']) && in_array($result['zone_id'], $this->request->post['selected']),
-				'action'   => $action			
+				'zone_id'     => $result['zone_id'],
+				'country'     => $result['country'],
+				'name'        => $result['name'] . (($result['zone_id'] == $this->config->get('config_zone_id')) ? $this->language->get('text_default') : NULL),
+				'code'        => $result['code'],
+				'selected'    => isset($this->request->post['selected']) && in_array($result['zone_id'], $this->request->post['selected']),
+				'action'      => $action,
+				'statusclass' => $result['zstatus'] ? "on" : "off"
 			);
 		}
 	

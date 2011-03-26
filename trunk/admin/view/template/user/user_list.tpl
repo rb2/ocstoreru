@@ -39,7 +39,7 @@
         <tbody>
           <?php if ($users) { ?>
           <?php foreach ($users as $user) { ?>
-          <tr>
+          <tr class="<?php echo $user['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($user['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $user['user_id']; ?>" checked="checked" />
               <?php } else { ?>

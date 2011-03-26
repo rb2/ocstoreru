@@ -187,7 +187,8 @@ class ControllerUserUser extends Controller {
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'selected'   => isset($this->request->post['selected']) && in_array($result['user_id'], $this->request->post['selected']),
-				'action'     => $action
+				'action'     => $action,
+				'statusclass'=> $result['status'] ? "on" : "off"
 			);
 		}	
 			

@@ -189,7 +189,8 @@ class ControllerSaleCoupon extends Controller {
 				'date_end'   => date($this->language->get('date_format_short'), strtotime($result['date_end'])),
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'selected'   => isset($this->request->post['selected']) && in_array($result['coupon_id'], $this->request->post['selected']),
-				'action'     => $action
+				'action'     => $action,
+				'statusclass'=> $result['status'] ? "on" : "off"
 			);
 		}
 									

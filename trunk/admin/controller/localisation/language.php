@@ -187,8 +187,9 @@ class ControllerLocalisationLanguage extends Controller {
 				'code'        => $result['code'],
 				'sort_order'  => $result['sort_order'],
 				'selected'    => isset($this->request->post['selected']) && in_array($result['language_id'], $this->request->post['selected']),
-				'action'      => $action	
-			);		
+				'action'      => $action,
+				'statusclass' => $result['status'] ? "on" : "off"
+			);
 		}
 	
 		$this->data['heading_title'] = $this->language->get('heading_title');

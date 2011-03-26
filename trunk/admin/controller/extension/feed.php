@@ -86,9 +86,10 @@ class ControllerExtensionFeed extends Controller {
 				}
 									
 				$this->data['extensions'][] = array(
-					'name'   => $this->language->get('heading_title'),
-					'status' => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-					'action' => $action
+					'name'       => $this->language->get('heading_title'),
+					'status'     => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+					'action'     => $action,
+					'statusclass'=> $this->config->get($extension . '_status') ? "on" : "off"
 				);
 			}
 		}

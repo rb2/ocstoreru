@@ -54,7 +54,7 @@
         <tbody>
           <?php if ($coupons) { ?>
           <?php foreach ($coupons as $coupon) { ?>
-          <tr>
+          <tr class="<?php echo $coupon['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($coupon['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $coupon['coupon_id']; ?>" checked="checked" />
               <?php } else { ?>

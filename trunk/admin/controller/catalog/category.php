@@ -103,7 +103,8 @@ class ControllerCatalogCategory extends Controller {
 				'name'        => $result['name'],
 				'sort_order'  => $result['sort_order'],
 				'selected'    => isset($this->request->post['selected']) && in_array($result['category_id'], $this->request->post['selected']),
-				'action'      => $action
+				'action'      => $action,
+				'statusclass' => $result['status'] ? "on" : "off"
 			);
 		}
 		

@@ -23,7 +23,7 @@
       <tbody>
         <?php if ($extensions) { ?>
         <?php foreach ($extensions as $extension) { ?>
-        <tr>
+        <tr class="<?php echo $extension['statusclass']; ?>">
           <td class="left"><?php echo $extension['name']; ?></td>
           <td class="left"><?php echo $extension['status'] ?></td>
           <td class="right"><?php foreach ($extension['action'] as $action) { ?>

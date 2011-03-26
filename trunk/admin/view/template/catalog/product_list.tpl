@@ -72,7 +72,7 @@
           </tr>
           <?php if ($products) { ?>
           <?php foreach ($products as $product) { ?>
-          <tr>
+          <tr class="<?php echo $product['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($product['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" checked="checked" />
               <?php } else { ?>

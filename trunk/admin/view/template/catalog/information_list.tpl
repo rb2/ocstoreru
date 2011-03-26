@@ -34,7 +34,7 @@
         <tbody>
           <?php if ($informations) { ?>
           <?php foreach ($informations as $information) { ?>
-          <tr>
+          <tr class="<?php echo $information['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($information['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $information['information_id']; ?>" checked="checked" />
               <?php } else { ?>

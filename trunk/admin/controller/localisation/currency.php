@@ -188,7 +188,8 @@ class ControllerLocalisationCurrency extends Controller {
 				'value'         => $result['value'],
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
 				'selected'      => isset($this->request->post['selected']) && in_array($result['currency_id'], $this->request->post['selected']),
-				'action'        => $action
+				'action'        => $action,
+				'statusclass'   => $result['status'] ? "on" : "off"
 			);
 		}	
 	

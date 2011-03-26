@@ -49,7 +49,7 @@
         <tbody>
           <?php if ($reviews) { ?>
           <?php foreach ($reviews as $review) { ?>
-          <tr>
+          <tr class="<?php echo $review['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($review['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $review['review_id']; ?>" checked="checked" />
               <?php } else { ?>

@@ -39,7 +39,7 @@
         <tbody>
           <?php if ($countries) { ?>
           <?php foreach ($countries as $country) { ?>
-          <tr>
+          <tr class="<?php echo $country['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($country['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $country['country_id']; ?>" checked="checked" />
               <?php } else { ?>

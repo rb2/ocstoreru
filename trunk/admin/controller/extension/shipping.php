@@ -90,7 +90,8 @@ class ControllerExtensionShipping extends Controller {
 					'name'       => $this->language->get('heading_title'),
 					'status'     => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 					'sort_order' => $this->config->get($extension . '_sort_order'),
-					'action'     => $action
+					'action'     => $action,
+					'statusclass'=> $this->config->get($extension . '_status') ? "on" : "off"
 				);
 			}
 		}

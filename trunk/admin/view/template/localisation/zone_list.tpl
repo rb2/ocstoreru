@@ -39,7 +39,7 @@
         <tbody>
           <?php if ($zones) { ?>
           <?php foreach ($zones as $zone) { ?>
-          <tr>
+          <tr class="<?php echo $zone['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($zone['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $zone['zone_id']; ?>" checked="checked" />
               <?php } else { ?>

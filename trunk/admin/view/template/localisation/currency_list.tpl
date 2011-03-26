@@ -44,7 +44,7 @@
         <tbody>
           <?php if ($currencies) { ?>
           <?php foreach ($currencies as $currency) { ?>
-          <tr>
+          <tr class="<?php echo $currency['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($currency['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $currency['currency_id']; ?>" checked="checked" />
               <?php } else { ?>

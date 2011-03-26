@@ -39,7 +39,7 @@
         <tbody>
           <?php if ($languages) { ?>
           <?php foreach ($languages as $language) { ?>
-          <tr>
+          <tr class="<?php echo $language['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($language['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $language['language_id']; ?>" checked="checked" />
               <?php } else { ?>

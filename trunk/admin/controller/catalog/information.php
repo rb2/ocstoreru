@@ -186,7 +186,8 @@ class ControllerCatalogInformation extends Controller {
 				'title'      => $result['title'],
 				'sort_order' => $result['sort_order'],
 				'selected'   => isset($this->request->post['selected']) && in_array($result['information_id'], $this->request->post['selected']),
-				'action'     => $action
+				'action'     => $action,
+				'statusclass'=> $result['status'] ? "on" : "off"
 			);
 		}	
 	

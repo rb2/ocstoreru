@@ -26,7 +26,7 @@
         <tbody>
           <?php if ($categories) { ?>
           <?php foreach ($categories as $category) { ?>
-          <tr>
+          <tr class="<?php echo $category['statusclass']; ?>">
             <td style="text-align: center;"><?php if ($category['selected']) { ?>
               <input type="checkbox" name="selected[]" value="<?php echo $category['category_id']; ?>" checked="checked" />
               <?php } else { ?>

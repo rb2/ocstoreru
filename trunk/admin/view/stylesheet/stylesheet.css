@@ -274,6 +274,9 @@ body > #container {
 .list tbody tr:hover {
 	background: moccasin !important;
 }
+.list tbody tr.off td {
+	color: dimgray;
+}
 .list .left {
 	text-align: left;
 	padding: 7px;

@@ -187,7 +187,8 @@ class ControllerLocalisationCountry extends Controller {
 				'iso_code_2' => $result['iso_code_2'],
 				'iso_code_3' => $result['iso_code_3'],
 				'selected'   => isset($this->request->post['selected']) && in_array($result['country_id'], $this->request->post['selected']),				
-				'action'     => $action
+				'action'     => $action,
+				'statusclass'=> $result['status'] ? "on" : "off"
 			);
 		}
 
