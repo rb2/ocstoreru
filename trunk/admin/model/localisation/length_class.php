@@ -13,12 +13,18 @@ class ModelLocalisationLengthClass extends Model {
 	}
 	
 	public function editLengthClass($length_class_id, $data) {
+		$query = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `group` = 'config' and `key` = 'config_length_class'");
+		$query = $this->db->query("SELECT `length_class_id`, `language_id` FROM `" . DB_PREFIX . "length_class_description` WHERE `unit` = '" . $this->db->escape($query->row['value']) . "'");
+		
 		$this->db->query("UPDATE " . DB_PREFIX . "length_class SET value = '" . (float)$data['value'] . "' WHERE length_class_id = '" . (int)$length_class_id . "'");
 		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "length_class_description WHERE length_class_id = '" . (int)$length_class_id . "'");
 
 		foreach ($data['length_class_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "length_class_description SET length_class_id = '" . (int)$length_class_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', unit = '" . $this->db->escape($value['unit']) . "'");
+			if ($length_class_id == $query->row['length_class_id'] and $language_id == $query->row['language_id']) {
+				$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `value` = '" . $this->db->escape($value['unit']) . "' WHERE `group` = 'config' and `key` = 'config_length_class'");
+			}
 		}
 		
 		$this->cache->delete('length_class');	

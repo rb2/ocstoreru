@@ -13,12 +13,18 @@ class ModelLocalisationWeightClass extends Model {
 	}
 	
 	public function editWeightClass($weight_class_id, $data) {
+		$query = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `group` = 'config' and `key` = 'config_weight_class'");
+		$query = $this->db->query("SELECT `weight_class_id`, `language_id` FROM `" . DB_PREFIX . "weight_class_description` WHERE `unit` = '" . $this->db->escape($query->row['value']) . "'");
+		
 		$this->db->query("UPDATE " . DB_PREFIX . "weight_class SET value = '" . (float)$data['value'] . "' WHERE weight_class_id = '" . (int)$weight_class_id . "'");
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "weight_class_description WHERE weight_class_id = '" . (int)$weight_class_id . "'");
 
 		foreach ($data['weight_class_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "weight_class_description SET weight_class_id = '" . (int)$weight_class_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', unit = '" . $this->db->escape($value['unit']) . "'");
+			if ($weight_class_id == $query->row['weight_class_id'] and $language_id == $query->row['language_id']) {
+				$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `value` = '" . $this->db->escape($value['unit']) . "' WHERE `group` = 'config' and `key` = 'config_weight_class'");
+			}
 		}
 		
 		$this->cache->delete('weight_class');	

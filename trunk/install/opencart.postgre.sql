@@ -767,8 +767,7 @@ CREATE TABLE "oc_length_class" (
 
 INSERT INTO "oc_length_class" ("length_class_id", "value") VALUES
 (1, '1.00000000'),
-(2, '10.00000000'),
-(3, '0.39370000');
+(2, '10.00000000');
 
 -- --------------------------------------------------------
 
@@ -1677,13 +1676,13 @@ INSERT INTO "oc_setting" ("group", "key", "value") VALUES
 ('config', 'config_customer_price', '0'),
 ('config', 'config_customer_group_id', '8'),
 ('config', 'config_tax', '1'),
-('config', 'config_weight_class', 'kg'),
+('config', 'config_weight_class', 'кг'),
 ('flat', 'flat_cost', '2'),
 ('flat', 'flat_tax_class_id', '9'),
 ('flat', 'flat_geo_zone_id', '0'),
 ('flat', 'flat_status', '1'),
 ('flat', 'flat_sort_order', '1'),
-('config', 'config_length_class', 'cm'),
+('config', 'config_length_class', 'см'),
 ('config', 'config_currency', 'RUB'),
 ('config', 'config_currency_auto', '1'),
 ('config', 'config_admin_language', 'ru'),
@@ -1956,9 +1955,7 @@ CREATE TABLE "oc_weight_class" (
 
 INSERT INTO "oc_weight_class" ("weight_class_id", "value") VALUES
 (1, '1.00000000'),
-(2, '1000.00000000'),
-(5, '2.20460000'),
-(6, '35.27400000');
+(2, '1000.00000000');
 
 -- --------------------------------------------------------
 
