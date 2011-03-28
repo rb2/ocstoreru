@@ -29,7 +29,7 @@
             </select>
             <br />
             <select name="product_id" id="product">
-              <?php if ($product) { ?>
+              <?php if (isset($product)) { ?>
               <option value="<?php echo $product_id; ?>"><?php echo $product; ?></option>
               <?php } else { ?>
               <option value="0"><?php echo $text_none; ?></option>
