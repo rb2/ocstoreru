@@ -170,6 +170,55 @@ class ControllerCatalogProduct extends Controller {
     	$this->getList();
   	}
 
+	public function enable() {
+		$this->changeStatusProducts(1);
+	}
+	
+	public function disable() {
+		$this->changeStatusProducts(0);
+	}
+	
+	private function changeStatusProducts($status) {
+		$this->load->language('catalog/product');
+		$this->load->model('catalog/product');
+		
+		if (isset($this->request->post['selected']) && $this->user->hasPermission('modify', 'catalog/product')) {
+			$this->model_catalog_product->changeStatusProducts($this->request->post['selected'], $status);
+			
+			$url = '';
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . $this->request->get['filter_name'];
+			}
+			if (isset($this->request->get['filter_model'])) {
+				$url .= '&filter_model=' . $this->request->get['filter_model'];
+			}
+			if (isset($this->request->get['filter_price'])) {
+				$url .= '&filter_price=' . $this->request->get['filter_price'];
+			}
+			if (isset($this->request->get['filter_quantity'])) {
+				$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+			}
+			if (isset($this->request->get['filter_status'])) {
+				$url .= '&filter_status=' . $this->request->get['filter_status'];
+			}
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+			
+			$this->session->data['success'] = $this->language->get('text_success');
+			$this->redirect(HTTPS_SERVER . 'index.php?route=catalog/product&token=' . $this->session->data['token'] . $url);
+		}
+		
+		$this->document->title = $this->language->get('heading_title');
+		$this->getList();
+	}
+	
   	public function copy() {
     	$this->load->language('catalog/product');
 
@@ -324,6 +373,8 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['insert'] = HTTPS_SERVER . 'index.php?route=catalog/product/insert&token=' . $this->session->data['token'] . $url;
 		$this->data['copy'] = HTTPS_SERVER . 'index.php?route=catalog/product/copy&token=' . $this->session->data['token'] . $url;
 		$this->data['delete'] = HTTPS_SERVER . 'index.php?route=catalog/product/delete&token=' . $this->session->data['token'] . $url;
+		$this->data['enable'] = HTTPS_SERVER . 'index.php?route=catalog/product/enable&token=' . $this->session->data['token'] . $url;
+		$this->data['disable'] = HTTPS_SERVER . 'index.php?route=catalog/product/disable&token=' . $this->session->data['token'] . $url;
 
 		$this->data['products'] = array();
 
@@ -403,6 +454,8 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['button_copy'] = $this->language->get('button_copy');
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+		$this->data['button_enable'] = $this->language->get('button_enable');
+		$this->data['button_disable'] = $this->language->get('button_disable');
 		$this->data['button_filter'] = $this->language->get('button_filter');
 
  		$this->data['token'] = $this->session->data['token'];

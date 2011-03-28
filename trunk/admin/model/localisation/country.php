@@ -18,6 +18,15 @@ class ModelLocalisationCountry extends Model {
 		$this->cache->delete('country');
 	}
 	
+	public function changeStatusCountries($countries, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_countries = array_map('check_int', $countries);
+		$countries = implode("' OR country_id = '", $arr_countries);
+		$this->db->query("UPDATE " . DB_PREFIX . "country SET status = '" . (int)(bool)$status . "' WHERE country_id = '" . $countries . "'");
+		
+		$this->cache->delete('country');
+	}
+	
 	public function getCountry($country_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "country WHERE country_id = '" . (int)$country_id . "'");
 		

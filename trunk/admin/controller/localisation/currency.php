@@ -110,6 +110,39 @@ class ControllerLocalisationCurrency extends Controller {
 		$this->getList();
 	}
 
+	public function enable() {
+		$this->changeStatusCurrencies(1);
+	}
+	
+	public function disable() {
+		$this->changeStatusCurrencies(0);
+	}
+	
+	private function changeStatusCurrencies($status) {
+		$this->load->language('localisation/currency');
+		$this->load->model('localisation/currency');
+		
+		if (isset($this->request->post['selected']) && $this->user->hasPermission('modify', 'localisation/currency')) {
+			$this->model_localisation_currency->changeStatusCurrencies($this->request->post['selected'], $status);
+			
+			$url = '';
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+			$this->session->data['success'] = $this->language->get('text_success');
+			$this->redirect(HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url);
+		}
+		
+		$this->document->title = $this->language->get('heading_title');
+		$this->getList();
+	}
+
 	private function getList() {
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -159,6 +192,8 @@ class ControllerLocalisationCurrency extends Controller {
 		
 		$this->data['insert'] = HTTPS_SERVER . 'index.php?route=localisation/currency/insert&token=' . $this->session->data['token'] . $url;
 		$this->data['delete'] = HTTPS_SERVER . 'index.php?route=localisation/currency/delete&token=' . $this->session->data['token'] . $url;
+		$this->data['enable'] = HTTPS_SERVER . 'index.php?route=localisation/currency/enable&token=' . $this->session->data['token'] . $url;
+		$this->data['disable'] = HTTPS_SERVER . 'index.php?route=localisation/currency/disable&token=' . $this->session->data['token'] . $url;
 		
 		$this->data['currencies'] = array();
 
@@ -205,6 +240,8 @@ class ControllerLocalisationCurrency extends Controller {
 
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+		$this->data['button_enable'] = $this->language->get('button_enable');
+		$this->data['button_disable'] = $this->language->get('button_disable');
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];

@@ -157,6 +157,15 @@ class ModelLocalisationLanguage extends Model {
 		$this->cache->delete('weight_class');
 	}
 	
+	public function changeStatusLanguages($languages, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_languages = array_map('check_int', $languages);
+		$languages = implode("' OR language_id = '", $arr_languages);
+		$this->db->query("UPDATE " . DB_PREFIX . "language SET status = '" . (int)(bool)$status . "' WHERE language_id = '" . $languages . "'");
+		
+		$this->cache->delete('language');
+	}
+	
 	public function getLanguage($language_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "language WHERE language_id = '" . (int)$language_id . "'");
 	

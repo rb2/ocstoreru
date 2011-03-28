@@ -32,6 +32,8 @@ $_['text_home']               = 'Главная';
 // Button
 $_['button_insert']           = 'Добавить';
 $_['button_delete']           = 'Удалить';
+$_['button_enable']           = 'Включить';
+$_['button_disable']          = 'Отключить';
 $_['button_save']             = 'Сохранить';
 $_['button_cancel']           = 'Отменить';
 $_['button_clear']            = 'Очистить журнал';

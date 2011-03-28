@@ -18,6 +18,15 @@ class ModelLocalisationZone extends Model {
 		$this->cache->delete('zone');	
 	}
 	
+	public function changeStatusZones($zones, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_zones = array_map('check_int', $zones);
+		$zones = implode("' OR zone_id = '", $arr_zones);
+		$this->db->query("UPDATE " . DB_PREFIX . "zone SET status = '" . (int)(bool)$status ."' WHERE zone_id = '" . $zones . "'");
+		
+		$this->cache->delete('zone');
+	}
+	
 	public function getZone($zone_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "zone WHERE zone_id = '" . (int)$zone_id . "'");
 		

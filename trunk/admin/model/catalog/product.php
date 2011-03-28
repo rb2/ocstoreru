@@ -272,6 +272,15 @@ class ModelCatalogProduct extends Model {
 		$this->cache->delete('product');
 	}
 
+	public function changeStatusProducts($products, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_products = array_map('check_int', $products);
+		$products = implode("' OR product_id = '", $arr_products);
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET status = '" . (int)(bool)$status . "' WHERE product_id = '" . $products . "'");
+		
+		$this->cache->delete('product');
+	}
+
 	public function getProduct($product_id) {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'product_id=" . (int)$product_id . "') AS keyword FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.product_id = '" . (int)$product_id . "' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 

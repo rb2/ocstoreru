@@ -71,7 +71,16 @@ class ModelCatalogCategory extends Model {
 		}
 		
 		$this->cache->delete('category');
-	} 
+	}
+	
+	public function changeStatusCategories($categories, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_categories = array_map('check_int', $categories);
+		$categories = implode("' OR category_id = '", $arr_categories);
+		$this->db->query("UPDATE " . DB_PREFIX . "category SET status = '" . (int)(bool)$status . "' WHERE category_id = '" . $categories . "'");
+		
+		$this->cache->delete('category');
+	}
 
 	public function getCategory($category_id) {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "') AS keyword FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");

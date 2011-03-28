@@ -16,6 +16,13 @@ class ModelUserUser extends Model {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "user` WHERE user_id = '" . (int)$user_id . "'");
 	}
 	
+	public function changeStatusUsers($users, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_users = array_map('check_int', $users);
+		$users = implode("' OR user_id = '", $arr_users);
+		$this->db->query("UPDATE `" . DB_PREFIX . "user` SET status = '" . (int)(bool)$status . "' WHERE user_id = '" . $users . "'");
+	}
+	
 	public function getUser($user_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "user` WHERE user_id = '" . (int)$user_id . "'");
 	

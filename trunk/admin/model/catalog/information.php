@@ -56,6 +56,15 @@ class ModelCatalogInformation extends Model {
 
 		$this->cache->delete('information');
 	}	
+	
+	public function changeStatusInformations($informations, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_informations = array_map('check_int', $informations);
+		$informations = implode("' OR information_id = '", $arr_informations);
+		$this->db->query("UPDATE " . DB_PREFIX . "information SET status = '" . (int)(bool)$status . "' WHERE information_id = '" . $informations . "'");
+		
+		$this->cache->delete('information');
+	}
 
 	public function getInformation($information_id) {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'information_id=" . (int)$information_id . "') AS keyword FROM " . DB_PREFIX . "information WHERE information_id = '" . (int)$information_id . "'");

@@ -12,6 +12,13 @@ class ModelCatalogReview extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "review WHERE review_id = '" . (int)$review_id . "'");
 	}
 	
+	public function changeStatusReviews($reviews, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_reviews = array_map('check_int', $reviews);
+		$reviews = implode("' OR review_id = '", $arr_reviews);
+		$this->db->query("UPDATE " . DB_PREFIX . "review SET status = '" . (int)(bool)$status . "' WHERE review_id = '" . $reviews . "'");
+	}
+	
 	public function getReview($review_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "review WHERE review_id = '" . (int)$review_id . "'");
 		

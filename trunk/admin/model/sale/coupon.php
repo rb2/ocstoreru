@@ -40,6 +40,13 @@ class ModelSaleCoupon extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "coupon_product WHERE coupon_id = '" . (int)$coupon_id . "'");		
 	}
 	
+	public function changeStatusCoupons($coupons, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_coupons = array_map('check_int', $coupons);
+		$coupons = implode("' OR coupon_id = '", $arr_coupons);
+		$this->db->query("UPDATE " . DB_PREFIX . "coupon SET status = '" . (int)(bool)$status . "' WHERE coupon_id = '" . $coupons . "'");
+	}
+	
 	public function getCoupon($coupon_id) {
       	$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "coupon WHERE coupon_id = '" . (int)$coupon_id . "'");
 		

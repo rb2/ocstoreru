@@ -18,6 +18,15 @@ class ModelLocalisationCurrency extends Model {
 		$this->cache->delete('currency');
 	}
 
+	public function changeStatusCurrencies($currencies, $status) {
+		function check_int($a) { return (int)$a; }
+		$arr_currencies = array_map('check_int', $currencies);
+		$currencies = implode("' OR currency_id = '", $arr_currencies);
+		$this->db->query("UPDATE " . DB_PREFIX . "currency SET status = '" . (int)(bool)$status . "' WHERE currency_id = '" . $currencies . "'");
+		
+		$this->cache->delete('currency');
+	}
+	
 	public function getCurrency($currency_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "currency WHERE currency_id = '" . (int)$currency_id . "'");
 	
