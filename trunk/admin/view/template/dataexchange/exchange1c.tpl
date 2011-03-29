@@ -15,11 +15,11 @@
         
         <tr>
           <td><?php echo $entry_username; ?></td>
-          <td><input name="exchange1c_username"><?php echo $exchange1c_username; ?></textarea></td>
+          <td><input name="exchange1c_username" type="text" value="<?php echo $exchange1c_username; ?>" /></td>
         </tr>        
         <tr>
           <td><?php echo $entry_password; ?></td>
-          <td><input name="exchange1c_password"><?php echo $exchange1c_password; ?></textarea></td>
+          <td><input name="exchange1c_password" type="password" value="<?php echo $exchange1c_password; ?>" /></td>
         </tr>
         
         <tr>
