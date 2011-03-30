@@ -93,6 +93,9 @@ class ModelCatalogProduct extends Model {
 
 
 		$this->cache->delete('product');
+		
+		// Возвращает индентификатор продукта. Нужно для работы модуля 1C
+		return $product_id;
 	}
 
 	public function editProduct($product_id, $data) {

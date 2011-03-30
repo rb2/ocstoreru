@@ -165,19 +165,25 @@ class ControllerDataexchangeExchange1c extends Controller {
 	
 	public function modeInit() {
 		
+		$this->load->model('dataexchange/exchange1c');
+		
 		// чистим кеш, убиваем старые данные
 		$this->cleanCacheDir();
 		
+		// Проверяем естль ли БД для хранения промежуточных данных.
+		$this->model_dataexchange_exchange1c->checkDbSheme();
+		
 		// Очищает таблицы от всех товаров
-		$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category'); 
-		$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_description');
-		$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_to_store');
+		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category'); 
+		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_description');
+		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_to_store');
 		
 		
-		$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product'); 
-		$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_description');
-		$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_store');
-		$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_category');
+		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product'); 
+		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_description');
+		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_store');
+		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_category');
+		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_1c');
 					
 		$limit = 1000 * 1024;
 	
@@ -273,6 +279,8 @@ class ControllerDataexchangeExchange1c extends Controller {
 			echo $this->request->get['filename'];
 			
 		}
+		
+		$this->cache->delete('product');
 		
 		return;
 	}

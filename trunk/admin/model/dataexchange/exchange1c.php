@@ -125,6 +125,10 @@ class ModelDataexchangeExchange1c extends Model {
 										$product->next();
 									break;
 									
+									case 'Описание':
+										$data['description'] = $product->readString();	
+									break;
+									
 									case 'ЗначенияСвойств':
 									case 'ХарактеристикиТовара':
 									case 'СтавкиНалогов':
@@ -135,13 +139,19 @@ class ModelDataexchangeExchange1c extends Model {
 										$product->next();
 										
 									break;
+									
+									case 'Статус':
+										$data['status'] = $product->readString();	
+									break;
 								
 								}
 							}
 						
 						}
 						
-						$this->insertProduct($data);
+						
+						// Добавляем/Обновляем продукт
+						$this->setProduct($data);
 						
 					break;
 				}
@@ -166,7 +176,7 @@ class ModelDataexchangeExchange1c extends Model {
 			if( isset($category->Ид) AND isset($category->Наименование) ){ 
 				$id =  strval($category->Ид);
 				$name = $category->Наименование;
-			
+				
 				$data = array();
 				$data['category_description'] = array(
 					1 => array(
@@ -190,8 +200,14 @@ class ModelDataexchangeExchange1c extends Model {
 			//	echo 'NAME: ' . $name . '<br/>';
 			//	echo 'PARENT: ' . $parent . '<br/>'; 
 			
-				$category_id = $this->model_catalog_category->addCategory($data);
+				$query = $this->db->query('SELECT * FROM `' . DB_PREFIX . 'category_to_1c` WHERE `1c_category_id` = "' . $this->db->escape($id) . '"');
 				
+				if($query->num_rows) {	
+					$category_id = (int)$query->row['category_id'];
+				} else {
+					$category_id = $this->model_catalog_category->addCategory($data);
+				}
+			
 				$this->CAT[$id] = $category_id;
 				
 			}
@@ -205,9 +221,22 @@ class ModelDataexchangeExchange1c extends Model {
 	}
 	
 	
-	private function insertProduct($product) {
+	/**
+	*	Функция работы с продуктом
+	* 	@param array $product(
+	*							'id'	идентификатор передаваемый из 1С
+	*						)
+	*/
+	private function setProduct($product) {
 	
 		if(!$product) return;
+		
+		//Проверяем есть ли такой товар в БД
+		$query = $this->db->query('SELECT * FROM `' . DB_PREFIX . 'product_to_1c` WHERE `1c_id` = "' . $this->db->escape($product['id']) . '"');
+		
+		if($query->num_rows) {	
+			return $this->updateProduct($product, (int)$query->row['product_id']);
+		} 	
 		
 		// Описание продукта
 		$data['product_description'] = array(
@@ -215,7 +244,7 @@ class ModelDataexchangeExchange1c extends Model {
 				'name' => trim($product['name']),
 				'meta_keywords' => '',
 				'meta_description' => '',
-				'description' => '',
+				'description' => (isset($product['description'])) ?trim($product['description']) :  '',
 				'title' => '',
 				'h1' => ''
 			),
@@ -273,7 +302,7 @@ class ModelDataexchangeExchange1c extends Model {
 		
 		$data['weight'] = '';
 		
-		$data['weight_class_id'] = '';
+		$data['weight_class_id'] = 1;
 		
 		$data['length'] = '';
 		
@@ -281,7 +310,7 @@ class ModelDataexchangeExchange1c extends Model {
 		
 		$data['height'] = '';
 		
-		$data['length_class_id'] = '';
+		$data['length_class_id'] = 1;
 		
 		$data['product_options'] = array();
 		
@@ -297,15 +326,81 @@ class ModelDataexchangeExchange1c extends Model {
 		
 		$this->load->model('catalog/product');
 		
-		$this->model_catalog_product->addProduct($data);
+		$product_id = $this->model_catalog_product->addProduct($data);
+		
+		// Добавляемя линкт в дб
+		$this->db->query('INSERT INTO `' .  DB_PREFIX . 'product_to_1c` SET product_id = ' . (int)$product_id . ', `1c_id` = "' . $this->db->escape($product['id']) . '"');		
 		
 		//var_dump($data);
 	}
 	
 	
-	private function updateProduct($data) {
+	private function updateProduct($product, $product_id = 0) {
 		
 		$this->load->model('catalog/product');
+		
+		// Проверяем что обновлять?
+		if( ! $product_id ) {
+			
+			$query = $this->db->query('SELECT * FROM `' . DB_PREFIX . 'product_to_1c` WHERE `1c_id` = "' . $this->db->escape($product['id']) . '"');
+			
+			if($query->num_rows) {	
+				$product_id = (int)$query->row['product_id'];
+			} else {
+
+				echo '<pre>';
+				var_dump($product);
+				exit;
+			}
+		}
+		
+		
+		
+		
+		
+		// Обновляем описание продукта
+		$product_old = $this->model_catalog_product->getProduct($product_id);
+		
+		// Проверяем изменения в наименовании
+		if( isset($product['name']) AND $product_old['name'] != $product['name']) {
+		
+			$set = array();
+			
+			if(isset($product['name'])) $set[] = 'name = "' . $this->db->escape($product['name']). '"';	
+			
+			//if(isset($product['description'])) $set[] = 'description = "' . $this->db->escape($product['description']). '"';
+			
+					
+			
+			
+			$query = $this->db->query('UPDATE `' . DB_PREFIX . 'product_description` SET ' . implode(', ', $set)  . ' WHERE product_id = ' . (int)$product_id);
+				
+		}
+		
+		
+		$set = array();
+		
+		// Изменять изображение?
+		if( ! $product_old['image'] AND isset($product['image']) ) $set[] = 'image = "' . $this->db->escape($product['image']). '"';
+		
+		// Изменяем стоимость 
+		if(isset($product['price'])) $set[] = 'price = "' . $this->db->escape($product['price']). '"';
+		
+		// Изменяем количество
+		if(isset($product['quantity'])) $set[] = 'quantity = ' . (int)$product['quantity'];
+		
+		// Включаем предложения
+		$set[] = 'status = 1';
+		
+		// Формируем строку изменения
+		$query = $this->db->query('UPDATE `' . DB_PREFIX . 'product` SET ' . implode(', ', $set) . ' WHERE `product_id` = ' .  (int)$product_id );
+		
+		
+		return;
+		
+		
+		
+		
 		
 		$product_id = $this->getProductIdBy1CProductName($data['name']);
 		
@@ -350,7 +445,47 @@ class ModelDataexchangeExchange1c extends Model {
 	
 	
 	
+	// Утилиты 
+	public function checkDbSheme() {
 	
+		// 
+		$query = $this->db->query('SHOW TABLES LIKE "' . DB_PREFIX . 'product_to_1c"');
+		
+		if( ! $query->num_rows ) {
+			// Создаем БД
+			
+			$this->db->query(
+					'CREATE TABLE 
+						`1cv03_product_to_1c` ( 
+							`product_id` int(10) unsigned NOT NULL,
+ 							`1c_id` varchar(255) NOT NULL,
+ 							PRIMARY KEY (`product_id`),
+ 							KEY `1c_id` (`1c_id`)
+						) ENGINE=MyISAM DEFAULT CHARSET=utf8'
+			);			
+		}
+
+
+		// 
+		$query = $this->db->query('SHOW TABLES LIKE "' . DB_PREFIX . 'category_to_1c"');
+		
+		if( ! $query->num_rows ) {
+			// Создаем БД
+			
+			$this->db->query(
+					'CREATE TABLE 
+						`1cv03_category_to_1c` ( 
+							`category_id` int(10) unsigned NOT NULL,
+ 							`1c_category_id` varchar(255) NOT NULL,
+ 							PRIMARY KEY (`category_id`),
+ 							KEY `1c_id` (`1c_category_id`)
+						) ENGINE=MyISAM DEFAULT CHARSET=utf8'
+			);			
+		}		
+		
+		return 0;
+	
+	}
 
 }
 ?>
