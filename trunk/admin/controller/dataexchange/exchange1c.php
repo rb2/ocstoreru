@@ -173,17 +173,20 @@ class ControllerDataexchangeExchange1c extends Controller {
 		// Проверяем естль ли БД для хранения промежуточных данных.
 		$this->model_dataexchange_exchange1c->checkDbSheme();
 		
-		// Очищает таблицы от всех товаров
-		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category'); 
-		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_description');
-		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_to_store');
+		// Если в настройках модуля стоит флаг обнулить БД 
+		if($this->config->get('exchange1c_flush_db') ) {
+			// Очищает таблицы от всех товаров
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category'); 
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_description');
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_to_store');
 		
 		
-		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product'); 
-		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_description');
-		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_store');
-		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_category');
-		//$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_1c');
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product'); 
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_description');
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_store');
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_category');
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_1c');
+		}
 					
 		$limit = 1000 * 1024;
 	
