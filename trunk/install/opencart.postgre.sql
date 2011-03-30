@@ -71,6 +71,8 @@ INSERT INTO "oc_category" ("category_id", "image", "parent_id", "sort_order", "d
 (33, '', 0, 6, '2009-02-03 14:17:55', '2010-03-21 15:30:55', 1),
 (34, '', 0, 7, '2009-02-03 14:18:11', '2010-03-21 15:31:01', 1);
 
+ALTER SEQUENCE "oc_category_category_id_seq" RESTART WITH 40;
+
 -- --------------------------------------------------------
 
 --
@@ -405,6 +407,9 @@ INSERT INTO "oc_country" ("country_id", "name", "iso_code_2", "iso_code_3", "add
 (237, 'Заир', 'ZR', 'ZAR', '', 1),
 (238, 'Замбия', 'ZM', 'ZMB', '', 1),
 (239, 'Зимбабве', 'ZW', 'ZWE', '', 1);
+
+ALTER SEQUENCE "oc_country_country_id_seq" RESTART WITH 300;
+
 -- --------------------------------------------------------
 
 --
@@ -436,6 +441,8 @@ INSERT INTO "oc_coupon" ("coupon_id", "code", "type", "discount", "logged", "shi
 (4, '2222', 'P', '10.0000', 0, 0, '0.0000', '2009-01-27', '2010-03-06', 10, '10', 1, '2009-01-27 13:55:03'),
 (5, '3333', 'P', '0.0000', 0, 1, '100.0000', '2009-03-01', '2009-08-31', 10, '10', 1, '2009-03-14 21:13:53'),
 (6, '1111', 'P', '10.0000', 0, 0, '10.0000', '2007-01-01', '2011-03-01', 10, '10', 1, '2009-03-14 21:15:18');
+
+ALTER SEQUENCE "oc_coupon_coupon_id_seq" RESTART WITH 10;
 
 -- --------------------------------------------------------
 
@@ -482,6 +489,8 @@ INSERT INTO "oc_coupon_product" ("coupon_product_id", "coupon_id", "product_id")
 (3, 7, 30),
 (8, 6, 48);
 
+ALTER SEQUENCE "oc_coupon_product_coupon_product_id_seq" RESTART WITH 10;
+
 -- --------------------------------------------------------
 
 --
@@ -509,6 +518,8 @@ INSERT INTO "oc_currency" ("currency_id", "title", "code", "symbol_left", "symbo
 (1, 'Рубль', 'RUB', '', ' р.', '2', 1.00000000, 1, '2010-06-28 08:52:14'),
 (2, 'US Dollar', 'USD', '$', '', '2', 1.52600002, 1, '2010-04-06 22:00:54'),
 (3, 'Euro', 'EUR', '', '€', '2', 1.13999999, 1, '2010-04-06 22:00:54');
+
+ALTER SEQUENCE "oc_currency_currency_id_seq" RESTART WITH 10;
 
 -- --------------------------------------------------------
 
@@ -560,6 +571,8 @@ CREATE TABLE "oc_customer_group" (
 INSERT INTO "oc_customer_group" ("customer_group_id", "name") VALUES
 (8, 'По умолчанию'),
 (6, 'Оптовики');
+
+ALTER SEQUENCE "oc_customer_group_customer_group_id_seq" RESTART WITH 10;
 
 -- --------------------------------------------------------
 
@@ -656,6 +669,8 @@ CREATE TABLE "oc_geo_zone" (
 INSERT INTO "oc_geo_zone" ("geo_zone_id", "name", "description", "date_modified", "date_added") VALUES
 (3, 'НДС', 'Облагаемые НДС', '2010-02-26 22:33:24', '2009-01-06 23:26:25');
 
+ALTER SEQUENCE "oc_geo_zone_geo_zone_id_seq" RESTART WITH 10;
+
 -- --------------------------------------------------------
 
 --
@@ -677,6 +692,8 @@ INSERT INTO "oc_information" ("information_id", "sort_order", "status") VALUES
 (3, 2, 1),
 (4, 1, 1),
 (5, 3, 1);
+
+ALTER SEQUENCE "oc_information_information_id_seq" RESTART WITH 10;
 
 -- --------------------------------------------------------
 
@@ -749,6 +766,8 @@ CREATE INDEX "oc_language_key_name" ON "oc_language" ("name");
 INSERT INTO "oc_language" ("language_id", "name", "code", "locale", "image", "directory", "filename", "sort_order", "status") VALUES
 (1, 'Russian', 'ru', 'ru_RU.UTF-8,ru_RU,russian', 'ru.png', 'russian', 'russian', 1, 1);
 
+ALTER SEQUENCE "oc_language_language_id_seq" RESTART WITH 10;
+
 -- --------------------------------------------------------
 
 --
@@ -768,6 +787,8 @@ CREATE TABLE "oc_length_class" (
 INSERT INTO "oc_length_class" ("length_class_id", "value") VALUES
 (1, '1.00000000'),
 (2, '10.00000000');
+
+ALTER SEQUENCE "oc_length_class_length_class_id_seq" RESTART WITH 10;
 
 -- --------------------------------------------------------
 
@@ -790,6 +811,8 @@ CREATE TABLE "oc_length_class_description" (
 INSERT INTO "oc_length_class_description" ("length_class_id", "language_id", "title", "unit") VALUES
 (1, 1, 'Сантиметр', 'см'),
 (2, 1, 'Миллиметр', 'мм');
+
+ALTER SEQUENCE "oc_length_class_description_length_class_id_seq" RESTART WITH 10;
 
 -- --------------------------------------------------------
 
@@ -816,6 +839,8 @@ INSERT INTO "oc_manufacturer" ("manufacturer_id", "name", "image", "sort_order")
 (8, 'Apple', 'data/apple_logo.jpg', 0),
 (9, 'Canon', 'data/canon_logo.jpg', 0),
 (10, 'Sony', 'data/sony_logo.jpg', 0);
+
+ALTER SEQUENCE "oc_manufacturer_manufacturer_id_seq" RESTART WITH 20;
 
 -- --------------------------------------------------------
 
@@ -850,7 +875,7 @@ INSERT INTO "oc_manufacturer_to_store" ("manufacturer_id", "store_id") VALUES
 CREATE TABLE "oc_order" (
   "order_id" bigserial not null,
   "invoice_id" bigint NOT NULL DEFAULT '0',
-  "invoice_prefix" varchar(24) NOT NULL,
+  "invoice_prefix" varchar(24) NOT NULL DEFAULT '',
   "invoice_date" timestamp NOT NULL DEFAULT '0001-01-01 00:00:00',
   "store_id" bigint NOT NULL DEFAULT '0',
   "store_name" varchar(64) NOT NULL,
@@ -1032,6 +1057,8 @@ INSERT INTO "oc_order_status" ("order_status_id", "language_id", "name") VALUES
 (12, 1, 'Полностью измененный'),
 (13, 1, 'Полный возврат');
 
+ALTER SEQUENCE "oc_order_status_order_status_id_seq" RESTART WITH 20;
+
 -- --------------------------------------------------------
 
 --
@@ -1117,6 +1144,8 @@ INSERT INTO "oc_product" ("product_id", "model", "sku", "location", "quantity", 
 (47, 'Товар 21', '', '', 10, 5, 'data/hp_1.jpg', 7, 1, '53721.0000', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, '2009-02-03 21:08:40', '2010-03-25 14:37:18', 0),
 (48, 'Товар 20', 'test 1', 'test 2', 89, 5, 'data/ipod_classic_1.jpg', 8, 1, '9378.0000', 9, '2009-02-08', '1.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-08 17:21:51', '2010-03-25 18:53:27', 0);
 
+ALTER SEQUENCE "oc_product_product_id_seq" RESTART WITH 100;
+
 -- --------------------------------------------------------
 
 --
@@ -1161,6 +1190,8 @@ INSERT INTO "oc_product_description" ("product_id", "language_id", "name", "meta
 (29, 1, 'Palm Treo Pro', '', '', E'&lt;p&gt;\r\n	Redefine your workday with the Palm Treo Pro smartphone. Perfectly balanced, you can respond to business and personal email, stay on top of appointments and contacts, and use Wi-Fi or GPS when you&amp;rsquo;re out and about. Then watch a video on YouTube, catch up with news and sports on the web, or listen to a few songs. Balance your work and play the way you like it, with the Palm Treo Pro.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Edition&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Qualcomm&amp;reg; MSM7201 400MHz Processor&lt;/li&gt;\r\n	&lt;li&gt;\r\n		320x320 transflective colour TFT touchscreen&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/UMTS/EDGE/GPRS/GSM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Tri-band UMTS &amp;mdash; 850MHz, 1900MHz, 2100MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM &amp;mdash; 850/900/1800/1900&lt;/li&gt;\r\n	&lt;li&gt;\r\n		802.11b/g with WPA, WPA2, and 801.1x authentication&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in GPS&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth Version: 2.0 + Enhanced Data Rate&lt;/li&gt;\r\n	&lt;li&gt;\r\n		256MB storage (100MB user available), 128MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2.0 megapixel camera, up to 8x digital zoom and video capture&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Removable, rechargeable 1500mAh lithium-ion battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Up to 5.0 hours talk time and up to 250 hours standby&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroSDHC card expansion (up to 32GB supported)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroUSB 2.0 for synchronization and charging&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.5mm stereo headset jack&lt;/li&gt;\r\n	&lt;li&gt;\r\n		60mm (W) x 114mm (L) x 13.5mm (D) / 133g&lt;/li&gt;\r\n&lt;/ul&gt;\r\n'),
 (42, 1, 'Apple Cinema 30&quot;', '', '', E'&lt;p&gt;\r\n	&lt;font face=&quot;helvetica,geneva,arial&quot; size=&quot;2&quot;&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br /&gt;\r\n	&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br /&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br /&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br /&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n');
 
+ALTER SEQUENCE "oc_product_description_product_id_seq" RESTART WITH 100;
+
 -- --------------------------------------------------------
 
 --
@@ -1188,6 +1219,8 @@ CREATE INDEX "oc_product_discount_key_product_id" ON "oc_product_discount" ("pro
 INSERT INTO "oc_product_discount" ("product_discount_id", "product_id", "customer_group_id", "quantity", "priority", "price", "date_start", "date_end") VALUES
 (88, 32, 6, 10, 1, '10.0000', '2010-01-01', '2010-01-31'),
 (100, 42, 6, 1, 2, '120.0000', '2010-02-10', '2010-02-12');
+
+ALTER SEQUENCE "oc_product_discount_product_discount_id_seq" RESTART WITH 200;
 
 -- --------------------------------------------------------
 
@@ -1283,6 +1316,8 @@ INSERT INTO "oc_product_image" ("product_image_id", "product_id", "image") VALUE
 (1250, 46, 'data/sony_vaio_5.jpg'),
 (1337, 42, 'data/apple_logo.jpg');
 
+ALTER SEQUENCE "oc_product_image_product_image_id_seq" RESTART WITH 2000;
+
 -- --------------------------------------------------------
 
 --
@@ -1305,6 +1340,8 @@ CREATE INDEX "oc_product_option_key_product_id" ON "oc_product_option" ("product
 INSERT INTO "oc_product_option" ("product_option_id", "product_id", "sort_order") VALUES
 (283, 40, 1),
 (296, 48, 1);
+
+ALTER SEQUENCE "oc_product_option_product_option_id_seq" RESTART WITH 300;
 
 -- --------------------------------------------------------
 
@@ -1355,6 +1392,8 @@ INSERT INTO "oc_product_option_value" ("product_option_value_id", "product_optio
 (562, 283, 40, 0, 0, '0.0000', '+', 1),
 (587, 296, 48, 2, 0, '50.0000', '+', 2),
 (586, 296, 48, 1, 0, '0.0000', '+', 1);
+
+ALTER SEQUENCE "oc_product_option_value_product_option_value_id_seq" RESTART WITH 1000;
 
 -- --------------------------------------------------------
 
@@ -1446,6 +1485,8 @@ INSERT INTO "oc_product_special" ("product_special_id", "product_id", "customer_
 (244, 58, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
 (246, 67, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
 (249, 69, 8, 1, '50.0000', '2010-02-01', '2010-02-28');
+
+ALTER SEQUENCE "oc_product_special_product_special_id_seq" RESTART WITH 300;
 
 -- --------------------------------------------------------
 
@@ -1582,6 +1623,8 @@ INSERT INTO "oc_review" ("review_id", "product_id", "customer_id", "author", "te
 (58, 42, 0, 'Дмитрий', 'Отличный товар', 3, 1, '2010-01-02 03:14:24', '0001-01-01 00:00:00'),
 (59, 42, 0, 'Александр', 'Пользуюсь с удовольствием', 2, 1, '2010-02-26 22:06:32', '0001-01-01 00:00:00'),
 (60, 47, 0, 'Михаил', 'Товар очень понравился, быстро доставили', 3, 1, '2010-03-05 21:10:52', '0001-01-01 00:00:00');
+
+ALTER SEQUENCE "oc_review_review_id_seq" RESTART WITH 100;
 
 -- --------------------------------------------------------
 
@@ -1746,6 +1789,8 @@ INSERT INTO "oc_stock_status" ("stock_status_id", "language_id", "name") VALUES
 (6, 1, 'Ожидание 2-3 дня'),
 (8, 1, 'Предзаказ');
 
+ALTER SEQUENCE "oc_stock_status_stock_status_id_seq" RESTART WITH 10;
+
 -- --------------------------------------------------------
 
 --
@@ -1841,6 +1886,8 @@ CREATE TABLE "oc_tax_class" (
 INSERT INTO "oc_tax_class" ("tax_class_id", "title", "description", "date_added", "date_modified") VALUES
 (9, 'Налоги', 'Облагаемые налогом', '2009-01-06 23:21:53', '2010-02-26 22:08:04');
 
+ALTER SEQUENCE "oc_tax_class_tax_class_id_seq" RESTART WITH 10;
+
 -- --------------------------------------------------------
 
 --
@@ -1865,6 +1912,8 @@ CREATE TABLE "oc_tax_rate" (
 
 INSERT INTO "oc_tax_rate" ("tax_rate_id", "geo_zone_id", "tax_class_id", "priority", "rate", "description", "date_modified", "date_added") VALUES
 (82, 3, 9, 1, '18.0000', 'НДС 18%', '0001-01-01 00:00:00', '2010-02-26 22:08:04');
+
+ALTER SEQUENCE "oc_tax_rate_tax_rate_id_seq" RESTART WITH 100;
 
 -- --------------------------------------------------------
 
@@ -1892,6 +1941,8 @@ INSERT INTO "oc_url_alias" ("url_alias_id", "query", "keyword") VALUES
 (455, 'information_id=4', 'about_us'),
 (485, 'product_id=42', 'test'),
 (444, 'category_id=34', 'mp3-players');
+
+ALTER SEQUENCE "oc_url_alias_url_alias_id_seq" RESTART WITH 500;
 
 -- --------------------------------------------------------
 
@@ -1937,6 +1988,8 @@ CREATE TABLE "oc_user_group" (
 INSERT INTO "oc_user_group" ("user_group_id", "name", "permission") VALUES ('1', 'Главный администратор', 'a:2:{s:6:''access'';a:96:{i:0;s:16:''catalog/category'';i:1;s:16:''catalog/download'';i:2;s:19:''catalog/information'';i:3;s:20:''catalog/manufacturer'';i:4;s:15:''catalog/product'';i:5;s:14:''catalog/review'';i:6;s:18:''common/filemanager'';i:7;s:23:''dataexchange/exchange1c'';i:8;s:22:''extension/dataexchange'';i:9;s:14:''extension/feed'';i:10;s:16:''extension/module'';i:11;s:17:''extension/payment'';i:12;s:18:''extension/shipping'';i:13;s:15:''extension/total'';i:14;s:16:''feed/google_base'';i:15;s:19:''feed/google_sitemap'';i:16;s:18:''feed/yandex_market'';i:17;s:20:''localisation/country'';i:18;s:21:''localisation/currency'';i:19;s:21:''localisation/geo_zone'';i:20;s:21:''localisation/language'';i:21;s:25:''localisation/length_class'';i:22;s:25:''localisation/order_status'';i:23;s:25:''localisation/stock_status'';i:24;s:22:''localisation/tax_class'';i:25;s:25:''localisation/weight_class'';i:26;s:17:''localisation/zone'';i:27;s:17:''module/bestseller'';i:28;s:13:''module/blinks'';i:29;s:11:''module/cart'';i:30;s:15:''module/category'';i:31;s:15:''module/featured'';i:32;s:23:''module/google_analytics'';i:33;s:18:''module/google_talk'';i:34;s:18:''module/information'';i:35;s:13:''module/latest'';i:36;s:19:''module/manufacturer'';i:37;s:14:''module/special'';i:38;s:16:''payment/alertpay'';i:39;s:24:''payment/authorizenet_aim'';i:40;s:21:''payment/bank_transfer'';i:41;s:14:''payment/cheque'';i:42;s:11:''payment/cod'';i:43;s:19:''payment/fl_sberbank'';i:44;s:21:''payment/free_checkout'';i:45;s:14:''payment/liqpay'';i:46;s:20:''payment/moneybookers'';i:47;s:13:''payment/okpay'';i:48;s:15:''payment/paymate'';i:49;s:16:''payment/paypoint'';i:50;s:26:''payment/perpetual_payments'';i:51;s:14:''payment/pp_pro'';i:52;s:17:''payment/pp_pro_uk'';i:53;s:19:''payment/pp_standard'';i:54;s:12:''payment/qiwi'';i:55;s:16:''payment/rbkmoney'';i:56;s:17:''payment/robokassa'';i:57;s:15:''payment/sagepay'';i:58;s:22:''payment/sagepay_direct'';i:59;s:18:''payment/sagepay_us'';i:60;s:19:''payment/twocheckout'';i:61;s:16:''payment/webmoney'';i:62;s:16:''payment/worldpay'';i:63;s:16:''payment/zpayment'';i:64;s:16:''report/purchased'';i:65;s:11:''report/sale'';i:66;s:13:''report/viewed'';i:67;s:12:''sale/contact'';i:68;s:11:''sale/coupon'';i:69;s:13:''sale/customer'';i:70;s:19:''sale/customer_group'';i:71;s:10:''sale/order'';i:72;s:15:''setting/setting'';i:73;s:13:''setting/store'';i:74;s:17:''shipping/citylink'';i:75;s:13:''shipping/flat'';i:76;s:13:''shipping/free'';i:77;s:13:''shipping/item'';i:78;s:23:''shipping/parcelforce_48'';i:79;s:15:''shipping/pickup'';i:80;s:19:''shipping/royal_mail'';i:81;s:12:''shipping/ups'';i:82;s:13:''shipping/usps'';i:83;s:15:''shipping/weight'';i:84;s:11:''tool/backup'';i:85;s:14:''tool/error_log'';i:86;s:12:''total/coupon'';i:87;s:14:''total/handling'';i:88;s:19:''total/low_order_fee'';i:89;s:14:''total/shipping'';i:90;s:15:''total/sub_total'';i:91;s:9:''total/tax'';i:92;s:11:''total/total'';i:93;s:9:''user/user'';i:94;s:20:''user/user_permission'';i:95;s:23:''dataexchange/exchange1c'';}s:6:''modify'';a:96:{i:0;s:16:''catalog/category'';i:1;s:16:''catalog/download'';i:2;s:19:''catalog/information'';i:3;s:20:''catalog/manufacturer'';i:4;s:15:''catalog/product'';i:5;s:14:''catalog/review'';i:6;s:18:''common/filemanager'';i:7;s:23:''dataexchange/exchange1c'';i:8;s:22:''extension/dataexchange'';i:9;s:14:''extension/feed'';i:10;s:16:''extension/module'';i:11;s:17:''extension/payment'';i:12;s:18:''extension/shipping'';i:13;s:15:''extension/total'';i:14;s:16:''feed/google_base'';i:15;s:19:''feed/google_sitemap'';i:16;s:18:''feed/yandex_market'';i:17;s:20:''localisation/country'';i:18;s:21:''localisation/currency'';i:19;s:21:''localisation/geo_zone'';i:20;s:21:''localisation/language'';i:21;s:25:''localisation/length_class'';i:22;s:25:''localisation/order_status'';i:23;s:25:''localisation/stock_status'';i:24;s:22:''localisation/tax_class'';i:25;s:25:''localisation/weight_class'';i:26;s:17:''localisation/zone'';i:27;s:17:''module/bestseller'';i:28;s:13:''module/blinks'';i:29;s:11:''module/cart'';i:30;s:15:''module/category'';i:31;s:15:''module/featured'';i:32;s:23:''module/google_analytics'';i:33;s:18:''module/google_talk'';i:34;s:18:''module/information'';i:35;s:13:''module/latest'';i:36;s:19:''module/manufacturer'';i:37;s:14:''module/special'';i:38;s:16:''payment/alertpay'';i:39;s:24:''payment/authorizenet_aim'';i:40;s:21:''payment/bank_transfer'';i:41;s:14:''payment/cheque'';i:42;s:11:''payment/cod'';i:43;s:19:''payment/fl_sberbank'';i:44;s:21:''payment/free_checkout'';i:45;s:14:''payment/liqpay'';i:46;s:20:''payment/moneybookers'';i:47;s:13:''payment/okpay'';i:48;s:15:''payment/paymate'';i:49;s:16:''payment/paypoint'';i:50;s:26:''payment/perpetual_payments'';i:51;s:14:''payment/pp_pro'';i:52;s:17:''payment/pp_pro_uk'';i:53;s:19:''payment/pp_standard'';i:54;s:12:''payment/qiwi'';i:55;s:16:''payment/rbkmoney'';i:56;s:17:''payment/robokassa'';i:57;s:15:''payment/sagepay'';i:58;s:22:''payment/sagepay_direct'';i:59;s:18:''payment/sagepay_us'';i:60;s:19:''payment/twocheckout'';i:61;s:16:''payment/webmoney'';i:62;s:16:''payment/worldpay'';i:63;s:16:''payment/zpayment'';i:64;s:16:''report/purchased'';i:65;s:11:''report/sale'';i:66;s:13:''report/viewed'';i:67;s:12:''sale/contact'';i:68;s:11:''sale/coupon'';i:69;s:13:''sale/customer'';i:70;s:19:''sale/customer_group'';i:71;s:10:''sale/order'';i:72;s:15:''setting/setting'';i:73;s:13:''setting/store'';i:74;s:17:''shipping/citylink'';i:75;s:13:''shipping/flat'';i:76;s:13:''shipping/free'';i:77;s:13:''shipping/item'';i:78;s:23:''shipping/parcelforce_48'';i:79;s:15:''shipping/pickup'';i:80;s:19:''shipping/royal_mail'';i:81;s:12:''shipping/ups'';i:82;s:13:''shipping/usps'';i:83;s:15:''shipping/weight'';i:84;s:11:''tool/backup'';i:85;s:14:''tool/error_log'';i:86;s:12:''total/coupon'';i:87;s:14:''total/handling'';i:88;s:19:''total/low_order_fee'';i:89;s:14:''total/shipping'';i:90;s:15:''total/sub_total'';i:91;s:9:''total/tax'';i:92;s:11:''total/total'';i:93;s:9:''user/user'';i:94;s:20:''user/user_permission'';i:95;s:23:''dataexchange/exchange1c'';}}');
 INSERT INTO "oc_user_group" ("user_group_id", "name", "permission") VALUES ('10', 'Демонстрация', 'a:1:{s:6:''access'';a:81:{i:0;s:16:''catalog/category'';i:1;s:16:''catalog/download'';i:2;s:19:''catalog/information'';i:3;s:20:''catalog/manufacturer'';i:4;s:15:''catalog/product'';i:5;s:14:''catalog/review'';i:6;s:18:''common/filemanager'';i:7;s:19:''extension/affiliate'';i:8;s:14:''extension/feed'';i:9;s:16:''extension/module'';i:10;s:17:''extension/payment'';i:11;s:18:''extension/shipping'';i:12;s:15:''extension/total'';i:13;s:16:''feed/google_base'';i:14;s:19:''feed/google_sitemap'';i:15;s:20:''localisation/country'';i:16;s:21:''localisation/currency'';i:17;s:21:''localisation/geo_zone'';i:18;s:21:''localisation/language'';i:19;s:25:''localisation/length_class'';i:20;s:25:''localisation/order_status'';i:21;s:25:''localisation/stock_status'';i:22;s:22:''localisation/tax_class'';i:23;s:25:''localisation/weight_class'';i:24;s:17:''localisation/zone'';i:25;s:17:''module/bestseller'';i:26;s:11:''module/cart'';i:27;s:15:''module/category'';i:28;s:15:''module/featured'';i:29;s:23:''module/google_analytics'';i:30;s:18:''module/google_talk'';i:31;s:18:''module/information'';i:32;s:13:''module/latest'';i:33;s:19:''module/manufacturer'';i:34;s:14:''module/special'';i:35;s:16:''payment/alertpay'';i:36;s:24:''payment/authorizenet_aim'';i:37;s:21:''payment/bank_transfer'';i:38;s:14:''payment/cheque'';i:39;s:11:''payment/cod'';i:40;s:14:''payment/liqpay'';i:41;s:20:''payment/moneybookers'';i:42;s:15:''payment/paymate'';i:43;s:16:''payment/paypoint'';i:44;s:26:''payment/perpetual_payments'';i:45;s:14:''payment/pp_pro'';i:46;s:17:''payment/pp_pro_uk'';i:47;s:19:''payment/pp_standard'';i:48;s:15:''payment/sagepay'';i:49;s:22:''payment/sagepay_direct'';i:50;s:18:''payment/sagepay_us'';i:51;s:19:''payment/twocheckout'';i:52;s:16:''payment/worldpay'';i:53;s:16:''report/purchased'';i:54;s:11:''report/sale'';i:55;s:13:''report/viewed'';i:56;s:12:''sale/contact'';i:57;s:11:''sale/coupon'';i:58;s:13:''sale/customer'';i:59;s:19:''sale/customer_group'';i:60;s:10:''sale/order'';i:61;s:15:''setting/setting'';i:62;s:17:''shipping/citylink'';i:63;s:13:''shipping/flat'';i:64;s:13:''shipping/free'';i:65;s:13:''shipping/item'';i:66;s:23:''shipping/parcelforce_48'';i:67;s:19:''shipping/royal_mail'';i:68;s:13:''shipping/usps'';i:69;s:15:''shipping/weight'';i:70;s:11:''tool/backup'';i:71;s:14:''tool/error_log'';i:72;s:12:''total/coupon'';i:73;s:14:''total/handling'';i:74;s:19:''total/low_order_fee'';i:75;s:14:''total/shipping'';i:76;s:15:''total/sub_total'';i:77;s:9:''total/tax'';i:78;s:11:''total/total'';i:79;s:9:''user/user'';i:80;s:20:''user/user_permission'';}}');
 
+ALTER SEQUENCE "oc_user_group_user_group_id_seq" RESTART WITH 100;
+
 -- --------------------------------------------------------
 
 --
@@ -1956,6 +2009,8 @@ CREATE TABLE "oc_weight_class" (
 INSERT INTO "oc_weight_class" ("weight_class_id", "value") VALUES
 (1, '1.00000000'),
 (2, '1000.00000000');
+
+ALTER SEQUENCE "oc_weight_class_weight_class_id_seq" RESTART WITH 10;
 
 -- --------------------------------------------------------
 
@@ -1978,6 +2033,8 @@ CREATE TABLE "oc_weight_class_description" (
 INSERT INTO "oc_weight_class_description" ("weight_class_id", "language_id", "title", "unit") VALUES
 (1, 1, 'Килограммы', 'кг'),
 (2, 1, 'Граммы', 'г');
+
+ALTER SEQUENCE "oc_weight_class_description_weight_class_id_seq" RESTART WITH 10;
 
 -- --------------------------------------------------------
 
@@ -5926,6 +5983,8 @@ INSERT INTO "oc_zone" ("zone_id", "country_id", "code", "name", "status") VALUES
 (3947, 105, 'VI', 'Vicenza', 1),
 (3948, 105, 'VT', 'Viterbo', 1);
 
+ALTER SEQUENCE "oc_zone_zone_id_seq" RESTART WITH 5000;
+
 -- --------------------------------------------------------
 
 --
@@ -5948,6 +6007,8 @@ CREATE TABLE "oc_zone_to_geo_zone" (
 
 INSERT INTO "oc_zone_to_geo_zone" ("zone_to_geo_zone_id", "country_id", "zone_id", "geo_zone_id", "date_added", "date_modified") VALUES
 (57, 176, 0, 3, '2010-02-26 22:33:24', '0001-01-01 00:00:00');
+
+ALTER SEQUENCE "oc_zone_to_geo_zone_zone_to_geo_zone_id_seq" RESTART WITH 100;
 
 ---
 --- Mysql-specific functions
