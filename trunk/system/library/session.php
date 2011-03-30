@@ -6,6 +6,7 @@ final class Session {
 		if (!session_id()) {
 			ini_set('session.use_cookies', 'On');
 			ini_set('session.use_trans_sid', 'Off');
+			ini_set('session.save_path', DIR_SYSTEM . '/sessions');
 		
 			session_set_cookie_params(0, '/');
 			session_start();

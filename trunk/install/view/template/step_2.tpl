@@ -143,6 +143,10 @@
             <td><?php echo is_writable($logs) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
           </tr>
           <tr>
+            <td><?php echo $sessions . '/'; ?></td>
+            <td><?php echo is_writable($sessions) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+          </tr>
+          <tr>
             <td><?php echo $image . '/'; ?></td>
             <td><?php echo is_writable($image) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
           </tr>
