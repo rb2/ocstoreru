@@ -1,6 +1,6 @@
 <?php
 // Version
-define('VERSION', '1.0.3');
+define('VERSION', '1.0.4');
 
 // Configuration
 require_once('../admin/config.php');

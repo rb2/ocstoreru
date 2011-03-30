@@ -35,6 +35,19 @@
             </select></td>
         </tr>
         
+         <tr>
+          <td><?php echo $entry_flush_db; ?></td>
+          <td><select name="exchange1c_flush_db">
+              <?php if ($exchange1c_flush_db) { ?>
+              <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+              <option value="0"><?php echo $text_no; ?></option>
+              <?php } else { ?>
+              <option value="1"><?php echo $text_yes; ?></option>
+              <option value="0" selected="selected"><?php echo $text_no; ?></option>
+              <?php } ?>
+            </select></td>
+        </tr>
+        
         <tr>
           <td><?php echo $entry_lic_type; ?></td>
           <td><b style="color: green"><?php echo $exchange1c_lic_type; ?></b></td>

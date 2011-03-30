@@ -14,6 +14,7 @@ $_['entry_username']   = 'Логин:';
 $_['entry_password']   = 'Пароль:';
 $_['entry_status']     = 'Статус:';
 $_['entry_lic_type']   = 'Тип лицензии:';
+$_['entry_flush_db']   = 'Очистить БД перед импортом номенклатуры?';
 
 
 

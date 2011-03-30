@@ -25,18 +25,15 @@ class ControllerDataexchangeExchange1c extends Controller {
 		$this->data['text_info'] = $this->language->get('text_info');
 		$this->data['text_homepage'] = $this->language->get('text_homepage');
 		$this->data['text_forum'] = $this->language->get('text_forum');
-		$this->data['text_donate'] = $this->language->get('text_donate');
-		
-		
+		$this->data['text_donate'] = $this->language->get('text_donate');		
 		$this->data['entry_username'] = $this->language->get('entry_username');
 		$this->data['entry_password'] = $this->language->get('entry_password');
-		
+		$this->data['entry_flush_db'] = $this->language->get('entry_flush_db');
 		$this->data['entry_lic_type'] = $this->language->get('entry_lic_type');
+		$this->data['text_yes'] = $this->language->get('text_yes');
+		$this->data['text_no'] = $this->language->get('text_no');
 		
 		
-		
-		// --
-
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		
@@ -45,7 +42,7 @@ class ControllerDataexchangeExchange1c extends Controller {
 
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
-
+	
   		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -105,6 +102,12 @@ class ControllerDataexchangeExchange1c extends Controller {
 		} else {
 			$this->data['exchange1c_status'] = $this->config->get('exchange1c_status');
 		}	
+		
+		if (isset($this->request->post['exchange1c_flush_db'])) {
+			$this->data['exchange1c_flush_db'] = $this->request->post['exchange1c_flush_db'];
+		} else {
+			$this->data['exchange1c_flush_db'] = $this->config->get('exchange1c_flush_db');
+		}		
 		
 		$this->data['exchange1c_lic_type'] = 'TEST';	
 				
@@ -175,6 +178,9 @@ class ControllerDataexchangeExchange1c extends Controller {
 		
 		// Если в настройках модуля стоит флаг обнулить БД 
 		if($this->config->get('exchange1c_flush_db') ) {
+			
+			echo 1;
+		
 			// Очищает таблицы от всех товаров
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category'); 
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_description');
