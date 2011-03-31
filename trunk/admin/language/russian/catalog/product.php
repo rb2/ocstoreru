@@ -23,6 +23,8 @@ $_['column_price']           = 'Цена';
 $_['column_quantity']        = 'Количество';
 $_['column_status']          = 'Статус';
 $_['column_action']          = 'Действие';
+$_['entry_title']            = 'Тег "title"';
+$_['entry_h1']               = 'Заголовок "h1"';
 
 // Entry
 $_['entry_name']             = 'Название товара:';

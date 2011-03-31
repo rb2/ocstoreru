@@ -11,6 +11,8 @@ $_['text_image_manager']     = 'Менеджер изображений';
 $_['column_name']            = 'Название категории';
 $_['column_sort_order']      = 'Порядок сортировки';
 $_['column_action']          = 'Действие';
+$_['entry_title']            = 'Тег "title"';
+$_['entry_h1']               = 'Заголовок "h1"';
 
 // Entry
 $_['entry_name']             = 'Название категории:';
