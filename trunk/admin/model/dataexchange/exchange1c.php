@@ -456,10 +456,10 @@ class ModelDataexchangeExchange1c extends Model {
 			
 			$this->db->query(
 					'CREATE TABLE 
-						`1cv03_product_to_1c` ( 
+						`' . DB_PREFIX . 'product_to_1c` ( 
 							`product_id` int(10) unsigned NOT NULL,
  							`1c_id` varchar(255) NOT NULL,
- 							PRIMARY KEY (`product_id`),
+ 							KEY (`product_id`),
  							KEY `1c_id` (`1c_id`)
 						) ENGINE=MyISAM DEFAULT CHARSET=utf8'
 			);			
@@ -474,10 +474,10 @@ class ModelDataexchangeExchange1c extends Model {
 			
 			$this->db->query(
 					'CREATE TABLE 
-						`1cv03_category_to_1c` ( 
+						`' . DB_PREFIX . 'category_to_1c` ( 
 							`category_id` int(10) unsigned NOT NULL,
  							`1c_category_id` varchar(255) NOT NULL,
- 							PRIMARY KEY (`category_id`),
+ 							KEY (`category_id`),
  							KEY `1c_id` (`1c_category_id`)
 						) ENGINE=MyISAM DEFAULT CHARSET=utf8'
 			);			
