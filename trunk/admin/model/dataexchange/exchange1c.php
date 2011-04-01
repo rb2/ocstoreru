@@ -204,8 +204,10 @@ class ModelDataexchangeExchange1c extends Model {
 				
 				if($query->num_rows) {	
 					$category_id = (int)$query->row['category_id'];
+					$this->model_catalog_category->editCategory($category_id, $data);
 				} else {
 					$category_id = $this->model_catalog_category->addCategory($data);
+					$this->db->query('INSERT INTO `' . DB_PREFIX . 'category_to_1c` SET category_id = ' . (int)$category_id . ', `1c_category_id` = "' . $this->db->escape($id) . '"');
 				}
 			
 				$this->CAT[$id] = $category_id;

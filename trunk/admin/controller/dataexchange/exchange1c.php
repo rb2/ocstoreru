@@ -178,9 +178,7 @@ class ControllerDataexchangeExchange1c extends Controller {
 		
 		// Если в настройках модуля стоит флаг обнулить БД 
 		if($this->config->get('exchange1c_flush_db') ) {
-			
-			echo 1;
-		
+
 			// Очищает таблицы от всех товаров
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category'); 
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_description');
@@ -192,6 +190,7 @@ class ControllerDataexchangeExchange1c extends Controller {
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_store');
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_category');
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_to_1c');
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'category_to_1c');
 		}
 					
 		$limit = 1000 * 1024;
@@ -214,11 +213,14 @@ class ControllerDataexchangeExchange1c extends Controller {
 			return;
 		}
 		
-		// Прочеряем XML или изображения
+		// Проверяем XML или изображения
 		if( strpos( $this->request->get['filename'], 'import_files') !== false ) {
 			$cache = DIR_IMAGE;
 			$uplod_file = $cache . $this->request->get['filename'];
 			$this->checkUploadFileTree( dirname($this->request->get['filename']) , $cache);
+			
+			// TODO: физическое обновление изображений. 
+			
 		}
 				
 		// Получаем данные
