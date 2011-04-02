@@ -6190,7 +6190,17 @@ RETURNS int AS $$
 SELECT EXTRACT(day from $1)::int
 $$ LANGUAGE sql;
 
+CREATE OR REPLACE FUNCTION dayofmonth(timestamp)
+RETURNS int AS $$
+SELECT EXTRACT(day from $1)::int
+$$ LANGUAGE sql;
+
 CREATE OR REPLACE FUNCTION day(date)
+RETURNS int AS $$
+SELECT dayofmonth($1)
+$$ LANGUAGE sql;
+
+CREATE OR REPLACE FUNCTION day(timestamp)
 RETURNS int AS $$
 SELECT dayofmonth($1)
 $$ LANGUAGE sql;
@@ -6286,6 +6296,11 @@ RETURNS int AS $$
 SELECT EXTRACT(month FROM $1)::int
 $$ LANGUAGE sql;
 
+CREATE OR REPLACE FUNCTION month(timestamp)
+RETURNS int AS $$
+SELECT EXTRACT(month FROM $1)::int
+$$ LANGUAGE sql;
+
 CREATE OR REPLACE FUNCTION monthname(date)
 RETURNS text AS $$
 SELECT to_char($1, 'TMMonth')
@@ -6322,6 +6337,11 @@ SELECT EXTRACT(year FROM $1)::int
 $$ LANGUAGE sql;
 
 CREATE OR REPLACE FUNCTION week(date)
+RETURNS int AS $$
+SELECT EXTRACT(week FROM $1)::int;
+$$ LANGUAGE sql;
+
+CREATE OR REPLACE FUNCTION week(timestamp)
 RETURNS int AS $$
 SELECT EXTRACT(week FROM $1)::int;
 $$ LANGUAGE sql;
