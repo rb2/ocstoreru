@@ -80,6 +80,10 @@ class ControllerStep2 extends Controller {
 			$this->error['warning'] = 'Для работы OpenCart директория Logs должна быть доступна для записи!';
 		}
 		
+		if (!is_writable(DIR_SYSTEM . 'sessions')) {
+			$this->error['warning'] = 'Для работы OpenCart директория Sessions должна быть доступна для записи!';
+		}
+		
 		if (!is_writable(DIR_CONFIG)) {
 			$this->error['warning'] = 'Для работы OpenCart директория Config должна быть доступна для записи!';
 		}
