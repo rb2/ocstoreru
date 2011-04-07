@@ -356,7 +356,7 @@
           </tr>
           <tr>
             <td><?php echo $entry_notify; ?></td>
-            <td><input type="checkbox" name="notify" value="1" /></td>
+            <td><input type="checkbox" name="notify" value="1" checked="checked" /></td>
           </tr>
 		  <tr>
             <td><?php echo $entry_append; ?></td>

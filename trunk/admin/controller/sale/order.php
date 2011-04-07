@@ -37,7 +37,7 @@ class ControllerSaleOrder extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
-			
+
 			$filters = array(
 				'filter_order_id',
 				'filter_name',
@@ -48,7 +48,7 @@ class ControllerSaleOrder extends Controller {
 				'sort',
 				'order'
 			);
-			
+
 			foreach($filters as $filter) {
 				if (isset($this->request->get[$filter])) {
 					$url .= '&' . $filter . '=' . $this->request->get[$filter];
@@ -122,7 +122,7 @@ class ControllerSaleOrder extends Controller {
 			'sort',
 			'order'
 		);
-		
+
 		foreach($filters as $filter) {
 			if (isset($this->request->get[$filter])) {
 				$url .= '&' . $filter . '=' . $this->request->get[$filter];
@@ -227,13 +227,13 @@ class ControllerSaleOrder extends Controller {
 			'filter_total',
 			'page',
 		);
-		
+
 		foreach($filters as $filter) {
 			if (isset($this->request->get[$filter])) {
 				$url .= '&' . $filter . '=' . $this->request->get[$filter];
 			}
 		}
-		
+
 		if ($order == 'ASC') {
 			$url .= '&order=' .  'DESC';
 		} else {
@@ -256,7 +256,7 @@ class ControllerSaleOrder extends Controller {
 			'sort',
 			'order'
 		);
-		
+
 		foreach($filters as $filter) {
 			if (isset($this->request->get[$filter])) {
 				$url .= '&' . $filter . '=' . $this->request->get[$filter];
@@ -362,7 +362,7 @@ class ControllerSaleOrder extends Controller {
 			$this->data['entry_option'] = $this->language->get('entry_option');
 			$this->data['entry_quantity'] = $this->language->get('entry_quantity');
 			$this->data['entry_tax'] = $this->language->get('entry_tax');
-			
+
 			$this->data['text_none'] = $this->language->get('text_none');
 
 			$this->data['button_invoice'] = $this->language->get('button_invoice');
@@ -393,7 +393,7 @@ class ControllerSaleOrder extends Controller {
 				'sort',
 				'order'
 			);
-			
+
 			foreach($filters as $filter) {
 				if (isset($this->request->get[$filter])) {
 					$url .= '&' . $filter . '=' . $this->request->get[$filter];
@@ -424,8 +424,8 @@ class ControllerSaleOrder extends Controller {
 			} else {
 				$this->data['invoice_id'] = '';
 			}
-			
-			if ($order_info['invoice_date']) {
+
+			if (isset($order_info['invoice_date'])) {
 				$this->data['invoice_date'] = $order_info['invoice_date'];
 			} else {
 				$this->data['invoice_date'] = '';
@@ -449,12 +449,12 @@ class ControllerSaleOrder extends Controller {
 			} else {
 				$this->data['customer_group'] = '';
 			}
-			
+
 			$this->data['email'] = $order_info['email'];
 			$this->data['telephone'] = $order_info['telephone'];
 			$this->data['fax'] = $order_info['fax'];
 			$this->data['ip'] = $order_info['ip'];
-			
+
 			$this->data['store_name'] = $order_info['store_name'];
 			$this->data['store_url'] = $order_info['store_url'];
 			$this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
@@ -748,7 +748,7 @@ class ControllerSaleOrder extends Controller {
 				} else {
 					$invoice_id = '';
 				}
-				
+
 				if ($order_info['invoice_date']) {
 					$invoice_date = $order_info['invoice_date'];
 				} else {

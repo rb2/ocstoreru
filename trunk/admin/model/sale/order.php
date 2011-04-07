@@ -1,18 +1,18 @@
 <?php
 class ModelSaleOrder extends Model {
 	public function deleteOrder($order_id) {
-		
+
 		$order_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` WHERE order_status_id > '0' AND order_id = '" . (int)$order_id . "'");
 
 		if ($order_query->num_rows) {
 			$order_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
-			
+
 			foreach($order_product_query->rows as $order_product) {
-			
-				$product_query = $this->db->query("SELECT subtract FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$order_product['product_id'] . "'");			
-			
+
+				$product_query = $this->db->query("SELECT subtract FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$order_product['product_id'] . "'");
+
 				foreach($product_query->rows as $product) {
-			
+
 					if ($product['subtract']) {
 						$this->db->query("UPDATE `" . DB_PREFIX . "product` SET quantity = (quantity + " . (int)$order_product['quantity'] . ") WHERE product_id = '" . (int)$order_product['product_id'] . "'");
 
@@ -22,11 +22,11 @@ class ModelSaleOrder extends Model {
 							$this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET quantity = (quantity + " . (int)$order_product['quantity'] . ") WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "' AND subtract = '1'");
 						}
 					}
-					
+
 				}
 			}
 		}
-		
+
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "'");
       	$this->db->query("DELETE FROM " . DB_PREFIX . "order_history WHERE order_id = '" . (int)$order_id . "'");
@@ -37,12 +37,12 @@ class ModelSaleOrder extends Model {
 	}
 
 	public function addProduct($order_id, $data) {
-   		$this->db->query("INSERT INTO " . DB_PREFIX . "order_product SET order_id = '" . (int)$order_id . "', product_id = '" . (int)$data['product_id'] . "', name = '" . $this->db->escape($data['name']) . "', model = '" . $this->db->escape($data['model']) . "', price = '" . (float)$data['price'] . "', total = '" . (float)$data['total'] . "', tax = '" . (float)$data['tax']['rate'] . "', quantity = '" . (int)$data['quantity'] . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "order_product (order_id, product_id, name, model, price, total, tax, quantity) VALUES ('" . (int)$order_id . "', '" . (int)$data['product_id'] . "', '" . $this->db->escape($data['name']) . "', '" . $this->db->escape($data['model']) . "', '" . (float)$data['price'] . "', '" . (float)$data['total'] . "', '" . (float)$data['tax']['rate'] . "', '" . (int)$data['quantity'] . "')");
 
 		$order_product_id = $this->db->getLastId();
 
 		foreach ($data['options'] as $option) {
-   			$this->db->query("INSERT INTO " . DB_PREFIX . "order_option SET order_id = '" . (int)$order_id . "', order_product_id = '" . (int)$order_product_id . "', product_option_value_id = '" . (int)$option['product_option_value_id'] . "', name = '" . $this->db->escape($option['name']) . "', value = '" . $this->db->escape($option['value']) . "', price = '" . (float)$option['price'] . "', prefix = '" . $this->db->escape($option['prefix']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "order_option (order_id, order_product_id, product_option_value_id, name, value, price, prefix) VALUES ('" . (int)$order_id . "', '" . (int)$order_product_id . "', '" . (int)$option['product_option_value_id'] . "', '" . $this->db->escape($option['name']) . "', '" . $this->db->escape($option['value']) . "', '" . (float)$option['price'] . "', '" . $this->db->escape($option['prefix']) . "')");
 		}
 
 		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET total = '" . (float)$data['new_grand_total'] . "' WHERE order_id = '" . (int)$order_id . "'");
@@ -115,7 +115,7 @@ class ModelSaleOrder extends Model {
 		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$data['order_status_id'] . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
 
 		if ($data['append']) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$data['order_status_id'] . "', notify = '" . (isset($data['notify']) ? (int)$data['notify'] : 0) . "', comment = '" . $this->db->escape(strip_tags($data['comment'])) . "', date_added = NOW()");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history (order_id, order_status_id, notify, comment, date_added) VALUES ('" . (int)$order_id . "', '" . (int)$data['order_status_id'] . "', '" . (isset($data['notify']) ? (int)$data['notify'] : 0) . "', '" . $this->db->escape(strip_tags($data['comment'])) . "', NOW())");
 		}
 
       	if ($data['notify']) {

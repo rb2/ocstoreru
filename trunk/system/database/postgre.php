@@ -22,15 +22,16 @@ final class Postgre {
 		// Replace "limit N,M" to "limit N offset M"
 		$newsql = preg_replace('/^(.+) LIMIT ([0-9]+),([0-9]+)$/i', '\1 LIMIT \3 OFFSET \2', $sql);
 
-		$newsql = preg_replace('/"/', '\'', $newsql);
-		$newsql = preg_replace('/`/', '"', $newsql);
-
-		// Replace zero date '0000-00-00' to '0001-01-01'
-		$newsql = preg_replace('/\'0000-00-00\'/', '\'0001-01-01\'', $newsql);
-		$newsql = preg_replace('/\'0000-00-00 ([0-9\:]+)\'/', '\'0001-01-01 \1\'', $newsql);
-
 		$sql = $newsql;
 	    };
+
+	    $sql = preg_replace('/"/', '\'', $sql);
+	    $sql = preg_replace('/`/', '"', $sql);
+	    $sql = preg_replace('/&&&quote&&&/', '"', $sql);
+
+	    // Replace zero date '0000-00-00' to '0001-01-01'
+	    $sql = preg_replace('/\'0000-00-00\'/', '\'0001-01-01\'', $sql);
+	    $sql = preg_replace('/\'0000-00-00 ([0-9\:]+)\'/', '\'0001-01-01 \1\'', $sql);
 
 	    $resource = pg_query($this->connection, $sql);
 
@@ -65,7 +66,10 @@ final class Postgre {
     }
 
     public function escape($value) {
-	return pg_escape_string($this->connection, $value);
+	$s = pg_escape_string($value);
+	$s = preg_replace('/"/', '&&&quote&&&', $s);
+
+	return $s;
     }
 
     public function countAffected() {

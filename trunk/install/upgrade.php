@@ -7,7 +7,7 @@ if (!file_exists('../config.php')) {
 
 // Configuration
 require_once('../config.php');
-   
+
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
@@ -15,7 +15,7 @@ require_once(DIR_SYSTEM . 'startup.php');
 $errors = array();
 $baseurl=(isset($_SERVER['HTTPS']) ? 'https' :'http'). '://' . $_SERVER['HTTP_HOST'] . str_replace('/install','',dirname($_SERVER['REQUEST_URI']));
 chdir('..');
-$basepath=getcwd(); 
+$basepath=getcwd();
 chdir(dirname(__FILE__));
 
 if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
@@ -23,7 +23,7 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 } else {
 	if (!@mysql_select_db(DB_DATABASE, $link)) {
 		$errors[] = 'The database could selected, check you have permissions, and check it exists on the server.';
-	}			
+	}
 }
 
 ?>
@@ -38,7 +38,7 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 	<body>
 		<h1>ocStore 0.x.x Upgrade Script (BETA)</h1>
 		<div id="container">
-<?php 
+<?php
 	if (empty($errors)) {
 		// Run upgrade script
 
@@ -65,7 +65,7 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 			if ($sql=file($file)) {
 				$query = '';
 				foreach($sql as $line) {
-					
+
 					// Hacks for compatibility (needs to be improved)
 					$line = str_replace("oc_", DB_PREFIX, $line);
 					$line = str_replace(" order ", " `order` ", $line);
@@ -73,7 +73,7 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 					$line = str_replace("NOT NULL DEFAULT ''", "NOT NULL", $line);
 					$line = str_replace("NOT NULL DEFAULT NULL", "NOT NULL", $line);
 					$line = str_replace("NOT NULL DEFAULT 0 COMMENT '' auto_increment", "NOT NULL COMMENT '' auto_increment", $line);
-					
+
 					if ((substr(trim($line), 0, 2) == '--') || (substr(trim($line), 0, 1) == '#')) { continue; }
 					if (preg_match('/^ALTER TABLE (.+?) ADD PRIMARY KEY/', $line, $matches)) {
 						$res = mysql_query(sprintf("SHOW KEYS FROM %s",$matches[1]), $link);
@@ -101,7 +101,7 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 					//if (preg_match('/^ALTER TABLE (.+?) ALTER (.+?) /',$line,$matches)) {
 					//	if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'",$matches[1],str_replace('`','',$matches[2])), $link)) <= 0) { continue; }
 					//}
-					
+
 					if (!empty($line)) {
 						$query .= $line;
 						if (preg_match('/;\s*$/', $line)) {
@@ -115,10 +115,10 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 			}
 		}
 	}
-	
+
 	// Check if there are any products associated with a store (pre-1.4.1)
 	$info = mysql_fetch_assoc(mysql_query("SELECT * FROM " . DB_PREFIX . "product_to_store", $link));
-	
+
 	// If not, then add them all to the default
 	if (!$info) {
 		$resource = mysql_query("SELECT product_id FROM " . DB_PREFIX . "product", $link);
@@ -129,15 +129,15 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 
 			$i++;
 		}
-		
+
 		foreach ($data as $product) {
-			mysql_query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '".$product['product_id']."', store_id = '0'", $link);
+		    mysql_query("INSERT INTO " . DB_PREFIX . "product_to_store (product_id, store_id) VALUES ('".$product['product_id']."', '0')", $link);
 		}
 	}
-	
+
 	// Check if there are any categories associated with a store (pre-1.4.1)
 	$info = mysql_fetch_assoc(mysql_query("SELECT * FROM " . DB_PREFIX . "information_to_store", $link));
-	
+
 	// If not, then add them all to the default
 	if (!$info) {
 		$resource = mysql_query("SELECT information_id FROM " . DB_PREFIX . "information", $link);
@@ -148,15 +148,15 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 
 			$i++;
 		}
-		
+
 		foreach ($data as $information) {
-			mysql_query("INSERT INTO " . DB_PREFIX . "information_to_store SET information_id = '".$information['information_id']."', store_id = '0'", $link);
+		    mysql_query("INSERT INTO " . DB_PREFIX . "information_to_store (information_id, store_id) VALUES ('".$information['information_id']."', '0')", $link);
 		}
 	}
-	
+
 	// Check if there are any categories associated with a store (pre-1.4.1)
 	$info = mysql_fetch_assoc(mysql_query("SELECT * FROM " . DB_PREFIX . "category_to_store", $link));
-	
+
 	// If not, then add them all to the default
 	if (!$info) {
 		$resource = mysql_query("SELECT category_id FROM " . DB_PREFIX . "category", $link);
@@ -167,15 +167,15 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 
 			$i++;
 		}
-		
+
 		foreach ($data as $category) {
-			mysql_query("INSERT INTO " . DB_PREFIX . "category_to_store SET category_id = '".$category['category_id']."', store_id = '0'", $link);
+		    mysql_query("INSERT INTO " . DB_PREFIX . "category_to_store (category_id, store_id) VALUES ('".$category['category_id']."', '0')", $link);
 		}
 	}
-	
+
 	// Check if there are any categories associated with a store (pre-1.4.1)
 	$info = mysql_fetch_assoc(mysql_query("SELECT * FROM " . DB_PREFIX . "manufacturer_to_store", $link));
-	
+
 	// If not, then add them all to the default
 	if (!$info) {
 		$resource = mysql_query("SELECT manufacturer_id FROM " . DB_PREFIX . "manufacturer", $link);
@@ -186,12 +186,12 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 
 			$i++;
 		}
-		
+
 		foreach ($data as $manufacturer) {
-			mysql_query("INSERT INTO " . DB_PREFIX . "manufacturer_to_store SET manufacturer_id = '".$manufacturer['manufacturer_id']."', store_id = '0'", $link);
+		    mysql_query("INSERT INTO " . DB_PREFIX . "manufacturer_to_store (manufacturer_id, store_id) VALUES ('".$manufacturer['manufacturer_id']."', '0')", $link);
 		}
 	}
-	
+
 	if (!empty($errors)) { //has to be a separate if
 		?>
 		<p>The following errors occured:</p>
