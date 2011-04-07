@@ -37,13 +37,13 @@ final class Currency {
   	public function set($currency) {
     	$this->code = $currency;
 
-    	if ((!isset($this->session->data['currency'])) || ($this->session->data['currency'] != $currency)) {
-      		$this->session->data['currency'] = $currency;
+    	if ((!isset($this->request->cookie['currency'])) || ($this->request->cookie['currency'] != $currency) || (!isset($this->session->data['currency']))) {
+			// do not use $request->server['HTTP_HOST'] as 'domain' because this may be broken if back-end server is used
+	  		setcookie('currency', $currency, time() + 60 * 60 * 24 * (int)CONF_COOKIES_LIFETIME, '/', '');
     	}
 
-    	if ((!isset($this->request->cookie['currency'])) || ($this->request->cookie['currency'] != $currency)) {
-			// do not use $request->server['HTTP_HOST'] as 'domain' because this may be broken if back-end server is used
-	  		setcookie('currency', $currency, time() + 60 * 60 * 24 * 30, '/', '');
+    	if ((!isset($this->session->data['currency'])) || ($this->session->data['currency'] != $currency)) {
+      		$this->session->data['currency'] = $currency;
     	}
   	}
 

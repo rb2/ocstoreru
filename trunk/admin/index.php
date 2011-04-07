@@ -4,6 +4,7 @@ define('VERSION', '0.1.9');
 
 // Configuration
 require_once('config.php');
+@include_once(DIR_CONFIG  . 'config_tuning.php');
 
 // Install
 if (!defined('DIR_APPLICATION')) {

@@ -41,6 +41,22 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 <?php 
 	if (empty($errors)) {
 		// Run upgrade script
+
+		@include_once(DIR_CONFIG . 'config_tuning.php');
+		if (!defined('CONF_COOKIES_LIFETIME')) {
+			$output  = '<?php' . "\n";
+			$output .= '// TUNING' . "\n";
+			$output .= 'define(\'CONF_COOKIES_LIFETIME\', \'183\'); // in days' . "\n";
+			$output .= '?>';
+
+			if ($file = @fopen(DIR_CONFIG . 'config_tuning.php', 'w')) {
+				fwrite($file, $output);
+				fclose($file);
+			} else {
+				$errors[] = '<font color=red>Can\'t write to \'config_tuning.php\' in ' . DIR_CONFIG . ', check permissions to dir;</font>';
+			}
+		}
+
 		$file='upgrade.sql';
 		if (!file_exists($file)) {
 			$errors[] = 'Upgrade SQL file '.$file.' could not be found.';

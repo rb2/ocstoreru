@@ -4,6 +4,7 @@ define('VERSION', '0.1.9');
 
 // Configuration
 require_once('config.php');
+@include_once(DIR_CONFIG . 'config_tuning.php');
 
 // Install
 if (!defined('DIR_APPLICATION')) {
@@ -160,13 +161,13 @@ if (isset($request->get['language']) && array_key_exists($request->get['language
 	$code = $config->get('config_language');
 }
 
-if (!isset($session->data['language']) || $session->data['language'] != $code) {
-	$session->data['language'] = $code;
+if (!isset($request->cookie['language']) || $request->cookie['language'] != $code || !isset($session->data['language'])) {
+	// do not use $request->server['HTTP_HOST'] as 'domain' because this may be broken if back-end server is used
+	setcookie('language', $code, time() + 60 * 60 * 24 * (int)CONF_COOKIES_LIFETIME, '/', '');
 }
 
-if (!isset($request->cookie['language']) || $request->cookie['language'] != $code) {
-	// do not use $request->server['HTTP_HOST'] as 'domain' because this may be broken if back-end server is used
-	setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', '');
+if (!isset($session->data['language']) || $session->data['language'] != $code) {
+	$session->data['language'] = $code;
 }
 
 $config->set('config_language_id', $languages[$code]['language_id']);

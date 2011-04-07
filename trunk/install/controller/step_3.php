@@ -90,6 +90,16 @@ class ControllerStep3 extends Controller {
 
 			fclose($file);
 
+
+			$output  = '<?php' . "\n";
+			$output .= '// TUNING' . "\n";
+			$output .= 'define(\'CONF_COOKIES_LIFETIME\', \'183\'); // in days' . "\n";
+			$output .= '?>';
+
+			$file = fopen(DIR_CONFIG . 'config_tuning.php', 'w');
+			fwrite($file, $output);
+			fclose($file);
+
 			$this->redirect(HTTP_SERVER . 'index.php?route=step_4');
 		}
 
