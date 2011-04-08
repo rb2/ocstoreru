@@ -133,7 +133,7 @@ class ControllerPaymentRobokassa extends Controller {
 
 			if( $order_info['order_status_id'] == 0) {
 				$this->model_checkout_order->confirm($order_id, $new_order_status_id, 'ROBOKASSA');
-				echo "Ok\n";
+				echo "OK".$order_id."\n";
 				return('');
 			}
 
@@ -143,7 +143,7 @@ class ControllerPaymentRobokassa extends Controller {
 
 			}
 
-			echo "Ok\n";
+			echo "OK".$order_id."\n";
 
 		}
 
