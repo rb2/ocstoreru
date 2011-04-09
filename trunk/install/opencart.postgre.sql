@@ -1115,6 +1115,7 @@ CREATE TABLE "oc_product" (
   "subtract" smallint NOT NULL DEFAULT '1',
   "minimum" bigint NOT NULL DEFAULT '1',
   "cost" DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
+  "main_category_id" bigint,
   PRIMARY KEY ("product_id")
 );
 
@@ -6024,6 +6025,11 @@ RETURNS text as $$
 SELECT array_to_string($2, $1);
 $$ LANGUAGE sql;
 
+CREATE OR REPLACE FUNCTION concat_ws(separator text, variadic bigint[])
+RETURNS text as $$
+SELECT array_to_string($2, $1);
+$$ LANGUAGE sql;
+
 CREATE OR REPLACE FUNCTION elt(int, VARIADIC text[])
 RETURNS text AS $$
 SELECT $2[$1];
@@ -6355,3 +6361,13 @@ UNION ALL
 SELECT 0
 LIMIT 1
 $$ LANGUAGE sql STRICT;
+
+CREATE OR REPLACE FUNCTION ifnull(int, int)
+RETURNS int AS $$
+SELECT COALESCE($1, $2)
+$$ LANGUAGE sql;
+
+CREATE OR REPLACE FUNCTION ifnull(bigint, bigint)
+RETURNS bigint AS $$
+SELECT COALESCE($1, $2)
+$$ LANGUAGE sql;

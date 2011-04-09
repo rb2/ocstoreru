@@ -1,12 +1,12 @@
 <?php
 // Heading
-$_['heading_title']          = 'Товары'; 
+$_['heading_title']          = 'Товары';
 
 // Tab
 $_['tab_shipping']           = 'Доставка';
 $_['tab_links']              = 'Связи';
 
-// Text  
+// Text
 $_['text_success']           = 'Список товаров обновлен!';
 $_['text_plus']              = '+';
 $_['text_minus']             = '-';
@@ -37,7 +37,7 @@ $_['entry_model']            = 'Модель:';
 $_['entry_sku']              = 'Единица учета складских запасов (SKU):';
 $_['entry_location']         = 'Расположение:';
 $_['entry_manufacturer']     = 'Произоводитель:';
-$_['entry_shipping']         = 'Необходима доставка:'; 
+$_['entry_shipping']         = 'Необходима доставка:';
 $_['entry_date_available']   = 'Дата поступления:';
 $_['entry_quantity']         = 'Количество:';
 $_['entry_minimum']          = 'Минимальное количество:<br/><span class="help">Указание минимально количества в заказе</span>';
@@ -60,10 +60,11 @@ $_['entry_option']           = 'Атрибут:';
 $_['entry_option_value']     = 'Значение атрибута:';
 $_['entry_sort_order']       = 'Порядок сортировки:';
 $_['entry_prefix']           = 'Префикс:';
-$_['entry_category']         = 'Категории:';
+$_['entry_category']         = 'Показывать в категориях:';
 $_['entry_download']         = 'Загрузки:';
 $_['entry_related']          = 'Рекомендуемые:';
 $_['entry_tags']          	 = 'Теги товара:<br /><span class="help">разделяются запятой</span>';
+$_['entry_main_category']    = 'Категория:';
 
 // Error
 $_['error_permission']       = 'У Вас нет прав для изменения товаров!';

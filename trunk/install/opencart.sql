@@ -1098,6 +1098,7 @@ CREATE TABLE `oc_product` (
   `subtract` int(1) NOT NULL DEFAULT '1',
   `minimum` int(11) NOT NULL DEFAULT '1',
   `cost` DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
+  `main_category_id` int(11),
   PRIMARY KEY (`product_id`),
   KEY `status` (`status`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=49 ;

@@ -649,5 +649,9 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'SRK', 'Sark', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'HRM', 'Herm', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
 
+### Start ocStore 0.1.10
+
+ALTER TABLE `oc_store` ADD COLUMN `main_category_id` int(11);
+
 ### Start 1.5.0
 #DROP TABLE `oc_product_featured`;

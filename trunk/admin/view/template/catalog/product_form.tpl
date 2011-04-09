@@ -17,7 +17,7 @@
           <?php foreach ($languages as $language) { ?>
           <a tab="#language<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
 		  <?php } ?>
-        </div> 
+        </div>
         <?php foreach ($languages as $language) { ?>
         <div id="language<?php echo $language['language_id']; ?>">
           <table class="form">
@@ -219,9 +219,22 @@
                 <?php } ?>
                 <?php } ?>
               </select></td>
-          </tr>         
+          </tr>
           <tr>
-            <td><?php echo $entry_category; ?></td>
+            <td><?php echo $entry_main_category; ?></td>
+            <td><select name="main_category_id">
+                <option value="0" selected="selected"><?php echo $text_none; ?></option>
+                <?php foreach ($categories as $category) { ?>
+                <?php if ($category['category_id'] == $main_category_id) { ?>
+                <option value="<?php echo $category['category_id']; ?>" selected="selected"><?php echo $category['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $category['category_id']; ?>"><?php echo $category['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+              </select></td>
+          </tr>
+          <tr>
+          <td><?php echo $entry_category; ?></td>
             <td><div class="scrollbox">
                 <?php $class = 'odd'; ?>
                 <?php foreach ($categories as $category) { ?>
@@ -558,13 +571,13 @@ CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 function addRelated() {
 	$('#product :selected').each(function() {
 		$(this).remove();
-		
+
 		$('#related option[value=\'' + $(this).attr('value') + '\']').remove();
-		
+
 		$('#related').append('<option value="' + $(this).attr('value') + '">' + $(this).text() + '</option>');
-		
+
 		$('#product_related input[value=\'' + $(this).attr('value') + '\']').remove();
-		
+
 		$('#product_related').append('<input type="hidden" name="product_related[]" value="' + $(this).attr('value') + '" />');
 	});
 }
@@ -572,7 +585,7 @@ function addRelated() {
 function removeRelated() {
 	$('#related :selected').each(function() {
 		$(this).remove();
-		
+
 		$('#product_related input[value=\'' + $(this).attr('value') + '\']').remove();
 	});
 }
@@ -600,7 +613,7 @@ function getProducts() {
 
 function getRelated() {
 	$('#related option').remove();
-	
+
 	$.ajax({
 		url: 'index.php?route=catalog/product/related&token=<?php echo $token; ?>',
 		type: 'POST',
@@ -608,12 +621,12 @@ function getRelated() {
 		data: $('#product_related input'),
 		success: function(data) {
 			$('#product_related input').remove();
-			
+
 			for (i = 0; i < data.length; i++) {
 	 			$('#related').append('<option value="' + data[i]['product_id'] + '">' + data[i]['name'] + ' (' + data[i]['model'] + ') </option>');
-				
+
 				$('#product_related').append('<input type="hidden" name="product_related[]" value="' + data[i]['product_id'] + '" />');
-			} 
+			}
 		}
 	});
 }
@@ -624,7 +637,7 @@ getRelated();
 <script type="text/javascript"><!--
 $('#option').bind('change', function() {
 	$('.option').hide();
-	
+
 	$('#' + $('#option option:selected').attr('value')).show();
 });
 
@@ -632,10 +645,10 @@ $('#option option:first').attr('selected', 'selected');
 
 $('#option').trigger('change');
 //--></script>
-<script type="text/javascript"><!--							 
+<script type="text/javascript"><!--
 var option_row = <?php echo $option_row; ?>;
 
-function addOption() {	
+function addOption() {
 	html  = '<div id="option' + option_row + '" class="option">';
 	html += '<table class="form">';
 	html += '<tr>';
@@ -659,9 +672,9 @@ function addOption() {
 	html += '</tr>';
 	html += '</table>';
 	html += '</div>';
-		 
+
 	$('#options').append(html);
-	
+
 	$('#option').append('<option value="option' + option_row + '"><?php echo $text_option; ?> ' + option_row + '</option>');
 	$('#option option[value=\'option' + option_row + '\']').attr('selected', 'selected');
 	$('#option').trigger('change');
@@ -672,7 +685,7 @@ function addOption() {
 function removeOption(option_row) {
 	$('#option option[value=\'option' + option_row + '\']').remove();
 	$('#option option[value^=\'option' + option_row + '_\']').remove();
-	
+
 	$('#options div[id=\'option' + option_row + '\']').remove();
 	$('#options div[id^=\'option' + option_row + '_\']').remove();
 }
@@ -690,13 +703,13 @@ function addOptionValue(option_id) {
 	html += '<input type="text" name="product_option[' + option_id + '][product_option_value][' + option_value_row + '][language][<?php echo $language['language_id']; ?>][name]" value="Option Value ' + option_value_row + '" onkeyup="$(\'#option option[value=\\\'option' + option_id + '_' + option_value_row + '\\\']\').text(\'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\' + this.value);" />&nbsp;<img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />';
 	<?php } else { ?>
 	html += '<input type="text" name="product_option[' + option_id + '][product_option_value][' + option_value_row + '][language][<?php echo $language['language_id']; ?>][name]" value="Option Value ' + option_value_row + '" />&nbsp;<img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />';
-	<?php } ?>	
+	<?php } ?>
 	<?php } ?>
 	html += '</td>';
 	html += '</tr>';
 	html += '<tr>';
 	html += '<td><?php echo $entry_quantity; ?></td>';
-	html += '<td><input type="text" name="product_option[' + option_id + '][product_option_value][' + option_value_row + '][quantity]" value="' + '" size="2" /></td>';	
+	html += '<td><input type="text" name="product_option[' + option_id + '][product_option_value][' + option_value_row + '][quantity]" value="' + '" size="2" /></td>';
 	html += '</tr>';
 	html += '<tr>';
 	html += '<td><?php echo $entry_subtract; ?></td>';
@@ -709,43 +722,43 @@ function addOptionValue(option_id) {
 	html += '<td><?php echo $entry_price; ?></td>';
 	html += '<td><input type="text" name="product_option[' + option_id + '][product_option_value][' + option_value_row + '][price]" value="" /></td>';
 	html += '</tr>';
-	html += '<tr>';	
+	html += '<tr>';
 	html += '<td><?php echo $entry_prefix; ?></td>';
 	html += '<td><select name="product_option[' + option_id + '][product_option_value][' + option_value_row + '][prefix]">';
 	html += '<option value="+"><?php echo $text_plus; ?></option>';
 	html += '<option value="-"><?php echo $text_minus; ?></option>';
 	html += '</select></td>';
 	html += '</tr>';
-	html += '<tr>';	
-	html += '<td><?php echo $entry_sort_order; ?></td>';	
+	html += '<tr>';
+	html += '<td><?php echo $entry_sort_order; ?></td>';
 	html += '<td><input type="text" name="product_option[' + option_id + '][product_option_value][' + option_value_row + '][sort_order]" value="" size="2" /></td>';
 	html += '</tr>';
-	html += '<tr>';		
+	html += '<tr>';
 	html += '<td colspan="2"><a onclick="removeOptionValue(\'' + option_id + '_' + option_value_row + '\');" class="button"><span><?php echo $button_remove; ?></span></a></td>';
 	html += '</tr>';
 	html += '</table>';
 	html += '</div>';
-	
+
 	$('#options').append(html);
-	
+
 	option = $('#option option[value^=\'option' + option_id + '_\']:last');
-	
+
 	if (option.size()) {
 		option.after('<option value="option' + option_id + '_' + option_value_row + '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $text_option_value; ?> ' + option_value_row + '</option>');
 	} else {
 		$('#option option[value=\'option' + option_id + '\']').after('<option value="option' + option_id + '_' + option_value_row + '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $text_option_value; ?> ' + option_value_row + '</option>');
 	}
-	
+
 	$('#option option[value=\'option' + option_id + '_' + option_value_row + '\']').attr('selected', 'selected');
-	
+
 	$('#option').trigger('change');
-	
+
 	option_value_row++;
 }
 
 function removeOptionValue(option_value_row) {
 	$('#option option[value=\'option' + option_value_row + '\']').remove();
-	
+
 	$('#option' + option_value_row).remove();
 }
 //--></script>
@@ -754,25 +767,25 @@ var discount_row = <?php echo $discount_row; ?>;
 
 function addDiscount() {
 	html  = '<tbody id="discount_row' + discount_row + '">';
-	html += '<tr>'; 
+	html += '<tr>';
     html += '<td class="left"><select name="product_discount[' + discount_row + '][customer_group_id]" style="margin-top: 3px;">';
     <?php foreach ($customer_groups as $customer_group) { ?>
     html += '<option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>';
     <?php } ?>
-    html += '</select></td>';		
+    html += '</select></td>';
     html += '<td class="left"><input type="text" name="product_discount[' + discount_row + '][quantity]" value="" size="2" /></td>';
     html += '<td class="left"><input type="text" name="product_discount[' + discount_row + '][priority]" value="" size="2" /></td>';
 	html += '<td class="left"><input type="text" name="product_discount[' + discount_row + '][price]" value="" /></td>';
     html += '<td class="left"><input type="text" name="product_discount[' + discount_row + '][date_start]" value="" class="date" /></td>';
 	html += '<td class="left"><input type="text" name="product_discount[' + discount_row + '][date_end]" value="" class="date" /></td>';
 	html += '<td class="left"><a onclick="$(\'#discount_row' + discount_row + '\').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>';
-	html += '</tr>';	
+	html += '</tr>';
     html += '</tbody>';
-	
+
 	$('#discount tfoot').before(html);
-		
+
 	$('#discount_row' + discount_row + ' .date').datepicker({dateFormat: 'yy-mm-dd'});
-	
+
 	discount_row++;
 }
 //--></script>
@@ -781,12 +794,12 @@ var special_row = <?php echo $special_row; ?>;
 
 function addSpecial() {
 	html  = '<tbody id="special_row' + special_row + '">';
-	html += '<tr>'; 
+	html += '<tr>';
     html += '<td class="left"><select name="product_special[' + special_row + '][customer_group_id]">';
     <?php foreach ($customer_groups as $customer_group) { ?>
     html += '<option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>';
     <?php } ?>
-    html += '</select></td>';		
+    html += '</select></td>';
     html += '<td class="left"><input type="text" name="product_special[' + special_row + '][priority]" value="" size="2" /></td>';
 	html += '<td class="left"><input type="text" name="product_special[' + special_row + '][price]" value="" /></td>';
     html += '<td class="left"><input type="text" name="product_special[' + special_row + '][date_start]" value="" class="date" /></td>';
@@ -794,11 +807,11 @@ function addSpecial() {
 	html += '<td class="left"><a onclick="$(\'#special_row' + special_row + '\').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>';
 	html += '</tr>';
     html += '</tbody>';
-	
+
 	$('#special tfoot').before(html);
- 
+
 	$('#special_row' + special_row + ' .date').datepicker({dateFormat: 'yy-mm-dd'});
-	
+
 	special_row++;
 }
 //--></script>
@@ -809,9 +822,9 @@ function addSpecial() {
 <script type="text/javascript"><!--
 function image_upload(field, preview) {
 	$('#dialog').remove();
-	
+
 	$('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="index.php?route=common/filemanager&token=<?php echo $token; ?>&field=' + encodeURIComponent(field) + '" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
-	
+
 	$('#dialog').dialog({
 		title: '<?php echo $text_image_manager; ?>',
 		close: function (event, ui) {
@@ -826,7 +839,7 @@ function image_upload(field, preview) {
 					}
 				});
 			}
-		},	
+		},
 		bgiframe: false,
 		width: 800,
 		height: 400,
@@ -845,9 +858,9 @@ function addImage() {
 	html += '<td class="left"><a onclick="$(\'#image_row' + image_row  + '\').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>';
 	html += '</tr>';
 	html += '</tbody>';
-	
+
 	$('#images tfoot').before(html);
-	
+
 	image_row++;
 }
 //--></script>
@@ -858,7 +871,7 @@ $(document).ready(function() {
 });
 //--></script>
 <script type="text/javascript"><!--
-$.tabs('#tabs a'); 
-$.tabs('#languages a'); 
+$.tabs('#tabs a');
+$.tabs('#languages a');
 //--></script>
 <?php echo $footer; ?>

@@ -18,10 +18,12 @@ class ModelSettingSetting extends Model {
 		foreach ($data as $key => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "setting (`group`, `key`, `value`) VALUES ('" . $this->db->escape($group) . "', '" . $this->db->escape($key) . "', '" . $this->db->escape($value) . "')");
 		}
+		$this->cache->delete('*');
 	}
 
 	public function deleteSetting($group) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "setting WHERE `group` = '" . $this->db->escape($group) . "'");
+		$this->cache->delete('*');
 	}
 }
 ?>

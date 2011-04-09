@@ -56,6 +56,7 @@ class ModelCatalogCategory extends Model {
 		}
 
 		$this->cache->delete('category');
+		$this->cache->delete('product.seo');
 	}
 
 	public function deleteCategory($category_id) {
@@ -71,6 +72,7 @@ class ModelCatalogCategory extends Model {
 		}
 
 		$this->cache->delete('category');
+		$this->cache->delete('product.seo');
 	}
 
 	public function changeStatusCategories($categories, $status) {
@@ -80,6 +82,7 @@ class ModelCatalogCategory extends Model {
 		$this->db->query("UPDATE " . DB_PREFIX . "category SET status = '" . (int)(bool)$status . "' WHERE category_id = '" . $categories . "'");
 
 		$this->cache->delete('category');
+		$this->cache->delete('product.seo');
 	}
 
 	public function getCategory($category_id) {

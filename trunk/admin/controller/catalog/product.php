@@ -173,18 +173,18 @@ class ControllerCatalogProduct extends Controller {
 	public function enable() {
 		$this->changeStatusProducts(1);
 	}
-	
+
 	public function disable() {
 		$this->changeStatusProducts(0);
 	}
-	
+
 	private function changeStatusProducts($status) {
 		$this->load->language('catalog/product');
 		$this->load->model('catalog/product');
-		
+
 		if (isset($this->request->post['selected']) && $this->user->hasPermission('modify', 'catalog/product')) {
 			$this->model_catalog_product->changeStatusProducts($this->request->post['selected'], $status);
-			
+
 			$url = '';
 			if (isset($this->request->get['filter_name'])) {
 				$url .= '&filter_name=' . $this->request->get['filter_name'];
@@ -210,15 +210,15 @@ class ControllerCatalogProduct extends Controller {
 			if (isset($this->request->get['order'])) {
 				$url .= '&order=' . $this->request->get['order'];
 			}
-			
+
 			$this->session->data['success'] = $this->language->get('text_success');
 			$this->redirect(HTTPS_SERVER . 'index.php?route=catalog/product&token=' . $this->session->data['token'] . $url);
 		}
-		
+
 		$this->document->title = $this->language->get('heading_title');
 		$this->getList();
 	}
-	
+
   	public function copy() {
     	$this->load->language('catalog/product');
 
@@ -630,6 +630,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_date_end'] = $this->language->get('entry_date_end');
 		$this->data['entry_priority'] = $this->language->get('entry_priority');
 		$this->data['entry_tags'] = $this->language->get('entry_tags');
+		$this->data['entry_main_category'] = $this->language->get('entry_main_category');
 
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -664,7 +665,7 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$this->data['error_meta_description'] = '';
 		}
-		
+
 		if (isset($this->error['title'])) {
 			$this->data['error_title'] = $this->error['title'];
 		} else {
@@ -1070,6 +1071,14 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/category');
 
 		$this->data['categories'] = $this->model_catalog_category->getCategories(0);
+
+		if (isset($this->request->post['main_category_id'])) {
+		$this->data['main_category_id'] = $this->request->post['main_category_id'];
+		} elseif (isset($product_info)) {
+			$this->data['main_category_id'] = $product_info['main_category_id'];
+		} else {
+			$this->data['main_category_id'] = 0;
+		}
 
 		if (isset($this->request->post['product_category'])) {
 			$this->data['product_category'] = $this->request->post['product_category'];
