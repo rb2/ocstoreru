@@ -51,6 +51,37 @@
             </select></td>
         </tr>
         <tr>
+          <td><?php echo $entry_order_status_cancel; ?></td>
+          <td><select name="qiwi_order_status_cancel_id">
+              <?php foreach ($order_statuses as $order_status) { ?>
+              <?php if ($order_status['order_status_id'] == $qiwi_order_status_cancel_id) { ?>
+              <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
+              <?php } else { ?>
+              <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select></td>
+        </tr>
+        <tr>
+          <td><?php echo $entry_order_status_progress; ?></td>
+          <td><select name="qiwi_order_status_progress_id">
+              <?php foreach ($order_statuses as $order_status) { ?>
+              <?php if ($order_status['order_status_id'] == $qiwi_order_status_progress_id) { ?>
+              <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
+              <?php } else { ?>
+              <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select></td>
+        </tr>
+		 <tr>
+          <td><span class="required">*</span> <?php echo $entry_lifetime; ?></td>
+          <td><input type="text" name="qiwi_lifetime" value="<?php echo $qiwi_lifetime; ?>" />
+            <?php if ($error_lifetime) { ?>
+            <span class="error"><?php echo $error_lifetime; ?></span>
+            <?php } ?></td>
+        </tr>
+        <tr>
           <td><?php echo $entry_geo_zone; ?></td>
           <td><select name="qiwi_geo_zone_id">
               <option value="0"><?php echo $text_all_zones; ?></option>

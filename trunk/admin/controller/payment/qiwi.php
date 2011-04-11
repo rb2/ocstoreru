@@ -28,10 +28,6 @@ class ControllerPaymentQiwi extends Controller {
 		$this->data['entry_soap_lib'] = $this->language->get('entry_soap_lib');
 		
 		
-		
-		
-		
-		
 		$this->data['entry_result_url'] = $this->language->get('entry_result_url');
 		$this->data['entry_success_url'] = $this->language->get('entry_success_url');
 		$this->data['entry_fail_url'] = $this->language->get('entry_fail_url');	
@@ -40,7 +36,10 @@ class ControllerPaymentQiwi extends Controller {
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_all_zones'] = $this->language->get('text_all_zones');
 
-		$this->data['entry_order_status'] = $this->language->get('entry_order_status');	
+		$this->data['entry_order_status'] = $this->language->get('entry_order_status');
+		$this->data['entry_order_status_cancel'] = $this->language->get('entry_order_status_cancel');		
+		$this->data['entry_order_status_progress'] = $this->language->get('entry_order_status_progress');
+		$this->data['entry_lifetime'] = $this->language->get('entry_lifetime');
 		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -66,6 +65,12 @@ class ControllerPaymentQiwi extends Controller {
 			$this->data['error_password'] = $this->error['password'];
 		} else {
 			$this->data['error_password'] = '';
+		}
+
+		if (isset($this->error['lifetime'])) {
+			$this->data['error_lifetime'] = $this->error['lifetime'];
+		} else {
+			$this->data['error_lifetime'] = '';
 		}
 
 		$this->document->breadcrumbs = array();
@@ -116,6 +121,26 @@ class ControllerPaymentQiwi extends Controller {
 			$this->data['qiwi_order_status_id'] = $this->request->post['qiwi_order_status_id'];
 		} else {
 			$this->data['qiwi_order_status_id'] = $this->config->get('qiwi_order_status_id'); 
+		} 
+		
+		if (isset($this->request->post['qiwi_order_status_cancel_id'])) {
+			$this->data['qiwi_order_status_cancel_id'] = $this->request->post['qiwi_order_status_cancel_id'];
+		} else {
+			$this->data['qiwi_order_status_cancel_id'] = $this->config->get('qiwi_order_status_cancel_id'); 
+		} 
+		
+		if (isset($this->request->post['qiwi_order_status_progress_id'])) {
+			$this->data['qiwi_order_status_progress_id'] = $this->request->post['qiwi_order_status_progress_id'];
+		} else {
+			$this->data['qiwi_order_status_progress_id'] = $this->config->get('qiwi_order_status_progress_id'); 
+		}
+		
+		if (isset($this->request->post['qiwi_lifetime'])) {
+			$this->data['qiwi_lifetime'] = (int)$this->request->post['qiwi_lifetime'];
+		} elseif( $this->config->get('qiwi_lifetime') ) {
+			$this->data['qiwi_lifetime'] = (int)$this->config->get('qiwi_lifetime'); 
+		} else {
+			$this->data['qiwi_lifetime'] = 24;
 		} 
 		
 		// Проверка на наличие SOAP сервера

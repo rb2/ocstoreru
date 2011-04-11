@@ -24,6 +24,7 @@ class ControllerPaymentQiwi extends Controller {
 		$this->data['com'] = html_entity_decode($this->config->get('config_store'), ENT_QUOTES, 'UTF-8'); 
 		$this->data['summ'] = $this->currency->format($order_info['total'], $order_info['currency'], $order_info['value'], FALSE);
 		$this->data['check_agt'] = false;
+		$this->data['lifetime'] = (int)$this->config->get('qiwi_lifetime');
 		
 						
 		
@@ -54,7 +55,23 @@ class ControllerPaymentQiwi extends Controller {
 	}
 	
 	public function confirm() {
-      return;
+	
+		$this->load->model('checkout/order');
+	
+		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+		if(!$order_info) return;
+		
+		$order_id = $this->session->data['order_id'];
+		
+		if( $order_info['order_status_id'] == 0) {
+			$this->model_checkout_order->confirm($order_id, $this->config->get('qiwi_order_status_progress_id'), 'QIWI');
+			return;
+		}
+			
+		if( $order_info['order_status_id'] != $this->config->get('qiwi_order_status_progress_id')) {
+			$this->model_checkout_order->update($order_id, $this->config->get('qiwi_order_status_progress_id'),'QIWI',TRUE);		
+		}
+	
    	}  
 	
 	public function fail() {
@@ -76,9 +93,7 @@ class ControllerPaymentQiwi extends Controller {
 		 $s = new SoapServer(DIR_CONFIG . 'ishopclientws.wsdl');
 		 $s->setClass('qiwiSoap');
 		 $s->handle();
-		 
-		 return FALSE;
-		
+		 exit;
 	}
 	
 }
@@ -92,6 +107,10 @@ class qiwiSoap extends model {
 
 	public function updateBill($param) {
 	
+/*
+		$k = var_export($param, true);
+		$this->log->write('PHP Fatal Error:  ' . $k . ' in qiwi');
+*/
 		
 		// Проверка на ID магазина
 		if($param->login != $this->config->get('qiwi_shop_id')) {
@@ -108,9 +127,6 @@ class qiwiSoap extends model {
 			return $param;
 		}
 		
-		$k = var_export($param, true);
-		$this->log->write('PHP Fatal Error:  ' . $k . ' in qiwi');
-		
 		// Проверка на номер заказа
 		$this->load->model('checkout/order');
 		$order_info = $this->model_checkout_order->getOrder($order_id);
@@ -122,7 +138,9 @@ class qiwiSoap extends model {
 		$param->updateBillResult = 0;
 		
 		// Изменяем статус заказа
-		if($param->status = 60 ) {
+		
+		// Стутс проведения счета.
+		if( $param->status = 60 ) {
 		
 			if( $order_info['order_status_id'] == 0) {
 				$this->model_checkout_order->confirm($order_id, $this->config->get('qiwi_order_status_id'), 'QIWI');
@@ -132,6 +150,27 @@ class qiwiSoap extends model {
 			if( $order_info['order_status_id'] != $this->config->get('qiwi_order_status_id')) {
 				$this->model_checkout_order->update($order_id, $this->config->get('qiwi_order_status_id'),'QIWI',TRUE);			
 			}
+		} elseif( $param->status >= 150) {
+		
+			if( $order_info['order_status_id'] == 0) {
+				$this->model_checkout_order->confirm($order_id, $this->config->get('qiwi_order_status_cancel_id'), 'QIWI');
+				return $param;
+			}
+			
+			if( $order_info['order_status_id'] != $this->config->get('qiwi_order_status_cancel_id')) {
+				$this->model_checkout_order->update($order_id, $this->config->get('qiwi_order_status_cancel_id'),'QIWI',TRUE);			
+			}
+		} else {
+			
+			if( $order_info['order_status_id'] == 0) {
+				$this->model_checkout_order->confirm($order_id, $this->config->get('qiwi_order_status_progress_id'), 'QIWI');
+				return $param;
+			}
+			
+			if( $order_info['order_status_id'] != $this->config->get('qiwi_order_status_progress_id')) {
+				$this->model_checkout_order->update($order_id, $this->config->get('qiwi_order_status_progress_id'),'QIWI',TRUE);			
+			}
+		
 		}
       	
     	  
