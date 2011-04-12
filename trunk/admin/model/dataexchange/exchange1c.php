@@ -364,16 +364,15 @@ class ModelDataexchangeExchange1c extends Model {
 		$product_old = $this->model_catalog_product->getProduct($product_id);
 		
 		// Проверяем изменения в наименовании
-		if( isset($product['name']) AND $product_old['name'] != $product['name']) {
+		if( isset($product['name']) AND ! empty( $product['name'] ) ) { 
 		
 			$set = array();
-			
-			if(isset($product['name'])) $set[] = 'name = "' . $this->db->escape($product['name']). '"';	
+		
+			if( $product_old['name'] != $product['name']) {
+				 $set[] = 'name = "' . $this->db->escape($product['name']). '"';	
+			}
 			
 			//if(isset($product['description'])) $set[] = 'description = "' . $this->db->escape($product['description']). '"';
-			
-					
-			
 			
 			$query = $this->db->query('UPDATE `' . DB_PREFIX . 'product_description` SET ' . implode(', ', $set)  . ' WHERE product_id = ' . (int)$product_id);
 				
@@ -383,7 +382,7 @@ class ModelDataexchangeExchange1c extends Model {
 		$set = array();
 		
 		// Изменять изображение?
-		if( ! $product_old['image'] AND isset($product['image']) ) $set[] = 'image = "' . $this->db->escape($product['image']). '"';
+		if( isset($product['image']) AND  ! $product_old['image'] ) $set[] = 'image = "' . $this->db->escape($product['image']). '"';
 		
 		// Изменяем стоимость 
 		if(isset($product['price'])) $set[] = 'price = "' . $this->db->escape($product['price']). '"';
