@@ -125,6 +125,10 @@ class ModelDataexchangeExchange1c extends Model {
 										$product->next();
 									break;
 									
+									case 'Модель':
+										$data['model'] = $product->readString();
+									break;
+									
 									case 'Описание':
 										$data['description'] = $product->readString();	
 									break;
@@ -253,7 +257,11 @@ class ModelDataexchangeExchange1c extends Model {
 		);
 		
 		// Модель
-		$data['model'] = '';
+		if( isset( $product['model'] ) AND  $product['model'] ) {
+			$data['model'] = $product['model'];
+		} else {
+			$data['model'] = '';
+		}
 		
 		// SKU
 		$data['sku'] = '123';
@@ -269,7 +277,7 @@ class ModelDataexchangeExchange1c extends Model {
 		
 		
 		// Изображение
-		if(isset( $product['image'] ) AND  $product['image'] ) {
+		if( isset( $product['image'] ) AND  $product['image'] ) {
 			$data['image'] = $product['image'];
 		} else {
 			$data['image'] = '';
@@ -322,7 +330,13 @@ class ModelDataexchangeExchange1c extends Model {
 		
 		$data['product_download'] = array();
 		
-		$data['product_category'] = array( ($this->CAT[$product['category_1c_id']]?$this->CAT[$product['category_1c_id']]:0));
+		if( isset($product['category_1c_id']) AND isset($this->CAT[$product['category_1c_id']]) ) {
+			$data['product_category'] = array( (int)$this->CAT[$product['category_1c_id']] );
+		} else {
+			$data['product_category'] = array();
+		}
+		
+		
 		
 		$data['product_related'] = array();
 		
@@ -374,7 +388,9 @@ class ModelDataexchangeExchange1c extends Model {
 			
 			//if(isset($product['description'])) $set[] = 'description = "' . $this->db->escape($product['description']). '"';
 			
-			$query = $this->db->query('UPDATE `' . DB_PREFIX . 'product_description` SET ' . implode(', ', $set)  . ' WHERE product_id = ' . (int)$product_id);
+			if( $set ) {
+				$query = $this->db->query('UPDATE `' . DB_PREFIX . 'product_description` SET ' . implode(', ', $set)  . ' WHERE product_id = ' . (int)$product_id);
+			}
 				
 		}
 		

@@ -139,7 +139,7 @@ class ControllerExtensionDataexchange extends Controller {
 			$this->load->model('setting/extension');
 			$this->load->model('setting/setting');
 			
-			$this->model_setting_extension->uninstall('feed', $this->request->get['extension']);
+			$this->model_setting_extension->uninstall('dataexchange', $this->request->get['extension']);
 		
 			$this->model_setting_setting->deleteSetting($this->request->get['extension']);
 		

@@ -30,6 +30,7 @@ class ControllerDataexchangeExchange1c extends Controller {
 		$this->data['entry_password'] = $this->language->get('entry_password');
 		$this->data['entry_flush_db'] = $this->language->get('entry_flush_db');
 		$this->data['entry_lic_type'] = $this->language->get('entry_lic_type');
+		$this->data['entry_version'] = 0;
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
 		
@@ -92,9 +93,9 @@ class ControllerDataexchangeExchange1c extends Controller {
 		}
 		
 		if (isset($this->request->post['exchange1c_password'])) {
-			$this->data['exchange1c_password'] = $this->request->post['alertpay_order_status_id'];
+			$this->data['exchange1c_password'] = $this->request->post['exchange1c_password'];
 		} else {
-			$this->data['exchange1c_password'] = $this->config->get('alertpay_order_status_id'); 
+			$this->data['exchange1c_password'] = $this->config->get('exchange1c_password'); 
 		} 
 		
 		if (isset($this->request->post['exchange1c_status'])) {
@@ -121,7 +122,7 @@ class ControllerDataexchangeExchange1c extends Controller {
 	}
 
 	private function validate() {
-		if (!$this->user->hasPermission('modify', 'payment/alertpay')) {
+		if (!$this->user->hasPermission('modify', 'dataexchange/exchange1c')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
@@ -131,6 +132,10 @@ class ControllerDataexchangeExchange1c extends Controller {
 			return FALSE;
 		}	
 	}
+	
+	public function install() {}
+	
+	public function uninstall() {}
 	
 	// --- 
 	public function modeCheckauth() {
