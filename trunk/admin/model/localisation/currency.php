@@ -102,7 +102,7 @@ class ModelLocalisationCurrency extends Model {
 		if (extension_loaded('curl')) {
 			$data = array();
 
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "currency WHERE code != '" . $this->db->escape($this->config->get('config_currency')) . "' AND date_modified > '" . date('Y-m-d H:i:s', strtotime('-1 day')) . "'");
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "currency WHERE code != '" . $this->db->escape($this->config->get('config_currency')) . "' AND date_modified < '" . date('Y-m-d H:i:s', strtotime('-1 day')) . "'");
 
 			foreach ($query->rows as $result) {
 				$data[] = $this->config->get('config_currency') . $result['code'] . '=X';
