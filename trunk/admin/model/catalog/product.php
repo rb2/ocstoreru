@@ -123,29 +123,93 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_option WHERE product_id = '" . (int)$product_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_option_description WHERE product_id = '" . (int)$product_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_option_value WHERE product_id = '" . (int)$product_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_option_value_description WHERE product_id = '" . (int)$product_id . "'");
+		// Удаляем только реально удаленные аттрибуты
+		$query = $this->db->query("SELECT product_option_id FROM " . DB_PREFIX . "product_option WHERE product_id = ".(int)$product_id);
+		foreach ($query->rows as $r)
+		    if (isset($data['id'.$r['product_option_id'].'option']))
+		    {
+			if (!isset($data['product_option'][$data['id'.$r['product_option_id'].'option']]))
+			{
+			    $this->db->query("DELETE FROM " . DB_PREFIX . "product_option WHERE product_option_id = ".(int)$r['product_option_id']);
+			    $this->db->query("DELETE FROM " . DB_PREFIX . "product_option_description WHERE product_option_id = ".(int)$r['product_option_id']);
+			}
+		    };
+		$query = $this->db->query("SELECT product_option_value_id FROM " . DB_PREFIX . "product_option_value WHERE product_id = ".(int)$product_id);
+		foreach ($query->rows as $r)
+		    if (isset($data['id'.$r['product_option_value_id'].'option_value']))
+		    {
+			$keys = explode(',', $data['id'.$r['product_option_value_id'].'option_value']);
+
+			if (!isset($data['product_option'][$keys[0]]['product_option_value'][$keys[1]]))
+			{
+			    $this->db->query("DELETE FROM " . DB_PREFIX . "product_option_value WHERE product_option_value_id = ".(int)$r['product_option_value_id']);
+			    $this->db->query("DELETE FROM " . DB_PREFIX . "product_option_value_description WHERE product_option_value_id = ".(int)$r['product_option_value_id']);
+			}
+		    };
 
 		if (isset($data['product_option'])) {
-			foreach ($data['product_option'] as $product_option) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_option (product_id, sort_order) VALUES ('" . (int)$product_id . "', '" . (int)$product_option['sort_order'] . "')");
+			foreach ($data['product_option'] as $key=>$product_option) {
+				// Аттрибут
+				$product_option_id = '';
+				if (!isset($data['option'.$key.'id']))
+				{
+				    // Добавляем добавленный аттрибут
+				    $this->db->query("INSERT INTO " . DB_PREFIX . "product_option (product_id, sort_order) VALUES ('" . (int)$product_id . "', '" . (int)$product_option['sort_order'] . "')");
 
-				$product_option_id = $this->db->getLastId();
+				    $product_option_id = $this->db->getLastId();
+				}
+				else
+				{
+				    // Изменяем существующий аттрибут
+				    $product_option_id = $data['option'.$key.'id'];
+
+				    $this->db->query("UPDATE " . DB_PREFIX . "product_option SET sort_order = '" . (int)$product_option['sort_order'] . "' WHERE product_option_id = ".$product_option_id);
+				}
 
 				foreach ($product_option['language'] as $language_id => $language) {
+				    $query = $this->db->query("SELECT COUNT(*) as cnt FROM " . DB_PREFIX . "product_option_description WHERE  product_option_id = '" . (int)$product_option_id . "' AND language_id = '" . (int)$language_id . "'");
+
+				    if ($query->rows[0]['cnt'] > 0)
+				    {
+				    $this->db->query("UPDATE " . DB_PREFIX . "product_option_description SET name = '" . $this->db->escape($language['name']) . "' WHERE product_option_id = '" . (int)$product_option_id . "' AND language_id = '" . (int)$language_id . "'");
+				    }
+				    else
+				    {
 					$this->db->query("INSERT INTO " . DB_PREFIX . "product_option_description (product_option_id, language_id, product_id, name) VALUES ('" . (int)$product_option_id . "', '" . (int)$language_id . "', '" . (int)$product_id . "', '" . $this->db->escape($language['name']) . "')");
+				    }
 				}
 
 				if (isset($product_option['product_option_value'])) {
-					foreach ($product_option['product_option_value'] as $product_option_value) {
-						$this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value (product_option_id, product_id, quantity, subtract, price, prefix, sort_order) VALUES ('" . (int)$product_option_id . "', '" . (int)$product_id . "', '" . (int)$product_option_value['quantity'] . "', '" . (int)$product_option_value['subtract'] . "', '" . (float)$product_option_value['price'] . "', '" . $this->db->escape($product_option_value['prefix']) . "', '" . (int)$product_option_value['sort_order'] . "')");
+					foreach ($product_option['product_option_value'] as $vkey=>$product_option_value) {
+						// Значение аттрибута
+						$product_option_value_id = '';
+						if (!isset($data['option'.$key.'_'.$vkey.'id']))
+						{
+						    // Добавляем новое значение аттрибута
 
-						$product_option_value_id = $this->db->getLastId();
+						    $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value (product_option_id, product_id, quantity, subtract, price, prefix, sort_order) VALUES ('" . (int)$product_option_id . "', '" . (int)$product_id . "', '" . (int)$product_option_value['quantity'] . "', '" . (int)$product_option_value['subtract'] . "', '" . (float)$product_option_value['price'] . "', '" . $this->db->escape($product_option_value['prefix']) . "', '" . (int)$product_option_value['sort_order'] . "')");
+
+						    $product_option_value_id = $this->db->getLastId();
+						}
+						else
+						{
+						    // Изменяем значение аттрибута
+						    $product_option_value_id = $data['option'.$key.'_'.$vkey.'id'];
+
+						    $this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', price = '" . (float)$product_option_value['price'] . "', prefix = '" . $this->db->escape($product_option_value['prefix']) . "', sort_order = '" . (int)$product_option_value['sort_order'] . "' WHERE product_option_value_id = ".$product_option_value_id);
+						};
 
 						foreach ($product_option_value['language'] as $language_id => $language) {
+						    $query = $this->db->query("SELECT COUNT(*) as cnt FROM " . DB_PREFIX . "product_option_value_description WHERE product_option_value_id = '" . (int)$product_option_value_id . "' AND language_id = '" . (int)$language_id . "'");
+
+						    if ($query->rows[0]['cnt'] > 0)
+						    {
+							$this->db->query("UPDATE " . DB_PREFIX . "product_option_value_description SET name = '" . $this->db->escape($language['name']) . "' WHERE product_option_value_id = '" . (int)$product_option_value_id . "' AND language_id = '" . (int)$language_id . "'");
+						    }
+						    else
+						    {
 							$this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value_description (product_option_value_id, language_id, product_id, name) VALUES ('" . (int)$product_option_value_id . "', '" . (int)$language_id . "', '" . (int)$product_id . "', '" . $this->db->escape($language['name']) . "')");
+						    };
 						}
 					}
 				}

@@ -1,6 +1,8 @@
 <?php
 final class Postgre {
     private $connection;
+    private $resource;
+    private $affectedRows = 0;
 
     public function __construct($hostname, $username, $password, $database) {
 	if (!$this->connection = pg_pconnect('host='.$hostname.' dbname='.$database.' user='.$username.' password='.$password)) {
@@ -33,21 +35,22 @@ final class Postgre {
 	    $sql = preg_replace('/\'0000-00-00\'/', '\'0001-01-01\'', $sql);
 	    $sql = preg_replace('/\'0000-00-00 ([0-9\:]+)\'/', '\'0001-01-01 \1\'', $sql);
 
-	    $resource = pg_query($this->connection, $sql);
+	    $this->resource = pg_query($this->connection, $sql);
 
-	    if ($resource) {
-		if (is_resource($resource)) {
+	    if ($this->resource) {
+		$this->affectedRows = pg_affected_rows($this->resource);
+		if (is_resource($this->resource)) {
 		    $i = 0;
 
 		    $data = array();
 
-		    while ($result = pg_fetch_assoc($resource)) {
+		    while ($result = pg_fetch_assoc($this->resource)) {
 			$data[$i] = $result;
 
 			$i++;
 		    }
 
-		    pg_free_result($resource);
+		    pg_free_result($this->resource);
 
 		    $query = new stdClass();
 		    $query->row = isset($data[0]) ? $data[0] : array();
@@ -59,7 +62,7 @@ final class Postgre {
 		    return $query;
 		} else {
 		    return TRUE;
-		}
+		};
 	    } else {
 		exit('Error: ' . pg_last_error($this->connection) . ': ' . $sql);
 	    }
@@ -73,7 +76,7 @@ final class Postgre {
     }
 
     public function countAffected() {
-	return pg_affected_rows($this->connection);
+	return $this->affectedRows;
     }
 
     public function getLastId() {

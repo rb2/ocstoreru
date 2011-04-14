@@ -651,7 +651,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 
 ### Start ocStore 0.1.10
 
-ALTER TABLE `oc_store` ADD COLUMN `main_category_id` int(11);
+ALTER TABLE `oc_product` ADD COLUMN `main_category_id` int(11);
 
 ### Start 1.5.0
 #DROP TABLE `oc_product_featured`;

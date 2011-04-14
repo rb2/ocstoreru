@@ -328,12 +328,17 @@
         <div style="width: 100%; display: inline-block; padding-bottom: 5px;">
           <div style="width: 200px; height: 300px; float: left;">
             <select id="option" size="20" style="width: 100%;">
-              <?php $option_row = 0; ?>
+	      <?php $option_list_ids = ''; ?>
+	      <?php $option_row = 0; ?>
               <?php $option_value_row = 0; ?>
-              <?php foreach ($product_options as $product_option) { ?>
+              <?php foreach ($product_options as $product_option) {
+		  $option_list_ids = $option_list_ids . '<input type="hidden" name="option' . $option_row . 'id" value="'.$product_option['product_option_id'].'"><input type="hidden" name="id'.$product_option['product_option_id'].'option" value="' . $option_row . '">';
+		?>
               <option value="option<?php echo $option_row; ?>"><?php echo $product_option['language'][$language_id]['name']; ?></option>
               <?php if ($product_option['product_option_value']) { ?>
-              <?php foreach ($product_option['product_option_value'] as $product_option_value) { ?>
+              <?php foreach ($product_option['product_option_value'] as $product_option_value) {
+		  $option_list_ids = $option_list_ids . '<input type="hidden" name="option'. $option_row .'_'. $option_value_row .'id" value="'.$product_option_value['product_option_value_id'].'"><input type="hidden" name="id'.$product_option_value['product_option_value_id'].'option_value" value="'. $option_row .','. $option_value_row .'">';
+		  ?>
               <?php foreach ($languages as $language) { ?>
               <?php if ($language['language_id'] == $language_id) { ?>
               <option value="option<?php echo $option_row; ?>_<?php echo $option_value_row; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $product_option_value['language'][$language['language_id']]['name']; ?></option>
@@ -345,6 +350,7 @@
               <?php $option_row++; ?>
               <?php } ?>
             </select>
+            <?php echo $option_list_ids; ?>
           </div>
           <div id="options" style="margin-left: 215px;">
             <div style="border-bottom: 1px solid #DDDDDD; text-align: right; padding-bottom: 10px; margin-bottom: 15px;"><a onclick="addOption();" class="button"><span><?php echo $button_add_option; ?></span></a></div>
