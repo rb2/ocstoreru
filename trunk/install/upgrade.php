@@ -46,7 +46,7 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 		if (!defined('CONF_COOKIES_LIFETIME')) {
 			$output  = '<?php' . "\n";
 			$output .= '// TUNING' . "\n";
-			$output .= 'define(\'CONF_COOKIES_LIFETIME\', \'183\'); // in days' . "\n";
+			$output .= 'define(\'CONF_COOKIES_LIFETIME\', 183); // in days' . "\n";
 			$output .= '?>';
 
 			if ($file = @fopen(DIR_CONFIG . 'config_tuning.php', 'w')) {

@@ -1,9 +1,10 @@
 <?php
 // Version
-define('VERSION', '1.0.4');
+define('VERSION', '1.0.7');
 
 // Configuration
 require_once('../admin/config.php');
+require_once(DIR_CONFIG . 'config_tuning.php');
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
