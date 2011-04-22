@@ -2,7 +2,7 @@
 class ModelDataexchangeExchange1c extends Model {
 
 	private $CAT = array();
-
+	private $$PROPERTIES = array();
 
 	public function parseOffers() {
 	
