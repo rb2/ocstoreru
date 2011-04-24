@@ -90,10 +90,20 @@ class ControllerStep3 extends Controller {
 
 			fclose($file);
 
-
 			$output  = '<?php' . "\n";
 			$output .= '// TUNING' . "\n";
-			$output .= 'define(\'CONF_COOKIES_LIFETIME\', 183); // in days' . "\n";
+			$output .= "\n";
+			$output .= '// Время жизни кук в браузере посетителя. Значение в днях (по умолчанию - 183 дня)' . "\n";
+			$output .= 'define(\'CONF_COOKIES_LIFETIME\', 183);' . "\n";
+			$output .= "\n";
+			$output .= '// Каталог для сессионных файлов. Возможные значения:' . "\n";
+			$output .= '//  \'opencart\' (по умолчанию) - файлы будут сохраняться внутри структуры движка' . "\n";
+			$output .= '//  \'php\' - файлы будут сохраняться в каталоге, указанном в php.ini (session.save_path)' . "\n";
+			$output .= 'define(\'CONF_SESSION_DIR\', \'opencart\');' . "\n";
+			$output .= "\n";
+			$output .= '// Время жизни сессионных файлов. Значение в минутах (по умолчанию - 180 минут)' . "\n";
+			$output .= '// Параметр имеет значение, только если CONF_SESSION_DIR = \'opencart\'' . "\n";
+			$output .= 'define(\'CONF_SESSION_LIFETIME\', 180);' . "\n";
 			$output .= '?>';
 
 			$file = fopen(DIR_CONFIG . 'config_tuning.php', 'w');

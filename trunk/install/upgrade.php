@@ -43,18 +43,27 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 		// Run upgrade script
 
 		@include_once(DIR_CONFIG . 'config_tuning.php');
-		if (!defined('CONF_COOKIES_LIFETIME')) {
-			$output  = '<?php' . "\n";
-			$output .= '// TUNING' . "\n";
-			$output .= 'define(\'CONF_COOKIES_LIFETIME\', 183); // in days' . "\n";
-			$output .= '?>';
-
-			if ($file = @fopen(DIR_CONFIG . 'config_tuning.php', 'w')) {
-				fwrite($file, $output);
-				fclose($file);
-			} else {
-				$errors[] = '<font color=red>Can\'t write to \'config_tuning.php\' in ' . DIR_CONFIG . ', check permissions to dir;</font>';
-			}
+		$output  = '<?php' . "\n";
+		$output .= '// TUNING' . "\n";
+		$output .= "\n";
+		$output .= '// Время жизни кук в браузере посетителя. Значение в днях (по умолчанию = 183 дня)' . "\n";
+		$output .= 'define(\'CONF_COOKIES_LIFETIME\', ' . (defined('CONF_COOKIES_LIFETIME') ? CONF_COOKIES_LIFETIME : '183') . ');' . "\n";
+		$output .= "\n";
+		$output .= '// Каталог для сессионных файлов. Возможные значения:' . "\n";
+		$output .= '//  \'opencart\' (по умолчанию) - файлы будут сохраняться внутри структуры движка' . "\n";
+		$output .= '//  \'php\' - файлы будут сохраняться в каталоге, указанном в php.ini (session.save_path)' . "\n";
+		$output .= 'define(\'CONF_SESSION_DIR\', \'' . (defined('CONF_SESSION_DIR') ? CONF_SESSION_DIR : 'opencart') . '\');' . "\n";
+		$output .= "\n";
+		$output .= '// Время жизни сессионных файлов. Значение в минутах (по умолчанию = 180 минут)' . "\n";
+		$output .= '// Параметр имеет значение, только если CONF_SESSION_DIR = \'opencart\'' . "\n";
+		$output .= 'define(\'CONF_SESSION_LIFETIME\', ' . (defined('CONF_SESSION_LIFETIME') ? CONF_SESSION_LIFETIME : '180') . ');' . "\n";
+		$output .= '?>';
+		
+		if ($file = @fopen(DIR_CONFIG . 'config_tuning.php', 'w')) {
+			fwrite($file, $output);
+			fclose($file);
+		} else {
+			$errors[] = '<font color=red>Can\'t write to \'config_tuning.php\' in ' . DIR_CONFIG . ', check permissions to dir;</font>';
 		}
 
 		$file='upgrade.sql';
