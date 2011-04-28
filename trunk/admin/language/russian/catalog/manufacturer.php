@@ -6,6 +6,8 @@ $_['heading_title']      = 'Производители';
 $_['text_success']       = 'Список производителей обновлен!';
 $_['text_default']       = 'Основной магазин';
 $_['text_image_manager'] = 'Менеджер изображений';
+$_['text_percent']       = 'Percentage';
+$_['text_amount']        = 'Fixed Amount';
 
 // Column
 $_['column_name']        = 'Производитель';
@@ -18,6 +20,7 @@ $_['entry_store']        = 'Магазины:';
 $_['entry_keyword']      = 'Псевдоним:';
 $_['entry_image']        = 'Изображение:';
 $_['entry_sort_order']   = 'Порядок сортировки:';
+$_['entry_type']         = 'Тип:';
 
 // Error
 $_['error_permission']   = 'У Вас нет прав для изменения производителей!';

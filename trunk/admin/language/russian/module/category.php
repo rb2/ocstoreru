@@ -5,10 +5,13 @@ $_['heading_title']    = 'Категории';
 // Text
 $_['text_module']      = 'Модули';
 $_['text_success']     = 'Настройки модуля обновлены!';
-$_['text_left']        = 'Слева';
-$_['text_right']       = 'Справа';
+$_['text_content_top']    = 'Content Top';
+$_['text_content_bottom'] = 'Content Bottom';
+$_['text_column_left']    = 'Column Left';
+$_['text_column_right']   = 'Column Right';
 
 // Entry
+$_['entry_layout']        = 'Layout:';
 $_['entry_position']   = 'Позиция:';
 $_['entry_status']     = 'Статус:';
 $_['entry_sort_order'] = 'Порядок сортировки:';

@@ -13,8 +13,8 @@ $_['column_action']     = 'Действие';
 
 // Entry
 $_['entry_name']        = 'Название:';
-$_['entry_code']        = 'Код:<br /><span class="help">Не изменяется, если язык установлен по умолчанию.</span>';
-$_['entry_locale']      = 'Кодировка:<br /><span class="help">Например ru_RU.UTF-8,ru_RU,ru</span>';
+$_['entry_code']        = 'Код:<br /><span class="help">Например: ru. Не изменять, если язык установлен по умолчанию.</span>';
+$_['entry_locale']      = 'Кодировка:<br /><span class="help">Например: ru_RU.UTF-8,ru_RU,ru_RU,ru</span>';
 $_['entry_image']       = 'Изображение:<br /><span class="help">Например ru.png</span>';
 $_['entry_directory']   = 'Директория:<br /><span class="help">название директории с переводом (с учетом регистра)</span>';
 $_['entry_filename']    = 'Файл перевода:<br /><span class="help">основной файла перевода (russian.php) без расширения</span>';
@@ -25,7 +25,6 @@ $_['entry_sort_order']  = 'Порядок сортировки:';
 $_['error_permission']  = 'У Вас нет прав для изменения списка языков!';
 $_['error_name']        = 'Название языка должно быть от 3 до 32 символов!';
 $_['error_code']        = 'Код языка должен быть от 2 символов!';
-$_['error_only']        = 'Не могу удалить последний оставшийся язык!';
 $_['error_locale']      = 'Необходим язык!';
 $_['error_image']       = 'Название изображения должно быть от 3 до 64 символов!';
 $_['error_directory']   = 'Необходимо указать каталог!';
