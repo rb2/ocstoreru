@@ -3,6 +3,8 @@
 $_['heading_title']  = 'Наши контакты';
 
 // Text 
+$_['text_location']  = 'Our Location';
+$_['text_contact']   = 'Contact Form';
 $_['text_address']   = 'Адрес:';
 $_['text_email']     = 'E-Mail:';
 $_['text_telephone'] = 'Номер телефона:';
