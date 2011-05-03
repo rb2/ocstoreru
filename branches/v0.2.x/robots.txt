@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /*route=account/login
+Disallow: /*route=checkout/cart
+Disallow: /admin
+Disallow: /catalog
+Disallow: /download
+Disallow: /export
+Disallow: /system
