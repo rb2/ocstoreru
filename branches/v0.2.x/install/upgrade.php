@@ -1,4 +1,7 @@
 <?php
+// Debug mode (use 0, 1 or 2):
+$debug = 0;
+
 // Run full install if config doesn't exist
 if (!file_exists('../config.php')) {
 	header('Location: ./index.php');
@@ -73,7 +76,9 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 			mysql_query('set character set utf8', $link);
 			if ($sql=file($file)) {
 				$query = '';
+				$num_line = 0;
 				foreach($sql as $line) {
+					$num_line++;
 
 					// Hacks for compatibility (needs to be improved)
 					$line = str_replace("oc_", DB_PREFIX, $line);
@@ -83,41 +88,75 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 					$line = str_replace("NOT NULL DEFAULT NULL", "NOT NULL", $line);
 					$line = str_replace("NOT NULL DEFAULT 0 COMMENT '' auto_increment", "NOT NULL COMMENT '' auto_increment", $line);
 
-					if ((substr(trim($line), 0, 2) == '--') || (substr(trim($line), 0, 1) == '#')) { continue; }
-					if (preg_match('/^ALTER TABLE (.+?) ADD PRIMARY KEY/', $line, $matches)) {
-						$res = mysql_query(sprintf("SHOW KEYS FROM %s",$matches[1]), $link);
-						$info = mysql_fetch_assoc(mysql_query(sprintf("SHOW KEYS FROM %s",$matches[1]), $link));
-						if ($info['Key_name'] == 'PRIMARY') { continue; }
+					switch ($debug) {
+						case 0: break;
+						case 1: if (preg_match('/^#|--/', $line) || !preg_match('/\S/', $line)) break;
+						case 2:
+						default: echo '<font color="brown">Read line '.$num_line.':</font> {' . $line . '}<br>';
 					}
-					if (preg_match('/^ALTER TABLE (.+?) ADD (.+?) /', $line, $matches)) {
-						if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $link)) > 0) { continue; }
+
+					if ((substr(trim($line), 0, 2) == '--') || (substr(trim($line), 0, 1) == '#')) {
+						if ($debug > 1) echo "^^ comment <b>(continue)</b><br><br>";
+						continue;
 					}
-					if (preg_match('/^ALTER TABLE (.+?) DROP (.+?) /', $line, $matches)) {
-						if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $link)) <= 0) { continue; }
-					}
-					if (strpos($line, 'ALTER TABLE') !== FALSE && strpos($line, 'DROP') !== FALSE && strpos($line, 'PRIMARY') === FALSE) {
-						$params = explode(' ', $line);
-						if ($params[3] == 'DROP') {
-							if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM $params[2] LIKE '$params[4]'", $matches[1],str_replace('`', '', $matches[2])), $link)) <= 0) { continue; }
+
+					if (preg_match('/^ALTER TABLE `?(.+?)`? ADD PRIMARY KEY/', $line, $matches)) {
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW KEYS FROM `%s` WHERE Key_name = 'PRIMARY'",$matches[1]), $link)) > 0) {
+							if ($debug) echo "^^ 'PRIMARY' key already exists <b>(continue)</b><br><br>";
+							continue;
 						}
 					}
-					if (preg_match('/^ALTER TABLE (.+?) MODIFY (.+?) /', $line, $matches)) {
-						if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $link)) <= 0) { continue; }
+					if (preg_match('/^ALTER TABLE `?(\w+?)`? ADD (?:INDEX|KEY) (.+)/', $line, $matches)) {
+						$index = 'PRIMARY';
+						if (preg_match('/^\s*`?(\w+?)`?\s+\(/', $matches[2], $i)) { $index = $i[1]; }
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW INDEX FROM `%s` WHERE Key_name = '%s'", $matches[1],$index), $link)) > 0) {
+							if ($debug) echo "^^ '$index' key already exists <b>(continue)</b><br><br>";
+							continue;
+						}
 					}
-					//if (preg_match('/^ALTER TABLE (.+?) DEFAULT (.+?) /',$line,$matches)) {
-					//	if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'",$matches[1],str_replace('`','',$matches[2])), $link)) <= 0) { continue; }
-					//}
-					//if (preg_match('/^ALTER TABLE (.+?) ALTER (.+?) /',$line,$matches)) {
-					//	if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'",$matches[1],str_replace('`','',$matches[2])), $link)) <= 0) { continue; }
-					//}
+					if (preg_match('/^ALTER TABLE `?(\w+?)`? ADD(?! INDEX| KEY)(?: COLUMN)? `?(.+?)`? /', $line, $matches)) {
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM `%s` LIKE '%s'", $matches[1],$matches[2]), $link)) > 0) {
+							if ($debug) echo "^^ '$matches[2]' column already exists <b>(continue)</b><br><br>";
+							continue;
+						}
+					}
+
+					if (preg_match('/^ALTER TABLE `?(\w+?)`? DROP PRIMARY KEY;/', $line, $matches)) {
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW KEYS FROM `%s` WHERE Key_name = 'PRIMARY'", $matches[1]), $link)) <= 0) {
+							if ($debug) echo "^^ 'PRIMARY' key already dropped <b>(continue)</b><br><br>";
+							continue;
+						}
+					}
+					if (preg_match('/^ALTER TABLE `?(\w+?)`? DROP (?:INDEX|KEY) `?(\w+?)`?;/', $line, $matches)) {
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW KEYS FROM `%s` WHERE Key_name = '%s'", $matches[1],$matches[2]), $link)) <= 0) {
+							if ($debug) echo "^^ '$matches[2]' key already dropped <b>(continue)</b><br><br>";
+							continue;
+						}
+					}
+					if (preg_match('/^ALTER TABLE `?(\w+?)`? DROP(?: COLUMN)? `?(\w+?)`?;/', $line, $matches)) {
+							if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM `%s` LIKE '%s'", $matches[1],$matches[2]), $link)) <= 0) {
+								if ($debug) echo "^^ '$matches[2]' column already dropped <b>(continue)</b><br><br>";
+								continue;
+							}
+					}
+
+					if (preg_match('/^ALTER TABLE `?(.+?)`? MODIFY(?: COLUMN)? `?(\w+?)`? /', $line, $matches)) {
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM `%s` LIKE '%s'", $matches[1],$matches[2]), $link)) <= 0) {
+							if ($debug) echo "^^ '$matches[2]' column NOT exists <b>(continue)</b><br><br>";
+							continue;
+						}
+					}
 
 					if (!empty($line)) {
 						$query .= $line;
 						if (preg_match('/;\s*$/', $line)) {
+							if ($debug) echo 'Try To Execute: {<font color="blue">' . $query . '</font>}<br>';
 							if (mysql_query($query, $link) === false) {
-								$errors[] = 'Could not execute this query: ' . $query;
+								if ($debug) echo '<b>&lt;--- ERROR</b><br>';
+								$errors[] = 'Could not execute this query ('.mysql_errno($link).'='.mysql_error($link).'):<br><b>-&gt; '.$query.'</b>';
 							}
 							$query = '';
+							if ($debug) echo '<br>';
 						}
 					}
 				}
@@ -203,7 +242,7 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 
 	if (!empty($errors)) { //has to be a separate if
 		?>
-		<p>The following errors occured:</p>
+		<p>The following <?php echo count($errors); ?> errors occured:</p>
 		<?php foreach ($errors as $error) {?>
 		<div class="warning"><?php echo $error;?></div><br />
 		<?php } ?>

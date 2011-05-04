@@ -408,7 +408,8 @@ ALTER TABLE oc_order_total DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 ALTER TABLE oc_product ADD length_class_id int(11) NOT NULL DEFAULT '0' COMMENT '' AFTER height;
-ALTER TABLE oc_product DROP measurement_class_id, DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+ALTER TABLE oc_product DROP measurement_class_id;
+ALTER TABLE oc_product DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 ALTER TABLE oc_product_description DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -472,8 +473,9 @@ ALTER TABLE oc_weight_class ADD value decimal(15,8) NOT NULL DEFAULT '0.00000000
 ALTER TABLE oc_weight_class DROP language_id;
 ALTER TABLE oc_weight_class DROP title;
 ALTER TABLE oc_weight_class DROP unit;
-ALTER TABLE oc_weight_class DROP PRIMARY KEY;
-ALTER TABLE oc_weight_class ADD PRIMARY KEY (weight_class_id), DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+# ALTER TABLE oc_weight_class DROP PRIMARY KEY;
+# ALTER TABLE oc_weight_class ADD PRIMARY KEY (weight_class_id);
+ALTER TABLE oc_weight_class DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS oc_weight_rule;
@@ -649,7 +651,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'SRK', 'Sark', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES (NULL, @cid, 'HRM', 'Herm', 1) ON DUPLICATE KEY UPDATE zone_id=zone_id;
 
-### Start ocStore 0.1.10
+### Start ocStore 0.2.0
 
 ALTER TABLE `oc_product` ADD `main_category_id` int(11) NULL;
 
