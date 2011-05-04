@@ -207,7 +207,9 @@ class ControllerDataexchangeExchange1c extends Controller {
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_option_value');
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_option_value_description');
 		}
-					
+        
+		//Выставляем кол-во товаров в 0.
+        $this->db->query('UPDATE ' . DB_PREFIX . 'product ' . 'SET quantity = 0');
 		$limit = 1000 * 1024;
 	
 		echo "zip=no\n";

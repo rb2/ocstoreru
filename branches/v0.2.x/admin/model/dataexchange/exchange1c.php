@@ -151,7 +151,7 @@ class ModelDataexchangeExchange1c extends Model {
 														$data['keyword'] = $property->Значение;
 													break;
 													case 'Производитель':
-														$query = $this->db->query('SELECT manufacturer_id FROM manufacturer WHERE name="'. (string)$property->Значение .'"');
+														$query = $this->db->query("SELECT manufacturer_id FROM ".DB_PREFIX."manufacturer WHERE name='". (string)$property->Значение ."'");
 														if($query->num_rows){
 															$data['manufacturer_id'] = $query->row['manufacturer_id'];
 														}else{
@@ -270,7 +270,45 @@ class ModelDataexchangeExchange1c extends Model {
 	*						)
 	*	@return array
 	*/
-	
+
+    private function getProductWithAllData($product_id) {
+		$this->load->model('catalog/product');
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.product_id = '" . (int)$product_id . "' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+
+		if ($query->num_rows) {
+			$data = array();
+
+			$data = $query->row;
+
+			$data = array_merge($data, array('product_description' => $this->model_catalog_product->getProductDescriptions($product_id)));
+			$data = array_merge($data, array('product_option' => $this->model_catalog_product->getProductOptions($product_id)));
+
+			$data['status'] = '0';
+
+			$data['product_image'] = array();
+
+			$results = $this->model_catalog_product->getProductImages($product_id);
+
+			foreach ($results as $result) {
+				$data['product_image'][] = $result['image'];
+			}
+
+			$data = array_merge($data, array('product_discount' => $this->model_catalog_product->getProductDiscounts($product_id)));
+			$data = array_merge($data, array('product_special' => $this->model_catalog_product->getProductSpecials($product_id)));
+			$data = array_merge($data, array('product_download' => $this->model_catalog_product->getProductDownloads($product_id)));
+			$data = array_merge($data, array('product_category' => $this->model_catalog_product->getProductCategories($product_id)));
+			$data = array_merge($data, array('product_store' => $this->model_catalog_product->getProductStores($product_id)));
+			$data = array_merge($data, array('product_related' => $this->model_catalog_product->getProductRelated($product_id)));
+			$data = array_merge($data, array('product_tags' => $this->model_catalog_product->getProductTags($product_id)));
+
+		}
+
+		$query = $this->db->query('SELECT * FROM ' . DB_PREFIX . 'url_alias WHERE query LIKE "product_id='.$product_id.'"');
+		if ($query->num_rows) $data['keyword'] = $query->row['keyword'];
+
+		return $data;
+	}
+
 	private function initProduct($product, $data = array()) {
 	
 		$data['product_description'] = array(
@@ -384,7 +422,7 @@ class ModelDataexchangeExchange1c extends Model {
 		//Проверяем есть ли такой товар в БД
 		$query = $this->db->query('SELECT * FROM `' . DB_PREFIX . 'product_to_1c` WHERE `1c_id` = "' . $this->db->escape($product['id']) . '"');
 		
-		if($query->num_rows) {	
+		if($query->num_rows) {
 			return $this->updateProduct($product, (int)$query->row['product_id']);
 		} 	
 		
@@ -422,25 +460,11 @@ class ModelDataexchangeExchange1c extends Model {
 		}
 		
 		// Обновляем описание продукта
-		$product_old = $this->model_catalog_product->getProduct($product_id);
-		$results = $this->model_catalog_product->getProductImages($product_id);
-		foreach ($results as $result) {
-				$product_old['product_image'][] = $result['image'];
-			}
-		/*if(!empty($product['product_images'])){
-			
-			$fr = fopen('/tmp/test.txt','a');
-			fwrite($fr, serialize($product['product_images']));
-			fclose($fr);
-		}*/
-		//$fr = fopen('/tmp/test.txt','a');
-		//isset($product_old['product_images'])?fwrite($fr, var_dump($product_old['product_images'])): $a=1; ;
-		//fclose($fr);
-		//$product_old['product_description'] = $this->model_catalog_product->getProductDescriptions($product_id);
+		$product_old = $this->getProductWithAllData($product_id);
 		$product_old = $this->initProduct($product, $product_old);
 		
 		$this->load->model('catalog/product');
-		// Редактируем продукт
+		//Редактируем продукт
 		$product_id = $this->model_catalog_product->editProduct($product_id, $product_old);
 		
 	}
