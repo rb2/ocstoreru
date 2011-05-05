@@ -164,6 +164,9 @@ class ModelDataexchangeExchange1c extends Model {
 													case 'title':
 														$data['title'] = $property->Значение;
 													break;
+                                                    case 'Сортировка':
+														$data['sort_order'] = $property->Значение;
+													break;
 												}
 											}
 										}
@@ -361,7 +364,7 @@ class ModelDataexchangeExchange1c extends Model {
 		
 		$data['subtract'] = (isset($product['subtract'])) ?$product['subtract'] : (isset($data['subtract'])? $data['subtract']: 1);
 		
-		$data['sort_order'] = (isset($product['sort_order'])) ?$product['sord_order'] : (isset($data['sord_order'])? $data['sord_order']: 1);
+		$data['sort_order'] = (isset($product['sort_order'])) ?$product['sort_order'] : (isset($data['sort_order'])? $data['sort_order']: 1);
 		
 		$data['stock_status_id'] = $this->config->get('config_stock_status_id');
 		
