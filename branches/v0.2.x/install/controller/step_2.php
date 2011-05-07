@@ -21,13 +21,12 @@ class ControllerStep2 extends Controller {
 		
 		$this->data['cache'] = DIR_SYSTEM . 'cache';
 		$this->data['logs'] = DIR_SYSTEM . 'logs';
-		$this->data['sessions'] = DIR_SYSTEM . 'sessions';
 		$this->data['config'] = DIR_CONFIG;
 		$this->data['image'] = DIR_OPENCART . 'image';
 		$this->data['image_cache'] = DIR_OPENCART . 'image/cache';
 		$this->data['image_data'] = DIR_OPENCART . 'image/data';
 		$this->data['download'] = DIR_OPENCART . 'download';
-		$this->data['config_dirs_cmd'] = DIR_SYSTEM . '{cache,logs,sessions} ' . DIR_OPENCART . '{system/config,image,image/cache,image/data,download}';
+		$this->data['config_dirs_cmd'] = DIR_SYSTEM . '{cache,logs} ' . DIR_OPENCART . '{system/config,image,image/cache,image/data,download}';
 
 		$this->children = array(
 			'header',
@@ -78,10 +77,6 @@ class ControllerStep2 extends Controller {
 		
 		if (!is_writable(DIR_SYSTEM . 'logs')) {
 			$this->error['warning'] = 'Для работы OpenCart директория Logs должна быть доступна для записи!';
-		}
-		
-		if (!is_writable(DIR_SYSTEM . 'sessions')) {
-			$this->error['warning'] = 'Для работы OpenCart директория Sessions должна быть доступна для записи!';
 		}
 		
 		if (!is_writable(DIR_CONFIG)) {

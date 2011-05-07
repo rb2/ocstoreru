@@ -53,13 +53,13 @@ if (!$link = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
 		$output .= 'define(\'CONF_COOKIES_LIFETIME\', ' . (defined('CONF_COOKIES_LIFETIME') ? CONF_COOKIES_LIFETIME : '183') . ');' . "\n";
 		$output .= "\n";
 		$output .= '// Каталог для сессионных файлов. Возможные значения:' . "\n";
-		$output .= '//  \'opencart\' (по умолчанию) - файлы будут сохраняться внутри структуры движка' . "\n";
-		$output .= '//  \'php\' - файлы будут сохраняться в каталоге, указанном в php.ini (session.save_path)' . "\n";
-		$output .= 'define(\'CONF_SESSION_DIR\', \'' . (defined('CONF_SESSION_DIR') ? CONF_SESSION_DIR : 'opencart') . '\');' . "\n";
+		$output .= '//  \'\' (по умолчанию) - файлы будут сохраняться в каталоге, указанном в php.ini' . "\n";
+		$output .= '//  \'path:/путь/к_каталогу\' - файлы будут сохраняться по указанному пути' . "\n";
+		$output .= 'define(\'CONF_SESSION_DIR\', \'' . (defined('CONF_SESSION_DIR') ? CONF_SESSION_DIR : '') . '\');' . "\n";
 		$output .= "\n";
-		$output .= '// Время жизни сессионных файлов. Значение в минутах (по умолчанию = 180 минут)' . "\n";
-		$output .= '// Параметр имеет значение, только если CONF_SESSION_DIR = \'opencart\'' . "\n";
-		$output .= 'define(\'CONF_SESSION_LIFETIME\', ' . (defined('CONF_SESSION_LIFETIME') ? CONF_SESSION_LIFETIME : '180') . ');' . "\n";
+		$output .= '// Время жизни сессионных файлов. Значение указывается в минутах.' . "\n";
+		$output .= '// Если указано 0 (по умолчанию), то значение берётся из файла php.ini' . "\n";
+		$output .= 'define(\'CONF_SESSION_LIFETIME\', ' . (defined('CONF_SESSION_LIFETIME') ? CONF_SESSION_LIFETIME : 0) . ');' . "\n";
 		$output .= '?>';
 		
 		if ($file = @fopen(DIR_CONFIG . 'config_tuning.php', 'w')) {
