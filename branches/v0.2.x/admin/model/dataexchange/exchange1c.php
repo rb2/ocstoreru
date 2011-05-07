@@ -49,7 +49,7 @@ class ModelDataexchangeExchange1c extends Model {
 							}
 						
 						}
-						
+						$data['status'] = 1;
 						$this->updateProduct($data);
 						
 					break;
@@ -286,8 +286,6 @@ class ModelDataexchangeExchange1c extends Model {
 			$data = array_merge($data, array('product_description' => $this->model_catalog_product->getProductDescriptions($product_id)));
 			$data = array_merge($data, array('product_option' => $this->model_catalog_product->getProductOptions($product_id)));
 
-			$data['status'] = '0';
-
 			$data['product_image'] = array();
 
 			$results = $this->model_catalog_product->getProductImages($product_id);
@@ -372,7 +370,7 @@ class ModelDataexchangeExchange1c extends Model {
 		
 		$data['cost'] = (isset($product['cost'])) ?$product['cost'] : (isset($data['cost'])? $data['cost']: 0);
 		
-		$data['status'] = (isset($product['status'])) ?$product['status'] : (isset($data['status'])? $data['status']: 1);
+		$data['status'] = (isset($product['status'])) ?$product['status'] : (isset($data['status'])? $data['status']: 0);
 		
 		$data['tax_class_id'] = (isset($product['tax_class_id'])) ?$product['tax_class_id'] : (isset($data['tax_class_id'])? $data['tax_class_id']: 0);
 		

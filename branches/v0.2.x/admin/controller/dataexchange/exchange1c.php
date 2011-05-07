@@ -29,6 +29,7 @@ class ControllerDataexchangeExchange1c extends Controller {
 		$this->data['entry_username'] = $this->language->get('entry_username');
 		$this->data['entry_password'] = $this->language->get('entry_password');
 		$this->data['entry_flush_db'] = $this->language->get('entry_flush_db');
+        $this->data['entry_flush_quantity'] = $this->language->get('entry_flush_quantity');
 		$this->data['entry_lic_type'] = $this->language->get('entry_lic_type');
 		$this->data['entry_version'] = 0;
 		$this->data['text_yes'] = $this->language->get('text_yes');
@@ -108,8 +109,14 @@ class ControllerDataexchangeExchange1c extends Controller {
 			$this->data['exchange1c_flush_db'] = $this->request->post['exchange1c_flush_db'];
 		} else {
 			$this->data['exchange1c_flush_db'] = $this->config->get('exchange1c_flush_db');
-		}		
-		
+		}
+        
+        if (isset($this->request->post['exchange1c_flush_quantity'])) {
+			$this->data['exchange1c_flush_quantity'] = $this->request->post['exchange1c_flush_quantity'];
+		} else {
+			$this->data['exchange1c_flush_quantity'] = $this->config->get('exchange1c_flush_quantity');
+		}
+
 		$this->data['exchange1c_lic_type'] = 'TEST';	
 				
 		$this->template = 'dataexchange/exchange1c.tpl';
@@ -209,7 +216,9 @@ class ControllerDataexchangeExchange1c extends Controller {
 		}
         
 		//Выставляем кол-во товаров в 0.
+        if($this->config->get('exchange1c_flush_quantity') ) {
         $this->db->query('UPDATE ' . DB_PREFIX . 'product ' . 'SET quantity = 0');
+        }
 		$limit = 1000 * 1024;
 	
 		echo "zip=no\n";

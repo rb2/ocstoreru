@@ -47,6 +47,18 @@
               <?php } ?>
             </select></td>
         </tr>
+        <tr>
+          <td><?php echo $entry_flush_quantity; ?></td>
+          <td><select name="exchange1c_flush_quantity">
+              <?php if ($exchange1c_flush_quantity) { ?>
+              <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+              <option value="0"><?php echo $text_no; ?></option>
+              <?php } else { ?>
+              <option value="1"><?php echo $text_yes; ?></option>
+              <option value="0" selected="selected"><?php echo $text_no; ?></option>
+              <?php } ?>
+            </select></td>
+        </tr>
         
         <tr>
           <td><?php echo $entry_lic_type; ?></td>
