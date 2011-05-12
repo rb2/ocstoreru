@@ -29,7 +29,9 @@ class ModelDataexchangeExchange1c extends Model {
 						
 								switch($offer->name) {
 									case 'Ид': 
-										$data['id'] = $offer->readString();
+										//Берем первую часть uuid т.к. могут быть и uuid#id
+										$uuid = explode("#", $offer->readString());
+										$data['id'] = $uuid[0];
 									break;
 									
 									case 'Наименование':
