@@ -45,6 +45,7 @@ $registry->set('log', $log);
 function error_handler($errno, $errstr, $errfile, $errline) {
 	global $config, $log;
 
+	if (0 === error_reporting()) return TRUE;
 	switch ($errno) {
 		case E_NOTICE:
 		case E_USER_NOTICE:

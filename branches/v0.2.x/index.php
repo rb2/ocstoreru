@@ -4,7 +4,7 @@ define('VERSION', '0.2.0');
 
 // Configuration
 require_once('config.php');
-@include_once(DIR_CONFIG . 'config_tuning.php');
+require_once(DIR_CONFIG . 'config_tuning.php');
 
 // Install
 if (!defined('DIR_APPLICATION')) {
@@ -71,6 +71,7 @@ $registry->set('log', $log);
 function error_handler($errno, $errstr, $errfile, $errline) {
 	global $config, $log;
 
+	if (0 === error_reporting()) return TRUE;
 	switch ($errno) {
 		case E_NOTICE:
 		case E_USER_NOTICE:
