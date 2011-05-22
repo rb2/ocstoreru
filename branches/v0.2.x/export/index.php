@@ -4,6 +4,8 @@ define('VERSION', '1.0.7');
 
 // Configuration
 require_once('../admin/config.php');
+
+// Additional configs
 require_once(DIR_CONFIG . 'config_tuning.php');
 
 // Startup

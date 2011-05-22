@@ -4,13 +4,15 @@ define('VERSION', '0.2.0');
 
 // Configuration
 require_once('config.php');
-require_once(DIR_CONFIG  . 'config_tuning.php');
 
 // Install
 if (!defined('DIR_APPLICATION')) {
 	header('Location: ../install/index.php');
 	exit;
 }
+
+// Additional configs
+require_once(DIR_CONFIG  . 'config_tuning.php');
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
