@@ -11,6 +11,10 @@ Order deny,allow
 Deny from all
 </FilesMatch>
 
+<Files robots.txt>
+Allow from all
+</Files>
+
 # Необходимо для ЧПУ.
 RewriteEngine On
 RewriteBase /
