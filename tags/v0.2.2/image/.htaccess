@@ -1,0 +1,10 @@
+<IfModule mod_php5.c>
+	php_flag engine off
+</IfModule>
+<FilesMatch "\.(php[0-9]?|html?|phtml?|shtml?|pl|pm|cgi|py)$">
+	SetHandler None
+</FilesMatch>
+RemoveHandler .php .php3 .php4 .php5 .php6 .phtml .phtm .html .htm .shtml .shtm .pl .pm .cgi .py
+AddType text/plain .php .php3 .php4 .php5 .php6 .phtml .phtm .pl .pm .cgi .py
+AddType text/html .html .htm .shtml .shtm
+# Options -Indexes
