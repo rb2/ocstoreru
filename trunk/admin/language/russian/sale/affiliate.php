@@ -1,69 +1,69 @@
 <?php
 // Heading
-$_['heading_title']             = 'Affiliate';
+$_['heading_title']             = 'Партнерская программа';
 
 // Text
-$_['text_success']              = 'Success: You have modified affiliates!';
-$_['text_approved']             = 'You have approved %s accounts!';
-$_['text_wait']                 = 'Please Wait!';
-$_['text_balance']              = 'Balance:';
-$_['text_cheque']               = 'Cheque';
+$_['text_success']              = 'Настройки успешно обновлены!';
+$_['text_approved']             = 'Вы одобрили %s аккаунтов!';
+$_['text_wait']                 = 'Пожалуйста, подождите!';
+$_['text_balance']              = 'Баланс:';
+$_['text_cheque']               = 'Чек';
 $_['text_paypal']               = 'PayPal';
-$_['text_bank']                 = 'Bank Transfer';
+$_['text_bank']                 = 'Банковкий перевод';
 
 // Column
-$_['column_name']               = 'Affiliate Name';
+$_['column_name']               = 'Имя партнера';
 $_['column_email']              = 'E-Mail';
-$_['column_code']               = 'Tracking Code';
-$_['column_balance']            = 'Balance';
-$_['column_status']             = 'Status';
-$_['column_approved']           = 'Approved';
-$_['column_date_added']         = 'Date Added';
-$_['column_description']        = 'Description';
-$_['column_amount']             = 'Amount';
-$_['column_action']             = 'Action';
+$_['column_code']               = 'Код отслеживания';
+$_['column_balance']            = 'Баланс';
+$_['column_status']             = 'Статус';
+$_['column_approved']           = 'Утверждено';
+$_['column_date_added']         = 'Дата добавления';
+$_['column_description']        = 'Описание';
+$_['column_amount']             = 'Сумма';
+$_['column_action']             = 'Действие';
 
 // Entry
-$_['entry_firstname']           = 'First Name:';
-$_['entry_lastname']            = 'Last Name:';
+$_['entry_firstname']           = 'Имя:';
+$_['entry_lastname']            = 'Фамилия:';
 $_['entry_email']               = 'E-Mail:';
-$_['entry_telephone']           = 'Telephone:';
-$_['entry_fax']                 = 'Fax:';
-$_['entry_status']              = 'Status:';
-$_['entry_password']            = 'Password:';
-$_['entry_confirm']             = 'Confirm:';
-$_['entry_company']             = 'Company:';
-$_['entry_address_1']           = 'Address 1:';
-$_['entry_address_2']           = 'Address 2:';
-$_['entry_city']                = 'City:';
-$_['entry_postcode']            = 'Postcode:';
-$_['entry_country']             = 'Country:';
-$_['entry_zone']                = 'Region / State:';
-$_['entry_code']                = 'Tracking Code:<span class="help">The tracking code that will be used to track referrals.</span>';
-$_['entry_commission']          = 'Commission (%):<span class="help">Percentage the affiliate recieves on each order.</span>';
-$_['entry_tax']                 = 'Tax ID:';
-$_['entry_payment']             = 'Payment Method:';
-$_['entry_cheque']              = 'Cheque Payee Name:';
-$_['entry_paypal']              = 'PayPal Email Account:';
-$_['entry_bank_name']           = 'Bank Name:';
-$_['entry_bank_branch_number']  = 'ABA/BSB number (Branch Number):';
-$_['entry_bank_swift_code']     = 'SWIFT Code:';
-$_['entry_bank_account_name']   = 'Account Name:';
-$_['entry_bank_account_number'] = 'Account Number:';
-$_['entry_amount']              = 'Amount:';
-$_['entry_description']         = 'Description:';
+$_['entry_telephone']           = 'Телефон:';
+$_['entry_fax']                 = 'Факс:';
+$_['entry_status']              = 'Статус:';
+$_['entry_password']            = 'Пароль:';
+$_['entry_confirm']             = 'Подтвердите пароль:';
+$_['entry_company']             = 'Компания:';
+$_['entry_address_1']           = 'Адрес 1:';
+$_['entry_address_2']           = 'Адрес 2:';
+$_['entry_city']                = 'Город:';
+$_['entry_postcode']            = 'Индекс:';
+$_['entry_country']             = 'Город:';
+$_['entry_zone']                = 'Регион / Область:';
+$_['entry_code']                = 'Код отслеживания:<span class="help">Этот код используется для отслеживания рефералов.</span>';
+$_['entry_commission']          = 'Вознаграждение (%):<span class="help">Процент, которые партнер получает за каждый заказ.</span>';
+$_['entry_tax']                 = 'ИНН:';
+$_['entry_payment']             = 'Способ оплаты:';
+$_['entry_cheque']              = 'Имя получателся чека:';
+$_['entry_paypal']              = 'PayPal Email аккаунта:';
+$_['entry_bank_name']           = 'Название банка:';
+$_['entry_bank_branch_number']  = 'ABA/BSB номер (Номер отделения):';
+$_['entry_bank_swift_code']     = 'SWIFT Код:';
+$_['entry_bank_account_name']   = 'Имя счета:';
+$_['entry_bank_account_number'] = 'Номер счета:';
+$_['entry_amount']              = 'Сумма:';
+$_['entry_description']         = 'Описание:';
 
 // Error
-$_['error_permission']          = 'Warning: You do not have permission to modify affiliates!';
-$_['error_firstname']           = 'First Name must be between 1 and 32 characters!';
-$_['error_lastname']            = 'Last Name must be between 1 and 32 characters!';
-$_['error_email']               = 'E-Mail Address does not appear to be valid!';
-$_['error_telephone']           = 'Telephone must be between 3 and 32 characters!';
-$_['error_password']            = 'Password must be between 4 and 20 characters!';
-$_['error_confirm']             = 'Password and password confirmation do not match!';
-$_['error_address_1']           = 'Address 1 must be between 3 and 128 characters!';
-$_['error_city']                = 'City must be between 2 and 128 characters!';
-$_['error_country']             = 'Please select a country!';
-$_['error_zone']                = 'Please select a region / state!';
-$_['error_code']                = 'Tracking Code required!';
+$_['error_permission']          = 'У Вас нет прав для управления партнерами!';
+$_['error_firstname']           = 'Имя должно быть от 1 до 32 символов!';
+$_['error_lastname']            = 'Фамилия должна быть от 1 до 32 символов!';
+$_['error_email']               = 'Введите верный адрес электронной почты!';
+$_['error_telephone']           = 'Номер телефона должен быть от 3 до 32 символов!';
+$_['error_password']            = 'Пароль должен быть от 4 до 20 символов!';
+$_['error_confirm']             = 'Пароли не совпадают!';
+$_['error_address_1']           = 'Адрес должен быть от 3 до 128 символов!';
+$_['error_city']                = 'Город должен быть от 2 до 128 символов!';
+$_['error_country']             = 'Пожалуйста, выберите страну!';
+$_['error_zone']                = 'Пожалуйста, выберите регион / область!';
+$_['error_code']                = 'Введите код отслеживания!';
 ?>
