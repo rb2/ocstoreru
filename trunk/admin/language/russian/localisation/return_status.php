@@ -1,20 +1,20 @@
 <?php
 // Heading
-$_['heading_title']    = 'Return Status';
+$_['heading_title']    = 'Статусы возвратов';
 
 // Text
-$_['text_success']     = 'Success: You have modified Return statuses!';
+$_['text_success']     = 'Статусы возвратов успешно обновлены!';
 
 // Column
-$_['column_name']      = 'Return Status Name';
-$_['column_action']    = 'Action';
+$_['column_name']      = 'Статус возврата';
+$_['column_action']    = 'Действие';
 
 // Entry
-$_['entry_name']       = 'Return Status Name:';
+$_['entry_name']       = 'Название статуса возврата:';
 
 // Error
-$_['error_permission'] = 'Warning: You do not have permission to modify Return statues!';
-$_['error_name']       = 'Return Status Name must be between 3 and 32 characters!';
-$_['error_default']    = 'Warning: This return status cannot be deleted as it is currently assigned as the default return status!';
-$_['error_return']     = 'Warning: This return status cannot be deleted as it is currently assigned to %s returns!';
+$_['error_permission'] = 'У Вас нет прав для изменения статусов возвратов!';
+$_['error_name']       = 'Статус возврата должен быть от 3 до 32 символов!';
+$_['error_default']    = 'Статус возврата не может быть исключен, поскольку он прикрелпен к статусу возврата основного магазина!';
+$_['error_return']     = 'Статус возврата не может быть исключен, поскольку он прикреплен к %s возврату(ам)!';
 ?>

@@ -1,19 +1,19 @@
 <?php
 // Heading
-$_['heading_title']    = 'Return Reason';
+$_['heading_title']    = 'Причина возврата';
 
 // Text
-$_['text_success']     = 'Success: You have modified Return reasons!';
+$_['text_success']     = 'Причины возвратов успешно обновлены!';
 
 // Column
-$_['column_name']      = 'Return Reason Name';
-$_['column_action']    = 'Action';
+$_['column_name']      = 'Причина возврата';
+$_['column_action']    = 'Действие';
 
 // Entry
-$_['entry_name']       = 'Return Reason Name:';
+$_['entry_name']       = 'Причина возврата:';
 
 // Error
-$_['error_permission'] = 'Warning: You do not have permission to modify Return reasons!';
-$_['error_name']       = 'Return Reason Name must be between 3 and 32 characters!';
-$_['error_return']     = 'Warning: This return reason cannot be deleted as it is currently assigned to %s returned products!';
+$_['error_permission'] = 'У Вас нет прав для изменения причин возвратов!';
+$_['error_name']       = 'Причина возврата должена быть от 3 до 32 символов!';
+$_['error_return']     = 'Причина возврата не может быть исключена, поскольку она прикреплена к %s возврату(ам)!';
 ?>

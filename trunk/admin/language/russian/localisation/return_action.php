@@ -1,19 +1,19 @@
 <?php
 // Heading
-$_['heading_title']    = 'Return Action';
+$_['heading_title']    = 'Операции возвратов';
 
 // Text
-$_['text_success']     = 'Success: You have modified Return actions!';
+$_['text_success']     = 'Операции возвратов успешно обновлены!';
 
 // Column
-$_['column_name']      = 'Return Action Name';
-$_['column_action']    = 'Action';
+$_['column_name']      = 'Операция возврата';
+$_['column_action']    = 'Действие';
 
 // Entry
-$_['entry_name']       = 'Return Action Name:';
+$_['entry_name']       = 'Операция возврата:';
 
 // Error
-$_['error_permission'] = 'Warning: You do not have permission to modify Return actions!';
-$_['error_name']       = 'Return Action Name must be between 3 and 32 characters!';
-$_['error_return']     = 'Warning: This return action cannot be deleted as it is currently assigned to %s returned products!';
+$_['error_permission'] = 'У Вас нет прав для изменения операций возвратов!';
+$_['error_name']       = 'Операция возврата должена быть от 3 до 32 символов!';
+$_['error_return']     = 'Операция возврата не может быть исключена, поскольку она прикреплена к %s возврату(ам)!';
 ?>
