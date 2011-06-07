@@ -1,26 +1,26 @@
 <?php
 // Heading
-$_['heading_title']     = 'Layouts';
+$_['heading_title']     = 'Шаблоны';
 
 // Text
-$_['text_success']      = 'Success: You have modified layouts!';
-$_['text_default']      = 'Default';
+$_['text_success']      = 'Шаблоны успешно обновлены!';
+$_['text_default']      = 'По умолчанию';
 
 // Column
-$_['column_name']       = 'Layout Name';
-$_['column_action']     = 'Action';
+$_['column_name']       = 'Название шаблона';
+$_['column_action']     = 'Действие';
 
 // Entry
-$_['entry_name']        = 'Layout Name:';
-$_['entry_store']       = 'Store:';
-$_['entry_route']       = 'Route:';
+$_['entry_name']        = 'Название шаблона:';
+$_['entry_store']       = 'Магазин:';
+$_['entry_route']       = 'Путь:';
 
 // Error
-$_['error_permission']  = 'Warning: You do not have permission to modify layouts!';
-$_['error_name']        = 'Layout Name must be between 3 and 64 characters!';
-$_['error_default']     = 'Warning: This layout cannot be deleted as it is currently assigned as the default store layout!';
-$_['error_store']       = 'Warning: This layout cannot be deleted as it is currently assigned to %s stores!';
-$_['error_product']     = 'Warning: This layout cannot be deleted as it is currently assigned to %s products!';
-$_['error_category']    = 'Warning: This layout cannot be deleted as it is currently assigned to %s categories!';
-$_['error_information'] = 'Warning: This layout cannot be deleted as it is currently assigned to %s information pages!';
+$_['error_permission']  = 'У Вас недостаточно прав для изменения шаблонов!';
+$_['error_name']        = 'название шаблона должно быть от 3 до 64 символов!';
+$_['error_default']     = 'Этот шаблон не может быть удален, поскольку он используется в магазине по умолчанию!';
+$_['error_store']       = 'Этот шаблон не может быть удален, поскольку испольется %s магазином(ами)!';
+$_['error_product']     = 'Этот шаблон не может быть удален, поскольку испольется %s товаром(ами)!';
+$_['error_category']    = 'Этот шаблон не может быть удален, поскольку испольется %s категорией(ями)!';
+$_['error_information'] = 'Этот шаблон не может быть удален, поскольку испольется %s страницей(ами)!';
 ?>
