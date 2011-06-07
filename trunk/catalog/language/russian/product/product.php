@@ -1,5 +1,7 @@
 <?php
 // Text
+$_['text_search']       = 'Search';
+$_['text_brand']        = 'Brand';
 $_['text_manufacturer'] = 'Brand:';
 $_['text_model']        = 'Product Code:';
 $_['text_reward']       = 'Reward Points:'; 
@@ -13,10 +15,9 @@ $_['text_option']        = 'Доступные варианты:';
 $_['text_qty']            = 'Количество:';
 $_['text_minimum']      = 'This product has a minimum quantity of %s';
 $_['text_or']           = '- OR -';
+$_['text_reviews']      = '%s reviews'; 
 $_['text_write']          = 'Написать отзыв';
-$_['text_read']         = 'Read Reviews';
 $_['text_no_reviews']     = 'Нет отзывов.';
-$_['text_reviews']      = 'Based on %s reviews.'; 
 $_['text_note']           = '<span style="color: #FF0000;">Заметка:</span> HTML теги не принимаются! Используйте обычный текст.';
 $_['text_share']        = 'Share';
 $_['text_success']        = 'Спасибо за Ваш отзыв. Он отправлен администратору на утверждение.';

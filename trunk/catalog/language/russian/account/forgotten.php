@@ -14,9 +14,4 @@ $_['entry_email']     = 'E-Mail:';
 
 // Error
 $_['error_email']     = 'E-Mail адрес введен неверно!';
-
-// Mail
-$_['mail_subject']    = '%s - New Password';
-$_['mail_greeting']   = 'A new password was requested from %s.';
-$_['mail_password']   = 'Your new password to is:';
 ?>

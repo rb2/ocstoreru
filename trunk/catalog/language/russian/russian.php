@@ -45,6 +45,7 @@ $_['button_search']         = 'Поиск';
 $_['button_shipping']       = 'Apply Shipping';
 $_['button_guest']          = 'Без регистрации';
 $_['button_view']           = 'Просмотр';
+$_['button_voucher']        = 'Apply Voucher';
 $_['button_upload']         = 'Upload File';
 $_['button_reward']         = 'Apply Points';
 $_['button_quote']          = 'Get Quotes';
