@@ -15,8 +15,6 @@ $_['text_enabled']            = 'Включено';
 $_['text_disabled']           = 'Отключено';
 $_['text_none']               = ' --- Не выбрано --- ';
 $_['text_select']             = ' --- Выберите --- ';
-$_['text_select_all']         = 'Выбрать все';
-$_['text_unselect_all']       = 'Отменить выбор';
 $_['text_all_zones']          = 'Все регионы';
 $_['text_default']            = ' <b>(По умолчанию)</b>';
 $_['text_close']              = 'Закрыть';
@@ -62,9 +60,9 @@ $_['button_add_total']        = 'Add Total';
 $_['button_add_reward']       = 'Add Reward Points';
 $_['button_add_route']        = 'Add Route';
 $_['button_add_module']       = 'Добавить модуль';
+$_['button_add_link']         = 'Add Link';
 $_['button_approve']          = 'Активировать';
 $_['button_reset']            = 'Сброс';
-$_['button_generate']         = 'Сгенерировать';
 
 // Tab
 $_['tab_address']             = 'Адрес';
@@ -96,6 +94,7 @@ $_['tab_shipping']            = 'Адрес доставки';
 $_['tab_sms']				  = 'SMS';
 $_['tab_total']               = 'Totals';
 $_['tab_transaction']         = 'Transactions';
+$_['tab_voucher_history']     = 'Voucher History';
 
 // Error
 $_['error_upload_1']          = 'Размер загружаемого файла превышает максимальный размер, указанный в php.ini!';

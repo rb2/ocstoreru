@@ -33,6 +33,7 @@ $_['entry_store']            = 'Магазины:';
 $_['entry_keyword']          = 'SEO Псевдоним:';
 $_['entry_model']            = 'Модель:';
 $_['entry_sku']              = 'Артикул (SKU, уникальный ID товара на складе):';
+$_['entry_upc']              = 'UPC:';
 $_['entry_location']         = 'Расположение:';
 $_['entry_manufacturer']     = 'Произоводитель:';
 $_['entry_shipping']         = 'Необходима доставка:';

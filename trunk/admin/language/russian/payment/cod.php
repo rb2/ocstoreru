@@ -7,6 +7,7 @@ $_['text_payment']       = 'Оплата';
 $_['text_success']       = 'Настройки модуля обновлены!';
 
 // Entry
+$_['entry_total']        = 'Total:<br /><span class="help">The checkout total the order must reach before this payment method becomes active.</span>';
 $_['entry_order_status'] = 'Статус заказа после оплаты:';
 $_['entry_geo_zone']     = 'Географическая зона:';
 $_['entry_status']       = 'Статус:';

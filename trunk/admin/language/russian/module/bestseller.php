@@ -20,4 +20,5 @@ $_['entry_sort_order'] = 'Порядок сортировки:';
 
 // Error
 $_['error_permission'] = 'У Вас нет прав для управления этим модулем!';
+$_['error_image']         = 'Image width &amp; height dimensions required!';
 ?>

@@ -5,6 +5,7 @@ $_['heading_title']  = 'Авторизация';
 // Text
 $_['text_heading']   = 'Авторизация';
 $_['text_login']     = 'Введите логин и пароль';
+$_['text_forgotten'] = 'Forgotten Password';
 
 // Entry
 $_['entry_username'] = 'Логин';

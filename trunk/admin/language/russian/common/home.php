@@ -33,4 +33,12 @@ $_['column_action']                	= 'Действие';
 
 // Entry
 $_['entry_range']                  	= 'Выбор диапазона:';
+
+// Error
+$_['error_install']                 = 'Warning: Install folder still exists!';
+$_['error_image']                   = 'Warning: Image directory %s not writeable!';
+$_['error_image_cache']             = 'Warning: Image cache directory %s not writeable!';
+$_['error_cache']                   = 'Warning: Cache directory %s not writeable!';
+$_['error_download']                = 'Warning: Download directory %s not writeable!';
+$_['error_logs']                    = 'Warning: Log directory %s not writeable!';
 ?>

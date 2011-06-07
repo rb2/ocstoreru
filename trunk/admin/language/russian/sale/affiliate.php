@@ -59,21 +59,11 @@ $_['error_firstname']           = 'First Name must be between 1 and 32 character
 $_['error_lastname']            = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']               = 'E-Mail Address does not appear to be valid!';
 $_['error_telephone']           = 'Telephone must be between 3 and 32 characters!';
-$_['error_password']            = 'Password must be between 3 and 20 characters!';
+$_['error_password']            = 'Password must be between 4 and 20 characters!';
 $_['error_confirm']             = 'Password and password confirmation do not match!';
 $_['error_address_1']           = 'Address 1 must be between 3 and 128 characters!';
-$_['error_city']                = 'City must be between 3 and 128 characters!';
+$_['error_city']                = 'City must be between 2 and 128 characters!';
 $_['error_country']             = 'Please select a country!';
 $_['error_zone']                = 'Please select a region / state!';
 $_['error_code']                = 'Tracking Code required!';
-
-// Mail
-$_['mail_approve_subject']      = '%s - Your Affiliate Account has been activated!';
-$_['mail_approve_welcome']      = 'Welcome and thank you for registering at %s!';
-$_['mail_approve_login']        = 'Your account has now been created and you can log in by using your email address and password by visiting our website or at the following URL:';
-$_['mail_approve_services']     = 'Upon logging in, you will be able to generate tracking codes, track commission payments and edit your account information.';
-$_['mail_approve_thanks']       = 'Thanks,';
-$_['mail_transaction_subject']  = '%s - Affiliate Commission';
-$_['mail_transaction_received'] = 'You have received %s commission!';
-$_['mail_transaction_total']    = 'Your total amount of commission is now %s.';
 ?>

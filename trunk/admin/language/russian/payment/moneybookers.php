@@ -10,14 +10,15 @@ $_['text_moneybookers']	            = '<a onclick="window.open(\'https://www.mon
 // Entry
 $_['entry_email']		            = 'E-Mail:';
 $_['entry_secret']		            = 'Secret:';
-$_['entry_order_status']            = 'Order Status:';
-$_['entry_order_status_pending']    = 'Order Status Pending:';
-$_['entry_order_status_canceled']   = 'Order Status Canceled:';
-$_['entry_order_status_failed']     = 'Order Status Failed:';
-$_['entry_order_status_chargeback'] = 'Order Status Chargeback:';
-$_['entry_geo_zone']                = 'Geo Zone:';
-$_['entry_status']                  = 'Status:';
-$_['entry_sort_order']              = 'Sort Order:';
+$_['entry_total']             = 'Total:<br /><span class="help">The checkout total the order must reach before this payment method becomes active.</span>';
+$_['entry_order_status']      = 'Order Status:';
+$_['entry_pending_status']    = 'Pending Status :';
+$_['entry_canceled_status']   = 'Canceled Status:';
+$_['entry_failed_status']     = 'Failed Status:';
+$_['entry_chargeback_status'] = 'Chargeback Status:';
+$_['entry_geo_zone']          = 'Geo Zone:';
+$_['entry_status']            = 'Status:';
+$_['entry_sort_order']        = 'Sort Order:';
 
 // Error
 $_['error_permission']	            = 'Warning: You do not have permission to modify Moneybookers!';

@@ -10,16 +10,13 @@ $_['text_smtp']               = 'SMTP';
 
 // Entry
 $_['entry_name']              = 'Название магазина:';
-//$_['entry_url']               = 'Адрес магазина (URL):<br /><span class="help">Полный URL до магазина. Убедитесь, что добавили \'/\' в конце. Пример: http://www.yourdomain.ru/path/</span>';
 $_['entry_owner']             = 'Владелец магазина:';
 $_['entry_address']           = 'Адрес магазина:';
 $_['entry_email']             = 'E-Mail:';
-//$_['entry_alert_emails']      = 'Дополнительные E-Mail-ы для оповещений:<br /><span class="help">Любые дополнительные email-ы, на которые необходимо отправлять оповещения, помимо основного. (разделение запятой)</span>';
 $_['entry_telephone']         = 'Телефон:';
 $_['entry_fax']               = 'Факс:';
 $_['entry_title']             = 'Заголовок:';
 $_['entry_meta_description']  = 'Описание для мета-тегов:';
-//$_['entry_description']       = 'Приветственное сообщение:';
 $_['entry_layout']              = 'Default Layout:';
 $_['entry_template']          = 'Шаблон:';
 $_['entry_country']           = 'Страна:';
@@ -48,10 +45,10 @@ $_['entry_stock_warning']     = 'Предупреждать о нехватке 
 $_['entry_stock_checkout']    = 'Заказ при нехватке на складе:<br /><span class="help">Разрешить клиентам оформлять заказ, если заказываемых товаров на данный момент нет на складе.</span>';
 $_['entry_stock_status']      = 'Статус "Нет на складе":<br /><span class="help">Устанавливать по умолчанию статус "Нет на складе" при создании товара.</span>';
 $_['entry_order_status']      = 'Статус заказа:<br /><span class="help">Статус заказа по умолчанию.</span>';
+$_['entry_complete_status']     = 'Complete Order Status:<br /><span class="help">Set the order status the customers order must reach before they are allowed to access their downloadable products and gift vouchers.</span>';
 $_['entry_return_status']       = 'Return Status:<br /><span class="help">Set the default return status when an returns request is submitted.</span>';
 $_['entry_review']       	  = 'Разрешить отзывы:<br /><span class="help">Включает/выключает добавление новых отзывов и отображение существующих отзывов</span>';
 $_['entry_download']          = 'Разрешить загрузки:';
-$_['entry_download_status']   = 'Статус заказа загрузок:<br /><span class="help">Статус заказа, при котором откроется доступ к загружаемым товарам.</span>';
 $_['entry_upload_allowed']      = 'Allowed Upload File Extensions:<br /><span class="help">Add which file extensions are allowed to be uploaded. Use comma separated values.</span>';
 $_['entry_cart_weight']       = 'Показывать вес на странице корзины:<br /><span class="help">Показывает вес заказанных товаров на странице корзины</span>';
 $_['entry_logo']              = 'Логотип:';
