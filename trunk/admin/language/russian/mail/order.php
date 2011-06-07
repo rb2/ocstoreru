@@ -1,10 +1,10 @@
 <?php
 // Text
-$_['text_subject']      = '%s - Order Update %s';
-$_['text_order']        = 'Order ID:';
-$_['text_date_added']   = 'Date Ordered:';
-$_['text_order_status'] = 'Your order has been updated to the following status:';
-$_['text_comment']      = 'The comments for your order are:';
-$_['text_link']         = 'To view your order click on the link below:';
-$_['text_footer']       = 'Please reply to this email if you have any questions.';
+$_['text_subject']      = '%s - заказ обновлен %s';
+$_['text_order']        = '№ заказа:';
+$_['text_date_added']   = 'Дата заказа:';
+$_['text_order_status'] = 'Актуальное состояние Вашего заказа:';
+$_['text_comment']      = 'Комментарии к Вашему заказу:';
+$_['text_link']         = 'Для просмотра Вашего заказа, щелкните:';
+$_['text_footer']       = 'Если у Вас есть какие-либо вопросы, ответьте на это сообщение.';
 ?>

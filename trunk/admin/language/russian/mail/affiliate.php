@@ -1,11 +1,11 @@
 <?php
 // Text
-$_['text_approve_subject']      = '%s - Your Affiliate Account has been activated!';
-$_['text_approve_welcome']      = 'Welcome and thank you for registering at %s!';
-$_['text_approve_login']        = 'Your account has now been created and you can log in by using your email address and password by visiting our website or at the following URL:';
-$_['text_approve_services']     = 'Upon logging in, you will be able to generate tracking codes, track commission payments and edit your account information.';
-$_['text_approve_thanks']       = 'Thanks,';
-$_['text_transaction_subject']  = '%s - Affiliate Commission';
-$_['text_transaction_received'] = 'You have received %s commission!';
-$_['text_transaction_total']    = 'Your total amount of commission is now %s.';
+$_['text_approve_subject']      = '%s - Ваш партнерский аккаунт активирован!';
+$_['text_approve_welcome']      = 'Добро пожаловать и спасибо за регистрацию на %s!';
+$_['text_approve_login']        = 'Ваш аккаунт создан и Вы можете войти используя Ваш E-mail и пароль, посетив наш сайт по адресу:';
+$_['text_approve_services']     = 'После входа Вы сможете получить адрес партнерской ссылки.';
+$_['text_approve_thanks']       = 'Спасибо,';
+$_['text_transaction_subject']  = '%s - Партнерское вознаграждение.';
+$_['text_transaction_received'] = 'Вы получили %s!';
+$_['text_transaction_total']    = 'Общая сумма Ваших партнерских вознаграждений %s.';
 ?>
