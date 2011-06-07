@@ -1,22 +1,22 @@
 <?php
 // Heading
-$_['heading_title']     = 'Attribute Groups';
+$_['heading_title']     = 'Группы атрибутов';
 
 // Text
-$_['text_success']      = 'Success: You have modified attribute groups!';
+$_['text_success']      = 'Группы атрибутов успешно обновлены!';
 
 // Column
-$_['column_name']       = 'Attribute Group Name';
-$_['column_sort_order'] = 'Sort Order';
-$_['column_action']     = 'Action';
+$_['column_name']       = 'Название группы атрибутов';
+$_['column_sort_order'] = 'Порядок сортировки';
+$_['column_action']     = 'Действие';
 
 // Entry
-$_['entry_name']        = 'Attribute Group Name:';
-$_['entry_sort_order']  = 'Sort Order:';
+$_['entry_name']        = 'Название группы атрибутов:';
+$_['entry_sort_order']  = 'Порядок сортировки:';
 
 // Error
-$_['error_permission']  = 'Warning: You do not have permission to modify attribute groups!';
-$_['error_name']        = 'Attribute Group Name must be between 3 and 64 characters!';
-$_['error_attribute']   = 'Warning: This attribute group cannot be deleted as it is currently assigned to %s attributes!';
-$_['error_product']     = 'Warning: This attribute group cannot be deleted as it is currently assigned to %s products!';
+$_['error_permission']  = 'У Вас нет прав для изменения групп атрибутов!';
+$_['error_name']        = 'Название группы атрибутов должно быть от 3 до 64 символов!';
+$_['error_attribute']   = 'Группа атрибутов не может быть удалена, так как используется %s атрибутами!';
+$_['error_product']     = 'Группа атрибутов не может быть удалена, так как используется %s товарами!';
 ?>
