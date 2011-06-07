@@ -1,22 +1,22 @@
 <?php
 // Heading
-$_['heading_title']       = 'Store';
+$_['heading_title']       = 'Магазин';
 
 // Text
-$_['text_module']         = 'Modules';
-$_['text_success']        = 'Success: You have modified module store!';
-$_['text_content_top']    = 'Content Top';
-$_['text_content_bottom'] = 'Content Bottom';
-$_['text_column_left']    = 'Column Left';
-$_['text_column_right']   = 'Column Right';
+$_['text_module']         = 'Модули';
+$_['text_success']        = 'Настройки модуля обновлены!';
+$_['text_content_top']    = 'Содержание шапки';
+$_['text_content_bottom'] = 'Содержание подвала';
+$_['text_column_left']    = 'Левая колонка';
+$_['text_column_right']   = 'Правая колонка';
 
 // Entry
-$_['entry_admin']         = 'Admin Users Only:';
-$_['entry_layout']        = 'Layout:';
-$_['entry_position']      = 'Position:';
-$_['entry_status']        = 'Status:';
-$_['entry_sort_order']    = 'Sort Order:';
+$_['entry_admin']         = 'Только администраторы:';
+$_['entry_layout']        = 'Шаблон:';
+$_['entry_position']      = 'Позиция:';
+$_['entry_status']        = 'Статус:';
+$_['entry_sort_order']    = 'Порядок сортировки:';
 
 // Error
-$_['error_permission']    = 'Warning: You do not have permission to modify module store!';
+$_['error_permission']    = 'У Вас нет прав для управления этим модулем!';
 ?>
