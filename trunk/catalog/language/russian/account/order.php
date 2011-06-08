@@ -1,34 +1,34 @@
 <?php
 // Heading 
-$_['heading_title']         = 'Order History';
+$_['heading_title']         = 'История покупок';
 
 // Text
-$_['text_account']          = 'Account';
+$_['text_account']          = 'Профиль';
 $_['text_order']            = 'Order Information';
 $_['text_order_detail']     = 'Order Detail';
 $_['text_invoice_no']       = 'Invoice No.:';
-$_['text_order_id']         = 'Order ID:';
-$_['text_status']           = 'Status:';
-$_['text_date_added']       = 'Date Added:';
-$_['text_customer']         = 'Customer:';
-$_['text_shipping_address'] = 'Shipping Address';
-$_['text_shipping_method']  = 'Shipping Method:';
-$_['text_payment_address']  = 'Payment Address';
-$_['text_payment_method']   = 'Payment Method:';
-$_['text_products']         = 'Products:';
-$_['text_total']            = 'Total:';
+$_['text_order_id']         = '№ заказа:';
+$_['text_status']           = 'Статус:';
+$_['text_date_added']       = 'Дата:';
+$_['text_customer']         = 'Покупатель:';
+$_['text_shipping_address'] = 'Адрес доставки';
+$_['text_shipping_method']  = 'Метод доставки:';
+$_['text_payment_address']  = 'Адрес оплаты';
+$_['text_payment_method']   = 'Метод оплаты:';
+$_['text_products']         = 'Товары:';
+$_['text_total']            = 'Итого:';
 $_['text_comment']          = 'Order Comments';
-$_['text_history']          = 'Order History';
-$_['text_empty']            = 'You have not made any previous orders!';
-$_['text_error']            = 'The order you requested could not be found!';
+$_['text_history']          = 'История заказов';
+$_['text_empty']            = 'Вы еще не совершали покупок!';
+$_['text_error']            = 'Запрашиваемый заказ не найден!';
 
 // Column
-$_['column_name']           = 'Product Name';
-$_['column_model']          = 'Model';
-$_['column_quantity']       = 'Quantity';
-$_['column_price']          = 'Price';
-$_['column_total']          = 'Total';
-$_['column_date_added']     = 'Date Added';
-$_['column_status']         = 'Status';
-$_['column_comment']        = 'Comment';
+$_['column_name']           = 'Наименование товара';
+$_['column_model']          = 'Модель';
+$_['column_quantity']       = 'Количество';
+$_['column_price']          = 'Цена';
+$_['column_total']          = 'Итого';
+$_['column_date_added']     = 'Дата';
+$_['column_status']         = 'Статус';
+$_['column_comment']        = 'Комментарий';
 ?>
