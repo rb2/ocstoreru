@@ -1,5 +1,6 @@
 <?php
 // Text
+$_['text_refine']       = 'Refine Search';
 $_['text_product']      = 'Товары';
 $_['text_error']        = 'Категория не найдена!';
 $_['text_empty']        = 'Эта категория пуста.';
