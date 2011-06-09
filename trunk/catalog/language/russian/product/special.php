@@ -4,17 +4,17 @@ $_['heading_title']     = 'Специальные предложения';
 
 // Text
 $_['text_empty']        = 'Нет специальных предложений.';
-$_['text_quantity']     = 'Qty:';
-$_['text_manufacturer'] = 'Brand:';
-$_['text_model']        = 'Product Code:'; 
+$_['text_quantity']     = 'Количество:';
+$_['text_manufacturer'] = 'Производитель:';
+$_['text_model']        = 'Модель:'; 
 $_['text_points']       = 'Reward Points:'; 
-$_['text_price']        = 'Price:'; 
-$_['text_tax']          = 'Ex Tax:'; 
-$_['text_reviews']      = 'Based on %s reviews.'; 
-$_['text_compare']      = 'Product Compare (%s)'; 
-$_['text_display']      = 'Display:';
-$_['text_list']         = 'List';
-$_['text_grid']         = 'Grid';
+$_['text_price']        = 'Цена:'; 
+$_['text_tax']          = 'Налог:'; 
+$_['text_reviews']      = 'Отзывов: %s'; 
+$_['text_compare']      = 'Сравнить (%s)'; 
+$_['text_display']      = 'Вид:';
+$_['text_list']         = 'Список';
+$_['text_grid']         = 'Сетка';
 $_['text_sort']         = 'Сортировать по:';
 $_['text_default']      = 'По-умолчанию';
 $_['text_name_asc']     = 'Имени (от А до Я)';
@@ -25,5 +25,5 @@ $_['text_rating_asc']   = 'Рейтингу (низкому)';
 $_['text_rating_desc']  = 'Рейтингу (высокому)';
 $_['text_model_asc']    = 'Модель (от А до Я)';
 $_['text_model_desc']   = 'Модель (от Я до А)';
-$_['text_limit']        = 'Show:';
+$_['text_limit']        = 'На странице:';
 ?>
