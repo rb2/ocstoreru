@@ -1,10 +1,10 @@
 <?php
 // Heading
-$_['heading_title']  = 'Наши контакты';
+$_['heading_title']  = 'Контакты';
 
 // Text 
-$_['text_location']  = 'Our Location';
-$_['text_contact']   = 'Contact Form';
+$_['text_location']  = 'Наши контакты';
+$_['text_contact']   = 'Написать нам';
 $_['text_address']   = 'Адрес:';
 $_['text_email']     = 'E-Mail:';
 $_['text_telephone'] = 'Номер телефона:';
