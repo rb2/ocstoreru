@@ -1,6 +1,6 @@
 <?php
 // header
-$_['heading_title']   = 'Forgot Your Password?';
+$_['heading_title']   = 'Забыли пароль?';
 
 // Text
 $_['text_forgotten']  = 'Forgotten Password';
@@ -9,12 +9,12 @@ $_['text_email']      = 'Enter the e-mail address associated with your account. 
 $_['text_success']    = 'An email with a confirmation link has been sent your admin email address.';
 
 // Entry
-$_['entry_email']     = 'E-Mail Address:';
-$_['entry_password']  = 'New Password:';
-$_['entry_confirm']   = 'Confirm:';
+$_['entry_email']     = 'E-Mail:';
+$_['entry_password']  = 'Новый пароль:';
+$_['entry_confirm']   = 'Повтор пароля:';
 
 // Error
-$_['error_email']     = 'Error: The E-Mail Address was not found in our records, please try again!';
-$_['error_password']  = 'Password must be between 3 and 20 characters!';
-$_['error_confirm']   = 'Password and password confirmation do not match!';
+$_['error_email']     = 'E-Mail не найден';
+$_['error_password']  = 'Пароль должен быть от 3 до 20 символов!!';
+$_['error_confirm']   = 'Пароли не совподают!';
 ?>
