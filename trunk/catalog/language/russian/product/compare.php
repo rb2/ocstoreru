@@ -10,14 +10,14 @@ $_['text_price']        = 'Цена';
 $_['text_model']        = 'Модель';
 $_['text_manufacturer'] = 'Производитель';
 $_['text_availability'] = 'Наличие';
-$_['text_instock']      = 'In Stock';
+$_['text_instock']      = 'В наличии';
 $_['text_rating']       = 'Оценка';
 $_['text_reviews']      = 'Отзывов: %s';
 $_['text_summary']      = 'Описание';
 $_['text_weight']       = 'Вес';
 $_['text_dimension']    = 'Размеры (Д x Ш x В)';
 $_['text_remove']       = 'Убрать из сравнения';
-$_['text_compare']      = 'Product Compare (%s)';
-$_['text_success']      = 'Success: You have added <a href="%s">%s</a> to your <a href="%s">product comparison</a>!';
+$_['text_compare']      = 'Сравнить (%s)';
+$_['text_success']      = 'Вы добавили <a href="%s">%s</a> для <a href="%s">сравнения</a>!';
 $_['text_empty']        = 'Вы не выбрали товары для сравнения';
 ?>
