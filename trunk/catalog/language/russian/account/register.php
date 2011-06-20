@@ -3,7 +3,7 @@
 $_['heading_title']        = 'Регистрация';
 
 // Text
-$_['text_account']         = 'Профиль';
+$_['text_account']         = 'Личный Кабинет';
 $_['text_register']        = 'Регистрация';
 $_['text_account_already'] = 'Если Вы уже зарегистрированы, перейдите на страницу <a href="%s">входа в систему</a>.';
 $_['text_your_details']    = 'Основные данные';

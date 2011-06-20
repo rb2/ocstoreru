@@ -1,20 +1,20 @@
 <?php
 // Heading 
-$_['heading_title']                 = 'Affiliate Program';
+$_['heading_title']                 = 'Парртнерская программа';
 
 // Text
-$_['text_account']                  = 'Account';
-$_['text_login']                    = 'Login';
-$_['text_description']              = '<p>%s affiliate program is free and enables members to earn revenue by placing a link or links on their web site which advertises %s or specific products on it. Any sales made to customers who have clicked on those links will earn the affiliate commission. The standard commission rate is currently %s.</p><p>For more information, visit our FAQ page or see our Affiliate terms &amp; conditions.</p>';
-$_['text_new_affiliate']            = 'New Affiliate';
-$_['text_register_account']         = '<p>I am not currently an affiliate.</p><p>Click Continue below to create a new affiliate account. Please note that this is not connected in any way to your customer account.</p>';
-$_['text_returning_affiliate']      = 'Affiliate Login';
-$_['text_i_am_returning_affiliate'] = 'I am a returning affiliate.';
-$_['text_forgotten']                = 'Forgotten Password';
+$_['text_account']                  = 'Кабинет Партнера';
+$_['text_login']                    = 'Логин';
+$_['text_description']              = '<p>Партнерская программа %s совершенно бесплатна и позволяет участникам получать дополнительный доход путем размещения ссылок как на весь на наш магазин %s, так и на отдельные товары. Каждая покупка совершенная по партнерской ссылке приносит агентскую коммисию. Стандартный размер коммиссии составляет %s. </p><p> За подробной информацией обращайтесь на страницу информации для партнеров.</p>';
+$_['text_new_affiliate']            = 'Новый Партнер';
+$_['text_register_account']         = '<p>Я не являюсь партнером.</p><p>Нажмите Вперед чтобы создать учетную запись партнера. Обратите внимание, что эта учетная запись никак не связана с какой либо учетной записью покупателя!</p>';
+$_['text_returning_affiliate']      = 'Логин Партнера';
+$_['text_i_am_returning_affiliate'] = 'Я зарегистрированный Партнер.';
+$_['text_forgotten']                = 'Забыли пароль?';
 
 // Entry
-$_['entry_email']                   = 'Affiliate E-Mail:';
-$_['entry_password']                = 'Password:';
+$_['entry_email']                   = 'Партнерский E-Mail:';
+$_['entry_password']                = 'Пароль:';
 
 // Error
 $_['error_login']                   = 'Error: No match for E-Mail Address and/or Password.';

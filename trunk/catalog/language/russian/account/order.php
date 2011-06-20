@@ -1,26 +1,26 @@
 <?php
 // Heading 
-$_['heading_title']         = 'История покупок';
+$_['heading_title']         = 'История заказов';
 
 // Text
-$_['text_account']          = 'Профиль';
-$_['text_order']            = 'Order Information';
-$_['text_order_detail']     = 'Order Detail';
-$_['text_invoice_no']       = 'Invoice No.:';
-$_['text_order_id']         = '№ заказа:';
+$_['text_account']          = 'Личный Кабинет';
+$_['text_order']            = 'Заказ';
+$_['text_order_detail']     = 'Детали заказа';
+$_['text_invoice_no']       = '№ Счета:';
+$_['text_order_id']         = 'Заказ:';
 $_['text_status']           = 'Статус:';
 $_['text_date_added']       = 'Дата:';
 $_['text_customer']         = 'Покупатель:';
-$_['text_shipping_address'] = 'Адрес доставки';
+$_['text_shipping_address'] = 'Адрес доставки:';
 $_['text_shipping_method']  = 'Способ доставки:';
-$_['text_payment_address']  = 'Адрес оплаты';
+$_['text_payment_address']  = 'Адрес оплаты:';
 $_['text_payment_method']   = 'Способ оплаты:';
-$_['text_products']         = 'Товары:';
+$_['text_products']         = 'Товаров:';
 $_['text_total']            = 'Итого:';
-$_['text_comment']          = 'Order Comments';
+$_['text_comment']          = 'Комментарий к заказу';
 $_['text_history']          = 'История заказов';
 $_['text_empty']            = 'Вы еще не совершали покупок!';
-$_['text_error']            = 'Запрашиваемый заказ не найден!';
+$_['text_error']            = 'Запрошенный заказ не найден!';
 
 // Column
 $_['column_name']           = 'Наименование товара';

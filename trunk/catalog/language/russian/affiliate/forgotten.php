@@ -1,13 +1,13 @@
 <?php
 // Heading 
-$_['heading_title']   = 'Forgot Your Password?';
+$_['heading_title']   = 'Забыли пароль?';
 
 // Text
-$_['text_account']    = 'Account';
-$_['text_forgotten']  = 'Forgotten Password';
-$_['text_your_email'] = 'Your E-Mail Address';
-$_['text_email']      = 'Enter the e-mail address associated with your account. Click submit to have your password e-mailed to you';
-$_['text_success']    = 'Success: A new password has been sent to your e-mail address.';
+$_['text_account']    = 'Кабинет Партнера';
+$_['text_forgotten']  = 'Забыли пароль?';
+$_['text_your_email'] = 'Ваш E-Mail';
+$_['text_email']      = 'Введите адрес электронной почты от Вашей учетной записи. Нажмите кнопку Вперед, чтобы получить пароль по электронной почте.';
+$_['text_success']    = 'Новый пароль был выслан на Ваш адрес электронной почты.';
 
 // Entry
 $_['entry_email']     = 'E-Mail Address:';

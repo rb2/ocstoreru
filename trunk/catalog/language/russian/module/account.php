@@ -4,7 +4,7 @@ $_['heading_title']    = 'Профиль';
 
 // Text
 $_['text_register']    = 'Зарегистрироваться';
-$_['text_login']       = 'Имя';
+$_['text_login']       = 'Войти';
 $_['text_logout']      = 'Выйти';
 $_['text_forgotten']   = 'Забыли пароль?';
 $_['text_account']     = 'Личный кабинет';
