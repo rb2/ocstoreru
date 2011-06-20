@@ -23,11 +23,11 @@ $_['entry_parent']         	 = 'Родительская категория:';
 $_['entry_store']            = 'Магазины:';
 $_['entry_keyword']          = 'Псевдоним:<br/><span class="help">Должен быть уникальным на всю систему.</span>';
 $_['entry_image']            = 'Изображение категории:';
-$_['entry_top']              = 'Top:<br/><span class="help">Display in the top menu bar. Only works for the top parent categories.</span>';
-$_['entry_column']           = 'Columns:<br/><span class="help">Number of columns to use for the bottom 3 categories. Only works for the top parent categories.</span>';
+$_['entry_top']              = 'Главное меню:<br/><span class="help">Показывать в главном меню (только для главных родительских категорий).</span>';
+$_['entry_column']           = 'Столбцы:<br/><span class="help">Количество столбцов в выпадающем меню категории (только для главных родительских категорий).</span>';
 $_['entry_sort_order']       = 'Порядок сортировки:';
 $_['entry_status']           = 'Статус:';
-$_['entry_layout']           = 'Layout Override:';
+$_['entry_layout']           = 'Выберите шаблон:';
 
 // Error
 $_['error_warning']          = 'Внимательно проверьте форму на ошибки!';

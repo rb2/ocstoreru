@@ -18,7 +18,7 @@ $_['entry_store']       	= 'Магазины:';
 $_['entry_keyword']     	= 'Псевдоним:';
 $_['entry_status']          = 'Статус:';
 $_['entry_sort_order']  	= 'Порядок сортировки:<br/><span class="help">-1 для скрытия</span>';
-$_['entry_layout']      	= 'Layout Override:';
+$_['entry_layout']      	= 'Выберите шаблон:';
 
 // Error
 $_['error_warning']         = 'Внимательно проверьте форму на ошибки!';
