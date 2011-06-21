@@ -5,10 +5,10 @@ class ControllerCommonLogin extends Controller {
 	public function index() { 
     	$this->load->language('common/login');
 
-		$this->document->title = $this->language->get('heading_title');
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
-			$this->redirect(HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) { 
@@ -17,13 +17,14 @@ class ControllerCommonLogin extends Controller {
 			if (isset($this->request->post['redirect'])) {
 				$this->redirect($this->request->post['redirect'] . '&token=' . $this->session->data['token']);
 			} else {
-				$this->redirect(HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token']);
+				$this->redirect($this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'));
 			}
 		}
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['text_login'] = $this->language->get('text_login');
+		$this->data['text_forgotten'] = $this->language->get('text_forgotten');
 		
 		$this->data['entry_username'] = $this->language->get('entry_username');
     	$this->data['entry_password'] = $this->language->get('entry_password');
@@ -40,7 +41,15 @@ class ControllerCommonLogin extends Controller {
 			$this->data['error_warning'] = '';
 		}
 		
-    	$this->data['action'] = HTTPS_SERVER . 'index.php?route=common/login';
+		if (isset($this->session->data['success'])) {
+    		$this->data['success'] = $this->session->data['success'];
+    
+			unset($this->session->data['success']);
+		} else {
+			$this->data['success'] = '';
+		}
+				
+    	$this->data['action'] = $this->url->link('common/login', '', 'SSL');
 
 		if (isset($this->request->post['username'])) {
 			$this->data['username'] = $this->request->post['username'];
@@ -64,23 +73,25 @@ class ControllerCommonLogin extends Controller {
 			}
 			
 			$url = '';
-			
+						
 			if ($this->request->get) {
-				$url = '&' . http_build_query($this->request->get);
+				$url .= http_build_query($this->request->get);
 			}
 			
-			$this->data['redirect'] = HTTPS_SERVER . 'index.php?route=' . $route . $url;
+			$this->data['redirect'] = $this->url->link($route, $url, 'SSL');
 		} else {
 			$this->data['redirect'] = '';	
 		}
-						
+	
+		$this->data['forgotten'] = $this->url->link('common/forgotten', '', 'SSL');
+	
 		$this->template = 'common/login.tpl';
 		$this->children = array(
-			'common/header',	
-			'common/footer'	
+			'common/header',
+			'common/footer',
 		);
-		
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+				
+		$this->response->setOutput($this->render());
   	}
 		
 	private function validate() {
@@ -89,9 +100,9 @@ class ControllerCommonLogin extends Controller {
 		}
 		
 		if (!$this->error) {
-			return TRUE;
+			return true;
 		} else {
-			return FALSE;
+			return false;
 		}
 	}
 }  
