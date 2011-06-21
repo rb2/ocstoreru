@@ -5,18 +5,16 @@ class ControllerPaymentTwoCheckout extends Controller {
 	public function index() {
 		$this->load->language('payment/twocheckout');
 
-		$this->document->title = $this->language->get('heading_title');
+		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 			
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validate())) {
-			$this->load->model('setting/setting');
-			
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('twocheckout', $this->request->post);				
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -30,6 +28,7 @@ class ControllerPaymentTwoCheckout extends Controller {
 		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_secret'] = $this->language->get('entry_secret');
 		$this->data['entry_test'] = $this->language->get('entry_test');
+		$this->data['entry_total'] = $this->language->get('entry_total');	
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');		
 		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$this->data['entry_status'] = $this->language->get('entry_status');
@@ -58,29 +57,29 @@ class ControllerPaymentTwoCheckout extends Controller {
 			$this->data['error_secret'] = '';
 		}	
 		
-  		$this->document->breadcrumbs = array();
+  		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),       		
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_payment'),
+			'href'      => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=payment/twocheckout&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('payment/twocheckout', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 				
-		$this->data['action'] = HTTPS_SERVER . 'index.php?route=payment/twocheckout&token=' . $this->session->data['token'];
+		$this->data['action'] = $this->url->link('payment/twocheckout', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->data['cancel'] = HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token'];
+		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
 		if (isset($this->request->post['twocheckout_account'])) {
 			$this->data['twocheckout_account'] = $this->request->post['twocheckout_account'];
@@ -100,6 +99,12 @@ class ControllerPaymentTwoCheckout extends Controller {
 			$this->data['twocheckout_test'] = $this->config->get('twocheckout_test');
 		}
 		
+		if (isset($this->request->post['twocheckout_total'])) {
+			$this->data['twocheckout_total'] = $this->request->post['twocheckout_total'];
+		} else {
+			$this->data['twocheckout_total'] = $this->config->get('twocheckout_total'); 
+		} 
+				
 		if (isset($this->request->post['twocheckout_order_status_id'])) {
 			$this->data['twocheckout_order_status_id'] = $this->request->post['twocheckout_order_status_id'];
 		} else {
@@ -132,13 +137,14 @@ class ControllerPaymentTwoCheckout extends Controller {
 			$this->data['twocheckout_sort_order'] = $this->config->get('twocheckout_sort_order');
 		}
 
+		$this->layout = 'common/layout';
 		$this->template = 'payment/twocheckout.tpl';
 		$this->children = array(
-			'common/header',	
-			'common/footer'	
+			'common/header',
+			'common/footer',
 		);
-		
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+				
+		$this->response->setOutput($this->render());
 	}
 
 	private function validate() {
@@ -155,9 +161,9 @@ class ControllerPaymentTwoCheckout extends Controller {
 		}
 		
 		if (!$this->error) {
-			return TRUE;
+			return true;
 		} else {
-			return FALSE;
+			return false;
 		}	
 	}
 }

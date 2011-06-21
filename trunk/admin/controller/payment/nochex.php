@@ -1,16 +1,16 @@
 <?php 
-class ControllerPaymentPayPoint extends Controller {
+class ControllerPaymentNOCHEX extends Controller {
 	private $error = array(); 
 
 	public function index() {
-		$this->load->language('payment/paypoint');
+		$this->load->language('payment/nochex');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('paypoint', $this->request->post);				
+			$this->model_setting_setting->editSetting('nochex', $this->request->post);				
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -24,11 +24,13 @@ class ControllerPaymentPayPoint extends Controller {
 		$this->data['text_all_zones'] = $this->language->get('text_all_zones');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
-		$this->data['text_live'] = $this->language->get('text_live');
-		$this->data['text_successful'] = $this->language->get('text_successful');
-		$this->data['text_fail'] = $this->language->get('text_fail');
-				
+		$this->data['text_seller'] = $this->language->get('text_seller');
+		$this->data['text_merchant'] = $this->language->get('text_merchant');
+		
+		$this->data['entry_email'] = $this->language->get('entry_email');
+		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_merchant'] = $this->language->get('entry_merchant');
+		$this->data['entry_template'] = $this->language->get('entry_template');
 		$this->data['entry_test'] = $this->language->get('entry_test');
 		$this->data['entry_total'] = $this->language->get('entry_total');	
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');		
@@ -41,13 +43,19 @@ class ControllerPaymentPayPoint extends Controller {
 
 		$this->data['tab_general'] = $this->language->get('tab_general');
 
- 		if (isset($this->error['warning'])) {
+  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
 			$this->data['error_warning'] = '';
 		}
 		
-		if (isset($this->error['merchant'])) {
+ 		if (isset($this->error['email'])) {
+			$this->data['error_email'] = $this->error['email'];
+		} else {
+			$this->data['error_email'] = '';
+		}
+		
+ 		if (isset($this->error['merchant'])) {
 			$this->data['error_merchant'] = $this->error['merchant'];
 		} else {
 			$this->data['error_merchant'] = '';
@@ -69,82 +77,104 @@ class ControllerPaymentPayPoint extends Controller {
 
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('payment/paypoint', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('payment/nochex', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 				
-		$this->data['action'] = $this->url->link('payment/paypoint', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['action'] = $this->url->link('payment/nochex', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
-		if (isset($this->request->post['paypoint_merchant'])) {
-			$this->data['paypoint_merchant'] = $this->request->post['paypoint_merchant'];
+		if (isset($this->request->post['nochex_email'])) {
+			$this->data['nochex_email'] = $this->request->post['nochex_email'];
 		} else {
-			$this->data['paypoint_merchant'] = $this->config->get('paypoint_merchant');
+			$this->data['nochex_email'] = $this->config->get('nochex_email');
+		}
+
+		if (isset($this->request->post['nochex_account'])) {
+			$this->data['nochex_account'] = $this->request->post['nochex_account'];
+		} else {
+			$this->data['nochex_account'] = $this->config->get('nochex_account');
+		}
+
+		if (isset($this->request->post['nochex_merchant'])) {
+			$this->data['nochex_merchant'] = $this->request->post['nochex_merchant'];
+		} else {
+			$this->data['nochex_merchant'] = $this->config->get('nochex_merchant');
+		}
+
+		if (isset($this->request->post['nochex_template'])) {
+			$this->data['nochex_template'] = $this->request->post['nochex_template'];
+		} else {
+			$this->data['nochex_template'] = $this->config->get('nochex_template');
 		}
 		
-		if (isset($this->request->post['paypoint_test'])) {
-			$this->data['paypoint_test'] = $this->request->post['paypoint_test'];
+		if (isset($this->request->post['nochex_test'])) {
+			$this->data['nochex_test'] = $this->request->post['nochex_test'];
 		} else {
-			$this->data['paypoint_test'] = $this->config->get('paypoint_test');
+			$this->data['nochex_test'] = $this->config->get('nochex_test');
 		}
 		
-		if (isset($this->request->post['paypoint_total'])) {
-			$this->data['paypoint_total'] = $this->request->post['paypoint_total'];
+		if (isset($this->request->post['nochex_total'])) {
+			$this->data['nochex_total'] = $this->request->post['nochex_total'];
 		} else {
-			$this->data['paypoint_total'] = $this->config->get('paypoint_total'); 
+			$this->data['nochex_total'] = $this->config->get('nochex_total'); 
 		} 
 				
-		if (isset($this->request->post['paypoint_order_status_id'])) {
-			$this->data['paypoint_order_status_id'] = $this->request->post['paypoint_order_status_id'];
+		if (isset($this->request->post['nochex_order_status_id'])) {
+			$this->data['nochex_order_status_id'] = $this->request->post['nochex_order_status_id'];
 		} else {
-			$this->data['paypoint_order_status_id'] = $this->config->get('paypoint_order_status_id'); 
+			$this->data['nochex_order_status_id'] = $this->config->get('nochex_order_status_id'); 
 		} 
 
 		$this->load->model('localisation/order_status');
 		
 		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 		
-		if (isset($this->request->post['paypoint_geo_zone_id'])) {
-			$this->data['paypoint_geo_zone_id'] = $this->request->post['paypoint_geo_zone_id'];
+		if (isset($this->request->post['nochex_geo_zone_id'])) {
+			$this->data['nochex_geo_zone_id'] = $this->request->post['nochex_geo_zone_id'];
 		} else {
-			$this->data['paypoint_geo_zone_id'] = $this->config->get('paypoint_geo_zone_id'); 
+			$this->data['nochex_geo_zone_id'] = $this->config->get('nochex_geo_zone_id'); 
 		} 
 		
 		$this->load->model('localisation/geo_zone');
 										
 		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 		
-		if (isset($this->request->post['paypoint_status'])) {
-			$this->data['paypoint_status'] = $this->request->post['paypoint_status'];
+		if (isset($this->request->post['nochex_status'])) {
+			$this->data['nochex_status'] = $this->request->post['nochex_status'];
 		} else {
-			$this->data['paypoint_status'] = $this->config->get('paypoint_status');
+			$this->data['nochex_status'] = $this->config->get('nochex_status');
 		}
 		
-		if (isset($this->request->post['paypoint_sort_order'])) {
-			$this->data['paypoint_sort_order'] = $this->request->post['paypoint_sort_order'];
+		if (isset($this->request->post['nochex_sort_order'])) {
+			$this->data['nochex_sort_order'] = $this->request->post['nochex_sort_order'];
 		} else {
-			$this->data['paypoint_sort_order'] = $this->config->get('paypoint_sort_order');
+			$this->data['nochex_sort_order'] = $this->config->get('nochex_sort_order');
 		}
 
-		$this->template = 'payment/paypoint.tpl';
+		$this->template = 'payment/nochex.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer',
 		);
 				
-		$this->response->setOutput($this->render());
+		$this->response->setOutput($this->render());		
 	}
 
 	private function validate() {
-		if (!$this->user->hasPermission('modify', 'payment/paypoint')) {
+		if (!$this->user->hasPermission('modify', 'payment/nochex')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		if (!$this->request->post['paypoint_merchant']) {
+		if (!$this->request->post['nochex_email']) {
+			$this->error['email'] = $this->language->get('error_email');
+		}
+
+		if (!$this->request->post['nochex_merchant']) {
 			$this->error['merchant'] = $this->language->get('error_merchant');
 		}
-				
+		
 		if (!$this->error) {
 			return true;
 		} else {

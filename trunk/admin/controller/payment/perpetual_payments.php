@@ -5,18 +5,16 @@ class ControllerPaymentPerpetualPayments extends Controller {
 	public function index() {
 		$this->load->language('payment/perpetual_payments');
 
-		$this->document->title = $this->language->get('heading_title');
+		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 			
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validate())) {
-			$this->load->model('setting/setting');
-			
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('perpetual_payments', $this->request->post);				
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -30,6 +28,7 @@ class ControllerPaymentPerpetualPayments extends Controller {
 		$this->data['entry_auth_id'] = $this->language->get('entry_auth_id');
 		$this->data['entry_auth_pass'] = $this->language->get('entry_auth_pass');
 		$this->data['entry_test'] = $this->language->get('entry_test');
+		$this->data['entry_total'] = $this->language->get('entry_total');	
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');		
 		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$this->data['entry_status'] = $this->language->get('entry_status');
@@ -58,29 +57,29 @@ class ControllerPaymentPerpetualPayments extends Controller {
 			$this->data['error_auth_pass'] = '';
 		}
 		
-		$this->document->breadcrumbs = array();
+		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),       		
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_payment'),
+			'href'      => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=payment/perpetual_payments&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('payment/perpetual_payments', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 				
-		$this->data['action'] = HTTPS_SERVER . 'index.php?route=payment/perpetual_payments&token=' . $this->session->data['token'];
+		$this->data['action'] = $this->url->link('payment/perpetual_payments', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->data['cancel'] = HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token'];
+		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 
 		if (isset($this->request->post['perpetual_payments_auth_id'])) {
 			$this->data['perpetual_payments_auth_id'] = $this->request->post['perpetual_payments_auth_id'];
@@ -100,6 +99,12 @@ class ControllerPaymentPerpetualPayments extends Controller {
 			$this->data['perpetual_payments_test'] = $this->config->get('perpetual_payments_test');
 		}
 		
+		if (isset($this->request->post['perpetual_payments_total'])) {
+			$this->data['perpetual_payments_total'] = $this->request->post['perpetual_payments_total'];
+		} else {
+			$this->data['perpetual_payments_total'] = $this->config->get('perpetual_payments_total'); 
+		} 
+				
 		if (isset($this->request->post['perpetual_payments_order_status_id'])) {
 			$this->data['perpetual_payments_order_status_id'] = $this->request->post['perpetual_payments_order_status_id'];
 		} else {
@@ -131,14 +136,14 @@ class ControllerPaymentPerpetualPayments extends Controller {
 		} else {
 			$this->data['perpetual_payments_sort_order'] = $this->config->get('perpetual_payments_sort_order');
 		}
-		
+
 		$this->template = 'payment/perpetual_payments.tpl';
 		$this->children = array(
-			'common/header',	
-			'common/footer'	
+			'common/header',
+			'common/footer',
 		);
-		
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+				
+		$this->response->setOutput($this->render());
 	}
 
 	private function validate() {
@@ -155,9 +160,9 @@ class ControllerPaymentPerpetualPayments extends Controller {
 		}
 		
 		if (!$this->error) {
-			return TRUE;
+			return true;
 		} else {
-			return FALSE;
+			return false;
 		}	
 	}
 }
