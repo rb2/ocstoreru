@@ -1,16 +1,16 @@
 <?php
-class ControllerModuleInformation extends Controller {
+class ControllerModuleAccount extends Controller {
 	private $error = array(); 
 	
 	public function index() {   
-		$this->load->language('module/information');
+		$this->load->language('module/account');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('information', $this->request->post);		
+			$this->model_setting_setting->editSetting('account', $this->request->post);		
 					
 			$this->session->data['success'] = $this->language->get('text_success');
 						
@@ -35,7 +35,7 @@ class ControllerModuleInformation extends Controller {
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		$this->data['button_add_module'] = $this->language->get('button_add_module');
 		$this->data['button_remove'] = $this->language->get('button_remove');
-
+		
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -58,18 +58,18 @@ class ControllerModuleInformation extends Controller {
 		
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('module/information', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('module/account', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 		
-		$this->data['action'] = $this->url->link('module/information', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['action'] = $this->url->link('module/account', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
-				
-		if (isset($this->request->post['information_module'])) {
-			$modules = explode(',', $this->request->post['information_module']);
-		} elseif ($this->config->get('information_module') != '') {
-			$modules = explode(',', $this->config->get('information_module'));
+
+		if (isset($this->request->post['account_module'])) {
+			$modules = explode(',', $this->request->post['account_module']);
+		} elseif ($this->config->get('account_module') != '') { 
+			$modules = explode(',', $this->config->get('account_module'));
 		} else {
 			$modules = array();
 		}		
@@ -79,40 +79,40 @@ class ControllerModuleInformation extends Controller {
 		$this->data['layouts'] = $this->model_design_layout->getLayouts();
 				
 		foreach ($modules as $module) {
-			if (isset($this->request->post['information_' . $module . '_layout_id'])) {
-				$this->data['information_' . $module . '_layout_id'] = $this->request->post['information_' . $module . '_layout_id'];
+			if (isset($this->request->post['account_' . $module . '_layout_id'])) {
+				$this->data['account_' . $module . '_layout_id'] = $this->request->post['account_' . $module . '_layout_id'];
 			} else {
-				$this->data['information_' . $module . '_layout_id'] = $this->config->get('information_' . $module . '_layout_id');
+				$this->data['account_' . $module . '_layout_id'] = $this->config->get('account_' . $module . '_layout_id');
 			}	
 			
-			if (isset($this->request->post['information_' . $module . '_position'])) {
-				$this->data['information_' . $module . '_position'] = $this->request->post['information_' . $module . '_position'];
+			if (isset($this->request->post['account_' . $module . '_position'])) {
+				$this->data['account_' . $module . '_position'] = $this->request->post['account_' . $module . '_position'];
 			} else {
-				$this->data['information_' . $module . '_position'] = $this->config->get('information_' . $module . '_position');
+				$this->data['account_' . $module . '_position'] = $this->config->get('account_' . $module . '_position');
 			}	
 			
-			if (isset($this->request->post['information_' . $module . '_status'])) {
-				$this->data['information_' . $module . '_status'] = $this->request->post['information_' . $module . '_status'];
+			if (isset($this->request->post['account_' . $module . '_status'])) {
+				$this->data['account_' . $module . '_status'] = $this->request->post['account_' . $module . '_status'];
 			} else {
-				$this->data['information_' . $module . '_status'] = $this->config->get('information_' . $module . '_status');
+				$this->data['account_' . $module . '_status'] = $this->config->get('account_' . $module . '_status');
 			}	
 						
-			if (isset($this->request->post['information_' . $module . '_sort_order'])) {
-				$this->data['information_' . $module . '_sort_order'] = $this->request->post['information_' . $module . '_sort_order'];
+			if (isset($this->request->post['account_' . $module . '_sort_order'])) {
+				$this->data['account_' . $module . '_sort_order'] = $this->request->post['account_' . $module . '_sort_order'];
 			} else {
-				$this->data['information_' . $module . '_sort_order'] = $this->config->get('information_' . $module . '_sort_order');
+				$this->data['account_' . $module . '_sort_order'] = $this->config->get('account_' . $module . '_sort_order');
 			}				
 		}
 		
 		$this->data['modules'] = $modules;
 		
-		if (isset($this->request->post['information_module'])) {
-			$this->data['information_module'] = $this->request->post['information_module'];
+		if (isset($this->request->post['account_module'])) {
+			$this->data['account_module'] = $this->request->post['account_module'];
 		} else {
-			$this->data['information_module'] = $this->config->get('information_module');
+			$this->data['account_module'] = $this->config->get('account_module');
 		}
-
-		$this->template = 'module/information.tpl';
+				
+		$this->template = 'module/account.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer',
@@ -122,7 +122,7 @@ class ControllerModuleInformation extends Controller {
 	}
 	
 	private function validate() {
-		if (!$this->user->hasPermission('modify', 'module/information')) {
+		if (!$this->user->hasPermission('modify', 'module/account')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		

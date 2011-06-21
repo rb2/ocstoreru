@@ -1,17 +1,17 @@
 <?php
-class ControllerModuleInformation extends Controller {
+class ControllerModuleStore extends Controller {
 	private $error = array(); 
 	
 	public function index() {   
-		$this->load->language('module/information');
+		$this->load->language('module/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('information', $this->request->post);		
-					
+			$this->model_setting_setting->editSetting('store', $this->request->post);		
+					 
 			$this->session->data['success'] = $this->language->get('text_success');
 						
 			$this->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
@@ -19,6 +19,8 @@ class ControllerModuleInformation extends Controller {
 				
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
+		$this->data['text_yes'] = $this->language->get('text_yes');
+		$this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_content_top'] = $this->language->get('text_content_top');
@@ -26,6 +28,7 @@ class ControllerModuleInformation extends Controller {
 		$this->data['text_column_left'] = $this->language->get('text_column_left');
 		$this->data['text_column_right'] = $this->language->get('text_column_right');
 		
+		$this->data['entry_admin'] = $this->language->get('entry_admin');
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
 		$this->data['entry_position'] = $this->language->get('entry_position');
 		$this->data['entry_status'] = $this->language->get('entry_status');
@@ -35,7 +38,7 @@ class ControllerModuleInformation extends Controller {
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		$this->data['button_add_module'] = $this->language->get('button_add_module');
 		$this->data['button_remove'] = $this->language->get('button_remove');
-
+		
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -58,18 +61,24 @@ class ControllerModuleInformation extends Controller {
 		
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('module/information', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('module/store', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 		
-		$this->data['action'] = $this->url->link('module/information', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['action'] = $this->url->link('module/store', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
-				
-		if (isset($this->request->post['information_module'])) {
-			$modules = explode(',', $this->request->post['information_module']);
-		} elseif ($this->config->get('information_module') != '') {
-			$modules = explode(',', $this->config->get('information_module'));
+
+		if (isset($this->request->post['store_admin'])) {
+			$this->data['store_admin'] = $this->request->post['store_admin'];
+		} else {
+			$this->data['store_admin'] = $this->config->get('store_admin');
+		}	
+			
+		if (isset($this->request->post['store_module'])) {
+			$modules = explode(',', $this->request->post['store_module']);
+		} elseif ($this->config->get('store_module') != '') { 
+			$modules = explode(',', $this->config->get('store_module'));
 		} else {
 			$modules = array();
 		}		
@@ -79,40 +88,40 @@ class ControllerModuleInformation extends Controller {
 		$this->data['layouts'] = $this->model_design_layout->getLayouts();
 				
 		foreach ($modules as $module) {
-			if (isset($this->request->post['information_' . $module . '_layout_id'])) {
-				$this->data['information_' . $module . '_layout_id'] = $this->request->post['information_' . $module . '_layout_id'];
+			if (isset($this->request->post['store_' . $module . '_layout_id'])) {
+				$this->data['store_' . $module . '_layout_id'] = $this->request->post['store_' . $module . '_layout_id'];
 			} else {
-				$this->data['information_' . $module . '_layout_id'] = $this->config->get('information_' . $module . '_layout_id');
+				$this->data['store_' . $module . '_layout_id'] = $this->config->get('store_' . $module . '_layout_id');
 			}	
 			
-			if (isset($this->request->post['information_' . $module . '_position'])) {
-				$this->data['information_' . $module . '_position'] = $this->request->post['information_' . $module . '_position'];
+			if (isset($this->request->post['store_' . $module . '_position'])) {
+				$this->data['store_' . $module . '_position'] = $this->request->post['store_' . $module . '_position'];
 			} else {
-				$this->data['information_' . $module . '_position'] = $this->config->get('information_' . $module . '_position');
+				$this->data['store_' . $module . '_position'] = $this->config->get('store_' . $module . '_position');
 			}	
 			
-			if (isset($this->request->post['information_' . $module . '_status'])) {
-				$this->data['information_' . $module . '_status'] = $this->request->post['information_' . $module . '_status'];
+			if (isset($this->request->post['store_' . $module . '_status'])) {
+				$this->data['store_' . $module . '_status'] = $this->request->post['store_' . $module . '_status'];
 			} else {
-				$this->data['information_' . $module . '_status'] = $this->config->get('information_' . $module . '_status');
+				$this->data['store_' . $module . '_status'] = $this->config->get('store_' . $module . '_status');
 			}	
 						
-			if (isset($this->request->post['information_' . $module . '_sort_order'])) {
-				$this->data['information_' . $module . '_sort_order'] = $this->request->post['information_' . $module . '_sort_order'];
+			if (isset($this->request->post['store_' . $module . '_sort_order'])) {
+				$this->data['store_' . $module . '_sort_order'] = $this->request->post['store_' . $module . '_sort_order'];
 			} else {
-				$this->data['information_' . $module . '_sort_order'] = $this->config->get('information_' . $module . '_sort_order');
+				$this->data['store_' . $module . '_sort_order'] = $this->config->get('store_' . $module . '_sort_order');
 			}				
 		}
 		
 		$this->data['modules'] = $modules;
 		
-		if (isset($this->request->post['information_module'])) {
-			$this->data['information_module'] = $this->request->post['information_module'];
+		if (isset($this->request->post['store_module'])) {
+			$this->data['store_module'] = $this->request->post['store_module'];
 		} else {
-			$this->data['information_module'] = $this->config->get('information_module');
+			$this->data['store_module'] = $this->config->get('store_module');
 		}
-
-		$this->template = 'module/information.tpl';
+				
+		$this->template = 'module/store.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer',
@@ -122,7 +131,7 @@ class ControllerModuleInformation extends Controller {
 	}
 	
 	private function validate() {
-		if (!$this->user->hasPermission('modify', 'module/information')) {
+		if (!$this->user->hasPermission('modify', 'module/store')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
