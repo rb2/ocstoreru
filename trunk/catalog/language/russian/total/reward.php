@@ -1,17 +1,17 @@
 <?php
-// Heading 
-$_['heading_title'] = 'Use Reward Points (Available %s)';
+// Heading
+$_['heading_title'] = 'Использование бонусных баллов (доступно %s)';
 
 // Text
-$_['text_reward']   = 'Reward Points(%s):';
-$_['text_order_id'] = 'Order ID: #%s';
-$_['text_success']  = 'Success: Your reward points discount has been applied!';
+$_['text_reward']   = 'Бонусные баллоы (%s):';
+$_['text_order_id'] = 'Заказ №: %s';
+$_['text_success']  = 'Ваши бонусные баллы успешно применены!';
 
 // Entry
-$_['entry_reward']  = 'Points to use (Max %s):';
+$_['entry_reward']  = 'Использовать баллов (не более %s):';
 
 // Error
-$_['error_empty']   = 'Error: Please enter the amount of points you wish to use!';
-$_['error_points']  = 'Error: You don\'t have %s reward points!';
-$_['error_maximum'] = 'Error: The maximum number of points that can be applied is %s!';
+$_['error_empty']   = 'Ошибка: Пожалуйста введите количество бонусных баллов, которые нужно потратить!';
+$_['error_points']  = 'Ошибка: У вас нет столько бонусных баллов!';
+$_['error_maximum'] = 'Ошибка: Можно потратить не более %s бонусных баллов!';
 ?>

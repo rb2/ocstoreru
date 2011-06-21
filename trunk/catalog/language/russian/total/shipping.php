@@ -1,19 +1,19 @@
 <?php
-// Heading 
-$_['heading_title']     = 'Estimate Shipping &amp; Taxes';
+// Heading
+$_['heading_title']     = 'Предварительная стоимость доставки и налоги';
 // Text
-$_['text_shipping']     = 'Enter your destination to get a shipping estimate.';
-$_['text_success']      = 'Success: Your shipping estimate has been applied!';
+$_['text_shipping']     = 'Укажите адрес получателя для оценки стоимости доставки.';
+$_['text_success']      = 'Рассчет доставки выполнен успешно!';
 
 // Entry
-$_['entry_country']     = 'Country:';
-$_['entry_zone']        = 'Region / State:';
-$_['entry_postcode']    = 'Post Code:';
+$_['entry_country']     = 'Страна:';
+$_['entry_zone']        = 'Регион / Область:';
+$_['entry_postcode']    = 'Индекс:';
 
 // Error
-$_['error_postcode']    = 'Postcode must be between 2 and 10 characters!';
-$_['error_country']     = 'Please select a country!';
-$_['error_zone']        = 'Please select a region / state!';
-$_['error_shipping']    = 'Error: Shipping method required!';
-$_['error_no_shipping'] = 'Error: No Shipping options are available. Please <a href="%s">contact us</a> for assistance!';
+$_['error_postcode']    = 'Индекс должен быть от 2 до 10 символов!';
+$_['error_country']     = 'Пожалуйста, укажите Страну!';
+$_['error_zone']        = 'Пожалуйста, укажите Ваш Регион / Область!';
+$_['error_shipping']    = 'Ошибка: Вы должны выбрать способ доставки!';
+$_['error_no_shipping'] = 'Ошибка: Доставка по данному адресу невозможна! Обратитесь к <a href="%s">Администрации</a>!';
 ?>

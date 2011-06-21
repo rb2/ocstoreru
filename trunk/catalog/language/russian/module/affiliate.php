@@ -1,15 +1,15 @@
 <?php
 // Heading 
-$_['heading_title']    = 'Affiliate';
+$_['heading_title']    = 'Партнерский раздел';
 
 // Text
-$_['text_register']    = 'Зарегистрироваться';
-$_['text_login']       = 'Имя';
+$_['text_register']    = 'Регистрация';
+$_['text_login']       = 'Войти';
 $_['text_logout']      = 'Выйти';
 $_['text_forgotten']   = 'Забыли пароль?';
 $_['text_account']     = 'Личный кабинет';
-$_['text_edit']        = 'Редактировать профиль';
+$_['text_edit']        = 'Редактировать учетную запись';
 $_['text_password']    = 'Пароль';
-$_['text_payment']     = 'Payment Options';
-$_['text_tracking']    = 'Affiliate Tracking';
-$_['text_transaction'] = 'Transactions';
+$_['text_payment']     = 'Способ оплаты';
+$_['text_tracking']    = 'Реферальный код';
+$_['text_transaction'] = 'Операции';

@@ -1,5 +1,5 @@
 <?php
 // Text
 $_['text_title']       = 'Самовывоз';
-$_['text_description'] = 'Самовывоз';
+$_['text_description'] = 'Самовывоз со склада магазина';
 ?>

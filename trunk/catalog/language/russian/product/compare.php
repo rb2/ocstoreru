@@ -3,7 +3,7 @@
 $_['heading_title']     = 'Сравнение товаров';
  
 // Text
-$_['text_product']      = 'Product Details';
+$_['text_product']      = 'Краткое описание';
 $_['text_name']         = 'Товар';
 $_['text_image']        = 'Изображение';
 $_['text_price']        = 'Цена';
