@@ -90,12 +90,12 @@ final class Mail {
 
 		if ($this->protocol != 'mail') {
 			$header .= 'To: ' . $to . $this->newline;
-			$header .= 'Subject: ' . $this->subject . $this->newline;
+			$header .= 'Subject: ' . '=?utf-8?B?'.base64_encode($this->subject).'?=' . $this->newline;
 		}
 		
 		$header .= 'Date: ' . date("D, d M Y H:i:s O") . $this->newline;
 		$header .= 'From: ' . '=?UTF-8?B?'.base64_encode($this->sender).'?=' . '<' . $this->from . '>' . $this->newline;
-		$header .= 'Reply-To: ' . $this->sender . '<' . $this->from . '>' . $this->newline;
+		$header .= 'Reply-To: ' . '=?utf-8?B?'.base64_encode($this->sender).'?=' . '<' . $this->from . '>' . $this->newline;
 		$header .= 'Return-Path: ' . $this->from . $this->newline;
 		$header .= 'X-Mailer: PHP/' . phpversion() . $this->newline;
 		$header .= 'MIME-Version: 1.0' . $this->newline;
