@@ -6,7 +6,7 @@ Options +FollowSymlinks
 Options -Indexes
 
 # Закрыть доступ к файлам шаблонов
-<FilesMatch "\.(tpl|ini|log|txt)">
+<FilesMatch "\.(tpl|ini|log)">
 Order deny,allow
 Deny from all
 </FilesMatch>
@@ -27,3 +27,15 @@ RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
 
 # 2. If your cart has magic quotes enabled, This may work to disable it:
 # php_flag magic_quotes_gpc Off
+
+# 3. Set max upload file size. Most hosts will limit this and not allow it to be overridden but you can try
+# php_value upload_max_filesize 999M
+
+# 4. set max post size. uncomment this line if you have a lot of product options or are getting errors where forms are not saving all fields
+# php_value post_max_size 999M
+
+# 5. set max time script can take. uncomment this line if you have a lot of product options or are getting errors where forms are not saving all fields
+# php_value max_execution_time 200
+
+# 6. set max time for input to be recieved. Uncomment this line if you have a lot of product options or are getting errors where forms are not saving all fields
+# php_value max_input_time 200
