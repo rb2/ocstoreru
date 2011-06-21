@@ -1,26 +1,26 @@
 <?php 
-class ControllerLocalisationStockStatus extends Controller {
-	private $error = array(); 
+class ControllerLocalisationReturnStatus extends Controller { 
+	private $error = array();
    
   	public function index() {
-		$this->load->language('localisation/stock_status');
+		$this->load->language('localisation/return_status');
 	
     	$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('localisation/stock_status');
+		$this->load->model('localisation/return_status');
 		
     	$this->getList();
   	}
               
   	public function insert() {
-		$this->load->language('localisation/stock_status');
+		$this->load->language('localisation/return_status');
 	
     	$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('localisation/stock_status');
+		$this->load->model('localisation/return_status');
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-      		$this->model_localisation_stock_status->addStockStatus($this->request->post);
+      		$this->model_localisation_return_status->addReturnStatus($this->request->post);
 		  	
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,21 +38,21 @@ class ControllerLocalisationStockStatus extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 						
-      		$this->redirect($this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+      		$this->redirect($this->url->link('localisation/return_status', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 	
     	$this->getForm();
   	}
 
   	public function update() {
-		$this->load->language('localisation/stock_status');
+		$this->load->language('localisation/return_status');
 	
     	$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('localisation/stock_status');
+		$this->load->model('localisation/return_status');
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-	  		$this->model_localisation_stock_status->editStockStatus($this->request->get['stock_status_id'], $this->request->post);
+	  		$this->model_localisation_return_status->editReturnStatus($this->request->get['return_status_id'], $this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -70,22 +70,22 @@ class ControllerLocalisationStockStatus extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 			
-			$this->redirect($this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->redirect($this->url->link('localisation/return_status', 'token=' . $this->session->data['token'] . $url, 'SSL'));
     	}
 	
     	$this->getForm();
   	}
 
   	public function delete() {
-		$this->load->language('localisation/stock_status');
+		$this->load->language('localisation/return_status');
 	
     	$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('localisation/stock_status');
+		$this->load->model('localisation/return_status');
 		
     	if (isset($this->request->post['selected']) && $this->validateDelete()) {
-			foreach ($this->request->post['selected'] as $stock_status_id) {
-				$this->model_localisation_stock_status->deleteStockStatus($stock_status_id);
+			foreach ($this->request->post['selected'] as $return_status_id) {
+				$this->model_localisation_return_status->deleteReturnStatus($return_status_id);
 			}
 			      		
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -104,7 +104,7 @@ class ControllerLocalisationStockStatus extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 			
-			$this->redirect($this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->redirect($this->url->link('localisation/return_status', 'token=' . $this->session->data['token'] . $url, 'SSL'));
    		}
 	
     	$this->getList();
@@ -153,14 +153,14 @@ class ControllerLocalisationStockStatus extends Controller {
 
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+			'href'      => $this->url->link('localisation/return_status', 'token=' . $this->session->data['token'] . $url, 'SSL'),
       		'separator' => ' :: '
    		);
 							
-		$this->data['insert'] = $this->url->link('localisation/stock_status/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		$this->data['delete'] = $this->url->link('localisation/stock_status/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');	
+		$this->data['insert'] = $this->url->link('localisation/return_status/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['delete'] = $this->url->link('localisation/return_status/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');	
 
-		$this->data['stock_statuses'] = array();
+		$this->data['return_statuses'] = array();
 
 		$data = array(
 			'sort'  => $sort,
@@ -169,23 +169,23 @@ class ControllerLocalisationStockStatus extends Controller {
 			'limit' => $this->config->get('config_admin_limit')
 		);
 		
-		$stock_status_total = $this->model_localisation_stock_status->getTotalStockStatuses();
+		$return_status_total = $this->model_localisation_return_status->getTotalReturnStatuses();
 	
-		$results = $this->model_localisation_stock_status->getStockStatuses($data);
+		$results = $this->model_localisation_return_status->getReturnStatuses($data);
  
     	foreach ($results as $result) {
 			$action = array();
 			
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),
-				'href' => $this->url->link('localisation/stock_status/update', 'token=' . $this->session->data['token'] . '&stock_status_id=' . $result['stock_status_id'] . $url, 'SSL')
+				'href' => $this->url->link('localisation/return_status/update', 'token=' . $this->session->data['token'] . '&return_status_id=' . $result['return_status_id'] . $url, 'SSL')
 			);
 						
-			$this->data['stock_statuses'][] = array(
-				'stock_status_id' => $result['stock_status_id'],
-				'name'            => $result['name'] . (($result['stock_status_id'] == $this->config->get('config_stock_status_id')) ? $this->language->get('text_default') : null),
-				'selected'        => isset($this->request->post['selected']) && in_array($result['stock_status_id'], $this->request->post['selected']),
-				'action'          => $action
+			$this->data['return_statuses'][] = array(
+				'return_status_id' => $result['return_status_id'],
+				'name'          => $result['name'] . (($result['return_status_id'] == $this->config->get('config_return_status_id')) ? $this->language->get('text_default') : null),
+				'selected'      => isset($this->request->post['selected']) && in_array($result['return_status_id'], $this->request->post['selected']),
+				'action'        => $action
 			);
 		}	
 	
@@ -225,7 +225,7 @@ class ControllerLocalisationStockStatus extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 		
-		$this->data['sort_name'] = $this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
+		$this->data['sort_name'] = $this->url->link('localisation/return_status', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
 		
 		$url = '';
 
@@ -238,18 +238,18 @@ class ControllerLocalisationStockStatus extends Controller {
 		}
 
 		$pagination = new Pagination();
-		$pagination->total = $stock_status_total;
+		$pagination->total = $return_status_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('localisation/return_status', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
 
-		$this->template = 'localisation/stock_status_list.tpl';
+		$this->template = 'localisation/return_status_list.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer',
@@ -262,12 +262,9 @@ class ControllerLocalisationStockStatus extends Controller {
      	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['entry_name'] = $this->language->get('entry_name');
-		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
-
-    	$this->data['tab_general'] = $this->language->get('tab_general');
     
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -305,31 +302,31 @@ class ControllerLocalisationStockStatus extends Controller {
 
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+			'href'      => $this->url->link('localisation/return_status', 'token=' . $this->session->data['token'] . $url, 'SSL'),
       		'separator' => ' :: '
    		);
 		
-		if (!isset($this->request->get['stock_status_id'])) {
-			$this->data['action'] = $this->url->link('localisation/stock_status/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		if (!isset($this->request->get['return_status_id'])) {
+			$this->data['action'] = $this->url->link('localisation/return_status/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		} else {
-			$this->data['action'] = $this->url->link('localisation/stock_status/update', 'token=' . $this->session->data['token'] . '&stock_status_id=' . $this->request->get['stock_status_id'] . $url, 'SSL');
+			$this->data['action'] = $this->url->link('localisation/return_status/update', 'token=' . $this->session->data['token'] . '&return_status_id=' . $this->request->get['return_status_id'] . $url, 'SSL');
 		}
 			
-		$this->data['cancel'] = $this->url->link('localisation/stock_status', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['cancel'] = $this->url->link('localisation/return_status', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		
 		$this->load->model('localisation/language');
 		
 		$this->data['languages'] = $this->model_localisation_language->getLanguages();
 		
-		if (isset($this->request->post['stock_status'])) {
-			$this->data['stock_status'] = $this->request->post['stock_status'];
-		} elseif (isset($this->request->get['stock_status_id'])) {
-			$this->data['stock_status'] = $this->model_localisation_stock_status->getStockStatusDescriptions($this->request->get['stock_status_id']);
+		if (isset($this->request->post['return_status'])) {
+			$this->data['return_status'] = $this->request->post['return_status'];
+		} elseif (isset($this->request->get['return_status_id'])) {
+			$this->data['return_status'] = $this->model_localisation_return_status->getReturnStatusDescriptions($this->request->get['return_status_id']);
 		} else {
-			$this->data['stock_status'] = array();
+			$this->data['return_status'] = array();
 		}
 
-		$this->template = 'localisation/stock_status_form.tpl';
+		$this->template = 'localisation/return_status_form.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer',
@@ -339,11 +336,11 @@ class ControllerLocalisationStockStatus extends Controller {
   	}
   	
 	private function validateForm() {
-    	if (!$this->user->hasPermission('modify', 'localisation/stock_status')) {
+    	if (!$this->user->hasPermission('modify', 'localisation/return_status')) {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 	
-    	foreach ($this->request->post['stock_status'] as $language_id => $value) {
+    	foreach ($this->request->post['return_status'] as $language_id => $value) {
       		if ((strlen(utf8_decode($value['name'])) < 3) || (strlen(utf8_decode($value['name'])) > 32)) {
         		$this->error['name'][$language_id] = $this->language->get('error_name');
       		}
@@ -357,22 +354,21 @@ class ControllerLocalisationStockStatus extends Controller {
   	}
 
   	private function validateDelete() {
-		if (!$this->user->hasPermission('modify', 'localisation/stock_status')) {
+		if (!$this->user->hasPermission('modify', 'localisation/return_status')) {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 		
-		$this->load->model('setting/store');
-		$this->load->model('catalog/product');
+		$this->load->model('sale/return');
 		
-		foreach ($this->request->post['selected'] as $stock_status_id) {
-			if ($this->config->get('config_stock_status_id') == $stock_status_id) {
-				$this->error['warning'] = $this->language->get('error_default');
-			}
-						
-			$product_total = $this->model_catalog_product->getTotalProductsByStockStatusId($stock_status_id);
+		foreach ($this->request->post['selected'] as $return_status_id) {
+    		if ($this->config->get('config_return_status_id') == $return_status_id) {
+	  			$this->error['warning'] = $this->language->get('error_default');	
+			}  
+			
+			$return_total = $this->model_sale_return->getTotalReturnsByReturnStatusId($return_status_id);
 		
-			if ($product_total) {
-	  			$this->error['warning'] = sprintf($this->language->get('error_product'), $product_total);	
+			if ($return_total) {
+	  			$this->error['warning'] = sprintf($this->language->get('error_return'), $return_total);	
 			}  
 	  	}
 		

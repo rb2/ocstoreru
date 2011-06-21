@@ -5,7 +5,7 @@ class ControllerLocalisationCurrency extends Controller {
 	public function index() {
 		$this->load->language('localisation/currency');
 
-		$this->document->title = $this->language->get('heading_title');
+		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('localisation/currency');
 		
@@ -15,7 +15,7 @@ class ControllerLocalisationCurrency extends Controller {
 	public function insert() {
 		$this->load->language('localisation/currency');
 
-		$this->document->title = $this->language->get('heading_title');
+		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('localisation/currency');
 		
@@ -26,10 +26,6 @@ class ControllerLocalisationCurrency extends Controller {
 			
 			$url = '';
 			
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -37,8 +33,12 @@ class ControllerLocalisationCurrency extends Controller {
 			if (isset($this->request->get['order'])) {
 				$url .= '&order=' . $this->request->get['order'];
 			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
 			
-			$this->redirect(HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url);
+			$this->redirect($this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
@@ -47,7 +47,7 @@ class ControllerLocalisationCurrency extends Controller {
 	public function update() {
 		$this->load->language('localisation/currency');
 
-		$this->document->title = $this->language->get('heading_title');
+		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('localisation/currency');
 		
@@ -58,10 +58,6 @@ class ControllerLocalisationCurrency extends Controller {
 
 			$url = '';
 			
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -69,8 +65,12 @@ class ControllerLocalisationCurrency extends Controller {
 			if (isset($this->request->get['order'])) {
 				$url .= '&order=' . $this->request->get['order'];
 			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
 					
-			$this->redirect(HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url);
+			$this->redirect($this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
@@ -79,7 +79,7 @@ class ControllerLocalisationCurrency extends Controller {
 	public function delete() {
 		$this->load->language('localisation/currency');
 
-		$this->document->title = $this->language->get('heading_title');
+		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('localisation/currency');
 		
@@ -92,10 +92,6 @@ class ControllerLocalisationCurrency extends Controller {
 
 			$url = '';
 			
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -104,52 +100,17 @@ class ControllerLocalisationCurrency extends Controller {
 				$url .= '&order=' . $this->request->get['order'];
 			}
 
-			$this->redirect(HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url);
-		}
-
-		$this->getList();
-	}
-
-	public function enable() {
-		$this->changeStatusCurrencies(1);
-	}
-	
-	public function disable() {
-		$this->changeStatusCurrencies(0);
-	}
-	
-	private function changeStatusCurrencies($status) {
-		$this->load->language('localisation/currency');
-		$this->load->model('localisation/currency');
-		
-		if (isset($this->request->post['selected']) && $this->user->hasPermission('modify', 'localisation/currency')) {
-			$this->model_localisation_currency->changeStatusCurrencies($this->request->post['selected'], $status);
-			
-			$url = '';
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
-			$this->session->data['success'] = $this->language->get('text_success');
-			$this->redirect(HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url);
+
+			$this->redirect($this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
-		
-		$this->document->title = $this->language->get('heading_title');
+
 		$this->getList();
 	}
 
 	private function getList() {
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-		
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -161,13 +122,15 @@ class ControllerLocalisationCurrency extends Controller {
 		} else {
 			$order = 'ASC';
 		}
-
-		$url = '';
-	
+		
 		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
 		}
 		
+		$url = '';
+	
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -175,25 +138,27 @@ class ControllerLocalisationCurrency extends Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+		
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
 
-  		$this->document->breadcrumbs = array();
+  		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url,
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . $url, 'SSL'),
       		'separator' => ' :: '
    		);
 		
-		$this->data['insert'] = HTTPS_SERVER . 'index.php?route=localisation/currency/insert&token=' . $this->session->data['token'] . $url;
-		$this->data['delete'] = HTTPS_SERVER . 'index.php?route=localisation/currency/delete&token=' . $this->session->data['token'] . $url;
-		$this->data['enable'] = HTTPS_SERVER . 'index.php?route=localisation/currency/enable&token=' . $this->session->data['token'] . $url;
-		$this->data['disable'] = HTTPS_SERVER . 'index.php?route=localisation/currency/disable&token=' . $this->session->data['token'] . $url;
+		$this->data['insert'] = $this->url->link('localisation/currency/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['delete'] = $this->url->link('localisation/currency/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		
 		$this->data['currencies'] = array();
 
@@ -213,18 +178,17 @@ class ControllerLocalisationCurrency extends Controller {
 			
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),
-				'href' => HTTPS_SERVER . 'index.php?route=localisation/currency/update&token=' . $this->session->data['token'] . '&currency_id=' . $result['currency_id'] . $url
+				'href' => $this->url->link('localisation/currency/update', 'token=' . $this->session->data['token'] . '&currency_id=' . $result['currency_id'] . $url, 'SSL')
 			);
 						
 			$this->data['currencies'][] = array(
 				'currency_id'   => $result['currency_id'],
-				'title'         => $result['title'] . (($result['code'] == $this->config->get('config_currency')) ? $this->language->get('text_default') : NULL),
+				'title'         => $result['title'] . (($result['code'] == $this->config->get('config_currency')) ? $this->language->get('text_default') : null),
 				'code'          => $result['code'],
 				'value'         => $result['value'],
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
 				'selected'      => isset($this->request->post['selected']) && in_array($result['currency_id'], $this->request->post['selected']),
-				'action'        => $action,
-				'statusclass'   => $result['status'] ? "on" : "off"
+				'action'        => $action
 			);
 		}	
 	
@@ -240,8 +204,6 @@ class ControllerLocalisationCurrency extends Controller {
 
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
-		$this->data['button_enable'] = $this->language->get('button_enable');
-		$this->data['button_disable'] = $this->language->get('button_disable');
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -269,10 +231,10 @@ class ControllerLocalisationCurrency extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 		
-		$this->data['sort_title'] = HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . '&sort=title' . $url;
-		$this->data['sort_code'] = HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . '&sort=code' . $url;
-		$this->data['sort_value'] = HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . '&sort=value' . $url;
-		$this->data['sort_date_modified'] = HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . '&sort=date_modified' . $url;
+		$this->data['sort_title'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . '&sort=title' . $url, 'SSL');
+		$this->data['sort_code'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . '&sort=code' . $url, 'SSL');
+		$this->data['sort_value'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . '&sort=value' . $url, 'SSL');
+		$this->data['sort_date_modified'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . '&sort=date_modified' . $url, 'SSL');
 		
 		$url = '';
 
@@ -289,20 +251,20 @@ class ControllerLocalisationCurrency extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url . '&page={page}';
+		$pagination->url = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 		
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
-		
+
 		$this->template = 'localisation/currency_list.tpl';
 		$this->children = array(
-			'common/header',	
-			'common/footer'	
+			'common/header',
+			'common/footer',
 		);
-		
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+				
+		$this->response->setOutput($this->render());
 	}
 
 	private function getForm() {
@@ -344,10 +306,6 @@ class ControllerLocalisationCurrency extends Controller {
 		
 		$url = '';
 			
-		if (isset($this->request->get['page'])) {
-			$url .= '&page=' . $this->request->get['page'];
-		}
-		
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -355,28 +313,32 @@ class ControllerLocalisationCurrency extends Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+		
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
 
-  		$this->document->breadcrumbs = array();
+  		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url,
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . $url, 'SSL'),      		
       		'separator' => ' :: '
    		);
 		
 		if (!isset($this->request->get['currency_id'])) {
-			$this->data['action'] = HTTPS_SERVER . 'index.php?route=localisation/currency/insert&token=' . $this->session->data['token'] . $url;
+			$this->data['action'] = $this->url->link('localisation/currency/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		} else {
-			$this->data['action'] = HTTPS_SERVER . 'index.php?route=localisation/currency/update&token=' . $this->session->data['token'] . '&currency_id=' . $this->request->get['currency_id'] . $url;
+			$this->data['action'] = $this->url->link('localisation/currency/update', 'token=' . $this->session->data['token'] . '&currency_id=' . $this->request->get['currency_id'] . $url, 'SSL');
 		}
 				
-		$this->data['cancel'] = HTTPS_SERVER . 'index.php?route=localisation/currency&token=' . $this->session->data['token'] . $url;
+		$this->data['cancel'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		if (isset($this->request->get['currency_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$currency_info = $this->model_localisation_currency->getCurrency($this->request->get['currency_id']);
@@ -437,14 +399,14 @@ class ControllerLocalisationCurrency extends Controller {
 		} else {
       		$this->data['status'] = '';
     	}
-		
+
 		$this->template = 'localisation/currency_form.tpl';
 		$this->children = array(
-			'common/header',	
-			'common/footer'	
+			'common/header',
+			'common/footer',
 		);
-		
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+				
+		$this->response->setOutput($this->render());
 	}
 	
 	private function validateForm() { 
@@ -461,9 +423,9 @@ class ControllerLocalisationCurrency extends Controller {
 		}
 
 		if (!$this->error) { 
-			return TRUE;
+			return true;
 		} else {
-			return FALSE;
+			return false;
 		}
 	}
 
@@ -498,9 +460,9 @@ class ControllerLocalisationCurrency extends Controller {
 		}
 		
 		if (!$this->error) {
-			return TRUE;
+			return true;
 		} else {
-			return FALSE;
+			return false;
 		}
 	}	
 }
