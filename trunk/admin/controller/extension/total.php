@@ -3,19 +3,19 @@ class ControllerExtensionTotal extends Controller {
 	public function index() {
 		$this->load->language('extension/total');
 		 
-		$this->document->title = $this->language->get('heading_title'); 
+		$this->document->setTitle($this->language->get('heading_title')); 
 
-   		$this->document->breadcrumbs = array();
+   		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=extension/total&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('extension/total', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 		
@@ -72,17 +72,17 @@ class ControllerExtensionTotal extends Controller {
 				if (!in_array($extension, $extensions)) {
 					$action[] = array(
 						'text' => $this->language->get('text_install'),
-						'href' => HTTPS_SERVER . 'index.php?route=extension/total/install&token=' . $this->session->data['token'] . '&extension=' . $extension
+						'href' => $this->url->link('extension/total/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL')
 					);
 				} else {
 					$action[] = array(
 						'text' => $this->language->get('text_edit'),
-						'href' => HTTPS_SERVER . 'index.php?route=total/' . $extension . '&token=' . $this->session->data['token']
+						'href' => $this->url->link('total/' . $extension . '', 'token=' . $this->session->data['token'], 'SSL')
 					);
 								
 					$action[] = array(
 						'text' => $this->language->get('text_uninstall'),
-						'href' => HTTPS_SERVER . 'index.php?route=extension/total/uninstall&token=' . $this->session->data['token'] . '&extension=' . $extension
+						'href' => $this->url->link('extension/total/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL')
 					);
 				}
 										
@@ -90,26 +90,25 @@ class ControllerExtensionTotal extends Controller {
 					'name'       => $this->language->get('heading_title'),
 					'status'     => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 					'sort_order' => $this->config->get($extension . '_sort_order'),
-					'action'     => $action,
-					'statusclass'=> $this->config->get($extension . '_status') ? "on" : "off"
+					'action'     => $action
 				);
 			}
 		}
-		
+
 		$this->template = 'extension/total.tpl';
 		$this->children = array(
-			'common/header',	
-			'common/footer'	
+			'common/header',
+			'common/footer',
 		);
-		
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+				
+		$this->response->setOutput($this->render());
 	}
 	
 	public function install() {
 		if (!$this->user->hasPermission('modify', 'extension/total')) {
 			$this->session->data['error'] = $this->language->get('error_permission'); 
 			
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/total&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/total', 'token=' . $this->session->data['token'], 'SSL'));
 		} else {				
 			$this->load->model('setting/extension');
 		
@@ -121,6 +120,7 @@ class ControllerExtensionTotal extends Controller {
 			$this->model_user_user_group->addPermission($this->user->getId(), 'modify', 'total/' . $this->request->get['extension']);
 
 			require_once(DIR_APPLICATION . 'controller/total/' . $this->request->get['extension'] . '.php');
+			
 			$class = 'ControllerTotal' . str_replace('_', '', $this->request->get['extension']);
 			$class = new $class($this->registry);
 			
@@ -128,7 +128,7 @@ class ControllerExtensionTotal extends Controller {
 				$class->install();
 			}
 			
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/total&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/total', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 	}
 	
@@ -136,7 +136,7 @@ class ControllerExtensionTotal extends Controller {
 		if (!$this->user->hasPermission('modify', 'extension/total')) {
 			$this->session->data['error'] = $this->language->get('error_permission'); 
 			
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/total&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/total', 'token=' . $this->session->data['token'], 'SSL'));
 		} else {			
 			$this->load->model('setting/extension');
 			$this->load->model('setting/setting');
@@ -146,6 +146,7 @@ class ControllerExtensionTotal extends Controller {
 			$this->model_setting_setting->deleteSetting($this->request->get['extension']);
 		
 			require_once(DIR_APPLICATION . 'controller/total/' . $this->request->get['extension'] . '.php');
+			
 			$class = 'ControllerTotal' . str_replace('_', '', $this->request->get['extension']);
 			$class = new $class($this->registry);
 			
@@ -153,7 +154,7 @@ class ControllerExtensionTotal extends Controller {
 				$class->uninstall();
 			}
 		
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/total&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/total', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 	}	
 }

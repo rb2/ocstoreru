@@ -3,19 +3,19 @@ class ControllerExtensionFeed extends Controller {
 	public function index() {
 		$this->load->language('extension/feed');
 		 
-		$this->document->title = $this->language->get('heading_title'); 
+		$this->document->setTitle($this->language->get('heading_title')); 
 
-  		$this->document->breadcrumbs = array();
+  		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=extension/feed&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 		
@@ -71,43 +71,42 @@ class ControllerExtensionFeed extends Controller {
 				if (!in_array($extension, $extensions)) {
 					$action[] = array(
 						'text' => $this->language->get('text_install'),
-						'href' => HTTPS_SERVER . 'index.php?route=extension/feed/install&token=' . $this->session->data['token'] . '&extension=' . $extension
+						'href' => $this->url->link('extension/feed/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL')
 					);
 				} else {
 					$action[] = array(
 						'text' => $this->language->get('text_edit'),
-						'href' => HTTPS_SERVER . 'index.php?route=feed/' . $extension . '&token=' . $this->session->data['token']
+						'href' => $this->url->link('feed/' . $extension . '', 'token=' . $this->session->data['token'], 'SSL')
 					);
 							
 					$action[] = array(
 						'text' => $this->language->get('text_uninstall'),
-						'href' => HTTPS_SERVER . 'index.php?route=extension/feed/uninstall&token=' . $this->session->data['token'] . '&extension=' . $extension
+						'href' => $this->url->link('extension/feed/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL')
 					);
 				}
 									
 				$this->data['extensions'][] = array(
-					'name'       => $this->language->get('heading_title'),
-					'status'     => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-					'action'     => $action,
-					'statusclass'=> $this->config->get($extension . '_status') ? "on" : "off"
+					'name'   => $this->language->get('heading_title'),
+					'status' => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+					'action' => $action
 				);
 			}
 		}
-		
+
 		$this->template = 'extension/feed.tpl';
 		$this->children = array(
-			'common/header',	
-			'common/footer'	
+			'common/header',
+			'common/footer',
 		);
-		
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+				
+		$this->response->setOutput($this->render());
 	}
 	
 	public function install() {
     	if (!$this->user->hasPermission('modify', 'extension/feed')) {
       		$this->session->data['error'] = $this->language->get('error_permission'); 
 			
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/feed&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL'));
     	} else {
 			$this->load->model('setting/extension');
 		
@@ -119,6 +118,7 @@ class ControllerExtensionFeed extends Controller {
 			$this->model_user_user_group->addPermission($this->user->getId(), 'modify', 'feed/' . $this->request->get['extension']);
 		
 			require_once(DIR_APPLICATION . 'controller/feed/' . $this->request->get['extension'] . '.php');
+			
 			$class = 'ControllerFeed' . str_replace('_', '', $this->request->get['extension']);
 			$class = new $class($this->registry);
 			
@@ -126,7 +126,7 @@ class ControllerExtensionFeed extends Controller {
 				$class->install();
 			}
 		
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/feed&token=' . $this->session->data['token']);			
+			$this->redirect($this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL'));			
 		}
 	}
 	
@@ -134,7 +134,7 @@ class ControllerExtensionFeed extends Controller {
     	if (!$this->user->hasPermission('modify', 'extension/feed')) {
       		$this->session->data['error'] = $this->language->get('error_permission'); 
 			
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/feed&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL'));
     	} else {		
 			$this->load->model('setting/extension');
 			$this->load->model('setting/setting');
@@ -144,6 +144,7 @@ class ControllerExtensionFeed extends Controller {
 			$this->model_setting_setting->deleteSetting($this->request->get['extension']);
 		
 			require_once(DIR_APPLICATION . 'controller/feed/' . $this->request->get['extension'] . '.php');
+			
 			$class = 'ControllerFeed' . str_replace('_', '', $this->request->get['extension']);
 			$class = new $class($this->registry);
 			
@@ -151,7 +152,7 @@ class ControllerExtensionFeed extends Controller {
 				$class->uninstall();
 			}
 		
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/feed&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 	}
 }
