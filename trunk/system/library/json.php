@@ -2,7 +2,7 @@
 final class Json {
 	static public function encode($data) {
 		if (function_exists('json_encode')) {
-			return json_encode($data);
+			return json_encode($data) . "\n\n\n\n\n\n";
 		} else {
 			switch (gettype($data)) {
 				case 'boolean':
@@ -12,7 +12,51 @@ final class Json {
       				return $data;
     			case 'resource':
     			case 'string':
-      				return '"' . str_replace(array("\r", "\n", "<", ">", "&"), array('\r', '\n', '\x3c', '\x3e', '\x26'), addslashes($data)) . '"';
+					# Escape non-printable or Non-ASCII characters. 
+					# I also put the \\ character first, as suggested in comments on the 'addclashes' page. 
+					$json = ''; 
+					
+					$string = '"' . addcslashes($data, "\\\"\n\r\t/" . chr(8) . chr(12)) . '"'; 
+					
+					# Convert UTF-8 to Hexadecimal Codepoints. 
+					for ($i = 0; $i < strlen($string); $i++) { 
+						$char = $string[$i]; 
+						$c1 = ord($char); 
+						
+						# Single byte; 
+						if($c1 < 128) { 
+							$json .= ($c1 > 31) ? $char : sprintf("\\u%04x", $c1); 
+							continue; 
+						} 
+						
+						# Double byte 
+						$c2 = ord($string[++$i]); 
+						if (($c1 & 32) === 0) { 
+							$json .= sprintf("\\u%04x", ($c1 - 192) * 64 + $c2 - 128); 
+							continue; 
+						} 
+						
+						# Triple 
+						$c3 = ord($string[++$i]); 
+						
+						if (($c1 & 16) === 0) { 
+							$json .= sprintf("\\u%04x", (($c1 - 224) <<12) + (($c2 - 128) << 6) + ($c3 - 128)); 
+							continue; 
+						} 
+							
+						# Quadruple 
+						$c4 = ord($string[++$i]); 
+						
+						if (($c1 & 8 ) === 0) { 
+							$u = (($c1 & 15) << 2) + (($c2>>4) & 3) - 1; 
+						
+							$w1 = (54<<10) + ($u<<6) + (($c2 & 15) << 2) + (($c3>>4) & 3); 
+							$w2 = (55<<10) + (($c3 & 15)<<6) + ($c4-128); 
+							$json .= sprintf("\\u%04x\\u%04x", $w1, $w2); 
+						} 
+					} 				
+				
+      				return $json;
 				case 'array':
 					if (empty($data) || array_keys($data) === range(0, sizeof($data) - 1)) {
 						$output = array();
@@ -21,25 +65,25 @@ final class Json {
 							$output[] = Json::encode($value);
 						}
 						
-						return '[ ' . implode(', ', $output) . ' ]';
+						return '[' . implode(',', $output) . ']';
 					}
     			case 'object':
       				$output = array();
       				
 					foreach ($data as $key => $value) {
-        				$output[] = Json::encode(strval($key)) . ': ' . Json::encode($value);
+        				$output[] = Json::encode(strval($key)) . ':' . Json::encode($value);
 					}
 					
-					return '{ ' . implode(', ', $output) . ' }';
+					return '{' . implode(',', $output) . '}';
 				default:
 					return 'null';
 			}
 		}
 	}
 	
-	static public function decode($json, $assoc = FALSE) {
+	static public function decode($json, $assoc = false) {
 		if (function_exists('json_decode')) {
-			return json_decode($json);
+			return json_decode($json, true);
 		} else {
 			$match = '/".*?(?<!\\\\)"/';
 
@@ -47,7 +91,7 @@ final class Json {
 			$string = preg_replace('/[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/', '', $string);
 
 			if ($string != '') {
-				return NULL;
+				return null;
 			}
 
 			$s2m = array();
@@ -80,7 +124,7 @@ final class Json {
  			$json = strtr($json, $m2s);
 
   			$function = @create_function('', "return {$json};");
-  			$return = ($function) ? $function() : NULL;
+  			$return = ($function) ? $function() : null;
 
   			unset($s2m); 
 			unset($m2s); 

@@ -34,7 +34,7 @@ final class User {
   	}
 		
   	public function login($username, $password) {
-    	$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE LOWER(username) = '" . $this->db->escape(strtolower($username)) . "' AND password = '" . $this->db->escape(md5($password)) . "'");
+    	$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND password = '" . $this->db->escape(md5($password)) . "'");
 
     	if ($user_query->num_rows) {
 			$this->session->data['user_id'] = $user_query->row['user_id'];
@@ -52,9 +52,9 @@ final class User {
 				}
 			}
 		
-      		return TRUE;
+      		return true;
     	} else {
-      		return FALSE;
+      		return false;
     	}
   	}
 
@@ -63,13 +63,15 @@ final class User {
 	
 		$this->user_id = '';
 		$this->username = '';
+		
+		session_destroy();
   	}
 
   	public function hasPermission($key, $value) {
     	if (isset($this->permission[$key])) {
 	  		return in_array($value, $this->permission[$key]);
 		} else {
-	  		return FALSE;
+	  		return false;
 		}
   	}
   
