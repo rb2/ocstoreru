@@ -16,11 +16,9 @@ final class Loader {
 	
 	public function library($library) {
 		$file = DIR_SYSTEM . 'library/' . $library . '.php';
-		$class = preg_replace('/[^a-zA-Z0-9]/', '', $library);
 		
 		if (file_exists($file)) {
 			include_once($file);
-			$this->registry->set('lib_' . $library, new $class($this->registry));
 		} else {
 			exit('Error: Could not load library ' . $library . '!');
 		}
@@ -49,16 +47,6 @@ final class Loader {
 			$this->registry->set(str_replace('/', '_', $driver), new $class());
 		} else {
 			exit('Error: Could not load database ' . $driver . '!'); 
-		}
-	}
-	
-	public function helper($helper) {
-		$file = DIR_SYSTEM . 'helper/' . $helper . '.php';
-	
-		if (file_exists($file)) {
-			include_once($file);
-		} else {
-			exit('Error: Could not load helper ' . $helper . '!');
 		}
 	}
 	
