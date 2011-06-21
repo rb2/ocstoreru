@@ -2,23 +2,23 @@
 class ControllerShippingUPS extends Controller {
 	private $error = array(); 
 	
-	public function index() {   
+	public function index() {
 		$this->load->language('shipping/ups');
-
-		$this->document->title = $this->language->get('heading_title');
+			
+		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 				
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validate())) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('ups', $this->request->post);		
 					
 			$this->session->data['success'] = $this->language->get('text_success');
 						
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/shipping&token=' . $this->session->data['token']);
+			$this->redirect($this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL'));
 		}
-				
+		
 		$this->data['heading_title'] = $this->language->get('heading_title');
-
+		
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_yes'] = $this->language->get('text_yes');
@@ -61,9 +61,13 @@ class ControllerShippingUPS extends Controller {
 		$this->data['entry_test'] = $this->language->get('entry_test');
 		$this->data['entry_quote_type'] = $this->language->get('entry_quote_type');
 		$this->data['entry_service'] = $this->language->get('entry_service');
+		$this->data['entry_insurance'] = $this->language->get('entry_insurance');
 		$this->data['entry_display_weight'] = $this->language->get('entry_display_weight');
 		$this->data['entry_weight_code'] = $this->language->get('entry_weight_code');
 		$this->data['entry_weight_class'] = $this->language->get('entry_weight_class');
+		$this->data['entry_length_code'] = $this->language->get('entry_length_code');
+		$this->data['entry_length_class'] = $this->language->get('entry_length_class');
+		$this->data['entry_dimension'] = $this->language->get('entry_dimension');
 		$this->data['entry_tax'] = $this->language->get('entry_tax');
 		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$this->data['entry_status'] = $this->language->get('entry_status');
@@ -71,8 +75,7 @@ class ControllerShippingUPS extends Controller {
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
-
-		$this->data['tab_general'] = $this->language->get('tab_general');
+		
 
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -116,30 +119,30 @@ class ControllerShippingUPS extends Controller {
 			$this->data['error_country'] = '';
 		}
 
-  		$this->document->breadcrumbs = array();
+  		$this->data['breadcrumbs'] = array();
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=extension/shipping&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_shipping'),
+			'href'      => $this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 		
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=shipping/ups&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('shipping/ups', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 		
-		$this->data['action'] = HTTPS_SERVER . 'index.php?route=shipping/ups&token=' . $this->session->data['token'];
+		$this->data['action'] = $this->url->link('shipping/ups', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->data['cancel'] = HTTPS_SERVER . 'index.php?route=extension/shipping&token=' . $this->session->data['token'];
-
+		$this->data['cancel'] = $this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL');
+		
 		if (isset($this->request->post['ups_key'])) {
 			$this->data['ups_key'] = $this->request->post['ups_key'];
 		} else {
@@ -200,13 +203,13 @@ class ControllerShippingUPS extends Controller {
 			'value' => '11',
 			'text'  => $this->language->get('text_suggested_retail_rates')
 		);	
-		
+			
 		if (isset($this->request->post['ups_packaging'])) {
 			$this->data['ups_packaging'] = $this->request->post['ups_packaging'];
 		} else {
 			$this->data['ups_packaging'] = $this->config->get('ups_packaging');
 		}
-		
+					
 		$this->data['packages'] = array();
 		  
 		$this->data['packages'][] = array(
@@ -244,12 +247,12 @@ class ControllerShippingUPS extends Controller {
 			'text'  => $this->language->get('text_ups_10kg_box')
 		);	
 		
-		if (isset($this->request->post['ups_customer'])) {
+		if (isset($this->request->post['ups_classification'])) {
 			$this->data['ups_classification'] = $this->request->post['ups_classification'];
 		} else {
 			$this->data['ups_classification'] = $this->config->get('ups_classification');
 		}
-		
+						
 		$this->data['classifications'][] = array(
 			'value' => '01',
 			'text'  => '01'
@@ -264,14 +267,13 @@ class ControllerShippingUPS extends Controller {
 			'value' => '04',
 			'text'  => '04'
 		);			
-		
-		
+			
 		if (isset($this->request->post['ups_origin'])) {
 			$this->data['ups_origin'] = $this->request->post['ups_origin'];
 		} else {
 			$this->data['ups_origin'] = $this->config->get('ups_origin');
-		}
-		
+		}			
+				
 		$this->data['origins'] = array();
 		  
 		$this->data['origins'][] = array(
@@ -351,7 +353,6 @@ class ControllerShippingUPS extends Controller {
 			'value' => 'commercial',
 			'text'  => $this->language->get('text_commercial')
 		);
-		
 		// US
 		if (isset($this->request->post['ups_us_01'])) {
 			$this->data['ups_us_01'] = $this->request->post['ups_us_01'];
@@ -651,13 +652,19 @@ class ControllerShippingUPS extends Controller {
 		} else {
 			$this->data['ups_other_65'] = $this->config->get('ups_other_65');
 		}
-		
+
 		if (isset($this->request->post['ups_display_weight'])) {
 			$this->data['ups_display_weight'] = $this->request->post['ups_display_weight'];
 		} else {
 			$this->data['ups_display_weight'] = $this->config->get('ups_display_weight');
 		}	
-
+		
+		if (isset($this->request->post['ups_insurance'])) {
+			$this->data['ups_insurance'] = $this->request->post['ups_insurance'];
+		} else {
+			$this->data['ups_insurance'] = $this->config->get('ups_insurance');
+		}	
+		
 		if (isset($this->request->post['ups_weight_code'])) {
 			$this->data['ups_weight_code'] = $this->request->post['ups_weight_code'];
 		} else {
@@ -674,6 +681,40 @@ class ControllerShippingUPS extends Controller {
 		
 		$this->data['weight_classes'] = $this->model_localisation_weight_class->getWeightClasses();
 		
+		if (isset($this->request->post['ups_length_code'])) {
+			$this->data['ups_length_code'] = $this->request->post['ups_length_code'];
+		} else {
+			$this->data['ups_length_code'] = $this->config->get('ups_length_code');
+		}
+		
+		if (isset($this->request->post['ups_length_class'])) {
+			$this->data['ups_length_class'] = $this->request->post['ups_length_class'];
+		} else {
+			$this->data['ups_length_class'] = $this->config->get('ups_length_class');
+		}
+				
+		$this->load->model('localisation/length_class');
+		
+		$this->data['length_classes'] = $this->model_localisation_length_class->getLengthClasses();
+						
+		if (isset($this->request->post['ups_length'])) {
+			$this->data['ups_length'] = $this->request->post['ups_length'];
+		} else {
+			$this->data['ups_length'] = $this->config->get('ups_length');
+		}
+		
+		if (isset($this->request->post['ups_width'])) {
+			$this->data['ups_width'] = $this->request->post['ups_width'];
+		} else {
+			$this->data['ups_width'] = $this->config->get('ups_width');
+		}		
+		
+		if (isset($this->request->post['ups_height'])) {
+			$this->data['ups_height'] = $this->request->post['ups_height'];
+		} else {
+			$this->data['ups_height'] = $this->config->get('ups_height');
+		}
+								
 		if (isset($this->request->post['ups_tax_class_id'])) {
 			$this->data['ups_tax_class_id'] = $this->request->post['ups_tax_class_id'];
 		} else {
@@ -704,15 +745,15 @@ class ControllerShippingUPS extends Controller {
 			$this->data['ups_sort_order'] = $this->request->post['ups_sort_order'];
 		} else {
 			$this->data['ups_sort_order'] = $this->config->get('ups_sort_order');
-		}				
-								
+		}	
+		
 		$this->template = 'shipping/ups.tpl';
 		$this->children = array(
-			'common/header',	
-			'common/footer'	
+			'common/header',
+			'common/footer',
 		);
 		
- 		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+ 		$this->response->setOutput($this->render());
 	}
 	
 	private function validate() {
@@ -745,9 +786,9 @@ class ControllerShippingUPS extends Controller {
 		}
 		
 		if (!$this->error) {
-			return TRUE;
+			return true;
 		} else {
-			return FALSE;
+			return false;
 		}	
 	}
 }
