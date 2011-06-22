@@ -22,7 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_address`
+-- Структура таблицы `oc_address`
 --
 
 DROP TABLE IF EXISTS `oc_address`;
@@ -43,14 +43,14 @@ CREATE TABLE `oc_address` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_address`
+-- Дамп данных таблицы `oc_address`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_affiliate`
+-- Структура таблицы `oc_affiliate`
 --
 
 DROP TABLE IF EXISTS `oc_affiliate`;
@@ -89,14 +89,14 @@ CREATE TABLE `oc_affiliate` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_affiliate`
+-- Дамп данных таблицы `oc_affiliate`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_affiliate_transaction`
+-- Структура таблицы `oc_affiliate_transaction`
 --
 
 DROP TABLE IF EXISTS `oc_affiliate_transaction`;
@@ -111,14 +111,14 @@ CREATE TABLE `oc_affiliate_transaction` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_affiliate_transaction`
+-- Дамп данных таблицы `oc_affiliate_transaction`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_attribute`
+-- Структура таблицы `oc_attribute`
 --
 
 DROP TABLE IF EXISTS `oc_attribute`;
@@ -130,7 +130,7 @@ CREATE TABLE `oc_attribute` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_attribute`
+-- Дамп данных таблицы `oc_attribute`
 --
 
 INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) VALUES
@@ -149,7 +149,7 @@ INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_attribute_description`
+-- Структура таблицы `oc_attribute_description`
 --
 
 DROP TABLE IF EXISTS `oc_attribute_description`;
@@ -161,7 +161,7 @@ CREATE TABLE `oc_attribute_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_attribute_description`
+-- Дамп данных таблицы `oc_attribute_description`
 --
 
 INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) VALUES
@@ -180,7 +180,7 @@ INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_attribute_group`
+-- Структура таблицы `oc_attribute_group`
 --
 
 DROP TABLE IF EXISTS `oc_attribute_group`;
@@ -191,7 +191,7 @@ CREATE TABLE `oc_attribute_group` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_attribute_group`
+-- Дамп данных таблицы `oc_attribute_group`
 --
 
 INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
@@ -203,7 +203,7 @@ INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_attribute_group_description`
+-- Структура таблицы `oc_attribute_group_description`
 --
 
 DROP TABLE IF EXISTS `oc_attribute_group_description`;
@@ -215,19 +215,19 @@ CREATE TABLE `oc_attribute_group_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_attribute_group_description`
+-- Дамп данных таблицы `oc_attribute_group_description`
 --
 
 INSERT INTO `oc_attribute_group_description` (`attribute_group_id`, `language_id`, `name`) VALUES
-(3, 1, 'Memory'),
+(3, 1, 'Память'),
 (4, 1, 'Technical'),
-(5, 1, 'Motherboard'),
-(6, 1, 'Processor');
+(5, 1, 'Материнская плата'),
+(6, 1, 'Процессор');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_banner`
+-- Структура таблицы `oc_banner`
 --
 
 DROP TABLE IF EXISTS `oc_banner`;
@@ -239,7 +239,7 @@ CREATE TABLE `oc_banner` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_banner`
+-- Дамп данных таблицы `oc_banner`
 --
 
 INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
@@ -249,7 +249,7 @@ INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_banner_image`
+-- Структура таблицы `oc_banner_image`
 --
 
 DROP TABLE IF EXISTS `oc_banner_image`;
@@ -262,7 +262,7 @@ CREATE TABLE `oc_banner_image` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_banner_image`
+-- Дамп данных таблицы `oc_banner_image`
 --
 
 INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `link`, `image`) VALUES
@@ -272,7 +272,7 @@ INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `link`, `image`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_banner_image_description`
+-- Структура таблицы `oc_banner_image_description`
 --
 
 DROP TABLE IF EXISTS `oc_banner_image_description`;
@@ -285,7 +285,7 @@ CREATE TABLE `oc_banner_image_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_banner_image_description`
+-- Дамп данных таблицы `oc_banner_image_description`
 --
 
 INSERT INTO `oc_banner_image_description` (`banner_image_id`, `language_id`, `banner_id`, `title`) VALUES
@@ -295,7 +295,7 @@ INSERT INTO `oc_banner_image_description` (`banner_image_id`, `language_id`, `ba
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category`
+-- Структура таблицы `oc_category`
 --
 
 DROP TABLE IF EXISTS `oc_category`;
@@ -313,7 +313,7 @@ CREATE TABLE `oc_category` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_category`
+-- Дамп данных таблицы `oc_category`
 --
 
 INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
@@ -359,7 +359,7 @@ INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category_description`
+-- Структура таблицы `oc_category_description`
 --
 
 DROP TABLE IF EXISTS `oc_category_description`;
@@ -375,22 +375,22 @@ CREATE TABLE `oc_category_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_category_description`
+-- Дамп данных таблицы `oc_category_description`
 --
 
 INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES
-(28, 1, 'Monitors', '', '', ''),
-(33, 1, 'Cameras', '', '', ''),
-(32, 1, 'Web Cameras', '', '', ''),
-(31, 1, 'Scanners', '', '', ''),
-(30, 1, 'Printers', '', '', ''),
-(29, 1, 'Mice and Trackballs', '', '', ''),
+(28, 1, 'Мониторы', '', '', ''),
+(33, 1, 'Камеры', '', '', ''),
+(32, 1, 'Веб-камеры', '', '', ''),
+(31, 1, 'Сканеры', '', '', ''),
+(30, 1, 'Принтеры', '', '', ''),
+(29, 1, 'Мышки', '', '', ''),
 (27, 1, 'Mac', '', '', ''),
 (26, 1, 'PC', '', '', ''),
-(17, 1, 'Software', '', '', ''),
-(25, 1, 'Components', '', '', ''),
-(24, 1, 'Phones &amp; PDAs', '', '', ''),
-(20, 1, 'Desktops', '&lt;p&gt;\r\n	Example of category description text&lt;/p&gt;\r\n', 'Example of category description', ''),
+(17, 1, 'Програмное обеспечение', '', '', ''),
+(25, 1, 'Компоненты', '', '', ''),
+(24, 1, 'Телефоны и PDA', '', '', ''),
+(20, 1, 'Стационарные компьютеры', '&lt;p&gt;\r\n	Пример текста в описания категории&lt;/p&gt;\r\n', 'Пример описания категории', ''),
 (35, 1, 'test 1', '', '', ''),
 (36, 1, 'test 2', '', '', ''),
 (37, 1, 'test 5', '', '', ''),
@@ -400,8 +400,8 @@ INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `de
 (41, 1, 'test 8', '', '', ''),
 (42, 1, 'test 9', '', '', ''),
 (43, 1, 'test 11', '', '', ''),
-(34, 1, 'MP3 Players', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
-(18, 1, 'Laptops &amp; Notebooks', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
+(34, 1, 'MP3 Плееры', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
+(18, 1, 'Ноутбуки', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
 (44, 1, 'test 12', '', '', ''),
 (45, 1, 'Windows', '', '', ''),
 (46, 1, 'Macs', '', '', ''),
@@ -415,13 +415,13 @@ INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `de
 (54, 1, 'test 22', '', '', ''),
 (55, 1, 'test 23', '', '', ''),
 (56, 1, 'test 24', '', '', ''),
-(57, 1, 'Tablets', '', '', ''),
+(57, 1, 'Планшеты', '', '', ''),
 (58, 1, 'test 25', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category_to_layout`
+-- Структура таблицы `oc_category_to_layout`
 --
 
 DROP TABLE IF EXISTS `oc_category_to_layout`;
@@ -433,14 +433,14 @@ CREATE TABLE `oc_category_to_layout` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_category_to_layout`
+-- Дамп данных таблицы `oc_category_to_layout`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_category_to_store`
+-- Структура таблицы `oc_category_to_store`
 --
 
 DROP TABLE IF EXISTS `oc_category_to_store`;
@@ -451,7 +451,7 @@ CREATE TABLE `oc_category_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_category_to_store`
+-- Дамп данных таблицы `oc_category_to_store`
 --
 
 INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
@@ -497,7 +497,7 @@ INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_country`
+-- Структура таблицы `oc_country`
 --
 
 DROP TABLE IF EXISTS `oc_country`;
@@ -513,254 +513,254 @@ CREATE TABLE `oc_country` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_country`
+-- Дамп данных таблицы `oc_country`
 --
 
 INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES
-(1, 'Afghanistan', 'AF', 'AFG', '', 0, 1),
-(2, 'Albania', 'AL', 'ALB', '', 0, 1),
-(3, 'Algeria', 'DZ', 'DZA', '', 0, 1),
-(4, 'American Samoa', 'AS', 'ASM', '', 0, 1),
-(5, 'Andorra', 'AD', 'AND', '', 0, 1),
-(6, 'Angola', 'AO', 'AGO', '', 0, 1),
-(7, 'Anguilla', 'AI', 'AIA', '', 0, 1),
-(8, 'Antarctica', 'AQ', 'ATA', '', 0, 1),
-(9, 'Antigua and Barbuda', 'AG', 'ATG', '', 0, 1),
-(10, 'Argentina', 'AR', 'ARG', '', 0, 1),
-(11, 'Armenia', 'AM', 'ARM', '', 0, 1),
-(12, 'Aruba', 'AW', 'ABW', '', 0, 1),
-(13, 'Australia', 'AU', 'AUS', '', 0, 1),
-(14, 'Austria', 'AT', 'AUT', '', 0, 1),
-(15, 'Azerbaijan', 'AZ', 'AZE', '', 0, 1),
-(16, 'Bahamas', 'BS', 'BHS', '', 0, 1),
-(17, 'Bahrain', 'BH', 'BHR', '', 0, 1),
-(18, 'Bangladesh', 'BD', 'BGD', '', 0, 1),
-(19, 'Barbados', 'BB', 'BRB', '', 0, 1),
-(20, 'Belarus', 'BY', 'BLR', '', 0, 1),
-(21, 'Belgium', 'BE', 'BEL', '', 0, 1),
-(22, 'Belize', 'BZ', 'BLZ', '', 0, 1),
-(23, 'Benin', 'BJ', 'BEN', '', 0, 1),
-(24, 'Bermuda', 'BM', 'BMU', '', 0, 1),
-(25, 'Bhutan', 'BT', 'BTN', '', 0, 1),
-(26, 'Bolivia', 'BO', 'BOL', '', 0, 1),
-(27, 'Bosnia and Herzegowina', 'BA', 'BIH', '', 0, 1),
-(28, 'Botswana', 'BW', 'BWA', '', 0, 1),
-(29, 'Bouvet Island', 'BV', 'BVT', '', 0, 1),
-(30, 'Brazil', 'BR', 'BRA', '', 0, 1),
-(31, 'British Indian Ocean Territory', 'IO', 'IOT', '', 0, 1),
-(32, 'Brunei Darussalam', 'BN', 'BRN', '', 0, 1),
-(33, 'Bulgaria', 'BG', 'BGR', '', 0, 1),
-(34, 'Burkina Faso', 'BF', 'BFA', '', 0, 1),
-(35, 'Burundi', 'BI', 'BDI', '', 0, 1),
-(36, 'Cambodia', 'KH', 'KHM', '', 0, 1),
-(37, 'Cameroon', 'CM', 'CMR', '', 0, 1),
-(38, 'Canada', 'CA', 'CAN', '', 0, 1),
-(39, 'Cape Verde', 'CV', 'CPV', '', 0, 1),
-(40, 'Cayman Islands', 'KY', 'CYM', '', 0, 1),
-(41, 'Central African Republic', 'CF', 'CAF', '', 0, 1),
-(42, 'Chad', 'TD', 'TCD', '', 0, 1),
-(43, 'Chile', 'CL', 'CHL', '', 0, 1),
-(44, 'China', 'CN', 'CHN', '', 0, 1),
-(45, 'Christmas Island', 'CX', 'CXR', '', 0, 1),
-(46, 'Cocos (Keeling) Islands', 'CC', 'CCK', '', 0, 1),
-(47, 'Colombia', 'CO', 'COL', '', 0, 1),
-(48, 'Comoros', 'KM', 'COM', '', 0, 1),
-(49, 'Congo', 'CG', 'COG', '', 0, 1),
-(50, 'Cook Islands', 'CK', 'COK', '', 0, 1),
-(51, 'Costa Rica', 'CR', 'CRI', '', 0, 1),
-(52, 'Cote D''Ivoire', 'CI', 'CIV', '', 0, 1),
-(53, 'Croatia', 'HR', 'HRV', '', 0, 1),
-(54, 'Cuba', 'CU', 'CUB', '', 0, 1),
-(55, 'Cyprus', 'CY', 'CYP', '', 0, 1),
-(56, 'Czech Republic', 'CZ', 'CZE', '', 0, 1),
-(57, 'Denmark', 'DK', 'DNK', '', 0, 1),
-(58, 'Djibouti', 'DJ', 'DJI', '', 0, 1),
-(59, 'Dominica', 'DM', 'DMA', '', 0, 1),
-(60, 'Dominican Republic', 'DO', 'DOM', '', 0, 1),
-(61, 'East Timor', 'TP', 'TMP', '', 0, 1),
-(62, 'Ecuador', 'EC', 'ECU', '', 0, 1),
-(63, 'Egypt', 'EG', 'EGY', '', 0, 1),
-(64, 'El Salvador', 'SV', 'SLV', '', 0, 1),
-(65, 'Equatorial Guinea', 'GQ', 'GNQ', '', 0, 1),
-(66, 'Eritrea', 'ER', 'ERI', '', 0, 1),
-(67, 'Estonia', 'EE', 'EST', '', 0, 1),
-(68, 'Ethiopia', 'ET', 'ETH', '', 0, 1),
-(69, 'Falkland Islands (Malvinas)', 'FK', 'FLK', '', 0, 1),
-(70, 'Faroe Islands', 'FO', 'FRO', '', 0, 1),
-(71, 'Fiji', 'FJ', 'FJI', '', 0, 1),
-(72, 'Finland', 'FI', 'FIN', '', 0, 1),
-(73, 'France', 'FR', 'FRA', '', 0, 1),
-(74, 'France, Metropolitan', 'FX', 'FXX', '', 0, 1),
-(75, 'French Guiana', 'GF', 'GUF', '', 0, 1),
-(76, 'French Polynesia', 'PF', 'PYF', '', 0, 1),
-(77, 'French Southern Territories', 'TF', 'ATF', '', 0, 1),
-(78, 'Gabon', 'GA', 'GAB', '', 0, 1),
-(79, 'Gambia', 'GM', 'GMB', '', 0, 1),
-(80, 'Georgia', 'GE', 'GEO', '', 0, 1),
-(81, 'Germany', 'DE', 'DEU', '', 0, 1),
-(82, 'Ghana', 'GH', 'GHA', '', 0, 1),
-(83, 'Gibraltar', 'GI', 'GIB', '', 0, 1),
-(84, 'Greece', 'GR', 'GRC', '', 0, 1),
-(85, 'Greenland', 'GL', 'GRL', '', 0, 1),
-(86, 'Grenada', 'GD', 'GRD', '', 0, 1),
-(87, 'Guadeloupe', 'GP', 'GLP', '', 0, 1),
-(88, 'Guam', 'GU', 'GUM', '', 0, 1),
-(89, 'Guatemala', 'GT', 'GTM', '', 0, 1),
-(90, 'Guinea', 'GN', 'GIN', '', 0, 1),
-(91, 'Guinea-bissau', 'GW', 'GNB', '', 0, 1),
-(92, 'Guyana', 'GY', 'GUY', '', 0, 1),
-(93, 'Haiti', 'HT', 'HTI', '', 0, 1),
-(94, 'Heard and Mc Donald Islands', 'HM', 'HMD', '', 0, 1),
-(95, 'Honduras', 'HN', 'HND', '', 0, 1),
-(96, 'Hong Kong', 'HK', 'HKG', '', 0, 1),
-(97, 'Hungary', 'HU', 'HUN', '', 0, 1),
-(98, 'Iceland', 'IS', 'ISL', '', 0, 1),
-(99, 'India', 'IN', 'IND', '', 0, 1),
-(100, 'Indonesia', 'ID', 'IDN', '', 0, 1),
-(101, 'Iran (Islamic Republic of)', 'IR', 'IRN', '', 0, 1),
-(102, 'Iraq', 'IQ', 'IRQ', '', 0, 1),
-(103, 'Ireland', 'IE', 'IRL', '', 0, 1),
-(104, 'Israel', 'IL', 'ISR', '', 0, 1),
-(105, 'Italy', 'IT', 'ITA', '', 0, 1),
-(106, 'Jamaica', 'JM', 'JAM', '', 0, 1),
-(107, 'Japan', 'JP', 'JPN', '', 0, 1),
-(108, 'Jordan', 'JO', 'JOR', '', 0, 1),
-(109, 'Kazakhstan', 'KZ', 'KAZ', '', 0, 1),
-(110, 'Kenya', 'KE', 'KEN', '', 0, 1),
-(111, 'Kiribati', 'KI', 'KIR', '', 0, 1),
-(112, 'North Korea', 'KP', 'PRK', '', 0, 1),
-(113, 'Korea, Republic of', 'KR', 'KOR', '', 0, 1),
-(114, 'Kuwait', 'KW', 'KWT', '', 0, 1),
-(115, 'Kyrgyzstan', 'KG', 'KGZ', '', 0, 1),
-(116, 'Lao People''s Democratic Republic', 'LA', 'LAO', '', 0, 1),
-(117, 'Latvia', 'LV', 'LVA', '', 0, 1),
-(118, 'Lebanon', 'LB', 'LBN', '', 0, 1),
-(119, 'Lesotho', 'LS', 'LSO', '', 0, 1),
-(120, 'Liberia', 'LR', 'LBR', '', 0, 1),
-(121, 'Libyan Arab Jamahiriya', 'LY', 'LBY', '', 0, 1),
-(122, 'Liechtenstein', 'LI', 'LIE', '', 0, 1),
-(123, 'Lithuania', 'LT', 'LTU', '', 0, 1),
-(124, 'Luxembourg', 'LU', 'LUX', '', 0, 1),
-(125, 'Macau', 'MO', 'MAC', '', 0, 1),
-(126, 'Macedonia', 'MK', 'MKD', '', 0, 1),
-(127, 'Madagascar', 'MG', 'MDG', '', 0, 1),
-(128, 'Malawi', 'MW', 'MWI', '', 0, 1),
-(129, 'Malaysia', 'MY', 'MYS', '', 0, 1),
-(130, 'Maldives', 'MV', 'MDV', '', 0, 1),
-(131, 'Mali', 'ML', 'MLI', '', 0, 1),
-(132, 'Malta', 'MT', 'MLT', '', 0, 1),
-(133, 'Marshall Islands', 'MH', 'MHL', '', 0, 1),
-(134, 'Martinique', 'MQ', 'MTQ', '', 0, 1),
-(135, 'Mauritania', 'MR', 'MRT', '', 0, 1),
-(136, 'Mauritius', 'MU', 'MUS', '', 0, 1),
-(137, 'Mayotte', 'YT', 'MYT', '', 0, 1),
-(138, 'Mexico', 'MX', 'MEX', '', 0, 1),
-(139, 'Micronesia, Federated States of', 'FM', 'FSM', '', 0, 1),
-(140, 'Moldova, Republic of', 'MD', 'MDA', '', 0, 1),
-(141, 'Monaco', 'MC', 'MCO', '', 0, 1),
-(142, 'Mongolia', 'MN', 'MNG', '', 0, 1),
-(143, 'Montserrat', 'MS', 'MSR', '', 0, 1),
-(144, 'Morocco', 'MA', 'MAR', '', 0, 1),
-(145, 'Mozambique', 'MZ', 'MOZ', '', 0, 1),
-(146, 'Myanmar', 'MM', 'MMR', '', 0, 1),
-(147, 'Namibia', 'NA', 'NAM', '', 0, 1),
-(148, 'Nauru', 'NR', 'NRU', '', 0, 1),
-(149, 'Nepal', 'NP', 'NPL', '', 0, 1),
-(150, 'Netherlands', 'NL', 'NLD', '', 0, 1),
-(151, 'Netherlands Antilles', 'AN', 'ANT', '', 0, 1),
-(152, 'New Caledonia', 'NC', 'NCL', '', 0, 1),
-(153, 'New Zealand', 'NZ', 'NZL', '', 0, 1),
-(154, 'Nicaragua', 'NI', 'NIC', '', 0, 1),
-(155, 'Niger', 'NE', 'NER', '', 0, 1),
-(156, 'Nigeria', 'NG', 'NGA', '', 0, 1),
-(157, 'Niue', 'NU', 'NIU', '', 0, 1),
-(158, 'Norfolk Island', 'NF', 'NFK', '', 0, 1),
-(159, 'Northern Mariana Islands', 'MP', 'MNP', '', 0, 1),
-(160, 'Norway', 'NO', 'NOR', '', 0, 1),
-(161, 'Oman', 'OM', 'OMN', '', 0, 1),
-(162, 'Pakistan', 'PK', 'PAK', '', 0, 1),
-(163, 'Palau', 'PW', 'PLW', '', 0, 1),
-(164, 'Panama', 'PA', 'PAN', '', 0, 1),
-(165, 'Papua New Guinea', 'PG', 'PNG', '', 0, 1),
-(166, 'Paraguay', 'PY', 'PRY', '', 0, 1),
-(167, 'Peru', 'PE', 'PER', '', 0, 1),
-(168, 'Philippines', 'PH', 'PHL', '', 0, 1),
-(169, 'Pitcairn', 'PN', 'PCN', '', 0, 1),
-(170, 'Poland', 'PL', 'POL', '', 0, 1),
-(171, 'Portugal', 'PT', 'PRT', '', 0, 1),
-(172, 'Puerto Rico', 'PR', 'PRI', '', 0, 1),
-(173, 'Qatar', 'QA', 'QAT', '', 0, 1),
-(174, 'Reunion', 'RE', 'REU', '', 0, 1),
-(175, 'Romania', 'RO', 'ROM', '', 0, 1),
-(176, 'Russian Federation', 'RU', 'RUS', '', 0, 1),
-(177, 'Rwanda', 'RW', 'RWA', '', 0, 1),
-(178, 'Saint Kitts and Nevis', 'KN', 'KNA', '', 0, 1),
-(179, 'Saint Lucia', 'LC', 'LCA', '', 0, 1),
-(180, 'Saint Vincent and the Grenadines', 'VC', 'VCT', '', 0, 1),
-(181, 'Samoa', 'WS', 'WSM', '', 0, 1),
-(182, 'San Marino', 'SM', 'SMR', '', 0, 1),
-(183, 'Sao Tome and Principe', 'ST', 'STP', '', 0, 1),
-(184, 'Saudi Arabia', 'SA', 'SAU', '', 0, 1),
-(185, 'Senegal', 'SN', 'SEN', '', 0, 1),
-(186, 'Seychelles', 'SC', 'SYC', '', 0, 1),
-(187, 'Sierra Leone', 'SL', 'SLE', '', 0, 1),
-(188, 'Singapore', 'SG', 'SGP', '', 0, 1),
-(189, 'Slovak Republic', 'SK', 'SVK', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city} {postcode}\r\n{zone}\r\n{country}', 0, 1),
-(190, 'Slovenia', 'SI', 'SVN', '', 0, 1),
-(191, 'Solomon Islands', 'SB', 'SLB', '', 0, 1),
-(192, 'Somalia', 'SO', 'SOM', '', 0, 1),
-(193, 'South Africa', 'ZA', 'ZAF', '', 0, 1),
-(194, 'South Georgia &amp; South Sandwich Islands', 'GS', 'SGS', '', 0, 1),
-(195, 'Spain', 'ES', 'ESP', '', 0, 1),
-(196, 'Sri Lanka', 'LK', 'LKA', '', 0, 1),
-(197, 'St. Helena', 'SH', 'SHN', '', 0, 1),
-(198, 'St. Pierre and Miquelon', 'PM', 'SPM', '', 0, 1),
-(199, 'Sudan', 'SD', 'SDN', '', 0, 1),
-(200, 'Suriname', 'SR', 'SUR', '', 0, 1),
-(201, 'Svalbard and Jan Mayen Islands', 'SJ', 'SJM', '', 0, 1),
-(202, 'Swaziland', 'SZ', 'SWZ', '', 0, 1),
-(203, 'Sweden', 'SE', 'SWE', '', 0, 1),
-(204, 'Switzerland', 'CH', 'CHE', '', 0, 1),
-(205, 'Syrian Arab Republic', 'SY', 'SYR', '', 0, 1),
-(206, 'Taiwan', 'TW', 'TWN', '', 0, 1),
-(207, 'Tajikistan', 'TJ', 'TJK', '', 0, 1),
-(208, 'Tanzania, United Republic of', 'TZ', 'TZA', '', 0, 1),
-(209, 'Thailand', 'TH', 'THA', '', 0, 1),
-(210, 'Togo', 'TG', 'TGO', '', 0, 1),
-(211, 'Tokelau', 'TK', 'TKL', '', 0, 1),
-(212, 'Tonga', 'TO', 'TON', '', 0, 1),
-(213, 'Trinidad and Tobago', 'TT', 'TTO', '', 0, 1),
-(214, 'Tunisia', 'TN', 'TUN', '', 0, 1),
-(215, 'Turkey', 'TR', 'TUR', '', 0, 1),
-(216, 'Turkmenistan', 'TM', 'TKM', '', 0, 1),
-(217, 'Turks and Caicos Islands', 'TC', 'TCA', '', 0, 1),
-(218, 'Tuvalu', 'TV', 'TUV', '', 0, 1),
-(219, 'Uganda', 'UG', 'UGA', '', 0, 1),
-(220, 'Ukraine', 'UA', 'UKR', '', 0, 1),
-(221, 'United Arab Emirates', 'AE', 'ARE', '', 0, 1),
-(222, 'United Kingdom', 'GB', 'GBR', '', 1, 1),
-(223, 'United States', 'US', 'USA', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', 0, 1),
-(224, 'United States Minor Outlying Islands', 'UM', 'UMI', '', 0, 1),
-(225, 'Uruguay', 'UY', 'URY', '', 0, 1),
-(226, 'Uzbekistan', 'UZ', 'UZB', '', 0, 1),
-(227, 'Vanuatu', 'VU', 'VUT', '', 0, 1),
-(228, 'Vatican City State (Holy See)', 'VA', 'VAT', '', 0, 1),
-(229, 'Venezuela', 'VE', 'VEN', '', 0, 1),
-(230, 'Viet Nam', 'VN', 'VNM', '', 0, 1),
-(231, 'Virgin Islands (British)', 'VG', 'VGB', '', 0, 1),
-(232, 'Virgin Islands (U.S.)', 'VI', 'VIR', '', 0, 1),
-(233, 'Wallis and Futuna Islands', 'WF', 'WLF', '', 0, 1),
-(234, 'Western Sahara', 'EH', 'ESH', '', 0, 1),
-(235, 'Yemen', 'YE', 'YEM', '', 0, 1),
-(236, 'Yugoslavia', 'YU', 'YUG', '', 0, 1),
-(237, 'Democratic Republic of Congo', 'CD', 'COD', '', 0, 1),
-(238, 'Zambia', 'ZM', 'ZMB', '', 0, 1),
-(239, 'Zimbabwe', 'ZW', 'ZWE', '', 0, 1);
+(1, 'Афганистан', 'AF', 'AFG', '', 0, 1),
+(2, 'Албания', 'AL', 'ALB', '', 0, 1),
+(3, 'Алжир', 'DZ', 'DZA', '', 0, 1),
+(4, 'Восточное Самоа', 'AS', 'ASM', '', 0, 1),
+(5, 'Андорра', 'AD', 'AND', '', 0, 1),
+(6, 'Ангола', 'AO', 'AGO', '', 0, 1),
+(7, 'Ангилья', 'AI', 'AIA', '', 0, 1),
+(8, 'Антарктида', 'AQ', 'ATA', '', 0, 1),
+(9, 'Антигуа и Барбуда', 'AG', 'ATG', '', 0, 1),
+(10, 'Аргентина', 'AR', 'ARG', '', 0, 1),
+(11, 'Армения', 'AM', 'ARM', '', 0, 1),
+(12, 'Аруба', 'AW', 'ABW', '', 0, 1),
+(13, 'Австралия', 'AU', 'AUS', '', 0, 1),
+(14, 'Австрия', 'AT', 'AUT', '', 0, 1),
+(15, 'Азербайджан', 'AZ', 'AZE', '', 0, 1),
+(16, 'Багамские острова', 'BS', 'BHS', '', 0, 1),
+(17, 'Бахрейн', 'BH', 'BHR', '', 0, 1),
+(18, 'Бангладеш', 'BD', 'BGD', '', 0, 1),
+(19, 'Барбадос', 'BB', 'BRB', '', 0, 1),
+(20, 'Белоруссия (Беларусь)', 'BY', 'BLR', '', 0, 1),
+(21, 'Бельгия', 'BE', 'BEL', '', 0, 1),
+(22, 'Белиз', 'BZ', 'BLZ', '', 0, 1),
+(23, 'Бенин', 'BJ', 'BEN', '', 0, 1),
+(24, 'Бермудские острова', 'BM', 'BMU', '', 0, 1),
+(25, 'Бутан', 'BT', 'BTN', '', 0, 1),
+(26, 'Боливия', 'BO', 'BOL', '', 0, 1),
+(27, 'Босния и Герцеговина', 'BA', 'BIH', '', 0, 1),
+(28, 'Ботсвана', 'BW', 'BWA', '', 0, 1),
+(29, 'Остров Буве', 'BV', 'BVT', '', 0, 1),
+(30, 'Бразилия', 'BR', 'BRA', '', 0, 1),
+(31, 'Британская территория в Индийском океане', 'IO', 'IOT', '', 0, 1),
+(32, 'Бруней', 'BN', 'BRN', '', 0, 1),
+(33, 'Болгария', 'BG', 'BGR', '', 0, 1),
+(34, 'Буркина-Фасо', 'BF', 'BFA', '', 0, 1),
+(35, 'Бурунди', 'BI', 'BDI', '', 0, 1),
+(36, 'Камбоджа', 'KH', 'KHM', '', 0, 1),
+(37, 'Камерун', 'CM', 'CMR', '', 0, 1),
+(38, 'Канада', 'CA', 'CAN', '', 0, 1),
+(39, 'Кабо-Верде', 'CV', 'CPV', '', 0, 1),
+(40, 'Каймановы острова', 'KY', 'CYM', '', 0, 1),
+(41, 'Центрально-Африканская Республика', 'CF', 'CAF', '', 0, 1),
+(42, 'Чад', 'TD', 'TCD', '', 0, 1),
+(43, 'Чили', 'CL', 'CHL', '', 0, 1),
+(44, 'Китайская Народная Республика', 'CN', 'CHN', '', 0, 1),
+(45, 'Остров Рождества', 'CX', 'CXR', '', 0, 1),
+(46, 'Кокосовые острова', 'CC', 'CCK', '', 0, 1),
+(47, 'Колумбия', 'CO', 'COL', '', 0, 1),
+(48, 'Коморские острова', 'KM', 'COM', '', 0, 1),
+(49, 'Конго', 'CG', 'COG', '', 0, 1),
+(50, 'Острова Кука', 'CK', 'COK', '', 0, 1),
+(51, 'Коста-Рика', 'CR', 'CRI', '', 0, 1),
+(52, 'Кот д''Ивуар', 'CI', 'CIV', '', 0, 1),
+(53, 'Хорватия', 'HR', 'HRV', '', 0, 1),
+(54, 'Куба', 'CU', 'CUB', '', 0, 1),
+(55, 'Кипр', 'CY', 'CYP', '', 0, 1),
+(56, 'Чехия', 'CZ', 'CZE', '', 0, 1),
+(57, 'Дания', 'DK', 'DNK', '', 0, 1),
+(58, 'Джибути', 'DJ', 'DJI', '', 0, 1),
+(59, 'Доминика', 'DM', 'DMA', '', 0, 1),
+(60, 'Доминиканская Республика', 'DO', 'DOM', '', 0, 1),
+(61, 'Восточный Тимор', 'TP', 'TMP', '', 0, 1),
+(62, 'Эквадор', 'EC', 'ECU', '', 0, 1),
+(63, 'Египет', 'EG', 'EGY', '', 0, 1),
+(64, 'Сальвадор', 'SV', 'SLV', '', 0, 1),
+(65, 'Экваториальная Гвинея', 'GQ', 'GNQ', '', 0, 1),
+(66, 'Эритрея', 'ER', 'ERI', '', 0, 1),
+(67, 'Эстония', 'EE', 'EST', '', 0, 1),
+(68, 'Эфиопия', 'ET', 'ETH', '', 0, 1),
+(69, 'Фолклендские (Мальвинские) острова', 'FK', 'FLK', '', 0, 1),
+(70, 'Фарерские острова', 'FO', 'FRO', '', 0, 1),
+(71, 'Фиджи', 'FJ', 'FJI', '', 0, 1),
+(72, 'Финляндия', 'FI', 'FIN', '', 0, 1),
+(73, 'Франция', 'FR', 'FRA', '', 0, 1),
+(74, 'Франция, Метрополия', 'FX', 'FXX', '', 0, 1),
+(75, 'Французская Гвиана', 'GF', 'GUF', '', 0, 1),
+(76, 'Французская Полинезия', 'PF', 'PYF', '', 0, 1),
+(77, 'Французские Южные территории', 'TF', 'ATF', '', 0, 1),
+(78, 'Габон', 'GA', 'GAB', '', 0, 1),
+(79, 'Гамбия', 'GM', 'GMB', '', 0, 1),
+(80, 'Грузия', 'GE', 'GEO', '', 0, 1),
+(81, 'Германия', 'DE', 'DEU', '', 0, 1),
+(82, 'Гана', 'GH', 'GHA', '', 0, 1),
+(83, 'Гибралтар', 'GI', 'GIB', '', 0, 1),
+(84, 'Греция', 'GR', 'GRC', '', 0, 1),
+(85, 'Гренландия', 'GL', 'GRL', '', 0, 1),
+(86, 'Гренада', 'GD', 'GRD', '', 0, 1),
+(87, 'Гваделупа', 'GP', 'GLP', '', 0, 1),
+(88, 'Гуам', 'GU', 'GUM', '', 0, 1),
+(89, 'Гватемала', 'GT', 'GTM', '', 0, 1),
+(90, 'Гвинея', 'GN', 'GIN', '', 0, 1),
+(91, 'Гвинея-Бисау', 'GW', 'GNB', '', 0, 1),
+(92, 'Гайана', 'GY', 'GUY', '', 0, 1),
+(93, 'Гаити', 'HT', 'HTI', '', 0, 1),
+(94, 'Херд и Макдональд, острова', 'HM', 'HMD', '', 0, 1),
+(95, 'Гондурас', 'HN', 'HND', '', 0, 1),
+(96, 'Гонконг', 'HK', 'HKG', '', 0, 1),
+(97, 'Венгрия', 'HU', 'HUN', '', 0, 1),
+(98, 'Исландия', 'IS', 'ISL', '', 0, 1),
+(99, 'Индия', 'IN', 'IND', '', 0, 1),
+(100, 'Индонезия', 'ID', 'IDN', '', 0, 1),
+(101, 'Иран', 'IR', 'IRN', '', 0, 1),
+(102, 'Ирак', 'IQ', 'IRQ', '', 0, 1),
+(103, 'Ирландия', 'IE', 'IRL', '', 0, 1),
+(104, 'Израиль', 'IL', 'ISR', '', 0, 1),
+(105, 'Италия', 'IT', 'ITA', '', 0, 1),
+(106, 'Ямайка', 'JM', 'JAM', '', 0, 1),
+(107, 'Япония', 'JP', 'JPN', '', 0, 1),
+(108, 'Иордания', 'JO', 'JOR', '', 0, 1),
+(109, 'Казахстан', 'KZ', 'KAZ', '', 0, 1),
+(110, 'Кения', 'KE', 'KEN', '', 0, 1),
+(111, 'Кирибати', 'KI', 'KIR', '', 0, 1),
+(112, 'Корейская Народно-Демократическая Республика', 'KP', 'PRK', '', 0, 1),
+(113, 'Республика Корея', 'KR', 'KOR', '', 0, 1),
+(114, 'Кувейт', 'KW', 'KWT', '', 0, 1),
+(115, 'Киргизия (Кыргызстан)', 'KG', 'KGZ', '', 0, 1),
+(116, 'Лаос', 'LA', 'LAO', '', 0, 1),
+(117, 'Латвия', 'LV', 'LVA', '', 0, 1),
+(118, 'Ливан', 'LB', 'LBN', '', 0, 1),
+(119, 'Лесото', 'LS', 'LSO', '', 0, 1),
+(120, 'Либерия', 'LR', 'LBR', '', 0, 1),
+(121, 'Ливия', 'LY', 'LBY', '', 0, 1),
+(122, 'Лихтенштейн', 'LI', 'LIE', '', 0, 1),
+(123, 'Литва', 'LT', 'LTU', '', 0, 1),
+(124, 'Люксембург', 'LU', 'LUX', '', 0, 1),
+(125, 'Макао', 'MO', 'MAC', '', 0, 1),
+(126, 'Македония', 'MK', 'MKD', '', 0, 1),
+(127, 'Мадагаскар', 'MG', 'MDG', '', 0, 1),
+(128, 'Малави', 'MW', 'MWI', '', 0, 1),
+(129, 'Малайзия', 'MY', 'MYS', '', 0, 1),
+(130, 'Мальдивы', 'MV', 'MDV', '', 0, 1),
+(131, 'Мали', 'ML', 'MLI', '', 0, 1),
+(132, 'Мальта', 'MT', 'MLT', '', 0, 1),
+(133, 'Маршалловы острова', 'MH', 'MHL', '', 0, 1),
+(134, 'Мартиника', 'MQ', 'MTQ', '', 0, 1),
+(135, 'Мавритания', 'MR', 'MRT', '', 0, 1),
+(136, 'Маврикий', 'MU', 'MUS', '', 0, 1),
+(137, 'Майотта', 'YT', 'MYT', '', 0, 1),
+(138, 'Мексика', 'MX', 'MEX', '', 0, 1),
+(139, 'Микронезия', 'FM', 'FSM', '', 0, 1),
+(140, 'Молдова', 'MD', 'MDA', '', 0, 1),
+(141, 'Монако', 'MC', 'MCO', '', 0, 1),
+(142, 'Монголия', 'MN', 'MNG', '', 0, 1),
+(143, 'Монтсеррат', 'MS', 'MSR', '', 0, 1),
+(144, 'Марокко', 'MA', 'MAR', '', 0, 1),
+(145, 'Мозамбик', 'MZ', 'MOZ', '', 0, 1),
+(146, 'Мьянма', 'MM', 'MMR', '', 0, 1),
+(147, 'Намибия', 'NA', 'NAM', '', 0, 1),
+(148, 'Науру', 'NR', 'NRU', '', 0, 1),
+(149, 'Непал', 'NP', 'NPL', '', 0, 1),
+(150, 'Нидерланды', 'NL', 'NLD', '', 0, 1),
+(151, 'Антильские (Нидерландские) острова', 'AN', 'ANT', '', 0, 1),
+(152, 'Новая Каледония', 'NC', 'NCL', '', 0, 1),
+(153, 'Новая Зеландия', 'NZ', 'NZL', '', 0, 1),
+(154, 'Никарагуа', 'NI', 'NIC', '', 0, 1),
+(155, 'Нигер', 'NE', 'NER', '', 0, 1),
+(156, 'Нигерия', 'NG', 'NGA', '', 0, 1),
+(157, 'Ниуэ', 'NU', 'NIU', '', 0, 1),
+(158, 'Остров Норфолк', 'NF', 'NFK', '', 0, 1),
+(159, 'Северные Марианские острова', 'MP', 'MNP', '', 0, 1),
+(160, 'Норвегия', 'NO', 'NOR', '', 0, 1),
+(161, 'Оман', 'OM', 'OMN', '', 0, 1),
+(162, 'Пакистан', 'PK', 'PAK', '', 0, 1),
+(163, 'Палау', 'PW', 'PLW', '', 0, 1),
+(164, 'Панама', 'PA', 'PAN', '', 0, 1),
+(165, 'Папуа - Новая Гвинея', 'PG', 'PNG', '', 0, 1),
+(166, 'Парагвай', 'PY', 'PRY', '', 0, 1),
+(167, 'Перу', 'PE', 'PER', '', 0, 1),
+(168, 'Филиппины', 'PH', 'PHL', '', 0, 1),
+(169, 'Острова Питкэрн', 'PN', 'PCN', '', 0, 1),
+(170, 'Польша', 'PL', 'POL', '', 0, 1),
+(171, 'Португалия', 'PT', 'PRT', '', 0, 1),
+(172, 'Пуэрто-Рико', 'PR', 'PRI', '', 0, 1),
+(173, 'Катар', 'QA', 'QAT', '', 0, 1),
+(174, 'Реюньон', 'RE', 'REU', '', 0, 1),
+(175, 'Румыния', 'RO', 'ROM', '', 0, 1),
+(176, 'Российская Федерация', 'RU', 'RUS', '', 0, 1),
+(177, 'Руанда', 'RW', 'RWA', '', 0, 1),
+(178, 'Сент-Китс и Невис', 'KN', 'KNA', '', 0, 1),
+(179, 'Сент-Люсия', 'LC', 'LCA', '', 0, 1),
+(180, 'Сент-Винсент и Гренадины', 'VC', 'VCT', '', 0, 1),
+(181, 'Западное Самоа', 'WS', 'WSM', '', 0, 1),
+(182, 'Сан-Марино', 'SM', 'SMR', '', 0, 1),
+(183, 'Сан-Томе и Принсипи', 'ST', 'STP', '', 0, 1),
+(184, 'Саудовская Аравия', 'SA', 'SAU', '', 0, 1),
+(185, 'Сенегал', 'SN', 'SEN', '', 0, 1),
+(186, 'Сейшельские острова', 'SC', 'SYC', '', 0, 1),
+(187, 'Сьерра-Леоне', 'SL', 'SLE', '', 0, 1),
+(188, 'Сингапур', 'SG', 'SGP', '', 0, 1),
+(189, 'Словакия', 'SK', 'SVK', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city} {postcode}\r\n{zone}\r\n{country}', 0, 1),
+(190, 'Словения', 'SI', 'SVN', '', 0, 1),
+(191, 'Соломоновы острова', 'SB', 'SLB', '', 0, 1),
+(192, 'Сомали', 'SO', 'SOM', '', 0, 1),
+(193, 'Южно-Африканская Республика', 'ZA', 'ZAF', '', 0, 1),
+(194, 'Южная Джорджия и Южные Сандвичевы острова', 'GS', 'SGS', '', 0, 1),
+(195, 'Испания', 'ES', 'ESP', '', 0, 1),
+(196, 'Шри-Ланка', 'LK', 'LKA', '', 0, 1),
+(197, 'Остров Святой Елены', 'SH', 'SHN', '', 0, 1),
+(198, 'Сен-Пьер и Микелон', 'PM', 'SPM', '', 0, 1),
+(199, 'Судан', 'SD', 'SDN', '', 0, 1),
+(200, 'Суринам', 'SR', 'SUR', '', 0, 1),
+(201, 'Шпицберген и Ян Майен', 'SJ', 'SJM', '', 0, 1),
+(202, 'Свазиленд', 'SZ', 'SWZ', '', 0, 1),
+(203, 'Швеция', 'SE', 'SWE', '', 0, 1),
+(204, 'Швейцария', 'CH', 'CHE', '', 0, 1),
+(205, 'Сирия', 'SY', 'SYR', '', 0, 1),
+(206, 'Тайвань (провинция Китая)', 'TW', 'TWN', '', 0, 1),
+(207, 'Таджикистан', 'TJ', 'TJK', '', 0, 1),
+(208, 'Танзания', 'TZ', 'TZA', '', 0, 1),
+(209, 'Таиланд', 'TH', 'THA', '', 0, 1),
+(210, 'Того', 'TG', 'TGO', '', 0, 1),
+(211, 'Токелау', 'TK', 'TKL', '', 0, 1),
+(212, 'Тонга', 'TO', 'TON', '', 0, 1),
+(213, 'Тринидад и Тобаго', 'TT', 'TTO', '', 0, 1),
+(214, 'Тунис', 'TN', 'TUN', '', 0, 1),
+(215, 'Турция', 'TR', 'TUR', '', 0, 1),
+(216, 'Туркменистан', 'TM', 'TKM', '', 0, 1),
+(217, 'Острова Теркс и Кайкос', 'TC', 'TCA', '', 0, 1),
+(218, 'Тувалу', 'TV', 'TUV', '', 0, 1),
+(219, 'Уганда', 'UG', 'UGA', '', 0, 1),
+(220, 'Украина', 'UA', 'UKR', '', 0, 1),
+(221, 'Объединенные Арабские Эмираты', 'AE', 'ARE', '', 0, 1),
+(222, 'Великобритания', 'GB', 'GBR', '', 1, 1),
+(223, 'Соединенные Штаты Америки', 'US', 'USA', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', 0, 1),
+(224, 'Мелкие отдаленные острова США', 'UM', 'UMI', '', 0, 1),
+(225, 'Уругвай', 'UY', 'URY', '', 0, 1),
+(226, 'Узбекистан', 'UZ', 'UZB', '', 0, 1),
+(227, 'Вануату', 'VU', 'VUT', '', 0, 1),
+(228, 'Ватикан', 'VA', 'VAT', '', 0, 1),
+(229, 'Венесуэла', 'VE', 'VEN', '', 0, 1),
+(230, 'Вьетнам', 'VN', 'VNM', '', 0, 1),
+(231, 'Виргинские острова (Британские)', 'VG', 'VGB', '', 0, 1),
+(232, 'Виргинские острова (США)', 'VI', 'VIR', '', 0, 1),
+(233, 'Уоллис и Футуна', 'WF', 'WLF', '', 0, 1),
+(234, 'Западная Сахара', 'EH', 'ESH', '', 0, 1),
+(235, 'Йемен', 'YE', 'YEM', '', 0, 1),
+(236, 'Сербия и Черногория', 'SCG', 'CS', '', 0, 1),
+(237, 'Заир', 'ZR', 'ZAR', '', 0, 1),
+(238, 'Замбия', 'ZM', 'ZMB', '', 0, 1),
+(239, 'Зимбабве', 'ZW', 'ZWE', '', 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon`
+-- Структура таблицы `oc_coupon`
 --
 
 DROP TABLE IF EXISTS `oc_coupon`;
@@ -783,18 +783,18 @@ CREATE TABLE `oc_coupon` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_coupon`
+-- Дамп данных таблицы `oc_coupon`
 --
 
 INSERT INTO `oc_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logged`, `shipping`, `total`, `date_start`, `date_end`, `uses_total`, `uses_customer`, `status`, `date_added`) VALUES
-(4, '-10% Discount', '2222', 'P', '10.0000', 0, 0, '0.0000', '2011-01-01', '2012-01-01', 10, '10', 1, '2009-01-27 13:55:03'),
-(5, 'Free Shipping', '3333', 'P', '0.0000', 0, 1, '100.0000', '2009-03-01', '2009-08-31', 10, '10', 1, '2009-03-14 21:13:53'),
-(6, '-10.00 Discount', '1111', 'F', '10.0000', 0, 0, '10.0000', '1970-11-01', '2020-11-01', 100000, '10000', 1, '2009-03-14 21:15:18');
+(4, '-10% скидка', '2222', 'P', '10.0000', 0, 0, '0.0000', '2011-01-01', '2012-01-01', 10, '10', 1, '2009-01-27 13:55:03'),
+(5, 'Бесплатная доставка', '3333', 'P', '0.0000', 0, 1, '100.0000', '2009-03-01', '2009-08-31', 10, '10', 1, '2009-03-14 21:13:53'),
+(6, '-10.00 скидка', '1111', 'F', '10.0000', 0, 0, '10.0000', '1970-11-01', '2020-11-01', 100000, '10000', 1, '2009-03-14 21:15:18');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon_history`
+-- Структура таблицы `oc_coupon_history`
 --
 
 DROP TABLE IF EXISTS `oc_coupon_history`;
@@ -809,14 +809,14 @@ CREATE TABLE `oc_coupon_history` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_coupon_history`
+-- Дамп данных таблицы `oc_coupon_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon_product`
+-- Структура таблицы `oc_coupon_product`
 --
 
 DROP TABLE IF EXISTS `oc_coupon_product`;
@@ -828,7 +828,7 @@ CREATE TABLE `oc_coupon_product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_coupon_product`
+-- Дамп данных таблицы `oc_coupon_product`
 --
 
 INSERT INTO `oc_coupon_product` (`coupon_product_id`, `coupon_id`, `product_id`) VALUES
@@ -838,7 +838,7 @@ INSERT INTO `oc_coupon_product` (`coupon_product_id`, `coupon_id`, `product_id`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_currency`
+-- Структура таблицы `oc_currency`
 --
 
 DROP TABLE IF EXISTS `oc_currency`;
@@ -856,18 +856,18 @@ CREATE TABLE `oc_currency` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_currency`
+-- Дамп данных таблицы `oc_currency`
 --
 
 INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
-(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.60740000, 1, '2011-05-30 23:37:53'),
-(2, 'US Dollar', 'USD', '$', '', '2', 1.00000000, 1, '2011-05-30 23:37:53'),
-(3, 'Euro', 'EUR', '', '€', '2', 0.70039999, 1, '2011-05-30 23:37:53');
+(1, 'Рубль', 'RUB', '', ' р.', '2', 1.00000000, 1, '2010-06-28 08:52:14'),
+(2, 'US Dollar', 'USD', '$', '', '2', 1.52600002, 1, '2010-04-06 22:00:54'),
+(3, 'Euro', 'EUR', '', '€', '2', 1.13999999, 1, '2010-04-06 22:00:54');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer`
+-- Структура таблицы `oc_customer`
 --
 
 DROP TABLE IF EXISTS `oc_customer`;
@@ -893,14 +893,14 @@ CREATE TABLE `oc_customer` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_customer`
+-- Дамп данных таблицы `oc_customer`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_group`
+-- Структура таблицы `oc_customer_group`
 --
 
 DROP TABLE IF EXISTS `oc_customer_group`;
@@ -911,17 +911,17 @@ CREATE TABLE `oc_customer_group` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_customer_group`
+-- Дамп данных таблицы `oc_customer_group`
 --
 
 INSERT INTO `oc_customer_group` (`customer_group_id`, `name`) VALUES
-(8, 'Default'),
-(6, 'Wholesale');
+(8, 'По умолчанию'),
+(6, 'Оптовики');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_ip`
+-- Структура таблицы `oc_customer_ip`
 --
 
 DROP TABLE IF EXISTS `oc_customer_ip`;
@@ -935,14 +935,14 @@ CREATE TABLE `oc_customer_ip` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_customer_ip`
+-- Дамп данных таблицы `oc_customer_ip`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_reward`
+-- Структура таблицы `oc_customer_reward`
 --
 
 DROP TABLE IF EXISTS `oc_customer_reward`;
@@ -957,14 +957,14 @@ CREATE TABLE `oc_customer_reward` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_customer_reward`
+-- Дамп данных таблицы `oc_customer_reward`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_customer_transaction`
+-- Структура таблицы `oc_customer_transaction`
 --
 
 DROP TABLE IF EXISTS `oc_customer_transaction`;
@@ -979,14 +979,14 @@ CREATE TABLE `oc_customer_transaction` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_customer_transaction`
+-- Дамп данных таблицы `oc_customer_transaction`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_download`
+-- Структура таблицы `oc_download`
 --
 
 DROP TABLE IF EXISTS `oc_download`;
@@ -1000,14 +1000,14 @@ CREATE TABLE `oc_download` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_download`
+-- Дамп данных таблицы `oc_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_download_description`
+-- Структура таблицы `oc_download_description`
 --
 
 DROP TABLE IF EXISTS `oc_download_description`;
@@ -1019,14 +1019,14 @@ CREATE TABLE `oc_download_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_download_description`
+-- Дамп данных таблицы `oc_download_description`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_extension`
+-- Структура таблицы `oc_extension`
 --
 
 DROP TABLE IF EXISTS `oc_extension`;
@@ -1038,7 +1038,7 @@ CREATE TABLE `oc_extension` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_extension`
+-- Дамп данных таблицы `oc_extension`
 --
 
 INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
@@ -1075,7 +1075,7 @@ INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_geo_zone`
+-- Структура таблицы `oc_geo_zone`
 --
 
 DROP TABLE IF EXISTS `oc_geo_zone`;
@@ -1089,17 +1089,16 @@ CREATE TABLE `oc_geo_zone` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_geo_zone`
+-- Дамп данных таблицы `oc_geo_zone`
 --
 
 INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`, `date_added`) VALUES
-(3, 'UK VAT Zone', 'UK VAT', '2010-02-26 22:33:24', '2009-01-06 23:26:25'),
-(4, 'UK Shipping', 'UK Shipping Zones', '2010-12-15 15:18:13', '2009-06-23 01:14:53');
+(3, 'НДС', 'Облагаемые НДС', '2010-02-26 22:33:24', '2009-01-06 23:26:25');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_information`
+-- Структура таблицы `oc_information`
 --
 
 DROP TABLE IF EXISTS `oc_information`;
@@ -1111,7 +1110,7 @@ CREATE TABLE `oc_information` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_information`
+-- Дамп данных таблицы `oc_information`
 --
 
 INSERT INTO `oc_information` (`information_id`, `sort_order`, `status`) VALUES
@@ -1123,7 +1122,7 @@ INSERT INTO `oc_information` (`information_id`, `sort_order`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_information_description`
+-- Структура таблицы `oc_information_description`
 --
 
 DROP TABLE IF EXISTS `oc_information_description`;
@@ -1136,19 +1135,19 @@ CREATE TABLE `oc_information_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_information_description`
+-- Дамп данных таблицы `oc_information_description`
 --
 
 INSERT INTO `oc_information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
-(4, 1, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
-(5, 1, 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n'),
-(3, 1, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n'),
-(6, 1, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n');
+(4, 1, 'О нас', '&lt;p&gt;\r\n	О нас&lt;/p&gt;\r\n'),
+(5, 1, 'Условия соглашения', '&lt;p&gt;\r\n	Условия соглашения&lt;/p&gt;\r\n'),
+(3, 1, 'Политика Безопасности', '&lt;p&gt;\r\n	Политика Безопасности&lt;/p&gt;\r\n'),
+(6, 1, 'Информация о доставке', '&lt;p&gt;\r\n	Информация о доставке&lt;/p&gt;\r\n');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_information_to_layout`
+-- Структура таблицы `oc_information_to_layout`
 --
 
 DROP TABLE IF EXISTS `oc_information_to_layout`;
@@ -1160,14 +1159,14 @@ CREATE TABLE `oc_information_to_layout` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_information_to_layout`
+-- Дамп данных таблицы `oc_information_to_layout`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_information_to_store`
+-- Структура таблицы `oc_information_to_store`
 --
 
 DROP TABLE IF EXISTS `oc_information_to_store`;
@@ -1178,7 +1177,7 @@ CREATE TABLE `oc_information_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_information_to_store`
+-- Дамп данных таблицы `oc_information_to_store`
 --
 
 INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
@@ -1190,7 +1189,7 @@ INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_language`
+-- Структура таблицы `oc_language`
 --
 
 DROP TABLE IF EXISTS `oc_language`;
@@ -1209,17 +1208,17 @@ CREATE TABLE `oc_language` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_language`
+-- Дамп данных таблицы `oc_language`
 --
 
 INSERT INTO `oc_language` (`language_id`, `name`, `code`, `locale`, `image`, `directory`, `filename`, `sort_order`, `status`) VALUES
 (1, 'Russian', 'ru', 'ru_RU.UTF-8,ru_RU,russian', 'ru.png', 'russian', 'russian', 1, 1),
-(2, 'English', 'en', 'en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 'english', 2, 0);;
+(2, 'English', 'en', 'en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 'english', 2, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_layout`
+-- Структура таблицы `oc_layout`
 --
 
 DROP TABLE IF EXISTS `oc_layout`;
@@ -1230,7 +1229,7 @@ CREATE TABLE `oc_layout` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_layout`
+-- Дамп данных таблицы `oc_layout`
 --
 
 INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
@@ -1249,7 +1248,7 @@ INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_layout_route`
+-- Структура таблицы `oc_layout_route`
 --
 
 DROP TABLE IF EXISTS `oc_layout_route`;
@@ -1262,7 +1261,7 @@ CREATE TABLE `oc_layout_route` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_layout_route`
+-- Дамп данных таблицы `oc_layout_route`
 --
 
 INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
@@ -1280,7 +1279,7 @@ INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `rout
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_length_class`
+-- Структура таблицы `oc_length_class`
 --
 
 DROP TABLE IF EXISTS `oc_length_class`;
@@ -1291,18 +1290,17 @@ CREATE TABLE `oc_length_class` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_length_class`
+-- Дамп данных таблицы `oc_length_class`
 --
 
 INSERT INTO `oc_length_class` (`length_class_id`, `value`) VALUES
 (1, '1.00000000'),
-(2, '10.00000000'),
-(3, '0.39370000');
+(2, '10.00000000');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_length_class_description`
+-- Структура таблицы `oc_length_class_description`
 --
 
 DROP TABLE IF EXISTS `oc_length_class_description`;
@@ -1315,18 +1313,17 @@ CREATE TABLE `oc_length_class_description` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_length_class_description`
+-- Дамп данных таблицы `oc_length_class_description`
 --
 
 INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `title`, `unit`) VALUES
-(1, 1, 'Centimeter', 'cm'),
-(2, 1, 'Millimeter', 'mm'),
-(3, 1, 'Inch', 'in');
+(1, 1, 'Сантиметр', 'см'),
+(2, 1, 'Миллиметр', 'мм');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_manufacturer`
+-- Структура таблицы `oc_manufacturer`
 --
 
 DROP TABLE IF EXISTS `oc_manufacturer`;
@@ -1339,7 +1336,7 @@ CREATE TABLE `oc_manufacturer` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_manufacturer`
+-- Дамп данных таблицы `oc_manufacturer`
 --
 
 INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`) VALUES
@@ -1353,7 +1350,7 @@ INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_manufacturer_to_store`
+-- Структура таблицы `oc_manufacturer_to_store`
 --
 
 DROP TABLE IF EXISTS `oc_manufacturer_to_store`;
@@ -1364,7 +1361,7 @@ CREATE TABLE `oc_manufacturer_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_manufacturer_to_store`
+-- Дамп данных таблицы `oc_manufacturer_to_store`
 --
 
 INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
@@ -1378,7 +1375,7 @@ INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_option`
+-- Структура таблицы `oc_option`
 --
 
 DROP TABLE IF EXISTS `oc_option`;
@@ -1390,7 +1387,7 @@ CREATE TABLE `oc_option` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_option`
+-- Дамп данных таблицы `oc_option`
 --
 
 INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
@@ -1409,7 +1406,7 @@ INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_option_description`
+-- Структура таблицы `oc_option_description`
 --
 
 DROP TABLE IF EXISTS `oc_option_description`;
@@ -1421,7 +1418,7 @@ CREATE TABLE `oc_option_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_option_description`
+-- Дамп данных таблицы `oc_option_description`
 --
 
 INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
@@ -1440,7 +1437,7 @@ INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_option_value`
+-- Структура таблицы `oc_option_value`
 --
 
 DROP TABLE IF EXISTS `oc_option_value`;
@@ -1452,7 +1449,7 @@ CREATE TABLE `oc_option_value` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_option_value`
+-- Дамп данных таблицы `oc_option_value`
 --
 
 INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `sort_order`) VALUES
@@ -1474,7 +1471,7 @@ INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `sort_order`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_option_value_description`
+-- Структура таблицы `oc_option_value_description`
 --
 
 DROP TABLE IF EXISTS `oc_option_value_description`;
@@ -1487,7 +1484,7 @@ CREATE TABLE `oc_option_value_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_option_value_description`
+-- Дамп данных таблицы `oc_option_value_description`
 --
 
 INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`) VALUES
@@ -1509,7 +1506,7 @@ INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `op
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order`
+-- Структура таблицы `oc_order`
 --
 
 DROP TABLE IF EXISTS `oc_order`;
@@ -1570,14 +1567,14 @@ CREATE TABLE `oc_order` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_order`
+-- Дамп данных таблицы `oc_order`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_download`
+-- Структура таблицы `oc_order_download`
 --
 
 DROP TABLE IF EXISTS `oc_order_download`;
@@ -1593,14 +1590,14 @@ CREATE TABLE `oc_order_download` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_order_download`
+-- Дамп данных таблицы `oc_order_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_history`
+-- Структура таблицы `oc_order_history`
 --
 
 DROP TABLE IF EXISTS `oc_order_history`;
@@ -1615,14 +1612,14 @@ CREATE TABLE `oc_order_history` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_order_history`
+-- Дамп данных таблицы `oc_order_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_option`
+-- Структура таблицы `oc_order_option`
 --
 
 DROP TABLE IF EXISTS `oc_order_option`;
@@ -1639,14 +1636,14 @@ CREATE TABLE `oc_order_option` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_order_option`
+-- Дамп данных таблицы `oc_order_option`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_product`
+-- Структура таблицы `oc_order_product`
 --
 
 DROP TABLE IF EXISTS `oc_order_product`;
@@ -1664,7 +1661,7 @@ CREATE TABLE `oc_order_product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_order_product`
+-- Дамп данных таблицы `oc_order_product`
 --
 
 INSERT INTO `oc_order_product` (`order_product_id`, `order_id`, `product_id`, `name`, `model`, `quantity`, `price`, `total`, `tax`) VALUES
@@ -1673,7 +1670,7 @@ INSERT INTO `oc_order_product` (`order_product_id`, `order_id`, `product_id`, `n
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_status`
+-- Структура таблицы `oc_order_status`
 --
 
 DROP TABLE IF EXISTS `oc_order_status`;
@@ -1685,21 +1682,21 @@ CREATE TABLE `oc_order_status` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_order_status`
+-- Дамп данных таблицы `oc_order_status`
 --
 
 INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
-(2, 1, 'Processing'),
-(3, 1, 'Shipped'),
-(7, 1, 'Canceled'),
-(5, 1, 'Complete'),
-(8, 1, 'Denied'),
-(9, 1, 'Canceled Reversal'),
-(10, 1, 'Failed'),
-(11, 1, 'Refunded'),
-(12, 1, 'Reversed'),
-(13, 1, 'Chargeback'),
-(1, 1, 'Pending'),
+(2, 1, 'В обработке'),
+(3, 1, 'Доставлено'),
+(7, 1, 'Отменено'),
+(5, 1, 'Сделка завершена'),
+(8, 1, 'Возврат'),
+(9, 1, 'Отмена и аннулирование'),
+(10, 1, 'Неудавшийся'),
+(11, 1, 'Возмещенный'),
+(12, 1, 'Полностью измененный'),
+(13, 1, 'Полный возврат'),
+(1, 1, 'Ожидание'),
 (16, 1, 'Voided'),
 (15, 1, 'Processed'),
 (14, 1, 'Expired');
@@ -1707,7 +1704,7 @@ INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_order_total`
+-- Структура таблицы `oc_order_total`
 --
 
 DROP TABLE IF EXISTS `oc_order_total`;
@@ -1724,7 +1721,7 @@ CREATE TABLE `oc_order_total` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_order_total`
+-- Дамп данных таблицы `oc_order_total`
 --
 
 INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `text`, `value`, `sort_order`) VALUES
@@ -1736,7 +1733,7 @@ INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `te
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product`
+-- Структура таблицы `oc_product`
 --
 
 DROP TABLE IF EXISTS `oc_product`;
@@ -1772,35 +1769,35 @@ CREATE TABLE `oc_product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product`
+-- Дамп данных таблицы `oc_product`
 --
 
 INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(28, 'Product 1', '', '', '', 946, 7, 'data/htc_touch_hd_1.jpg', 5, 1, '500.0000', 200, 9, '2009-02-03', '146.40', 2, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2011-03-28 08:31:42', 0),
-(29, 'Product 2', '', '', '', 1000, 6, 'data/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00', 2, '0.00', '0.00', '0.00', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-03-19 03:55:24', 0),
-(30, 'Product 3', '', '', '', 995, 6, 'data/canon_eos_5d_1.jpg', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2011-03-19 03:54:10', 0),
-(31, 'Product 4', '', '', '', 1000, 6, 'data/nikon_d300_1.jpg', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2011-03-19 03:55:17', 0),
-(32, 'Product 5', '', '', '', 999, 6, 'data/ipod_touch_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-03-19 03:56:43', 0),
-(33, 'Product 6', '', '', '', 1000, 6, 'data/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2011-03-19 03:55:46', 0),
-(34, 'Product 7', '', '', '', 1000, 6, 'data/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2011-03-19 03:56:35', 0),
-(35, 'Product 8', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-04-28 01:47:48', 0),
-(36, 'Product 9', '', '', '', 995, 6, 'data/ipod_nano_1.jpg', 8, 0, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-03-19 03:56:26', 1),
-(40, 'product 11', '', '', '', 975, 5, 'data/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-03-19 03:55:09', 0),
-(41, 'Product 14', '', '', '', 994, 5, 'data/imac_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-03-19 03:56:14', 0),
-(42, 'Product 15', '', '', '', 992, 5, 'data/apple_cinema_30.jpg', 8, 1, '100.0000', 10, 9, '2009-02-04', '12.50', 5, '1.00', '2.00', '3.00', 2, 1, 2, 0, 1, '2009-02-03 21:07:37', '2011-05-30 22:12:03', 0),
-(43, 'Product 16', '', '', '', 929, 5, 'data/macbook_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2011-03-19 03:54:41', 0),
-(44, 'Product 17', '', '', '', 1000, 5, 'data/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2011-03-19 03:54:51', 0),
-(45, 'Product 18', '', '', '', 998, 5, 'data/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-03-19 03:55:00', 0),
-(46, 'Product 19', '', '', '', 1000, 5, 'data/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2011-03-19 03:55:55', 0),
-(47, 'Product 21', '', '', '', 1000, 5, 'data/hp_1.jpg', 7, 1, '100.0000', 50, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 0, 2, 0, 1, '2009-02-03 21:08:40', '2011-05-10 01:23:14', 0),
-(48, 'product 20', 'test 1', '', 'test 2', 995, 5, 'data/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2011-03-19 03:55:39', 0),
+(28, 'Товар 1', '', '', '', 946, 7, 'data/htc_touch_hd_1.jpg', 5, 1, '500.0000', 200, 9, '2009-02-03', '146.40', 2, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2011-03-28 08:31:42', 0),
+(29, 'Товар 2', '', '', '', 1000, 6, 'data/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00', 2, '0.00', '0.00', '0.00', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-03-19 03:55:24', 0),
+(30, 'Товар 3', '', '', '', 995, 6, 'data/canon_eos_5d_1.jpg', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2011-03-19 03:54:10', 0),
+(31, 'Товар 4', '', '', '', 1000, 6, 'data/nikon_d300_1.jpg', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2011-03-19 03:55:17', 0),
+(32, 'Товар 5', '', '', '', 999, 6, 'data/ipod_touch_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-03-19 03:56:43', 0),
+(33, 'Товар 6', '', '', '', 1000, 6, 'data/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2011-03-19 03:55:46', 0),
+(34, 'Товар 7', '', '', '', 1000, 6, 'data/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2011-03-19 03:56:35', 0),
+(35, 'Товар 8', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-04-28 01:47:48', 0),
+(36, 'Товар 9', '', '', '', 995, 6, 'data/ipod_nano_1.jpg', 8, 0, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-03-19 03:56:26', 1),
+(40, 'Товар 11', '', '', '', 975, 5, 'data/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-03-19 03:55:09', 0),
+(41, 'Товар 14', '', '', '', 994, 5, 'data/imac_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-03-19 03:56:14', 0),
+(42, 'Товар 15', '', '', '', 992, 5, 'data/apple_cinema_30.jpg', 8, 1, '100.0000', 10, 9, '2009-02-04', '12.50', 5, '1.00', '2.00', '3.00', 2, 1, 2, 0, 1, '2009-02-03 21:07:37', '2011-05-30 22:12:03', 0),
+(43, 'Товар 16', '', '', '', 929, 5, 'data/macbook_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2011-03-19 03:54:41', 0),
+(44, 'Товар 17', '', '', '', 1000, 5, 'data/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2011-03-19 03:54:51', 0),
+(45, 'Товар 18', '', '', '', 998, 5, 'data/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-03-19 03:55:00', 0),
+(46, 'Товар 19', '', '', '', 1000, 5, 'data/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2011-03-19 03:55:55', 0),
+(47, 'Товар 21', '', '', '', 1000, 5, 'data/hp_1.jpg', 7, 1, '100.0000', 50, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 0, 2, 0, 1, '2009-02-03 21:08:40', '2011-05-10 01:23:14', 0),
+(48, 'Товар 20', 'test 1', '', 'test 2', 995, 5, 'data/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2011-03-19 03:55:39', 0),
 (49, 'SAM1', '', '', '', 0, 8, 'data/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-04-26 09:21:13', 0),
-(64, 'Product 1', '', '', '', 946, 7, 'data/htc_touch_hd_1.jpg', 5, 1, '500.0000', 200, 9, '2009-02-03', '146.40', 2, '0.00', '0.00', '0.00', 1, 1, 1, 0, 0, '2011-05-24 23:48:34', '0000-00-00 00:00:00', 0);
+(64, 'Товар 1', '', '', '', 946, 7, 'data/htc_touch_hd_1.jpg', 5, 1, '500.0000', 200, 9, '2009-02-03', '146.40', 2, '0.00', '0.00', '0.00', 1, 1, 1, 0, 0, '2011-05-24 23:48:34', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_attribute`
+-- Структура таблицы `oc_product_attribute`
 --
 
 DROP TABLE IF EXISTS `oc_product_attribute`;
@@ -1813,20 +1810,20 @@ CREATE TABLE `oc_product_attribute` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_attribute`
+-- Дамп данных таблицы `oc_product_attribute`
 --
 
 INSERT INTO `oc_product_attribute` (`product_id`, `attribute_id`, `language_id`, `text`) VALUES
 (43, 2, 1, '1'),
 (47, 2, 1, '4'),
-(43, 4, 1, '8gb'),
-(42, 3, 1, '100mhz'),
-(47, 4, 1, '16GB');
+(43, 4, 1, '8гб'),
+(42, 3, 1, '100мгц'),
+(47, 4, 1, '16ГБ');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_description`
+-- Структура таблицы `oc_product_description`
 --
 
 DROP TABLE IF EXISTS `oc_product_description`;
@@ -1842,11 +1839,11 @@ CREATE TABLE `oc_product_description` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_description`
+-- Дамп данных таблицы `oc_product_description`
 --
 
 INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES
-(35, 1, 'Product 8', '&lt;p&gt;\r\n	Product 8&lt;/p&gt;\r\n', '', ''),
+(35, 1, 'Товар 8', '&lt;p&gt;\r\n	Товар 8&lt;/p&gt;\r\n', '', ''),
 (48, 1, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', ''),
 (40, 1, 'iPhone', '&lt;p class=&quot;intro&quot;&gt;\r\n	iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', ''),
 (28, 1, 'HTC Touch HD', '&lt;p&gt;\r\n	HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;\r\n		GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;\r\n		40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', ''),
@@ -1870,7 +1867,7 @@ INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `desc
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_discount`
+-- Структура таблицы `oc_product_discount`
 --
 
 DROP TABLE IF EXISTS `oc_product_discount`;
@@ -1888,7 +1885,7 @@ CREATE TABLE `oc_product_discount` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_discount`
+-- Дамп данных таблицы `oc_product_discount`
 --
 
 INSERT INTO `oc_product_discount` (`product_discount_id`, `product_id`, `customer_group_id`, `quantity`, `priority`, `price`, `date_start`, `date_end`) VALUES
@@ -1900,7 +1897,7 @@ INSERT INTO `oc_product_discount` (`product_discount_id`, `product_id`, `custome
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_image`
+-- Структура таблицы `oc_product_image`
 --
 
 DROP TABLE IF EXISTS `oc_product_image`;
@@ -1912,7 +1909,7 @@ CREATE TABLE `oc_product_image` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_image`
+-- Дамп данных таблицы `oc_product_image`
 --
 
 INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`) VALUES
@@ -1983,7 +1980,7 @@ INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_option`
+-- Структура таблицы `oc_product_option`
 --
 
 DROP TABLE IF EXISTS `oc_product_option`;
@@ -1997,7 +1994,7 @@ CREATE TABLE `oc_product_option` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_option`
+-- Дамп данных таблицы `oc_product_option`
 --
 
 INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`, `option_value`, `required`) VALUES
@@ -2016,7 +2013,7 @@ INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_option_value`
+-- Структура таблицы `oc_product_option_value`
 --
 
 DROP TABLE IF EXISTS `oc_product_option_value`;
@@ -2038,7 +2035,7 @@ CREATE TABLE `oc_product_option_value` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_option_value`
+-- Дамп данных таблицы `oc_product_option_value`
 --
 
 INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
@@ -2060,7 +2057,7 @@ INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_optio
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_related`
+-- Структура таблицы `oc_product_related`
 --
 
 DROP TABLE IF EXISTS `oc_product_related`;
@@ -2071,7 +2068,7 @@ CREATE TABLE `oc_product_related` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_related`
+-- Дамп данных таблицы `oc_product_related`
 --
 
 INSERT INTO `oc_product_related` (`product_id`, `related_id`) VALUES
@@ -2083,7 +2080,7 @@ INSERT INTO `oc_product_related` (`product_id`, `related_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_reward`
+-- Структура таблицы `oc_product_reward`
 --
 
 DROP TABLE IF EXISTS `oc_product_reward`;
@@ -2096,7 +2093,7 @@ CREATE TABLE `oc_product_reward` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_reward`
+-- Дамп данных таблицы `oc_product_reward`
 --
 
 INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_group_id`, `points`) VALUES
@@ -2144,7 +2141,7 @@ INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_gr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_special`
+-- Структура таблицы `oc_product_special`
 --
 
 DROP TABLE IF EXISTS `oc_product_special`;
@@ -2161,7 +2158,7 @@ CREATE TABLE `oc_product_special` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_special`
+-- Дамп данных таблицы `oc_product_special`
 --
 
 INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_group_id`, `priority`, `price`, `date_start`, `date_end`) VALUES
@@ -2183,7 +2180,7 @@ INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_tag`
+-- Структура таблицы `oc_product_tag`
 --
 
 DROP TABLE IF EXISTS `oc_product_tag`;
@@ -2196,17 +2193,17 @@ CREATE TABLE `oc_product_tag` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_tag`
+-- Дамп данных таблицы `oc_product_tag`
 --
 
 INSERT INTO `oc_product_tag` (`product_tag_id`, `product_id`, `language_id`, `tag`) VALUES
-(341, 42, 1, 'test 1'),
-(342, 42, 1, 'test 2');
+(341, 42, 1, 'тест 1'),
+(342, 42, 1, 'тест 2');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_to_category`
+-- Структура таблицы `oc_product_to_category`
 --
 
 DROP TABLE IF EXISTS `oc_product_to_category`;
@@ -2217,7 +2214,7 @@ CREATE TABLE `oc_product_to_category` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_to_category`
+-- Дамп данных таблицы `oc_product_to_category`
 --
 
 INSERT INTO `oc_product_to_category` (`product_id`, `category_id`) VALUES
@@ -2257,7 +2254,7 @@ INSERT INTO `oc_product_to_category` (`product_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_to_download`
+-- Структура таблицы `oc_product_to_download`
 --
 
 DROP TABLE IF EXISTS `oc_product_to_download`;
@@ -2268,14 +2265,14 @@ CREATE TABLE `oc_product_to_download` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_to_download`
+-- Дамп данных таблицы `oc_product_to_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_to_layout`
+-- Структура таблицы `oc_product_to_layout`
 --
 
 DROP TABLE IF EXISTS `oc_product_to_layout`;
@@ -2287,14 +2284,14 @@ CREATE TABLE `oc_product_to_layout` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_to_layout`
+-- Дамп данных таблицы `oc_product_to_layout`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_product_to_store`
+-- Структура таблицы `oc_product_to_store`
 --
 
 DROP TABLE IF EXISTS `oc_product_to_store`;
@@ -2305,7 +2302,7 @@ CREATE TABLE `oc_product_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_product_to_store`
+-- Дамп данных таблицы `oc_product_to_store`
 --
 
 INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
@@ -2333,7 +2330,7 @@ INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return`
+-- Структура таблицы `oc_return`
 --
 
 DROP TABLE IF EXISTS `oc_return`;
@@ -2354,14 +2351,14 @@ CREATE TABLE `oc_return` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_return`
+-- Дамп данных таблицы `oc_return`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_action`
+-- Структура таблицы `oc_return_action`
 --
 
 DROP TABLE IF EXISTS `oc_return_action`;
@@ -2373,7 +2370,7 @@ CREATE TABLE `oc_return_action` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_return_action`
+-- Дамп данных таблицы `oc_return_action`
 --
 
 INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUES
@@ -2384,7 +2381,7 @@ INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_history`
+-- Структура таблицы `oc_return_history`
 --
 
 DROP TABLE IF EXISTS `oc_return_history`;
@@ -2399,14 +2396,14 @@ CREATE TABLE `oc_return_history` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_return_history`
+-- Дамп данных таблицы `oc_return_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_product`
+-- Структура таблицы `oc_return_product`
 --
 
 DROP TABLE IF EXISTS `oc_return_product`;
@@ -2425,14 +2422,14 @@ CREATE TABLE `oc_return_product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_return_product`
+-- Дамп данных таблицы `oc_return_product`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_reason`
+-- Структура таблицы `oc_return_reason`
 --
 
 DROP TABLE IF EXISTS `oc_return_reason`;
@@ -2444,7 +2441,7 @@ CREATE TABLE `oc_return_reason` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_return_reason`
+-- Дамп данных таблицы `oc_return_reason`
 --
 
 INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
@@ -2457,7 +2454,7 @@ INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_return_status`
+-- Структура таблицы `oc_return_status`
 --
 
 DROP TABLE IF EXISTS `oc_return_status`;
@@ -2469,7 +2466,7 @@ CREATE TABLE `oc_return_status` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_return_status`
+-- Дамп данных таблицы `oc_return_status`
 --
 
 INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUES
@@ -2480,7 +2477,7 @@ INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_review`
+-- Структура таблицы `oc_review`
 --
 
 DROP TABLE IF EXISTS `oc_review`;
@@ -2499,14 +2496,14 @@ CREATE TABLE `oc_review` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_review`
+-- Дамп данных таблицы `oc_review`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_setting`
+-- Структура таблицы `oc_setting`
 --
 
 DROP TABLE IF EXISTS `oc_setting`;
@@ -2520,7 +2517,7 @@ CREATE TABLE `oc_setting` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_setting`
+-- Дамп данных таблицы `oc_setting`
 --
 
 INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`) VALUES
@@ -2739,7 +2736,7 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_stock_status`
+-- Структура таблицы `oc_stock_status`
 --
 
 DROP TABLE IF EXISTS `oc_stock_status`;
@@ -2751,19 +2748,19 @@ CREATE TABLE `oc_stock_status` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_stock_status`
+-- Дамп данных таблицы `oc_stock_status`
 --
 
 INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
-(7, 1, 'In Stock'),
-(8, 1, 'Pre-Order'),
-(5, 1, 'Out Of Stock'),
-(6, 1, '2 - 3 Days');
+(7, 1, 'В наличии'),
+(8, 1, 'Предзаказ'),
+(5, 1, 'Нет в наличии'),
+(6, 1, 'Ожидание 2-3 дня');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_store`
+-- Структура таблицы `oc_store`
 --
 
 DROP TABLE IF EXISTS `oc_store`;
@@ -2776,14 +2773,14 @@ CREATE TABLE `oc_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_store`
+-- Дамп данных таблицы `oc_store`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_tax_class`
+-- Структура таблицы `oc_tax_class`
 --
 
 DROP TABLE IF EXISTS `oc_tax_class`;
@@ -2797,16 +2794,16 @@ CREATE TABLE `oc_tax_class` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_tax_class`
+-- Дамп данных таблицы `oc_tax_class`
 --
 
 INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`, `date_modified`) VALUES
-(9, 'Taxable Goods', 'Taxed Stuff', '2009-01-06 23:21:53', '2011-03-09 21:17:10');
+(9, 'Налоги', 'Облагаемые налогом', '2009-01-06 23:21:53', '2011-03-09 21:17:10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_tax_rate`
+-- Структура таблицы `oc_tax_rate`
 --
 
 DROP TABLE IF EXISTS `oc_tax_rate`;
@@ -2823,16 +2820,16 @@ CREATE TABLE `oc_tax_rate` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_tax_rate`
+-- Дамп данных таблицы `oc_tax_rate`
 --
 
 INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `tax_class_id`, `priority`, `rate`, `description`, `date_modified`, `date_added`) VALUES
-(86, 3, 9, 1, '17.5000', 'VAT 17.5%', '0000-00-00 00:00:00', '2011-03-09 21:17:10');
+(86, 3, 9, 1, '18.0000', 'НДС 18%', '0000-00-00 00:00:00', '2011-03-09 21:17:10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_url_alias`
+-- Структура таблицы `oc_url_alias`
 --
 
 DROP TABLE IF EXISTS `oc_url_alias`;
@@ -2844,7 +2841,7 @@ CREATE TABLE `oc_url_alias` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_url_alias`
+-- Дамп данных таблицы `oc_url_alias`
 --
 
 INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
@@ -2861,7 +2858,7 @@ INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_user`
+-- Структура таблицы `oc_user`
 --
 
 DROP TABLE IF EXISTS `oc_user`;
@@ -2881,13 +2878,13 @@ CREATE TABLE `oc_user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_user`
+-- Дамп данных таблицы `oc_user`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_user_group`
+-- Структура таблицы `oc_user_group`
 --
 
 DROP TABLE IF EXISTS `oc_user_group`;
@@ -2899,17 +2896,17 @@ CREATE TABLE `oc_user_group` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_user_group`
+-- Дамп данных таблицы `oc_user_group`
 --
 
 INSERT INTO `oc_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Top Administrator', 'a:2:{s:6:"access";a:131:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:11:"design/menu";i:13;s:14:"extension/feed";i:14;s:16:"extension/module";i:15;s:17:"extension/payment";i:16;s:18:"extension/shipping";i:17;s:15:"extension/total";i:18;s:16:"feed/google_base";i:19;s:19:"feed/google_sitemap";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:25:"localisation/weight_class";i:32;s:17:"localisation/zone";i:33;s:14:"module/account";i:34;s:16:"module/affiliate";i:35;s:13:"module/banner";i:36;s:17:"module/bestseller";i:37;s:15:"module/category";i:38;s:15:"module/featured";i:39;s:18:"module/google_talk";i:40;s:18:"module/information";i:41;s:13:"module/latest";i:42;s:19:"module/manufacturer";i:43;s:16:"module/slideshow";i:44;s:14:"module/special";i:45;s:12:"module/store";i:46;s:14:"module/welcome";i:47;s:16:"payment/alertpay";i:48;s:24:"payment/authorizenet_aim";i:49;s:21:"payment/bank_transfer";i:50;s:14:"payment/cheque";i:51;s:11:"payment/cod";i:52;s:21:"payment/free_checkout";i:53;s:14:"payment/liqpay";i:54;s:20:"payment/moneybookers";i:55;s:14:"payment/nochex";i:56;s:15:"payment/paymate";i:57;s:16:"payment/paypoint";i:58;s:26:"payment/perpetual_payments";i:59;s:14:"payment/pp_pro";i:60;s:17:"payment/pp_pro_uk";i:61;s:19:"payment/pp_standard";i:62;s:15:"payment/sagepay";i:63;s:22:"payment/sagepay_direct";i:64;s:18:"payment/sagepay_us";i:65;s:19:"payment/twocheckout";i:66;s:16:"payment/worldpay";i:67;s:16:"report/purchased";i:68;s:11:"report/sale";i:69;s:13:"report/viewed";i:70;s:14:"sale/affiliate";i:71;s:12:"sale/contact";i:72;s:11:"sale/coupon";i:73;s:13:"sale/customer";i:74;s:19:"sale/customer_group";i:75;s:10:"sale/order";i:76;s:11:"sale/return";i:77;s:12:"sale/voucher";i:78;s:18:"sale/voucher_theme";i:79;s:15:"setting/setting";i:80;s:13:"setting/store";i:81;s:17:"shipping/citylink";i:82;s:13:"shipping/flat";i:83;s:13:"shipping/free";i:84;s:13:"shipping/item";i:85;s:23:"shipping/parcelforce_48";i:86;s:15:"shipping/pickup";i:87;s:19:"shipping/royal_mail";i:88;s:12:"shipping/ups";i:89;s:13:"shipping/usps";i:90;s:15:"shipping/weight";i:91;s:11:"tool/backup";i:92;s:14:"tool/error_log";i:93;s:12:"total/coupon";i:94;s:12:"total/credit";i:95;s:14:"total/handling";i:96;s:19:"total/low_order_fee";i:97;s:12:"total/reward";i:98;s:14:"total/shipping";i:99;s:15:"total/sub_total";i:100;s:9:"total/tax";i:101;s:11:"total/total";i:102;s:13:"total/voucher";i:103;s:9:"user/user";i:104;s:20:"user/user_permission";i:105;s:19:"shipping/royal_mail";i:106;s:12:"shipping/ups";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:19:"payment/pp_standard";i:110;s:19:"payment/pp_standard";i:111;s:19:"payment/pp_standard";i:112;s:21:"payment/free_checkout";i:113;s:16:"payment/alertpay";i:114;s:24:"payment/authorizenet_aim";i:115;s:21:"payment/bank_transfer";i:116;s:14:"payment/cheque";i:117;s:14:"payment/liqpay";i:118;s:20:"payment/moneybookers";i:119;s:14:"payment/nochex";i:120;s:15:"payment/paymate";i:121;s:16:"payment/paypoint";i:122;s:26:"payment/perpetual_payments";i:123;s:17:"payment/pp_pro_uk";i:124;s:14:"payment/pp_pro";i:125;s:19:"payment/pp_standard";i:126;s:15:"payment/sagepay";i:127;s:16:"payment/worldpay";i:128;s:19:"payment/twocheckout";i:129;s:18:"payment/sagepay_us";i:130;s:22:"payment/sagepay_direct";}s:6:"modify";a:131:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:11:"design/menu";i:13;s:14:"extension/feed";i:14;s:16:"extension/module";i:15;s:17:"extension/payment";i:16;s:18:"extension/shipping";i:17;s:15:"extension/total";i:18;s:16:"feed/google_base";i:19;s:19:"feed/google_sitemap";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:25:"localisation/weight_class";i:32;s:17:"localisation/zone";i:33;s:14:"module/account";i:34;s:16:"module/affiliate";i:35;s:13:"module/banner";i:36;s:17:"module/bestseller";i:37;s:15:"module/category";i:38;s:15:"module/featured";i:39;s:18:"module/google_talk";i:40;s:18:"module/information";i:41;s:13:"module/latest";i:42;s:19:"module/manufacturer";i:43;s:16:"module/slideshow";i:44;s:14:"module/special";i:45;s:12:"module/store";i:46;s:14:"module/welcome";i:47;s:16:"payment/alertpay";i:48;s:24:"payment/authorizenet_aim";i:49;s:21:"payment/bank_transfer";i:50;s:14:"payment/cheque";i:51;s:11:"payment/cod";i:52;s:21:"payment/free_checkout";i:53;s:14:"payment/liqpay";i:54;s:20:"payment/moneybookers";i:55;s:14:"payment/nochex";i:56;s:15:"payment/paymate";i:57;s:16:"payment/paypoint";i:58;s:26:"payment/perpetual_payments";i:59;s:14:"payment/pp_pro";i:60;s:17:"payment/pp_pro_uk";i:61;s:19:"payment/pp_standard";i:62;s:15:"payment/sagepay";i:63;s:22:"payment/sagepay_direct";i:64;s:18:"payment/sagepay_us";i:65;s:19:"payment/twocheckout";i:66;s:16:"payment/worldpay";i:67;s:16:"report/purchased";i:68;s:11:"report/sale";i:69;s:13:"report/viewed";i:70;s:14:"sale/affiliate";i:71;s:12:"sale/contact";i:72;s:11:"sale/coupon";i:73;s:13:"sale/customer";i:74;s:19:"sale/customer_group";i:75;s:10:"sale/order";i:76;s:11:"sale/return";i:77;s:12:"sale/voucher";i:78;s:18:"sale/voucher_theme";i:79;s:15:"setting/setting";i:80;s:13:"setting/store";i:81;s:17:"shipping/citylink";i:82;s:13:"shipping/flat";i:83;s:13:"shipping/free";i:84;s:13:"shipping/item";i:85;s:23:"shipping/parcelforce_48";i:86;s:15:"shipping/pickup";i:87;s:19:"shipping/royal_mail";i:88;s:12:"shipping/ups";i:89;s:13:"shipping/usps";i:90;s:15:"shipping/weight";i:91;s:11:"tool/backup";i:92;s:14:"tool/error_log";i:93;s:12:"total/coupon";i:94;s:12:"total/credit";i:95;s:14:"total/handling";i:96;s:19:"total/low_order_fee";i:97;s:12:"total/reward";i:98;s:14:"total/shipping";i:99;s:15:"total/sub_total";i:100;s:9:"total/tax";i:101;s:11:"total/total";i:102;s:13:"total/voucher";i:103;s:9:"user/user";i:104;s:20:"user/user_permission";i:105;s:19:"shipping/royal_mail";i:106;s:12:"shipping/ups";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:19:"payment/pp_standard";i:110;s:19:"payment/pp_standard";i:111;s:19:"payment/pp_standard";i:112;s:21:"payment/free_checkout";i:113;s:16:"payment/alertpay";i:114;s:24:"payment/authorizenet_aim";i:115;s:21:"payment/bank_transfer";i:116;s:14:"payment/cheque";i:117;s:14:"payment/liqpay";i:118;s:20:"payment/moneybookers";i:119;s:14:"payment/nochex";i:120;s:15:"payment/paymate";i:121;s:16:"payment/paypoint";i:122;s:26:"payment/perpetual_payments";i:123;s:17:"payment/pp_pro_uk";i:124;s:14:"payment/pp_pro";i:125;s:19:"payment/pp_standard";i:126;s:15:"payment/sagepay";i:127;s:16:"payment/worldpay";i:128;s:19:"payment/twocheckout";i:129;s:18:"payment/sagepay_us";i:130;s:22:"payment/sagepay_direct";}}'),
-(10, 'Demonstration', '');
+(1, 'Главный администратор', 'a:2:{s:6:"access";a:131:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:11:"design/menu";i:13;s:14:"extension/feed";i:14;s:16:"extension/module";i:15;s:17:"extension/payment";i:16;s:18:"extension/shipping";i:17;s:15:"extension/total";i:18;s:16:"feed/google_base";i:19;s:19:"feed/google_sitemap";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:25:"localisation/weight_class";i:32;s:17:"localisation/zone";i:33;s:14:"module/account";i:34;s:16:"module/affiliate";i:35;s:13:"module/banner";i:36;s:17:"module/bestseller";i:37;s:15:"module/category";i:38;s:15:"module/featured";i:39;s:18:"module/google_talk";i:40;s:18:"module/information";i:41;s:13:"module/latest";i:42;s:19:"module/manufacturer";i:43;s:16:"module/slideshow";i:44;s:14:"module/special";i:45;s:12:"module/store";i:46;s:14:"module/welcome";i:47;s:16:"payment/alertpay";i:48;s:24:"payment/authorizenet_aim";i:49;s:21:"payment/bank_transfer";i:50;s:14:"payment/cheque";i:51;s:11:"payment/cod";i:52;s:21:"payment/free_checkout";i:53;s:14:"payment/liqpay";i:54;s:20:"payment/moneybookers";i:55;s:14:"payment/nochex";i:56;s:15:"payment/paymate";i:57;s:16:"payment/paypoint";i:58;s:26:"payment/perpetual_payments";i:59;s:14:"payment/pp_pro";i:60;s:17:"payment/pp_pro_uk";i:61;s:19:"payment/pp_standard";i:62;s:15:"payment/sagepay";i:63;s:22:"payment/sagepay_direct";i:64;s:18:"payment/sagepay_us";i:65;s:19:"payment/twocheckout";i:66;s:16:"payment/worldpay";i:67;s:16:"report/purchased";i:68;s:11:"report/sale";i:69;s:13:"report/viewed";i:70;s:14:"sale/affiliate";i:71;s:12:"sale/contact";i:72;s:11:"sale/coupon";i:73;s:13:"sale/customer";i:74;s:19:"sale/customer_group";i:75;s:10:"sale/order";i:76;s:11:"sale/return";i:77;s:12:"sale/voucher";i:78;s:18:"sale/voucher_theme";i:79;s:15:"setting/setting";i:80;s:13:"setting/store";i:81;s:17:"shipping/citylink";i:82;s:13:"shipping/flat";i:83;s:13:"shipping/free";i:84;s:13:"shipping/item";i:85;s:23:"shipping/parcelforce_48";i:86;s:15:"shipping/pickup";i:87;s:19:"shipping/royal_mail";i:88;s:12:"shipping/ups";i:89;s:13:"shipping/usps";i:90;s:15:"shipping/weight";i:91;s:11:"tool/backup";i:92;s:14:"tool/error_log";i:93;s:12:"total/coupon";i:94;s:12:"total/credit";i:95;s:14:"total/handling";i:96;s:19:"total/low_order_fee";i:97;s:12:"total/reward";i:98;s:14:"total/shipping";i:99;s:15:"total/sub_total";i:100;s:9:"total/tax";i:101;s:11:"total/total";i:102;s:13:"total/voucher";i:103;s:9:"user/user";i:104;s:20:"user/user_permission";i:105;s:19:"shipping/royal_mail";i:106;s:12:"shipping/ups";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:19:"payment/pp_standard";i:110;s:19:"payment/pp_standard";i:111;s:19:"payment/pp_standard";i:112;s:21:"payment/free_checkout";i:113;s:16:"payment/alertpay";i:114;s:24:"payment/authorizenet_aim";i:115;s:21:"payment/bank_transfer";i:116;s:14:"payment/cheque";i:117;s:14:"payment/liqpay";i:118;s:20:"payment/moneybookers";i:119;s:14:"payment/nochex";i:120;s:15:"payment/paymate";i:121;s:16:"payment/paypoint";i:122;s:26:"payment/perpetual_payments";i:123;s:17:"payment/pp_pro_uk";i:124;s:14:"payment/pp_pro";i:125;s:19:"payment/pp_standard";i:126;s:15:"payment/sagepay";i:127;s:16:"payment/worldpay";i:128;s:19:"payment/twocheckout";i:129;s:18:"payment/sagepay_us";i:130;s:22:"payment/sagepay_direct";}s:6:"modify";a:131:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:11:"design/menu";i:13;s:14:"extension/feed";i:14;s:16:"extension/module";i:15;s:17:"extension/payment";i:16;s:18:"extension/shipping";i:17;s:15:"extension/total";i:18;s:16:"feed/google_base";i:19;s:19:"feed/google_sitemap";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:25:"localisation/weight_class";i:32;s:17:"localisation/zone";i:33;s:14:"module/account";i:34;s:16:"module/affiliate";i:35;s:13:"module/banner";i:36;s:17:"module/bestseller";i:37;s:15:"module/category";i:38;s:15:"module/featured";i:39;s:18:"module/google_talk";i:40;s:18:"module/information";i:41;s:13:"module/latest";i:42;s:19:"module/manufacturer";i:43;s:16:"module/slideshow";i:44;s:14:"module/special";i:45;s:12:"module/store";i:46;s:14:"module/welcome";i:47;s:16:"payment/alertpay";i:48;s:24:"payment/authorizenet_aim";i:49;s:21:"payment/bank_transfer";i:50;s:14:"payment/cheque";i:51;s:11:"payment/cod";i:52;s:21:"payment/free_checkout";i:53;s:14:"payment/liqpay";i:54;s:20:"payment/moneybookers";i:55;s:14:"payment/nochex";i:56;s:15:"payment/paymate";i:57;s:16:"payment/paypoint";i:58;s:26:"payment/perpetual_payments";i:59;s:14:"payment/pp_pro";i:60;s:17:"payment/pp_pro_uk";i:61;s:19:"payment/pp_standard";i:62;s:15:"payment/sagepay";i:63;s:22:"payment/sagepay_direct";i:64;s:18:"payment/sagepay_us";i:65;s:19:"payment/twocheckout";i:66;s:16:"payment/worldpay";i:67;s:16:"report/purchased";i:68;s:11:"report/sale";i:69;s:13:"report/viewed";i:70;s:14:"sale/affiliate";i:71;s:12:"sale/contact";i:72;s:11:"sale/coupon";i:73;s:13:"sale/customer";i:74;s:19:"sale/customer_group";i:75;s:10:"sale/order";i:76;s:11:"sale/return";i:77;s:12:"sale/voucher";i:78;s:18:"sale/voucher_theme";i:79;s:15:"setting/setting";i:80;s:13:"setting/store";i:81;s:17:"shipping/citylink";i:82;s:13:"shipping/flat";i:83;s:13:"shipping/free";i:84;s:13:"shipping/item";i:85;s:23:"shipping/parcelforce_48";i:86;s:15:"shipping/pickup";i:87;s:19:"shipping/royal_mail";i:88;s:12:"shipping/ups";i:89;s:13:"shipping/usps";i:90;s:15:"shipping/weight";i:91;s:11:"tool/backup";i:92;s:14:"tool/error_log";i:93;s:12:"total/coupon";i:94;s:12:"total/credit";i:95;s:14:"total/handling";i:96;s:19:"total/low_order_fee";i:97;s:12:"total/reward";i:98;s:14:"total/shipping";i:99;s:15:"total/sub_total";i:100;s:9:"total/tax";i:101;s:11:"total/total";i:102;s:13:"total/voucher";i:103;s:9:"user/user";i:104;s:20:"user/user_permission";i:105;s:19:"shipping/royal_mail";i:106;s:12:"shipping/ups";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:19:"payment/pp_standard";i:110;s:19:"payment/pp_standard";i:111;s:19:"payment/pp_standard";i:112;s:21:"payment/free_checkout";i:113;s:16:"payment/alertpay";i:114;s:24:"payment/authorizenet_aim";i:115;s:21:"payment/bank_transfer";i:116;s:14:"payment/cheque";i:117;s:14:"payment/liqpay";i:118;s:20:"payment/moneybookers";i:119;s:14:"payment/nochex";i:120;s:15:"payment/paymate";i:121;s:16:"payment/paypoint";i:122;s:26:"payment/perpetual_payments";i:123;s:17:"payment/pp_pro_uk";i:124;s:14:"payment/pp_pro";i:125;s:19:"payment/pp_standard";i:126;s:15:"payment/sagepay";i:127;s:16:"payment/worldpay";i:128;s:19:"payment/twocheckout";i:129;s:18:"payment/sagepay_us";i:130;s:22:"payment/sagepay_direct";}}'),
+(10, 'Демонстрация', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_voucher`
+-- Структура таблицы `oc_voucher`
 --
 
 DROP TABLE IF EXISTS `oc_voucher`;
@@ -2930,14 +2927,14 @@ CREATE TABLE `oc_voucher` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_voucher`
+-- Дамп данных таблицы `oc_voucher`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_voucher_history`
+-- Структура таблицы `oc_voucher_history`
 --
 
 DROP TABLE IF EXISTS `oc_voucher_history`;
@@ -2951,14 +2948,14 @@ CREATE TABLE `oc_voucher_history` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_voucher_history`
+-- Дамп данных таблицы `oc_voucher_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_voucher_theme`
+-- Структура таблицы `oc_voucher_theme`
 --
 
 DROP TABLE IF EXISTS `oc_voucher_theme`;
@@ -2969,7 +2966,7 @@ CREATE TABLE `oc_voucher_theme` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_voucher_theme`
+-- Дамп данных таблицы `oc_voucher_theme`
 --
 
 INSERT INTO `oc_voucher_theme` (`voucher_theme_id`, `image`) VALUES
@@ -2980,7 +2977,7 @@ INSERT INTO `oc_voucher_theme` (`voucher_theme_id`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_voucher_theme_description`
+-- Структура таблицы `oc_voucher_theme_description`
 --
 
 DROP TABLE IF EXISTS `oc_voucher_theme_description`;
@@ -2992,18 +2989,18 @@ CREATE TABLE `oc_voucher_theme_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_voucher_theme_description`
+-- Дамп данных таблицы `oc_voucher_theme_description`
 --
 
 INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `name`) VALUES
-(6, 1, 'Christmas'),
-(7, 1, 'Birthday'),
-(8, 1, 'General');
+(6, 1, 'Рождество'),
+(7, 1, 'День рождения'),
+(8, 1, 'Основной');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_weight_class`
+-- Структура таблицы `oc_weight_class`
 --
 
 DROP TABLE IF EXISTS `oc_weight_class`;
@@ -3014,19 +3011,17 @@ CREATE TABLE `oc_weight_class` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_weight_class`
+-- Дамп данных таблицы `oc_weight_class`
 --
 
 INSERT INTO `oc_weight_class` (`weight_class_id`, `value`) VALUES
 (1, '1.00000000'),
-(2, '1000.00000000'),
-(5, '2.20460000'),
-(6, '35.27400000');
+(2, '1000.00000000');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_weight_class_description`
+-- Структура таблицы `oc_weight_class_description`
 --
 
 DROP TABLE IF EXISTS `oc_weight_class_description`;
@@ -3039,19 +3034,17 @@ CREATE TABLE `oc_weight_class_description` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_weight_class_description`
+-- Дамп данных таблицы `oc_weight_class_description`
 --
 
 INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `title`, `unit`) VALUES
-(1, 1, 'Kilogram', 'kg'),
-(2, 1, 'Gram', 'g'),
-(5, 1, 'Pound ', 'lb'),
-(6, 1, 'Ounce', 'oz');
+(1, 1, 'Килограммы', 'кг'),
+(2, 1, 'Граммы', 'г');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_zone`
+-- Структура таблицы `oc_zone`
 --
 
 DROP TABLE IF EXISTS `oc_zone`;
@@ -3065,217 +3058,217 @@ CREATE TABLE `oc_zone` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_zone`
+-- Дамп данных таблицы `oc_zone`
 --
 
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
-(1, 1, 'BDS', 'Badakhshan', 1),
-(2, 1, 'BDG', 'Badghis', 1),
-(3, 1, 'BGL', 'Baghlan', 1),
-(4, 1, 'BAL', 'Balkh', 1),
-(5, 1, 'BAM', 'Bamian', 1),
-(6, 1, 'FRA', 'Farah', 1),
-(7, 1, 'FYB', 'Faryab', 1),
-(8, 1, 'GHA', 'Ghazni', 1),
-(9, 1, 'GHO', 'Ghowr', 1),
-(10, 1, 'HEL', 'Helmand', 1),
-(11, 1, 'HER', 'Herat', 1),
-(12, 1, 'JOW', 'Jowzjan', 1),
-(13, 1, 'KAB', 'Kabul', 1),
-(14, 1, 'KAN', 'Kandahar', 1),
-(15, 1, 'KAP', 'Kapisa', 1),
-(16, 1, 'KHO', 'Khost', 1),
-(17, 1, 'KNR', 'Konar', 1),
-(18, 1, 'KDZ', 'Kondoz', 1),
-(19, 1, 'LAG', 'Laghman', 1),
-(20, 1, 'LOW', 'Lowgar', 1),
-(21, 1, 'NAN', 'Nangrahar', 1),
-(22, 1, 'NIM', 'Nimruz', 1),
-(23, 1, 'NUR', 'Nurestan', 1),
-(24, 1, 'ORU', 'Oruzgan', 1),
-(25, 1, 'PIA', 'Paktia', 1),
-(26, 1, 'PKA', 'Paktika', 1),
-(27, 1, 'PAR', 'Parwan', 1),
-(28, 1, 'SAM', 'Samangan', 1),
-(29, 1, 'SAR', 'Sar-e Pol', 1),
-(30, 1, 'TAK', 'Takhar', 1),
-(31, 1, 'WAR', 'Wardak', 1),
-(32, 1, 'ZAB', 'Zabol', 1),
-(33, 2, 'BR', 'Berat', 1),
-(34, 2, 'BU', 'Bulqize', 1),
-(35, 2, 'DL', 'Delvine', 1),
-(36, 2, 'DV', 'Devoll', 1),
-(37, 2, 'DI', 'Diber', 1),
-(38, 2, 'DR', 'Durres', 1),
-(39, 2, 'EL', 'Elbasan', 1),
-(40, 2, 'ER', 'Kolonje', 1),
-(41, 2, 'FR', 'Fier', 1),
-(42, 2, 'GJ', 'Gjirokaster', 1),
-(43, 2, 'GR', 'Gramsh', 1),
-(44, 2, 'HA', 'Has', 1),
-(45, 2, 'KA', 'Kavaje', 1),
-(46, 2, 'KB', 'Kurbin', 1),
-(47, 2, 'KC', 'Kucove', 1),
-(48, 2, 'KO', 'Korce', 1),
-(49, 2, 'KR', 'Kruje', 1),
-(50, 2, 'KU', 'Kukes', 1),
-(51, 2, 'LB', 'Librazhd', 1),
-(52, 2, 'LE', 'Lezhe', 1),
-(53, 2, 'LU', 'Lushnje', 1),
-(54, 2, 'MM', 'Malesi e Madhe', 1),
-(55, 2, 'MK', 'Mallakaster', 1),
-(56, 2, 'MT', 'Mat', 1),
-(57, 2, 'MR', 'Mirdite', 1),
-(58, 2, 'PQ', 'Peqin', 1),
-(59, 2, 'PR', 'Permet', 1),
-(60, 2, 'PG', 'Pogradec', 1),
-(61, 2, 'PU', 'Puke', 1),
-(62, 2, 'SH', 'Shkoder', 1),
-(63, 2, 'SK', 'Skrapar', 1),
-(64, 2, 'SR', 'Sarande', 1),
-(65, 2, 'TE', 'Tepelene', 1),
-(66, 2, 'TP', 'Tropoje', 1),
-(67, 2, 'TR', 'Tirane', 1),
-(68, 2, 'VL', 'Vlore', 1),
-(69, 3, 'ADR', 'Adrar', 1),
-(70, 3, 'ADE', 'Ain Defla', 1),
-(71, 3, 'ATE', 'Ain Temouchent', 1),
-(72, 3, 'ALG', 'Alger', 1),
-(73, 3, 'ANN', 'Annaba', 1),
-(74, 3, 'BAT', 'Batna', 1),
-(75, 3, 'BEC', 'Bechar', 1),
-(76, 3, 'BEJ', 'Bejaia', 1),
-(77, 3, 'BIS', 'Biskra', 1),
-(78, 3, 'BLI', 'Blida', 1),
-(79, 3, 'BBA', 'Bordj Bou Arreridj', 1),
-(80, 3, 'BOA', 'Bouira', 1),
-(81, 3, 'BMD', 'Boumerdes', 1),
-(82, 3, 'CHL', 'Chlef', 1),
-(83, 3, 'CON', 'Constantine', 1),
-(84, 3, 'DJE', 'Djelfa', 1),
-(85, 3, 'EBA', 'El Bayadh', 1),
-(86, 3, 'EOU', 'El Oued', 1),
-(87, 3, 'ETA', 'El Tarf', 1),
-(88, 3, 'GHA', 'Ghardaia', 1),
-(89, 3, 'GUE', 'Guelma', 1),
-(90, 3, 'ILL', 'Illizi', 1),
-(91, 3, 'JIJ', 'Jijel', 1),
-(92, 3, 'KHE', 'Khenchela', 1),
-(93, 3, 'LAG', 'Laghouat', 1),
-(94, 3, 'MUA', 'Muaskar', 1),
-(95, 3, 'MED', 'Medea', 1),
-(96, 3, 'MIL', 'Mila', 1),
-(97, 3, 'MOS', 'Mostaganem', 1),
-(98, 3, 'MSI', 'M''Sila', 1),
-(99, 3, 'NAA', 'Naama', 1),
-(100, 3, 'ORA', 'Oran', 1),
-(101, 3, 'OUA', 'Ouargla', 1),
-(102, 3, 'OEB', 'Oum el-Bouaghi', 1),
-(103, 3, 'REL', 'Relizane', 1),
-(104, 3, 'SAI', 'Saida', 1),
-(105, 3, 'SET', 'Setif', 1),
-(106, 3, 'SBA', 'Sidi Bel Abbes', 1),
-(107, 3, 'SKI', 'Skikda', 1),
-(108, 3, 'SAH', 'Souk Ahras', 1),
-(109, 3, 'TAM', 'Tamanghasset', 1),
-(110, 3, 'TEB', 'Tebessa', 1),
-(111, 3, 'TIA', 'Tiaret', 1),
-(112, 3, 'TIN', 'Tindouf', 1),
-(113, 3, 'TIP', 'Tipaza', 1),
-(114, 3, 'TIS', 'Tissemsilt', 1),
-(115, 3, 'TOU', 'Tizi Ouzou', 1),
-(116, 3, 'TLE', 'Tlemcen', 1),
-(117, 4, 'E', 'Eastern', 1),
-(118, 4, 'M', 'Manu''a', 1),
-(119, 4, 'R', 'Rose Island', 1),
-(120, 4, 'S', 'Swains Island', 1),
-(121, 4, 'W', 'Western', 1),
-(122, 5, 'ALV', 'Andorra la Vella', 1),
-(123, 5, 'CAN', 'Canillo', 1),
-(124, 5, 'ENC', 'Encamp', 1),
-(125, 5, 'ESE', 'Escaldes-Engordany', 1),
-(126, 5, 'LMA', 'La Massana', 1),
-(127, 5, 'ORD', 'Ordino', 1),
-(128, 5, 'SJL', 'Sant Julia de Loria', 1),
-(129, 6, 'BGO', 'Bengo', 1),
-(130, 6, 'BGU', 'Benguela', 1),
-(131, 6, 'BIE', 'Bie', 1),
-(132, 6, 'CAB', 'Cabinda', 1),
-(133, 6, 'CCU', 'Cuando-Cubango', 1),
-(134, 6, 'CNO', 'Cuanza Norte', 1),
-(135, 6, 'CUS', 'Cuanza Sul', 1),
-(136, 6, 'CNN', 'Cunene', 1),
-(137, 6, 'HUA', 'Huambo', 1),
-(138, 6, 'HUI', 'Huila', 1),
-(139, 6, 'LUA', 'Luanda', 1),
-(140, 6, 'LNO', 'Lunda Norte', 1),
-(141, 6, 'LSU', 'Lunda Sul', 1),
-(142, 6, 'MAL', 'Malange', 1),
-(143, 6, 'MOX', 'Moxico', 1),
-(144, 6, 'NAM', 'Namibe', 1),
-(145, 6, 'UIG', 'Uige', 1),
-(146, 6, 'ZAI', 'Zaire', 1),
-(147, 9, 'ASG', 'Saint George', 1),
-(148, 9, 'ASJ', 'Saint John', 1),
-(149, 9, 'ASM', 'Saint Mary', 1),
-(150, 9, 'ASL', 'Saint Paul', 1),
-(151, 9, 'ASR', 'Saint Peter', 1),
-(152, 9, 'ASH', 'Saint Philip', 1),
-(153, 9, 'BAR', 'Barbuda', 1),
-(154, 9, 'RED', 'Redonda', 1),
-(155, 10, 'AN', 'Antartida e Islas del Atlantico', 1),
-(156, 10, 'BA', 'Buenos Aires', 1),
-(157, 10, 'CA', 'Catamarca', 1),
-(158, 10, 'CH', 'Chaco', 1),
-(159, 10, 'CU', 'Chubut', 1),
-(160, 10, 'CO', 'Cordoba', 1),
-(161, 10, 'CR', 'Corrientes', 1),
-(162, 10, 'DF', 'Distrito Federal', 1),
-(163, 10, 'ER', 'Entre Rios', 1),
-(164, 10, 'FO', 'Formosa', 1),
-(165, 10, 'JU', 'Jujuy', 1),
-(166, 10, 'LP', 'La Pampa', 1),
-(167, 10, 'LR', 'La Rioja', 1),
-(168, 10, 'ME', 'Mendoza', 1),
-(169, 10, 'MI', 'Misiones', 1),
-(170, 10, 'NE', 'Neuquen', 1),
-(171, 10, 'RN', 'Rio Negro', 1),
-(172, 10, 'SA', 'Salta', 1),
-(173, 10, 'SJ', 'San Juan', 1),
-(174, 10, 'SL', 'San Luis', 1),
-(175, 10, 'SC', 'Santa Cruz', 1),
-(176, 10, 'SF', 'Santa Fe', 1),
-(177, 10, 'SD', 'Santiago del Estero', 1),
-(178, 10, 'TF', 'Tierra del Fuego', 1),
-(179, 10, 'TU', 'Tucuman', 1),
-(180, 11, 'AGT', 'Aragatsotn', 1),
-(181, 11, 'ARR', 'Ararat', 1),
-(182, 11, 'ARM', 'Armavir', 1),
-(183, 11, 'GEG', 'Geghark''unik''', 1),
-(184, 11, 'KOT', 'Kotayk''', 1),
-(185, 11, 'LOR', 'Lorri', 1),
-(186, 11, 'SHI', 'Shirak', 1),
-(187, 11, 'SYU', 'Syunik''', 1),
-(188, 11, 'TAV', 'Tavush', 1),
-(189, 11, 'VAY', 'Vayots'' Dzor', 1),
-(190, 11, 'YER', 'Yerevan', 1),
-(191, 13, 'ACT', 'Australian Capital Territory', 1),
-(192, 13, 'NSW', 'New South Wales', 1),
-(193, 13, 'NT', 'Northern Territory', 1),
-(194, 13, 'QLD', 'Queensland', 1),
-(195, 13, 'SA', 'South Australia', 1),
-(196, 13, 'TAS', 'Tasmania', 1),
-(197, 13, 'VIC', 'Victoria', 1),
-(198, 13, 'WA', 'Western Australia', 1),
-(199, 14, 'BUR', 'Burgenland', 1),
-(200, 14, 'KAR', 'Kärnten', 1),
-(201, 14, 'NOS', 'Nieder&ouml;sterreich', 1),
-(202, 14, 'OOS', 'Ober&ouml;sterreich', 1),
-(203, 14, 'SAL', 'Salzburg', 1),
-(204, 14, 'STE', 'Steiermark', 1),
-(205, 14, 'TIR', 'Tirol', 1),
-(206, 14, 'VOR', 'Vorarlberg', 1),
-(207, 14, 'WIE', 'Wien', 1),
+(1, 1, 'BDS', 'Бадахшан', 1),
+(2, 1, 'BDG', 'Бадгис', 1),
+(3, 1, 'BGL', 'Баглан', 1),
+(4, 1, 'BAL', 'Балх', 1),
+(5, 1, 'BAM', 'Бамиан', 1),
+(6, 1, 'FRA', 'Фарах', 1),
+(7, 1, 'FYB', 'Фарьяб', 1),
+(8, 1, 'GHA', 'Газни', 1),
+(9, 1, 'GHO', 'Гор', 1),
+(10, 1, 'HEL', 'Гильменд', 1),
+(11, 1, 'HER', 'Герат', 1),
+(12, 1, 'JOW', 'Джаузджан', 1),
+(13, 1, 'KAB', 'Кабул', 1),
+(14, 1, 'KAN', 'Кандагар', 1),
+(15, 1, 'KAP', 'Каписа', 1),
+(16, 1, 'KHO', 'Хост', 1),
+(17, 1, 'KNR', 'Кунар', 1),
+(18, 1, 'KDZ', 'Кундуз', 1),
+(19, 1, 'LAG', 'Лагман', 1),
+(20, 1, 'LOW', 'Логар', 1),
+(21, 1, 'NAN', 'Нангархар', 1),
+(22, 1, 'NIM', 'Нимроз', 1),
+(23, 1, 'NUR', 'Нуристан', 1),
+(24, 1, 'ORU', 'Урузган', 1),
+(25, 1, 'PIA', 'Пактия', 1),
+(26, 1, 'PKA', 'Пактика', 1),
+(27, 1, 'PAR', 'Парван', 1),
+(28, 1, 'SAM', 'Саманган', 1),
+(29, 1, 'SAR', 'Сари-Пуль', 1),
+(30, 1, 'TAK', 'Тахар', 1),
+(31, 1, 'WAR', 'Вардак', 1),
+(32, 1, 'ZAB', 'Забуль', 1),
+(33, 2, 'BR', 'Берат', 1),
+(34, 2, 'BU', 'Булькиза', 1),
+(35, 2, 'DL', 'Дельвина', 1),
+(36, 2, 'DV', 'Девол', 1),
+(37, 2, 'DI', 'Дибра', 1),
+(38, 2, 'DR', 'Дуррес', 1),
+(39, 2, 'EL', 'Эльбасан', 1),
+(40, 2, 'ER', 'Колёня', 1),
+(41, 2, 'FR', 'Фиери', 1),
+(42, 2, 'GJ', 'Гирокастра', 1),
+(43, 2, 'GR', 'Грамши', 1),
+(44, 2, 'HA', 'Хас', 1),
+(45, 2, 'KA', 'Кавая', 1),
+(46, 2, 'KB', 'Курбин', 1),
+(47, 2, 'KC', 'Кучова', 1),
+(48, 2, 'KO', 'Корча', 1),
+(49, 2, 'KR', 'Круя', 1),
+(50, 2, 'KU', 'Кукес', 1),
+(51, 2, 'LB', 'Либражди', 1),
+(52, 2, 'LE', 'Лежа', 1),
+(53, 2, 'LU', 'Люшня', 1),
+(54, 2, 'MM', 'Мальси-э-Мади', 1),
+(55, 2, 'MK', 'Малакастра', 1),
+(56, 2, 'MT', 'Мати', 1),
+(57, 2, 'MR', 'Мирдита', 1),
+(58, 2, 'PQ', 'Пекини', 1),
+(59, 2, 'PR', 'Пермети', 1),
+(60, 2, 'PG', 'Поградец', 1),
+(61, 2, 'PU', 'Пука', 1),
+(62, 2, 'SH', 'Шкодер', 1),
+(63, 2, 'SK', 'Скрапари', 1),
+(64, 2, 'SR', 'Саранда', 1),
+(65, 2, 'TE', 'Тепелена', 1),
+(66, 2, 'TP', 'Тропоя', 1),
+(67, 2, 'TR', 'Тирана', 1),
+(68, 2, 'VL', 'Влёра', 1),
+(69, 3, 'ADR', 'Адрар', 1),
+(70, 3, 'ADE', 'Айн-Дефла', 1),
+(71, 3, 'ATE', 'Айн-Темухент', 1),
+(72, 3, 'ALG', 'Алжир', 1),
+(73, 3, 'ANN', 'Аннаба', 1),
+(74, 3, 'BAT', 'Батна', 1),
+(75, 3, 'BEC', 'Бешар', 1),
+(76, 3, 'BEJ', 'Беджая', 1),
+(77, 3, 'BIS', 'Бискра', 1),
+(78, 3, 'BLI', 'Блида', 1),
+(79, 3, 'BBA', 'Бордж-Бу-Арреридж', 1),
+(80, 3, 'BOA', 'Буйра', 1),
+(81, 3, 'BMD', 'Бумердес', 1),
+(82, 3, 'CHL', 'Шлеф', 1),
+(83, 3, 'CON', 'Константина', 1),
+(84, 3, 'DJE', 'Джельфа', 1),
+(85, 3, 'EBA', 'Эль-Баяд', 1),
+(86, 3, 'EOU', 'Эль-Уэд', 1),
+(87, 3, 'ETA', 'Эль-Тарф', 1),
+(88, 3, 'GHA', 'Гардая', 1),
+(89, 3, 'GUE', 'Гуэльма', 1),
+(90, 3, 'ILL', 'Иллизи', 1),
+(91, 3, 'JIJ', 'Джиджель', 1),
+(92, 3, 'KHE', 'Хеншела', 1),
+(93, 3, 'LAG', 'Лагуат', 1),
+(94, 3, 'MUA', 'Маскара', 1),
+(95, 3, 'MED', 'Медеа', 1),
+(96, 3, 'MIL', 'Мила', 1),
+(97, 3, 'MOS', 'Мостаганем', 1),
+(98, 3, 'MSI', 'Мсила', 1),
+(99, 3, 'NAA', 'Наама', 1),
+(100, 3, 'ORA', 'Оран', 1),
+(101, 3, 'OUA', 'Уаргла', 1),
+(102, 3, 'OEB', 'Ум Эль-Буахи', 1),
+(103, 3, 'REL', 'Релизан', 1),
+(104, 3, 'SAI', 'Саида', 1),
+(105, 3, 'SET', 'Сетиф', 1),
+(106, 3, 'SBA', 'Сиди-Бель-Аббес', 1),
+(107, 3, 'SKI', 'Скикда', 1),
+(108, 3, 'SAH', 'Сук-Ахрас', 1),
+(109, 3, 'TAM', 'Таменрассет', 1),
+(110, 3, 'TEB', 'Тебесса', 1),
+(111, 3, 'TIA', 'Тиарет', 1),
+(112, 3, 'TIN', 'Тиндуф', 1),
+(113, 3, 'TIP', 'Типаза', 1),
+(114, 3, 'TIS', 'Тиссемсилт', 1),
+(115, 3, 'TOU', 'Тизи-Узу', 1),
+(116, 3, 'TLE', 'Тлемсен', 1),
+(117, 4, 'E', 'Восточный округ', 1),
+(118, 4, 'M', 'Мануа', 1),
+(119, 4, 'R', 'Остров Роз', 1),
+(120, 4, 'S', 'Остров Суэйнс', 1),
+(121, 4, 'W', 'Западный округ', 1),
+(122, 5, 'ALV', 'Андорра-ла-Велья', 1),
+(123, 5, 'CAN', 'Канильо', 1),
+(124, 5, 'ENC', 'Энкамп', 1),
+(125, 5, 'ESE', 'Эскальдес-Энгордань', 1),
+(126, 5, 'LMA', 'Ла-Массана', 1),
+(127, 5, 'ORD', 'Ордино', 1),
+(128, 5, 'SJL', 'Сант-Жулия-де-Лория', 1),
+(129, 6, 'BGO', 'Бенго', 1),
+(130, 6, 'BGU', 'Бенгела', 1),
+(131, 6, 'BIE', 'Бие', 1),
+(132, 6, 'CAB', 'Кабинда', 1),
+(133, 6, 'CCU', 'Квандо-Кубанго', 1),
+(134, 6, 'CNO', 'Северная Кванза', 1),
+(135, 6, 'CUS', 'Южная Кванза', 1),
+(136, 6, 'CNN', 'Кунене', 1),
+(137, 6, 'HUA', 'Уамбо', 1),
+(138, 6, 'HUI', 'Уила', 1),
+(139, 6, 'LUA', 'Луанда', 1),
+(140, 6, 'LNO', 'Северная Лунда', 1),
+(141, 6, 'LSU', 'Южная Лунда', 1),
+(142, 6, 'MAL', 'Маланже', 1),
+(143, 6, 'MOX', 'Мошико', 1),
+(144, 6, 'NAM', 'Намибе', 1),
+(145, 6, 'UIG', 'Уиже', 1),
+(146, 6, 'ZAI', 'Заире', 1),
+(147, 9, 'ASG', 'Сент-Джордж', 1),
+(148, 9, 'ASJ', 'Сент-Джон', 1),
+(149, 9, 'ASM', 'Сент-Мери', 1),
+(150, 9, 'ASL', 'Сент-Пол', 1),
+(151, 9, 'ASR', 'Сент-Петер', 1),
+(152, 9, 'ASH', 'Сент-Филип', 1),
+(153, 9, 'BAR', 'Барбуда', 1),
+(154, 9, 'RED', 'Редонда', 1),
+(155, 10, 'AN', 'Антарктида и острова Южной Атлантики', 1),
+(156, 10, 'BA', 'Буэнос-Айрес', 1),
+(157, 10, 'CA', 'Катамарка', 1),
+(158, 10, 'CH', 'Чако', 1),
+(159, 10, 'CU', 'Чубут', 1),
+(160, 10, 'CO', 'Кордова', 1),
+(161, 10, 'CR', 'Корриентес', 1),
+(162, 10, 'DF', 'Федеральный округ', 1),
+(163, 10, 'ER', 'Энтре-Риос', 1),
+(164, 10, 'FO', 'Формоса', 1),
+(165, 10, 'JU', 'Жужуй', 1),
+(166, 10, 'LP', 'Ла-Пампа', 1),
+(167, 10, 'LR', 'Ла-Риоха', 1),
+(168, 10, 'ME', 'Мендоса', 1),
+(169, 10, 'MI', 'Мисьонес', 1),
+(170, 10, 'NE', 'Неукен', 1),
+(171, 10, 'RN', 'Рио-Негро', 1),
+(172, 10, 'SA', 'Сальта', 1),
+(173, 10, 'SJ', 'Сан-Хуан', 1),
+(174, 10, 'SL', 'Сан-Луис', 1),
+(175, 10, 'SC', 'Санта-Крус', 1),
+(176, 10, 'SF', 'Санта-Фе', 1),
+(177, 10, 'SD', 'Сантьяго-дель-Эстеро', 1),
+(178, 10, 'TF', 'Тьерра-дель-Фуэго', 1),
+(179, 10, 'TU', 'Тукуман', 1),
+(180, 11, 'AGT', 'Арагацотн', 1),
+(181, 11, 'ARR', 'Арарат', 1),
+(182, 11, 'ARM', 'Армавир', 1),
+(183, 11, 'GEG', 'Гегаркуник', 1),
+(184, 11, 'KOT', 'Котайк', 1),
+(185, 11, 'LOR', 'Лори', 1),
+(186, 11, 'SHI', 'Ширак', 1),
+(187, 11, 'SYU', 'Сюник', 1),
+(188, 11, 'TAV', 'Тавуш', 1),
+(189, 11, 'VAY', 'Вайоц Дзор', 1),
+(190, 11, 'YER', 'Ереван', 1),
+(191, 13, 'ACT', 'Австралийская столичная территория', 1),
+(192, 13, 'NSW', 'Новый Южный Уэльс', 1),
+(193, 13, 'NT', 'Северная территория', 1),
+(194, 13, 'QLD', 'Квинсленд', 1),
+(195, 13, 'SA', 'Южная Австралия', 1),
+(196, 13, 'TAS', 'Тасмания', 1),
+(197, 13, 'VIC', 'Виктория', 1),
+(198, 13, 'WA', 'Западная Австралия', 1),
+(199, 14, 'BUR', 'Бургенланд', 1),
+(200, 14, 'KAR', 'Каринтия', 1),
+(201, 14, 'NOS', 'Нижняя Австрия', 1),
+(202, 14, 'OOS', 'Верхняя Австрия', 1),
+(203, 14, 'SAL', 'Зальцбург', 1),
+(204, 14, 'STE', 'Штирия', 1),
+(205, 14, 'TIR', 'Тироль', 1),
+(206, 14, 'VOR', 'Форарльберг', 1),
+(207, 14, 'WIE', 'Вена', 1),
 (208, 15, 'AB', 'Ali Bayramli', 1),
 (209, 15, 'ABS', 'Abseron', 1),
 (210, 15, 'AGC', 'AgcabAdi', 1),
@@ -3405,13 +3398,13 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (334, 19, 'PET', 'Saint Peter', 1),
 (335, 19, 'PHI', 'Saint Philip', 1),
 (336, 19, 'THO', 'Saint Thomas', 1),
-(337, 20, 'BR', 'Brestskaya (Brest)', 1),
-(338, 20, 'HO', 'Homyel''skaya (Homyel'')', 1),
-(339, 20, 'HM', 'Horad Minsk', 1),
-(340, 20, 'HR', 'Hrodzyenskaya (Hrodna)', 1),
-(341, 20, 'MA', 'Mahilyowskaya (Mahilyow)', 1),
-(342, 20, 'MI', 'Minskaya', 1),
-(343, 20, 'VI', 'Vitsyebskaya (Vitsyebsk)', 1),
+(337, 20, 'BR', 'Брест', 1),
+(338, 20, 'HO', 'Гомель', 1),
+(339, 20, 'HM', 'Минск', 1),
+(340, 20, 'HR', 'Гродно', 1),
+(341, 20, 'MA', 'Могилев', 1),
+(342, 20, 'MI', 'Минская область', 1),
+(343, 20, 'VI', 'Витебск', 1),
 (344, 21, 'VAN', 'Antwerpen', 1),
 (345, 21, 'WBR', 'Brabant Wallon', 1),
 (346, 21, 'WHT', 'Hainaut', 1),
@@ -5788,95 +5781,91 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (2717, 175, 'TL', 'Tulcea', 1),
 (2718, 175, 'VS', 'Vaslui', 1),
 (2719, 175, 'VL', 'Valcea', 1),
-(2720, 175, 'VN', 'Vrancea', 1),
-(2721, 176, 'AB', 'Abakan', 1),
-(2722, 176, 'AG', 'Aginskoye', 1),
-(2723, 176, 'AN', 'Anadyr', 1),
-(2724, 176, 'AR', 'Arkahangelsk', 1),
-(2725, 176, 'AS', 'Astrakhan', 1),
-(2726, 176, 'BA', 'Barnaul', 1),
-(2727, 176, 'BE', 'Belgorod', 1),
-(2728, 176, 'BI', 'Birobidzhan', 1),
-(2729, 176, 'BL', 'Blagoveshchensk', 1),
-(2730, 176, 'BR', 'Bryansk', 1),
-(2731, 176, 'CH', 'Cheboksary', 1),
-(2732, 176, 'CL', 'Chelyabinsk', 1),
-(2733, 176, 'CR', 'Cherkessk', 1),
-(2734, 176, 'CI', 'Chita', 1),
-(2735, 176, 'DU', 'Dudinka', 1),
-(2736, 176, 'EL', 'Elista', 1),
-(2737, 176, 'GO', 'Gomo-Altaysk', 1),
-(2738, 176, 'GA', 'Gorno-Altaysk', 1),
-(2739, 176, 'GR', 'Groznyy', 1),
-(2740, 176, 'IR', 'Irkutsk', 1),
-(2741, 176, 'IV', 'Ivanovo', 1),
-(2742, 176, 'IZ', 'Izhevsk', 1),
-(2743, 176, 'KA', 'Kalinigrad', 1),
-(2744, 176, 'KL', 'Kaluga', 1),
-(2745, 176, 'KS', 'Kasnodar', 1),
-(2746, 176, 'KZ', 'Kazan', 1),
-(2747, 176, 'KE', 'Kemerovo', 1),
-(2748, 176, 'KH', 'Khabarovsk', 1),
-(2749, 176, 'KM', 'Khanty-Mansiysk', 1),
-(2750, 176, 'KO', 'Kostroma', 1),
-(2751, 176, 'KR', 'Krasnodar', 1),
-(2752, 176, 'KN', 'Krasnoyarsk', 1),
-(2753, 176, 'KU', 'Kudymkar', 1),
-(2754, 176, 'KG', 'Kurgan', 1),
-(2755, 176, 'KK', 'Kursk', 1),
-(2756, 176, 'KY', 'Kyzyl', 1),
-(2757, 176, 'LI', 'Lipetsk', 1),
-(2758, 176, 'MA', 'Magadan', 1),
-(2759, 176, 'MK', 'Makhachkala', 1),
-(2760, 176, 'MY', 'Maykop', 1),
-(2761, 176, 'MO', 'Moscow', 1),
-(2762, 176, 'MU', 'Murmansk', 1),
-(2763, 176, 'NA', 'Nalchik', 1),
-(2764, 176, 'NR', 'Naryan Mar', 1),
-(2765, 176, 'NZ', 'Nazran', 1),
-(2766, 176, 'NI', 'Nizhniy Novgorod', 1),
-(2767, 176, 'NO', 'Novgorod', 1),
-(2768, 176, 'NV', 'Novosibirsk', 1),
-(2769, 176, 'OM', 'Omsk', 1),
-(2770, 176, 'OR', 'Orel', 1),
-(2771, 176, 'OE', 'Orenburg', 1),
-(2772, 176, 'PA', 'Palana', 1),
-(2773, 176, 'PE', 'Penza', 1),
-(2774, 176, 'PR', 'Perm', 1),
-(2775, 176, 'PK', 'Petropavlovsk-Kamchatskiy', 1),
-(2776, 176, 'PT', 'Petrozavodsk', 1),
-(2777, 176, 'PS', 'Pskov', 1),
-(2778, 176, 'RO', 'Rostov-na-Donu', 1),
-(2779, 176, 'RY', 'Ryazan', 1),
-(2780, 176, 'SL', 'Salekhard', 1),
-(2781, 176, 'SA', 'Samara', 1),
-(2782, 176, 'SR', 'Saransk', 1),
-(2783, 176, 'SV', 'Saratov', 1),
-(2784, 176, 'SM', 'Smolensk', 1),
-(2785, 176, 'SP', 'St. Petersburg', 1),
-(2786, 176, 'ST', 'Stavropol', 1),
-(2787, 176, 'SY', 'Syktyvkar', 1),
-(2788, 176, 'TA', 'Tambov', 1),
-(2789, 176, 'TO', 'Tomsk', 1),
-(2790, 176, 'TU', 'Tula', 1),
-(2791, 176, 'TR', 'Tura', 1),
-(2792, 176, 'TV', 'Tver', 1),
-(2793, 176, 'TY', 'Tyumen', 1),
-(2794, 176, 'UF', 'Ufa', 1),
-(2795, 176, 'UL', 'Ul''yanovsk', 1),
-(2796, 176, 'UU', 'Ulan-Ude', 1),
-(2797, 176, 'US', 'Ust''-Ordynskiy', 1),
-(2798, 176, 'VL', 'Vladikavkaz', 1),
-(2799, 176, 'VA', 'Vladimir', 1),
-(2800, 176, 'VV', 'Vladivostok', 1),
-(2801, 176, 'VG', 'Volgograd', 1),
-(2802, 176, 'VD', 'Vologda', 1),
-(2803, 176, 'VO', 'Voronezh', 1),
-(2804, 176, 'VY', 'Vyatka', 1),
-(2805, 176, 'YA', 'Yakutsk', 1),
-(2806, 176, 'YR', 'Yaroslavl', 1),
-(2807, 176, 'YE', 'Yekaterinburg', 1),
-(2808, 176, 'YO', 'Yoshkar-Ola', 1),
+(2720, 175, 'VN', 'Vrancea', 1);
+INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
+(2721, 176, 'KK', 'Республика Хакасия', 1),
+(2722, 176, 'MOS', 'Московская область', 1),
+(2723, 176, 'CHU', 'Чукотский АО', 1),
+(2724, 176, 'ARK', 'Архангельская область', 1),
+(2725, 176, 'AST', 'Астраханская область', 1),
+(2726, 176, 'ALT', 'Алтайский край', 1),
+(2727, 176, 'BEL', 'Белгородская область', 1),
+(2728, 176, 'YEV', 'Еврейская АО', 1),
+(2729, 176, 'AMU', 'Амурская область', 1),
+(2730, 176, 'BRY', 'Брянская область', 1),
+(2731, 176, 'CU', 'Чувашская Республика', 1),
+(2732, 176, 'CHE', 'Челябинская область', 1),
+(2733, 176, 'KC', 'Карачаево-Черкеcсия', 1),
+(2734, 176, 'ZAB', 'Забайкальский край', 1),
+(2735, 176, 'LEN', 'Ленинградская область', 1),
+(2736, 176, 'KL', 'Республика Калмыкия', 1),
+(2737, 176, 'SAK', 'Сахалинская область', 1),
+(2738, 176, 'AL', 'Республика Алтай', 1),
+(2739, 176, 'CE', 'Чеченская Республика', 1),
+(2740, 176, 'IRK', 'Иркутская область', 1),
+(2741, 176, 'IVA', 'Ивановская область', 1),
+(2742, 176, 'UD', 'Удмуртская Республика', 1),
+(2743, 176, 'KGD', 'Калининградская область', 1),
+(2744, 176, 'KLU', 'Калужская область', 1),
+(2746, 176, 'TA', 'Республика Татарстан', 1),
+(2747, 176, 'KEM', 'Кемеровская область', 1),
+(2748, 176, 'KHA', 'Хабаровский край', 1),
+(2749, 176, 'KHM', 'Ханты-Мансийский АО - Югра', 1),
+(2750, 176, 'KOS', 'Костромская область', 1),
+(2751, 176, 'KDA', 'Краснодарский край', 1),
+(2752, 176, 'KYA', 'Красноярский край', 1),
+(2754, 176, 'KGN', 'Курганская область', 1),
+(2755, 176, 'KRS', 'Курская область', 1),
+(2756, 176, 'TY', 'Республика Тыва', 1),
+(2757, 176, 'LIP', 'Липецкая область', 1),
+(2758, 176, 'MAG', 'Магаданская область', 1),
+(2759, 176, 'DA', 'Республика Дагестан', 1),
+(2760, 176, 'AD', 'Республика Адыгея', 1),
+(2761, 176, 'MOW', 'Москва', 1),
+(2762, 176, 'MUR', 'Мурманская область', 1),
+(2763, 176, 'KB', 'Республика Кабардино-Балкария', 1),
+(2764, 176, 'NEN', 'Ненецкий АО', 1),
+(2765, 176, 'IN', 'Республика Ингушетия', 1),
+(2766, 176, 'NIZ', 'Нижегородская область', 1),
+(2767, 176, 'NGR', 'Новгородская область', 1),
+(2768, 176, 'NVS', 'Новосибирская область', 1),
+(2769, 176, 'OMS', 'Омская область', 1),
+(2770, 176, 'ORL', 'Орловская область', 1),
+(2771, 176, 'ORE', 'Оренбургская область', 1),
+(2773, 176, 'PNZ', 'Пензенская область', 1),
+(2774, 176, 'PER', 'Пермский край', 1),
+(2775, 176, 'KAM', 'Камчатский край', 1),
+(2776, 176, 'KR', 'Республика Карелия', 1),
+(2777, 176, 'PSK', 'Псковская область', 1),
+(2778, 176, 'ROS', 'Ростовская область', 1),
+(2779, 176, 'RYA', 'Рязанская область', 1),
+(2780, 176, 'YAN', 'Ямало-Ненецкий АО', 1),
+(2781, 176, 'SAM', 'Самарская область', 1),
+(2782, 176, 'MO', 'Республика Мордовия', 1),
+(2783, 176, 'SAR', 'Саратовская область', 1),
+(2784, 176, 'SMO', 'Смоленская область', 1),
+(2785, 176, 'SPE', 'Санкт-Петербург', 1),
+(2786, 176, 'STA', 'Ставропольский край', 1),
+(2787, 176, 'KO', 'Республика Коми', 1),
+(2788, 176, 'TAM', 'Тамбовская область', 1),
+(2789, 176, 'TOM', 'Томская область', 1),
+(2790, 176, 'TUL', 'Тульская область', 1),
+(2792, 176, 'TVE', 'Тверская область', 1),
+(2793, 176, 'TYU', 'Тюменская область', 1),
+(2794, 176, 'BA', 'Республика Башкортостан', 1),
+(2795, 176, 'ULY', 'Ульяновская область', 1),
+(2796, 176, 'BU', 'Республика Бурятия', 1),
+(2798, 176, 'SE', 'Республика Северная Осетия', 1),
+(2799, 176, 'VLA', 'Владимирская область', 1),
+(2800, 176, 'PRI', 'Приморский край', 1),
+(2801, 176, 'VGG', 'Волгоградская область', 1),
+(2802, 176, 'VLG', 'Вологодская область', 1),
+(2803, 176, 'VOR', 'Воронежская область', 1),
+(2804, 176, 'KIR', 'Кировская область', 1),
+(2805, 176, 'SA', 'Республика Саха', 1),
+(2806, 176, 'YAR', 'Ярославская область', 1),
+(2807, 176, 'SVE', 'Свердловская область', 1),
+(2808, 176, 'ME', 'Республика Марий Эл', 1),
 (2809, 177, 'BU', 'Butare', 1),
 (2810, 177, 'BY', 'Byumba', 1),
 (2811, 177, 'CY', 'Cyangugu', 1),
@@ -5993,14 +5982,14 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (2922, 187, 'N', 'Northern', 1),
 (2923, 187, 'S', 'Southern', 1),
 (2924, 187, 'W', 'Western', 1),
-(2925, 189, 'BA', 'Banskobystrický', 1),
-(2926, 189, 'BR', 'Bratislavský', 1),
-(2927, 189, 'KO', 'Košický', 1),
+(2925, 189, 'BA', 'BanskobystrickГЅ', 1),
+(2926, 189, 'BR', 'BratislavskГЅ', 1),
+(2927, 189, 'KO', 'KoЕЎickГЅ', 1),
 (2928, 189, 'NI', 'Nitriansky', 1),
-(2929, 189, 'PR', 'Prešovský', 1),
-(2930, 189, 'TC', 'Trenčiansky', 1),
-(2931, 189, 'TV', 'Trnavský', 1),
-(2932, 189, 'ZI', 'Žilinský', 1),
+(2929, 189, 'PR', 'PreЕЎovskГЅ', 1),
+(2930, 189, 'TC', 'TrenДЌiansky', 1),
+(2931, 189, 'TV', 'TrnavskГЅ', 1),
+(2932, 189, 'ZI', 'ЕЅilinskГЅ', 1),
 (2933, 191, 'CE', 'Central', 1),
 (2934, 191, 'CH', 'Choiseul', 1),
 (2935, 191, 'GC', 'Guadalcanal', 1),
@@ -6549,32 +6538,32 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (3477, 219, 'MBR', 'Mbarara', 1),
 (3478, 219, 'NTU', 'Ntungamo', 1),
 (3479, 219, 'RUK', 'Rukungiri', 1),
-(3480, 220, 'CK', 'Cherkasy', 1),
-(3481, 220, 'CH', 'Chernihiv', 1),
-(3482, 220, 'CV', 'Chernivtsi', 1),
-(3483, 220, 'CR', 'Crimea', 1),
-(3484, 220, 'DN', 'Dnipropetrovs''k', 1),
-(3485, 220, 'DO', 'Donets''k', 1),
-(3486, 220, 'IV', 'Ivano-Frankivs''k', 1),
-(3487, 220, 'KL', 'Kharkiv Kherson', 1),
-(3488, 220, 'KM', 'Khmel''nyts''kyy', 1),
-(3489, 220, 'KR', 'Kirovohrad', 1),
-(3490, 220, 'KV', 'Kiev', 1),
-(3491, 220, 'KY', 'Kyyiv', 1),
-(3492, 220, 'LU', 'Luhans''k', 1),
-(3493, 220, 'LV', 'L''viv', 1),
-(3494, 220, 'MY', 'Mykolayiv', 1),
-(3495, 220, 'OD', 'Odesa', 1),
-(3496, 220, 'PO', 'Poltava', 1),
-(3497, 220, 'RI', 'Rivne', 1),
-(3498, 220, 'SE', 'Sevastopol', 1),
-(3499, 220, 'SU', 'Sumy', 1),
-(3500, 220, 'TE', 'Ternopil''', 1),
-(3501, 220, 'VI', 'Vinnytsya', 1),
-(3502, 220, 'VO', 'Volyn''', 1),
-(3503, 220, 'ZK', 'Zakarpattya', 1),
-(3504, 220, 'ZA', 'Zaporizhzhya', 1),
-(3505, 220, 'ZH', 'Zhytomyr', 1),
+(3480, 220, 'CK', 'Черкассы', 1),
+(3481, 220, 'CH', 'Чернигов', 1),
+(3482, 220, 'CV', 'Черновцы', 1),
+(3483, 220, 'CR', 'Крым', 1),
+(3484, 220, 'DN', 'Днепропетровск', 1),
+(3485, 220, 'DO', 'Донецк', 1),
+(3486, 220, 'IV', 'Ивано-Франковск', 1),
+(3487, 220, 'KL', 'Харьков Херсон', 1),
+(3488, 220, 'KM', 'Хмельницкий', 1),
+(3489, 220, 'KR', 'Кировоград', 1),
+(3490, 220, 'KV', 'Киевская область', 1),
+(3491, 220, 'KY', 'Киев', 1),
+(3492, 220, 'LU', 'Луганск', 1),
+(3493, 220, 'LV', 'Львов', 1),
+(3494, 220, 'MY', 'Николаев', 1),
+(3495, 220, 'OD', 'Одесса', 1),
+(3496, 220, 'PO', 'Полтава', 1),
+(3497, 220, 'RI', 'Ровно', 1),
+(3498, 220, 'SE', 'Севастополь', 1),
+(3499, 220, 'SU', 'Сумы', 1),
+(3500, 220, 'TE', 'Тернополь', 1),
+(3501, 220, 'VI', 'Винница', 1),
+(3502, 220, 'VO', 'Луцк', 1),
+(3503, 220, 'ZK', 'Ужгород', 1),
+(3504, 220, 'ZA', 'Запорожье', 1),
+(3505, 220, 'ZH', 'Житомир', 1),
 (3506, 221, 'AZ', 'Abu Zaby', 1),
 (3507, 221, 'AJ', '''Ajman', 1),
 (3508, 221, 'FU', 'Al Fujayrah', 1),
@@ -7010,7 +6999,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_zone_to_geo_zone`
+-- Структура таблицы `oc_zone_to_geo_zone`
 --
 
 DROP TABLE IF EXISTS `oc_zone_to_geo_zone`;
@@ -7025,10 +7014,8 @@ CREATE TABLE `oc_zone_to_geo_zone` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `oc_zone_to_geo_zone`
+-- Дамп данных таблицы `oc_zone_to_geo_zone`
 --
 
 INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`, `date_added`, `date_modified`) VALUES
-(57, 222, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00'),
-(51, 81, 0, 5, '2010-02-09 16:27:20', '0000-00-00 00:00:00'),
-(65, 222, 0, 4, '2010-12-15 15:18:13', '0000-00-00 00:00:00');
+(57, 176, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00');
