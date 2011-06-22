@@ -1,184 +1,146 @@
 <?php echo $header; ?>
-<h1 style="background: url('view/image/installation.png') no-repeat;">Шаг 2 - Перед установкой</h1>
+<h1 style="background: url('view/image/installation.png') no-repeat;">Step 2 - Pre-Installation</h1>
 <div style="width: 100%; display: inline-block;">
   <div style="float: left; width: 569px;">
     <?php if ($error_warning) { ?>
     <div class="warning"><?php echo $error_warning; ?></div>
     <?php } ?>
     <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-      <p>1. Настройте PHP для соответствия следующим требованиям.</p>
+      <p>1. Please configure your PHP settings to match requirements listed below.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table width="100%">
           <tr>
-            <th width="35%" align="left"><b>Настройки PHP</b></th>
-            <th width="25%" align="left"><b>Текущие настройки</b></th>
-            <th width="25%" align="left"><b>Необходимые настройки</b></th>
-            <th width="15%" align="center"><b>Состояние</b></th>
+            <th width="35%" align="left"><b>PHP Settings</b></th>
+            <th width="25%" align="left"><b>Current Settings</b></th>
+            <th width="25%" align="left"><b>Required Settings</b></th>
+            <th width="15%" align="center"><b>Status</b></th>
           </tr>
           <tr>
-            <td>Версия PHP:</td>
+            <td>PHP Version:</td>
             <td><?php echo phpversion(); ?></td>
             <td>5.0+</td>
-            <td align="center"><?php echo (phpversion() >= '5.0') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo (phpversion() >= '5.0') ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
           <tr>
             <td>Register Globals:</td>
             <td><?php echo (ini_get('register_globals')) ? 'On' : 'Off'; ?></td>
             <td>Off</td>
-            <td align="center"><?php echo (!ini_get('register_globals')) ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo (!ini_get('register_globals')) ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
           <tr>
             <td>Magic Quotes GPC:</td>
             <td><?php echo (ini_get('magic_quotes_gpc')) ? 'On' : 'Off'; ?></td>
             <td>Off</td>
-            <td align="center"><?php echo (!ini_get('magic_quotes_gpc')) ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo (!ini_get('magic_quotes_gpc')) ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
           <tr>
             <td>File Uploads:</td>
             <td><?php echo (ini_get('file_uploads')) ? 'On' : 'Off'; ?></td>
             <td>On</td>
-            <td align="center"><?php echo (ini_get('file_uploads')) ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo (ini_get('file_uploads')) ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
           <tr>
             <td>Session Auto Start:</td>
             <td><?php echo (ini_get('session_auto_start')) ? 'On' : 'Off'; ?></td>
             <td>Off</td>
-            <td align="center"><?php echo (!ini_get('session_auto_start')) ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo (!ini_get('session_auto_start')) ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
         </table>
       </div>
-      <p>2. Убедитесь, что перечисленные ниже расширения установлены.</p>
+      <p>2. Please make sure the extensions listed below are installed.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table width="100%">
           <tr>
-            <th width="35%" align="left"><b>Расширения</b></th>
-            <th width="25%" align="left"><b>Текущие настройки</b></th>
-            <th width="25%" align="left"><b>Необходимые настройки</b></th>
-            <th width="15%" align="center"><b>Состояние</b></th>
+            <th width="35%" align="left"><b>Extension</b></th>
+            <th width="25%" align="left"><b>Current Settings</b></th>
+            <th width="25%" align="left"><b>Required Settings</b></th>
+            <th width="15%" align="center"><b>Status</b></th>
           </tr>
           <tr>
             <td>MySQL:</td>
             <td><?php echo extension_loaded('mysql') ? 'On' : 'Off'; ?></td>
             <td>On</td>
-            <td align="center"><?php echo extension_loaded('mysql') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo extension_loaded('mysql') ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
           <tr>
             <td>GD:</td>
             <td><?php echo extension_loaded('gd') ? 'On' : 'Off'; ?></td>
             <td>On</td>
-            <td align="center"><?php echo extension_loaded('gd') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo extension_loaded('gd') ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
           <tr>
             <td>cURL:</td>
             <td><?php echo extension_loaded('curl') ? 'On' : 'Off'; ?></td>
             <td>On</td>
-            <td align="center"><?php echo extension_loaded('curl') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo extension_loaded('curl') ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
           <tr>
             <td>ZIP:</td>
             <td><?php echo extension_loaded('zlib') ? 'On' : 'Off'; ?></td>
             <td>On</td>
-            <td align="center"><?php echo extension_loaded('zlib') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
-          </tr>
-          <tr>
-            <td>mbstring:</td>
-            <td><?php echo extension_loaded('mbstring') ? 'On' : 'Off'; ?></td>
-            <td>On</td>
-            <td align="center"><?php echo extension_loaded('mbstring') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td align="center"><?php echo extension_loaded('zlib') ? '<img src="view/image/good.png" alt="Good" />' : '<img src="view/image/bad.png" alt="Bad" />'; ?></td>
           </tr>
         </table>
       </div>
-       <p>3. Расширения для доп. модулей.</p>
+      <p>3. Please make sure you have set the correct permissions on the files list below.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table width="100%">
           <tr>
-            <th width="35%" align="left"><b>Расширения</b></th>
-            <th width="50%" align="left"><b>Модуль</b></th>
-            <th width="15%" align="center"><b>Состояние</b></th>
-          </tr>
-          <tr>
-            <td>XMLReader:</td>
-            <td>Обмен данными с 1Сv8.X</td>
-            <td align="center"><?php echo extension_loaded('xmlreader') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
-          </tr>
-          <tr>
-            <td>SOAP:</td>
-            <td>Модуль QIWI Кошелек</td>
-            <td align="center"><?php echo extension_loaded('soap') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
-          </tr>
-        </table>
-      </div>
-      <p>4. Убедитесь, что перечисленные ниже файлы имеют разрешение на запись.</p>
-      <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
-        <table width="100%">
-          <tr>
-            <th align="left"><b>Файл</b></th>
-            <th width="30%" align="left"><b>Состояние</b></th>
+            <th align="left"><b>Files</b></th>
+            <th width="15%" align="left"><b>Status</b></th>
           </tr>
           <tr>
             <td><?php echo $config_catalog; ?></td>
-            <td><?php echo is_writable($config_catalog) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+            <td><?php echo is_writable($config_catalog) ? '<span class="good">Writable</span>' : '<span class="bad">Unwritable</span>'; ?></td>
           </tr>
           <tr>
             <td><?php echo $config_admin; ?></td>
-            <td><?php echo is_writable($config_admin) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+            <td><?php echo is_writable($config_admin) ? '<span class="good">Writable</span>' : '<span class="bad">Unwritable</span>'; ?></td>
           </tr>
         </table>
       </div>
-        <p><small>Если вы не смогли установить необходимые права на файлы, то попросите техподдержку выполнить следующую команду:
-        <pre class="prettyprint">chmod 0666 <?php echo $config_files_cmd; ?></pre></small></p>
-      <p>5. Убедитесь, что перечисленные ниже каталоги, а также все их подкаталоги и файлы в них имеют разрешение на запись.</p>
+      <p>4. Please make sure you have set the correct permissions on the directories list below.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table width="100%">
           <tr>
-            <th align="left"><b>Директория</b></th>
-            <th width="30%" align="left"><b>Состояние</b></th>
+            <th align="left"><b>Directories</b></th>
+            <th width="15%" align="left"><b>Status</b></th>
           </tr>
           <tr>
             <td><?php echo $cache . '/'; ?></td>
-            <td><?php echo is_writable($cache) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+            <td><?php echo is_writable($cache) ? '<span class="good">Writable</span>' : '<span class="bad">Unwritable</span>'; ?></td>
           </tr>
           <tr>
             <td><?php echo $logs . '/'; ?></td>
-            <td><?php echo is_writable($logs) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $sessions . '/'; ?></td>
-            <td><?php echo is_writable($sessions) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $config; ?></td>
-            <td><?php echo is_writable($config) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+            <td><?php echo is_writable($logs) ? '<span class="good">Writable</span>' : '<span class="bad">Unwritable</span>'; ?></td>
           </tr>
           <tr>
             <td><?php echo $image . '/'; ?></td>
-            <td><?php echo is_writable($image) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+            <td><?php echo is_writable($image) ? '<span class="good">Writable</span>' : '<span class="bad">Unwritable</span>'; ?></td>
           </tr>
           <tr>
             <td><?php echo $image_cache . '/'; ?></td>
-            <td><?php echo is_writable($image_cache) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+            <td><?php echo is_writable($image_cache) ? '<span class="good">Writable</span>' : '<span class="bad">Unwritable</span>'; ?></td>
           </tr>
           <tr>
             <td><?php echo $image_data . '/'; ?></td>
-            <td><?php echo is_writable($image_data) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+            <td><?php echo is_writable($image_data) ? '<span class="good">Writable</span>' : '<span class="bad">Unwritable</span>'; ?></td>
           </tr>          
           <tr>
             <td><?php echo $download . '/'; ?></td>
-            <td><?php echo is_writable($download) ? '<span class="good">Доступно для записи</span>' : '<span class="bad">Не доступно для записи</span>'; ?></td>
+            <td><?php echo is_writable($download) ? '<span class="good">Writable</span>' : '<span class="bad">Unwritable</span>'; ?></td>
           </tr>
         </table>
       </div>
-        <p><small>Если вы не смогли установить необходимые права на каталоги, то попросите техподдержку выполнить следующую команду:
-        <pre class="prettyprint">chmod -R a=rwX <?php echo $config_dirs_cmd; ?></pre></small></p>
-      <div style="text-align: right;"><a onclick="document.getElementById('form').submit()" class="button"><span class="button_left button_continue"></span><span class="button_middle">Продолжить</span><span class="button_right"></span></a></div>
+      <div style="text-align: right;"><a onclick="document.getElementById('form').submit()" class="button"><span class="button_left button_continue"></span><span class="button_middle">Continue</span><span class="button_right"></span></a></div>
     </form>
   </div>
   <div style="float: right; width: 205px; height: 400px; padding: 10px; color: #663300; border: 1px solid #FFE0CC; background: #FFF5CC;">
     <ul>
-      <li>Лицензия</li>
-      <li><b>Перед установкой</b></li>
-      <li>Конфигурация</li>
-      <li>Окончание</li>
+      <li>License</li>
+      <li><b>Pre-Installation</b></li>
+      <li>Configuration</li>
+      <li>Finished</li>
     </ul>
   </div>
 </div>

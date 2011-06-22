@@ -1,39 +1,24 @@
 <?php echo $header; ?>
-<h1 style="background: url('view/image/configuration.png') no-repeat;">Шаг 3 - Конфигурация</h1>
+<h1 style="background: url('view/image/configuration.png') no-repeat;">Step 3 - Configuration</h1>
 <div style="width: 100%; display: inline-block;">
   <div style="float: left; width: 569px;">
     <?php if ($error_warning) { ?>
     <div class="warning"><?php echo $error_warning; ?></div>
     <?php } ?>
     <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-      <p>1 . Введите настройки БД.</p>
+      <p>1 . Please enter your database connection details.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table>
-        <tr>
-	    <td width="185"><span class="required">*</span>Драйвер БД:</td>
-	    <td><select name="db_driver">
-	    <option value="mysql" <?php if ($db_driver == "mysql") { echo 'selected'; } ?>>MySQL</option>
-	    <option value="mysql_cached" <?php if ($db_driver == "mysql_cached") { echo 'selected'; } ?>>MySQL с кэшированием</option>
-<!--	    <option value="postgre" <?php if ($db_driver == "postgre") { echo 'selected'; } ?>>PostgreSQL</option> -->
-	    </select></td>
-        </tr>
-        <tr>
-            <td width="185"><span class="required">*</span>Сервер БД:</td>
-            <td><input type="text" name="db_host" value="<?php echo $db_host; ?>" /><sup>*</sup></td>
-          </tr>
           <tr>
-            <td colspan=2><small>*Если вместо имени хоста Вы хотите указать путь к сокету UNIX, то первым символом
-            вставьте знак двоеточия (пример: ":/var/run/mysqld/mysqld.sock")</small></td>
-          </tr>
-          <tr>
-            <td> </td>
-            <td>
+            <td width="185"><span class="required">*</span>Database Host:</td>
+            <td><input type="text" name="db_host" value="<?php echo $db_host; ?>" />
+              <br />
               <?php if ($error_db_host) { ?>
               <span class="required"><?php echo $error_db_host; ?></span>
               <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span>Пользователь:</td>
+            <td><span class="required">*</span>User:</td>
             <td><input type="text" name="db_user" value="<?php echo $db_user; ?>" />
               <br />
               <?php if ($error_db_user) { ?>
@@ -41,11 +26,11 @@
               <?php } ?></td>
           </tr>
           <tr>
-            <td>Пароль:</td>
+            <td>Password:</td>
             <td><input type="text" name="db_password" value="<?php echo $db_password; ?>" /></td>
           </tr>
           <tr>
-            <td><span class="required">*</span>Имя БД:</td>
+            <td><span class="required">*</span>Database Name:</td>
             <td><input type="text" name="db_name" value="<?php echo $db_name; ?>" />
               <br />
               <?php if ($error_db_name) { ?>
@@ -53,23 +38,23 @@
               <?php } ?></td>
           </tr>
           <tr>
-            <td>Префикс БД:</td>
+            <td>Database Prefix:</td>
             <td><input type="text" name="db_prefix" value="<?php echo $db_prefix; ?>" /></td>
           </tr>
         </table>
       </div>
-      <p>2. Введите логин и пароль администратора.</p>
+      <p>2. Please enter a username and password for the administration.</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table>
           <tr>
-            <td width="185"><span class="required">*</span>Логин:</td>
+            <td width="185"><span class="required">*</span>Username:</td>
             <td><input type="text" name="username" value="<?php echo $username; ?>" />
               <?php if ($error_username) { ?>
               <span class="required"><?php echo $error_username; ?></span>
               <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span>Пароль:</td>
+            <td><span class="required">*</span>Password:</td>
             <td><input type="text" name="password" value="<?php echo $password; ?>" />
               <?php if ($error_password) { ?>
               <span class="required"><?php echo $error_password; ?></span>
@@ -84,25 +69,15 @@
           </tr>
         </table>
       </div>
-      <p>3. Дополнительно (для профессионалов).</p>
-      <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
-      <table>
-          <tr>
-            <td width="185">Очистить БД:</td>
-            <td><input type="checkbox" name="flushdbflag" value="1" />
-          </tr>
-      </table>
-      </div>
-
-      <div style="text-align: right;"><a onclick="document.getElementById('form').submit()" class="button"><span class="button_left button_continue"></span><span class="button_middle">Продолжить</span><span class="button_right"></span></a></div>
+      <div style="text-align: right;"><a onclick="document.getElementById('form').submit()" class="button"><span class="button_left button_continue"></span><span class="button_middle">Continue</span><span class="button_right"></span></a></div>
     </form>
   </div>
   <div style="float: right; width: 205px; height: 400px; padding: 10px; color: #663300; border: 1px solid #FFE0CC; background: #FFF5CC;">
     <ul>
-      <li>Лицензия</li>
-      <li>Перед установкой</li>
-      <li><b>Конфигурация</b></li>
-      <li>Окончание</li>
+      <li>License</li>
+      <li>Pre-Installation</li>
+      <li><b>Configuration</b></li>
+      <li>Finished</li>
     </ul>
   </div>
 </div>
