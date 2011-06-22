@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.2
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2010 at 10:14 PM
--- Server version: 5.1.39
--- PHP Version: 5.2.11
+-- Generation Time: May 30, 2011 at 04:16 PM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -22,115 +22,428 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_address`
+-- Table structure for table `oc_address`
 --
 
+DROP TABLE IF EXISTS `oc_address`;
 CREATE TABLE `oc_address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
-  `company` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `firstname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `lastname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `company` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `address_1` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `address_2` varchar(128) COLLATE utf8_general_ci NOT NULL,
-  `postcode` varchar(10) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `city` varchar(128) COLLATE utf8_general_ci NOT NULL,
+  `postcode` varchar(10) COLLATE utf8_general_ci NOT NULL,
   `country_id` int(11) NOT NULL DEFAULT '0',
   `zone_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`address_id`),
   KEY `customer_id` (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_address`
+-- Dumping data for table `oc_address`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_category`
+-- Table structure for table `oc_affiliate`
 --
 
+DROP TABLE IF EXISTS `oc_affiliate`;
+CREATE TABLE `oc_affiliate` (
+  `affiliate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `lastname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `email` varchar(96) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `telephone` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `fax` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `password` varchar(40) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `company` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `website` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `address_1` varchar(128) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `address_2` varchar(128) COLLATE utf8_general_ci NOT NULL,
+  `city` varchar(128) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `postcode` varchar(10) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `country_id` int(11) NOT NULL,
+  `zone_id` int(11) NOT NULL,
+  `code` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `commission` decimal(4,2) NOT NULL DEFAULT '0.00',
+  `tax` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `payment` varchar(6) COLLATE utf8_general_ci NOT NULL,
+  `cheque` varchar(100) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `paypal` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `bank_name` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `bank_branch_number` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `bank_swift_code` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `bank_account_name` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `bank_account_number` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `ip` varchar(15) COLLATE utf8_general_ci NOT NULL,
+  `status` int(1) NOT NULL,
+  `approved` int(1) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`affiliate_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_affiliate`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_affiliate_transaction`
+--
+
+DROP TABLE IF EXISTS `oc_affiliate_transaction`;
+CREATE TABLE `oc_affiliate_transaction` (
+  `affiliate_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `affiliate_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `description` text COLLATE utf8_general_ci NOT NULL,
+  `amount` decimal(15,4) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`affiliate_transaction_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_affiliate_transaction`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_attribute`
+--
+
+DROP TABLE IF EXISTS `oc_attribute`;
+CREATE TABLE `oc_attribute` (
+  `attribute_id` int(11) NOT NULL AUTO_INCREMENT,
+  `attribute_group_id` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`attribute_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_attribute`
+--
+
+INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) VALUES
+(1, 6, 1),
+(2, 6, 5),
+(3, 6, 3),
+(4, 3, 1),
+(5, 3, 2),
+(6, 3, 3),
+(7, 3, 4),
+(8, 3, 5),
+(9, 3, 6),
+(10, 3, 7),
+(11, 3, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_attribute_description`
+--
+
+DROP TABLE IF EXISTS `oc_attribute_description`;
+CREATE TABLE `oc_attribute_description` (
+  `attribute_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`attribute_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_attribute_description`
+--
+
+INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) VALUES
+(1, 1, 'Description'),
+(2, 1, 'No. of Cores'),
+(4, 1, 'test 1'),
+(5, 1, 'test 2'),
+(6, 1, 'test 3'),
+(7, 1, 'test 4'),
+(8, 1, 'test 5'),
+(9, 1, 'test 6'),
+(10, 1, 'test 7'),
+(11, 1, 'test 8'),
+(3, 1, 'Clockspeed');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_attribute_group`
+--
+
+DROP TABLE IF EXISTS `oc_attribute_group`;
+CREATE TABLE `oc_attribute_group` (
+  `attribute_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`attribute_group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_attribute_group`
+--
+
+INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
+(3, 2),
+(4, 1),
+(5, 3),
+(6, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_attribute_group_description`
+--
+
+DROP TABLE IF EXISTS `oc_attribute_group_description`;
+CREATE TABLE `oc_attribute_group_description` (
+  `attribute_group_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`attribute_group_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_attribute_group_description`
+--
+
+INSERT INTO `oc_attribute_group_description` (`attribute_group_id`, `language_id`, `name`) VALUES
+(3, 1, 'Memory'),
+(4, 1, 'Technical'),
+(5, 1, 'Motherboard'),
+(6, 1, 'Processor');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_banner`
+--
+
+DROP TABLE IF EXISTS `oc_banner`;
+CREATE TABLE `oc_banner` (
+  `banner_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `status` int(1) NOT NULL,
+  PRIMARY KEY (`banner_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_banner`
+--
+
+INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
+(6, 'HP Products', 1),
+(7, 'Samsung Tab', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_banner_image`
+--
+
+DROP TABLE IF EXISTS `oc_banner_image`;
+CREATE TABLE `oc_banner_image` (
+  `banner_image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `banner_id` int(11) NOT NULL,
+  `link` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`banner_image_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_banner_image`
+--
+
+INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `link`, `image`) VALUES
+(54, 7, 'index.php?route=product/product&amp;path=57&amp;product_id=49', 'data/samsung_banner.jpg'),
+(52, 6, '/index.php?route=product/manufacturer/product&amp;manufacturer_id=7', 'data/hp_banner.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_banner_image_description`
+--
+
+DROP TABLE IF EXISTS `oc_banner_image_description`;
+CREATE TABLE `oc_banner_image_description` (
+  `banner_image_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `banner_id` int(11) NOT NULL,
+  `title` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`banner_image_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_banner_image_description`
+--
+
+INSERT INTO `oc_banner_image_description` (`banner_image_id`, `language_id`, `banner_id`, `title`) VALUES
+(54, 1, 7, 'Samsung Tab 10.1'),
+(52, 1, 6, 'HP Banner');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_category`
+--
+
+DROP TABLE IF EXISTS `oc_category`;
 CREATE TABLE `oc_category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
+  `top` int(1) NOT NULL,
+  `column` int(3) NOT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`category_id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `sort_order` (`sort_order`),
-  KEY `status` (`status`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=35 ;
+  PRIMARY KEY (`category_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_category`
+-- Dumping data for table `oc_category`
 --
 
-INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `sort_order`, `date_added`, `date_modified`, `status`) VALUES
-(25, '', 0, 3, '2009-01-31 01:04:25', '2010-03-21 15:30:07', 1),
-(27, '', 20, 2, '2009-01-31 01:55:34', '2010-03-21 15:29:49', 1),
-(20, '', 0, 1, '2009-01-05 21:49:43', '2010-03-29 15:15:17', 1),
-(24, '', 0, 5, '2009-01-20 02:36:26', '2010-03-21 15:30:50', 1),
-(18, '', 0, 2, '2009-01-05 21:49:15', '2010-03-21 15:30:00', 1),
-(17, '', 0, 4, '2009-01-03 21:08:57', '2010-03-21 15:30:44', 1),
-(28, '', 25, 1, '2009-02-02 13:11:12', '2010-03-21 15:30:17', 1),
-(26, '', 20, 1, '2009-01-31 01:55:14', '2010-03-21 15:29:42', 1),
-(29, '', 25, 1, '2009-02-02 13:11:37', '2010-03-21 15:30:12', 1),
-(30, '', 25, 1, '2009-02-02 13:11:59', '2010-03-21 15:30:22', 1),
-(31, '', 25, 1, '2009-02-03 14:17:24', '2010-03-21 15:30:27', 1),
-(32, '', 25, 1, '2009-02-03 14:17:34', '2010-03-21 15:30:35', 1),
-(33, '', 0, 6, '2009-02-03 14:17:55', '2010-03-21 15:30:55', 1),
-(34, '', 0, 7, '2009-02-03 14:18:11', '2010-03-21 15:31:01', 1);
+INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
+(25, '', 0, 1, 1, 3, 1, '2009-01-31 01:04:25', '2011-05-30 12:14:55'),
+(27, '', 20, 0, 0, 2, 1, '2009-01-31 01:55:34', '2010-08-22 06:32:15'),
+(20, 'data/compaq_presario.jpg', 0, 1, 1, 1, 1, '2009-01-05 21:49:43', '2011-05-30 12:13:49'),
+(24, '', 0, 1, 1, 5, 1, '2009-01-20 02:36:26', '2011-05-30 12:15:18'),
+(18, 'data/hp_2.jpg', 0, 1, 0, 2, 1, '2009-01-05 21:49:15', '2011-05-30 12:13:55'),
+(17, '', 0, 1, 1, 4, 1, '2009-01-03 21:08:57', '2011-05-30 12:15:11'),
+(28, '', 25, 0, 0, 1, 1, '2009-02-02 13:11:12', '2010-08-22 06:32:46'),
+(26, '', 20, 0, 0, 1, 1, '2009-01-31 01:55:14', '2010-08-22 06:31:45'),
+(29, '', 25, 0, 0, 1, 1, '2009-02-02 13:11:37', '2010-08-22 06:32:39'),
+(30, '', 25, 0, 0, 1, 1, '2009-02-02 13:11:59', '2010-08-22 06:33:00'),
+(31, '', 25, 0, 0, 1, 1, '2009-02-03 14:17:24', '2010-08-22 06:33:06'),
+(32, '', 25, 0, 0, 1, 1, '2009-02-03 14:17:34', '2010-08-22 06:33:12'),
+(33, '', 0, 1, 1, 6, 1, '2009-02-03 14:17:55', '2011-05-30 12:15:25'),
+(34, 'data/ipod_touch_4.jpg', 0, 1, 4, 7, 1, '2009-02-03 14:18:11', '2011-05-30 12:15:31'),
+(35, '', 28, 0, 0, 0, 1, '2010-09-17 10:06:48', '2010-09-18 14:02:42'),
+(36, '', 28, 0, 0, 0, 1, '2010-09-17 10:07:13', '2010-09-18 14:02:55'),
+(37, '', 34, 0, 0, 0, 1, '2010-09-18 14:03:39', '2011-04-22 01:55:08'),
+(38, '', 34, 0, 0, 0, 1, '2010-09-18 14:03:51', '2010-09-18 14:03:51'),
+(39, '', 34, 0, 0, 0, 1, '2010-09-18 14:04:17', '2011-04-22 01:55:20'),
+(40, '', 34, 0, 0, 0, 1, '2010-09-18 14:05:36', '2010-09-18 14:05:36'),
+(41, '', 34, 0, 0, 0, 1, '2010-09-18 14:05:49', '2011-04-22 01:55:30'),
+(42, '', 34, 0, 0, 0, 1, '2010-09-18 14:06:34', '2010-11-07 20:31:04'),
+(43, '', 34, 0, 0, 0, 1, '2010-09-18 14:06:49', '2011-04-22 01:55:40'),
+(44, '', 34, 0, 0, 0, 1, '2010-09-21 15:39:21', '2010-11-07 20:30:55'),
+(45, '', 18, 0, 0, 0, 1, '2010-09-24 18:29:16', '2011-04-26 08:52:11'),
+(46, '', 18, 0, 0, 0, 1, '2010-09-24 18:29:31', '2011-04-26 08:52:23'),
+(47, '', 34, 0, 0, 0, 1, '2010-11-07 11:13:16', '2010-11-07 11:13:16'),
+(48, '', 34, 0, 0, 0, 1, '2010-11-07 11:13:33', '2010-11-07 11:13:33'),
+(49, '', 34, 0, 0, 0, 1, '2010-11-07 11:14:04', '2010-11-07 11:14:04'),
+(50, '', 34, 0, 0, 0, 1, '2010-11-07 11:14:23', '2011-04-22 01:16:01'),
+(51, '', 34, 0, 0, 0, 1, '2010-11-07 11:14:38', '2011-04-22 01:16:13'),
+(52, '', 34, 0, 0, 0, 1, '2010-11-07 11:16:09', '2011-04-22 01:54:57'),
+(53, '', 34, 0, 0, 0, 1, '2010-11-07 11:28:53', '2011-04-22 01:14:36'),
+(54, '', 34, 0, 0, 0, 1, '2010-11-07 11:29:16', '2011-04-22 01:16:50'),
+(55, '', 34, 0, 0, 0, 1, '2010-11-08 10:31:32', '2010-11-08 10:31:32'),
+(56, '', 34, 0, 0, 0, 1, '2010-11-08 10:31:50', '2011-04-22 01:16:37'),
+(57, '', 0, 1, 1, 3, 1, '2011-04-26 08:53:16', '2011-05-30 12:15:05'),
+(58, '', 52, 0, 0, 0, 1, '2011-05-08 13:44:16', '2011-05-08 13:44:16');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_category_description`
+-- Table structure for table `oc_category_description`
 --
 
+DROP TABLE IF EXISTS `oc_category_description`;
 CREATE TABLE `oc_category_description` (
   `category_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `meta_keywords` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `description` text COLLATE utf8_general_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `h1` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`category_id`,`language_id`),
   KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_category_description`
+-- Dumping data for table `oc_category_description`
 --
 
-INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `meta_keywords`, `meta_description`, `description`) VALUES
-(18, 1, 'Ноутбуки', '','', ''),
-(28, 1, 'Мониторы', '', '', ''),
-(20, 1, 'Стационарные компьютеры', '', 'Пример описания категории', '&lt;p&gt;\r\n	Пример текстового описания категории&lt;/p&gt;\r\n'),
-(34, 1, 'MP3 Плееры', '', '', ''),
-(33, 1, 'Камеры', '', '', ''),
-(32, 1, 'Веб-камеры', '', '', ''),
-(31, 1, 'Сканеры', '', '', ''),
-(30, 1, 'Принтеры', '', '', ''),
-(29, 1, 'Мышки', '', '', ''),
+INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES
+(28, 1, 'Monitors', '', '', ''),
+(33, 1, 'Cameras', '', '', ''),
+(32, 1, 'Web Cameras', '', '', ''),
+(31, 1, 'Scanners', '', '', ''),
+(30, 1, 'Printers', '', '', ''),
+(29, 1, 'Mice and Trackballs', '', '', ''),
 (27, 1, 'Mac', '', '', ''),
 (26, 1, 'PC', '', '', ''),
-(17, 1, 'Программное обеспечение', '', '', ''),
-(25, 1, 'Компоненты', '', '', ''),
-(24, 1, 'Телефоны и PDA', '', '', '');
+(17, 1, 'Software', '', '', ''),
+(25, 1, 'Components', '', '', ''),
+(24, 1, 'Phones &amp; PDAs', '', '', ''),
+(20, 1, 'Desktops', '&lt;p&gt;\r\n	Example of category description text&lt;/p&gt;\r\n', 'Example of category description', ''),
+(35, 1, 'test 1', '', '', ''),
+(36, 1, 'test 2', '', '', ''),
+(37, 1, 'test 5', '', '', ''),
+(38, 1, 'test 4', '', '', ''),
+(39, 1, 'test 6', '', '', ''),
+(40, 1, 'test 7', '', '', ''),
+(41, 1, 'test 8', '', '', ''),
+(42, 1, 'test 9', '', '', ''),
+(43, 1, 'test 11', '', '', ''),
+(34, 1, 'MP3 Players', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
+(18, 1, 'Laptops &amp; Notebooks', '&lt;p&gt;\r\n	Shop Laptop feature only the best laptop deals on the market. By comparing laptop deals from the likes of PC World, Comet, Dixons, The Link and Carphone Warehouse, Shop Laptop has the most comprehensive selection of laptops on the internet. At Shop Laptop, we pride ourselves on offering customers the very best laptop deals. From refurbished laptops to netbooks, Shop Laptop ensures that every laptop - in every colour, style, size and technical spec - is featured on the site at the lowest possible price.&lt;/p&gt;\r\n', '', ''),
+(44, 1, 'test 12', '', '', ''),
+(45, 1, 'Windows', '', '', ''),
+(46, 1, 'Macs', '', '', ''),
+(47, 1, 'test 15', '', '', ''),
+(48, 1, 'test 16', '', '', ''),
+(49, 1, 'test 17', '', '', ''),
+(50, 1, 'test 18', '', '', ''),
+(51, 1, 'test 19', '', '', ''),
+(52, 1, 'test 20', '', '', ''),
+(53, 1, 'test 21', '', '', ''),
+(54, 1, 'test 22', '', '', ''),
+(55, 1, 'test 23', '', '', ''),
+(56, 1, 'test 24', '', '', ''),
+(57, 1, 'Tablets', '', '', ''),
+(58, 1, 'test 25', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_category_to_store`
+-- Table structure for table `oc_category_to_layout`
 --
 
+DROP TABLE IF EXISTS `oc_category_to_layout`;
+CREATE TABLE `oc_category_to_layout` (
+  `category_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `layout_id` int(11) NOT NULL,
+  PRIMARY KEY (`category_id`,`store_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_category_to_layout`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_category_to_store`
+--
+
+DROP TABLE IF EXISTS `oc_category_to_store`;
 CREATE TABLE `oc_category_to_store` (
   `category_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -138,7 +451,7 @@ CREATE TABLE `oc_category_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_category_to_store`
+-- Dumping data for table `oc_category_to_store`
 --
 
 INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
@@ -155,278 +468,305 @@ INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
 (31, 0),
 (32, 0),
 (33, 0),
-(34, 0);
+(34, 0),
+(35, 0),
+(36, 0),
+(37, 0),
+(38, 0),
+(39, 0),
+(40, 0),
+(41, 0),
+(42, 0),
+(43, 0),
+(44, 0),
+(45, 0),
+(46, 0),
+(47, 0),
+(48, 0),
+(49, 0),
+(50, 0),
+(51, 0),
+(52, 0),
+(53, 0),
+(54, 0),
+(55, 0),
+(56, 0),
+(57, 0),
+(58, 0);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_country`
+-- Table structure for table `oc_country`
 --
 
+DROP TABLE IF EXISTS `oc_country`;
 CREATE TABLE `oc_country` (
   `country_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `iso_code_2` varchar(2) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `iso_code_3` varchar(3) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `address_format` text COLLATE utf8_general_ci NOT NULL,
-  `postcode_required` int(1) NOT NULL DEFAULT '0',
+  `postcode_required` int(1) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`country_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=240 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_country`
+-- Dumping data for table `oc_country`
 --
 
-INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `status`) VALUES
-(1, 'Афганистан', 'AF', 'AFG', '', 1),
-(2, 'Албания', 'AL', 'ALB', '', 1),
-(3, 'Алжир', 'DZ', 'DZA', '', 1),
-(4, 'Восточное Самоа', 'AS', 'ASM', '', 1),
-(5, 'Андорра', 'AD', 'AND', '', 1),
-(6, 'Ангола', 'AO', 'AGO', '', 1),
-(7, 'Ангилья', 'AI', 'AIA', '', 1),
-(8, 'Антарктида', 'AQ', 'ATA', '', 1),
-(9, 'Антигуа и Барбуда', 'AG', 'ATG', '', 1),
-(10, 'Аргентина', 'AR', 'ARG', '', 1),
-(11, 'Армения', 'AM', 'ARM', '', 1),
-(12, 'Аруба', 'AW', 'ABW', '', 1),
-(13, 'Австралия', 'AU', 'AUS', '', 1),
-(14, 'Австрия', 'AT', 'AUT', '', 1),
-(15, 'Азербайджан', 'AZ', 'AZE', '', 1),
-(16, 'Багамские острова', 'BS', 'BHS', '', 1),
-(17, 'Бахрейн', 'BH', 'BHR', '', 1),
-(18, 'Бангладеш', 'BD', 'BGD', '', 1),
-(19, 'Барбадос', 'BB', 'BRB', '', 1),
-(20, 'Белоруссия (Беларусь)', 'BY', 'BLR', '', 1),
-(21, 'Бельгия', 'BE', 'BEL', '', 1),
-(22, 'Белиз', 'BZ', 'BLZ', '', 1),
-(23, 'Бенин', 'BJ', 'BEN', '', 1),
-(24, 'Бермудские острова', 'BM', 'BMU', '', 1),
-(25, 'Бутан', 'BT', 'BTN', '', 1),
-(26, 'Боливия', 'BO', 'BOL', '', 1),
-(27, 'Босния и Герцеговина', 'BA', 'BIH', '', 1),
-(28, 'Ботсвана', 'BW', 'BWA', '', 1),
-(29, 'Остров Буве', 'BV', 'BVT', '', 1),
-(30, 'Бразилия', 'BR', 'BRA', '', 1),
-(31, 'Британская территория в Индийском океане', 'IO', 'IOT', '', 1),
-(32, 'Бруней', 'BN', 'BRN', '', 1),
-(33, 'Болгария', 'BG', 'BGR', '', 1),
-(34, 'Буркина-Фасо', 'BF', 'BFA', '', 1),
-(35, 'Бурунди', 'BI', 'BDI', '', 1),
-(36, 'Камбоджа', 'KH', 'KHM', '', 1),
-(37, 'Камерун', 'CM', 'CMR', '', 1),
-(38, 'Канада', 'CA', 'CAN', '', 1),
-(39, 'Кабо-Верде', 'CV', 'CPV', '', 1),
-(40, 'Каймановы острова', 'KY', 'CYM', '', 1),
-(41, 'Центрально-Африканская Республика', 'CF', 'CAF', '', 1),
-(42, 'Чад', 'TD', 'TCD', '', 1),
-(43, 'Чили', 'CL', 'CHL', '', 1),
-(44, 'Китайская Народная Республика', 'CN', 'CHN', '', 1),
-(45, 'Остров Рождества', 'CX', 'CXR', '', 1),
-(46, 'Кокосовые острова', 'CC', 'CCK', '', 1),
-(47, 'Колумбия', 'CO', 'COL', '', 1),
-(48, 'Коморские острова', 'KM', 'COM', '', 1),
-(49, 'Конго', 'CG', 'COG', '', 1),
-(50, 'Острова Кука', 'CK', 'COK', '', 1),
-(51, 'Коста-Рика', 'CR', 'CRI', '', 1),
-(52, 'Кот д''Ивуар', 'CI', 'CIV', '', 1),
-(53, 'Хорватия', 'HR', 'HRV', '', 1),
-(54, 'Куба', 'CU', 'CUB', '', 1),
-(55, 'Кипр', 'CY', 'CYP', '', 1),
-(56, 'Чехия', 'CZ', 'CZE', '', 1),
-(57, 'Дания', 'DK', 'DNK', '', 1),
-(58, 'Джибути', 'DJ', 'DJI', '', 1),
-(59, 'Доминика', 'DM', 'DMA', '', 1),
-(60, 'Доминиканская Республика', 'DO', 'DOM', '', 1),
-(61, 'Восточный Тимор', 'TP', 'TMP', '', 1),
-(62, 'Эквадор', 'EC', 'ECU', '', 1),
-(63, 'Египет', 'EG', 'EGY', '', 1),
-(64, 'Сальвадор', 'SV', 'SLV', '', 1),
-(65, 'Экваториальная Гвинея', 'GQ', 'GNQ', '', 1),
-(66, 'Эритрея', 'ER', 'ERI', '', 1),
-(67, 'Эстония', 'EE', 'EST', '', 1),
-(68, 'Эфиопия', 'ET', 'ETH', '', 1),
-(69, 'Фолклендские (Мальвинские) острова', 'FK', 'FLK', '', 1),
-(70, 'Фарерские острова', 'FO', 'FRO', '', 1),
-(71, 'Фиджи', 'FJ', 'FJI', '', 1),
-(72, 'Финляндия', 'FI', 'FIN', '', 1),
-(73, 'Франция', 'FR', 'FRA', '', 1),
-(74, 'Франция, Метрополия', 'FX', 'FXX', '', 1),
-(75, 'Французская Гвиана', 'GF', 'GUF', '', 1),
-(76, 'Французская Полинезия', 'PF', 'PYF', '', 1),
-(77, 'Французские Южные территории', 'TF', 'ATF', '', 1),
-(78, 'Габон', 'GA', 'GAB', '', 1),
-(79, 'Гамбия', 'GM', 'GMB', '', 1),
-(80, 'Грузия', 'GE', 'GEO', '', 1),
-(81, 'Германия', 'DE', 'DEU', '', 1),
-(82, 'Гана', 'GH', 'GHA', '', 1),
-(83, 'Гибралтар', 'GI', 'GIB', '', 1),
-(84, 'Греция', 'GR', 'GRC', '', 1),
-(85, 'Гренландия', 'GL', 'GRL', '', 1),
-(86, 'Гренада', 'GD', 'GRD', '', 1),
-(87, 'Гваделупа', 'GP', 'GLP', '', 1),
-(88, 'Гуам', 'GU', 'GUM', '', 1),
-(89, 'Гватемала', 'GT', 'GTM', '', 1),
-(90, 'Гвинея', 'GN', 'GIN', '', 1),
-(91, 'Гвинея-Бисау', 'GW', 'GNB', '', 1),
-(92, 'Гайана', 'GY', 'GUY', '', 1),
-(93, 'Гаити', 'HT', 'HTI', '', 1),
-(94, 'Херд и Макдональд, острова', 'HM', 'HMD', '', 1),
-(95, 'Гондурас', 'HN', 'HND', '', 1),
-(96, 'Гонконг', 'HK', 'HKG', '', 1),
-(97, 'Венгрия', 'HU', 'HUN', '', 1),
-(98, 'Исландия', 'IS', 'ISL', '', 1),
-(99, 'Индия', 'IN', 'IND', '', 1),
-(100, 'Индонезия', 'ID', 'IDN', '', 1),
-(101, 'Иран', 'IR', 'IRN', '', 1),
-(102, 'Ирак', 'IQ', 'IRQ', '', 1),
-(103, 'Ирландия', 'IE', 'IRL', '', 1),
-(104, 'Израиль', 'IL', 'ISR', '', 1),
-(105, 'Италия', 'IT', 'ITA', '', 1),
-(106, 'Ямайка', 'JM', 'JAM', '', 1),
-(107, 'Япония', 'JP', 'JPN', '', 1),
-(108, 'Иордания', 'JO', 'JOR', '', 1),
-(109, 'Казахстан', 'KZ', 'KAZ', '', 1),
-(110, 'Кения', 'KE', 'KEN', '', 1),
-(111, 'Кирибати', 'KI', 'KIR', '', 1),
-(112, 'Корейская Народно-Демократическая Республика', 'KP', 'PRK', '', 1),
-(113, 'Республика Корея', 'KR', 'KOR', '', 1),
-(114, 'Кувейт', 'KW', 'KWT', '', 1),
-(115, 'Киргизия (Кыргызстан)', 'KG', 'KGZ', '', 1),
-(116, 'Лаос', 'LA', 'LAO', '', 1),
-(117, 'Латвия', 'LV', 'LVA', '', 1),
-(118, 'Ливан', 'LB', 'LBN', '', 1),
-(119, 'Лесото', 'LS', 'LSO', '', 1),
-(120, 'Либерия', 'LR', 'LBR', '', 1),
-(121, 'Ливия', 'LY', 'LBY', '', 1),
-(122, 'Лихтенштейн', 'LI', 'LIE', '', 1),
-(123, 'Литва', 'LT', 'LTU', '', 1),
-(124, 'Люксембург', 'LU', 'LUX', '', 1),
-(125, 'Макао', 'MO', 'MAC', '', 1),
-(126, 'Македония', 'MK', 'MKD', '', 1),
-(127, 'Мадагаскар', 'MG', 'MDG', '', 1),
-(128, 'Малави', 'MW', 'MWI', '', 1),
-(129, 'Малайзия', 'MY', 'MYS', '', 1),
-(130, 'Мальдивы', 'MV', 'MDV', '', 1),
-(131, 'Мали', 'ML', 'MLI', '', 1),
-(132, 'Мальта', 'MT', 'MLT', '', 1),
-(133, 'Маршалловы острова', 'MH', 'MHL', '', 1),
-(134, 'Мартиника', 'MQ', 'MTQ', '', 1),
-(135, 'Мавритания', 'MR', 'MRT', '', 1),
-(136, 'Маврикий', 'MU', 'MUS', '', 1),
-(137, 'Майотта', 'YT', 'MYT', '', 1),
-(138, 'Мексика', 'MX', 'MEX', '', 1),
-(139, 'Микронезия', 'FM', 'FSM', '', 1),
-(140, 'Молдова', 'MD', 'MDA', '', 1),
-(141, 'Монако', 'MC', 'MCO', '', 1),
-(142, 'Монголия', 'MN', 'MNG', '', 1),
-(143, 'Монтсеррат', 'MS', 'MSR', '', 1),
-(144, 'Марокко', 'MA', 'MAR', '', 1),
-(145, 'Мозамбик', 'MZ', 'MOZ', '', 1),
-(146, 'Мьянма', 'MM', 'MMR', '', 1),
-(147, 'Намибия', 'NA', 'NAM', '', 1),
-(148, 'Науру', 'NR', 'NRU', '', 1),
-(149, 'Непал', 'NP', 'NPL', '', 1),
-(150, 'Нидерланды', 'NL', 'NLD', '', 1),
-(151, 'Антильские (Нидерландские) острова', 'AN', 'ANT', '', 1),
-(152, 'Новая Каледония', 'NC', 'NCL', '', 1),
-(153, 'Новая Зеландия', 'NZ', 'NZL', '', 1),
-(154, 'Никарагуа', 'NI', 'NIC', '', 1),
-(155, 'Нигер', 'NE', 'NER', '', 1),
-(156, 'Нигерия', 'NG', 'NGA', '', 1),
-(157, 'Ниуэ', 'NU', 'NIU', '', 1),
-(158, 'Остров Норфолк', 'NF', 'NFK', '', 1),
-(159, 'Северные Марианские острова', 'MP', 'MNP', '', 1),
-(160, 'Норвегия', 'NO', 'NOR', '', 1),
-(161, 'Оман', 'OM', 'OMN', '', 1),
-(162, 'Пакистан', 'PK', 'PAK', '', 1),
-(163, 'Палау', 'PW', 'PLW', '', 1),
-(164, 'Панама', 'PA', 'PAN', '', 1),
-(165, 'Папуа - Новая Гвинея', 'PG', 'PNG', '', 1),
-(166, 'Парагвай', 'PY', 'PRY', '', 1),
-(167, 'Перу', 'PE', 'PER', '', 1),
-(168, 'Филиппины', 'PH', 'PHL', '', 1),
-(169, 'Острова Питкэрн', 'PN', 'PCN', '', 1),
-(170, 'Польша', 'PL', 'POL', '', 1),
-(171, 'Португалия', 'PT', 'PRT', '', 1),
-(172, 'Пуэрто-Рико', 'PR', 'PRI', '', 1),
-(173, 'Катар', 'QA', 'QAT', '', 1),
-(174, 'Реюньон', 'RE', 'REU', '', 1),
-(175, 'Румыния', 'RO', 'ROM', '', 1),
-(176, 'Российская Федерация', 'RU', 'RUS', '', 1),
-(177, 'Руанда', 'RW', 'RWA', '', 1),
-(178, 'Сент-Китс и Невис', 'KN', 'KNA', '', 1),
-(179, 'Сент-Люсия', 'LC', 'LCA', '', 1),
-(180, 'Сент-Винсент и Гренадины', 'VC', 'VCT', '', 1),
-(181, 'Западное Самоа', 'WS', 'WSM', '', 1),
-(182, 'Сан-Марино', 'SM', 'SMR', '', 1),
-(183, 'Сан-Томе и Принсипи', 'ST', 'STP', '', 1),
-(184, 'Саудовская Аравия', 'SA', 'SAU', '', 1),
-(185, 'Сенегал', 'SN', 'SEN', '', 1),
-(186, 'Сейшельские острова', 'SC', 'SYC', '', 1),
-(187, 'Сьерра-Леоне', 'SL', 'SLE', '', 1),
-(188, 'Сингапур', 'SG', 'SGP', '', 1),
-(189, 'Словакия', 'SK', 'SVK', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city} {postcode}\r\n{zone}\r\n{country}', 1),
-(190, 'Словения', 'SI', 'SVN', '', 1),
-(191, 'Соломоновы острова', 'SB', 'SLB', '', 1),
-(192, 'Сомали', 'SO', 'SOM', '', 1),
-(193, 'Южно-Африканская Республика', 'ZA', 'ZAF', '', 1),
-(194, 'Южная Джорджия и Южные Сандвичевы острова', 'GS', 'SGS', '', 1),
-(195, 'Испания', 'ES', 'ESP', '', 1),
-(196, 'Шри-Ланка', 'LK', 'LKA', '', 1),
-(197, 'Остров Святой Елены', 'SH', 'SHN', '', 1),
-(198, 'Сен-Пьер и Микелон', 'PM', 'SPM', '', 1),
-(199, 'Судан', 'SD', 'SDN', '', 1),
-(200, 'Суринам', 'SR', 'SUR', '', 1),
-(201, 'Шпицберген и Ян Майен', 'SJ', 'SJM', '', 1),
-(202, 'Свазиленд', 'SZ', 'SWZ', '', 1),
-(203, 'Швеция', 'SE', 'SWE', '', 1),
-(204, 'Швейцария', 'CH', 'CHE', '', 1),
-(205, 'Сирия', 'SY', 'SYR', '', 1),
-(206, 'Тайвань (провинция Китая)', 'TW', 'TWN', '', 1),
-(207, 'Таджикистан', 'TJ', 'TJK', '', 1),
-(208, 'Танзания', 'TZ', 'TZA', '', 1),
-(209, 'Таиланд', 'TH', 'THA', '', 1),
-(210, 'Того', 'TG', 'TGO', '', 1),
-(211, 'Токелау', 'TK', 'TKL', '', 1),
-(212, 'Тонга', 'TO', 'TON', '', 1),
-(213, 'Тринидад и Тобаго', 'TT', 'TTO', '', 1),
-(214, 'Тунис', 'TN', 'TUN', '', 1),
-(215, 'Турция', 'TR', 'TUR', '', 1),
-(216, 'Туркменистан', 'TM', 'TKM', '', 1),
-(217, 'Острова Теркс и Кайкос', 'TC', 'TCA', '', 1),
-(218, 'Тувалу', 'TV', 'TUV', '', 1),
-(219, 'Уганда', 'UG', 'UGA', '', 1),
-(220, 'Украина', 'UA', 'UKR', '', 1),
-(221, 'Объединенные Арабские Эмираты', 'AE', 'ARE', '', 1),
-(222, 'Великобритания', 'GB', 'GBR', '', 1),
-(223, 'Соединенные Штаты Америки', 'US', 'USA', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', 1),
-(224, 'Мелкие отдаленные острова США', 'UM', 'UMI', '', 1),
-(225, 'Уругвай', 'UY', 'URY', '', 1),
-(226, 'Узбекистан', 'UZ', 'UZB', '', 1),
-(227, 'Вануату', 'VU', 'VUT', '', 1),
-(228, 'Ватикан', 'VA', 'VAT', '', 1),
-(229, 'Венесуэла', 'VE', 'VEN', '', 1),
-(230, 'Вьетнам', 'VN', 'VNM', '', 1),
-(231, 'Виргинские острова (Британские)', 'VG', 'VGB', '', 1),
-(232, 'Виргинские острова (США)', 'VI', 'VIR', '', 1),
-(233, 'Уоллис и Футуна', 'WF', 'WLF', '', 1),
-(234, 'Западная Сахара', 'EH', 'ESH', '', 1),
-(235, 'Йемен', 'YE', 'YEM', '', 1),
-(236, 'Сербия и Черногория', 'SCG', 'CS', '', 1),
-(237, 'Заир', 'ZR', 'ZAR', '', 1),
-(238, 'Замбия', 'ZM', 'ZMB', '', 1),
-(239, 'Зимбабве', 'ZW', 'ZWE', '', 1),
-(240, 'Channel Islands', 'CI', 'CHI', '', 1);
+INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES
+(1, 'Afghanistan', 'AF', 'AFG', '', 0, 1),
+(2, 'Albania', 'AL', 'ALB', '', 0, 1),
+(3, 'Algeria', 'DZ', 'DZA', '', 0, 1),
+(4, 'American Samoa', 'AS', 'ASM', '', 0, 1),
+(5, 'Andorra', 'AD', 'AND', '', 0, 1),
+(6, 'Angola', 'AO', 'AGO', '', 0, 1),
+(7, 'Anguilla', 'AI', 'AIA', '', 0, 1),
+(8, 'Antarctica', 'AQ', 'ATA', '', 0, 1),
+(9, 'Antigua and Barbuda', 'AG', 'ATG', '', 0, 1),
+(10, 'Argentina', 'AR', 'ARG', '', 0, 1),
+(11, 'Armenia', 'AM', 'ARM', '', 0, 1),
+(12, 'Aruba', 'AW', 'ABW', '', 0, 1),
+(13, 'Australia', 'AU', 'AUS', '', 0, 1),
+(14, 'Austria', 'AT', 'AUT', '', 0, 1),
+(15, 'Azerbaijan', 'AZ', 'AZE', '', 0, 1),
+(16, 'Bahamas', 'BS', 'BHS', '', 0, 1),
+(17, 'Bahrain', 'BH', 'BHR', '', 0, 1),
+(18, 'Bangladesh', 'BD', 'BGD', '', 0, 1),
+(19, 'Barbados', 'BB', 'BRB', '', 0, 1),
+(20, 'Belarus', 'BY', 'BLR', '', 0, 1),
+(21, 'Belgium', 'BE', 'BEL', '', 0, 1),
+(22, 'Belize', 'BZ', 'BLZ', '', 0, 1),
+(23, 'Benin', 'BJ', 'BEN', '', 0, 1),
+(24, 'Bermuda', 'BM', 'BMU', '', 0, 1),
+(25, 'Bhutan', 'BT', 'BTN', '', 0, 1),
+(26, 'Bolivia', 'BO', 'BOL', '', 0, 1),
+(27, 'Bosnia and Herzegowina', 'BA', 'BIH', '', 0, 1),
+(28, 'Botswana', 'BW', 'BWA', '', 0, 1),
+(29, 'Bouvet Island', 'BV', 'BVT', '', 0, 1),
+(30, 'Brazil', 'BR', 'BRA', '', 0, 1),
+(31, 'British Indian Ocean Territory', 'IO', 'IOT', '', 0, 1),
+(32, 'Brunei Darussalam', 'BN', 'BRN', '', 0, 1),
+(33, 'Bulgaria', 'BG', 'BGR', '', 0, 1),
+(34, 'Burkina Faso', 'BF', 'BFA', '', 0, 1),
+(35, 'Burundi', 'BI', 'BDI', '', 0, 1),
+(36, 'Cambodia', 'KH', 'KHM', '', 0, 1),
+(37, 'Cameroon', 'CM', 'CMR', '', 0, 1),
+(38, 'Canada', 'CA', 'CAN', '', 0, 1),
+(39, 'Cape Verde', 'CV', 'CPV', '', 0, 1),
+(40, 'Cayman Islands', 'KY', 'CYM', '', 0, 1),
+(41, 'Central African Republic', 'CF', 'CAF', '', 0, 1),
+(42, 'Chad', 'TD', 'TCD', '', 0, 1),
+(43, 'Chile', 'CL', 'CHL', '', 0, 1),
+(44, 'China', 'CN', 'CHN', '', 0, 1),
+(45, 'Christmas Island', 'CX', 'CXR', '', 0, 1),
+(46, 'Cocos (Keeling) Islands', 'CC', 'CCK', '', 0, 1),
+(47, 'Colombia', 'CO', 'COL', '', 0, 1),
+(48, 'Comoros', 'KM', 'COM', '', 0, 1),
+(49, 'Congo', 'CG', 'COG', '', 0, 1),
+(50, 'Cook Islands', 'CK', 'COK', '', 0, 1),
+(51, 'Costa Rica', 'CR', 'CRI', '', 0, 1),
+(52, 'Cote D''Ivoire', 'CI', 'CIV', '', 0, 1),
+(53, 'Croatia', 'HR', 'HRV', '', 0, 1),
+(54, 'Cuba', 'CU', 'CUB', '', 0, 1),
+(55, 'Cyprus', 'CY', 'CYP', '', 0, 1),
+(56, 'Czech Republic', 'CZ', 'CZE', '', 0, 1),
+(57, 'Denmark', 'DK', 'DNK', '', 0, 1),
+(58, 'Djibouti', 'DJ', 'DJI', '', 0, 1),
+(59, 'Dominica', 'DM', 'DMA', '', 0, 1),
+(60, 'Dominican Republic', 'DO', 'DOM', '', 0, 1),
+(61, 'East Timor', 'TP', 'TMP', '', 0, 1),
+(62, 'Ecuador', 'EC', 'ECU', '', 0, 1),
+(63, 'Egypt', 'EG', 'EGY', '', 0, 1),
+(64, 'El Salvador', 'SV', 'SLV', '', 0, 1),
+(65, 'Equatorial Guinea', 'GQ', 'GNQ', '', 0, 1),
+(66, 'Eritrea', 'ER', 'ERI', '', 0, 1),
+(67, 'Estonia', 'EE', 'EST', '', 0, 1),
+(68, 'Ethiopia', 'ET', 'ETH', '', 0, 1),
+(69, 'Falkland Islands (Malvinas)', 'FK', 'FLK', '', 0, 1),
+(70, 'Faroe Islands', 'FO', 'FRO', '', 0, 1),
+(71, 'Fiji', 'FJ', 'FJI', '', 0, 1),
+(72, 'Finland', 'FI', 'FIN', '', 0, 1),
+(73, 'France', 'FR', 'FRA', '', 0, 1),
+(74, 'France, Metropolitan', 'FX', 'FXX', '', 0, 1),
+(75, 'French Guiana', 'GF', 'GUF', '', 0, 1),
+(76, 'French Polynesia', 'PF', 'PYF', '', 0, 1),
+(77, 'French Southern Territories', 'TF', 'ATF', '', 0, 1),
+(78, 'Gabon', 'GA', 'GAB', '', 0, 1),
+(79, 'Gambia', 'GM', 'GMB', '', 0, 1),
+(80, 'Georgia', 'GE', 'GEO', '', 0, 1),
+(81, 'Germany', 'DE', 'DEU', '', 0, 1),
+(82, 'Ghana', 'GH', 'GHA', '', 0, 1),
+(83, 'Gibraltar', 'GI', 'GIB', '', 0, 1),
+(84, 'Greece', 'GR', 'GRC', '', 0, 1),
+(85, 'Greenland', 'GL', 'GRL', '', 0, 1),
+(86, 'Grenada', 'GD', 'GRD', '', 0, 1),
+(87, 'Guadeloupe', 'GP', 'GLP', '', 0, 1),
+(88, 'Guam', 'GU', 'GUM', '', 0, 1),
+(89, 'Guatemala', 'GT', 'GTM', '', 0, 1),
+(90, 'Guinea', 'GN', 'GIN', '', 0, 1),
+(91, 'Guinea-bissau', 'GW', 'GNB', '', 0, 1),
+(92, 'Guyana', 'GY', 'GUY', '', 0, 1),
+(93, 'Haiti', 'HT', 'HTI', '', 0, 1),
+(94, 'Heard and Mc Donald Islands', 'HM', 'HMD', '', 0, 1),
+(95, 'Honduras', 'HN', 'HND', '', 0, 1),
+(96, 'Hong Kong', 'HK', 'HKG', '', 0, 1),
+(97, 'Hungary', 'HU', 'HUN', '', 0, 1),
+(98, 'Iceland', 'IS', 'ISL', '', 0, 1),
+(99, 'India', 'IN', 'IND', '', 0, 1),
+(100, 'Indonesia', 'ID', 'IDN', '', 0, 1),
+(101, 'Iran (Islamic Republic of)', 'IR', 'IRN', '', 0, 1),
+(102, 'Iraq', 'IQ', 'IRQ', '', 0, 1),
+(103, 'Ireland', 'IE', 'IRL', '', 0, 1),
+(104, 'Israel', 'IL', 'ISR', '', 0, 1),
+(105, 'Italy', 'IT', 'ITA', '', 0, 1),
+(106, 'Jamaica', 'JM', 'JAM', '', 0, 1),
+(107, 'Japan', 'JP', 'JPN', '', 0, 1),
+(108, 'Jordan', 'JO', 'JOR', '', 0, 1),
+(109, 'Kazakhstan', 'KZ', 'KAZ', '', 0, 1),
+(110, 'Kenya', 'KE', 'KEN', '', 0, 1),
+(111, 'Kiribati', 'KI', 'KIR', '', 0, 1),
+(112, 'North Korea', 'KP', 'PRK', '', 0, 1),
+(113, 'Korea, Republic of', 'KR', 'KOR', '', 0, 1),
+(114, 'Kuwait', 'KW', 'KWT', '', 0, 1),
+(115, 'Kyrgyzstan', 'KG', 'KGZ', '', 0, 1),
+(116, 'Lao People''s Democratic Republic', 'LA', 'LAO', '', 0, 1),
+(117, 'Latvia', 'LV', 'LVA', '', 0, 1),
+(118, 'Lebanon', 'LB', 'LBN', '', 0, 1),
+(119, 'Lesotho', 'LS', 'LSO', '', 0, 1),
+(120, 'Liberia', 'LR', 'LBR', '', 0, 1),
+(121, 'Libyan Arab Jamahiriya', 'LY', 'LBY', '', 0, 1),
+(122, 'Liechtenstein', 'LI', 'LIE', '', 0, 1),
+(123, 'Lithuania', 'LT', 'LTU', '', 0, 1),
+(124, 'Luxembourg', 'LU', 'LUX', '', 0, 1),
+(125, 'Macau', 'MO', 'MAC', '', 0, 1),
+(126, 'Macedonia', 'MK', 'MKD', '', 0, 1),
+(127, 'Madagascar', 'MG', 'MDG', '', 0, 1),
+(128, 'Malawi', 'MW', 'MWI', '', 0, 1),
+(129, 'Malaysia', 'MY', 'MYS', '', 0, 1),
+(130, 'Maldives', 'MV', 'MDV', '', 0, 1),
+(131, 'Mali', 'ML', 'MLI', '', 0, 1),
+(132, 'Malta', 'MT', 'MLT', '', 0, 1),
+(133, 'Marshall Islands', 'MH', 'MHL', '', 0, 1),
+(134, 'Martinique', 'MQ', 'MTQ', '', 0, 1),
+(135, 'Mauritania', 'MR', 'MRT', '', 0, 1),
+(136, 'Mauritius', 'MU', 'MUS', '', 0, 1),
+(137, 'Mayotte', 'YT', 'MYT', '', 0, 1),
+(138, 'Mexico', 'MX', 'MEX', '', 0, 1),
+(139, 'Micronesia, Federated States of', 'FM', 'FSM', '', 0, 1),
+(140, 'Moldova, Republic of', 'MD', 'MDA', '', 0, 1),
+(141, 'Monaco', 'MC', 'MCO', '', 0, 1),
+(142, 'Mongolia', 'MN', 'MNG', '', 0, 1),
+(143, 'Montserrat', 'MS', 'MSR', '', 0, 1),
+(144, 'Morocco', 'MA', 'MAR', '', 0, 1),
+(145, 'Mozambique', 'MZ', 'MOZ', '', 0, 1),
+(146, 'Myanmar', 'MM', 'MMR', '', 0, 1),
+(147, 'Namibia', 'NA', 'NAM', '', 0, 1),
+(148, 'Nauru', 'NR', 'NRU', '', 0, 1),
+(149, 'Nepal', 'NP', 'NPL', '', 0, 1),
+(150, 'Netherlands', 'NL', 'NLD', '', 0, 1),
+(151, 'Netherlands Antilles', 'AN', 'ANT', '', 0, 1),
+(152, 'New Caledonia', 'NC', 'NCL', '', 0, 1),
+(153, 'New Zealand', 'NZ', 'NZL', '', 0, 1),
+(154, 'Nicaragua', 'NI', 'NIC', '', 0, 1),
+(155, 'Niger', 'NE', 'NER', '', 0, 1),
+(156, 'Nigeria', 'NG', 'NGA', '', 0, 1),
+(157, 'Niue', 'NU', 'NIU', '', 0, 1),
+(158, 'Norfolk Island', 'NF', 'NFK', '', 0, 1),
+(159, 'Northern Mariana Islands', 'MP', 'MNP', '', 0, 1),
+(160, 'Norway', 'NO', 'NOR', '', 0, 1),
+(161, 'Oman', 'OM', 'OMN', '', 0, 1),
+(162, 'Pakistan', 'PK', 'PAK', '', 0, 1),
+(163, 'Palau', 'PW', 'PLW', '', 0, 1),
+(164, 'Panama', 'PA', 'PAN', '', 0, 1),
+(165, 'Papua New Guinea', 'PG', 'PNG', '', 0, 1),
+(166, 'Paraguay', 'PY', 'PRY', '', 0, 1),
+(167, 'Peru', 'PE', 'PER', '', 0, 1),
+(168, 'Philippines', 'PH', 'PHL', '', 0, 1),
+(169, 'Pitcairn', 'PN', 'PCN', '', 0, 1),
+(170, 'Poland', 'PL', 'POL', '', 0, 1),
+(171, 'Portugal', 'PT', 'PRT', '', 0, 1),
+(172, 'Puerto Rico', 'PR', 'PRI', '', 0, 1),
+(173, 'Qatar', 'QA', 'QAT', '', 0, 1),
+(174, 'Reunion', 'RE', 'REU', '', 0, 1),
+(175, 'Romania', 'RO', 'ROM', '', 0, 1),
+(176, 'Russian Federation', 'RU', 'RUS', '', 0, 1),
+(177, 'Rwanda', 'RW', 'RWA', '', 0, 1),
+(178, 'Saint Kitts and Nevis', 'KN', 'KNA', '', 0, 1),
+(179, 'Saint Lucia', 'LC', 'LCA', '', 0, 1),
+(180, 'Saint Vincent and the Grenadines', 'VC', 'VCT', '', 0, 1),
+(181, 'Samoa', 'WS', 'WSM', '', 0, 1),
+(182, 'San Marino', 'SM', 'SMR', '', 0, 1),
+(183, 'Sao Tome and Principe', 'ST', 'STP', '', 0, 1),
+(184, 'Saudi Arabia', 'SA', 'SAU', '', 0, 1),
+(185, 'Senegal', 'SN', 'SEN', '', 0, 1),
+(186, 'Seychelles', 'SC', 'SYC', '', 0, 1),
+(187, 'Sierra Leone', 'SL', 'SLE', '', 0, 1),
+(188, 'Singapore', 'SG', 'SGP', '', 0, 1),
+(189, 'Slovak Republic', 'SK', 'SVK', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city} {postcode}\r\n{zone}\r\n{country}', 0, 1),
+(190, 'Slovenia', 'SI', 'SVN', '', 0, 1),
+(191, 'Solomon Islands', 'SB', 'SLB', '', 0, 1),
+(192, 'Somalia', 'SO', 'SOM', '', 0, 1),
+(193, 'South Africa', 'ZA', 'ZAF', '', 0, 1),
+(194, 'South Georgia &amp; South Sandwich Islands', 'GS', 'SGS', '', 0, 1),
+(195, 'Spain', 'ES', 'ESP', '', 0, 1),
+(196, 'Sri Lanka', 'LK', 'LKA', '', 0, 1),
+(197, 'St. Helena', 'SH', 'SHN', '', 0, 1),
+(198, 'St. Pierre and Miquelon', 'PM', 'SPM', '', 0, 1),
+(199, 'Sudan', 'SD', 'SDN', '', 0, 1),
+(200, 'Suriname', 'SR', 'SUR', '', 0, 1),
+(201, 'Svalbard and Jan Mayen Islands', 'SJ', 'SJM', '', 0, 1),
+(202, 'Swaziland', 'SZ', 'SWZ', '', 0, 1),
+(203, 'Sweden', 'SE', 'SWE', '', 0, 1),
+(204, 'Switzerland', 'CH', 'CHE', '', 0, 1),
+(205, 'Syrian Arab Republic', 'SY', 'SYR', '', 0, 1),
+(206, 'Taiwan', 'TW', 'TWN', '', 0, 1),
+(207, 'Tajikistan', 'TJ', 'TJK', '', 0, 1),
+(208, 'Tanzania, United Republic of', 'TZ', 'TZA', '', 0, 1),
+(209, 'Thailand', 'TH', 'THA', '', 0, 1),
+(210, 'Togo', 'TG', 'TGO', '', 0, 1),
+(211, 'Tokelau', 'TK', 'TKL', '', 0, 1),
+(212, 'Tonga', 'TO', 'TON', '', 0, 1),
+(213, 'Trinidad and Tobago', 'TT', 'TTO', '', 0, 1),
+(214, 'Tunisia', 'TN', 'TUN', '', 0, 1),
+(215, 'Turkey', 'TR', 'TUR', '', 0, 1),
+(216, 'Turkmenistan', 'TM', 'TKM', '', 0, 1),
+(217, 'Turks and Caicos Islands', 'TC', 'TCA', '', 0, 1),
+(218, 'Tuvalu', 'TV', 'TUV', '', 0, 1),
+(219, 'Uganda', 'UG', 'UGA', '', 0, 1),
+(220, 'Ukraine', 'UA', 'UKR', '', 0, 1),
+(221, 'United Arab Emirates', 'AE', 'ARE', '', 0, 1),
+(222, 'United Kingdom', 'GB', 'GBR', '', 1, 1),
+(223, 'United States', 'US', 'USA', '{firstname} {lastname}\r\n{company}\r\n{address_1}\r\n{address_2}\r\n{city}, {zone} {postcode}\r\n{country}', 0, 1),
+(224, 'United States Minor Outlying Islands', 'UM', 'UMI', '', 0, 1),
+(225, 'Uruguay', 'UY', 'URY', '', 0, 1),
+(226, 'Uzbekistan', 'UZ', 'UZB', '', 0, 1),
+(227, 'Vanuatu', 'VU', 'VUT', '', 0, 1),
+(228, 'Vatican City State (Holy See)', 'VA', 'VAT', '', 0, 1),
+(229, 'Venezuela', 'VE', 'VEN', '', 0, 1),
+(230, 'Viet Nam', 'VN', 'VNM', '', 0, 1),
+(231, 'Virgin Islands (British)', 'VG', 'VGB', '', 0, 1),
+(232, 'Virgin Islands (U.S.)', 'VI', 'VIR', '', 0, 1),
+(233, 'Wallis and Futuna Islands', 'WF', 'WLF', '', 0, 1),
+(234, 'Western Sahara', 'EH', 'ESH', '', 0, 1),
+(235, 'Yemen', 'YE', 'YEM', '', 0, 1),
+(236, 'Yugoslavia', 'YU', 'YUG', '', 0, 1),
+(237, 'Democratic Republic of Congo', 'CD', 'COD', '', 0, 1),
+(238, 'Zambia', 'ZM', 'ZMB', '', 0, 1),
+(239, 'Zimbabwe', 'ZW', 'ZWE', '', 0, 1);
+
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_coupon`
+-- Table structure for table `oc_coupon`
 --
 
+DROP TABLE IF EXISTS `oc_coupon`;
 CREATE TABLE `oc_coupon` (
   `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `code` varchar(10) COLLATE utf8_general_ci NOT NULL,
   `type` char(1) COLLATE utf8_general_ci NOT NULL,
   `discount` decimal(15,4) NOT NULL,
@@ -440,68 +780,68 @@ CREATE TABLE `oc_coupon` (
   `status` int(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`coupon_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_coupon`
+-- Dumping data for table `oc_coupon`
 --
 
-INSERT INTO `oc_coupon` (`coupon_id`, `code`, `type`, `discount`, `logged`, `shipping`, `total`, `date_start`, `date_end`, `uses_total`, `uses_customer`, `status`, `date_added`) VALUES
-(4, '2222', 'P', '10.0000', 0, 0, '0.0000', '2009-01-27', '2010-03-06', 10, '10', 1, '2009-01-27 13:55:03'),
-(5, '3333', 'P', '0.0000', 0, 1, '100.0000', '2009-03-01', '2009-08-31', 10, '10', 1, '2009-03-14 21:13:53'),
-(6, '1111', 'P', '10.0000', 0, 0, '10.0000', '2007-01-01', '2011-03-01', 10, '10', 1, '2009-03-14 21:15:18');
+INSERT INTO `oc_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logged`, `shipping`, `total`, `date_start`, `date_end`, `uses_total`, `uses_customer`, `status`, `date_added`) VALUES
+(4, '-10% Discount', '2222', 'P', '10.0000', 0, 0, '0.0000', '2011-01-01', '2012-01-01', 10, '10', 1, '2009-01-27 13:55:03'),
+(5, 'Free Shipping', '3333', 'P', '0.0000', 0, 1, '100.0000', '2009-03-01', '2009-08-31', 10, '10', 1, '2009-03-14 21:13:53'),
+(6, '-10.00 Discount', '1111', 'F', '10.0000', 0, 0, '10.0000', '1970-11-01', '2020-11-01', 100000, '10000', 1, '2009-03-14 21:15:18');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_coupon_description`
+-- Table structure for table `oc_coupon_history`
 --
 
-CREATE TABLE `oc_coupon_description` (
+DROP TABLE IF EXISTS `oc_coupon_history`;
+CREATE TABLE `oc_coupon_history` (
+  `coupon_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `coupon_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8_general_ci NOT NULL,
-  `description` text COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`coupon_id`,`language_id`)
+  `order_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `amount` decimal(15,4) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`coupon_history_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_coupon_description`
+-- Dumping data for table `oc_coupon_history`
 --
 
-INSERT INTO `oc_coupon_description` (`coupon_id`, `language_id`, `name`, `description`) VALUES
-(4, 1, 'Купон (-10%)', 'Скидка 10%'),
-(5, 1, 'Купон (бесплатная доставка)', 'Бесплатная доставка'),
-(6, 1, 'Купон (-10.00)', 'Фиксированная скидка');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_coupon_product`
+-- Table structure for table `oc_coupon_product`
 --
 
+DROP TABLE IF EXISTS `oc_coupon_product`;
 CREATE TABLE `oc_coupon_product` (
   `coupon_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `coupon_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   PRIMARY KEY (`coupon_product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_coupon_product`
+-- Dumping data for table `oc_coupon_product`
 --
 
 INSERT INTO `oc_coupon_product` (`coupon_product_id`, `coupon_id`, `product_id`) VALUES
 (4, 7, 47),
-(3, 7, 30),
-(8, 6, 48);
+(3, 7, 30);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_currency`
+-- Table structure for table `oc_currency`
 --
 
+DROP TABLE IF EXISTS `oc_currency`;
 CREATE TABLE `oc_currency` (
   `currency_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -513,23 +853,24 @@ CREATE TABLE `oc_currency` (
   `status` int(1) NOT NULL,
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`currency_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_currency`
+-- Dumping data for table `oc_currency`
 --
 
 INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
-(1, 'Рубль', 'RUB', '', ' р.', '2', 1.00000000, 1, '2010-06-28 08:52:14'),
-(2, 'US Dollar', 'USD', '$', '', '2', 1.52600002, 1, '2010-04-06 22:00:54'),
-(3, 'Euro', 'EUR', '', '€', '2', 1.13999999, 1, '2010-04-06 22:00:54');
+(1, 'Pound Sterling', 'GBP', '£', '', '2', 0.60740000, 1, '2011-05-30 23:37:53'),
+(2, 'US Dollar', 'USD', '$', '', '2', 1.00000000, 1, '2011-05-30 23:37:53'),
+(3, 'Euro', 'EUR', '', '€', '2', 0.70039999, 1, '2011-05-30 23:37:53');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_customer`
+-- Table structure for table `oc_customer`
 --
 
+DROP TABLE IF EXISTS `oc_customer`;
 CREATE TABLE `oc_customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL DEFAULT '0',
@@ -540,47 +881,115 @@ CREATE TABLE `oc_customer` (
   `fax` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `password` varchar(40) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `cart` text COLLATE utf8_general_ci,
+  `wishlist` text COLLATE utf8_general_ci,
   `newsletter` int(1) NOT NULL DEFAULT '0',
   `address_id` int(11) NOT NULL DEFAULT '0',
-  `status` int(1) NOT NULL,
-  `approved` int(1) NOT NULL DEFAULT '0',
   `customer_group_id` int(11) NOT NULL,
   `ip` varchar(15) COLLATE utf8_general_ci NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL,
+  `approved` int(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`customer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_customer`
+-- Dumping data for table `oc_customer`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_customer_group`
+-- Table structure for table `oc_customer_group`
 --
 
+DROP TABLE IF EXISTS `oc_customer_group`;
 CREATE TABLE `oc_customer_group` (
   `customer_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`customer_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_customer_group`
+-- Dumping data for table `oc_customer_group`
 --
 
 INSERT INTO `oc_customer_group` (`customer_group_id`, `name`) VALUES
-(8, 'По умолчанию'),
-(6, 'Оптовики');
+(8, 'Default'),
+(6, 'Wholesale');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_download`
+-- Table structure for table `oc_customer_ip`
 --
 
+DROP TABLE IF EXISTS `oc_customer_ip`;
+CREATE TABLE `oc_customer_ip` (
+  `customer_ip_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `ip` varchar(15) COLLATE utf8_general_ci NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`customer_ip_id`),
+  KEY `ip` (`ip`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_customer_ip`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_customer_reward`
+--
+
+DROP TABLE IF EXISTS `oc_customer_reward`;
+CREATE TABLE `oc_customer_reward` (
+  `customer_reward_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL DEFAULT '0',
+  `order_id` int(11) NOT NULL DEFAULT '0',
+  `description` text COLLATE utf8_general_ci NOT NULL,
+  `points` int(8) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`customer_reward_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_customer_reward`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_customer_transaction`
+--
+
+DROP TABLE IF EXISTS `oc_customer_transaction`;
+CREATE TABLE `oc_customer_transaction` (
+  `customer_transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `description` text COLLATE utf8_general_ci NOT NULL,
+  `amount` decimal(15,4) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`customer_transaction_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_customer_transaction`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_download`
+--
+
+DROP TABLE IF EXISTS `oc_download`;
 CREATE TABLE `oc_download` (
   `download_id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(128) COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -588,19 +997,20 @@ CREATE TABLE `oc_download` (
   `remaining` int(11) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_download`
+-- Dumping data for table `oc_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_download_description`
+-- Table structure for table `oc_download_description`
 --
 
+DROP TABLE IF EXISTS `oc_download_description`;
 CREATE TABLE `oc_download_description` (
   `download_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -609,51 +1019,66 @@ CREATE TABLE `oc_download_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_download_description`
+-- Dumping data for table `oc_download_description`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_extension`
+-- Table structure for table `oc_extension`
 --
 
+DROP TABLE IF EXISTS `oc_extension`;
 CREATE TABLE `oc_extension` (
   `extension_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) COLLATE utf8_general_ci NOT NULL,
-  `key` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `code` varchar(32) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`extension_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_extension`
+-- Dumping data for table `oc_extension`
 --
 
-INSERT INTO `oc_extension` (`extension_id`, `type`, `key`) VALUES
-(NULL, 'payment', 'cod'),
-(NULL, 'total', 'shipping'),
-(NULL, 'total', 'sub_total'),
-(NULL, 'total', 'tax'),
-(NULL, 'total', 'total'),
-(NULL, 'module', 'cart'),
-(NULL, 'module', 'category'),
-(NULL, 'module', 'information'),
-(NULL, 'module', 'manufacturer'),
-(NULL, 'module', 'bestseller'),
-(NULL, 'payment', 'nochex'),
-(NULL, 'total', 'coupon'),
-(NULL, 'shipping', 'flat'),
-(NULL, 'module', 'latest'),
-(NULL, 'module', 'featured'),
-(NULL, 'module', 'blinks');
+INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
+(23, 'payment', 'cod'),
+(22, 'total', 'shipping'),
+(57, 'total', 'sub_total'),
+(58, 'total', 'tax'),
+(59, 'total', 'total'),
+(379, 'module', 'information'),
+(380, 'module', 'latest'),
+(371, 'module', 'banner'),
+(383, 'module', 'google_talk'),
+(372, 'module', 'bestseller'),
+(374, 'module', 'category'),
+(375, 'module', 'welcome'),
+(390, 'total', 'credit'),
+(377, 'module', 'featured'),
+(387, 'shipping', 'flat'),
+(349, 'total', 'handling'),
+(350, 'total', 'low_order_fee'),
+(389, 'total', 'coupon'),
+(352, 'feed', 'google_base'),
+(353, 'feed', 'google_sitemap'),
+(381, 'module', 'manufacturer'),
+(370, 'module', 'affiliate'),
+(369, 'module', 'account'),
+(382, 'module', 'special'),
+(384, 'module', 'slideshow'),
+(393, 'total', 'reward'),
+(396, 'module', 'store'),
+(398, 'total', 'voucher'),
+(407, 'payment', 'free_checkout');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_geo_zone`
+-- Table structure for table `oc_geo_zone`
 --
 
+DROP TABLE IF EXISTS `oc_geo_zone`;
 CREATE TABLE `oc_geo_zone` (
   `geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -661,43 +1086,47 @@ CREATE TABLE `oc_geo_zone` (
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_geo_zone`
+-- Dumping data for table `oc_geo_zone`
 --
 
 INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`, `date_added`) VALUES
-(3, 'НДС', 'Облагаемые НДС', '2010-02-26 22:33:24', '2009-01-06 23:26:25');
+(3, 'UK VAT Zone', 'UK VAT', '2010-02-26 22:33:24', '2009-01-06 23:26:25'),
+(4, 'UK Shipping', 'UK Shipping Zones', '2010-12-15 15:18:13', '2009-06-23 01:14:53');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_information`
+-- Table structure for table `oc_information`
 --
 
+DROP TABLE IF EXISTS `oc_information`;
 CREATE TABLE `oc_information` (
   `information_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`information_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_information`
+-- Dumping data for table `oc_information`
 --
 
 INSERT INTO `oc_information` (`information_id`, `sort_order`, `status`) VALUES
-(3, 2, 1),
+(3, 3, 1),
 (4, 1, 1),
-(5, 3, 1);
+(5, 4, 1),
+(6, 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_information_description`
+-- Table structure for table `oc_information_description`
 --
 
+DROP TABLE IF EXISTS `oc_information_description`;
 CREATE TABLE `oc_information_description` (
   `information_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
@@ -707,20 +1136,41 @@ CREATE TABLE `oc_information_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_information_description`
+-- Dumping data for table `oc_information_description`
 --
 
 INSERT INTO `oc_information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
-(5, 1, 'Условия соглашения', '&lt;p&gt;\r\n	Условия соглашения&lt;/p&gt;\r\n'),
-(3, 1, 'Политика Безопасности', '&lt;p&gt;\r\n	Политика Безопасности&lt;/p&gt;\r\n'),
-(4, 1, 'О нас', '&lt;p&gt;\r\n	О нас&lt;/p&gt;\r\n');
+(4, 1, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
+(5, 1, 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n'),
+(3, 1, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n'),
+(6, 1, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_information_to_store`
+-- Table structure for table `oc_information_to_layout`
 --
 
+DROP TABLE IF EXISTS `oc_information_to_layout`;
+CREATE TABLE `oc_information_to_layout` (
+  `information_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `layout_id` int(11) NOT NULL,
+  PRIMARY KEY (`information_id`,`store_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_information_to_layout`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_information_to_store`
+--
+
+DROP TABLE IF EXISTS `oc_information_to_store`;
 CREATE TABLE `oc_information_to_store` (
   `information_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -728,20 +1178,22 @@ CREATE TABLE `oc_information_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_information_to_store`
+-- Dumping data for table `oc_information_to_store`
 --
 
 INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
 (3, 0),
 (4, 0),
-(5, 0);
+(5, 0),
+(6, 0);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_language`
+-- Table structure for table `oc_language`
 --
 
+DROP TABLE IF EXISTS `oc_language`;
 CREATE TABLE `oc_language` (
   `language_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -754,72 +1206,140 @@ CREATE TABLE `oc_language` (
   `status` int(1) NOT NULL,
   PRIMARY KEY (`language_id`),
   KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_language`
+-- Dumping data for table `oc_language`
 --
+
 INSERT INTO `oc_language` (`language_id`, `name`, `code`, `locale`, `image`, `directory`, `filename`, `sort_order`, `status`) VALUES
-(1, 'Russian', 'ru', 'ru_RU.UTF-8,ru_RU,russian', 'ru.png', 'russian', 'russian', 1, 1);
+(1, 'Russian', 'ru', 'ru_RU.UTF-8,ru_RU,russian', 'ru.png', 'russian', 'russian', 1, 1),
+(2, 'English', 'en', 'en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 'english', 2, 0);;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_length_class`
+-- Table structure for table `oc_layout`
 --
 
+DROP TABLE IF EXISTS `oc_layout`;
+CREATE TABLE `oc_layout` (
+  `layout_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`layout_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_layout`
+--
+
+INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
+(1, 'Home'),
+(2, 'Product'),
+(3, 'Category'),
+(4, 'Default'),
+(5, 'Manufacturer'),
+(6, 'Account'),
+(7, 'Checkout'),
+(8, 'Contact'),
+(9, 'Sitemap'),
+(10, 'Affiliate'),
+(11, 'Information');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_layout_route`
+--
+
+DROP TABLE IF EXISTS `oc_layout_route`;
+CREATE TABLE `oc_layout_route` (
+  `layout_route_id` int(11) NOT NULL AUTO_INCREMENT,
+  `layout_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `route` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`layout_route_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_layout_route`
+--
+
+INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
+(30, 6, 0, 'account'),
+(17, 10, 0, 'affiliate/'),
+(29, 3, 0, 'product/category'),
+(27, 1, 3, 'common/home'),
+(26, 1, 0, 'common/home'),
+(20, 2, 0, 'product/product'),
+(24, 11, 0, 'information/information'),
+(22, 5, 0, 'product/manufacturer'),
+(23, 7, 0, 'checkout/'),
+(31, 8, 0, 'information/contact');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_length_class`
+--
+
+DROP TABLE IF EXISTS `oc_length_class`;
 CREATE TABLE `oc_length_class` (
   `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `value` decimal(15,8) NOT NULL,
   PRIMARY KEY (`length_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_length_class`
+-- Dumping data for table `oc_length_class`
 --
 
 INSERT INTO `oc_length_class` (`length_class_id`, `value`) VALUES
 (1, '1.00000000'),
-(2, '10.00000000');
+(2, '10.00000000'),
+(3, '0.39370000');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_length_class_description`
+-- Table structure for table `oc_length_class_description`
 --
 
+DROP TABLE IF EXISTS `oc_length_class_description`;
 CREATE TABLE `oc_length_class_description` (
   `length_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `title` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `unit` varchar(4) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`length_class_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_length_class_description`
+-- Dumping data for table `oc_length_class_description`
 --
 
 INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `title`, `unit`) VALUES
-(1, 1, 'Сантиметр', 'см'),
-(2, 1, 'Миллиметр', 'мм');
+(1, 1, 'Centimeter', 'cm'),
+(2, 1, 'Millimeter', 'mm'),
+(3, 1, 'Inch', 'in');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_manufacturer`
+-- Table structure for table `oc_manufacturer`
 --
 
+DROP TABLE IF EXISTS `oc_manufacturer`;
 CREATE TABLE `oc_manufacturer` (
   `manufacturer_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `image` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`manufacturer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_manufacturer`
+-- Dumping data for table `oc_manufacturer`
 --
 
 INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`) VALUES
@@ -833,9 +1353,10 @@ INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`)
 -- --------------------------------------------------------
 
 --
---  Структура таблицы `oc_manufacturer_to_store`
+-- Table structure for table `oc_manufacturer_to_store`
 --
 
+DROP TABLE IF EXISTS `oc_manufacturer_to_store`;
 CREATE TABLE `oc_manufacturer_to_store` (
   `manufacturer_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -843,7 +1364,7 @@ CREATE TABLE `oc_manufacturer_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_manufacturer_to_store`
+-- Dumping data for table `oc_manufacturer_to_store`
 --
 
 INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
@@ -857,14 +1378,145 @@ INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order`
+-- Table structure for table `oc_option`
 --
 
+DROP TABLE IF EXISTS `oc_option`;
+CREATE TABLE `oc_option` (
+  `option_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`option_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_option`
+--
+
+INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
+(1, 'radio', 2),
+(2, 'checkbox', 3),
+(4, 'text', 4),
+(5, 'select', 1),
+(6, 'textarea', 5),
+(7, 'file', 6),
+(8, 'date', 7),
+(9, 'time', 8),
+(10, 'datetime', 9),
+(11, 'select', 1),
+(12, 'date', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_option_description`
+--
+
+DROP TABLE IF EXISTS `oc_option_description`;
+CREATE TABLE `oc_option_description` (
+  `option_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(128) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`option_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_option_description`
+--
+
+INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
+(1, 1, 'Radio'),
+(2, 1, 'Checkbox'),
+(4, 1, 'Text'),
+(6, 1, 'Textarea'),
+(8, 1, 'Date'),
+(7, 1, 'File'),
+(5, 1, 'Select'),
+(9, 1, 'Time'),
+(10, 1, 'Date &amp; Time'),
+(12, 1, 'Delivery Date'),
+(11, 1, 'Size');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_option_value`
+--
+
+DROP TABLE IF EXISTS `oc_option_value`;
+CREATE TABLE `oc_option_value` (
+  `option_value_id` int(11) NOT NULL AUTO_INCREMENT,
+  `option_id` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`option_value_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_option_value`
+--
+
+INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `sort_order`) VALUES
+(43, 1, 3),
+(32, 1, 1),
+(45, 2, 4),
+(44, 2, 3),
+(42, 5, 4),
+(41, 5, 3),
+(39, 5, 1),
+(40, 5, 2),
+(31, 1, 2),
+(23, 2, 1),
+(24, 2, 2),
+(46, 11, 1),
+(47, 11, 2),
+(48, 11, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_option_value_description`
+--
+
+DROP TABLE IF EXISTS `oc_option_value_description`;
+CREATE TABLE `oc_option_value_description` (
+  `option_value_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `option_id` int(11) NOT NULL,
+  `name` varchar(128) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`option_value_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_option_value_description`
+--
+
+INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`) VALUES
+(43, 1, 1, 'Large'),
+(32, 1, 1, 'Small'),
+(45, 1, 2, 'Checkbox 4'),
+(44, 1, 2, 'Checkbox 3'),
+(31, 1, 1, 'Medium'),
+(42, 1, 5, 'Yellow'),
+(41, 1, 5, 'Green'),
+(39, 1, 5, 'Red'),
+(40, 1, 5, 'Blue'),
+(23, 1, 2, 'Checkbox 1'),
+(24, 1, 2, 'Checkbox 2'),
+(48, 1, 11, 'Large'),
+(47, 1, 11, 'Medium'),
+(46, 1, 11, 'Small');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_order`
+--
+
+DROP TABLE IF EXISTS `oc_order`;
 CREATE TABLE `oc_order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `invoice_id` int(11) NOT NULL DEFAULT '0',
-  `invoice_prefix` varchar(24) COLLATE utf8_general_ci NOT NULL,
-  `invoice_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `invoice_no` int(11) NOT NULL DEFAULT '0',
+  `invoice_prefix` varchar(10) COLLATE utf8_general_ci NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `store_name` varchar(64) COLLATE utf8_general_ci NOT NULL,
   `store_url` varchar(255) COLLATE utf8_general_ci NOT NULL,
@@ -872,9 +1524,9 @@ CREATE TABLE `oc_order` (
   `customer_group_id` int(11) NOT NULL DEFAULT '0',
   `firstname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `lastname` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(96) COLLATE utf8_general_ci NOT NULL,
   `telephone` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `fax` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `email` varchar(96) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `shipping_firstname` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `shipping_lastname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `shipping_company` varchar(32) COLLATE utf8_general_ci NOT NULL,
@@ -882,10 +1534,10 @@ CREATE TABLE `oc_order` (
   `shipping_address_2` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `shipping_city` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `shipping_postcode` varchar(10) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `shipping_zone` varchar(128) COLLATE utf8_general_ci NOT NULL,
-  `shipping_zone_id` int(11) NOT NULL,
   `shipping_country` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `shipping_country_id` int(11) NOT NULL,
+  `shipping_zone` varchar(128) COLLATE utf8_general_ci NOT NULL,
+  `shipping_zone_id` int(11) NOT NULL,
   `shipping_address_format` text COLLATE utf8_general_ci NOT NULL,
   `shipping_method` varchar(128) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `payment_firstname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -895,38 +1547,40 @@ CREATE TABLE `oc_order` (
   `payment_address_2` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `payment_city` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `payment_postcode` varchar(10) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `payment_zone` varchar(128) COLLATE utf8_general_ci NOT NULL,
-  `payment_zone_id` int(11) NOT NULL,
   `payment_country` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `payment_country_id` int(11) NOT NULL,
+  `payment_zone` varchar(128) COLLATE utf8_general_ci NOT NULL,
+  `payment_zone_id` int(11) NOT NULL,
   `payment_address_format` text COLLATE utf8_general_ci NOT NULL,
   `payment_method` varchar(128) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `comment` text COLLATE utf8_general_ci NOT NULL,
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `reward` int(8) NOT NULL,
   `order_status_id` int(11) NOT NULL DEFAULT '0',
+  `affiliate_id` int(11) NOT NULL,
+  `commission` decimal(15,4) NOT NULL,
   `language_id` int(11) NOT NULL,
   `currency_id` int(11) NOT NULL,
-  `currency` varchar(3) COLLATE utf8_general_ci NOT NULL,
-  `value` decimal(15,8) NOT NULL,
-  `coupon_id` int(11) NOT NULL,
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `currency_code` varchar(3) COLLATE utf8_general_ci NOT NULL,
+  `currency_value` decimal(15,8) NOT NULL,
+  `date_added` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
   `ip` varchar(15) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`order_id`),
-  KEY `order_status_id` (`order_status_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`order_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order`
+-- Dumping data for table `oc_order`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_download`
+-- Table structure for table `oc_order_download`
 --
 
+DROP TABLE IF EXISTS `oc_order_download`;
 CREATE TABLE `oc_order_download` (
   `order_download_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -936,19 +1590,20 @@ CREATE TABLE `oc_order_download` (
   `mask` varchar(128) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `remaining` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`order_download_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_download`
+-- Dumping data for table `oc_order_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_history`
+-- Table structure for table `oc_order_history`
 --
 
+DROP TABLE IF EXISTS `oc_order_history`;
 CREATE TABLE `oc_order_history` (
   `order_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -957,124 +1612,139 @@ CREATE TABLE `oc_order_history` (
   `comment` text COLLATE utf8_general_ci NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_history_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_history`
+-- Dumping data for table `oc_order_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_option`
+-- Table structure for table `oc_order_option`
 --
 
+DROP TABLE IF EXISTS `oc_order_option`;
 CREATE TABLE `oc_order_option` (
   `order_option_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `order_product_id` int(11) NOT NULL,
+  `product_option_id` int(11) NOT NULL,
   `product_option_value_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `value` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `prefix` char(1) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `value` text COLLATE utf8_general_ci NOT NULL,
+  `type` varchar(32) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`order_option_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_option`
+-- Dumping data for table `oc_order_option`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_product`
+-- Table structure for table `oc_order_product`
 --
 
+DROP TABLE IF EXISTS `oc_order_product`;
 CREATE TABLE `oc_order_product` (
   `order_product_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `model` varchar(24) COLLATE utf8_general_ci NOT NULL,
+  `quantity` int(4) NOT NULL,
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `total` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `tax` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `quantity` int(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`order_product_id`),
-  KEY `product_id` (`product_id`),
-  KEY `order_id` (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`order_product_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_product`
+-- Dumping data for table `oc_order_product`
 --
 
+INSERT INTO `oc_order_product` (`order_product_id`, `order_id`, `product_id`, `name`, `model`, `quantity`, `price`, `total`, `tax`) VALUES
+(576, 326, 33, 'Samsung SyncMaster 941BW', 'Product 6', 1, '200.0000', '200.0000', '17.5000');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_status`
+-- Table structure for table `oc_order_status`
 --
 
+DROP TABLE IF EXISTS `oc_order_status`;
 CREATE TABLE `oc_order_status` (
   `order_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`order_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_status`
+-- Dumping data for table `oc_order_status`
 --
 
 INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
-(1, 1, 'Ожидание'),
-(2, 1, 'В обработке'),
-(3, 1, 'Отправлено'),
-(7, 1, 'Отменено'),
-(5, 1, 'Сделка завершена'),
-(8, 1, 'Возврат'),
-(9, 1, 'Отмена и аннулирование'),
-(10, 1, 'Неудавшийся'),
-(11, 1, 'Возмещенный'),
-(12, 1, 'Полностью измененный'),
-(13, 1, 'Полный возврат');
+(2, 1, 'Processing'),
+(3, 1, 'Shipped'),
+(7, 1, 'Canceled'),
+(5, 1, 'Complete'),
+(8, 1, 'Denied'),
+(9, 1, 'Canceled Reversal'),
+(10, 1, 'Failed'),
+(11, 1, 'Refunded'),
+(12, 1, 'Reversed'),
+(13, 1, 'Chargeback'),
+(1, 1, 'Pending'),
+(16, 1, 'Voided'),
+(15, 1, 'Processed'),
+(14, 1, 'Expired');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_total`
+-- Table structure for table `oc_order_total`
 --
 
+DROP TABLE IF EXISTS `oc_order_total`;
 CREATE TABLE `oc_order_total` (
   `order_total_id` int(10) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
+  `code` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `text` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `value` decimal(15,4) NOT NULL DEFAULT '0.0000',
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`order_total_id`),
   KEY `idx_orders_total_orders_id` (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_total`
+-- Dumping data for table `oc_order_total`
 --
 
+INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `text`, `value`, `sort_order`) VALUES
+(1243, 326, 'total', 'Total:', '$576.24', '349.6411', 8),
+(1240, 326, 'sub_total', 'Sub-Total:', '$329.62', '200.0000', 1),
+(1241, 326, 'shipping', 'UPS Worldwide Express:', '$188.94', '114.6411', 3),
+(1242, 326, 'tax', 'VAT 17.5%:', '$57.68', '35.0000', 5);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product`
+-- Table structure for table `oc_product`
 --
 
+DROP TABLE IF EXISTS `oc_product`;
 CREATE TABLE `oc_product` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `model` varchar(64) COLLATE utf8_general_ci NOT NULL,
   `sku` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `upc` varchar(12) COLLATE utf8_general_ci NOT NULL,
   `location` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `quantity` int(4) NOT NULL DEFAULT '0',
   `stock_status_id` int(11) NOT NULL,
@@ -1082,6 +1752,7 @@ CREATE TABLE `oc_product` (
   `manufacturer_id` int(11) NOT NULL,
   `shipping` int(1) NOT NULL DEFAULT '1',
   `price` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `points` int(8) NOT NULL DEFAULT '0',
   `tax_class_id` int(11) NOT NULL,
   `date_available` date NOT NULL,
   `weight` decimal(5,2) NOT NULL DEFAULT '0.00',
@@ -1090,92 +1761,119 @@ CREATE TABLE `oc_product` (
   `width` decimal(5,2) NOT NULL DEFAULT '0.00',
   `height` decimal(5,2) NOT NULL DEFAULT '0.00',
   `length_class_id` int(11) NOT NULL DEFAULT '0',
+  `subtract` int(1) NOT NULL DEFAULT '1',
+  `minimum` int(11) NOT NULL DEFAULT '1',
+  `sort_order` int(11) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `viewed` int(5) NOT NULL DEFAULT '0',
-  `sort_order` int(11) NOT NULL DEFAULT '0',
-  `subtract` int(1) NOT NULL DEFAULT '1',
-  `minimum` int(11) NOT NULL DEFAULT '1',
-  `cost` DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
-  `main_category_id` int(11),
-  PRIMARY KEY (`product_id`),
-  KEY `status` (`status`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=49 ;
+  PRIMARY KEY (`product_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product`
+-- Dumping data for table `oc_product`
 --
 
-INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
-(28, 'Товар 1', '', '', 10, 7, 'data/htc_touch_hd_1.jpg', 5, 1, '16490.0000', 9, '2009-02-03', '146.40', 2, '0.00', '0.00', '0.00', 1, 1, '2009-02-03 16:06:50', '2010-03-25 14:37:23', 0),
-(29, 'Товар 2', '', '', 10, 6, 'data/palm_treo_pro_1.jpg', 6, 1, '21099.0000', 9, '2009-02-03', '133.00', 2, '0.00', '0.00', '0.00', 3, 1, '2009-02-03 16:42:17', '2010-03-25 14:38:01', 0),
-(30, 'Товар 3', '', '', 10, 6, 'data/canon_eos_5d_1.jpg', 9, 1, '4868.8600', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, '2009-02-03 16:59:00', '2010-03-25 14:37:11', 0),
-(31, 'Товар 4', '', '', 50, 6, 'data/nikon_d300_1.jpg', 0, 1, '52900.0000', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 3, 1, '2009-02-03 17:00:10', '2010-03-25 14:37:54', 0),
-(32, 'Товар 5', '', '', 10, 6, 'data/ipod_touch_1.jpg', 8, 1, '13390.0000', 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, '2009-02-03 17:07:26', '2010-03-25 14:36:51', 0),
-(33, 'Товар 6', '', '', 10, 6, 'data/samsung_syncmaster_941bw.jpg', 0, 1, '5000.0000', 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-03 17:08:31', '2010-03-25 14:35:49', 1),
-(34, 'Товар 7', '', '', 10, 6, 'data/ipod_shuffle_1.jpg', 8, 1, '1465.0000', 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-03 18:07:54', '2010-03-25 14:36:38', 0),
-(35, 'Товар 8', '', '', 10, 5, '', 0, 0, '100.0000', 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, '2009-02-03 18:08:31', '2010-03-25 14:38:06', 0),
-(36, 'Товар 9', '', '', 8, 6, 'data/ipod_nano_1.jpg', 8, 0, '8999.0000', 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-03 18:09:19', '2010-03-25 14:36:32', 0),
-(40, 'Товар 11', '', '', 7, 5, 'data/iphone_1.jpg', 8, 1, '26990.0000', 9, '2009-02-03', '10.00', 1, '0.00', '0.00', '0.00', 1, 1, '2009-02-03 21:07:12', '2010-03-25 14:36:23', 0),
-(41, 'Товар 14', '', '', 100, 5, 'data/imac_1.jpg', 8, 0, '49990.0000', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, '2009-02-03 21:07:26', '2010-03-25 14:36:06', 0),
-(42, 'Товар 15', '', '', 100, 5, 'data/apple_cinema_30.jpg', 8, 1, '87530.0000', 0, '2009-02-04', '12.50', 2, '1.00', '2.00', '3.00', 2, 1, '2009-02-03 21:07:37', '2010-03-29 15:05:00', 0),
-(43, 'Товар 16', '', '', 9, 5, 'data/macbook_1.jpg', 8, 0, '43790.0000', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-03 21:07:49', '2010-03-25 14:37:30', 0),
-(44, 'Товар 17', '', '', 10, 5, 'data/macbook_air_1.jpg', 8, 1, '66490.0000', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-03 21:08:00', '2010-03-25 14:37:36', 0),
-(45, 'Товар 18', '', '', 99, 5, 'data/macbook_pro_1.jpg', 8, 1, '52790.0000', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-03 21:08:17', '2010-03-25 14:37:40', 0),
-(46, 'Товар 19', '', '', 8, 5, 'data/sony_vaio_1.jpg', 10, 1, '50000.0000', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-03 21:08:29', '2010-03-25 14:35:59', 0),
-(47, 'Товар 21', '', '', 10, 5, 'data/hp_1.jpg', 7, 1, '53721.0000', 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, '2009-02-03 21:08:40', '2010-03-25 14:37:18', 0),
-(48, 'Товар 20', 'test 1', 'test 2', 89, 5, 'data/ipod_classic_1.jpg', 8, 1, '9378.0000', 9, '2009-02-08', '1.00', 1, '0.00', '0.00', '0.00', 2, 1, '2009-02-08 17:21:51', '2010-03-25 18:53:27', 0);
+INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
+(28, 'Product 1', '', '', '', 946, 7, 'data/htc_touch_hd_1.jpg', 5, 1, '500.0000', 200, 9, '2009-02-03', '146.40', 2, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 16:06:50', '2011-03-28 08:31:42', 0),
+(29, 'Product 2', '', '', '', 1000, 6, 'data/palm_treo_pro_1.jpg', 6, 1, '279.9900', 0, 9, '2009-02-03', '133.00', 2, '0.00', '0.00', '0.00', 3, 1, 1, 0, 1, '2009-02-03 16:42:17', '2011-03-19 03:55:24', 0),
+(30, 'Product 3', '', '', '', 995, 6, 'data/canon_eos_5d_1.jpg', 9, 1, '100.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 16:59:00', '2011-03-19 03:54:10', 0),
+(31, 'Product 4', '', '', '', 1000, 6, 'data/nikon_d300_1.jpg', 0, 1, '80.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 3, 1, 1, 0, 1, '2009-02-03 17:00:10', '2011-03-19 03:55:17', 0),
+(32, 'Product 5', '', '', '', 999, 6, 'data/ipod_touch_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 17:07:26', '2011-03-19 03:56:43', 0),
+(33, 'Product 6', '', '', '', 1000, 6, 'data/samsung_syncmaster_941bw.jpg', 0, 1, '200.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 17:08:31', '2011-03-19 03:55:46', 0),
+(34, 'Product 7', '', '', '', 1000, 6, 'data/ipod_shuffle_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 18:07:54', '2011-03-19 03:56:35', 0),
+(35, 'Product 8', '', '', '', 1000, 5, '', 0, 0, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 18:08:31', '2011-04-28 01:47:48', 0),
+(36, 'Product 9', '', '', '', 995, 6, 'data/ipod_nano_1.jpg', 8, 0, '100.0000', 0, 9, '2009-02-03', '5.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 18:09:19', '2011-03-19 03:56:26', 1),
+(40, 'product 11', '', '', '', 975, 5, 'data/iphone_1.jpg', 8, 1, '101.0000', 0, 9, '2009-02-03', '10.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 21:07:12', '2011-03-19 03:55:09', 0),
+(41, 'Product 14', '', '', '', 994, 5, 'data/imac_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 0, 1, '2009-02-03 21:07:26', '2011-03-19 03:56:14', 0),
+(42, 'Product 15', '', '', '', 992, 5, 'data/apple_cinema_30.jpg', 8, 1, '100.0000', 10, 9, '2009-02-04', '12.50', 5, '1.00', '2.00', '3.00', 2, 1, 2, 0, 1, '2009-02-03 21:07:37', '2011-05-30 22:12:03', 0),
+(43, 'Product 16', '', '', '', 929, 5, 'data/macbook_1.jpg', 8, 0, '500.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:07:49', '2011-03-19 03:54:41', 0),
+(44, 'Product 17', '', '', '', 1000, 5, 'data/macbook_air_1.jpg', 8, 1, '1000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:00', '2011-03-19 03:54:51', 0),
+(45, 'Product 18', '', '', '', 998, 5, 'data/macbook_pro_1.jpg', 8, 1, '2000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:17', '2011-03-19 03:55:00', 0),
+(46, 'Product 19', '', '', '', 1000, 5, 'data/sony_vaio_1.jpg', 10, 1, '1000.0000', 0, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-03 21:08:29', '2011-03-19 03:55:55', 0),
+(47, 'Product 21', '', '', '', 1000, 5, 'data/hp_1.jpg', 7, 1, '100.0000', 50, 9, '2009-02-03', '0.00', 1, '0.00', '0.00', '0.00', 1, 0, 2, 0, 1, '2009-02-03 21:08:40', '2011-05-10 01:23:14', 0),
+(48, 'product 20', 'test 1', '', 'test 2', 995, 5, 'data/ipod_classic_1.jpg', 8, 1, '100.0000', 0, 9, '2009-02-08', '1.00', 1, '0.00', '0.00', '0.00', 2, 1, 1, 0, 1, '2009-02-08 17:21:51', '2011-03-19 03:55:39', 0),
+(49, 'SAM1', '', '', '', 0, 8, 'data/samsung_tab_1.jpg', 0, 1, '199.9900', 0, 9, '2011-04-25', '0.00', 1, '0.00', '0.00', '0.00', 1, 1, 1, 1, 1, '2011-04-26 08:57:34', '2011-04-26 09:21:13', 0),
+(64, 'Product 1', '', '', '', 946, 7, 'data/htc_touch_hd_1.jpg', 5, 1, '500.0000', 200, 9, '2009-02-03', '146.40', 2, '0.00', '0.00', '0.00', 1, 1, 1, 0, 0, '2011-05-24 23:48:34', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_description`
+-- Table structure for table `oc_product_attribute`
 --
 
+DROP TABLE IF EXISTS `oc_product_attribute`;
+CREATE TABLE `oc_product_attribute` (
+  `product_id` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `text` text COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`product_id`,`attribute_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_product_attribute`
+--
+
+INSERT INTO `oc_product_attribute` (`product_id`, `attribute_id`, `language_id`, `text`) VALUES
+(43, 2, 1, '1'),
+(47, 2, 1, '4'),
+(43, 4, 1, '8gb'),
+(42, 3, 1, '100mhz'),
+(47, 4, 1, '16GB');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_product_description`
+--
+
+DROP TABLE IF EXISTS `oc_product_description`;
 CREATE TABLE `oc_product_description` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `meta_keywords` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `description` text COLLATE utf8_general_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `h1` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`product_id`,`language_id`),
   KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_description`
+-- Dumping data for table `oc_product_description`
 --
 
-INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `meta_keywords`, `meta_description`, `description`) VALUES
-(35, 1, 'Товар 8', '', '', '&lt;p&gt;\r\ Товар 8&lt;/p&gt;\r\n'),
-(36, 1, 'iPod Nano', '', '', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Video in your pocket.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Its the small iPod with one very big idea: video. The worlds most popular music player now lets you enjoy movies, TV shows, and more on a two-inch display thats 65% brighter than before.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;strong&gt;&amp;nbsp;&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Sleek and colorful.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With an anodized aluminum and polished stainless steel enclosure and a choice of five colors, iPod nano is dressed to impress.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;iTunes.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Available as a free download, iTunes makes it easy to browse and buy millions of songs, movies, TV shows, audiobooks, and games and download free podcasts all at the iTunes Store. And you can import your own music, manage your whole media library, and sync your iPod or iPhone with ease.&lt;/p&gt;\r\n&lt;/div&gt;\r\n'),
-(48, 1, 'iPod Classic', '', '', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;'),
-(40, 1, 'iPhone', '', '', '&lt;p class=&quot;intro&quot;&gt;\r\n	iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n'),
-(46, 1, 'Sony VAIO', '', '', '&lt;div&gt;\r\n	Unprecedented power. The next generation of processing technology has arrived. Built into the newest VAIO notebooks lies Intel&amp;#39;s latest, most powerful innovation yet: Intel&amp;reg; Centrino&amp;reg; 2 processor technology. Boasting incredible speed, expanded wireless connectivity, enhanced multimedia support and greater energy efficiency, all the high-performance essentials are seamlessly combined into a single chip.&lt;/div&gt;\r\n'),
-(47, 1, 'HP LP3065', '', '', '&lt;p&gt;\r\n	Stop your co-workers in their tracks with the stunning new 30-inch diagonal HP LP3065 Flat Panel Monitor. This flagship monitor features best-in-class performance and presentation features on a huge wide-aspect screen while letting you work as comfortably as possible - you might even forget you&amp;#39;re at the office&lt;/p&gt;\r\n'),
-(28, 1, 'HTC Touch HD', '', '', '&lt;p&gt;\r\n	HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;\r\n		GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;\r\n		40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n'),
-(32, 1, 'iPod Touch', '', '', '&lt;p&gt;\r\n	&lt;strong&gt;Revolutionary multi-touch interface.&lt;/strong&gt;&lt;br /&gt;\r\n	iPod touch features the same multi-touch screen technology as iPhone. Pinch to zoom in on a photo. Scroll through your songs and videos with a flick. Flip through your library by album artwork with Cover Flow.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Gorgeous 3.5-inch widescreen display.&lt;/strong&gt;&lt;br /&gt;\r\n	Watch your movies, TV shows, and photos come alive with bright, vivid color on the 320-by-480-pixel display.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Music downloads straight from iTunes.&lt;/strong&gt;&lt;br /&gt;\r\n	Shop the iTunes Wi-Fi Music Store from anywhere with Wi-Fi.1 Browse or search to find the music youre looking for, preview it, and buy it with just a tap.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Surf the web with Wi-Fi.&lt;/strong&gt;&lt;br /&gt;\r\n	Browse the web using Safari and watch YouTube videos on the first iPod with Wi-Fi built in&lt;br /&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n'),
-(30, 1, 'Canon EOS 5D', '', '', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		Canon&amp;#39;s press material for the EOS 5D states that it &amp;#39;defines (a) new D-SLR category&amp;#39;, while we&amp;#39;re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably &amp;#39;chunkier&amp;#39;). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR&amp;#39;s, an important difference when compared to the latter is that the EOS 5D doesn&amp;#39;t have any environmental seals. While Canon don&amp;#39;t specifically refer to the EOS 5D as a &amp;#39;professional&amp;#39; digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they&amp;#39;ve not bought too many EF-S lenses...)&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;'),
-(41, 1, 'iMac', '', '', '&lt;div&gt;\r\n	Just when you thought iMac had everything, now there&amp;rsquo;s even more. More powerful Intel Core 2 Duo processors. And more memory standard. Combine this with Mac OS X Leopard and iLife &amp;rsquo;08, and it&amp;rsquo;s more all-in-one than ever. iMac packs amazing performance into a stunningly slim space.&lt;/div&gt;\r\n'),
-(44, 1, 'MacBook Air', '', '', '&lt;div&gt;\r\n	MacBook Air is ultrathin, ultraportable, and ultra unlike anything else. But you don&amp;rsquo;t lose inches and pounds overnight. It&amp;rsquo;s the result of rethinking conventions. Of multiple wireless innovations. And of breakthrough design. With MacBook Air, mobile computing suddenly has a new standard.&lt;/div&gt;\r\n'),
-(33, 1, 'Samsung SyncMaster 941BW', '', '', '&lt;div&gt;\r\n	Imagine the advantages of going big without slowing down. The big 19&amp;quot; 941BW monitor combines wide aspect ratio with fast pixel response time, for bigger images, more room to work and crisp motion. In addition, the exclusive MagicBright 2, MagicColor and MagicTune technologies help deliver the ideal image in every situation, while sleek, narrow bezels and adjustable stands deliver style just the way you want it. With the Samsung 941BW widescreen analog/digital LCD monitor, it&amp;#39;s not hard to imagine.&lt;/div&gt;\r\n'),
-(34, 1, 'iPod Shuffle', '', '', '&lt;div&gt;\r\n	&lt;strong&gt;Born to be worn.&lt;/strong&gt;\r\n	&lt;p&gt;\r\n		Clip on the worlds most wearable music player and take up to 240 songs with you anywhere. Choose from five colors including four new hues to make your musical fashion statement.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Random meets rhythm.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With iTunes autofill, iPod shuffle can deliver a new musical experience every time you sync. For more randomness, you can shuffle songs during playback with the slide of a switch.&lt;/p&gt;\r\n	&lt;strong&gt;Everything is easy.&lt;/strong&gt;\r\n	&lt;p&gt;\r\n		Charge and sync with the included USB dock. Operate the iPod shuffle controls with one hand. Enjoy up to 12 hours straight of skip-free music playback.&lt;/p&gt;\r\n&lt;/div&gt;\r\n'),
-(43, 1, 'MacBook', '', '', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Intel Core 2 Duo processor&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;1GB memory, larger hard drives&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Sleek, 1.08-inch-thin design&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Built-in iSight camera&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n'),
-(45, 1, 'MacBook Pro', '', '', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Latest Intel mobile architecture&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Powered by the most advanced mobile processors from Intel, the new Core 2 Duo MacBook Pro is over 50% faster than the original Core Duo MacBook Pro and now supports up to 4GB of RAM.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Leading-edge graphics&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			The NVIDIA GeForce 8600M GT delivers exceptional graphics processing power. For the ultimate creative canvas, you can even configure the 17-inch model with a 1920-by-1200 resolution display.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Designed for life on the road&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Innovations such as a magnetic power connection and an illuminated keyboard with ambient light sensor put the MacBook Pro in a class by itself.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Connect. Create. Communicate.&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Quickly set up a video conference with the built-in iSight camera. Control presentations and media from up to 30 feet away with the included Apple Remote. Connect to high-bandwidth peripherals with FireWire 800 and DVI.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Next-generation wireless&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Featuring 802.11n wireless technology, the MacBook Pro delivers up to five times the performance and up to twice the range of previous-generation technologies.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;'),
-(31, 1, 'Nikon D300', '', '', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon&amp;#39;s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		Similar to the D3, the D300 features Nikon&amp;#39;s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera&amp;#39;s new features. The D300 features a new 51-point autofocus system with Nikon&amp;#39;s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera&amp;#39;s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon&amp;#39;s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;'),
-(29, 1, 'Palm Treo Pro', '', '', '&lt;p&gt;\r\n	Redefine your workday with the Palm Treo Pro smartphone. Perfectly balanced, you can respond to business and personal email, stay on top of appointments and contacts, and use Wi-Fi or GPS when you&amp;rsquo;re out and about. Then watch a video on YouTube, catch up with news and sports on the web, or listen to a few songs. Balance your work and play the way you like it, with the Palm Treo Pro.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Edition&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Qualcomm&amp;reg; MSM7201 400MHz Processor&lt;/li&gt;\r\n	&lt;li&gt;\r\n		320x320 transflective colour TFT touchscreen&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/UMTS/EDGE/GPRS/GSM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Tri-band UMTS &amp;mdash; 850MHz, 1900MHz, 2100MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM &amp;mdash; 850/900/1800/1900&lt;/li&gt;\r\n	&lt;li&gt;\r\n		802.11b/g with WPA, WPA2, and 801.1x authentication&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in GPS&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth Version: 2.0 + Enhanced Data Rate&lt;/li&gt;\r\n	&lt;li&gt;\r\n		256MB storage (100MB user available), 128MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2.0 megapixel camera, up to 8x digital zoom and video capture&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Removable, rechargeable 1500mAh lithium-ion battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Up to 5.0 hours talk time and up to 250 hours standby&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroSDHC card expansion (up to 32GB supported)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroUSB 2.0 for synchronization and charging&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.5mm stereo headset jack&lt;/li&gt;\r\n	&lt;li&gt;\r\n		60mm (W) x 114mm (L) x 13.5mm (D) / 133g&lt;/li&gt;\r\n&lt;/ul&gt;\r\n'),
-(42, 1, 'Apple Cinema 30&quot;', '', '', '&lt;p&gt;\r\n	&lt;font face=&quot;helvetica,geneva,arial&quot; size=&quot;2&quot;&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br /&gt;\r\n	&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br /&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br /&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br /&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n');
+INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES
+(35, 1, 'Product 8', '&lt;p&gt;\r\n	Product 8&lt;/p&gt;\r\n', '', ''),
+(48, 1, 'iPod Classic', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;More room to move.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;strong&gt;Sleeker design.&lt;/strong&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polished stainless steel enclosure with rounded edges.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', ''),
+(40, 1, 'iPhone', '&lt;p class=&quot;intro&quot;&gt;\r\n	iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name or number in your address book, a favorites list, or a call log. It also automatically syncs all your contacts from a PC, Mac, or Internet service. And it lets you select and listen to voicemail messages in whatever order you want just like email.&lt;/p&gt;\r\n', '', ''),
+(28, 1, 'HTC Touch HD', '&lt;p&gt;\r\n	HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;\r\n		GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;\r\n		40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', ''),
+(44, 1, 'MacBook Air', '&lt;div&gt;\r\n	MacBook Air is ultrathin, ultraportable, and ultra unlike anything else. But you don&amp;rsquo;t lose inches and pounds overnight. It&amp;rsquo;s the result of rethinking conventions. Of multiple wireless innovations. And of breakthrough design. With MacBook Air, mobile computing suddenly has a new standard.&lt;/div&gt;\r\n', '', ''),
+(45, 1, 'MacBook Pro', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Latest Intel mobile architecture&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Powered by the most advanced mobile processors from Intel, the new Core 2 Duo MacBook Pro is over 50% faster than the original Core Duo MacBook Pro and now supports up to 4GB of RAM.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Leading-edge graphics&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			The NVIDIA GeForce 8600M GT delivers exceptional graphics processing power. For the ultimate creative canvas, you can even configure the 17-inch model with a 1920-by-1200 resolution display.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Designed for life on the road&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Innovations such as a magnetic power connection and an illuminated keyboard with ambient light sensor put the MacBook Pro in a class by itself.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Connect. Create. Communicate.&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Quickly set up a video conference with the built-in iSight camera. Control presentations and media from up to 30 feet away with the included Apple Remote. Connect to high-bandwidth peripherals with FireWire 800 and DVI.&lt;/p&gt;\r\n		&lt;p&gt;\r\n			&lt;b&gt;Next-generation wireless&lt;/b&gt;&lt;/p&gt;\r\n		&lt;p&gt;\r\n			Featuring 802.11n wireless technology, the MacBook Pro delivers up to five times the performance and up to twice the range of previous-generation technologies.&lt;/p&gt;\r\n	&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', ''),
+(29, 1, 'Palm Treo Pro', '&lt;p&gt;\r\n	Redefine your workday with the Palm Treo Pro smartphone. Perfectly balanced, you can respond to business and personal email, stay on top of appointments and contacts, and use Wi-Fi or GPS when you&amp;rsquo;re out and about. Then watch a video on YouTube, catch up with news and sports on the web, or listen to a few songs. Balance your work and play the way you like it, with the Palm Treo Pro.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Edition&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Qualcomm&amp;reg; MSM7201 400MHz Processor&lt;/li&gt;\r\n	&lt;li&gt;\r\n		320x320 transflective colour TFT touchscreen&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/UMTS/EDGE/GPRS/GSM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Tri-band UMTS &amp;mdash; 850MHz, 1900MHz, 2100MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM &amp;mdash; 850/900/1800/1900&lt;/li&gt;\r\n	&lt;li&gt;\r\n		802.11b/g with WPA, WPA2, and 801.1x authentication&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in GPS&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth Version: 2.0 + Enhanced Data Rate&lt;/li&gt;\r\n	&lt;li&gt;\r\n		256MB storage (100MB user available), 128MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2.0 megapixel camera, up to 8x digital zoom and video capture&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Removable, rechargeable 1500mAh lithium-ion battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Up to 5.0 hours talk time and up to 250 hours standby&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroSDHC card expansion (up to 32GB supported)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MicroUSB 2.0 for synchronization and charging&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.5mm stereo headset jack&lt;/li&gt;\r\n	&lt;li&gt;\r\n		60mm (W) x 114mm (L) x 13.5mm (D) / 133g&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', ''),
+(36, 1, 'iPod Nano', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Video in your pocket.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Its the small iPod with one very big idea: video. The worlds most popular music player now lets you enjoy movies, TV shows, and more on a two-inch display thats 65% brighter than before.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Cover Flow.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.&lt;strong&gt;&amp;nbsp;&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Enhanced interface.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Experience a whole new way to browse and view your music and video.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Sleek and colorful.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With an anodized aluminum and polished stainless steel enclosure and a choice of five colors, iPod nano is dressed to impress.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;iTunes.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Available as a free download, iTunes makes it easy to browse and buy millions of songs, movies, TV shows, audiobooks, and games and download free podcasts all at the iTunes Store. And you can import your own music, manage your whole media library, and sync your iPod or iPhone with ease.&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', ''),
+(46, 1, 'Sony VAIO', '&lt;div&gt;\r\n	Unprecedented power. The next generation of processing technology has arrived. Built into the newest VAIO notebooks lies Intel&amp;#39;s latest, most powerful innovation yet: Intel&amp;reg; Centrino&amp;reg; 2 processor technology. Boasting incredible speed, expanded wireless connectivity, enhanced multimedia support and greater energy efficiency, all the high-performance essentials are seamlessly combined into a single chip.&lt;/div&gt;\r\n', '', ''),
+(47, 1, 'HP LP3065', '&lt;p&gt;\r\n	Stop your co-workers in their tracks with the stunning new 30-inch diagonal HP LP3065 Flat Panel Monitor. This flagship monitor features best-in-class performance and presentation features on a huge wide-aspect screen while letting you work as comfortably as possible - you might even forget you&amp;#39;re at the office&lt;/p&gt;\r\n', '', ''),
+(32, 1, 'iPod Touch', '&lt;p&gt;\r\n	&lt;strong&gt;Revolutionary multi-touch interface.&lt;/strong&gt;&lt;br /&gt;\r\n	iPod touch features the same multi-touch screen technology as iPhone. Pinch to zoom in on a photo. Scroll through your songs and videos with a flick. Flip through your library by album artwork with Cover Flow.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Gorgeous 3.5-inch widescreen display.&lt;/strong&gt;&lt;br /&gt;\r\n	Watch your movies, TV shows, and photos come alive with bright, vivid color on the 320-by-480-pixel display.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Music downloads straight from iTunes.&lt;/strong&gt;&lt;br /&gt;\r\n	Shop the iTunes Wi-Fi Music Store from anywhere with Wi-Fi.1 Browse or search to find the music youre looking for, preview it, and buy it with just a tap.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Surf the web with Wi-Fi.&lt;/strong&gt;&lt;br /&gt;\r\n	Browse the web using Safari and watch YouTube videos on the first iPod with Wi-Fi built in&lt;br /&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n', '', ''),
+(30, 1, 'Canon EOS 5D', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		Canon&amp;#39;s press material for the EOS 5D states that it &amp;#39;defines (a) new D-SLR category&amp;#39;, while we&amp;#39;re not typically too concerned with marketing talk this particular statement is clearly pretty accurate. The EOS 5D is unlike any previous digital SLR in that it combines a full-frame (35 mm sized) high resolution sensor (12.8 megapixels) with a relatively compact body (slightly larger than the EOS 20D, although in your hand it feels noticeably &amp;#39;chunkier&amp;#39;). The EOS 5D is aimed to slot in between the EOS 20D and the EOS-1D professional digital SLR&amp;#39;s, an important difference when compared to the latter is that the EOS 5D doesn&amp;#39;t have any environmental seals. While Canon don&amp;#39;t specifically refer to the EOS 5D as a &amp;#39;professional&amp;#39; digital SLR it will have obvious appeal to professionals who want a high quality digital SLR in a body lighter than the EOS-1D. It will also no doubt appeal to current EOS 20D owners (although lets hope they&amp;#39;ve not bought too many EF-S lenses...)&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', ''),
+(41, 1, 'iMac', '&lt;div&gt;\r\n	Just when you thought iMac had everything, now there&amp;rsquo;s even more. More powerful Intel Core 2 Duo processors. And more memory standard. Combine this with Mac OS X Leopard and iLife &amp;rsquo;08, and it&amp;rsquo;s more all-in-one than ever. iMac packs amazing performance into a stunningly slim space.&lt;/div&gt;\r\n', '', ''),
+(33, 1, 'Samsung SyncMaster 941BW', '&lt;div&gt;\r\n	Imagine the advantages of going big without slowing down. The big 19&amp;quot; 941BW monitor combines wide aspect ratio with fast pixel response time, for bigger images, more room to work and crisp motion. In addition, the exclusive MagicBright 2, MagicColor and MagicTune technologies help deliver the ideal image in every situation, while sleek, narrow bezels and adjustable stands deliver style just the way you want it. With the Samsung 941BW widescreen analog/digital LCD monitor, it&amp;#39;s not hard to imagine.&lt;/div&gt;\r\n', '', ''),
+(34, 1, 'iPod Shuffle', '&lt;div&gt;\r\n	&lt;strong&gt;Born to be worn.&lt;/strong&gt;\r\n	&lt;p&gt;\r\n		Clip on the worlds most wearable music player and take up to 240 songs with you anywhere. Choose from five colors including four new hues to make your musical fashion statement.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;strong&gt;Random meets rhythm.&lt;/strong&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		With iTunes autofill, iPod shuffle can deliver a new musical experience every time you sync. For more randomness, you can shuffle songs during playback with the slide of a switch.&lt;/p&gt;\r\n	&lt;strong&gt;Everything is easy.&lt;/strong&gt;\r\n	&lt;p&gt;\r\n		Charge and sync with the included USB dock. Operate the iPod shuffle controls with one hand. Enjoy up to 12 hours straight of skip-free music playback.&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', ''),
+(43, 1, 'MacBook', '&lt;div&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Intel Core 2 Duo processor&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest ever.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;1GB memory, larger hard drives&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line perfect for running more of your favorite applications and storing growing media collections.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Sleek, 1.08-inch-thin design&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		MacBook makes it easy to hit the road thanks to its tough polycarbonate case, built-in wireless technologies, and innovative MagSafe Power Adapter that releases automatically if someone accidentally trips on the cord.&lt;/p&gt;\r\n	&lt;p&gt;\r\n		&lt;b&gt;Built-in iSight camera&lt;/b&gt;&lt;/p&gt;\r\n	&lt;p&gt;\r\n		Right out of the box, you can have a video chat with friends or family,2 record a video at your desk, or take fun pictures with Photo Booth&lt;/p&gt;\r\n&lt;/div&gt;\r\n', '', ''),
+(31, 1, 'Nikon D300', '&lt;div class=&quot;cpt_product_description &quot;&gt;\r\n	&lt;div&gt;\r\n		Engineered with pro-level features and performance, the 12.3-effective-megapixel D300 combines brand new technologies with advanced features inherited from Nikon&amp;#39;s newly announced D3 professional digital SLR camera to offer serious photographers remarkable performance combined with agility.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		Similar to the D3, the D300 features Nikon&amp;#39;s exclusive EXPEED Image Processing System that is central to driving the speed and processing power needed for many of the camera&amp;#39;s new features. The D300 features a new 51-point autofocus system with Nikon&amp;#39;s 3D Focus Tracking feature and two new LiveView shooting modes that allow users to frame a photograph using the camera&amp;#39;s high-resolution LCD monitor. The D300 shares a similar Scene Recognition System as is found in the D3; it promises to greatly enhance the accuracy of autofocus, autoexposure, and auto white balance by recognizing the subject or scene being photographed and applying this information to the calculations for the three functions.&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 reacts with lightning speed, powering up in a mere 0.13 seconds and shooting with an imperceptible 45-millisecond shutter release lag time. The D300 is capable of shooting at a rapid six frames per second and can go as fast as eight frames per second when using the optional MB-D10 multi-power battery pack. In continuous bursts, the D300 can shoot up to 100 shots at full 12.3-megapixel resolution. (NORMAL-LARGE image setting, using a SanDisk Extreme IV 1GB CompactFlash card.)&lt;br /&gt;\r\n		&lt;br /&gt;\r\n		The D300 incorporates a range of innovative technologies and features that will significantly improve the accuracy, control, and performance photographers can get from their equipment. Its new Scene Recognition System advances the use of Nikon&amp;#39;s acclaimed 1,005-segment sensor to recognize colors and light patterns that help the camera determine the subject and the type of scene being photographed before a picture is taken. This information is used to improve the accuracy of autofocus, autoexposure, and auto white balance functions in the D300. For example, the camera can track moving subjects better and by identifying them, it can also automatically select focus points faster and with greater accuracy. It can also analyze highlights and more accurately determine exposure, as well as infer light sources to deliver more accurate white balance detection.&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;!-- cpt_container_end --&gt;', '', ''),
+(49, 1, 'Samsung Galaxy Tab 10.1', '&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1, is the world&amp;rsquo;s thinnest tablet, measuring 8.6 mm thickness, running with Android 3.0 Honeycomb OS on a 1GHz dual-core Tegra 2 processor, similar to its younger brother Samsung Galaxy Tab 8.9.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 gives pure Android 3.0 experience, adding its new TouchWiz UX or TouchWiz 4.0 &amp;ndash; includes a live panel, which lets you to customize with different content, such as your pictures, bookmarks, and social feeds, sporting a 10.1 inches WXGA capacitive touch screen with 1280 x 800 pixels of resolution, equipped with 3 megapixel rear camera with LED flash and a 2 megapixel front camera, HSPA+ connectivity up to 21Mbps, 720p HD video recording capability, 1080p HD playback, DLNA support, Bluetooth 2.1, USB 2.0, gyroscope, Wi-Fi 802.11 a/b/g/n, micro-SD slot, 3.5mm headphone jack, and SIM slot, including the Samsung Stick &amp;ndash; a Bluetooth microphone that can be carried in a pocket like a pen and sound dock with powered subwoofer.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Samsung Galaxy Tab 10.1 will come in 16GB / 32GB / 64GB verities and pre-loaded with Social Hub, Reader&amp;rsquo;s Hub, Music Hub and Samsung Mini Apps Tray &amp;ndash; which gives you access to more commonly used apps to help ease multitasking and it is capable of Adobe Flash Player 10.2, powered by 6860mAh battery that gives you 10hours of video-playback time.&lt;/p&gt;\r\n', '', ''),
+(42, 1, 'Apple Cinema 30&quot;', '&lt;p&gt;\r\n	&lt;font face=&quot;helvetica,geneva,arial&quot; size=&quot;2&quot;&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there&amp;#39;s no limit to what you can achieve. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it&amp;#39;s designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Offering accurate, brilliant color performance, the Cinema HD delivers up to 16.7 million colors across a wide gamut allowing you to see subtle nuances between colors from soft pastels to rich jewel tones. A wide viewing angle ensures uniform color from edge to edge. Apple&amp;#39;s ColorSync technology allows you to create custom profiles to maintain consistent color onscreen and in print. The result: You can confidently use this display in all your color-critical applications. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;Housed in a new aluminum design, the display has a very thin bezel that enhances visual accuracy. Each display features two FireWire 400 ports and two USB 2.0 ports, making attachment of desktop peripherals, such as iSight, iPod, digital and still cameras, hard drives, printers and scanners, even more accessible and convenient. Taking advantage of the much thinner and lighter footprint of an LCD, the new displays support the VESA (Video Electronics Standards Association) mounting interface standard. Customers with the optional Cinema Display VESA Mount Adapter kit gain the flexibility to mount their display in locations most appropriate for their work environment. &lt;br /&gt;\r\n	&lt;br /&gt;\r\n	&lt;/font&gt;&lt;font face=&quot;Helvetica&quot; size=&quot;2&quot;&gt;The Cinema HD features a single cable design with elegant breakout for the USB 2.0, FireWire 400 and a pure digital connection using the industry standard Digital Video Interface (DVI) interface. The DVI connection allows for a direct pure-digital connection.&lt;br /&gt;\r\n	&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;\r\n&lt;h3&gt;\r\n	Features:&lt;/h3&gt;\r\n&lt;p&gt;\r\n	Unrivaled display performance&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch (viewable) active-matrix liquid crystal display provides breathtaking image quality and vivid, richly saturated color.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 2560-by-1600 pixel resolution for display of high definition still and video imagery.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wide-format design for simultaneous display of two full pages of text and graphics.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Industry standard DVI connector for direct attachment to Mac- and Windows-based desktops and notebooks&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Incredibly wide (170 degree) horizontal and vertical viewing angle for maximum visibility and color performance.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Lightning-fast pixel response for full-motion digital video playback.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for 16.7 million saturated colors, for use in all graphics-intensive applications.&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Simple setup and operation&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Single cable with elegant breakout for connection to DVI, USB and FireWire ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in two-port USB 2.0 hub for easy connection of desktop peripheral devices.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports to support iSight and other desktop peripherals&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Sleek, elegant design&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Huge virtual workspace, very small footprint.&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Narrow Bezel design to minimize visual impact of using dual displays&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Unique hinge design for effortless adjustment&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Support for VESA mounting solutions (Apple Cinema Display VESA Mount Adapter sold separately)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;h3&gt;\r\n	Technical specifications&lt;/h3&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen size (diagonal viewable image size)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Apple Cinema HD Display: 30 inches (29.7-inch viewable)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen type&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Thin film transistor (TFT) active-matrix liquid crystal display (AMLCD)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Resolutions&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		2560 x 1600 pixels (optimum resolution)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		2048 x 1280&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1920 x 1200&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1280 x 800&lt;/li&gt;\r\n	&lt;li&gt;\r\n		1024 x 640&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Display colors (maximum)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16.7 million&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Viewing angle (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		170&amp;deg; horizontal; 170&amp;deg; vertical&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Brightness (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 400 cd/m2&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Contrast ratio (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		700:1&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Response time (typical)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		16 ms&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Pixel pitch&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		30-inch Cinema HD Display: 0.250 mm&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Screen treatment&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Antiglare hardcoat&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;User controls (hardware and software)&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Display Power,&lt;/li&gt;\r\n	&lt;li&gt;\r\n		System sleep, wake&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Brightness&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Monitor tilt&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Connectors and cables&lt;/b&gt;&lt;br /&gt;\r\n	Cable&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		DVI (Digital Visual Interface)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		FireWire 400&lt;/li&gt;\r\n	&lt;li&gt;\r\n		USB 2.0&lt;/li&gt;\r\n	&lt;li&gt;\r\n		DC power (24 V)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	Connectors&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Two-port, self-powered USB 2.0 hub&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Two FireWire 400 ports&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Kensington security port&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;VESA mount adapter&lt;/b&gt;&lt;br /&gt;\r\n	Requires optional Cinema Display VESA Mount Adapter (M9649G/A)&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Compatible with VESA FDMI (MIS-D, 100, C) compliant mounting solutions&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Electrical requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Input voltage: 100-240 VAC 50-60Hz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum power when operating: 150W&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Energy saver mode: 3W or less&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Environmental requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Operating temperature: 50&amp;deg; to 95&amp;deg; F (10&amp;deg; to 35&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Storage temperature: -40&amp;deg; to 116&amp;deg; F (-40&amp;deg; to 47&amp;deg; C)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Operating humidity: 20% to 80% noncondensing&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Maximum operating altitude: 10,000 feet&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Agency approvals&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		FCC Part 15 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55022 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN55024&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VCCI Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AS/NZS 3548 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CNS 13438 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ICES-003 Class B&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ISO 13406 part 2&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MPR II&lt;/li&gt;\r\n	&lt;li&gt;\r\n		IEC 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		UL 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		CSA 60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		EN60950&lt;/li&gt;\r\n	&lt;li&gt;\r\n		ENERGY STAR&lt;/li&gt;\r\n	&lt;li&gt;\r\n		TCO &amp;#39;03&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;Size and weight&lt;/b&gt;&lt;br /&gt;\r\n	30-inch Apple Cinema HD Display&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Height: 21.3 inches (54.3 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Width: 27.2 inches (68.8 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Depth: 8.46 inches (21.5 cm)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Weight: 27.5 pounds (12.5 kg)&lt;/li&gt;\r\n&lt;/ul&gt;\r\n&lt;p&gt;\r\n	&lt;b&gt;System Requirements&lt;/b&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Mac Pro, all graphic options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		MacBook Pro&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI-X) with ATI Radeon 9650 or better or NVIDIA GeForce 6800 GT DDL or better&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Power Mac G5 (PCI Express), all graphics options&lt;/li&gt;\r\n	&lt;li&gt;\r\n		PowerBook G4 with dual-link DVI support&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', ''),
+(64, 1, 'HTC Touch HD', '&lt;p&gt;\r\n	HTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high definition clarity for a mobile experience you never thought possible. Seductively sleek, the HTC Touch HD provides the next generation of mobile functionality, all at a simple touch. Fully integrated with Windows Mobile Professional 6.1, ultrafast 3.5G, GPS, 5MP camera, plus lots more - all delivered on a breathtakingly crisp 3.8&amp;quot; WVGA touchscreen - you can take control of your mobile world with the HTC Touch HD.&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;\r\n&lt;ul&gt;\r\n	&lt;li&gt;\r\n		Processor Qualcomm&amp;reg; MSM 7201A&amp;trade; 528 MHz&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Windows Mobile&amp;reg; 6.1 Professional Operating System&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Memory: 512 MB ROM, 288 MB RAM&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Dimensions: 115 mm x 62.8 mm x 12 mm / 146.4 grams&lt;/li&gt;\r\n	&lt;li&gt;\r\n		3.8-inch TFT-LCD flat touch-sensitive screen with 480 x 800 WVGA resolution&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HSDPA/WCDMA: Europe/Asia: 900/2100 MHz; Up to 2 Mbps up-link and 7.2 Mbps down-link speeds&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Quad-band GSM/GPRS/EDGE: Europe/Asia: 850/900/1800/1900 MHz (Band frequency, HSUPA availability, and data speed are operator dependent.)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Device Control via HTC TouchFLO&amp;trade; 3D &amp;amp; Touch-sensitive front panel buttons&lt;/li&gt;\r\n	&lt;li&gt;\r\n		GPS and A-GPS ready&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Bluetooth&amp;reg; 2.0 with Enhanced Data Rate and A2DP for wireless stereo headsets&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Wi-Fi&amp;reg;: IEEE 802.11 b/g&lt;/li&gt;\r\n	&lt;li&gt;\r\n		HTC ExtUSB&amp;trade; (11-pin mini-USB 2.0)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		5 megapixel color camera with auto focus&lt;/li&gt;\r\n	&lt;li&gt;\r\n		VGA CMOS color camera&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Built-in 3.5 mm audio jack, microphone, speaker, and FM radio&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Ring tone formats: AAC, AAC+, eAAC+, AMR-NB, AMR-WB, QCP, MP3, WMA, WAV&lt;/li&gt;\r\n	&lt;li&gt;\r\n		40 polyphonic and standard MIDI format 0 and 1 (SMF)/SP MIDI&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Rechargeable Lithium-ion or Lithium-ion polymer 1350 mAh battery&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Expansion Slot: microSD&amp;trade; memory card (SD 2.0 compatible)&lt;/li&gt;\r\n	&lt;li&gt;\r\n		AC Adapter Voltage range/frequency: 100 ~ 240V AC, 50/60 Hz DC output: 5V and 1A&lt;/li&gt;\r\n	&lt;li&gt;\r\n		Special Features: FM Radio, G-Sensor&lt;/li&gt;\r\n&lt;/ul&gt;\r\n', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_discount`
+-- Table structure for table `oc_product_discount`
 --
 
+DROP TABLE IF EXISTS `oc_product_discount`;
 CREATE TABLE `oc_product_discount` (
   `product_discount_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -1187,211 +1885,185 @@ CREATE TABLE `oc_product_discount` (
   `date_end` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`product_discount_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=101 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_discount`
+-- Dumping data for table `oc_product_discount`
 --
 
 INSERT INTO `oc_product_discount` (`product_discount_id`, `product_id`, `customer_group_id`, `quantity`, `priority`, `price`, `date_start`, `date_end`) VALUES
-(88, 32, 6, 10, 1, '10.0000', '2010-01-01', '2010-01-31'),
-(100, 42, 6, 1, 2, '120.0000', '2010-02-10', '2010-02-12');
+(296, 32, 6, 10, 1, '10.0000', '2010-01-01', '2010-01-31'),
+(440, 42, 8, 30, 1, '66.0000', '0000-00-00', '0000-00-00'),
+(439, 42, 8, 20, 1, '77.0000', '0000-00-00', '0000-00-00'),
+(438, 42, 8, 10, 1, '88.0000', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_featured`
+-- Table structure for table `oc_product_image`
 --
 
-CREATE TABLE `oc_product_featured` (
-  `product_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Дамп данных таблицы `oc_product_featured`
---
-
-INSERT INTO `oc_product_featured` (`product_id`) VALUES
-(42),
-(28),
-(43),
-(44),
-(45);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_image`
---
-
+DROP TABLE IF EXISTS `oc_product_image`;
 CREATE TABLE `oc_product_image` (
   `product_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `image` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`product_image_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1338 ;
+  PRIMARY KEY (`product_image_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_image`
+-- Dumping data for table `oc_product_image`
 --
 
 INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`) VALUES
-(1277, 30, 'data/canon_eos_5d_3.jpg'),
-(1279, 47, 'data/hp_3.jpg'),
-(1281, 28, 'data/htc_touch_hd_2.jpg'),
-(1255, 41, 'data/imac_3.jpg'),
-(1260, 40, 'data/iphone_6.jpg'),
-(1264, 36, 'data/ipod_nano_3.jpg'),
-(1263, 36, 'data/ipod_nano_2.jpg'),
-(1268, 34, 'data/ipod_shuffle_3.jpg'),
-(1267, 34, 'data/ipod_shuffle_2.jpg'),
-(1274, 32, 'data/ipod_touch_4.jpg'),
-(1273, 32, 'data/ipod_touch_3.jpg'),
-(1272, 32, 'data/ipod_touch_2.jpg'),
-(1285, 43, 'data/macbook_3.jpg'),
-(1284, 43, 'data/macbook_2.jpg'),
-(1288, 44, 'data/macbook_air_4.jpg'),
-(1287, 44, 'data/macbook_air_2.jpg'),
-(1291, 45, 'data/macbook_pro_2.jpg'),
-(1290, 45, 'data/macbook_pro_3.jpg'),
-(1299, 31, 'data/nikon_d300_5.jpg'),
-(1298, 31, 'data/nikon_d300_4.jpg'),
-(1301, 29, 'data/palm_treo_pro_3.jpg'),
-(1253, 46, 'data/sony_vaio_3.jpg'),
-(1252, 46, 'data/sony_vaio_2.jpg'),
-(1316, 48, 'data/ipod_classic_4.jpg'),
-(1315, 48, 'data/ipod_classic_3.jpg'),
-(1259, 40, 'data/iphone_2.jpg'),
-(1258, 40, 'data/iphone_5.jpg'),
-(1276, 30, 'data/canon_eos_5d_2.jpg'),
-(1278, 47, 'data/hp_2.jpg'),
-(1280, 28, 'data/htc_touch_hd_3.jpg'),
-(1254, 41, 'data/imac_2.jpg'),
-(1257, 40, 'data/iphone_3.jpg'),
-(1256, 40, 'data/iphone_4.jpg'),
-(1314, 48, 'data/ipod_classic_2.jpg'),
-(1262, 36, 'data/ipod_nano_4.jpg'),
-(1261, 36, 'data/ipod_nano_5.jpg'),
-(1266, 34, 'data/ipod_shuffle_4.jpg'),
-(1265, 34, 'data/ipod_shuffle_5.jpg'),
-(1271, 32, 'data/ipod_touch_5.jpg'),
-(1270, 32, 'data/ipod_touch_6.jpg'),
-(1269, 32, 'data/ipod_touch_7.jpg'),
-(1283, 43, 'data/macbook_4.jpg'),
-(1282, 43, 'data/macbook_5.jpg'),
-(1286, 44, 'data/macbook_air_3.jpg'),
-(1289, 45, 'data/macbook_pro_4.jpg'),
-(1297, 31, 'data/nikon_d300_2.jpg'),
-(1296, 31, 'data/nikon_d300_3.jpg'),
-(1300, 29, 'data/palm_treo_pro_2.jpg'),
-(1251, 46, 'data/sony_vaio_4.jpg'),
-(1250, 46, 'data/sony_vaio_5.jpg'),
-(1337, 42, 'data/apple_logo.jpg');
+(1960, 30, 'data/canon_eos_5d_2.jpg'),
+(2219, 47, 'data/hp_2.jpg'),
+(2035, 28, 'data/htc_touch_hd_2.jpg'),
+(1997, 41, 'data/imac_2.jpg'),
+(1982, 40, 'data/iphone_6.jpg'),
+(2001, 36, 'data/ipod_nano_5.jpg'),
+(2000, 36, 'data/ipod_nano_4.jpg'),
+(2005, 34, 'data/ipod_shuffle_5.jpg'),
+(2004, 34, 'data/ipod_shuffle_4.jpg'),
+(2011, 32, 'data/ipod_touch_7.jpg'),
+(2010, 32, 'data/ipod_touch_6.jpg'),
+(2009, 32, 'data/ipod_touch_5.jpg'),
+(1971, 43, 'data/macbook_5.jpg'),
+(1970, 43, 'data/macbook_4.jpg'),
+(1974, 44, 'data/macbook_air_4.jpg'),
+(1973, 44, 'data/macbook_air_2.jpg'),
+(1977, 45, 'data/macbook_pro_2.jpg'),
+(1976, 45, 'data/macbook_pro_3.jpg'),
+(1986, 31, 'data/nikon_d300_3.jpg'),
+(1985, 31, 'data/nikon_d300_2.jpg'),
+(1988, 29, 'data/palm_treo_pro_3.jpg'),
+(1995, 46, 'data/sony_vaio_5.jpg'),
+(1994, 46, 'data/sony_vaio_4.jpg'),
+(1991, 48, 'data/ipod_classic_4.jpg'),
+(1990, 48, 'data/ipod_classic_3.jpg'),
+(1981, 40, 'data/iphone_2.jpg'),
+(1980, 40, 'data/iphone_5.jpg'),
+(1959, 30, 'data/canon_eos_5d_3.jpg'),
+(2218, 47, 'data/hp_3.jpg'),
+(2034, 28, 'data/htc_touch_hd_3.jpg'),
+(1996, 41, 'data/imac_3.jpg'),
+(1979, 40, 'data/iphone_3.jpg'),
+(1978, 40, 'data/iphone_4.jpg'),
+(1989, 48, 'data/ipod_classic_2.jpg'),
+(1999, 36, 'data/ipod_nano_2.jpg'),
+(1998, 36, 'data/ipod_nano_3.jpg'),
+(2003, 34, 'data/ipod_shuffle_2.jpg'),
+(2002, 34, 'data/ipod_shuffle_3.jpg'),
+(2008, 32, 'data/ipod_touch_2.jpg'),
+(2007, 32, 'data/ipod_touch_3.jpg'),
+(2006, 32, 'data/ipod_touch_4.jpg'),
+(1969, 43, 'data/macbook_2.jpg'),
+(1968, 43, 'data/macbook_3.jpg'),
+(1972, 44, 'data/macbook_air_3.jpg'),
+(1975, 45, 'data/macbook_pro_4.jpg'),
+(1984, 31, 'data/nikon_d300_4.jpg'),
+(1983, 31, 'data/nikon_d300_5.jpg'),
+(1987, 29, 'data/palm_treo_pro_2.jpg'),
+(1993, 46, 'data/sony_vaio_2.jpg'),
+(1992, 46, 'data/sony_vaio_3.jpg'),
+(2099, 49, 'data/samsung_tab_2.jpg'),
+(2098, 49, 'data/samsung_tab_3.jpg'),
+(2097, 49, 'data/samsung_tab_4.jpg'),
+(2096, 49, 'data/samsung_tab_5.jpg'),
+(2095, 49, 'data/samsung_tab_6.jpg'),
+(2094, 49, 'data/samsung_tab_7.jpg'),
+(2317, 42, 'data/canon_logo.jpg'),
+(2316, 42, 'data/hp_1.jpg'),
+(2315, 42, 'data/compaq_presario.jpg'),
+(2314, 42, 'data/canon_eos_5d_1.jpg'),
+(2313, 42, 'data/canon_eos_5d_2.jpg'),
+(2275, 64, 'data/htc_touch_hd_2.jpg'),
+(2276, 64, 'data/htc_touch_hd_3.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_option`
+-- Table structure for table `oc_product_option`
 --
 
+DROP TABLE IF EXISTS `oc_product_option`;
 CREATE TABLE `oc_product_option` (
   `product_option_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
-  `sort_order` int(3) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_option_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=297 ;
+  `option_id` int(11) NOT NULL,
+  `option_value` text COLLATE utf8_general_ci NOT NULL,
+  `required` int(1) NOT NULL,
+  PRIMARY KEY (`product_option_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_option`
+-- Dumping data for table `oc_product_option`
 --
 
-INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `sort_order`) VALUES
-(283, 40, 1),
-(296, 48, 1);
+INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`, `option_value`, `required`) VALUES
+(224, 35, 11, '', 1),
+(225, 47, 12, '2011-04-22', 1),
+(223, 42, 2, '', 1),
+(217, 42, 5, '', 1),
+(209, 42, 6, '', 1),
+(218, 42, 1, '', 1),
+(208, 42, 4, 'test', 1),
+(219, 42, 8, '2011-02-20', 1),
+(222, 42, 7, '', 1),
+(221, 42, 9, '22:25', 1),
+(220, 42, 10, '2011-02-20 22:25', 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_option_description`
+-- Table structure for table `oc_product_option_value`
 --
 
-CREATE TABLE `oc_product_option_description` (
-  `product_option_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`product_option_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Дамп данных таблицы `oc_product_option_description`
---
-
-INSERT INTO `oc_product_option_description` (`product_option_id`, `language_id`, `product_id`, `name`) VALUES
-(283, 1, 40, 'Память'),
-(296, 1, 48, 'Память');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_option_value`
---
-
+DROP TABLE IF EXISTS `oc_product_option_value`;
 CREATE TABLE `oc_product_option_value` (
   `product_option_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_option_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(4) NOT NULL DEFAULT '0',
-  `subtract` int(1) NOT NULL DEFAULT '0',
+  `option_id` int(11) NOT NULL,
+  `option_value_id` int(11) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  `subtract` int(1) NOT NULL,
   `price` decimal(15,4) NOT NULL,
-  `prefix` char(1) COLLATE utf8_general_ci NOT NULL,
-  `sort_order` int(3) NOT NULL,
+  `price_prefix` varchar(1) COLLATE utf8_general_ci NOT NULL,
+  `points` int(8) NOT NULL,
+  `points_prefix` varchar(1) COLLATE utf8_general_ci NOT NULL,
+  `weight` decimal(15,8) NOT NULL,
+  `weight_prefix` varchar(1) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`product_option_value_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=588 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_option_value`
+-- Dumping data for table `oc_product_option_value`
 --
 
-INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `quantity`, `subtract`, `price`, `prefix`, `sort_order`) VALUES
-(563, 283, 40, 0, 0, '50.0000', '+', 2),
-(562, 283, 40, 0, 0, '0.0000', '+', 1),
-(587, 296, 48, 2, 0, '50.0000', '+', 2),
-(586, 296, 48, 1, 0, '0.0000', '+', 1);
+INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
+(1, 217, 42, 5, 41, 100, 0, '1.0000', '+', 0, '+', '1.00000000', '+'),
+(6, 218, 42, 1, 31, 146, 1, '20.0000', '+', 2, '-', '20.00000000', '+'),
+(7, 218, 42, 1, 43, 300, 1, '30.0000', '+', 3, '+', '30.00000000', '+'),
+(5, 218, 42, 1, 32, 96, 1, '10.0000', '+', 1, '+', '10.00000000', '+'),
+(4, 217, 42, 5, 39, 92, 1, '4.0000', '+', 0, '+', '4.00000000', '+'),
+(2, 217, 42, 5, 42, 200, 1, '2.0000', '+', 0, '+', '2.00000000', '+'),
+(3, 217, 42, 5, 40, 300, 0, '3.0000', '+', 0, '+', '3.00000000', '+'),
+(8, 223, 42, 2, 23, 48, 1, '10.0000', '+', 0, '+', '10.00000000', '+'),
+(10, 223, 42, 2, 44, 2696, 1, '30.0000', '+', 0, '+', '30.00000000', '+'),
+(9, 223, 42, 2, 24, 194, 1, '20.0000', '+', 0, '+', '20.00000000', '+'),
+(11, 223, 42, 2, 45, 3998, 1, '40.0000', '+', 0, '+', '40.00000000', '+'),
+(12, 224, 35, 11, 46, 0, 1, '5.0000', '+', 0, '+', '0.00000000', '+'),
+(13, 224, 35, 11, 47, 10, 1, '10.0000', '+', 0, '+', '0.00000000', '+'),
+(14, 224, 35, 11, 48, 15, 1, '15.0000', '+', 0, '+', '0.00000000', '+');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_option_value_description`
+-- Table structure for table `oc_product_related`
 --
 
-CREATE TABLE `oc_product_option_value_description` (
-  `product_option_value_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`product_option_value_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Дамп данных таблицы `oc_product_option_value_description`
---
-
-INSERT INTO `oc_product_option_value_description` (`product_option_value_id`, `language_id`, `product_id`, `name`) VALUES
-(563, 1, 40, '16GB'),
-(562, 1, 40, '8GB'),
-(587, 1, 48, '8GB'),
-(586, 1, 48, '1GB');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_product_related`
---
-
+DROP TABLE IF EXISTS `oc_product_related`;
 CREATE TABLE `oc_product_related` (
   `product_id` int(11) NOT NULL,
   `related_id` int(11) NOT NULL,
@@ -1399,35 +2071,83 @@ CREATE TABLE `oc_product_related` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_related`
+-- Dumping data for table `oc_product_related`
 --
 
 INSERT INTO `oc_product_related` (`product_id`, `related_id`) VALUES
-(42, 28),
-(42, 41),
-(42, 48),
-(48, 28),
-(48, 30),
-(48, 32),
-(48, 33),
-(48, 34),
-(48, 35),
-(48, 36),
-(48, 41),
-(48, 42),
-(48, 43),
-(48, 44),
-(48, 45),
-(48, 46),
-(48, 47),
-(48, 48);
+(40, 42),
+(41, 42),
+(42, 40),
+(42, 41);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_special`
+-- Table structure for table `oc_product_reward`
 --
 
+DROP TABLE IF EXISTS `oc_product_reward`;
+CREATE TABLE `oc_product_reward` (
+  `product_reward_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL DEFAULT '0',
+  `customer_group_id` int(11) NOT NULL DEFAULT '0',
+  `points` int(8) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`product_reward_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_product_reward`
+--
+
+INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_group_id`, `points`) VALUES
+(516, 42, 6, 10),
+(515, 42, 8, 100),
+(472, 47, 6, 30),
+(471, 47, 8, 300),
+(380, 28, 6, 400),
+(379, 28, 8, 400),
+(330, 43, 6, 60),
+(329, 43, 8, 600),
+(340, 29, 6, 0),
+(339, 29, 8, 0),
+(344, 48, 6, 0),
+(343, 48, 8, 0),
+(336, 40, 6, 0),
+(335, 40, 8, 0),
+(324, 30, 6, 20),
+(323, 30, 8, 200),
+(332, 44, 6, 70),
+(331, 44, 8, 700),
+(334, 45, 6, 80),
+(333, 45, 8, 800),
+(337, 31, 8, 0),
+(338, 31, 6, 0),
+(426, 35, 6, 0),
+(425, 35, 8, 0),
+(345, 33, 8, 0),
+(346, 33, 6, 0),
+(347, 46, 8, 0),
+(348, 46, 6, 0),
+(349, 41, 8, 0),
+(350, 41, 6, 0),
+(351, 36, 8, 0),
+(352, 36, 6, 0),
+(353, 34, 8, 0),
+(354, 34, 6, 0),
+(355, 32, 8, 0),
+(356, 32, 6, 0),
+(416, 49, 6, 1000),
+(415, 49, 8, 1000),
+(496, 64, 8, 400),
+(495, 64, 6, 400);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_product_special`
+--
+
+DROP TABLE IF EXISTS `oc_product_special`;
 CREATE TABLE `oc_product_special` (
   `product_special_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -1438,41 +2158,58 @@ CREATE TABLE `oc_product_special` (
   `date_end` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`product_special_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=252 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_special`
+-- Dumping data for table `oc_product_special`
 --
 
 INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_group_id`, `priority`, `price`, `date_start`, `date_end`) VALUES
-(251, 42, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
-(242, 49, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
-(243, 50, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
-(244, 58, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
-(246, 67, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
-(249, 69, 8, 1, '50.0000', '2010-02-01', '2010-02-28');
+(419, 42, 8, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(391, 50, 8, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(359, 30, 8, 2, '90.0000', '0000-00-00', '0000-00-00'),
+(358, 30, 8, 1, '80.0000', '0000-00-00', '0000-00-00'),
+(390, 50, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
+(392, 51, 8, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(397, 52, 8, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(396, 52, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
+(393, 53, 8, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(399, 54, 8, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(398, 54, 8, 1, '50.0000', '2010-02-01', '2010-02-28'),
+(400, 55, 8, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(395, 56, 8, 1, '90.0000', '0000-00-00', '0000-00-00'),
+(394, 56, 8, 1, '50.0000', '2010-02-01', '2010-02-28');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_tags`
+-- Table structure for table `oc_product_tag`
 --
-CREATE TABLE `oc_product_tags` (
+
+DROP TABLE IF EXISTS `oc_product_tag`;
+CREATE TABLE `oc_product_tag` (
+  `product_tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
-  `tag` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `language_id` int(11) NOT NULL,
-  PRIMARY KEY  (`product_id`,`tag`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `tag` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`product_tag_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_tags`
+-- Dumping data for table `oc_product_tag`
 --
+
+INSERT INTO `oc_product_tag` (`product_tag_id`, `product_id`, `language_id`, `tag`) VALUES
+(341, 42, 1, 'test 1'),
+(342, 42, 1, 'test 2');
+
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_to_category`
+-- Table structure for table `oc_product_to_category`
 --
 
+DROP TABLE IF EXISTS `oc_product_to_category`;
 CREATE TABLE `oc_product_to_category` (
   `product_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -1480,11 +2217,13 @@ CREATE TABLE `oc_product_to_category` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_to_category`
+-- Dumping data for table `oc_product_to_category`
 --
 
 INSERT INTO `oc_product_to_category` (`product_id`, `category_id`) VALUES
+(28, 20),
 (28, 24),
+(29, 20),
 (29, 24),
 (30, 20),
 (30, 33),
@@ -1495,24 +2234,33 @@ INSERT INTO `oc_product_to_category` (`product_id`, `category_id`) VALUES
 (34, 34),
 (35, 20),
 (36, 34),
+(40, 20),
 (40, 24),
 (41, 27),
+(42, 20),
 (42, 28),
 (43, 18),
+(43, 20),
 (44, 18),
 (44, 20),
 (45, 18),
 (46, 18),
 (46, 20),
 (47, 18),
-(48, 34);
+(47, 20),
+(48, 20),
+(48, 34),
+(49, 57),
+(64, 20),
+(64, 24);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_to_download`
+-- Table structure for table `oc_product_to_download`
 --
 
+DROP TABLE IF EXISTS `oc_product_to_download`;
 CREATE TABLE `oc_product_to_download` (
   `product_id` int(11) NOT NULL,
   `download_id` int(11) NOT NULL,
@@ -1520,24 +2268,44 @@ CREATE TABLE `oc_product_to_download` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_to_download`
+-- Dumping data for table `oc_product_to_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_to_store`
+-- Table structure for table `oc_product_to_layout`
 --
 
-CREATE TABLE `oc_product_to_store` (
+DROP TABLE IF EXISTS `oc_product_to_layout`;
+CREATE TABLE `oc_product_to_layout` (
   `product_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL DEFAULT 0,
+  `store_id` int(11) NOT NULL,
+  `layout_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_to_store`
+-- Dumping data for table `oc_product_to_layout`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_product_to_store`
+--
+
+DROP TABLE IF EXISTS `oc_product_to_store`;
+CREATE TABLE `oc_product_to_store` (
+  `product_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`product_id`,`store_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_product_to_store`
 --
 
 INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
@@ -1554,16 +2322,168 @@ INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
 (41, 0),
 (42, 0),
 (43, 0),
+(44, 0),
+(45, 0),
 (46, 0),
 (47, 0),
-(48, 0);
+(48, 0),
+(49, 0),
+(64, 0);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_review`
+-- Table structure for table `oc_return`
 --
 
+DROP TABLE IF EXISTS `oc_return`;
+CREATE TABLE `oc_return` (
+  `return_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `date_ordered` date NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `firstname` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `lastname` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(96) COLLATE utf8_general_ci NOT NULL,
+  `telephone` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `return_status_id` int(11) NOT NULL,
+  `comment` text COLLATE utf8_general_ci,
+  `date_added` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  PRIMARY KEY (`return_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_return`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_return_action`
+--
+
+DROP TABLE IF EXISTS `oc_return_action`;
+CREATE TABLE `oc_return_action` (
+  `return_action_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`return_action_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_return_action`
+--
+
+INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUES
+(1, 1, 'Refunded'),
+(2, 1, 'Credit Issued'),
+(3, 1, 'Replacement Sent');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_return_history`
+--
+
+DROP TABLE IF EXISTS `oc_return_history`;
+CREATE TABLE `oc_return_history` (
+  `return_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `return_id` int(11) NOT NULL,
+  `return_status_id` int(11) NOT NULL,
+  `notify` int(1) NOT NULL,
+  `comment` text COLLATE utf8_general_ci NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`return_history_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_return_history`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_return_product`
+--
+
+DROP TABLE IF EXISTS `oc_return_product`;
+CREATE TABLE `oc_return_product` (
+  `return_product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `return_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `model` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `quantity` int(4) NOT NULL,
+  `return_reason_id` int(11) NOT NULL,
+  `opened` int(1) NOT NULL,
+  `comment` text COLLATE utf8_general_ci NOT NULL,
+  `return_action_id` int(11) NOT NULL,
+  PRIMARY KEY (`return_product_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_return_product`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_return_reason`
+--
+
+DROP TABLE IF EXISTS `oc_return_reason`;
+CREATE TABLE `oc_return_reason` (
+  `return_reason_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(128) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`return_reason_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_return_reason`
+--
+
+INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
+(1, 1, 'Dead On Arrival'),
+(2, 1, 'Received Wrong Item'),
+(3, 1, 'Order Error'),
+(4, 1, 'Faulty, please supply details'),
+(5, 1, 'Other, please supply details');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_return_status`
+--
+
+DROP TABLE IF EXISTS `oc_return_status`;
+CREATE TABLE `oc_return_status` (
+  `return_status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`return_status_id`,`language_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_return_status`
+--
+
+INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUES
+(1, 1, 'Pending'),
+(3, 1, 'Complete'),
+(2, 1, 'Awaiting Products');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_review`
+--
+
+DROP TABLE IF EXISTS `oc_review`;
 CREATE TABLE `oc_review` (
   `review_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -1576,259 +2496,297 @@ CREATE TABLE `oc_review` (
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`review_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=61 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_review`
+-- Dumping data for table `oc_review`
 --
 
-INSERT INTO `oc_review` (`review_id`, `product_id`, `customer_id`, `author`, `text`, `rating`, `status`, `date_added`, `date_modified`) VALUES
-(58, 42, 0, 'Дмитрий', 'Отличный товар', 3, 1, '2010-01-02 03:14:24', '0000-00-00 00:00:00'),
-(59, 42, 0, 'Александр', 'Пользуюсь с удовольствием', 2, 1, '2010-02-26 22:06:32', '0000-00-00 00:00:00'),
-(60, 47, 0, 'Михаил', 'Товар очень понравился, быстро доставили', 3, 1, '2010-03-05 21:10:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_setting`
+-- Table structure for table `oc_setting`
 --
 
+DROP TABLE IF EXISTS `oc_setting`;
 CREATE TABLE `oc_setting` (
   `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL DEFAULT '0',
   `group` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `key` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `value` text COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_setting`
+-- Dumping data for table `oc_setting`
 --
 
-INSERT INTO `oc_setting` (`setting_id`, `group`, `key`, `value`) VALUES
-(NULL, 'coupon', 'coupon_sort_order', '4'),
-(NULL, 'shipping', 'shipping_sort_order', '3'),
-(NULL, 'shipping', 'shipping_status', '1'),
-(NULL, 'cod', 'cod_sort_order', '1'),
-(NULL, 'sub_total', 'sub_total_sort_order', '1'),
-(NULL, 'cod', 'cod_status', '1'),
-(NULL, 'cod', 'cod_geo_zone_id', '0'),
-(NULL, 'coupon', 'coupon_status', '1'),
-(NULL, 'sub_total', 'sub_total_status', '1'),
-(NULL, 'cod', 'cod_order_status_id', '1'),
-(NULL, 'tax', 'tax_status', '1'),
-(NULL, 'tax', 'tax_sort_order', '5'),
-(NULL, 'total', 'total_sort_order', '6'),
-(NULL, 'total', 'total_status', '1'),
-(NULL, 'category', 'category_sort_order', '1'),
-(NULL, 'category', 'category_status', '1'),
-(NULL, 'information', 'information_sort_order', '3'),
-(NULL, 'information', 'information_status', '1'),
-(NULL, 'information', 'information_position', 'left'),
-(NULL, 'manufacturer', 'manufacturer_sort_order', '2'),
-(NULL, 'manufacturer', 'manufacturer_status', '1'),
-(NULL, 'bestseller', 'bestseller_sort_order', '3'),
-(NULL, 'bestseller', 'bestseller_status', '1'),
-(NULL, 'bestseller', 'bestseller_position', 'right'),
-(NULL, 'bestseller', 'bestseller_limit', '10'),
-(NULL, 'featured', 'featured_limit', '5'),
-(NULL, 'featured', 'featured_position', 'right'),
-(NULL, 'featured', 'featured_status', '1'),
-(NULL, 'featured', 'featured_sort_order', '5'),
-(NULL, 'cart', 'cart_status', '1'),
-(NULL, 'category', 'category_position', 'left'),
-(NULL, 'manufacturer', 'manufacturer_position', 'left'),
-(NULL, 'cart', 'cart_position', 'right'),
-(NULL, 'cart', 'cart_ajax', '1'),
-(NULL, 'cart', 'cart_sort_order', '1'),
-(NULL, 'config', 'config_smtp_password', ''),
-(NULL, 'config', 'config_smtp_host', ''),
-(NULL, 'config', 'config_smtp_username', ''),
-(NULL, 'config', 'config_mail_protocol', 'mail'),
-(NULL, 'config', 'config_image_cart_height', '75'),
-(NULL, 'config', 'config_image_cart_width', '75'),
-(NULL, 'config', 'config_image_related_height', '120'),
-(NULL, 'config', 'config_image_related_width', '120'),
-(NULL, 'config', 'config_image_additional_height', '150'),
-(NULL, 'config', 'config_image_additional_width', '150'),
-(NULL, 'config', 'config_image_product_height', '120'),
-(NULL, 'config', 'config_image_product_width', '120'),
-(NULL, 'config', 'config_image_category_height', '120'),
-(NULL, 'config', 'config_image_category_width', '120'),
-(NULL, 'config', 'config_image_popup_height', '500'),
-(NULL, 'config', 'config_image_popup_width', '500'),
-(NULL, 'config', 'config_image_thumb_height', '250'),
-(NULL, 'config', 'config_image_thumb_width', '250'),
-(NULL, 'config', 'config_icon', 'data/cart.png'),
-(NULL, 'config', 'config_logo', 'data/logo.png'),
-(NULL, 'config', 'config_shipping_session', '0'),
-(NULL, 'config', 'config_cart_weight', '1'),
-(NULL, 'config', 'config_catalog_limit', '20'),
-(NULL, 'config', 'config_admin_limit', '20'),
-(NULL, 'config', 'config_download_status', '5'),
-(NULL, 'config', 'config_download', '1'),
-(NULL, 'config', 'config_stock_status_id', '5'),
-(NULL, 'config', 'config_order_status_id', '1'),
-(NULL, 'config', 'config_stock_subtract', '0'),
-(NULL, 'config', 'config_stock_checkout', '0'),
-(NULL, 'config', 'config_stock_check', '1'),
-(NULL, 'config', 'config_stock_display', '0'),
-(NULL, 'config', 'config_checkout_id', '5'),
-(NULL, 'config', 'config_account_id', '3'),
-(NULL, 'config', 'config_guest_checkout', '1'),
-(NULL, 'config', 'config_customer_approval', '0'),
-(NULL, 'config', 'config_customer_price', '0'),
-(NULL, 'config', 'config_customer_group_id', '8'),
-(NULL, 'config', 'config_tax', '1'),
-(NULL, 'config', 'config_weight_class', 'кг'),
-(NULL, 'flat', 'flat_cost', '2'),
-(NULL, 'flat', 'flat_tax_class_id', '9'),
-(NULL, 'flat', 'flat_geo_zone_id', '0'),
-(NULL, 'flat', 'flat_status', '1'),
-(NULL, 'flat', 'flat_sort_order', '1'),
-(NULL, 'config', 'config_length_class', 'см'),
-(NULL, 'config', 'config_currency', 'RUB'),
-(NULL, 'config', 'config_currency_auto', '1'),
-(NULL, 'config', 'config_admin_language', 'ru'),
-(NULL, 'config', 'config_zone_id', '3563'),
-(NULL, 'config', 'config_language', 'ru'),
-(NULL, 'config', 'config_country_id', '176'),
-(NULL, 'config', 'config_description_1', '&lt;p&gt;\r\n	Добро пожаловать в Мой магазин!&lt;/p&gt;\r\n'),
-(NULL, 'config', 'config_template', 'default'),
-(NULL, 'config', 'config_meta_description', 'Мой магазин'),
-(NULL, 'config', 'config_title', 'Мой магазин'),
-(NULL, 'config', 'config_fax', ''),
-(NULL, 'config', 'config_telephone', '123456789'),
-(NULL, 'config', 'config_owner', 'Ваше имя'),
-(NULL, 'config', 'config_address', 'Адрес 1'),
-(NULL, 'config', 'config_email', 'mail@myopencart.ru'),
-(NULL, 'config', 'config_url', 'http://localhost/'),
-(NULL, 'config', 'config_name', 'Мой магазин'),
-(NULL, 'config', 'config_smtp_port', '25'),
-(NULL, 'config', 'config_smtp_timeout', '5'),
-(NULL, 'config', 'config_account_mail', '0'),
-(NULL, 'config', 'config_alert_mail', '1'),
-(NULL, 'config', 'config_ssl', '0'),
-(NULL, 'config', 'config_encryption', '12345'),
-(NULL, 'config', 'config_seo_url', '0'),
-(NULL, 'config', 'config_compression', '0'),
-(NULL, 'config', 'config_error_display', '1'),
-(NULL, 'config', 'config_error_log', '1'),
-(NULL, 'config', 'config_invoice_id', '1'),
-(NULL, 'config', 'config_invoice_prefix', 'INV-2011-00'),
-(NULL, 'config', 'config_review', '1'),
-(NULL, 'latest', 'latest_limit', '8'),
-(NULL, 'latest', 'latest_position', 'home'),
-(NULL, 'latest', 'latest_status', '1'),
-(NULL, 'latest', 'latest_sort_order', '0'),
-(NULL, 'config', 'config_error_filename', 'error.txt'),
-(NULL, 'blinks', 'blinks_position', 'right'),
-(NULL, 'blinks', 'blinks_status', '1'),
-(NULL, 'blinks', 'blinks_sort_order', '10'),
-(NULL, 'blinks', 'blinks_links', '&lt;a href=&quot;http://myopencart.ru&quot;&gt;myOpenCart.ru&lt;/a&gt; \r\n &lt;a href=&quot;http://myopencart.ru/wiki/&quot;&gt;Документация&lt;/a&gt; \r\n &lt;a href=&quot;http://opencartforum.ru&quot;&gt;Форум поддержки&lt;/a&gt;  \r\n &lt;a href=&quot;http://domenam.ru&quot;&gt;Хостинг для OpenCart&lt;/a&gt;');
+INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`) VALUES
+(9457, 0, 'shipping', 'shipping_sort_order', '3'),
+(19421, 0, 'cod', 'cod_sort_order', '5'),
+(3453, 0, 'sub_total', 'sub_total_sort_order', '1'),
+(19420, 0, 'cod', 'cod_status', '1'),
+(3452, 0, 'sub_total', 'sub_total_status', '1'),
+(19419, 0, 'cod', 'cod_geo_zone_id', '0'),
+(272, 0, 'tax', 'tax_status', '1'),
+(16013, 0, 'total', 'total_sort_order', '9'),
+(16012, 0, 'total', 'total_status', '1'),
+(273, 0, 'tax', 'tax_sort_order', '5'),
+(18090, 0, 'bestseller', 'bestseller_0_layout_id', '2'),
+(17868, 0, 'slideshow', 'slideshow_module', '0'),
+(18093, 0, 'bestseller', 'bestseller_0_sort_order', '1'),
+(18092, 0, 'bestseller', 'bestseller_0_status', '1'),
+(15729, 0, 'manufacturer', 'manufacturer_module', '0'),
+(15728, 0, 'manufacturer', 'manufacturer_0_sort_order', '4'),
+(18424, 0, 'banner', 'banner_0_width', '180'),
+(3709, 0, 'citylink', 'citylink_geo_zone_id', '0'),
+(3708, 0, 'citylink', 'citylink_tax_class_id', '0'),
+(18094, 0, 'bestseller', 'bestseller_module', '0'),
+(19411, 0, 'free_checkout', 'free_checkout_sort_order', '1'),
+(19418, 0, 'cod', 'cod_order_status_id', '1'),
+(19417, 0, 'cod', 'cod_total', '0'),
+(18091, 0, 'bestseller', 'bestseller_0_position', 'column_right'),
+(17860, 0, 'category', 'category_module', '1,2,3,4,5,6'),
+(17859, 0, 'category', 'category_6_sort_order', '1'),
+(19503, 0, 'config', 'config_google_analytics', ''),
+(9456, 0, 'shipping', 'shipping_status', '1'),
+(9455, 0, 'shipping', 'shipping_estimator', '1'),
+(19502, 0, 'config', 'config_error_filename', 'error.txt'),
+(19501, 0, 'config', 'config_error_log', '1'),
+(19500, 0, 'config', 'config_error_display', '1'),
+(9648, 0, 'affiliate', 'affiliate_0_sort_order', '1'),
+(19499, 0, 'config', 'config_compression', '0'),
+(9647, 0, 'affiliate', 'affiliate_0_status', '1'),
+(17343, 0, 'google_base', 'google_base_status', '1'),
+(15727, 0, 'manufacturer', 'manufacturer_0_status', '0'),
+(4976, 0, 'information', 'information_module', '1'),
+(19498, 0, 'config', 'config_encryption', '12345'),
+(19497, 0, 'config', 'config_maintenance', '0'),
+(19496, 0, 'config', 'config_seo_url', '0'),
+(19495, 0, 'config', 'config_use_ssl', '0'),
+(19494, 0, 'config', 'config_alert_emails', ''),
+(15726, 0, 'manufacturer', 'manufacturer_0_position', 'content_top'),
+(15725, 0, 'manufacturer', 'manufacturer_0_layout_id', '1'),
+(15724, 0, 'manufacturer', 'manufacturer_0_axis', 'horizontal'),
+(15723, 0, 'manufacturer', 'manufacturer_0_image_height', ''),
+(15722, 0, 'manufacturer', 'manufacturer_0_image_width', ''),
+(4975, 0, 'information', 'information_0_sort_order', ''),
+(4974, 0, 'information', 'information_0_status', '0'),
+(4973, 0, 'information', 'information_0_position', 'column_left'),
+(4972, 0, 'information', 'information_0_layout_id', '1'),
+(4516, 0, 'google_talk', 'google_talk_code', 'ty'),
+(4517, 0, 'google_talk', 'google_talk_module', ''),
+(15721, 0, 'manufacturer', 'manufacturer_0_height', ''),
+(15720, 0, 'manufacturer', 'manufacturer_0_width', ''),
+(13531, 0, 'special', 'special_module', ''),
+(9646, 0, 'affiliate', 'affiliate_0_position', 'column_right'),
+(9645, 0, 'affiliate', 'affiliate_0_layout_id', '10'),
+(19493, 0, 'config', 'config_account_mail', '0'),
+(15719, 0, 'manufacturer', 'manufacturer_0_scroll', '3'),
+(15718, 0, 'manufacturer', 'manufacturer_0_limit', '5'),
+(17863, 0, 'slideshow', 'slideshow_0_height', '280'),
+(19492, 0, 'config', 'config_alert_mail', '0'),
+(13801, 0, 'coupon', 'coupon_sort_order', '4'),
+(13800, 0, 'coupon', 'coupon_status', '1'),
+(19491, 0, 'config', 'config_smtp_timeout', '5'),
+(19489, 0, 'config', 'config_smtp_password', ''),
+(19490, 0, 'config', 'config_smtp_port', '25'),
+(19488, 0, 'config', 'config_smtp_username', ''),
+(19487, 0, 'config', 'config_smtp_host', ''),
+(19486, 0, 'config', 'config_mail_parameter', ''),
+(19485, 0, 'config', 'config_mail_protocol', 'mail'),
+(19508, 0, 'flat', 'flat_sort_order', '1'),
+(19507, 0, 'flat', 'flat_status', '1'),
+(19506, 0, 'flat', 'flat_geo_zone_id', '0'),
+(19505, 0, 'flat', 'flat_tax_class_id', '9'),
+(17858, 0, 'category', 'category_6_status', '1'),
+(17857, 0, 'category', 'category_6_position', 'column_left'),
+(17856, 0, 'category', 'category_6_layout_id', '9'),
+(17855, 0, 'category', 'category_5_sort_order', '1'),
+(17854, 0, 'category', 'category_5_status', '1'),
+(17853, 0, 'category', 'category_5_position', 'column_left'),
+(17852, 0, 'category', 'category_5_layout_id', '2'),
+(17851, 0, 'category', 'category_4_sort_order', '1'),
+(17850, 0, 'category', 'category_4_status', '1'),
+(17849, 0, 'category', 'category_4_position', 'column_left'),
+(17848, 0, 'category', 'category_4_layout_id', '5'),
+(17847, 0, 'category', 'category_3_sort_order', '1'),
+(17846, 0, 'category', 'category_3_status', '1'),
+(17845, 0, 'category', 'category_3_position', 'column_left'),
+(17844, 0, 'category', 'category_3_layout_id', '11'),
+(17843, 0, 'category', 'category_2_sort_order', '1'),
+(17842, 0, 'category', 'category_2_status', '1'),
+(19504, 0, 'flat', 'flat_cost', '5.00'),
+(9444, 0, 'credit', 'credit_sort_order', '7'),
+(9443, 0, 'credit', 'credit_status', '1'),
+(13532, 0, 'welcome', 'welcome_module', ''),
+(19484, 0, 'config', 'config_image_cart_height', '80'),
+(19483, 0, 'config', 'config_image_cart_width', '80'),
+(19481, 0, 'config', 'config_image_wishlist_width', '50'),
+(19482, 0, 'config', 'config_image_wishlist_height', '50'),
+(19480, 0, 'config', 'config_image_compare_height', '90'),
+(19479, 0, 'config', 'config_image_compare_width', '90'),
+(19478, 0, 'config', 'config_image_related_height', '80'),
+(19477, 0, 'config', 'config_image_related_width', '80'),
+(19476, 0, 'config', 'config_image_additional_height', '74'),
+(19475, 0, 'config', 'config_image_additional_width', '74'),
+(19474, 0, 'config', 'config_image_manufacturer_height', '80'),
+(18432, 0, 'reward', 'reward_sort_order', '2'),
+(18431, 0, 'reward', 'reward_status', '1'),
+(17841, 0, 'category', 'category_2_position', 'column_left'),
+(17840, 0, 'category', 'category_2_layout_id', '8'),
+(17839, 0, 'category', 'category_1_sort_order', '1'),
+(17838, 0, 'category', 'category_1_status', '1'),
+(17837, 0, 'category', 'category_1_position', 'column_left'),
+(17836, 0, 'category', 'category_1_layout_id', '3'),
+(19473, 0, 'config', 'config_image_manufacturer_width', '80'),
+(9649, 0, 'affiliate', 'affiliate_module', '0'),
+(18087, 0, 'bestseller', 'bestseller_0_limit', '4'),
+(18089, 0, 'bestseller', 'bestseller_0_image_height', '80'),
+(18088, 0, 'bestseller', 'bestseller_0_image_width', '80'),
+(18084, 0, 'featured', 'featured_0_status', '1'),
+(18085, 0, 'featured', 'featured_0_sort_order', '2'),
+(18086, 0, 'featured', 'featured_module', '0'),
+(18083, 0, 'featured', 'featured_0_position', 'content_bottom'),
+(18082, 0, 'featured', 'featured_0_layout_id', '1'),
+(18081, 0, 'featured', 'featured_0_image_height', '80'),
+(18079, 0, 'featured', 'featured_product', '41,40,48,36,34,32,29'),
+(18080, 0, 'featured', 'featured_0_image_width', '80'),
+(15764, 0, 'account', 'account_0_sort_order', '1'),
+(18078, 0, 'featured', 'product', 'p'),
+(19472, 0, 'config', 'config_image_category_height', '80'),
+(14660, 0, 'latest', 'latest_module', ''),
+(19471, 0, 'config', 'config_image_category_width', '80'),
+(15763, 0, 'account', 'account_0_status', '1'),
+(15762, 0, 'account', 'account_0_position', 'column_right'),
+(15761, 0, 'account', 'account_0_layout_id', '6'),
+(19470, 0, 'config', 'config_image_product_height', '80'),
+(19469, 0, 'config', 'config_image_product_width', '80'),
+(19468, 0, 'config', 'config_image_popup_height', '500'),
+(19467, 0, 'config', 'config_image_popup_width', '500'),
+(19466, 0, 'config', 'config_image_thumb_height', '228'),
+(19465, 0, 'config', 'config_image_thumb_width', '228'),
+(19464, 0, 'config', 'config_icon', 'data/cart.png'),
+(19463, 0, 'config', 'config_logo', 'data/logo.png'),
+(19462, 0, 'config', 'config_cart_weight', '1'),
+(14671, 0, 'store', 'store_module', '0'),
+(14670, 0, 'store', 'store_0_sort_order', '2'),
+(14669, 0, 'store', 'store_0_status', '0'),
+(14668, 0, 'store', 'store_0_position', 'column_left'),
+(14666, 0, 'store', 'store_admin', '0'),
+(14667, 0, 'store', 'store_0_layout_id', '1'),
+(19461, 0, 'config', 'config_upload_allowed', 'jpg, JPG, jpeg, gif, png, txt'),
+(19459, 0, 'config', 'config_review_status', '1'),
+(19460, 0, 'config', 'config_download', '1'),
+(18423, 0, 'banner', 'banner_0_banner_id', '6'),
+(19458, 0, 'config', 'config_return_status_id', '2'),
+(19457, 0, 'config', 'config_complete_status_id', '5'),
+(19456, 0, 'config', 'config_order_status_id', '1'),
+(19455, 0, 'config', 'config_stock_status_id', '5'),
+(19454, 0, 'config', 'config_stock_checkout', '0'),
+(19453, 0, 'config', 'config_stock_warning', '0'),
+(19452, 0, 'config', 'config_stock_display', '0'),
+(19451, 0, 'config', 'config_commission', '5'),
+(19450, 0, 'config', 'config_affiliate_id', '4'),
+(19449, 0, 'config', 'config_checkout_id', '5'),
+(19448, 0, 'config', 'config_account_id', '3'),
+(19447, 0, 'config', 'config_guest_checkout', '1'),
+(19446, 0, 'config', 'config_customer_approval', '0'),
+(19445, 0, 'config', 'config_customer_price', '0'),
+(19444, 0, 'config', 'config_customer_group_id', '8'),
+(19443, 0, 'config', 'config_invoice_prefix', 'INV-2011-00'),
+(19442, 0, 'config', 'config_tax', '1'),
+(19441, 0, 'config', 'config_admin_limit', '20'),
+(19440, 0, 'config', 'config_catalog_limit', '15'),
+(19439, 0, 'config', 'config_weight_class', 'kg'),
+(19438, 0, 'config', 'config_length_class', 'cm'),
+(19436, 0, 'config', 'config_currency', 'USD'),
+(19437, 0, 'config', 'config_currency_auto', '1'),
+(19435, 0, 'config', 'config_admin_language', 'ru'),
+(19434, 0, 'config', 'config_language', 'ru'),
+(19433, 0, 'config', 'config_zone_id', '3563'),
+(19432, 0, 'config', 'config_country_id', '222'),
+(19431, 0, 'config', 'config_layout_id', '4'),
+(19430, 0, 'config', 'config_template', 'default'),
+(19429, 0, 'config', 'config_meta_description', 'My Store'),
+(19428, 0, 'config', 'config_title', 'Your Store'),
+(19427, 0, 'config', 'config_fax', ''),
+(17867, 0, 'slideshow', 'slideshow_0_sort_order', ''),
+(17865, 0, 'slideshow', 'slideshow_0_position', 'content_top'),
+(17861, 0, 'slideshow', 'slideshow_0_banner_id', '7'),
+(17866, 0, 'slideshow', 'slideshow_0_status', '1'),
+(17864, 0, 'slideshow', 'slideshow_0_layout_id', '1'),
+(15765, 0, 'account', 'account_module', '0'),
+(19425, 0, 'config', 'config_email', 'your@store.com'),
+(19426, 0, 'config', 'config_telephone', '123456789'),
+(16017, 0, 'voucher', 'voucher_sort_order', '8'),
+(16016, 0, 'voucher', 'voucher_status', '1'),
+(17862, 0, 'slideshow', 'slideshow_0_width', '980'),
+(18430, 0, 'banner', 'banner_module', '0'),
+(19424, 0, 'config', 'config_address', 'Address 1'),
+(18429, 0, 'banner', 'banner_0_sort_order', '2'),
+(18428, 0, 'banner', 'banner_0_status', '1'),
+(18427, 0, 'banner', 'banner_0_position', 'column_left'),
+(18426, 0, 'banner', 'banner_0_layout_id', '3'),
+(18425, 0, 'banner', 'banner_0_height', '200'),
+(19410, 0, 'free_checkout', 'free_checkout_status', '1'),
+(19409, 0, 'free_checkout', 'free_checkout_order_status_id', '1'),
+(19423, 0, 'config', 'config_owner', 'Your Name'),
+(19422, 0, 'config', 'config_name', 'Your Store');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_stock_status`
+-- Table structure for table `oc_stock_status`
 --
 
+DROP TABLE IF EXISTS `oc_stock_status`;
 CREATE TABLE `oc_stock_status` (
   `stock_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`stock_status_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_stock_status`
+-- Dumping data for table `oc_stock_status`
 --
 
 INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
-(7, 1, 'В наличии'),
-(5, 1, 'Нет в наличии'),
-(6, 1, 'Ожидание 2-3 дня'),
-(8, 1, 'Предзаказ');
+(7, 1, 'In Stock'),
+(8, 1, 'Pre-Order'),
+(5, 1, 'Out Of Stock'),
+(6, 1, '2 - 3 Days');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_store`
+-- Table structure for table `oc_store`
 --
 
+DROP TABLE IF EXISTS `oc_store`;
 CREATE TABLE `oc_store` (
   `store_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_general_ci NOT NULL,
   `url` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `title` varchar(128) COLLATE utf8_general_ci NOT NULL,
-  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `template` varchar(64) COLLATE utf8_general_ci NOT NULL,
-  `country_id` int(11) NOT NULL,
-  `zone_id` int(11) NOT NULL,
-  `language` varchar(5) COLLATE utf8_general_ci NOT NULL,
-  `currency` varchar(3) COLLATE utf8_general_ci NOT NULL,
-  `tax` int(1) NOT NULL DEFAULT '0',
-  `customer_group_id` int(11) NOT NULL,
-  `customer_price` int(1) NOT NULL,
-  `customer_approval` int(1) NOT NULL,
-  `guest_checkout` int(1) NOT NULL,
-  `account_id` int(11) NOT NULL DEFAULT '0',
-  `checkout_id` int(11) NOT NULL DEFAULT '0',
-  `stock_display` int(1) NOT NULL,
-  `stock_check` int(1) NOT NULL,
-  `stock_checkout` int(1) NOT NULL,
-  `order_status_id` int(11) NOT NULL,
-  `logo` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8_general_ci NOT NULL,
-  `image_thumb_width` int(5) NOT NULL,
-  `image_thumb_height` int(5) NOT NULL,
-  `image_popup_width` int(5) NOT NULL,
-  `image_popup_height` int(5) NOT NULL,
-  `image_category_width` int(5) NOT NULL,
-  `image_category_height` int(5) NOT NULL,
-  `image_product_width` int(5) NOT NULL,
-  `image_product_height` int(5) NOT NULL,
-  `image_additional_width` int(5) NOT NULL,
-  `image_additional_height` int(5) NOT NULL,
-  `image_related_width` int(5) NOT NULL,
-  `image_related_height` int(5) NOT NULL,
-  `image_cart_width` int(5) NOT NULL,
-  `image_cart_height` int(5) NOT NULL,
-  `ssl` int(1) NOT NULL,
-  `catalog_limit` int(4) NOT NULL DEFAULT '12',
-  `cart_weight` int(1) NOT NULL,
+  `ssl` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`store_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `oc_store`
---
-
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `oc_store_description`
---
-
-CREATE TABLE `oc_store_description` (
-  `store_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `description` text COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`store_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_store_description`
+-- Dumping data for table `oc_store`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_tax_class`
+-- Table structure for table `oc_tax_class`
 --
 
+DROP TABLE IF EXISTS `oc_tax_class`;
 CREATE TABLE `oc_tax_class` (
   `tax_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -1836,21 +2794,22 @@ CREATE TABLE `oc_tax_class` (
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`tax_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_tax_class`
+-- Dumping data for table `oc_tax_class`
 --
 
 INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`, `date_modified`) VALUES
-(9, 'Налоги', 'Облагаемые налогом', '2009-01-06 23:21:53', '2010-02-26 22:08:04');
+(9, 'Taxable Goods', 'Taxed Stuff', '2009-01-06 23:21:53', '2011-03-09 21:17:10');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_tax_rate`
+-- Table structure for table `oc_tax_rate`
 --
 
+DROP TABLE IF EXISTS `oc_tax_rate`;
 CREATE TABLE `oc_tax_rate` (
   `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,
   `geo_zone_id` int(11) NOT NULL DEFAULT '0',
@@ -1861,48 +2820,51 @@ CREATE TABLE `oc_tax_rate` (
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`tax_rate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=83 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_tax_rate`
+-- Dumping data for table `oc_tax_rate`
 --
 
 INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `tax_class_id`, `priority`, `rate`, `description`, `date_modified`, `date_added`) VALUES
-(82, 3, 9, 1, '18.0000', 'НДС 18%', '0000-00-00 00:00:00', '2010-02-26 22:08:04');
+(86, 3, 9, 1, '17.5000', 'VAT 17.5%', '0000-00-00 00:00:00', '2011-03-09 21:17:10');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_url_alias`
+-- Table structure for table `oc_url_alias`
 --
 
+DROP TABLE IF EXISTS `oc_url_alias`;
 CREATE TABLE `oc_url_alias` (
   `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,
   `query` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `keyword` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`url_alias_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=488 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_url_alias`
+-- Dumping data for table `oc_url_alias`
 --
 
 INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
-(464, 'product_id=48', 'ipod_classic'),
-(487, 'category_id=20', 'desktops'),
-(442, 'category_id=26', 'pc'),
-(443, 'category_id=27', 'mac'),
-(453, 'manufacturer_id=8', 'apple'),
-(455, 'information_id=4', 'about_us'),
-(485, 'product_id=42', 'test'),
-(444, 'category_id=34', 'mp3-players');
+(704, 'product_id=48', 'ipod_classic'),
+(766, 'category_id=20', 'desktops'),
+(503, 'category_id=26', 'pc'),
+(505, 'category_id=27', 'mac'),
+(730, 'manufacturer_id=8', 'apple'),
+(732, 'information_id=4', 'about_us'),
+(768, 'product_id=42', 'test'),
+(767, 'category_id=34', 'mp3-players'),
+(536, 'category_id=36', 'Normal');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_user`
+-- Table structure for table `oc_user`
 --
 
+DROP TABLE IF EXISTS `oc_user`;
 CREATE TABLE `oc_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_group_id` int(11) NOT NULL,
@@ -1911,84 +2873,188 @@ CREATE TABLE `oc_user` (
   `firstname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `lastname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `email` varchar(96) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `status` int(1) NOT NULL,
+  `code` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `ip` varchar(15) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `status` int(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_user`
+-- Dumping data for table `oc_user`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_user_group`
+-- Table structure for table `oc_user_group`
 --
 
+DROP TABLE IF EXISTS `oc_user_group`;
 CREATE TABLE `oc_user_group` (
   `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_general_ci NOT NULL,
   `permission` text COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`user_group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_user_group`
+-- Dumping data for table `oc_user_group`
 --
 
-INSERT INTO `oc_user_group` (`user_group_id`, `name`, `permission`) VALUES ('1', 'Главный администратор', 'a:2:{s:6:"access";a:96:{i:0;s:16:"catalog/category";i:1;s:16:"catalog/download";i:2;s:19:"catalog/information";i:3;s:20:"catalog/manufacturer";i:4;s:15:"catalog/product";i:5;s:14:"catalog/review";i:6;s:18:"common/filemanager";i:7;s:23:"dataexchange/exchange1c";i:8;s:22:"extension/dataexchange";i:9;s:14:"extension/feed";i:10;s:16:"extension/module";i:11;s:17:"extension/payment";i:12;s:18:"extension/shipping";i:13;s:15:"extension/total";i:14;s:16:"feed/google_base";i:15;s:19:"feed/google_sitemap";i:16;s:18:"feed/yandex_market";i:17;s:20:"localisation/country";i:18;s:21:"localisation/currency";i:19;s:21:"localisation/geo_zone";i:20;s:21:"localisation/language";i:21;s:25:"localisation/length_class";i:22;s:25:"localisation/order_status";i:23;s:25:"localisation/stock_status";i:24;s:22:"localisation/tax_class";i:25;s:25:"localisation/weight_class";i:26;s:17:"localisation/zone";i:27;s:17:"module/bestseller";i:28;s:13:"module/blinks";i:29;s:11:"module/cart";i:30;s:15:"module/category";i:31;s:15:"module/featured";i:32;s:23:"module/google_analytics";i:33;s:18:"module/google_talk";i:34;s:18:"module/information";i:35;s:13:"module/latest";i:36;s:19:"module/manufacturer";i:37;s:14:"module/special";i:38;s:16:"payment/alertpay";i:39;s:24:"payment/authorizenet_aim";i:40;s:21:"payment/bank_transfer";i:41;s:14:"payment/cheque";i:42;s:11:"payment/cod";i:43;s:19:"payment/fl_sberbank";i:44;s:21:"payment/free_checkout";i:45;s:14:"payment/liqpay";i:46;s:20:"payment/moneybookers";i:47;s:13:"payment/okpay";i:48;s:15:"payment/paymate";i:49;s:16:"payment/paypoint";i:50;s:26:"payment/perpetual_payments";i:51;s:14:"payment/pp_pro";i:52;s:17:"payment/pp_pro_uk";i:53;s:19:"payment/pp_standard";i:54;s:12:"payment/qiwi";i:55;s:16:"payment/rbkmoney";i:56;s:17:"payment/robokassa";i:57;s:15:"payment/sagepay";i:58;s:22:"payment/sagepay_direct";i:59;s:18:"payment/sagepay_us";i:60;s:19:"payment/twocheckout";i:61;s:16:"payment/webmoney";i:62;s:16:"payment/worldpay";i:63;s:16:"payment/zpayment";i:64;s:16:"report/purchased";i:65;s:11:"report/sale";i:66;s:13:"report/viewed";i:67;s:12:"sale/contact";i:68;s:11:"sale/coupon";i:69;s:13:"sale/customer";i:70;s:19:"sale/customer_group";i:71;s:10:"sale/order";i:72;s:15:"setting/setting";i:73;s:13:"setting/store";i:74;s:17:"shipping/citylink";i:75;s:13:"shipping/flat";i:76;s:13:"shipping/free";i:77;s:13:"shipping/item";i:78;s:23:"shipping/parcelforce_48";i:79;s:15:"shipping/pickup";i:80;s:19:"shipping/royal_mail";i:81;s:12:"shipping/ups";i:82;s:13:"shipping/usps";i:83;s:15:"shipping/weight";i:84;s:11:"tool/backup";i:85;s:14:"tool/error_log";i:86;s:12:"total/coupon";i:87;s:14:"total/handling";i:88;s:19:"total/low_order_fee";i:89;s:14:"total/shipping";i:90;s:15:"total/sub_total";i:91;s:9:"total/tax";i:92;s:11:"total/total";i:93;s:9:"user/user";i:94;s:20:"user/user_permission";i:95;s:23:"dataexchange/exchange1c";}s:6:"modify";a:96:{i:0;s:16:"catalog/category";i:1;s:16:"catalog/download";i:2;s:19:"catalog/information";i:3;s:20:"catalog/manufacturer";i:4;s:15:"catalog/product";i:5;s:14:"catalog/review";i:6;s:18:"common/filemanager";i:7;s:23:"dataexchange/exchange1c";i:8;s:22:"extension/dataexchange";i:9;s:14:"extension/feed";i:10;s:16:"extension/module";i:11;s:17:"extension/payment";i:12;s:18:"extension/shipping";i:13;s:15:"extension/total";i:14;s:16:"feed/google_base";i:15;s:19:"feed/google_sitemap";i:16;s:18:"feed/yandex_market";i:17;s:20:"localisation/country";i:18;s:21:"localisation/currency";i:19;s:21:"localisation/geo_zone";i:20;s:21:"localisation/language";i:21;s:25:"localisation/length_class";i:22;s:25:"localisation/order_status";i:23;s:25:"localisation/stock_status";i:24;s:22:"localisation/tax_class";i:25;s:25:"localisation/weight_class";i:26;s:17:"localisation/zone";i:27;s:17:"module/bestseller";i:28;s:13:"module/blinks";i:29;s:11:"module/cart";i:30;s:15:"module/category";i:31;s:15:"module/featured";i:32;s:23:"module/google_analytics";i:33;s:18:"module/google_talk";i:34;s:18:"module/information";i:35;s:13:"module/latest";i:36;s:19:"module/manufacturer";i:37;s:14:"module/special";i:38;s:16:"payment/alertpay";i:39;s:24:"payment/authorizenet_aim";i:40;s:21:"payment/bank_transfer";i:41;s:14:"payment/cheque";i:42;s:11:"payment/cod";i:43;s:19:"payment/fl_sberbank";i:44;s:21:"payment/free_checkout";i:45;s:14:"payment/liqpay";i:46;s:20:"payment/moneybookers";i:47;s:13:"payment/okpay";i:48;s:15:"payment/paymate";i:49;s:16:"payment/paypoint";i:50;s:26:"payment/perpetual_payments";i:51;s:14:"payment/pp_pro";i:52;s:17:"payment/pp_pro_uk";i:53;s:19:"payment/pp_standard";i:54;s:12:"payment/qiwi";i:55;s:16:"payment/rbkmoney";i:56;s:17:"payment/robokassa";i:57;s:15:"payment/sagepay";i:58;s:22:"payment/sagepay_direct";i:59;s:18:"payment/sagepay_us";i:60;s:19:"payment/twocheckout";i:61;s:16:"payment/webmoney";i:62;s:16:"payment/worldpay";i:63;s:16:"payment/zpayment";i:64;s:16:"report/purchased";i:65;s:11:"report/sale";i:66;s:13:"report/viewed";i:67;s:12:"sale/contact";i:68;s:11:"sale/coupon";i:69;s:13:"sale/customer";i:70;s:19:"sale/customer_group";i:71;s:10:"sale/order";i:72;s:15:"setting/setting";i:73;s:13:"setting/store";i:74;s:17:"shipping/citylink";i:75;s:13:"shipping/flat";i:76;s:13:"shipping/free";i:77;s:13:"shipping/item";i:78;s:23:"shipping/parcelforce_48";i:79;s:15:"shipping/pickup";i:80;s:19:"shipping/royal_mail";i:81;s:12:"shipping/ups";i:82;s:13:"shipping/usps";i:83;s:15:"shipping/weight";i:84;s:11:"tool/backup";i:85;s:14:"tool/error_log";i:86;s:12:"total/coupon";i:87;s:14:"total/handling";i:88;s:19:"total/low_order_fee";i:89;s:14:"total/shipping";i:90;s:15:"total/sub_total";i:91;s:9:"total/tax";i:92;s:11:"total/total";i:93;s:9:"user/user";i:94;s:20:"user/user_permission";i:95;s:23:"dataexchange/exchange1c";}}');
-INSERT INTO `oc_user_group` (`user_group_id`, `name`, `permission`) VALUES ('10', 'Демонстрация', 'a:1:{s:6:"access";a:81:{i:0;s:16:"catalog/category";i:1;s:16:"catalog/download";i:2;s:19:"catalog/information";i:3;s:20:"catalog/manufacturer";i:4;s:15:"catalog/product";i:5;s:14:"catalog/review";i:6;s:18:"common/filemanager";i:7;s:19:"extension/affiliate";i:8;s:14:"extension/feed";i:9;s:16:"extension/module";i:10;s:17:"extension/payment";i:11;s:18:"extension/shipping";i:12;s:15:"extension/total";i:13;s:16:"feed/google_base";i:14;s:19:"feed/google_sitemap";i:15;s:20:"localisation/country";i:16;s:21:"localisation/currency";i:17;s:21:"localisation/geo_zone";i:18;s:21:"localisation/language";i:19;s:25:"localisation/length_class";i:20;s:25:"localisation/order_status";i:21;s:25:"localisation/stock_status";i:22;s:22:"localisation/tax_class";i:23;s:25:"localisation/weight_class";i:24;s:17:"localisation/zone";i:25;s:17:"module/bestseller";i:26;s:11:"module/cart";i:27;s:15:"module/category";i:28;s:15:"module/featured";i:29;s:23:"module/google_analytics";i:30;s:18:"module/google_talk";i:31;s:18:"module/information";i:32;s:13:"module/latest";i:33;s:19:"module/manufacturer";i:34;s:14:"module/special";i:35;s:16:"payment/alertpay";i:36;s:24:"payment/authorizenet_aim";i:37;s:21:"payment/bank_transfer";i:38;s:14:"payment/cheque";i:39;s:11:"payment/cod";i:40;s:14:"payment/liqpay";i:41;s:20:"payment/moneybookers";i:42;s:15:"payment/paymate";i:43;s:16:"payment/paypoint";i:44;s:26:"payment/perpetual_payments";i:45;s:14:"payment/pp_pro";i:46;s:17:"payment/pp_pro_uk";i:47;s:19:"payment/pp_standard";i:48;s:15:"payment/sagepay";i:49;s:22:"payment/sagepay_direct";i:50;s:18:"payment/sagepay_us";i:51;s:19:"payment/twocheckout";i:52;s:16:"payment/worldpay";i:53;s:16:"report/purchased";i:54;s:11:"report/sale";i:55;s:13:"report/viewed";i:56;s:12:"sale/contact";i:57;s:11:"sale/coupon";i:58;s:13:"sale/customer";i:59;s:19:"sale/customer_group";i:60;s:10:"sale/order";i:61;s:15:"setting/setting";i:62;s:17:"shipping/citylink";i:63;s:13:"shipping/flat";i:64;s:13:"shipping/free";i:65;s:13:"shipping/item";i:66;s:23:"shipping/parcelforce_48";i:67;s:19:"shipping/royal_mail";i:68;s:13:"shipping/usps";i:69;s:15:"shipping/weight";i:70;s:11:"tool/backup";i:71;s:14:"tool/error_log";i:72;s:12:"total/coupon";i:73;s:14:"total/handling";i:74;s:19:"total/low_order_fee";i:75;s:14:"total/shipping";i:76;s:15:"total/sub_total";i:77;s:9:"total/tax";i:78;s:11:"total/total";i:79;s:9:"user/user";i:80;s:20:"user/user_permission";}}');
+INSERT INTO `oc_user_group` (`user_group_id`, `name`, `permission`) VALUES
+(1, 'Top Administrator', 'a:2:{s:6:"access";a:131:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:11:"design/menu";i:13;s:14:"extension/feed";i:14;s:16:"extension/module";i:15;s:17:"extension/payment";i:16;s:18:"extension/shipping";i:17;s:15:"extension/total";i:18;s:16:"feed/google_base";i:19;s:19:"feed/google_sitemap";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:25:"localisation/weight_class";i:32;s:17:"localisation/zone";i:33;s:14:"module/account";i:34;s:16:"module/affiliate";i:35;s:13:"module/banner";i:36;s:17:"module/bestseller";i:37;s:15:"module/category";i:38;s:15:"module/featured";i:39;s:18:"module/google_talk";i:40;s:18:"module/information";i:41;s:13:"module/latest";i:42;s:19:"module/manufacturer";i:43;s:16:"module/slideshow";i:44;s:14:"module/special";i:45;s:12:"module/store";i:46;s:14:"module/welcome";i:47;s:16:"payment/alertpay";i:48;s:24:"payment/authorizenet_aim";i:49;s:21:"payment/bank_transfer";i:50;s:14:"payment/cheque";i:51;s:11:"payment/cod";i:52;s:21:"payment/free_checkout";i:53;s:14:"payment/liqpay";i:54;s:20:"payment/moneybookers";i:55;s:14:"payment/nochex";i:56;s:15:"payment/paymate";i:57;s:16:"payment/paypoint";i:58;s:26:"payment/perpetual_payments";i:59;s:14:"payment/pp_pro";i:60;s:17:"payment/pp_pro_uk";i:61;s:19:"payment/pp_standard";i:62;s:15:"payment/sagepay";i:63;s:22:"payment/sagepay_direct";i:64;s:18:"payment/sagepay_us";i:65;s:19:"payment/twocheckout";i:66;s:16:"payment/worldpay";i:67;s:16:"report/purchased";i:68;s:11:"report/sale";i:69;s:13:"report/viewed";i:70;s:14:"sale/affiliate";i:71;s:12:"sale/contact";i:72;s:11:"sale/coupon";i:73;s:13:"sale/customer";i:74;s:19:"sale/customer_group";i:75;s:10:"sale/order";i:76;s:11:"sale/return";i:77;s:12:"sale/voucher";i:78;s:18:"sale/voucher_theme";i:79;s:15:"setting/setting";i:80;s:13:"setting/store";i:81;s:17:"shipping/citylink";i:82;s:13:"shipping/flat";i:83;s:13:"shipping/free";i:84;s:13:"shipping/item";i:85;s:23:"shipping/parcelforce_48";i:86;s:15:"shipping/pickup";i:87;s:19:"shipping/royal_mail";i:88;s:12:"shipping/ups";i:89;s:13:"shipping/usps";i:90;s:15:"shipping/weight";i:91;s:11:"tool/backup";i:92;s:14:"tool/error_log";i:93;s:12:"total/coupon";i:94;s:12:"total/credit";i:95;s:14:"total/handling";i:96;s:19:"total/low_order_fee";i:97;s:12:"total/reward";i:98;s:14:"total/shipping";i:99;s:15:"total/sub_total";i:100;s:9:"total/tax";i:101;s:11:"total/total";i:102;s:13:"total/voucher";i:103;s:9:"user/user";i:104;s:20:"user/user_permission";i:105;s:19:"shipping/royal_mail";i:106;s:12:"shipping/ups";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:19:"payment/pp_standard";i:110;s:19:"payment/pp_standard";i:111;s:19:"payment/pp_standard";i:112;s:21:"payment/free_checkout";i:113;s:16:"payment/alertpay";i:114;s:24:"payment/authorizenet_aim";i:115;s:21:"payment/bank_transfer";i:116;s:14:"payment/cheque";i:117;s:14:"payment/liqpay";i:118;s:20:"payment/moneybookers";i:119;s:14:"payment/nochex";i:120;s:15:"payment/paymate";i:121;s:16:"payment/paypoint";i:122;s:26:"payment/perpetual_payments";i:123;s:17:"payment/pp_pro_uk";i:124;s:14:"payment/pp_pro";i:125;s:19:"payment/pp_standard";i:126;s:15:"payment/sagepay";i:127;s:16:"payment/worldpay";i:128;s:19:"payment/twocheckout";i:129;s:18:"payment/sagepay_us";i:130;s:22:"payment/sagepay_direct";}s:6:"modify";a:131:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:11:"design/menu";i:13;s:14:"extension/feed";i:14;s:16:"extension/module";i:15;s:17:"extension/payment";i:16;s:18:"extension/shipping";i:17;s:15:"extension/total";i:18;s:16:"feed/google_base";i:19;s:19:"feed/google_sitemap";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:25:"localisation/weight_class";i:32;s:17:"localisation/zone";i:33;s:14:"module/account";i:34;s:16:"module/affiliate";i:35;s:13:"module/banner";i:36;s:17:"module/bestseller";i:37;s:15:"module/category";i:38;s:15:"module/featured";i:39;s:18:"module/google_talk";i:40;s:18:"module/information";i:41;s:13:"module/latest";i:42;s:19:"module/manufacturer";i:43;s:16:"module/slideshow";i:44;s:14:"module/special";i:45;s:12:"module/store";i:46;s:14:"module/welcome";i:47;s:16:"payment/alertpay";i:48;s:24:"payment/authorizenet_aim";i:49;s:21:"payment/bank_transfer";i:50;s:14:"payment/cheque";i:51;s:11:"payment/cod";i:52;s:21:"payment/free_checkout";i:53;s:14:"payment/liqpay";i:54;s:20:"payment/moneybookers";i:55;s:14:"payment/nochex";i:56;s:15:"payment/paymate";i:57;s:16:"payment/paypoint";i:58;s:26:"payment/perpetual_payments";i:59;s:14:"payment/pp_pro";i:60;s:17:"payment/pp_pro_uk";i:61;s:19:"payment/pp_standard";i:62;s:15:"payment/sagepay";i:63;s:22:"payment/sagepay_direct";i:64;s:18:"payment/sagepay_us";i:65;s:19:"payment/twocheckout";i:66;s:16:"payment/worldpay";i:67;s:16:"report/purchased";i:68;s:11:"report/sale";i:69;s:13:"report/viewed";i:70;s:14:"sale/affiliate";i:71;s:12:"sale/contact";i:72;s:11:"sale/coupon";i:73;s:13:"sale/customer";i:74;s:19:"sale/customer_group";i:75;s:10:"sale/order";i:76;s:11:"sale/return";i:77;s:12:"sale/voucher";i:78;s:18:"sale/voucher_theme";i:79;s:15:"setting/setting";i:80;s:13:"setting/store";i:81;s:17:"shipping/citylink";i:82;s:13:"shipping/flat";i:83;s:13:"shipping/free";i:84;s:13:"shipping/item";i:85;s:23:"shipping/parcelforce_48";i:86;s:15:"shipping/pickup";i:87;s:19:"shipping/royal_mail";i:88;s:12:"shipping/ups";i:89;s:13:"shipping/usps";i:90;s:15:"shipping/weight";i:91;s:11:"tool/backup";i:92;s:14:"tool/error_log";i:93;s:12:"total/coupon";i:94;s:12:"total/credit";i:95;s:14:"total/handling";i:96;s:19:"total/low_order_fee";i:97;s:12:"total/reward";i:98;s:14:"total/shipping";i:99;s:15:"total/sub_total";i:100;s:9:"total/tax";i:101;s:11:"total/total";i:102;s:13:"total/voucher";i:103;s:9:"user/user";i:104;s:20:"user/user_permission";i:105;s:19:"shipping/royal_mail";i:106;s:12:"shipping/ups";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:19:"payment/pp_standard";i:110;s:19:"payment/pp_standard";i:111;s:19:"payment/pp_standard";i:112;s:21:"payment/free_checkout";i:113;s:16:"payment/alertpay";i:114;s:24:"payment/authorizenet_aim";i:115;s:21:"payment/bank_transfer";i:116;s:14:"payment/cheque";i:117;s:14:"payment/liqpay";i:118;s:20:"payment/moneybookers";i:119;s:14:"payment/nochex";i:120;s:15:"payment/paymate";i:121;s:16:"payment/paypoint";i:122;s:26:"payment/perpetual_payments";i:123;s:17:"payment/pp_pro_uk";i:124;s:14:"payment/pp_pro";i:125;s:19:"payment/pp_standard";i:126;s:15:"payment/sagepay";i:127;s:16:"payment/worldpay";i:128;s:19:"payment/twocheckout";i:129;s:18:"payment/sagepay_us";i:130;s:22:"payment/sagepay_direct";}}'),
+(10, 'Demonstration', '');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_weight_class`
+-- Table structure for table `oc_voucher`
 --
 
+DROP TABLE IF EXISTS `oc_voucher`;
+CREATE TABLE `oc_voucher` (
+  `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `code` varchar(10) COLLATE utf8_general_ci NOT NULL,
+  `from_name` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `from_email` varchar(96) COLLATE utf8_general_ci NOT NULL,
+  `to_name` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `to_email` varchar(96) COLLATE utf8_general_ci NOT NULL,
+  `message` text COLLATE utf8_general_ci NOT NULL,
+  `amount` decimal(15,4) NOT NULL,
+  `voucher_theme_id` int(11) NOT NULL,
+  `status` int(1) NOT NULL,
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`voucher_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_voucher`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_voucher_history`
+--
+
+DROP TABLE IF EXISTS `oc_voucher_history`;
+CREATE TABLE `oc_voucher_history` (
+  `voucher_history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `voucher_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `amount` decimal(15,4) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`voucher_history_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_voucher_history`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_voucher_theme`
+--
+
+DROP TABLE IF EXISTS `oc_voucher_theme`;
+CREATE TABLE `oc_voucher_theme` (
+  `voucher_theme_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`voucher_theme_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_voucher_theme`
+--
+
+INSERT INTO `oc_voucher_theme` (`voucher_theme_id`, `image`) VALUES
+(8, 'data/canon_eos_5d_2.jpg'),
+(7, 'data/gift-voucher-birthday.jpg'),
+(6, 'data/apple_logo.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_voucher_theme_description`
+--
+
+DROP TABLE IF EXISTS `oc_voucher_theme_description`;
+CREATE TABLE `oc_voucher_theme_description` (
+  `voucher_theme_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`voucher_theme_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_voucher_theme_description`
+--
+
+INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `name`) VALUES
+(6, 1, 'Christmas'),
+(7, 1, 'Birthday'),
+(8, 1, 'General');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_weight_class`
+--
+
+DROP TABLE IF EXISTS `oc_weight_class`;
 CREATE TABLE `oc_weight_class` (
   `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `value` decimal(15,8) NOT NULL DEFAULT '0.00000000',
   PRIMARY KEY (`weight_class_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_weight_class`
+-- Dumping data for table `oc_weight_class`
 --
 
 INSERT INTO `oc_weight_class` (`weight_class_id`, `value`) VALUES
 (1, '1.00000000'),
-(2, '1000.00000000');
+(2, '1000.00000000'),
+(5, '2.20460000'),
+(6, '35.27400000');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_weight_class_description`
+-- Table structure for table `oc_weight_class_description`
 --
 
+DROP TABLE IF EXISTS `oc_weight_class_description`;
 CREATE TABLE `oc_weight_class_description` (
   `weight_class_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `title` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `unit` varchar(4) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`weight_class_id`,`language_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_weight_class_description`
+-- Dumping data for table `oc_weight_class_description`
 --
 
 INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `title`, `unit`) VALUES
-(1, 1, 'Килограммы', 'кг'),
-(2, 1, 'Граммы', 'г');
+(1, 1, 'Kilogram', 'kg'),
+(2, 1, 'Gram', 'g'),
+(5, 1, 'Pound ', 'lb'),
+(6, 1, 'Ounce', 'oz');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_zone`
+-- Table structure for table `oc_zone`
 --
 
+DROP TABLE IF EXISTS `oc_zone`;
 CREATE TABLE `oc_zone` (
   `zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
@@ -1996,220 +3062,220 @@ CREATE TABLE `oc_zone` (
   `name` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=3949 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_zone`
+-- Dumping data for table `oc_zone`
 --
 
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
-(1, 1, 'BDS', 'Бадахшан', 1),
-(2, 1, 'BDG', 'Бадгис', 1),
-(3, 1, 'BGL', 'Баглан', 1),
-(4, 1, 'BAL', 'Балх', 1),
-(5, 1, 'BAM', 'Бамиан', 1),
-(6, 1, 'FRA', 'Фарах', 1),
-(7, 1, 'FYB', 'Фарьяб', 1),
-(8, 1, 'GHA', 'Газни', 1),
-(9, 1, 'GHO', 'Гор', 1),
-(10, 1, 'HEL', 'Гильменд', 1),
-(11, 1, 'HER', 'Герат', 1),
-(12, 1, 'JOW', 'Джаузджан', 1),
-(13, 1, 'KAB', 'Кабул', 1),
-(14, 1, 'KAN', 'Кандагар', 1),
-(15, 1, 'KAP', 'Каписа', 1),
-(16, 1, 'KHO', 'Хост', 1),
-(17, 1, 'KNR', 'Кунар', 1),
-(18, 1, 'KDZ', 'Кундуз', 1),
-(19, 1, 'LAG', 'Лагман', 1),
-(20, 1, 'LOW', 'Логар', 1),
-(21, 1, 'NAN', 'Нангархар', 1),
-(22, 1, 'NIM', 'Нимроз', 1),
-(23, 1, 'NUR', 'Нуристан', 1),
-(24, 1, 'ORU', 'Урузган', 1),
-(25, 1, 'PIA', 'Пактия', 1),
-(26, 1, 'PKA', 'Пактика', 1),
-(27, 1, 'PAR', 'Парван', 1),
-(28, 1, 'SAM', 'Саманган', 1),
-(29, 1, 'SAR', 'Сари-Пуль', 1),
-(30, 1, 'TAK', 'Тахар', 1),
-(31, 1, 'WAR', 'Вардак', 1),
-(32, 1, 'ZAB', 'Забуль', 1),
-(33, 2, 'BR', 'Берат', 1),
-(34, 2, 'BU', 'Булькиза', 1),
-(35, 2, 'DL', 'Дельвина', 1),
-(36, 2, 'DV', 'Девол', 1),
-(37, 2, 'DI', 'Дибра', 1),
-(38, 2, 'DR', 'Дуррес', 1),
-(39, 2, 'EL', 'Эльбасан', 1),
-(40, 2, 'ER', 'Колёня', 1),
-(41, 2, 'FR', 'Фиери', 1),
-(42, 2, 'GJ', 'Гирокастра', 1),
-(43, 2, 'GR', 'Грамши', 1),
-(44, 2, 'HA', 'Хас', 1),
-(45, 2, 'KA', 'Кавая', 1),
-(46, 2, 'KB', 'Курбин', 1),
-(47, 2, 'KC', 'Кучова', 1),
-(48, 2, 'KO', 'Корча', 1),
-(49, 2, 'KR', 'Круя', 1),
-(50, 2, 'KU', 'Кукес', 1),
-(51, 2, 'LB', 'Либражди', 1),
-(52, 2, 'LE', 'Лежа', 1),
-(53, 2, 'LU', 'Люшня', 1),
-(54, 2, 'MM', 'Мальси-э-Мади', 1),
-(55, 2, 'MK', 'Малакастра', 1),
-(56, 2, 'MT', 'Мати', 1),
-(57, 2, 'MR', 'Мирдита', 1),
-(58, 2, 'PQ', 'Пекини', 1),
-(59, 2, 'PR', 'Пермети', 1),
-(60, 2, 'PG', 'Поградец', 1),
-(61, 2, 'PU', 'Пука', 1),
-(62, 2, 'SH', 'Шкодер', 1),
-(63, 2, 'SK', 'Скрапари', 1),
-(64, 2, 'SR', 'Саранда', 1),
-(65, 2, 'TE', 'Тепелена', 1),
-(66, 2, 'TP', 'Тропоя', 1),
-(67, 2, 'TR', 'Тирана', 1),
-(68, 2, 'VL', 'Влёра', 1),
-(69, 3, 'ADR', 'Адрар', 1),
-(70, 3, 'ADE', 'Айн-Дефла', 1),
-(71, 3, 'ATE', 'Айн-Темухент', 1),
-(72, 3, 'ALG', 'Алжир', 1),
-(73, 3, 'ANN', 'Аннаба', 1),
-(74, 3, 'BAT', 'Батна', 1),
-(75, 3, 'BEC', 'Бешар', 1),
-(76, 3, 'BEJ', 'Беджая', 1),
-(77, 3, 'BIS', 'Бискра', 1),
-(78, 3, 'BLI', 'Блида', 1),
-(79, 3, 'BBA', 'Бордж-Бу-Арреридж', 1),
-(80, 3, 'BOA', 'Буйра', 1),
-(81, 3, 'BMD', 'Бумердес', 1),
-(82, 3, 'CHL', 'Шлеф', 1),
-(83, 3, 'CON', 'Константина', 1),
-(84, 3, 'DJE', 'Джельфа', 1),
-(85, 3, 'EBA', 'Эль-Баяд', 1),
-(86, 3, 'EOU', 'Эль-Уэд', 1),
-(87, 3, 'ETA', 'Эль-Тарф', 1),
-(88, 3, 'GHA', 'Гардая', 1),
-(89, 3, 'GUE', 'Гуэльма', 1),
-(90, 3, 'ILL', 'Иллизи', 1),
-(91, 3, 'JIJ', 'Джиджель', 1),
-(92, 3, 'KHE', 'Хеншела', 1),
-(93, 3, 'LAG', 'Лагуат', 1),
-(94, 3, 'MUA', 'Маскара', 1),
-(95, 3, 'MED', 'Медеа', 1),
-(96, 3, 'MIL', 'Мила', 1),
-(97, 3, 'MOS', 'Мостаганем', 1),
-(98, 3, 'MSI', 'Мсила', 1),
-(99, 3, 'NAA', 'Наама', 1),
-(100, 3, 'ORA', 'Оран', 1),
-(101, 3, 'OUA', 'Уаргла', 1),
-(102, 3, 'OEB', 'Ум Эль-Буахи', 1),
-(103, 3, 'REL', 'Релизан', 1),
-(104, 3, 'SAI', 'Саида', 1),
-(105, 3, 'SET', 'Сетиф', 1),
-(106, 3, 'SBA', 'Сиди-Бель-Аббес', 1),
-(107, 3, 'SKI', 'Скикда', 1),
-(108, 3, 'SAH', 'Сук-Ахрас', 1),
-(109, 3, 'TAM', 'Таменрассет', 1),
-(110, 3, 'TEB', 'Тебесса', 1),
-(111, 3, 'TIA', 'Тиарет', 1),
-(112, 3, 'TIN', 'Тиндуф', 1),
-(113, 3, 'TIP', 'Типаза', 1),
-(114, 3, 'TIS', 'Тиссемсилт', 1),
-(115, 3, 'TOU', 'Тизи-Узу', 1),
-(116, 3, 'TLE', 'Тлемсен', 1),
-(117, 4, 'E', 'Восточный округ', 1),
-(118, 4, 'M', 'Мануа', 1),
-(119, 4, 'R', 'Остров Роз', 1),
-(120, 4, 'S', 'Остров Суэйнс', 1),
-(121, 4, 'W', 'Западный округ', 1),
-(122, 5, 'ALV', 'Андорра-ла-Велья', 1),
-(123, 5, 'CAN', 'Канильо', 1),
-(124, 5, 'ENC', 'Энкамп', 1),
-(125, 5, 'ESE', 'Эскальдес-Энгордань', 1),
-(126, 5, 'LMA', 'Ла-Массана', 1),
-(127, 5, 'ORD', 'Ордино', 1),
-(128, 5, 'SJL', 'Сант-Жулия-де-Лория', 1),
-(129, 6, 'BGO', 'Бенго', 1),
-(130, 6, 'BGU', 'Бенгела', 1),
-(131, 6, 'BIE', 'Бие', 1),
-(132, 6, 'CAB', 'Кабинда', 1),
-(133, 6, 'CCU', 'Квандо-Кубанго', 1),
-(134, 6, 'CNO', 'Северная Кванза', 1),
-(135, 6, 'CUS', 'Южная Кванза', 1),
-(136, 6, 'CNN', 'Кунене', 1),
-(137, 6, 'HUA', 'Уамбо', 1),
-(138, 6, 'HUI', 'Уила', 1),
-(139, 6, 'LUA', 'Луанда', 1),
-(140, 6, 'LNO', 'Северная Лунда', 1),
-(141, 6, 'LSU', 'Южная Лунда', 1),
-(142, 6, 'MAL', 'Маланже', 1),
-(143, 6, 'MOX', 'Мошико', 1),
-(144, 6, 'NAM', 'Намибе', 1),
-(145, 6, 'UIG', 'Уиже', 1),
-(146, 6, 'ZAI', 'Заире', 1),
-(147, 9, 'ASG', 'Сент-Джордж', 1),
-(148, 9, 'ASJ', 'Сент-Джон', 1),
-(149, 9, 'ASM', 'Сент-Мери', 1),
-(150, 9, 'ASL', 'Сент-Пол', 1),
-(151, 9, 'ASR', 'Сент-Петер', 1),
-(152, 9, 'ASH', 'Сент-Филип', 1),
-(153, 9, 'BAR', 'Барбуда', 1),
-(154, 9, 'RED', 'Редонда', 1),
-(155, 10, 'AN', 'Антарктида и острова Южной Атлантики', 1),
-(156, 10, 'BA', 'Буэнос-Айрес', 1),
-(157, 10, 'CA', 'Катамарка', 1),
-(158, 10, 'CH', 'Чако', 1),
-(159, 10, 'CU', 'Чубут', 1),
-(160, 10, 'CO', 'Кордова', 1),
-(161, 10, 'CR', 'Корриентес', 1),
-(162, 10, 'DF', 'Федеральный округ', 1),
-(163, 10, 'ER', 'Энтре-Риос', 1),
-(164, 10, 'FO', 'Формоса', 1),
-(165, 10, 'JU', 'Жужуй', 1),
-(166, 10, 'LP', 'Ла-Пампа', 1),
-(167, 10, 'LR', 'Ла-Риоха', 1),
-(168, 10, 'ME', 'Мендоса', 1),
-(169, 10, 'MI', 'Мисьонес', 1),
-(170, 10, 'NE', 'Неукен', 1),
-(171, 10, 'RN', 'Рио-Негро', 1),
-(172, 10, 'SA', 'Сальта', 1),
-(173, 10, 'SJ', 'Сан-Хуан', 1),
-(174, 10, 'SL', 'Сан-Луис', 1),
-(175, 10, 'SC', 'Санта-Крус', 1),
-(176, 10, 'SF', 'Санта-Фе', 1),
-(177, 10, 'SD', 'Сантьяго-дель-Эстеро', 1),
-(178, 10, 'TF', 'Тьерра-дель-Фуэго', 1),
-(179, 10, 'TU', 'Тукуман', 1),
-(180, 11, 'AGT', 'Арагацотн', 1),
-(181, 11, 'ARR', 'Арарат', 1),
-(182, 11, 'ARM', 'Армавир', 1),
-(183, 11, 'GEG', 'Гегаркуник', 1),
-(184, 11, 'KOT', 'Котайк', 1),
-(185, 11, 'LOR', 'Лори', 1),
-(186, 11, 'SHI', 'Ширак', 1),
-(187, 11, 'SYU', 'Сюник', 1),
-(188, 11, 'TAV', 'Тавуш', 1),
-(189, 11, 'VAY', 'Вайоц Дзор', 1),
-(190, 11, 'YER', 'Ереван', 1),
-(191, 13, 'ACT', 'Австралийская столичная территория', 1),
-(192, 13, 'NSW', 'Новый Южный Уэльс', 1),
-(193, 13, 'NT', 'Северная территория', 1),
-(194, 13, 'QLD', 'Квинсленд', 1),
-(195, 13, 'SA', 'Южная Австралия', 1),
-(196, 13, 'TAS', 'Тасмания', 1),
-(197, 13, 'VIC', 'Виктория', 1),
-(198, 13, 'WA', 'Западная Австралия', 1),
-(199, 14, 'BUR', 'Бургенланд', 1),
-(200, 14, 'KAR', 'Каринтия', 1),
-(201, 14, 'NOS', 'Нижняя Австрия', 1),
-(202, 14, 'OOS', 'Верхняя Австрия', 1),
-(203, 14, 'SAL', 'Зальцбург', 1),
-(204, 14, 'STE', 'Штирия', 1),
-(205, 14, 'TIR', 'Тироль', 1),
-(206, 14, 'VOR', 'Форарльберг', 1),
-(207, 14, 'WIE', 'Вена', 1),
+(1, 1, 'BDS', 'Badakhshan', 1),
+(2, 1, 'BDG', 'Badghis', 1),
+(3, 1, 'BGL', 'Baghlan', 1),
+(4, 1, 'BAL', 'Balkh', 1),
+(5, 1, 'BAM', 'Bamian', 1),
+(6, 1, 'FRA', 'Farah', 1),
+(7, 1, 'FYB', 'Faryab', 1),
+(8, 1, 'GHA', 'Ghazni', 1),
+(9, 1, 'GHO', 'Ghowr', 1),
+(10, 1, 'HEL', 'Helmand', 1),
+(11, 1, 'HER', 'Herat', 1),
+(12, 1, 'JOW', 'Jowzjan', 1),
+(13, 1, 'KAB', 'Kabul', 1),
+(14, 1, 'KAN', 'Kandahar', 1),
+(15, 1, 'KAP', 'Kapisa', 1),
+(16, 1, 'KHO', 'Khost', 1),
+(17, 1, 'KNR', 'Konar', 1),
+(18, 1, 'KDZ', 'Kondoz', 1),
+(19, 1, 'LAG', 'Laghman', 1),
+(20, 1, 'LOW', 'Lowgar', 1),
+(21, 1, 'NAN', 'Nangrahar', 1),
+(22, 1, 'NIM', 'Nimruz', 1),
+(23, 1, 'NUR', 'Nurestan', 1),
+(24, 1, 'ORU', 'Oruzgan', 1),
+(25, 1, 'PIA', 'Paktia', 1),
+(26, 1, 'PKA', 'Paktika', 1),
+(27, 1, 'PAR', 'Parwan', 1),
+(28, 1, 'SAM', 'Samangan', 1),
+(29, 1, 'SAR', 'Sar-e Pol', 1),
+(30, 1, 'TAK', 'Takhar', 1),
+(31, 1, 'WAR', 'Wardak', 1),
+(32, 1, 'ZAB', 'Zabol', 1),
+(33, 2, 'BR', 'Berat', 1),
+(34, 2, 'BU', 'Bulqize', 1),
+(35, 2, 'DL', 'Delvine', 1),
+(36, 2, 'DV', 'Devoll', 1),
+(37, 2, 'DI', 'Diber', 1),
+(38, 2, 'DR', 'Durres', 1),
+(39, 2, 'EL', 'Elbasan', 1),
+(40, 2, 'ER', 'Kolonje', 1),
+(41, 2, 'FR', 'Fier', 1),
+(42, 2, 'GJ', 'Gjirokaster', 1),
+(43, 2, 'GR', 'Gramsh', 1),
+(44, 2, 'HA', 'Has', 1),
+(45, 2, 'KA', 'Kavaje', 1),
+(46, 2, 'KB', 'Kurbin', 1),
+(47, 2, 'KC', 'Kucove', 1),
+(48, 2, 'KO', 'Korce', 1),
+(49, 2, 'KR', 'Kruje', 1),
+(50, 2, 'KU', 'Kukes', 1),
+(51, 2, 'LB', 'Librazhd', 1),
+(52, 2, 'LE', 'Lezhe', 1),
+(53, 2, 'LU', 'Lushnje', 1),
+(54, 2, 'MM', 'Malesi e Madhe', 1),
+(55, 2, 'MK', 'Mallakaster', 1),
+(56, 2, 'MT', 'Mat', 1),
+(57, 2, 'MR', 'Mirdite', 1),
+(58, 2, 'PQ', 'Peqin', 1),
+(59, 2, 'PR', 'Permet', 1),
+(60, 2, 'PG', 'Pogradec', 1),
+(61, 2, 'PU', 'Puke', 1),
+(62, 2, 'SH', 'Shkoder', 1),
+(63, 2, 'SK', 'Skrapar', 1),
+(64, 2, 'SR', 'Sarande', 1),
+(65, 2, 'TE', 'Tepelene', 1),
+(66, 2, 'TP', 'Tropoje', 1),
+(67, 2, 'TR', 'Tirane', 1),
+(68, 2, 'VL', 'Vlore', 1),
+(69, 3, 'ADR', 'Adrar', 1),
+(70, 3, 'ADE', 'Ain Defla', 1),
+(71, 3, 'ATE', 'Ain Temouchent', 1),
+(72, 3, 'ALG', 'Alger', 1),
+(73, 3, 'ANN', 'Annaba', 1),
+(74, 3, 'BAT', 'Batna', 1),
+(75, 3, 'BEC', 'Bechar', 1),
+(76, 3, 'BEJ', 'Bejaia', 1),
+(77, 3, 'BIS', 'Biskra', 1),
+(78, 3, 'BLI', 'Blida', 1),
+(79, 3, 'BBA', 'Bordj Bou Arreridj', 1),
+(80, 3, 'BOA', 'Bouira', 1),
+(81, 3, 'BMD', 'Boumerdes', 1),
+(82, 3, 'CHL', 'Chlef', 1),
+(83, 3, 'CON', 'Constantine', 1),
+(84, 3, 'DJE', 'Djelfa', 1),
+(85, 3, 'EBA', 'El Bayadh', 1),
+(86, 3, 'EOU', 'El Oued', 1),
+(87, 3, 'ETA', 'El Tarf', 1),
+(88, 3, 'GHA', 'Ghardaia', 1),
+(89, 3, 'GUE', 'Guelma', 1),
+(90, 3, 'ILL', 'Illizi', 1),
+(91, 3, 'JIJ', 'Jijel', 1),
+(92, 3, 'KHE', 'Khenchela', 1),
+(93, 3, 'LAG', 'Laghouat', 1),
+(94, 3, 'MUA', 'Muaskar', 1),
+(95, 3, 'MED', 'Medea', 1),
+(96, 3, 'MIL', 'Mila', 1),
+(97, 3, 'MOS', 'Mostaganem', 1),
+(98, 3, 'MSI', 'M''Sila', 1),
+(99, 3, 'NAA', 'Naama', 1),
+(100, 3, 'ORA', 'Oran', 1),
+(101, 3, 'OUA', 'Ouargla', 1),
+(102, 3, 'OEB', 'Oum el-Bouaghi', 1),
+(103, 3, 'REL', 'Relizane', 1),
+(104, 3, 'SAI', 'Saida', 1),
+(105, 3, 'SET', 'Setif', 1),
+(106, 3, 'SBA', 'Sidi Bel Abbes', 1),
+(107, 3, 'SKI', 'Skikda', 1),
+(108, 3, 'SAH', 'Souk Ahras', 1),
+(109, 3, 'TAM', 'Tamanghasset', 1),
+(110, 3, 'TEB', 'Tebessa', 1),
+(111, 3, 'TIA', 'Tiaret', 1),
+(112, 3, 'TIN', 'Tindouf', 1),
+(113, 3, 'TIP', 'Tipaza', 1),
+(114, 3, 'TIS', 'Tissemsilt', 1),
+(115, 3, 'TOU', 'Tizi Ouzou', 1),
+(116, 3, 'TLE', 'Tlemcen', 1),
+(117, 4, 'E', 'Eastern', 1),
+(118, 4, 'M', 'Manu''a', 1),
+(119, 4, 'R', 'Rose Island', 1),
+(120, 4, 'S', 'Swains Island', 1),
+(121, 4, 'W', 'Western', 1),
+(122, 5, 'ALV', 'Andorra la Vella', 1),
+(123, 5, 'CAN', 'Canillo', 1),
+(124, 5, 'ENC', 'Encamp', 1),
+(125, 5, 'ESE', 'Escaldes-Engordany', 1),
+(126, 5, 'LMA', 'La Massana', 1),
+(127, 5, 'ORD', 'Ordino', 1),
+(128, 5, 'SJL', 'Sant Julia de Loria', 1),
+(129, 6, 'BGO', 'Bengo', 1),
+(130, 6, 'BGU', 'Benguela', 1),
+(131, 6, 'BIE', 'Bie', 1),
+(132, 6, 'CAB', 'Cabinda', 1),
+(133, 6, 'CCU', 'Cuando-Cubango', 1),
+(134, 6, 'CNO', 'Cuanza Norte', 1),
+(135, 6, 'CUS', 'Cuanza Sul', 1),
+(136, 6, 'CNN', 'Cunene', 1),
+(137, 6, 'HUA', 'Huambo', 1),
+(138, 6, 'HUI', 'Huila', 1),
+(139, 6, 'LUA', 'Luanda', 1),
+(140, 6, 'LNO', 'Lunda Norte', 1),
+(141, 6, 'LSU', 'Lunda Sul', 1),
+(142, 6, 'MAL', 'Malange', 1),
+(143, 6, 'MOX', 'Moxico', 1),
+(144, 6, 'NAM', 'Namibe', 1),
+(145, 6, 'UIG', 'Uige', 1),
+(146, 6, 'ZAI', 'Zaire', 1),
+(147, 9, 'ASG', 'Saint George', 1),
+(148, 9, 'ASJ', 'Saint John', 1),
+(149, 9, 'ASM', 'Saint Mary', 1),
+(150, 9, 'ASL', 'Saint Paul', 1),
+(151, 9, 'ASR', 'Saint Peter', 1),
+(152, 9, 'ASH', 'Saint Philip', 1),
+(153, 9, 'BAR', 'Barbuda', 1),
+(154, 9, 'RED', 'Redonda', 1),
+(155, 10, 'AN', 'Antartida e Islas del Atlantico', 1),
+(156, 10, 'BA', 'Buenos Aires', 1),
+(157, 10, 'CA', 'Catamarca', 1),
+(158, 10, 'CH', 'Chaco', 1),
+(159, 10, 'CU', 'Chubut', 1),
+(160, 10, 'CO', 'Cordoba', 1),
+(161, 10, 'CR', 'Corrientes', 1),
+(162, 10, 'DF', 'Distrito Federal', 1),
+(163, 10, 'ER', 'Entre Rios', 1),
+(164, 10, 'FO', 'Formosa', 1),
+(165, 10, 'JU', 'Jujuy', 1),
+(166, 10, 'LP', 'La Pampa', 1),
+(167, 10, 'LR', 'La Rioja', 1),
+(168, 10, 'ME', 'Mendoza', 1),
+(169, 10, 'MI', 'Misiones', 1),
+(170, 10, 'NE', 'Neuquen', 1),
+(171, 10, 'RN', 'Rio Negro', 1),
+(172, 10, 'SA', 'Salta', 1),
+(173, 10, 'SJ', 'San Juan', 1),
+(174, 10, 'SL', 'San Luis', 1),
+(175, 10, 'SC', 'Santa Cruz', 1),
+(176, 10, 'SF', 'Santa Fe', 1),
+(177, 10, 'SD', 'Santiago del Estero', 1),
+(178, 10, 'TF', 'Tierra del Fuego', 1),
+(179, 10, 'TU', 'Tucuman', 1),
+(180, 11, 'AGT', 'Aragatsotn', 1),
+(181, 11, 'ARR', 'Ararat', 1),
+(182, 11, 'ARM', 'Armavir', 1),
+(183, 11, 'GEG', 'Geghark''unik''', 1),
+(184, 11, 'KOT', 'Kotayk''', 1),
+(185, 11, 'LOR', 'Lorri', 1),
+(186, 11, 'SHI', 'Shirak', 1),
+(187, 11, 'SYU', 'Syunik''', 1),
+(188, 11, 'TAV', 'Tavush', 1),
+(189, 11, 'VAY', 'Vayots'' Dzor', 1),
+(190, 11, 'YER', 'Yerevan', 1),
+(191, 13, 'ACT', 'Australian Capital Territory', 1),
+(192, 13, 'NSW', 'New South Wales', 1),
+(193, 13, 'NT', 'Northern Territory', 1),
+(194, 13, 'QLD', 'Queensland', 1),
+(195, 13, 'SA', 'South Australia', 1),
+(196, 13, 'TAS', 'Tasmania', 1),
+(197, 13, 'VIC', 'Victoria', 1),
+(198, 13, 'WA', 'Western Australia', 1),
+(199, 14, 'BUR', 'Burgenland', 1),
+(200, 14, 'KAR', 'Kärnten', 1),
+(201, 14, 'NOS', 'Nieder&ouml;sterreich', 1),
+(202, 14, 'OOS', 'Ober&ouml;sterreich', 1),
+(203, 14, 'SAL', 'Salzburg', 1),
+(204, 14, 'STE', 'Steiermark', 1),
+(205, 14, 'TIR', 'Tirol', 1),
+(206, 14, 'VOR', 'Vorarlberg', 1),
+(207, 14, 'WIE', 'Wien', 1),
 (208, 15, 'AB', 'Ali Bayramli', 1),
 (209, 15, 'ABS', 'Abseron', 1),
 (210, 15, 'AGC', 'AgcabAdi', 1),
@@ -2339,13 +3405,13 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (334, 19, 'PET', 'Saint Peter', 1),
 (335, 19, 'PHI', 'Saint Philip', 1),
 (336, 19, 'THO', 'Saint Thomas', 1),
-(337, 20, 'BR', 'Брест', 1),
-(338, 20, 'HO', 'Гомель', 1),
-(339, 20, 'HM', 'Минск', 1),
-(340, 20, 'HR', 'Гродно', 1),
-(341, 20, 'MA', 'Могилев', 1),
-(342, 20, 'MI', 'Минская область', 1),
-(343, 20, 'VI', 'Витебск', 1),
+(337, 20, 'BR', 'Brestskaya (Brest)', 1),
+(338, 20, 'HO', 'Homyel''skaya (Homyel'')', 1),
+(339, 20, 'HM', 'Horad Minsk', 1),
+(340, 20, 'HR', 'Hrodzyenskaya (Hrodna)', 1),
+(341, 20, 'MA', 'Mahilyowskaya (Mahilyow)', 1),
+(342, 20, 'MI', 'Minskaya', 1),
+(343, 20, 'VI', 'Vitsyebskaya (Vitsyebsk)', 1),
 (344, 21, 'VAN', 'Antwerpen', 1),
 (345, 21, 'WBR', 'Brabant Wallon', 1),
 (346, 21, 'WHT', 'Hainaut', 1),
@@ -4722,91 +5788,95 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (2717, 175, 'TL', 'Tulcea', 1),
 (2718, 175, 'VS', 'Vaslui', 1),
 (2719, 175, 'VL', 'Valcea', 1),
-(2720, 175, 'VN', 'Vrancea', 1);
-INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
-(2721, 176, 'KK', 'Республика Хакасия', 1),
-(2722, 176, 'MOS', 'Московская область', 1),
-(2723, 176, 'CHU', 'Чукотский АО', 1),
-(2724, 176, 'ARK', 'Архангельская область', 1),
-(2725, 176, 'AST', 'Астраханская область', 1),
-(2726, 176, 'ALT', 'Алтайский край', 1),
-(2727, 176, 'BEL', 'Белгородская область', 1),
-(2728, 176, 'YEV', 'Еврейская АО', 1),
-(2729, 176, 'AMU', 'Амурская область', 1),
-(2730, 176, 'BRY', 'Брянская область', 1),
-(2731, 176, 'CU', 'Чувашская Республика', 1),
-(2732, 176, 'CHE', 'Челябинская область', 1),
-(2733, 176, 'KC', 'Карачаево-Черкеcсия', 1),
-(2734, 176, 'ZAB', 'Забайкальский край', 1),
-(2735, 176, 'LEN', 'Ленинградская область', 1),
-(2736, 176, 'KL', 'Республика Калмыкия', 1),
-(2737, 176, 'SAK', 'Сахалинская область', 1),
-(2738, 176, 'AL', 'Республика Алтай', 1),
-(2739, 176, 'CE', 'Чеченская Республика', 1),
-(2740, 176, 'IRK', 'Иркутская область', 1),
-(2741, 176, 'IVA', 'Ивановская область', 1),
-(2742, 176, 'UD', 'Удмуртская Республика', 1),
-(2743, 176, 'KGD', 'Калининградская область', 1),
-(2744, 176, 'KLU', 'Калужская область', 1),
-(2746, 176, 'TA', 'Республика Татарстан', 1),
-(2747, 176, 'KEM', 'Кемеровская область', 1),
-(2748, 176, 'KHA', 'Хабаровский край', 1),
-(2749, 176, 'KHM', 'Ханты-Мансийский АО - Югра', 1),
-(2750, 176, 'KOS', 'Костромская область', 1),
-(2751, 176, 'KDA', 'Краснодарский край', 1),
-(2752, 176, 'KYA', 'Красноярский край', 1),
-(2754, 176, 'KGN', 'Курганская область', 1),
-(2755, 176, 'KRS', 'Курская область', 1),
-(2756, 176, 'TY', 'Республика Тыва', 1),
-(2757, 176, 'LIP', 'Липецкая область', 1),
-(2758, 176, 'MAG', 'Магаданская область', 1),
-(2759, 176, 'DA', 'Республика Дагестан', 1),
-(2760, 176, 'AD', 'Республика Адыгея', 1),
-(2761, 176, 'MOW', 'Москва', 1),
-(2762, 176, 'MUR', 'Мурманская область', 1),
-(2763, 176, 'KB', 'Республика Кабардино-Балкария', 1),
-(2764, 176, 'NEN', 'Ненецкий АО', 1),
-(2765, 176, 'IN', 'Республика Ингушетия', 1),
-(2766, 176, 'NIZ', 'Нижегородская область', 1),
-(2767, 176, 'NGR', 'Новгородская область', 1),
-(2768, 176, 'NVS', 'Новосибирская область', 1),
-(2769, 176, 'OMS', 'Омская область', 1),
-(2770, 176, 'ORL', 'Орловская область', 1),
-(2771, 176, 'ORE', 'Оренбургская область', 1),
-(2773, 176, 'PNZ', 'Пензенская область', 1),
-(2774, 176, 'PER', 'Пермский край', 1),
-(2775, 176, 'KAM', 'Камчатский край', 1),
-(2776, 176, 'KR', 'Республика Карелия', 1),
-(2777, 176, 'PSK', 'Псковская область', 1),
-(2778, 176, 'ROS', 'Ростовская область', 1),
-(2779, 176, 'RYA', 'Рязанская область', 1),
-(2780, 176, 'YAN', 'Ямало-Ненецкий АО', 1),
-(2781, 176, 'SAM', 'Самарская область', 1),
-(2782, 176, 'MO', 'Республика Мордовия', 1),
-(2783, 176, 'SAR', 'Саратовская область', 1),
-(2784, 176, 'SMO', 'Смоленская область', 1),
-(2785, 176, 'SPE', 'Санкт-Петербург', 1),
-(2786, 176, 'STA', 'Ставропольский край', 1),
-(2787, 176, 'KO', 'Республика Коми', 1),
-(2788, 176, 'TAM', 'Тамбовская область', 1),
-(2789, 176, 'TOM', 'Томская область', 1),
-(2790, 176, 'TUL', 'Тульская область', 1),
-(2792, 176, 'TVE', 'Тверская область', 1),
-(2793, 176, 'TYU', 'Тюменская область', 1),
-(2794, 176, 'BA', 'Республика Башкортостан', 1),
-(2795, 176, 'ULY', 'Ульяновская область', 1),
-(2796, 176, 'BU', 'Республика Бурятия', 1),
-(2798, 176, 'SE', 'Республика Северная Осетия', 1),
-(2799, 176, 'VLA', 'Владимирская область', 1),
-(2800, 176, 'PRI', 'Приморский край', 1),
-(2801, 176, 'VGG', 'Волгоградская область', 1),
-(2802, 176, 'VLG', 'Вологодская область', 1),
-(2803, 176, 'VOR', 'Воронежская область', 1),
-(2804, 176, 'KIR', 'Кировская область', 1),
-(2805, 176, 'SA', 'Республика Саха', 1),
-(2806, 176, 'YAR', 'Ярославская область', 1),
-(2807, 176, 'SVE', 'Свердловская область', 1),
-(2808, 176, 'ME', 'Республика Марий Эл', 1),
+(2720, 175, 'VN', 'Vrancea', 1),
+(2721, 176, 'AB', 'Abakan', 1),
+(2722, 176, 'AG', 'Aginskoye', 1),
+(2723, 176, 'AN', 'Anadyr', 1),
+(2724, 176, 'AR', 'Arkahangelsk', 1),
+(2725, 176, 'AS', 'Astrakhan', 1),
+(2726, 176, 'BA', 'Barnaul', 1),
+(2727, 176, 'BE', 'Belgorod', 1),
+(2728, 176, 'BI', 'Birobidzhan', 1),
+(2729, 176, 'BL', 'Blagoveshchensk', 1),
+(2730, 176, 'BR', 'Bryansk', 1),
+(2731, 176, 'CH', 'Cheboksary', 1),
+(2732, 176, 'CL', 'Chelyabinsk', 1),
+(2733, 176, 'CR', 'Cherkessk', 1),
+(2734, 176, 'CI', 'Chita', 1),
+(2735, 176, 'DU', 'Dudinka', 1),
+(2736, 176, 'EL', 'Elista', 1),
+(2737, 176, 'GO', 'Gomo-Altaysk', 1),
+(2738, 176, 'GA', 'Gorno-Altaysk', 1),
+(2739, 176, 'GR', 'Groznyy', 1),
+(2740, 176, 'IR', 'Irkutsk', 1),
+(2741, 176, 'IV', 'Ivanovo', 1),
+(2742, 176, 'IZ', 'Izhevsk', 1),
+(2743, 176, 'KA', 'Kalinigrad', 1),
+(2744, 176, 'KL', 'Kaluga', 1),
+(2745, 176, 'KS', 'Kasnodar', 1),
+(2746, 176, 'KZ', 'Kazan', 1),
+(2747, 176, 'KE', 'Kemerovo', 1),
+(2748, 176, 'KH', 'Khabarovsk', 1),
+(2749, 176, 'KM', 'Khanty-Mansiysk', 1),
+(2750, 176, 'KO', 'Kostroma', 1),
+(2751, 176, 'KR', 'Krasnodar', 1),
+(2752, 176, 'KN', 'Krasnoyarsk', 1),
+(2753, 176, 'KU', 'Kudymkar', 1),
+(2754, 176, 'KG', 'Kurgan', 1),
+(2755, 176, 'KK', 'Kursk', 1),
+(2756, 176, 'KY', 'Kyzyl', 1),
+(2757, 176, 'LI', 'Lipetsk', 1),
+(2758, 176, 'MA', 'Magadan', 1),
+(2759, 176, 'MK', 'Makhachkala', 1),
+(2760, 176, 'MY', 'Maykop', 1),
+(2761, 176, 'MO', 'Moscow', 1),
+(2762, 176, 'MU', 'Murmansk', 1),
+(2763, 176, 'NA', 'Nalchik', 1),
+(2764, 176, 'NR', 'Naryan Mar', 1),
+(2765, 176, 'NZ', 'Nazran', 1),
+(2766, 176, 'NI', 'Nizhniy Novgorod', 1),
+(2767, 176, 'NO', 'Novgorod', 1),
+(2768, 176, 'NV', 'Novosibirsk', 1),
+(2769, 176, 'OM', 'Omsk', 1),
+(2770, 176, 'OR', 'Orel', 1),
+(2771, 176, 'OE', 'Orenburg', 1),
+(2772, 176, 'PA', 'Palana', 1),
+(2773, 176, 'PE', 'Penza', 1),
+(2774, 176, 'PR', 'Perm', 1),
+(2775, 176, 'PK', 'Petropavlovsk-Kamchatskiy', 1),
+(2776, 176, 'PT', 'Petrozavodsk', 1),
+(2777, 176, 'PS', 'Pskov', 1),
+(2778, 176, 'RO', 'Rostov-na-Donu', 1),
+(2779, 176, 'RY', 'Ryazan', 1),
+(2780, 176, 'SL', 'Salekhard', 1),
+(2781, 176, 'SA', 'Samara', 1),
+(2782, 176, 'SR', 'Saransk', 1),
+(2783, 176, 'SV', 'Saratov', 1),
+(2784, 176, 'SM', 'Smolensk', 1),
+(2785, 176, 'SP', 'St. Petersburg', 1),
+(2786, 176, 'ST', 'Stavropol', 1),
+(2787, 176, 'SY', 'Syktyvkar', 1),
+(2788, 176, 'TA', 'Tambov', 1),
+(2789, 176, 'TO', 'Tomsk', 1),
+(2790, 176, 'TU', 'Tula', 1),
+(2791, 176, 'TR', 'Tura', 1),
+(2792, 176, 'TV', 'Tver', 1),
+(2793, 176, 'TY', 'Tyumen', 1),
+(2794, 176, 'UF', 'Ufa', 1),
+(2795, 176, 'UL', 'Ul''yanovsk', 1),
+(2796, 176, 'UU', 'Ulan-Ude', 1),
+(2797, 176, 'US', 'Ust''-Ordynskiy', 1),
+(2798, 176, 'VL', 'Vladikavkaz', 1),
+(2799, 176, 'VA', 'Vladimir', 1),
+(2800, 176, 'VV', 'Vladivostok', 1),
+(2801, 176, 'VG', 'Volgograd', 1),
+(2802, 176, 'VD', 'Vologda', 1),
+(2803, 176, 'VO', 'Voronezh', 1),
+(2804, 176, 'VY', 'Vyatka', 1),
+(2805, 176, 'YA', 'Yakutsk', 1),
+(2806, 176, 'YR', 'Yaroslavl', 1),
+(2807, 176, 'YE', 'Yekaterinburg', 1),
+(2808, 176, 'YO', 'Yoshkar-Ola', 1),
 (2809, 177, 'BU', 'Butare', 1),
 (2810, 177, 'BY', 'Byumba', 1),
 (2811, 177, 'CY', 'Cyangugu', 1),
@@ -5479,32 +6549,32 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (3477, 219, 'MBR', 'Mbarara', 1),
 (3478, 219, 'NTU', 'Ntungamo', 1),
 (3479, 219, 'RUK', 'Rukungiri', 1),
-(3480, 220, 'CK', 'Черкассы', 1),
-(3481, 220, 'CH', 'Чернигов', 1),
-(3482, 220, 'CV', 'Черновцы', 1),
-(3483, 220, 'CR', 'Крым', 1),
-(3484, 220, 'DN', 'Днепропетровск', 1),
-(3485, 220, 'DO', 'Донецк', 1),
-(3486, 220, 'IV', 'Ивано-Франковск', 1),
-(3487, 220, 'KL', 'Харьков Херсон', 1),
-(3488, 220, 'KM', 'Хмельницкий', 1),
-(3489, 220, 'KR', 'Кировоград', 1),
-(3490, 220, 'KV', 'Киевская область', 1),
-(3491, 220, 'KY', 'Киев', 1),
-(3492, 220, 'LU', 'Луганск', 1),
-(3493, 220, 'LV', 'Львов', 1),
-(3494, 220, 'MY', 'Николаев', 1),
-(3495, 220, 'OD', 'Одесса', 1),
-(3496, 220, 'PO', 'Полтава', 1),
-(3497, 220, 'RI', 'Ровно', 1),
-(3498, 220, 'SE', 'Севастополь', 1),
-(3499, 220, 'SU', 'Сумы', 1),
-(3500, 220, 'TE', 'Тернополь', 1),
-(3501, 220, 'VI', 'Винница', 1),
-(3502, 220, 'VO', 'Луцк', 1),
-(3503, 220, 'ZK', 'Ужгород', 1),
-(3504, 220, 'ZA', 'Запорожье', 1),
-(3505, 220, 'ZH', 'Житомир', 1),
+(3480, 220, 'CK', 'Cherkasy', 1),
+(3481, 220, 'CH', 'Chernihiv', 1),
+(3482, 220, 'CV', 'Chernivtsi', 1),
+(3483, 220, 'CR', 'Crimea', 1),
+(3484, 220, 'DN', 'Dnipropetrovs''k', 1),
+(3485, 220, 'DO', 'Donets''k', 1),
+(3486, 220, 'IV', 'Ivano-Frankivs''k', 1),
+(3487, 220, 'KL', 'Kharkiv Kherson', 1),
+(3488, 220, 'KM', 'Khmel''nyts''kyy', 1),
+(3489, 220, 'KR', 'Kirovohrad', 1),
+(3490, 220, 'KV', 'Kiev', 1),
+(3491, 220, 'KY', 'Kyyiv', 1),
+(3492, 220, 'LU', 'Luhans''k', 1),
+(3493, 220, 'LV', 'L''viv', 1),
+(3494, 220, 'MY', 'Mykolayiv', 1),
+(3495, 220, 'OD', 'Odesa', 1),
+(3496, 220, 'PO', 'Poltava', 1),
+(3497, 220, 'RI', 'Rivne', 1),
+(3498, 220, 'SE', 'Sevastopol', 1),
+(3499, 220, 'SU', 'Sumy', 1),
+(3500, 220, 'TE', 'Ternopil''', 1),
+(3501, 220, 'VI', 'Vinnytsya', 1),
+(3502, 220, 'VO', 'Volyn''', 1),
+(3503, 220, 'ZK', 'Zakarpattya', 1),
+(3504, 220, 'ZA', 'Zaporizhzhya', 1),
+(3505, 220, 'ZH', 'Zhytomyr', 1),
 (3506, 221, 'AZ', 'Abu Zaby', 1),
 (3507, 221, 'AJ', '''Ajman', 1),
 (3508, 221, 'FU', 'Al Fujayrah', 1),
@@ -5929,22 +6999,21 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (3946, 105, 'VV', 'Vibo Valentia', 1),
 (3947, 105, 'VI', 'Vicenza', 1),
 (3948, 105, 'VT', 'Viterbo', 1),
-(3949, 222, 'FER', 'County Fermanagh', 1),
-(3950, 222, 'LDY', 'County Londonderry', 1),
-(3951, 222, 'TYR', 'County Tyrone', 1),
-(3952, 222, 'CMA', 'Cumbria', 1),
-(3953, 240, 'ALD', 'Alderney', 1),
-(3954, 240, 'GUE', 'Guernsey', 1),
-(3955, 240, 'HRM', 'Herm', 1),
-(3956, 240, 'JER', 'Jersey', 1),
-(3957, 240, 'SRK', 'Sark', 1);
+(3949, 222, 'ANT', 'County Antrim', 1),
+(3950, 222, 'ARM', 'County Armagh', 1),
+(3951, 222, 'DOW', 'County Down', 1),
+(3952, 222, 'FER', 'County Fermanagh', 1),
+(3953, 222, 'LDY', 'County Londonderry', 1),
+(3954, 222, 'TYR', 'County Tyrone', 1),
+(3955, 222, 'CMA', 'Cumbria', 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_zone_to_geo_zone`
+-- Table structure for table `oc_zone_to_geo_zone`
 --
 
+DROP TABLE IF EXISTS `oc_zone_to_geo_zone`;
 CREATE TABLE `oc_zone_to_geo_zone` (
   `zone_to_geo_zone_id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
@@ -5953,11 +7022,13 @@ CREATE TABLE `oc_zone_to_geo_zone` (
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`zone_to_geo_zone_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=62 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_zone_to_geo_zone`
+-- Dumping data for table `oc_zone_to_geo_zone`
 --
 
 INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`, `date_added`, `date_modified`) VALUES
-(57, 176, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00');
+(57, 222, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00'),
+(51, 81, 0, 5, '2010-02-09 16:27:20', '0000-00-00 00:00:00'),
+(65, 222, 0, 4, '2010-12-15 15:18:13', '0000-00-00 00:00:00');
