@@ -1,26 +1,70 @@
 <?php  
 class ControllerModuleCategory extends Controller {
-	protected $category_id = 0;
-	protected $path = array();
-	
 	protected function index() {
 		$this->language->load('module/category');
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');
 		
-		$this->load->model('catalog/category');
-		$this->load->model('tool/seo_url');
-		
 		if (isset($this->request->get['path'])) {
-			$this->path = explode('_', $this->request->get['path']);
-			
-			$this->category_id = end($this->path);
+			$parts = explode('_', (string)$this->request->get['path']);
+		} else {
+			$parts = array();
 		}
 		
-		$this->data['category'] = $this->getCategories(0);
-												
-		$this->id = 'category';
-
+		if (isset($parts[0])) {
+			$this->data['category_id'] = $parts[0];
+		} else {
+			$this->data['category_id'] = 0;
+		}
+		
+		if (isset($parts[1])) {
+			$this->data['child_id'] = $parts[1];
+		} else {
+			$this->data['child_id'] = 0;
+		}
+							
+		$this->load->model('catalog/category');
+		$this->load->model('catalog/product');
+		
+		$this->data['categories'] = array();
+					
+		$categories = $this->model_catalog_category->getCategories(0);
+		
+		foreach ($categories as $category) {
+			$children_data = array();
+			
+			$children = $this->model_catalog_category->getCategories($category['category_id']);
+			
+			foreach ($children as $child) {
+				$data = array(
+					'filter_category_id'  => $child['category_id'],
+					'filter_sub_category' => true
+				);		
+					
+				$product_total = $this->model_catalog_product->getTotalProducts($data);
+							
+				$children_data[] = array(
+					'category_id' => $child['category_id'],
+					'name'        => $child['name'] . ' (' . $product_total . ')',
+					'href'        => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
+				);					
+			}
+			
+			$data = array(
+				'filter_category_id'  => $category['category_id'],
+				'filter_sub_category' => true	
+			);		
+				
+			$product_total = $this->model_catalog_product->getTotalProducts($data);
+						
+			$this->data['categories'][] = array(
+				'category_id' => $category['category_id'],
+				'name'        => $category['name'] . ' (' . $product_total . ')',
+				'children'    => $children_data,
+				'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
+			);
+		}
+		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/category.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/category.tpl';
 		} else {
@@ -29,49 +73,5 @@ class ControllerModuleCategory extends Controller {
 		
 		$this->render();
   	}
-	
-	protected function getCategories($parent_id, $current_path = '') {
-		$category_id = array_shift($this->path);
-		
-		$output = '';
-		
-		$results = $this->model_catalog_category->getCategories($parent_id);
-		
-		if ($results) { 
-			$output .= '<ul>';
-    	}
-		
-		foreach ($results as $result) {	
-			if (!$current_path) {
-				$new_path = $result['category_id'];
-			} else {
-				$new_path = $current_path . '_' . $result['category_id'];
-			}
-			
-			$output .= '<li>';
-			
-			$children = '';
-			
-			if ($category_id == $result['category_id']) {
-				$children = $this->getCategories($result['category_id'], $new_path);
-			}
-			
-			if ($this->category_id == $result['category_id']) {
-				$output .= '<a href="' . $this->model_tool_seo_url->rewrite(HTTP_SERVER . 'index.php?route=product/category&amp;path=' . $new_path)  . '"><b>' . $result['name'] . '</b></a>';
-			} else {
-				$output .= '<a href="' . $this->model_tool_seo_url->rewrite(HTTP_SERVER . 'index.php?route=product/category&amp;path=' . $new_path)  . '">' . $result['name'] . '</a>';
-			}
-			
-        	$output .= $children;
-        
-        	$output .= '</li>'; 
-		}
- 
-		if ($results) {
-			$output .= '</ul>';
-		}
-		
-		return $output;
-	}		
 }
 ?>
