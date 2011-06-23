@@ -66,6 +66,9 @@
   <div class="pagination"><?php echo $pagination; ?></div>
   <?php } else { ?>
   <div class="content"><?php echo $text_empty; ?></div>
+  <div class="buttons">
+    <div class="right"><a href="<?php echo $continue; ?>" class="button"><span><?php echo $button_continue; ?></span></a></div>
+  </div>
   <?php }?>
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
