@@ -213,13 +213,24 @@ class ControllerDataexchangeExchange1c extends Controller {
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_option_description');
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_option_value');
 			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_option_value_description');
+
+            // Удаляем скидки как они есть
+
+            $this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_discount');
+			$this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'product_special');
+
+			// Очищает таблицы от всех производителей
+
+            $this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'manufacturer');
+            $this->db->query('TRUNCATE TABLE ' . DB_PREFIX . 'manufacturer_to_store');
+            $this->db->query('DELETE FROM ' . DB_PREFIX . 'url_alias WHERE query LIKE "%manufacturer_id=%"');
 		}
         
 		//Выставляем кол-во товаров в 0.
         if($this->config->get('exchange1c_flush_quantity') ) {
         $this->db->query('UPDATE ' . DB_PREFIX . 'product ' . 'SET quantity = 0');
         }
-		$limit = 1000 * 1024;
+		$limit = 10000 * 1024;
 	
 		echo "zip=no\n";
 		echo "file_limit=".$limit."\n";
@@ -254,7 +265,7 @@ class ControllerDataexchangeExchange1c extends Controller {
 		
 		if($DATA !== false) 
 		{
-			if($fp = fopen($uplod_file, "ab")) 
+			if($fp = fopen($uplod_file, "wb")) 
 			{
 				$result = fwrite($fp, $DATA);
 				if($result === strlen($DATA))
