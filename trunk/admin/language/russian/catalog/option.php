@@ -29,8 +29,8 @@ $_['entry_sort_order']   = 'Порядок сортировки:';
 
 // Error
 $_['error_permission']   = 'У вас не достаточно прав для изменения опции!';
-$_['error_name']         = 'Имя опции должно быть от 3 до 128 символов!';
+$_['error_name']         = 'Имя опции должно быть от 1 до 128 символов!';
 $_['error_type']         = 'Не указано значение опции!';
-$_['error_option_value'] = 'Значение опции должно быть от 3 до 128!';
+$_['error_option_value'] = 'Значение опции должно быть от 1 до 128!';
 $_['error_product']      = 'Warning: This option cannot be deleted as it is currently assigned to %s products!';
 ?>
