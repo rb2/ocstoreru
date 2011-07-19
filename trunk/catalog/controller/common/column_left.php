@@ -44,7 +44,7 @@ class ControllerCommonColumnLeft extends Controller {
 		
 		foreach ($extensions as $extension) {
 			$modules = $this->config->get($extension['code'] . '_module');
-		
+			
 			if ($modules) {
 				foreach ($modules as $module) {
 					if ($module['layout_id'] == $layout_id && $module['position'] == 'column_left' && $module['status']) {

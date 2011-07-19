@@ -21,6 +21,10 @@ $_['text_comment']          = 'Order Comments';
 $_['text_history']          = 'Order History';
 $_['text_empty']            = 'You have not made any previous orders!';
 $_['text_error']            = 'The order you requested could not be found!';
+$_['text_action']           = 'Choose an action:';
+$_['text_selected']         = 'With selected..';
+$_['text_reorder']          = 'Add to Cart';
+$_['text_return']           = 'Return Products';
 
 // Column
 $_['column_name']           = 'Product Name';
@@ -31,4 +35,7 @@ $_['column_total']          = 'Total';
 $_['column_date_added']     = 'Date Added';
 $_['column_status']         = 'Status';
 $_['column_comment']        = 'Comment';
+
+// Error
+$_['error_warning']         = 'Warning: you must select some products and an action complete your request!';
 ?>
