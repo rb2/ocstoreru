@@ -6,8 +6,8 @@ $_['heading_title']      = 'Производители';
 $_['text_success']       = 'Список производителей обновлен!';
 $_['text_default']       = 'Основной магазин';
 $_['text_image_manager'] = 'Менеджер изображений';
-$_['text_percent']       = 'Percentage';
-$_['text_amount']        = 'Fixed Amount';
+$_['text_percent']       = 'Проценты';
+$_['text_amount']        = 'Фиксированная сумма';
 
 // Column
 $_['column_name']        = 'Производитель';
