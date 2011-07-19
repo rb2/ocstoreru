@@ -1,7 +1,7 @@
 <?php
 // Heading 
-$_['heading_title']  = 'Последние';
+$_['heading_title']	= 'Последние';
 
 // Text
-$_['text_reviews']	= 'Основано  на %s отзыве(ах).';
+$_['text_reviews']	= 'На основании %s отзывов.'; 
 ?>

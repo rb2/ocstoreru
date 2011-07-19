@@ -21,10 +21,10 @@ $_['text_comment']          = 'Комментарий к заказу';
 $_['text_history']          = 'История заказов';
 $_['text_empty']            = 'Вы еще не совершали покупок!';
 $_['text_error']            = 'Запрошенный заказ не найден!';
-$_['text_action']           = 'Choose an action:';
-$_['text_selected']         = 'With selected..';
-$_['text_reorder']          = 'Add to Cart';
-$_['text_return']           = 'Return Products';
+$_['text_action']           = 'Выберите действие:';
+$_['text_selected']         = 'С выбранными..';
+$_['text_reorder']          = 'Добавить в корзину';
+$_['text_return']           = 'Вернуть товар';
 
 // Column
 $_['column_name']           = 'Наименование товара';

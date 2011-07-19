@@ -13,13 +13,13 @@ $_['text_bank']                 = 'Банковский перевод';
 $_['text_success']              = 'Учетные данные Партнера успешно обновлены.';
 
 // Entry
-$_['entry_tax']                 = 'Tax ID:';
+$_['entry_tax']                 = 'Налоговый код:';
 $_['entry_payment']             = 'Способ оплаты:';
-$_['entry_cheque']              = 'Cheque Payee Name:';
-$_['entry_paypal']              = 'PayPal Email Account:';
-$_['entry_bank_name']           = 'Bank Name:';
-$_['entry_bank_branch_number']  = 'ABA/BSB number (Branch Number):';
-$_['entry_bank_swift_code']     = 'SWIFT Code:';
-$_['entry_bank_account_name']   = 'Account Name:';
-$_['entry_bank_account_number'] = 'Account Number:';
+$_['entry_cheque']              = 'Чек, Имя получателя платежа:';
+$_['entry_paypal']              = 'PayPal Email аккаунт:';
+$_['entry_bank_name']           = 'Название банка:';
+$_['entry_bank_branch_number']  = 'ABA/BSB номер (номер отделения):';
+$_['entry_bank_swift_code']     = 'SWIFT код:';
+$_['entry_bank_account_name']   = 'Название счета:';
+$_['entry_bank_account_number'] = 'Номер счета:';
 ?>

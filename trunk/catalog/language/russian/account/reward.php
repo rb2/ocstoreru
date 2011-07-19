@@ -1,10 +1,10 @@
 <?php
 // Heading 
-$_['heading_title']      = 'Бонусы';
+$_['heading_title']      = 'Бонусные баллы';
 
 // Column
 $_['column_date_added']  = 'Добавлено';
-$_['column_description'] = 'Описание';
+$_['column_description'] = 'Описание;
 $_['column_points']      = 'Бонусные баллы';
 
 // Text

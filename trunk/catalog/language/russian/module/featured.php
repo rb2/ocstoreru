@@ -1,7 +1,7 @@
 <?php
 // Heading 
-$_['heading_title']  = 'Рекомендуем';
+$_['heading_title'] = 'Рекомендуем';
 
 // Text
-$_['text_reviews']	= 'Основано  на %s отзыве(ах).';
+$_['text_reviews']  = 'На основании %s отзывов.'; 
 ?>
