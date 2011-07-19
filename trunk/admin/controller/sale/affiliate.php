@@ -34,10 +34,6 @@ class ControllerSaleAffiliate extends Controller {
 				$url .= '&filter_email=' . $this->request->get['filter_email'];
 			}
 			
-			if (isset($this->request->get['filter_balance'])) {
-				$url .= '&filter_balance=' . $this->request->get['filter_balance'];
-			}
-						
 			if (isset($this->request->get['filter_status'])) {
 				$url .= '&filter_status=' . $this->request->get['filter_status'];
 			}
@@ -296,10 +292,6 @@ class ControllerSaleAffiliate extends Controller {
 		if (isset($this->request->get['filter_email'])) {
 			$url .= '&filter_email=' . $this->request->get['filter_email'];
 		}
-			
-		if (isset($this->request->get['filter_balance'])) {
-			$url .= '&filter_balance=' . $this->request->get['filter_balance'];
-		}
 						
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
@@ -453,7 +445,6 @@ class ControllerSaleAffiliate extends Controller {
 		
 		$this->data['sort_name'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=name' . $url, 'SSL');
 		$this->data['sort_email'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=a.email' . $url, 'SSL');
-		$this->data['sort_balance'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=balance' . $url, 'SSL');
 		$this->data['sort_status'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=a.status' . $url, 'SSL');
 		$this->data['sort_approved'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=a.approved' . $url, 'SSL');
 		$this->data['sort_date_added'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'] . '&sort=a.date_added' . $url, 'SSL');
@@ -1081,7 +1072,8 @@ class ControllerSaleAffiliate extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $transaction_total;
 		$pagination->page = $page;
-		$pagination->limit = 10; 
+		$pagination->limit = $this->config->get('config_admin_limit');
+		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('sale/affiliate/transaction', 'token=' . $this->session->data['token'] . '&affiliate_id=' . $this->request->get['affiliate_id'] . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();

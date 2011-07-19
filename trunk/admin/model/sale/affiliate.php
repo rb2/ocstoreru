@@ -29,7 +29,7 @@ class ModelSaleAffiliate extends Model {
 		$implode = array();
 		
 		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(a.firstname, ' ', a.lastname)) LIKE '" . $this->db->escape(strtolower($data['filter_name'])) . "%'";
+			$implode[] = "LCASE(CONCAT(a.firstname, ' ', a.lastname)) LIKE LCASE('" . $this->db->escape($data['filter_name']) . "%')";
 		}
 
 		if (isset($data['filter_email']) && !is_null($data['filter_email'])) {
@@ -60,7 +60,6 @@ class ModelSaleAffiliate extends Model {
 			'name',
 			'a.email',
 			'a.code',
-			'balance',
 			'a.status',
 			'a.approved',
 			'a.date_added'

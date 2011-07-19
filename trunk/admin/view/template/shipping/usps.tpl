@@ -205,7 +205,8 @@
                   <?php echo $text_domestic_28; ?>
                   <?php } ?>
                 </div>
-              </div></td>
+              </div>
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
           </tr>
           <tr>
             <td><?php echo $entry_international; ?></td>
@@ -355,7 +356,8 @@
                   <?php echo $text_international_21; ?>
                   <?php } ?>
                 </div>
-              </div></td>
+              </div>
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
           </tr>
           <tr>
             <td><?php echo $entry_size; ?></td>
@@ -460,12 +462,12 @@
           </tr>
           <tr>
             <td><?php echo $entry_weight_class; ?></td>
-            <td><select name="usps_weight_class">
+            <td><select name="usps_weight_class_id">
                 <?php foreach ($weight_classes as $weight_class) { ?>
-                <?php if ($weight_class['unit'] == $usps_weight_class) { ?>
-                <option value="<?php echo $weight_class['unit']; ?>" selected="selected"><?php echo $weight_class['title']; ?></option>
+                <?php if ($weight_class['weight_class_id'] == $usps_weight_class_id) { ?>
+                <option value="<?php echo $weight_class['weight_class_id']; ?>" selected="selected"><?php echo $weight_class['title']; ?></option>
                 <?php } else { ?>
-                <option value="<?php echo $weight_class['unit']; ?>"><?php echo $weight_class['title']; ?></option>
+                <option value="<?php echo $weight_class['weight_class_id']; ?>"><?php echo $weight_class['title']; ?></option>
                 <?php } ?>
                 <?php } ?>
               </select></td>

@@ -24,7 +24,7 @@
   <?php $i++; ?>
   <?php } ?>
   <input type="hidden" name="id_type" value="1" />
-  <?php if (isset($demo)) { ?>
+  <?php if ($demo) { ?>
   <input type="hidden" name="demo" value="<?php echo $demo; ?>" />
   <?php } ?>
   <input type="hidden" name="lang" value="<?php echo $lang; ?>" />

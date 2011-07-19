@@ -269,6 +269,15 @@ a.button span {
 	padding: 5px 10px 5px 2px;
 	background: url('../image/button-right.png') top right no-repeat;
 }
+table.filter {
+	width: 100%;
+	background: #E7EFEF; 
+	border: 1px solid #C6D7D7; 
+	margin-bottom: 15px;	
+}
+table.filter td {
+	padding: 5px;
+}
 .list {
 	border-collapse: collapse;
 	width: 100%;
@@ -295,15 +304,8 @@ a.button span {
 .list tbody td {
 	vertical-align: middle;
 	padding: 0px 5px;
-}
-.list tbody tr:nth-child(odd) {
 	background: #FFFFFF;
 }
-.list tbody tr:nth-child(even) {
-	/*background: #E4EEF7;
-	background: #F4F4F8;*/
-}
-
 .list .left {
 	text-align: left;
 	padding: 7px;
@@ -403,6 +405,7 @@ table.form > tbody > tr > td {
 	text-decoration: none;
 	color: #000000;
 	margin-right: 2px;
+	display: none;
 }
 .htabs a.selected {
 	padding-bottom: 7px;
@@ -415,6 +418,9 @@ table.form > tbody > tr > td {
 	float: left;
 	display: block;
 	border-right: 1px solid #DDDDDD;
+}
+.vtabs a {
+	display: none;
 }
 .vtabs a, .vtabs span {
 	display: block;

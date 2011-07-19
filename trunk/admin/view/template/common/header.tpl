@@ -71,8 +71,8 @@ $(document).ready(function(){
           <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
           <li><a class="parent"><?php echo $text_attribute; ?></a>
             <ul>
-              <li><a href="<?php echo $attribute; ?>"><?php echo $text_attribute; ?></a>
-              <li><a href="<?php echo $attribute_group; ?>"><?php echo $text_attribute_group; ?></a>
+              <li><a href="<?php echo $attribute; ?>"><?php echo $text_attribute; ?></a></li>
+              <li><a href="<?php echo $attribute_group; ?>"><?php echo $text_attribute_group; ?></a></li>
             </ul>
           </li>
           <li><a href="<?php echo $option; ?>"><?php echo $text_option; ?></a></li>
@@ -154,16 +154,40 @@ $(document).ready(function(){
       </li>
       <li id="reports"><a class="top"><?php echo $text_reports; ?></a>
         <ul>
-          <li><a href="<?php echo $report_sale; ?>"><?php echo $text_report_sale; ?></a></li>
-          <li><a href="<?php echo $report_viewed; ?>"><?php echo $text_report_viewed; ?></a></li>
-          <li><a href="<?php echo $report_purchased; ?>"><?php echo $text_report_purchased; ?></a></li>
+          <li><a class="parent"><?php echo $text_sale; ?></a>
+            <ul>
+              <li><a href="<?php echo $report_sale_order; ?>"><?php echo $text_report_sale_order; ?></a></li>
+              <li><a href="<?php echo $report_sale_tax; ?>"><?php echo $text_report_sale_tax; ?></a></li>
+              <li><a href="<?php echo $report_sale_shipping; ?>"><?php echo $text_report_sale_shipping; ?></a></li>
+              <li><a href="<?php echo $report_sale_return; ?>"><?php echo $text_report_sale_return; ?></a></li>
+              <li><a href="<?php echo $report_sale_coupon; ?>"><?php echo $text_report_sale_coupon; ?></a></li>
+            </ul>
+          </li>
+          <li><a class="parent"><?php echo $text_product; ?></a>
+            <ul>
+              <li><a href="<?php echo $report_product_viewed; ?>"><?php echo $text_report_product_viewed; ?></a></li>
+              <li><a href="<?php echo $report_product_purchased; ?>"><?php echo $text_report_product_purchased; ?></a></li>
+            </ul>
+          </li>
+          <li><a class="parent"><?php echo $text_customer; ?></a>
+            <ul>
+              <li><a href="<?php echo $report_customer_order; ?>"><?php echo $text_report_customer_order; ?></a></li>
+              <li><a href="<?php echo $report_customer_reward; ?>"><?php echo $text_report_customer_reward; ?></a></li>
+              <li><a href="<?php echo $report_customer_credit; ?>"><?php echo $text_report_customer_credit; ?></a></li>
+            </ul>
+          </li>
+          <li><a class="parent"><?php echo $text_affiliate; ?></a>
+            <ul>
+              <li><a href="<?php echo $report_affiliate_commission; ?>"><?php echo $text_report_affiliate_commission; ?></a></li>
+            </ul>
+          </li>          
         </ul>
       </li>
       <li id="help"><a class="top"><?php echo $text_help; ?></a>
         <ul>
-          <li><a onClick="window.open('http://www.opencart.com');"><?php echo $text_opencart; ?></a></li>
-          <li><a onClick="window.open('http://www.opencart.com/index.php?route=documentation/introduction');"><?php echo $text_documentation; ?></a></li>
-          <li><a onClick="window.open('http://forum.opencart.com');"><?php echo $text_support; ?></a></li>
+          <li><a onClick="window.open('http://myopencart.ru');"><?php echo $text_opencart; ?></a></li>
+          <li><a onClick="window.open('http://opencartforum.ru/index.php?app=ccs');"><?php echo $text_documentation; ?></a></li>
+          <li><a onClick="window.open('http://opencartforum.ru');"><?php echo $text_support; ?></a></li>
         </ul>
       </li>
     </ul>

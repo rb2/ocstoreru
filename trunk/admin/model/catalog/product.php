@@ -340,11 +340,11 @@ class ModelCatalogProduct extends Model {
 			$sql = "SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'"; 
 		
 			if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-				$sql .= " AND LCASE(pd.name) LIKE '" . $this->db->escape(strtolower($data['filter_name'])) . "%'";
+				$sql .= " AND LCASE(pd.name) LIKE LCASE('" . $this->db->escape($data['filter_name']) . "%')";
 			}
 
 			if (isset($data['filter_model']) && !is_null($data['filter_model'])) {
-				$sql .= " AND LCASE(p.model) LIKE '" . $this->db->escape(strtolower($data['filter_model'])) . "%'";
+				$sql .= " AND LCASE(p.model) LIKE LCASE('" . $this->db->escape($data['filter_model']) . "%')";
 			}
 			
 			if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
@@ -466,12 +466,13 @@ class ModelCatalogProduct extends Model {
 			if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox') {
 				$product_option_value_data = array();	
 				
-				$product_option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) WHERE pov.product_option_id = '" . (int)$product_option['product_option_id'] . "'");
+				$product_option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE pov.product_option_id = '" . (int)$product_option['product_option_id'] . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 				
 				foreach ($product_option_value_query->rows as $product_option_value) {
 					$product_option_value_data[] = array(
 						'product_option_value_id' => $product_option_value['product_option_value_id'],
 						'option_value_id'         => $product_option_value['option_value_id'],
+						'name'                    => $product_option_value['name'],
 						'quantity'                => $product_option_value['quantity'],
 						'subtract'                => $product_option_value['subtract'],
 						'price'                   => $product_option_value['price'],
@@ -618,11 +619,11 @@ class ModelCatalogProduct extends Model {
 		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		
 		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$sql .= " AND LCASE(pd.name) LIKE '%" . $this->db->escape(strtolower($data['filter_name'])) . "%'";
+			$sql .= " AND LCASE(pd.name) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%')";
 		}
 
 		if (isset($data['filter_model']) && !is_null($data['filter_model'])) {
-			$sql .= " AND LCASE(p.model) LIKE '%" . $this->db->escape(strtolower($data['filter_model'])) . "%'";
+			$sql .= " AND LCASE(p.model) LIKE LCASE('%" . $this->db->escape($data['filter_model']) . "%')";
 		}
 		
 		if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
@@ -644,12 +645,6 @@ class ModelCatalogProduct extends Model {
 	
 	public function getTotalProductsByStockStatusId($stock_status_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product WHERE stock_status_id = '" . (int)$stock_status_id . "'");
-
-		return $query->row['total'];
-	}
-	
-	public function getTotalProductsByImageId($image_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product WHERE image_id = '" . (int)$image_id . "'");
 
 		return $query->row['total'];
 	}

@@ -1,6 +1,6 @@
 <?php
 // Version
-define('VERSION', '1.0.0');
+define('VERSION', '1.0.1');
 
 // Configuration
 require_once('config.php');
@@ -39,7 +39,11 @@ $registry->set('db', $db);
 $query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
  
 foreach ($query->rows as $setting) {
-	$config->set($setting['key'], $setting['value']);
+	if (!$setting['serialized']) {
+		$config->set($setting['key'], $setting['value']);
+	} else {
+		$config->set($setting['key'], unserialize($setting['value']));
+	}
 }
 
 // Url

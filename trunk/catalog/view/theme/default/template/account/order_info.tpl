@@ -6,6 +6,9 @@
     <?php } ?>
   </div>
   <h1><?php echo $heading_title; ?></h1>
+  <?php if ($error_warning) { ?>
+  <div class="warning"><?php echo $error_warning; ?></div>
+  <?php } ?>
   <table class="list">
     <thead>
       <tr>
@@ -14,7 +17,7 @@
     </thead>
     <tbody>
       <tr>
-        <td class="left"><?php if ($invoice_no) { ?>
+        <td class="left" style="width: 50%;"><?php if ($invoice_no) { ?>
           <b><?php echo $text_invoice_no; ?></b> <?php echo $invoice_no; ?><br />
           <?php } ?>
           <b><?php echo $text_order_id; ?></b> #<?php echo $order_id; ?><br />
@@ -44,7 +47,7 @@
       </tr>
     </tbody>
   </table>
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="reorder">
+  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="order">
     <table class="list">
       <thead>
         <tr>
@@ -79,16 +82,23 @@
       <tfoot>
         <?php foreach ($totals as $total) { ?>
         <tr>
-          <td colspan="5" class="right"><b><?php echo $total['title']; ?></b></td>
+          <td colspan="4"></td>
+          <td class="right"><b><?php echo $total['title']; ?>:</b></td>
           <td class="right"><?php echo $total['text']; ?></td>
         </tr>
         <?php } ?>
       </tfoot>
     </table>
+    <div class="buttons">
+      <div class="right"><?php echo $text_action; ?>
+        <select name="action" onchange="$('#order').submit();">
+          <option value=""><?php echo $text_selected; ?></option>
+          <option value="reorder"><?php echo $text_reorder; ?></option>
+          <option value="return"><?php echo $text_return; ?></option>
+        </select>
+      </div>
+    </div>
   </form>
-  <div class="buttons">
-    <div class="right"><a onclick="$('#reorder').submit();" class="button"><span><?php echo $button_reorder; ?></span></a></div>
-  </div>
   <?php if ($comment) { ?>
   <table class="list">
     <thead>

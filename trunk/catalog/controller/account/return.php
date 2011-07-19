@@ -434,12 +434,16 @@ class ControllerAccountReturn extends Controller {
 
     	if (isset($this->request->post['order_id'])) {
       		$this->data['order_id'] = $this->request->post['order_id']; 	
+		} elseif (isset($this->session->data['return']['order_id'])) {
+			$this->data['order_id'] = $this->session->data['return']['order_id'];
 		} else {
       		$this->data['order_id'] = ''; 
     	}
 				
     	if (isset($this->request->post['date_ordered'])) {
       		$this->data['date_ordered'] = $this->request->post['date_ordered']; 	
+		} elseif (isset($this->session->data['return'])) {
+			$this->data['date_ordered'] = date('Y-m-d', strtotime($this->session->data['return']['date_added']));
 		} else {
       		$this->data['date_ordered'] = '';
     	}
@@ -447,25 +451,25 @@ class ControllerAccountReturn extends Controller {
 		if (isset($this->request->post['firstname'])) {
     		$this->data['firstname'] = $this->request->post['firstname'];
 		} else {
-			$this->data['firstname'] = '';
+			$this->data['firstname'] = $this->customer->getFirstName();
 		}
 
 		if (isset($this->request->post['lastname'])) {
     		$this->data['lastname'] = $this->request->post['lastname'];
 		} else {
-			$this->data['lastname'] = '';
+			$this->data['lastname'] = $this->customer->getLastName();
 		}
 		
 		if (isset($this->request->post['email'])) {
     		$this->data['email'] = $this->request->post['email'];
 		} else {
-			$this->data['email'] = '';
+			$this->data['email'] = $this->customer->getEmail();
 		}
 		
 		if (isset($this->request->post['telephone'])) {
     		$this->data['telephone'] = $this->request->post['telephone'];
 		} else {
-			$this->data['telephone'] = '';
+			$this->data['telephone'] = $this->customer->getTelephone();
 		}
 		
 		$this->load->model('localisation/return_reason');
@@ -474,10 +478,26 @@ class ControllerAccountReturn extends Controller {
 
     	if (isset($this->request->post['return_product'])) {
       		$this->data['return_products'] = $this->request->post['return_product']; 	
+		} elseif (isset($this->session->data['return'])) {
+			$this->data['return_products'] = array();
+			
+			foreach ($this->session->data['return']['product'] as $result) {
+				$this->data['return_products'][] = array(
+					'name'     => $result['name'],
+					'model'    => $result['model'],
+					'quantity' => 1,
+					'opened'   => false,
+					'comment'  => ''
+				);
+			}
 		} else {
       		$this->data['return_products'] = array();
     	}
-				
+		
+		if (isset($this->session->data['return'])) {
+			unset($this->session->data['return']);
+		}
+		
     	if (isset($this->request->post['comment'])) {
       		$this->data['comment'] = $this->request->post['comment']; 	
 		} else {

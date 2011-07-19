@@ -87,6 +87,8 @@ final class Mail {
 		$boundary = '----=_NextPart_' . md5(time());
 
 		$header = '';
+		
+		$header .= 'MIME-Version: 1.0' . $this->newline;
 
 		if ($this->protocol != 'mail') {
 			$header .= 'To: ' . $to . $this->newline;
@@ -98,8 +100,7 @@ final class Mail {
 		$header .= 'Reply-To: ' . '=?utf-8?B?'.base64_encode($this->sender).'?=' . '<' . $this->from . '>' . $this->newline;
 		$header .= 'Return-Path: ' . $this->from . $this->newline;
 		$header .= 'X-Mailer: PHP/' . phpversion() . $this->newline;
-		$header .= 'MIME-Version: 1.0' . $this->newline;
-		$header .= 'Content-Type: multipart/mixed; boundary="' . $boundary . '"' . $this->newline;
+		$header .= 'Content-Type: multipart/related; boundary="' . $boundary . '"' . $this->newline;
 
 		if (!$this->html) {
 			$message  = '--' . $boundary . $this->newline;
@@ -129,15 +130,17 @@ final class Mail {
 		foreach ($this->attachments as $attachment) {
 			if (file_exists($attachment['file'])) {
 				$handle = fopen($attachment['file'], 'r');
+				
 				$content = fread($handle, filesize($attachment['file']));
 
 				fclose($handle);
 
 				$message .= '--' . $boundary . $this->newline;
-				$message .= 'Content-Type: application/octetstream' . $this->newline;
+				$message .= 'Content-Type: application/octetstream; name="' . basename($attachment['file']) . '"' . $this->newline;
 				$message .= 'Content-Transfer-Encoding: base64' . $this->newline;
-				$message .= 'Content-Disposition: attachment; filename="' . basename($attachment['filename']) . '"' . $this->newline;
+				$message .= 'Content-Disposition: attachment; filename="' . basename($attachment['file']) . '"' . $this->newline;
 				$message .= 'Content-ID: <' . basename($attachment['filename']) . '>' . $this->newline . $this->newline;
+				$message .= 'X-Attachment-Id: ' . basename($attachment['filename']) . $this->newline . $this->newline;
 				$message .= chunk_split(base64_encode($content));
 			}
 		}

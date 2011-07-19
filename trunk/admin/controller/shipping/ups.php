@@ -23,6 +23,8 @@ class ControllerShippingUPS extends Controller {
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');		
+		$this->data['text_select_all'] = $this->language->get('text_select_all');
+		$this->data['text_unselect_all'] = $this->language->get('text_unselect_all');		
 		$this->data['text_all_zones'] = $this->language->get('text_all_zones');
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_next_day_air'] = $this->language->get('text_next_day_air');
@@ -671,10 +673,10 @@ class ControllerShippingUPS extends Controller {
 			$this->data['ups_weight_code'] = $this->config->get('ups_weight_code');
 		}
 		
-		if (isset($this->request->post['ups_weight_class'])) {
-			$this->data['ups_weight_class'] = $this->request->post['ups_weight_class'];
+		if (isset($this->request->post['ups_weight_class_id'])) {
+			$this->data['ups_weight_class_id'] = $this->request->post['ups_weight_class_id'];
 		} else {
-			$this->data['ups_weight_class'] = $this->config->get('ups_weight_class');
+			$this->data['ups_weight_class_id'] = $this->config->get('ups_weight_class_id');
 		}
 		
 		$this->load->model('localisation/weight_class');

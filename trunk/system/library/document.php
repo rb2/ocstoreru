@@ -32,18 +32,18 @@ final class Document {
 	}
 	
 	public function addLink($href, $rel) {
-		$this->links[] = array(
+		$this->links[md5($href)] = array(
 			'href' => $href,
 			'rel'  => $rel
 		);			
 	}
 	
 	public function getLinks() {
-		return array_unique($this->links);
+		return $this->links;
 	}	
 	
 	public function addStyle($href, $rel = 'stylesheet', $media = 'screen') {
-		$this->styles[] = array(
+		$this->styles[md5($href)] = array(
 			'href'  => $href,
 			'rel'   => $rel,
 			'media' => $media
@@ -51,15 +51,15 @@ final class Document {
 	}
 	
 	public function getStyles() {
-		return array_unique($this->styles);
+		return $this->styles;
 	}	
 	
 	public function addScript($script) {
-		$this->scripts[] = $script;			
+		$this->scripts[md5($script)] = $script;			
 	}
 	
 	public function getScripts() {
-		return array_unique($this->scripts);
+		return $this->scripts;
 	}
 }
 ?>

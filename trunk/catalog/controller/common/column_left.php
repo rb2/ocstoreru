@@ -20,11 +20,11 @@ class ControllerCommonColumnLeft extends Controller {
 			$layout_id = $this->model_catalog_category->getCategoryLayoutId(end($path));			
 		}
 		
-		if (substr($route, 0, 16) == 'product/product' && isset($this->request->get['product_id'])) {
+		if (substr($route, 0, 15) == 'product/product' && isset($this->request->get['product_id'])) {
 			$layout_id = $this->model_catalog_product->getProductLayoutId($this->request->get['product_id']);
 		}
 		
-		if (substr($route, 0, 16) == 'product/information' && isset($this->request->get['information_id'])) {
+		if (substr($route, 0, 23) == 'information/information' && isset($this->request->get['information_id'])) {
 			$layout_id = $this->model_catalog_information->getInformationLayoutId($this->request->get['information_id']);
 		}
 		
@@ -43,15 +43,17 @@ class ControllerCommonColumnLeft extends Controller {
 		$extensions = $this->model_setting_extension->getExtensions('module');		
 		
 		foreach ($extensions as $extension) {
-			$modules = explode(',', $this->config->get($extension['code'] . '_module'));
+			$modules = $this->config->get($extension['code'] . '_module');
 		
-			foreach ($modules as $module) {
-				if ($this->config->get($extension['code'] . '_' . $module . '_layout_id') == $layout_id && $this->config->get($extension['code'] . '_' . $module . '_position') == 'column_left' && $this->config->get($extension['code'] . '_' . $module . '_status')) {
-					$module_data[] = array(
-						'code'       => $extension['code'],
-						'module'     => $module,
-						'sort_order' => $this->config->get($extension['code'] . '_' . $module . '_sort_order')
-					);				
+			if ($modules) {
+				foreach ($modules as $module) {
+					if ($module['layout_id'] == $layout_id && $module['position'] == 'column_left' && $module['status']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+					}
 				}
 			}
 		}
@@ -67,7 +69,7 @@ class ControllerCommonColumnLeft extends Controller {
 		$this->data['modules'] = array();
 		
 		foreach ($module_data as $module) {
-			$module = $this->getChild('module/' . $module['code'], $module['module']);
+			$module = $this->getChild('module/' . $module['code'], $module['setting']);
 			
 			if ($module) {
 				$this->data['modules'][] = $module;
