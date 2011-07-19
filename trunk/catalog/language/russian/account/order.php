@@ -21,6 +21,10 @@ $_['text_comment']          = 'Комментарий к заказу';
 $_['text_history']          = 'История заказов';
 $_['text_empty']            = 'Вы еще не совершали покупок!';
 $_['text_error']            = 'Запрошенный заказ не найден!';
+$_['text_action']           = 'Choose an action:';
+$_['text_selected']         = 'With selected..';
+$_['text_reorder']          = 'Add to Cart';
+$_['text_return']           = 'Return Products';
 
 // Column
 $_['column_name']           = 'Наименование товара';
@@ -31,4 +35,7 @@ $_['column_total']          = 'Итого';
 $_['column_date_added']     = 'Дата';
 $_['column_status']         = 'Статус';
 $_['column_comment']        = 'Комментарий';
+
+// Error
+$_['error_warning']         = 'Warning: you must select some products and an action complete your request!';
 ?>

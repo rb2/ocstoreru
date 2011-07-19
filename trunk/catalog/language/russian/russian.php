@@ -22,7 +22,7 @@ $_['text_separator']        = ' &raquo; ';
 $_['button_add_address']    = 'Добавить адрес';
 $_['button_back']           = 'Назад';
 $_['button_continue']       = 'Вперед';
-$_['button_cart']    = 'В Корзину';
+$_['button_cart']    		= 'В Корзину';
 $_['button_compare']        = 'Добавить к сравнению';
 $_['button_wishlist']       = 'В будущие покупки';
 $_['button_checkout']       = 'Оформить заказ';
@@ -35,8 +35,6 @@ $_['button_change_address'] = 'Изменить адрес';
 $_['button_add_product']    = 'Добавить товар';
 $_['button_remove']         = 'Убрать';
 $_['button_reviews']        = 'Отзывы';
-$_['button_reorder']        = 'Reorder';
-
 $_['button_write']          = 'Написать отзыв';
 $_['button_login']          = 'Войти';
 $_['button_update']         = 'Применить';
