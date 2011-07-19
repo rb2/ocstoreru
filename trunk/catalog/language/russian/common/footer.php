@@ -15,5 +15,5 @@ $_['text_login']        = 'Войти в кабинет';
 $_['text_order']        = 'История заказов';
 $_['text_wishlist']     = 'Будущие покупки';
 $_['text_newsletter']   = 'Подписка';
-$_['text_powered'] 		= '%s &copy; %s';
+$_['text_powered'] 		= 'Работает на <a href="http://myopencart.ru">OpenCart</a><br /> %s &copy; %s';
 ?>
