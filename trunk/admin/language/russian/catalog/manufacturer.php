@@ -17,7 +17,7 @@ $_['column_action']      = 'Действие';
 // Entry
 $_['entry_name']         = 'Производитель:';
 $_['entry_store']        = 'Магазины:';
-$_['entry_keyword']      = 'Псевдоним:';
+$_['entry_keyword']      = 'SEO URL:<br/><span class="help">Должно быть уникальным на всю систему.</span>';
 $_['entry_image']        = 'Изображение:';
 $_['entry_sort_order']   = 'Порядок сортировки:';
 $_['entry_type']         = 'Тип:';

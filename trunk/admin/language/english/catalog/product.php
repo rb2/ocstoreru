@@ -14,13 +14,14 @@ $_['text_percent']           = 'Percentage';
 $_['text_amount']            = 'Fixed Amount';
 
 // Column
-$_['column_name']            = 'Product Name';
-$_['column_model']           = 'Model';
-$_['column_image']           = 'Image';
-$_['column_price']           = 'Price';
-$_['column_quantity']        = 'Quantity';
-$_['column_status']          = 'Status';
-$_['column_action']          = 'Action';
+$_['column_name']            	= 'Product Name';
+$_['column_model']           	= 'Model';
+$_['column_image']           	= 'Image';
+$_['column_manufacturer_price']	= 'Manufacturer Price';
+$_['column_price']           	= 'Price';
+$_['column_quantity']        	= 'Quantity';
+$_['column_status']          	= 'Status';
+$_['column_action']          	= 'Action';
 
 // Entry
 $_['entry_name']             = 'Product Name:';
@@ -38,8 +39,9 @@ $_['entry_shipping']         = 'Requires Shipping:';
 $_['entry_date_available']   = 'Date Available:';
 $_['entry_quantity']         = 'Quantity:';
 $_['entry_minimum']          = 'Minimum Quantity:<br/><span class="help">Force a minimum ordered amount</span>';
-$_['entry_stock_status']     = 'Out Of Stock Status:<br/><span class="help">Status shown when a product is out of stock</span>';
+$_['entry_stock_status']     = 'Availability';//'Out Of Stock Status:<br/><span class="help">Status shown when a product is out of stock</span>';
 $_['entry_tax_class']        = 'Tax Class:';
+$_['entry_manufacturer_price'] = 'Manufacturer Price:';
 $_['entry_price']            = 'Price:';
 $_['entry_points']           = 'Points:<br/><span class="help">Number of points needed to buy this item. If you don\'t want this product to be purchased with points leave as 0.</span>';
 $_['entry_option_points']    = 'Points:';

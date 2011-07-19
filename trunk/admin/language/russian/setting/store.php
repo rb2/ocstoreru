@@ -7,9 +7,9 @@ $_['text_success']            = 'Магазины обновлены!';
 $_['text_image_manager']      = 'Менеджер изображений';
 
 // Column
-$_['column_name']               = 'Store Name';
-$_['column_url']	            = 'Store URL';
-$_['column_action']             = 'Action';
+$_['column_name']               = 'Название магазина';
+$_['column_url']	            = 'URL магазина';
+$_['column_action']             = 'Действие';
 
 // Entry
 $_['entry_url']               = 'URL магазина:<br /><span class="help">Включая полный URL к магазину. Добавьте \'/\' в конце. Например: http://wwww.yourdomain.com/path/</span>';
