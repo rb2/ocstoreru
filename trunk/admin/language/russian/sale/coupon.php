@@ -14,15 +14,15 @@ $_['column_discount']     = 'Скидка';
 $_['column_date_start']   = 'Дата начала';
 $_['column_date_end']     = 'Дата окончания';
 $_['column_status']       = 'Статус';
-$_['column_order_id']     = 'Order ID';
-$_['column_customer']     = 'Customer';
-$_['column_amount']       = 'Amount';
-$_['column_date_added']   = 'Date Added';
+$_['column_order_id']     = 'Код заказа';
+$_['column_customer']     = 'Покупатель';
+$_['column_amount']       = 'Сумма';
+$_['column_date_added']   = 'Дата добавления';
 $_['column_action']       = 'Действие';
 
 // Entry
 $_['entry_name']          = 'Название купона:';
-$_['entry_code']          = 'Код: <br /><span class="help">Код клиент вводит для получения скидки</span>';
+$_['entry_code']          = 'Код: <br /><span class="help">Клиент вводит код для получения скидки</span>';
 $_['entry_type']          = 'Тип: <br /><span class="help">Проценты или фиксированная сумма</span>';
 $_['entry_discount']      = 'Скидка:';
 $_['entry_logged']        = 'Авторизация пользователя:<br /><span class="help">Пользователь должен войти чтобы использовать купон.</span>';

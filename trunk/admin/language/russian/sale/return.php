@@ -3,21 +3,21 @@
 $_['heading_title']       = 'Возвраты товаров';
 
 // Text
-$_['text_opened']         = 'Opened';
-$_['text_unopened']       = 'Unopened';
-$_['text_success']        = 'Success: You have modified returns!';
-$_['text_wait']           = 'Пожалуйста ждите!';
+$_['text_opened']         = 'Открытый';
+$_['text_unopened']       = 'Неоткрытый';
+$_['text_success']        = 'Вы изменили возвраты!';
+$_['text_wait']           = 'Подождите!';
 
 // Text
 $_['text_return_id']      = '№ возврата:';
 $_['text_order_id']       = '№ заказа:';
-$_['text_date_ordered']   = 'Дата покупки:';
+$_['text_date_ordered']   = 'Дата заказа:';
 $_['text_customer']       = 'Покупатель:';
 $_['text_email']          = 'E-Mail:';
 $_['text_telephone']      = 'Телефон:';
 $_['text_return_status']  = 'Статус возврата:';
-$_['text_comment']        = 'Коментарий:';
-$_['text_date_added']     = 'Дата создания:';
+$_['text_comment']        = 'Комментарий:';
+$_['text_date_added']     = 'Дата добавления:';
 $_['text_date_modified']  = 'Дата изменения:';
 
 // Column
@@ -30,42 +30,42 @@ $_['column_date_added']    = 'Дата создания';
 $_['column_date_modified'] = 'Дата изменения';
 $_['column_product']       = 'Товар';
 $_['column_model']         = 'Модель';
-$_['column_reason']        = 'Return Reason';
-$_['column_opened']        = 'Opened';
-$_['column_notify']        = 'Customer Notified';
-$_['column_comment']       = 'Коментарий';
-$_['column_action']        = 'Action';
+$_['column_reason']        = 'Причина возврата';
+$_['column_opened']        = 'Открытый';
+$_['column_notify']        = 'Покупатель уведомлен';
+$_['column_comment']       = 'Комментарий';
+$_['column_action']        = 'Действие';
 
 // Entry
 $_['entry_customer']      = 'Покупатель:';
-$_['entry_order_id']      = '№ заказ:';
+$_['entry_order_id']      = '№ заказа:';
 $_['entry_date_ordered']  = 'Дата заказа:';
-$_['entry_firstname']     = 'Имя Отчество:';
+$_['entry_firstname']     = 'Имя, Отчество:';
 $_['entry_lastname']      = 'Фамилия:';
 $_['entry_email']         = 'E-Mail:';
 $_['entry_telephone']     = 'Телефон:';
 $_['entry_product']       = 'Товар:';
 $_['entry_model']         = 'Модель:';
 $_['entry_quantity']      = 'Количество:';
-$_['entry_reason']        = 'Return Reason:';
-$_['entry_opened']        = 'Opened:';
-$_['entry_comment']       = 'Коментарий:';
+$_['entry_reason']        = 'Причина возврата:';
+$_['entry_opened']        = 'Открытый:';
+$_['entry_comment']       = 'Комментарий:';
 $_['entry_return_status'] = 'Статус возврата:';
-$_['entry_notify']        = 'Notify Customer:';
-$_['entry_action']        = 'Return Action:';
+$_['entry_notify']        = 'Клиент уведомлен:';
+$_['entry_action']        = 'Действие по возврату:';
 
 // Error
-$_['error_warning']       = 'Warning: Please check the form carefully for errors!';
-$_['error_permission']    = 'Warning: You do not have permission to modify returns!';
-$_['error_firstname']     = 'First Name must be between 1 and 32 characters!';
-$_['error_lastname']      = 'Last Name must be between 1 and 32 characters!';
-$_['error_email']         = 'E-Mail Address does not appear to be valid!';
-$_['error_telephone']     = 'Telephone must be between 3 and 32 characters!';
-$_['error_password']      = 'Password must be between 3 and 20 characters!';
-$_['error_confirm']       = 'Password and password confirmation do not match!';
-$_['error_address_1']     = 'Address 1 must be between 3 and 128 characters!';
-$_['error_city']          = 'City must be between 3 and 128 characters!';
-$_['error_postcode']      = 'Postcode must be between 2 and 10 characters!';
-$_['error_country']       = 'Please select a country!';
-$_['error_zone']          = 'Please select a region / state!';
+$_['error_warning']       = 'Внимательно проверьте форму на ошибки!';
+$_['error_permission']    = 'У Вас нет прав для изменения возвратов!';
+$_['error_firstname']     = 'Имя должно быть от 1 до 32 символов!';
+$_['error_lastname']      = 'Фамилия должна быть от 1 до 32 символов!';
+$_['error_email']         = 'E-Mail адрес введен неверно!';
+$_['error_telephone']     = 'Телефон должен быть от 3 до 32 символов!';
+$_['error_password']      = 'Пароль должен быть от 4 до 20 символов!';
+$_['error_confirm']       = 'Пароли не совпадают!';
+$_['error_address_1']     = 'Адрес должен быть от 4 до 128 символов!';
+$_['error_city']          = 'Город должен быть от 3 до 128 символов!';
+$_['error_postcode']      = 'Индекс должен быть от 2 до 10 символов для этой страны!';
+$_['error_country']       = 'Выберите страну!';
+$_['error_zone']          = 'Выберите регион / область!';
 ?>

@@ -1,19 +1,19 @@
 <?php
 // Heading  
-$_['heading_title']     = 'Gift Voucher';
+$_['heading_title']     = 'Подарочный сертификат';
 
 // Text
-$_['text_send']         = 'Send';
-$_['text_success']      = 'Success: You have modified vouchers!';
-$_['text_sent']         = 'Success: Gift Voucher e-mail has been sent!';
-$_['text_wait']         = 'Please Wait!';
+$_['text_send']         = 'Отправить';
+$_['text_success']      = 'Вы изменили подарочный сертификат!';
+$_['text_sent']         = 'Подарочный сертификат отправлен на e-mail!';
+$_['text_wait']         = 'Подождите!';
 
 // Column
-$_['column_name']       = 'Voucher Name';
-$_['column_code']       = 'Code';
-$_['column_from']       = 'From';
-$_['column_to']         = 'To';
-$_['column_amount']     = 'Amount';
+$_['column_name']       = 'Название подарочного сертификата';
+$_['column_code']       = 'Код';
+$_['column_from']       = 'От';
+$_['column_to']         = 'Кому';
+$_['column_amount']     = 'Сумма';
 $_['column_theme']      = 'Theme';
 $_['column_date_added'] = 'Date Added';
 $_['column_status']     = 'Status';
@@ -38,6 +38,6 @@ $_['error_permission']  = 'Warning: You do not have permission to modify voucher
 $_['error_code']        = 'Code must be between 3 and 10 characters!';
 $_['error_to_name']     = 'Recipient\'s Name must be between 1 and 64 characters!';
 $_['error_from_name']   = 'Your Name must be between 1 and 64 characters!';
-$_['error_email']       = 'E-Mail Address does not appear to be valid!';
+$_['error_email']       = 'E-Mail адрес введен неверно!';
 $_['error_amount']      = 'Amount must be greater than or equal to 1!';
 ?>
