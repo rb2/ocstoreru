@@ -520,7 +520,7 @@ class ModelDataexchangeExchange1c extends Model {
 
 		if( ! $query->num_rows ) {
 			// Меняем тип таблицы чтоб поддерживались внешние ключи
-			$this->db->query('ALTER TABLE  `'. DB_PREFIX .'product` ENGINE = INNODB');
+			//$this->db->query('ALTER TABLE  `'. DB_PREFIX .'product` ENGINE = INNODB');
 			// Создаем БД
 
 			$this->db->query(
@@ -529,9 +529,8 @@ class ModelDataexchangeExchange1c extends Model {
 							`product_id` int(11) NOT NULL,
 							`1c_id` varchar(255) NOT NULL,
 							KEY (`product_id`),
-							KEY `1c_id` (`1c_id`),
-							FOREIGN KEY (product_id) REFERENCES '. DB_PREFIX .'product(product_id) ON DELETE CASCADE
-						) ENGINE=InnoDB DEFAULT CHARSET=utf8'
+							KEY `1c_id` (`1c_id`)
+						) ENGINE=MyISAM DEFAULT CHARSET=utf8'
 			);			
 		}
 
@@ -541,7 +540,7 @@ class ModelDataexchangeExchange1c extends Model {
 
 		if( ! $query->num_rows ) {
 			// Меняем тип таблицы чтоб поддерживались внешние ключи
-			$this->db->query('ALTER TABLE  `'. DB_PREFIX .'category` ENGINE = INNODB');
+			//$this->db->query('ALTER TABLE  `'. DB_PREFIX .'category` ENGINE = INNODB');
 			// Создаем БД
 
 			$this->db->query(
@@ -550,9 +549,8 @@ class ModelDataexchangeExchange1c extends Model {
 							`category_id` int(11) NOT NULL,
 							`1c_category_id` varchar(255) NOT NULL,
 							KEY (`category_id`),
-							KEY `1c_id` (`1c_category_id`),
-							FOREIGN KEY (category_id) REFERENCES '. DB_PREFIX .'category(category_id) ON DELETE CASCADE
-						) ENGINE=InnoDB DEFAULT CHARSET=utf8'
+							KEY `1c_id` (`1c_category_id`)
+						) ENGINE=MyISAM DEFAULT CHARSET=utf8'
 			);			
 		}		
 
