@@ -1,15 +1,15 @@
 <?php
 // Heading
-$_['heading_title']    = 'Gift Voucher';
+$_['heading_title']    = 'Подарочный сертификат';
 
 // Text
-$_['text_total']       = 'Order Totals';
-$_['text_success']     = 'Success: You have modified gift voucher total!';
+$_['text_total']       = 'Итого в заказе';
+$_['text_success']     = 'Настройки модуля обновлены!';
 
 // Entry
-$_['entry_status']     = 'Status:';
-$_['entry_sort_order'] = 'Sort Order:';
+$_['entry_status']     = 'Статус:';
+$_['entry_sort_order'] = 'Порядок сортировки:';
 
 // Error
-$_['error_permission'] = 'Warning: You do not have permission to modify gift voucher total!';
+$_['error_permission'] = 'У Вас нет прав для управления подарочными сертификатами!';
 ?>

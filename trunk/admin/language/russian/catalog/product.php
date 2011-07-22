@@ -69,7 +69,7 @@ $_['entry_download']         = 'Загрузки:';
 $_['entry_related']          = 'Рекомендуемые:';
 $_['entry_tag']          	 = 'Теги товара:<br /><span class="help">разделяются запятой</span>';
 $_['entry_reward']           = 'Бонусные баллы:';
-$_['entry_layout']           = 'Изменить расположение:';
+$_['entry_layout']           = 'Изменить схему:';
 $_['entry_main_category']    = 'Категория:';
 
 // Error

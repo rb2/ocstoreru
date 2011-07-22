@@ -14,30 +14,30 @@ $_['column_code']       = 'Код';
 $_['column_from']       = 'От';
 $_['column_to']         = 'Кому';
 $_['column_amount']     = 'Сумма';
-$_['column_theme']      = 'Theme';
-$_['column_date_added'] = 'Date Added';
-$_['column_status']     = 'Status';
-$_['column_order_id']   = 'Order ID';
-$_['column_customer']   = 'Customer';
-$_['column_date_added'] = 'Date Added';
-$_['column_action']     = 'Action';
+$_['column_theme']      = 'Тематика';
+$_['column_date_added'] = 'Дата добавления';
+$_['column_status']     = 'Статус';
+$_['column_order_id']   = '№ заказа';
+$_['column_customer']   = 'Клиент';
+$_['column_date_added'] = 'Дата добавления';
+$_['column_action']     = 'Действия';
 
 // Entry
-$_['entry_code']        = 'Code:<br /><span class="help">The code the customer enters to activate the voucher.</span>';
-$_['entry_from_name']   = 'From Name:';
-$_['entry_from_email']  = 'From E-Mail:';
-$_['entry_to_name']     = 'To Name:';
-$_['entry_to_email']    = 'To E-Mail:';
-$_['entry_message']     = 'Message:';
-$_['entry_amount']      = 'Amount:';
-$_['entry_theme']       = 'Theme:';
-$_['entry_status']      = 'Status:';
+$_['entry_code']        = 'Код:<br /><span class="help">Код, который клиент вводит для активации подарочного сертификата.</span>';
+$_['entry_from_name']   = 'Имя отправителя:';
+$_['entry_from_email']  = 'E-Mail отправителя:';
+$_['entry_to_name']     = 'Имя получателя:';
+$_['entry_to_email']    = 'E-Mail получателя:';
+$_['entry_message']     = 'Сообщение:';
+$_['entry_amount']      = 'Сумма:';
+$_['entry_theme']       = 'Тематика:';
+$_['entry_status']      = 'Статус:';
 
 // Error
-$_['error_permission']  = 'Warning: You do not have permission to modify vouchers!';
-$_['error_code']        = 'Code must be between 3 and 10 characters!';
-$_['error_to_name']     = 'Recipient\'s Name must be between 1 and 64 characters!';
-$_['error_from_name']   = 'Your Name must be between 1 and 64 characters!';
+$_['error_permission']  = 'У Вас нет прав для изменения подарочных сертификатов!';
+$_['error_code']        = 'Код должен быть от 3 до 10 символов!';
+$_['error_to_name']     = 'Имя получателя должно быть от 1 до 64 символов!';
+$_['error_from_name']   = 'Имя отправителя должно быть от 1 до 64 символов!';
 $_['error_email']       = 'E-Mail адрес введен неверно!';
-$_['error_amount']      = 'Amount must be greater than or equal to 1!';
+$_['error_amount']      = 'Сумма должна быть не менее 1!';
 ?>

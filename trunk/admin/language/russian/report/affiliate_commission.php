@@ -1,17 +1,17 @@
 <?php
 // Heading
-$_['heading_title']     = 'Affiliate Commission Report';
+$_['heading_title']     = 'Отчет по комиссиям партнеров';
 
 // Column
-$_['column_affiliate']  = 'Affiliate Name';
+$_['column_affiliate']  = 'Имя партнера';
 $_['column_email']      = 'E-Mail';
-$_['column_status']     = 'Status';
-$_['column_commission'] = 'Commission';
-$_['column_orders']     = 'No. Orders';
-$_['column_total']      = 'Total';
-$_['column_action']     = 'Action';
+$_['column_status']     = 'Статус';
+$_['column_commission'] = 'Комиссия';
+$_['column_orders']     = 'Кол-во заказов';
+$_['column_total']      = 'Итого';
+$_['column_action']     = 'Действие';
 
 // Entry
-$_['entry_date_start']  = 'Date Start:';
-$_['entry_date_end']    = 'Date End:';
+$_['entry_date_start']  = 'Дата начала:';
+$_['entry_date_end']    = 'Дата окончания:';
 ?>
