@@ -9,16 +9,14 @@ class ControllerPaymentWebmoneyWME extends Controller {
 		
 		$this->load->model('setting/setting');
 		
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validate())) {
-			$this->load->model('setting/setting');
-			
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('webmoney_wme', $this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
-			
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token']);
+
+			$this->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
 		}
-		
+
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['entry_merch_e'] = $this->language->get('entry_merch_e');
@@ -60,29 +58,29 @@ class ControllerPaymentWebmoneyWME extends Controller {
 			$this->data['error_secret_key'] = '';
 		}
 		
-		$this->document->breadcrumbs = array();
-		
-		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+		$this->data['breadcrumbs'] = array();
+
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_payment'),
+			'href'      => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=payment/webmoney_wme&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('payment/webmoney_wme', 'token=' . $this->session->data['token'], 'SSL'),      		
       		'separator' => ' :: '
    		);
+				
+		$this->data['action'] = $this->url->link('payment/webmoney_wme', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->data['action'] = HTTPS_SERVER . 'index.php?route=payment/webmoney_wme&token=' . $this->session->data['token'];
-		
-		$this->data['cancel'] = HTTPS_SERVER . 'index.php?route=extension/payment';
+		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
 		
 		// Номер магазина
@@ -109,7 +107,7 @@ class ControllerPaymentWebmoneyWME extends Controller {
 		if (isset($this->request->post['webmoney_wme_order_status_id'])) {
 			$this->data['webmoney_wme_order_status_id'] = $this->request->post['webmoney_wme_order_status_id'];
 		} else {
-			$this->data['webmoney_wme_order_status_id'] = $this->config->get('webmoney_wme_order_status_id');
+			$this->data['webmoney_wme_order_status_id'] = $this->config->get('webmoney_wme_order_status_id'); 
 		}
 		
 		
@@ -120,7 +118,7 @@ class ControllerPaymentWebmoneyWME extends Controller {
 		if (isset($this->request->post['webmoney_wme_geo_zone_id'])) {
 			$this->data['webmoney_wme_geo_zone_id'] = $this->request->post['webmoney_wme_geo_zone_id'];
 		} else {
-			$this->data['webmoney_wme_geo_zone_id'] = $this->config->get('webmoney_wme_geo_zone_id');
+			$this->data['webmoney_wme_geo_zone_id'] = $this->config->get('webmoney_wme_geo_zone_id'); 
 		}
 		
 		$this->load->model('localisation/geo_zone');

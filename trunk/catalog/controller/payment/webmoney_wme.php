@@ -19,7 +19,7 @@ class ControllerPaymentWebmoneyWME extends Controller {
 		
 		//$this->data['amount'] = $this->currency->format($order_info['total'], $order_info['currency'], $order_info['value'], FALSE);
 		
-		$eur_code = "EUR";
+		$eur_code = 'EUR';
 		$eur_order_total = $this->currency->convert($order_info['total'], $order_info['currency_code'], $eur_code);
 		$this->data['amount'] = $this->currency->format($eur_order_total, $eur_code, $order_info['currency_value'], FALSE);
 		
@@ -50,7 +50,7 @@ class ControllerPaymentWebmoneyWME extends Controller {
 	}
 	
 	public function fail() {
-		
+	
 		$this->redirect(HTTPS_SERVER . 'index.php?route=checkout/payment');
 		
 		return TRUE;

@@ -9,16 +9,14 @@ class ControllerPaymentWebmoneyWMR extends Controller {
 		
 		$this->load->model('setting/setting');
 		
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validate())) {
-			$this->load->model('setting/setting');
-			
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('webmoney_wmr', $this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_success');
-			
-			$this->redirect(HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token']);
+
+			$this->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
 		}
-		
+
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['entry_merch_r'] = $this->language->get('entry_merch_r');
@@ -60,29 +58,29 @@ class ControllerPaymentWebmoneyWMR extends Controller {
 			$this->data['error_secret_key'] = '';
 		}
 		
-		$this->document->breadcrumbs = array();
-		
-		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token'],
+		$this->data['breadcrumbs'] = array();
+
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-      		'separator' => FALSE
+			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+      		'separator' => false
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=extension/payment&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_payment'),
+			'href'      => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
-   		$this->document->breadcrumbs[] = array(
-       		'href'      => HTTPS_SERVER . 'index.php?route=payment/webmoney_wmr&token=' . $this->session->data['token'],
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
+			'href'      => $this->url->link('payment/webmoney_wmr', 'token=' . $this->session->data['token'], 'SSL'),      		
       		'separator' => ' :: '
    		);
+				
+		$this->data['action'] = $this->url->link('payment/webmoney_wmr', 'token=' . $this->session->data['token'], 'SSL');
 		
-		$this->data['action'] = HTTPS_SERVER . 'index.php?route=payment/webmoney_wmr&token=' . $this->session->data['token'];
-		
-		$this->data['cancel'] = HTTPS_SERVER . 'index.php?route=extension/payment';
+		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
 		
 		// Номер магазина

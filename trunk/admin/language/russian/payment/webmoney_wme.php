@@ -13,8 +13,6 @@ $_['entry_secret_key']      = 'Secret Key:';
 $_['entry_result_url']     	= 'Result URL:';
 $_['entry_success_url']     = 'Success URL:';
 $_['entry_fail_url']      	= 'Fail URL :';
-
-
 $_['entry_order_status'] 	= 'Статус заказа после оплаты:';
 $_['entry_geo_zone']     	= 'Гео. Зона:';
 $_['entry_status']       	= 'Состояние:';
@@ -26,5 +24,4 @@ $_['error_permission']   	= 'У Вас нет прав для изменения
 $_['error_merch_e']        	= 'Неверный номер кошелька!';
 $_['error_secret_key']    = 'Отсутствует Merchant Key';
 
- 
 ?>
