@@ -8,7 +8,7 @@ $_['text_success']       	= 'Настройки модуля обновлены!
 $_['text_webmoney_wmz'] 		= '<a onclick="window.open(\'http://webmoney.ru\');"><img src="/image/payment/webmoney_wmz.gif" alt="Webmoney" title="Webmoney" style="border: 1px solid #EEEEEE;" height="25px" /></a>';
 
 // Entry
-$_['entry_merch_z']      	= 'Номер кошелька E:';
+$_['entry_merch_z']      	= 'Номер кошелька Z:';
 $_['entry_secret_key']      = 'Secret Key:';
 $_['entry_result_url']     	= 'Result URL:';
 $_['entry_success_url']     = 'Success URL:';
