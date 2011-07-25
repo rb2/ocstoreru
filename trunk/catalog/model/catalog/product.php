@@ -21,7 +21,9 @@ class ModelCatalogProduct extends Model {
 				'meta_description' => $query->row['meta_description'],
 				'meta_keyword'     => $query->row['meta_keyword'],
 				'model'            => $query->row['model'],
+				'model'            => $query->row['model'],
 				'sku'              => $query->row['sku'],
+				'upc'              => $query->row['upc'],
 				'location'         => $query->row['location'],
 				'quantity'         => $query->row['quantity'],
 				'stock_status'     => $query->row['stock_status'],
@@ -71,14 +73,14 @@ class ModelCatalogProduct extends Model {
 			
 			if (isset($data['filter_name']) && $data['filter_name']) {
 				if (isset($data['filter_description']) && $data['filter_description']) {
-					$sql .= " AND (LCASE(pd.name) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%') OR p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%') OR LCASE(pd.description) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%')))";
+					$sql .= " AND (LCASE(pd.name) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%' OR p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%') OR LCASE(pd.description) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%')";
 				} else {
-					$sql .= " AND (LCASE(pd.name) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%') OR p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%')))";
+					$sql .= " AND (LCASE(pd.name) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%' OR p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%'))";
 				}
 			}
 			
 			if (isset($data['filter_tag']) && $data['filter_tag']) {
-				$sql .= " AND p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE LCASE('%" . $this->db->escape($data['filter_tag']) . "%'))";
+				$sql .= " AND p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_tag'], 'UTF-8')) . "%')";
 			}
 										
 			if (isset($data['filter_category_id']) && $data['filter_category_id']) {
@@ -392,14 +394,14 @@ class ModelCatalogProduct extends Model {
 		
 		if (isset($data['filter_name'])) {
 			if (isset($data['filter_description']) && $data['filter_description']) {
-				$sql .= " AND (LCASE(pd.name) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%') OR p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%')) OR LCASE(pd.description) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%'))";
+				$sql .= " AND (LCASE(pd.name) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%' OR p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%') OR LCASE(pd.description) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%')";
 			} else {
-				$sql .= " AND (LCASE(pd.name) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%') OR p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE LCASE('%" . $this->db->escape($data['filter_name']) . "%')))";
+				$sql .= " AND (LCASE(pd.name) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%' OR p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%'))";
 			}
 		}
 		
 		if (isset($data['filter_tag']) && $data['filter_tag']) {
-			$sql .= " AND p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE LCASE('%" . $this->db->escape($data['filter_tag']) . "%'))";
+			$sql .= " AND p.product_id IN (SELECT pt.product_id FROM " . DB_PREFIX . "product_tag pt WHERE pt.language_id = '" . (int)$this->config->get('config_language_id') . "' AND LCASE(pt.tag) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_tag'], 'UTF-8')) . "%')";
 		}
 									
 		if (isset($data['filter_category_id']) && $data['filter_category_id']) {
