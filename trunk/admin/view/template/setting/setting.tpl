@@ -679,6 +679,36 @@
                 <?php } ?></td>
             </tr>
             <tr>
+              <td><?php echo $entry_seo_url_type; ?></td>
+              <td><select name="config_seo_url_type">
+                <?php foreach ($seo_types as $seo_type) { ?>
+                <?php if ($seo_type['type'] == $config_seo_url_type) { ?>
+                <option value="<?php echo $seo_type['type']; ?>" selected="selected"><?php echo $seo_type['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $seo_type['type']; ?>"><?php echo $seo_type['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+              </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_seo_url_include_path; ?></td>
+              <td><?php if ($config_seo_url_include_path) { ?>
+                <input type="radio" name="config_seo_url_include_path" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_seo_url_include_path" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_seo_url_include_path" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_seo_url_include_path" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_seo_url_postfix; ?></td>
+              <td><input type="text" name="config_seo_url_postfix" value="<?php echo $config_seo_url_postfix; ?>" size="3" /></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_maintenance; ?></td>
               <td><?php if ($config_maintenance) { ?>
                 <input type="radio" name="config_maintenance" value="1" checked="checked" />

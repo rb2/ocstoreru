@@ -100,6 +100,9 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_maintenance'] = $this->language->get('entry_maintenance');
 		$this->data['entry_encryption'] = $this->language->get('entry_encryption');
 		$this->data['entry_seo_url'] = $this->language->get('entry_seo_url');
+		$this->data['entry_seo_url_type'] = $this->language->get('entry_seo_url_type');
+		$this->data['entry_seo_url_include_path'] = $this->language->get('entry_seo_url_include_path');
+		$this->data['entry_seo_url_postfix'] = $this->language->get('entry_seo_url_postfix');
 		$this->data['entry_compression'] = $this->language->get('entry_compression');
 		$this->data['entry_error_display'] = $this->language->get('entry_error_display');
 		$this->data['entry_error_log'] = $this->language->get('entry_error_log');
@@ -789,6 +792,30 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_seo_url'] = $this->config->get('config_seo_url');
 		}
 		
+		if (isset($this->request->post['config_seo_url_type'])) {
+			$this->data['config_seo_url_type'] = $this->request->post['config_seo_url_type'];
+		} elseif ($this->config->get('config_seo_url_type')) {
+			$this->data['config_seo_url_type'] = $this->config->get('config_seo_url_type');
+		} else {
+			$this->data['config_seo_url_type'] = 'seo_url';
+		}
+
+		$this->data['seo_types'] = array();
+		$this->data['seo_types'][] = array('type' => 'seo_url', 'name' => $this->language->get('text_seo_url'));
+		$this->data['seo_types'][] = array('type' => 'seo_pro', 'name' => $this->language->get('text_seo_pro'));
+
+		if (isset($this->request->post['config_seo_url_include_path'])) {
+			$this->data['config_seo_url_include_path'] = $this->request->post['config_seo_url_include_path'];
+		} else {
+			$this->data['config_seo_url_include_path'] = $this->config->get('config_seo_url_include_path');
+		}
+
+		if (isset($this->request->post['config_seo_url_postfix'])) {
+			$this->data['config_seo_url_postfix'] = $this->request->post['config_seo_url_postfix'];
+		} else {
+			$this->data['config_seo_url_postfix'] = $this->config->get('config_seo_url_postfix');
+		}
+
 		if (isset($this->request->post['config_maintenance'])) {
 			$this->data['config_maintenance'] = $this->request->post['config_maintenance'];
 		} else {

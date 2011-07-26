@@ -581,6 +581,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_reward'] = $this->language->get('entry_reward');
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
+		$this->data['entry_main_category'] = $this->language->get('entry_main_category');
 				
     	$this->data['button_save'] = $this->language->get('button_save');
     	$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -1063,6 +1064,14 @@ class ControllerCatalogProduct extends Controller {
 				
 		$this->data['categories'] = $this->model_catalog_category->getCategories(0);
 		
+		if (isset($this->request->post['main_category_id'])) {
+			$this->data['main_category_id'] = $this->request->post['main_category_id'];
+		} elseif (isset($product_info)) {
+			$this->data['main_category_id'] = $this->model_catalog_product->getProductMainCategoryId($this->request->get['product_id']);
+		} else {
+			$this->data['main_category_id'] = 0;
+		}
+
 		if (isset($this->request->post['product_category'])) {
 			$this->data['product_category'] = $this->request->post['product_category'];
 		} elseif (isset($product_info)) {
