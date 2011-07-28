@@ -13,8 +13,8 @@ $_['text_address']       = 'Адресная книга';
 $_['text_wishlist']      = 'Изменить заметки';
 $_['text_order']         = 'История заказов';
 $_['text_download']      = 'Файлы для скачивания';
-$_['text_reward']        = 'Ваши бонусные баллы'; 
-$_['text_return']        = 'View your return requests'; 
+$_['text_reward']        = 'Бонусные баллы'; 
+$_['text_return']        = 'Запросы на возврат'; 
 $_['text_transaction']   = 'История платежей'; 
 $_['text_newsletter']    = 'Редактировать подписку';
 ?>

@@ -21,7 +21,7 @@ $_['text_separator']        = ' &raquo; ';
 // Buttons
 $_['button_add_address']    = 'Добавить адрес';
 $_['button_back']           = 'Назад';
-$_['button_continue']       = 'Продолжить';
+$_['button_continue']       = 'Вперед';
 $_['button_cart']    		= 'В Корзину';
 $_['button_compare']        = 'В сравнения';
 $_['button_wishlist']       = 'В заметки';
