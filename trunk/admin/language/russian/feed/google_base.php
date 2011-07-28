@@ -3,7 +3,7 @@
 $_['heading_title']    = 'Google Base';
 
 // Text   
-$_['text_feed']        = 'Каналы товаров';
+$_['text_feed']        = 'Каналы продвижения';
 $_['text_success']     = 'Настройки модуля обновлены!';
 
 // Entry

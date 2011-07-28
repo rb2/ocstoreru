@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']  = 'Каналы товаров';
+$_['heading_title']  = 'Каналы продвижения';
 
 // Text
 $_['text_install']   = 'Установить';
