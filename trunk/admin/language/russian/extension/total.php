@@ -7,7 +7,7 @@ $_['text_install']      = 'Установить';
 $_['text_uninstall']    = 'Удалить';
 
 // Column
-$_['column_name']       = 'Итого в заказе';
+$_['column_name']       = 'Учитывать в заказе';
 $_['column_status']     = 'Статус';
 $_['column_sort_order'] = 'Порядок сортировки';
 $_['column_action']     = 'Действие';
