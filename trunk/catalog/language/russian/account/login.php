@@ -17,5 +17,5 @@ $_['entry_email']			= 'E-Mail:';
 $_['entry_password']			= 'Пароль:';
 
 // Error
-$_['error_login']			= 'Не заполнены поля E-Mail и/или пароль!';
+$_['error_login']                  = 'Неправильно заполнены поля E-Mail и/или пароль!';
 ?>
