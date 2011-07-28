@@ -26,6 +26,21 @@ class ControllerInformationContact extends Controller {
 	  		$this->redirect($this->url->link('information/contact/success'));
     	}
 
+		// http://www.assembla.com/spaces/ocstoreru/tickets/6
+		// Автозаполнение email и name на странице Наши контакты
+		$this->load->model('account/customer');
+		if ($this->customer->isLogged()) {
+			$customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+			
+			$email = $customer_info['email'];
+			$name = $customer_info['firstname'];
+			
+		} else {
+			$email = '';
+			$name = '';	
+		}
+
+
       	$this->data['breadcrumbs'] = array();
 
       	$this->data['breadcrumbs'][] = array(
@@ -88,13 +103,13 @@ class ControllerInformationContact extends Controller {
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
 		} else {
-			$this->data['name'] = '';
+			$this->data['name'] = $name;
 		}
 
 		if (isset($this->request->post['email'])) {
 			$this->data['email'] = $this->request->post['email'];
 		} else {
-			$this->data['email'] = '';
+			$this->data['email'] = $email;
 		}
 		
 		if (isset($this->request->post['enquiry'])) {
