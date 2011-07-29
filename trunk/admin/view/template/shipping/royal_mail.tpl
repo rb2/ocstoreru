@@ -101,8 +101,7 @@
                   <?php echo $text_surface; ?>
                   <?php } ?>
                 </div>
-              </div>
-              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
+            </div></td>
           </tr>
           <tr>
             <td><?php echo $entry_display_weight; ?></td>
