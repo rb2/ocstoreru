@@ -31,6 +31,13 @@
 // Confirm Actions (delete, uninstall)
 //-----------------------------------------
 $(document).ready(function(){
+	$(".scrollbox").each(function(i) {
+        if ($(this).attr('id') == null) {
+			$(this).attr('id', 'scrollbox_' + i);
+			sbox = '#' + $(this).attr('id');
+			$(this).after('<span><a onclick="$(\'' + sbox + ' :checkbox\').attr(\'checked\', \'checked\');"><u><?php echo $text_select_all; ?></u></a> / <a onclick="$(\'' + sbox + ' :checkbox\').removeAttr(\'checked\');"><u><?php echo $text_unselect_all; ?></u></a></span>');
+        }
+	});
 	
     // Confirm Delete
     $('#form').submit(function(){
