@@ -1,17 +1,17 @@
 <?php
 // Heading
-$_['heading_title']     = 'Îò÷åò ïî êîìèññèÿì ïàðòíåðîâ';
+$_['heading_title']     = 'ÐžÑ‚Ñ‡ÐµÑ‚ Ð¿Ð¾ ÐºÐ¾Ð¼Ð¸ÑÑÐ¸ÑÐ¼ Ð¿Ð°Ñ€Ñ‚Ð½ÐµÑ€Ð¾Ð²';
 
 // Column
-$_['column_affiliate']  = 'Èìÿ ïàðòíåðà';
+$_['column_affiliate']  = 'Ð˜Ð¼Ñ Ð¿Ð°Ñ€Ñ‚Ð½ÐµÑ€Ð°';
 $_['column_email']      = 'E-Mail';
-$_['column_status']     = 'Ñòàòóñ';
-$_['column_commission'] = 'Êîìèññèÿ';
-$_['column_orders']     = 'Êîë-âî çàêàçîâ';
-$_['column_total']      = 'Èòîãî';
-$_['column_action']     = 'Äåéñòâèå';
+$_['column_status']     = 'Ð¡Ñ‚Ð°Ñ‚ÑƒÑ';
+$_['column_commission'] = 'ÐšÐ¾Ð¼Ð¸ÑÑÐ¸Ñ';
+$_['column_orders']     = 'ÐšÐ¾Ð»-Ð²Ð¾ Ð·Ð°ÐºÐ°Ð·Ð¾Ð²';
+$_['column_total']      = 'Ð˜Ñ‚Ð¾Ð³Ð¾';
+$_['column_action']     = 'Ð”ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ';
 
 // Entry
-$_['entry_date_start']  = 'Äàòà íà÷àëà:';
-$_['entry_date_end']    = 'Äàòà îêîí÷àíèÿ:';
+$_['entry_date_start']  = 'Ð”Ð°Ñ‚Ð° Ð½Ð°Ñ‡Ð°Ð»Ð°:';
+$_['entry_date_end']    = 'Ð”Ð°Ñ‚Ð° Ð¾ÐºÐ¾Ð½Ñ‡Ð°Ð½Ð¸Ñ:';
 ?>
