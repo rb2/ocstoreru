@@ -145,7 +145,7 @@ body > #container {
 }
 #content {
 	background: #FFFFFF url('../image/background.png') 0px 1px repeat-x;
-	padding: 10px 30px 0px 30px;
+	padding: 10px 10px 0px 10px;
 	min-width: 900px;
 	padding-bottom: 128px;
 }
@@ -304,6 +304,12 @@ table.filter td {
 .list tbody td {
 	vertical-align: middle;
 	padding: 0px 5px;
+}
+.list tbody tr:hover td {
+	background:  #e6f1ff;
+	/*background: #ffe9a3;*/
+}
+.list tbody tr:nth-child(odd) {
 	background: #FFFFFF;
 }
 .list .left {
