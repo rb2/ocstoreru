@@ -9,13 +9,12 @@ $_['text_account_already']      = 'Если у вас уже есть партн
 $_['text_signup']               = 'Для создания учетной записи партнера необходимо заполнить форму регистрации:';
 $_['text_your_details']         = 'Ваши персональные данные';
 $_['text_your_address']         = 'Ваш адрес';
-$_['text_payment']              = 'Платежные реквезиты';
+$_['text_payment']              = 'Платёжные реквизиты';
 $_['text_your_password']        = 'Пароль';
 $_['text_cheque']               = 'Чек';
 $_['text_paypal']               = 'PayPal';
 $_['text_bank']                 = 'Банковский перевод';
-$_['text_agree']                = 'Мною прочитаны и приняты условия <a class="fancybox" href="%s" alt="%s"><b>%s</b></a>';
-
+$_['text_agree']                = 'Я прочитал <a class="fancybox" href="%s" alt="%s"><b>%s</b></a> и согласен с условиями';
 // Entry
 $_['entry_firstname']           = 'Имя, Отчество:';
 $_['entry_lastname']            = 'Фамилия:';
@@ -24,21 +23,21 @@ $_['entry_telephone']           = 'Номер телефона:';
 $_['entry_fax']                 = 'Факс:';
 $_['entry_company']             = 'Компания:';
 $_['entry_website']             = 'Веб-сайт:';
-$_['entry_address_1']           = 'Адрес 1:';
-$_['entry_address_2']           = 'Адрес 2:';
+$_['entry_address_1']           = 'Адрес:';
+$_['entry_address_2']           = 'Адрес (продолжение):';
 $_['entry_postcode']            = 'Индекс:';
 $_['entry_city']                = 'Город:';
 $_['entry_country']             = 'Страна:';
 $_['entry_zone']                = 'Регион / Область:';
-$_['entry_tax']                 = 'Налог:';
+$_['entry_tax']                 = 'Налоговый код (ИНН):';
 $_['entry_payment']             = 'Способ оплаты:';
-$_['entry_cheque']              = 'Cheque Payee Name:';
-$_['entry_paypal']              = 'PayPal Email Account:';
-$_['entry_bank_name']           = 'Bank Name:';
-$_['entry_bank_branch_number']  = 'ABA/BSB number (Branch Number):';
-$_['entry_bank_swift_code']     = 'SWIFT Code:';
-$_['entry_bank_account_name']   = 'Account Name:';
-$_['entry_bank_account_number'] = 'Account Number:';
+$_['entry_cheque']              = 'Чек, Имя получателя платежа:';
+$_['entry_paypal']              = 'PayPal Email аккаунт:';
+$_['entry_bank_name']           = 'Наименование банка:';
+$_['entry_bank_branch_number']  = 'ABA/BSB номер (номер отделения):';
+$_['entry_bank_swift_code']     = 'SWIFT код:';
+$_['entry_bank_account_name']   = 'Имя счета:';
+$_['entry_bank_account_number'] = 'Номер счета:';
 $_['entry_password']            = 'Пароль:';
 $_['entry_confirm']             = 'Подтверждение пароля:';
 

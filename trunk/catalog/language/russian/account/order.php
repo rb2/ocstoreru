@@ -13,7 +13,7 @@ $_['text_date_added']       = 'Дата:';
 $_['text_customer']         = 'Покупатель:';
 $_['text_shipping_address'] = 'Адрес доставки:';
 $_['text_shipping_method']  = 'Способ доставки:';
-$_['text_payment_address']  = 'Адрес платильщика:';
+$_['text_payment_address']  = 'Адрес плательщика:';
 $_['text_payment_method']   = 'Способ оплаты:';
 $_['text_products']         = 'Товаров:';
 $_['text_total']            = 'Итого:';
@@ -22,9 +22,9 @@ $_['text_history']          = 'История заказов';
 $_['text_empty']            = 'Вы еще не совершали покупок!';
 $_['text_error']            = 'Запрошенный заказ не найден!';
 $_['text_action']           = 'Выберите действие:';
-$_['text_selected']         = 'С выбранными..';
+$_['text_selected']         = 'С выбранными...';
 $_['text_reorder']          = 'Добавить в корзину';
-$_['text_return']           = 'Вернуть товар';
+$_['text_return']           = 'Вернуть товары';
 
 // Column
 $_['column_name']           = 'Наименование товара';
@@ -37,5 +37,5 @@ $_['column_status']         = 'Статус';
 $_['column_comment']        = 'Комментарий';
 
 // Error
-$_['error_warning']         = 'Warning: you must select some products and an action complete your request!';
+$_['error_warning']         = 'Необходимо выбрать товары и действие!';
 ?>

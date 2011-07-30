@@ -20,6 +20,6 @@ $_['entry_paypal']              = 'PayPal Email аккаунт:';
 $_['entry_bank_name']           = 'Название банка:';
 $_['entry_bank_branch_number']  = 'ABA/BSB номер (номер отделения):';
 $_['entry_bank_swift_code']     = 'SWIFT код:';
-$_['entry_bank_account_name']   = 'Название счета:';
-$_['entry_bank_account_number'] = 'Номер счета:';
+$_['entry_bank_account_name']   = 'Название счёта:';
+$_['entry_bank_account_number'] = 'Номер счёта:';
 ?>
