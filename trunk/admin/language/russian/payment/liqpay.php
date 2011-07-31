@@ -12,7 +12,7 @@ $_['text_card']          = 'Credit Card';
 $_['entry_merchant']     = 'Merchant ID:';
 $_['entry_signature']    = 'Signature:';
 $_['entry_type']         = 'Type:';
-$_['entry_total']        = 'Total:<br /><span class="help">The checkout total the order must reach before this payment method becomes active.</span>';
+$_['entry_total']        = 'Нижняя граница:<br /><span class="help">Минимальная суииа заказа. Ниже этой суммы метод будет недоступен.</span>';
 $_['entry_order_status'] = 'Статус заказа после оплаты:';
 $_['entry_geo_zone']     = 'Географическая зона:';
 $_['entry_status']       = 'Статус:';

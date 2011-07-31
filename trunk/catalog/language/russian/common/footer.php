@@ -1,6 +1,6 @@
 <?php
 // Text
-$_['text_information']  = 'Инофрмация';
+$_['text_information']  = 'Информация';
 $_['text_service']      = 'Поддержка';
 $_['text_extra']        = 'Дополнительно';
 $_['text_account']      = 'Личный Кабинет';

@@ -18,7 +18,7 @@ $_['entry_email']             = 'E-Mail:';
 $_['entry_telephone']         = 'Телефон:';
 $_['entry_fax']               = 'Факс:';
 $_['entry_title']             = 'Заголовок:';
-$_['entry_meta_description']  = 'Описание для мета-тегов:';
+$_['entry_meta_description']  = 'Мета-тег "Описание":';
 $_['entry_layout']              = 'Схема по умолчанию:';
 $_['entry_template']          = 'Шаблон магазина:';
 $_['entry_country']           = 'Страна:';
@@ -35,9 +35,9 @@ $_['entry_tax']               = 'Отображать цены с налогом
 $_['entry_invoice']           = 'Начальный № счета-фактуры:<br /><span class="help">Установите стартовый номер счета-фактуры.</span>';
 $_['entry_invoice_prefix']    = 'Префикс счета-фактуры:<br /><span class="help">Установите префикс счета-фактуры. Пример: INV-2011-00</span>';
 $_['entry_customer_group']    = 'Группа покупателей:<br /><span class="help">Группа покупателей по умолчанию.</span>';
-$_['entry_customer_price']    = 'Показывать цены:<br /><span class="help">Показывать цены только зарегистрированнным клиентам.</span>';
+$_['entry_customer_price']    = 'Показывать цены только залогиненным:<br /><span class="help">Показывать цены только зарегистрированнным клиентам.</span>';
 $_['entry_customer_approval'] = 'Активация новых пользователей:<br /><span class="help">Не позволять входить новым клиентам под своим логином и паролем до одобрения аккаунта.</span>';
-$_['entry_guest_checkout']    = 'Гостевое оформление заказа:<br /><span class="help">Позволить клиентам оформлять заказы без регистрации Личного кабинета. Эта функция не будет доступна, если в корзине будут загружаемые в виде файла товары.</span>';
+$_['entry_guest_checkout']    = 'Оформление заказа без регистрации:<br /><span class="help">Позволить клиентам оформлять заказы без регистрации Личного кабинета. Эта функция не будет доступна, если в корзине будут загружаемые в виде файла товары.</span>';
 $_['entry_account']           = 'Подтверждение при регистрации:<br /><span class="help">Требовать подтверждение согласия с правилами при регистрации аккаунта.</span>';
 $_['entry_checkout']          = 'Подтверждение при заказе:<br /><span class="help">Требовать подтверждение согласия с правилами при оформлении заказа.</span>';
 $_['entry_affiliate']           = 'Условия партнерства:<br /><span class="help">Требовать подтверждение согласия с правилами при оформлении партнерского аккаунта.</span>';
@@ -50,8 +50,8 @@ $_['entry_order_status']      = 'Статус заказа:<br /><span class="he
 $_['entry_complete_status']     = 'Complete Order Status:<br /><span class="help">Set the order status the customers order must reach before they are allowed to access their downloadable products and gift vouchers.</span>';
 $_['entry_return_status']       = 'Return Status:<br /><span class="help">Set the default return status when an returns request is submitted.</span>';
 $_['entry_review']       	  = 'Разрешить отзывы:<br /><span class="help">Включает/выключает добавление новых отзывов и отображение существующих отзывов</span>';
-$_['entry_download']          = 'Разрешить загрузки:';
-$_['entry_upload_allowed']      = 'Разрешенные загрузки:<br /><span class="help">Разрешенные для загрузки форматы файлов. Форматы разделяются запятыми.</span>';
+$_['entry_download']          = 'Разрешить скачивание файлов:';
+$_['entry_upload_allowed']    = 'Разрешенные для загрузки типы файлов:<br /><span class="help">Разрешенные для загрузки на сервер форматы файлов. Форматы разделяются запятыми.</span>';
 $_['entry_cart_weight']       = 'Показывать вес на странице корзины:<br /><span class="help">Показывает вес заказанных товаров на странице корзины</span>';
 $_['entry_logo']              = 'Логотип:';
 $_['entry_icon']              = 'Иконка:<br /><span class="help">Должана быть в PNG 16px на 16px.</span>';
@@ -76,7 +76,8 @@ $_['entry_alert_mail']        = 'Оповещение о заказе по E-mai
 $_['entry_account_mail']      = 'Оповещение о новом клиенте:<br /><span class="help">Оповестить владельца магазина о регистрации нового клиента.</span>';
 $_['entry_alert_emails']        = 'Дополнительные адреса для оповещений:<br /><span class="help">Список дополнительных адресов для получения сообщений от системы. (Разделяются запятыми)</span>';
 $_['entry_use_ssl']               = 'Использовать SSL:<br /><span class="help">Для использования SSL убедитесь что Ваш хостинг поддерживает SSL сертификат и пропишите SSL адреса в файле конфигурации.</span>';
-$_['entry_seo_url']           = 'Включить ЧПУ:<span class="help">Необходимо настройть файл .htaccess в корневом каталоге магазина</span>';
+$_['entry_seo_url']           = 'Включить ЧПУ:<span class="help">Необходимо настроить файл .htaccess в корневом каталоге магазина</span>';
+
 $_['entry_seo_url_type']      = 'Тип ЧПУ:';
 $_['entry_seo_url_include_path'] = 'ЧПУ товаров с категориями:<span class="help">/category/subcategory/product<br />(только для SeoPro)</span>';
 $_['entry_seo_url_postfix']   = 'Окончание ЧПУ:<span class="help">Например .html<br />(только для SeoPro)</span>';
