@@ -1062,7 +1062,9 @@ class ControllerCatalogProduct extends Controller {
 		
 		$this->load->model('catalog/category');
 				
-		$this->data['categories'] = $this->model_catalog_category->getCategories(0);
+		$categories = $this->model_catalog_category->getAllCategories();
+
+		$this->data['categories'] = $this->getAllCategories($categories);
 		
 		if (isset($this->request->post['main_category_id'])) {
 			$this->data['main_category_id'] = $this->request->post['main_category_id'];
@@ -1274,6 +1276,27 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->library('json');
 
 		$this->response->setOutput(Json::encode($json));
+	}
+
+	private function getAllCategories($categories, $parent_id = 0, $parent_name = '') {
+		$output = array();
+
+		if (array_key_exists($parent_id, $categories)) {
+			if ($parent_name != '') {
+				$parent_name .= $this->language->get('text_separator');
+			}
+
+			foreach ($categories[$parent_id] as $category) {
+				$output[$category['category_id']] = array(
+					'category_id' => $category['category_id'],
+					'name'        => $parent_name . $category['name']
+				);
+
+				$output += $this->getAllCategories($categories, $category['category_id'], $parent_name . $category['name']);
+			}
+		}
+
+		return $output;
 	}
 }
 ?>
