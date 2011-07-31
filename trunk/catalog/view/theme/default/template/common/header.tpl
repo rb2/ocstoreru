@@ -110,7 +110,12 @@ DD_belatedPNG.fix('#logo img');
 <div id="menu">
   <ul>
     <?php foreach ($categories as $category) { ?>
-    <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
+    <li><?php if ($category['category_id'] == $category_id) { ?>
+	<a href="<?php echo $category['href']; ?>" class="active"><?php echo $category['name']; ?></a>
+	<?php } else { ?>
+	<a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
+	<?php } ?>
+
       <?php if ($category['children']) { ?>
       <div>
         <?php for ($i = 0; $i < count($category['children']);) { ?>
