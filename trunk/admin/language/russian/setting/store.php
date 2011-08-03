@@ -13,7 +13,7 @@ $_['column_action']				= 'Действие';
 
 // Entry
 $_['entry_url']					= 'URL магазина:<br /><span class="help">Включая полный URL к магазину. Добавьте \'/\' в конце. Например: http://wwww.yourdomain.com/path/</span>';
-$_['entry_ssl']					= 'SSL URL:<br /><span class="help">SSL URL to your store. Make sure to add \'/\' at the end. Example: http://www.yourdomain.com/path/<br /><br />Don\'t use directories to create a new store. You should always point another domain or sub domain to your hosting.</span>';
+$_['entry_ssl']					= 'SSL URL:<br /><span class="help">SSL ссылка к магазину. Убедитесь, что \'/\' стоит в конце. Например: http://www.yourdomain.com/path/<br /><br />Не используйте директории для создания нового магазина. Необходимо использовать поддомен или новый домен.</span>';
 $_['entry_name']				= 'Название магазина:';
 $_['entry_owner']				= 'Владелец магазина:';
 $_['entry_address']				= 'Адрес:';
