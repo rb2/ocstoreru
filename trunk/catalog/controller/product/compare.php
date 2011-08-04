@@ -113,7 +113,7 @@ class ControllerProductCompare extends Controller {
 					'thumb'        => $image,
 					'price'        => $price,
 					'special'      => $special,
-					'description'  => substr(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')), 0, 200) . '..',
+					'description'  => mb_substr(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')), 0, 200, 'UTF-8') . '..',
 					'model'        => $product_info['model'],
 					'manufacturer' => $product_info['manufacturer'],
 					'availability' => $availability,
