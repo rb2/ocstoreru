@@ -77,7 +77,7 @@ class ControllerFeedYandexMarket extends Controller {
 			$this->data['yandex_market_status'] = $this->config->get('yandex_market_status');
 		}
 
-		$this->data['data_feed'] = $this->url->link('export/yml');
+		$this->data['data_feed'] = HTTP_CATALOG . 'index.php?route=export/yml';
 
 		if (isset($this->request->post['yandex_market_shopname'])) {
 			$this->data['yandex_market_shopname'] = $this->request->post['yandex_market_shopname'];
@@ -140,7 +140,7 @@ class ControllerFeedYandexMarket extends Controller {
 			'common/footer'
 		);
 
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+		$this->response->setOutput($this->render(), $this->config->get('config_compression'));
 	}
 
 	private function validate() {
