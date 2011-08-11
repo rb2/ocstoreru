@@ -136,11 +136,27 @@ class ModelDataexchangeExchange1c extends Model {
 				$data['name'] = $product->Наименование?(string)$product->Наименование:'не задано';
 			
 				if($product->Картинка){
-					$data['image'] =(string)$product->Картинка[0];
-					unset($product->Картинка[0]);
-					foreach($product->Картинка as $image){
+					
+					// Заглушка, без нее не пашет :(
+					$tmpData = (array)$product->Картинка;
+					$tmpData = $tmpData['Картинка'];
+					
+					$data['image'] = $tmpData[0];
+					unset($tmpData[0]);
+					foreach($tmpData as $image){
 					  $data['product_image'][] = (string)$image;
 					}
+					
+					unset($tmpData);
+					/*
+
+					
+					echo '<pre>';
+					var_dump($data);
+					var_dump($product->Картинка);
+					exit;
+*/
+
 				}
 
 				if($product->Группы) $data['category_1c_id'] = (string)$product->Группы->Ид;
