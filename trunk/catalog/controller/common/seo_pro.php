@@ -161,9 +161,9 @@ class ControllerCommonSeoPro extends Controller {
 		$seo_url = trim($seo_url, '/');
 
 		if ($component['scheme'] == 'https') {
-			$seo_url = HTTPS_SERVER . $seo_url;
+			$seo_url = $this->config->get('config_ssl') . $seo_url;
 		} else {
-			$seo_url = HTTP_SERVER . $seo_url;
+			$seo_url = $this->config->get('config_url') . $seo_url;
 		}
 
 		if (isset($postfix)) {
