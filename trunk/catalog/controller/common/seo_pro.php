@@ -105,9 +105,9 @@ class ControllerCommonSeoPro extends Controller {
 		}
 
 		if ($component['scheme'] == 'https') {
-			$link = HTTPS_SERVER;
+			$link = $this->config->get('config_ssl');
 		} else {
-			$link = HTTP_SERVER;
+			$link = $this->config->get('config_url');
 		}
 
 		$link .= 'index.php?route=' . $route;
