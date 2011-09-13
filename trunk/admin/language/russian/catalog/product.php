@@ -43,6 +43,7 @@ $_['entry_quantity']         = 'Количество:';
 $_['entry_minimum']          = 'Минимальное количество:<br/><span class="help">Указание минимально количества в заказе</span>';
 $_['entry_stock_status']     = 'Остутствие на складе:<br /><span class="help">Статус, показываемый, когда товара нет на складе</span>';
 $_['entry_tax_class']        = 'Налог:';
+$_['entry_manufacturer_price'] = 'Цена производителя:';
 $_['entry_price']            = 'Цена:';
 $_['entry_points']           = 'Баллы:<br/><span class="help">Количество баллов для покупки продукта. Поставьте 0, чтобы не использовать баллы.</span>';
 $_['entry_option_points']    = 'Баллы:';
