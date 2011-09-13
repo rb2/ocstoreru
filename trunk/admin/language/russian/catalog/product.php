@@ -14,6 +14,7 @@ $_['text_percent']           = 'Процент';
 $_['text_amount']            = 'Фиксированная сумма';
 
 // Column
+$_['column_date_added']  		= 'Добавлено';
 $_['column_name']            	= 'Название товара';
 $_['column_model']           	= 'Модель';
 $_['column_image']           	= 'Изображения';
