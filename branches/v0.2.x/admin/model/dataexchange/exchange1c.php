@@ -135,10 +135,10 @@ class ModelDataexchangeExchange1c extends Model {
 
 				$data['name'] = $product->Наименование?(string)$product->Наименование:'не задано';
 			
-				if($product->Картинка){
+				if($product->Картинки){
 					
 					// Заглушка, без нее не пашет :(
-					$tmpData = (array)$product->Картинка;
+					$tmpData = (array)$product->Картинки;
 					$tmpData = $tmpData['Картинка'];
 					
 					$data['image'] = $tmpData[0];
