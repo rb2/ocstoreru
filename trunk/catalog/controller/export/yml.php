@@ -437,7 +437,7 @@ class ControllerExportYml extends Controller {
 		$to = array('&quot;', '&amp;', '&gt;', '&lt;', '&apos;');
 		$field = str_replace($from, $to, $field);
 		if ($this->from_charset != 'windows-1251') {
-			$field = iconv($this->from_charset, 'windows-1251//IGNORE//TRANSLIT', $field);
+			$field = iconv($this->from_charset, 'windows-1251//TRANSLIT//IGNORE', $field);
 		}
 		$field = preg_replace('#[\x00-\x08\x0B-\x0C\x0E-\x1F]+#is', ' ', $field);
 
