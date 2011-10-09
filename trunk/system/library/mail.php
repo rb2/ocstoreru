@@ -140,7 +140,7 @@ final class Mail {
 				$message .= 'Content-Transfer-Encoding: base64' . $this->newline;
 				$message .= 'Content-Disposition: attachment; filename="' . basename($attachment['filename']) . '"' . $this->newline;
 				$message .= 'Content-ID: <' . basename($attachment['filename']) . '>' . $this->newline . $this->newline;
-				$message .= 'X-Attachment-Id: ' . basename($attachment['filename']) . $this->newline . $this->newline;
+//				$message .= 'X-Attachment-Id: ' . basename($attachment['filename']) . $this->newline . $this->newline;
 				$message .= chunk_split(base64_encode($content));
 			}
 		}
