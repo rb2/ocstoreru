@@ -236,7 +236,7 @@ class ModelCheckoutOrder extends Model {
 			$template->data['text_price'] = $language->get('text_new_price');
 			$template->data['text_total'] = $language->get('text_new_total');
 			$template->data['text_footer'] = $language->get('text_new_footer');
-			$template->data['text_powered'] = $language->get('text_new_powered');
+			$template->data['text_powered'] = sprintf($language->get('text_new_powered'), $this->config->get('config_name'), date('Y', time()));
 			
 			$template->data['logo'] = 'cid:' . md5(basename($this->config->get('config_logo')));		
 			$template->data['store_name'] = $order_info['store_name'];
