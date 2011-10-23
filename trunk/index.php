@@ -68,7 +68,7 @@ if (!$store_query->num_rows) {
 }
 
 // Url
-$url = new Url($config->get('config_url'), $config->get('config_ssl'));	
+$url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
 $registry->set('url', $url);
 
 // Log 
@@ -202,7 +202,8 @@ if (isset($request->get['tracking']) && !isset($request->cookie['tracking'])) {
 $registry->set('currency', new Currency($registry));
 
 // Tax
-$registry->set('tax', new Tax($registry));
+$tax = new Tax($registry);
+$registry->set('tax', $tax);
 
 // Weight
 $registry->set('weight', new Weight($registry));

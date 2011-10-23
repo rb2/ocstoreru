@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.0.1
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 30, 2011 at 04:16 PM
+-- Generation Time: Jul 16, 2011 at 05:01 PM
 -- Server version: 5.1.36
--- PHP Version: 5.3.0
+-- PHP Version: 5.3.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -22,7 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_address`
+-- Table structure for table `oc_address`
 --
 
 DROP TABLE IF EXISTS `oc_address`;
@@ -43,14 +43,14 @@ CREATE TABLE `oc_address` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_address`
+-- Dumping data for table `oc_address`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_affiliate`
+-- Table structure for table `oc_affiliate`
 --
 
 DROP TABLE IF EXISTS `oc_affiliate`;
@@ -89,14 +89,14 @@ CREATE TABLE `oc_affiliate` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_affiliate`
+-- Dumping data for table `oc_affiliate`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_affiliate_transaction`
+-- Table structure for table `oc_affiliate_transaction`
 --
 
 DROP TABLE IF EXISTS `oc_affiliate_transaction`;
@@ -111,14 +111,14 @@ CREATE TABLE `oc_affiliate_transaction` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_affiliate_transaction`
+-- Dumping data for table `oc_affiliate_transaction`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_attribute`
+-- Table structure for table `oc_attribute`
 --
 
 DROP TABLE IF EXISTS `oc_attribute`;
@@ -130,7 +130,7 @@ CREATE TABLE `oc_attribute` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_attribute`
+-- Dumping data for table `oc_attribute`
 --
 
 INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) VALUES
@@ -149,7 +149,7 @@ INSERT INTO `oc_attribute` (`attribute_id`, `attribute_group_id`, `sort_order`) 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_attribute_description`
+-- Table structure for table `oc_attribute_description`
 --
 
 DROP TABLE IF EXISTS `oc_attribute_description`;
@@ -161,7 +161,7 @@ CREATE TABLE `oc_attribute_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_attribute_description`
+-- Dumping data for table `oc_attribute_description`
 --
 
 INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) VALUES
@@ -180,7 +180,7 @@ INSERT INTO `oc_attribute_description` (`attribute_id`, `language_id`, `name`) V
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_attribute_group`
+-- Table structure for table `oc_attribute_group`
 --
 
 DROP TABLE IF EXISTS `oc_attribute_group`;
@@ -191,7 +191,7 @@ CREATE TABLE `oc_attribute_group` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_attribute_group`
+-- Dumping data for table `oc_attribute_group`
 --
 
 INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
@@ -203,7 +203,7 @@ INSERT INTO `oc_attribute_group` (`attribute_group_id`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_attribute_group_description`
+-- Table structure for table `oc_attribute_group_description`
 --
 
 DROP TABLE IF EXISTS `oc_attribute_group_description`;
@@ -215,7 +215,7 @@ CREATE TABLE `oc_attribute_group_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_attribute_group_description`
+-- Dumping data for table `oc_attribute_group_description`
 --
 
 INSERT INTO `oc_attribute_group_description` (`attribute_group_id`, `language_id`, `name`) VALUES
@@ -227,7 +227,7 @@ INSERT INTO `oc_attribute_group_description` (`attribute_group_id`, `language_id
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_banner`
+-- Table structure for table `oc_banner`
 --
 
 DROP TABLE IF EXISTS `oc_banner`;
@@ -239,7 +239,7 @@ CREATE TABLE `oc_banner` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_banner`
+-- Dumping data for table `oc_banner`
 --
 
 INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
@@ -250,7 +250,7 @@ INSERT INTO `oc_banner` (`banner_id`, `name`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_banner_image`
+-- Table structure for table `oc_banner_image`
 --
 
 DROP TABLE IF EXISTS `oc_banner_image`;
@@ -263,12 +263,11 @@ CREATE TABLE `oc_banner_image` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_banner_image`
+-- Dumping data for table `oc_banner_image`
 --
 
 INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `link`, `image`) VALUES
 (54, 7, 'index.php?route=product/product&amp;path=57&amp;product_id=49', 'data/samsung_banner.jpg'),
-(52, 6, '/index.php?route=product/manufacturer/product&amp;manufacturer_id=7', 'data/hp_banner.jpg'),
 (77, 6, '/index.php?route=product/manufacturer/product&amp;manufacturer_id=7', 'data/hp_banner.jpg'),
 (75, 8, '/index.php?route=product/manufacturer/product&amp;manufacturer_id=5', 'data/htc_logo.jpg'),
 (73, 8, '/index.php?route=product/manufacturer/product&amp;manufacturer_id=8', 'data/apple_logo.jpg'),
@@ -277,11 +276,10 @@ INSERT INTO `oc_banner_image` (`banner_image_id`, `banner_id`, `link`, `image`) 
 (72, 8, '/index.php?route=product/manufacturer/product&amp;manufacturer_id=6', 'data/palm_logo.jpg'),
 (76, 8, '/index.php?route=product/manufacturer/product&amp;manufacturer_id=7', 'data/hp_logo.jpg');
 
-
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_banner_image_description`
+-- Table structure for table `oc_banner_image_description`
 --
 
 DROP TABLE IF EXISTS `oc_banner_image_description`;
@@ -294,12 +292,11 @@ CREATE TABLE `oc_banner_image_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_banner_image_description`
+-- Dumping data for table `oc_banner_image_description`
 --
 
 INSERT INTO `oc_banner_image_description` (`banner_image_id`, `language_id`, `banner_id`, `title`) VALUES
 (54, 1, 7, 'Samsung Tab 10.1'),
-(52, 1, 6, 'HP Banner'),
 (77, 1, 6, 'HP Banner'),
 (75, 1, 8, 'HTC'),
 (74, 1, 8, 'Canon'),
@@ -311,7 +308,7 @@ INSERT INTO `oc_banner_image_description` (`banner_image_id`, `language_id`, `ba
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_category`
+-- Table structure for table `oc_category`
 --
 
 DROP TABLE IF EXISTS `oc_category`;
@@ -329,13 +326,13 @@ CREATE TABLE `oc_category` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_category`
+-- Dumping data for table `oc_category`
 --
 
 INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
 (25, '', 0, 1, 1, 3, 1, '2009-01-31 01:04:25', '2011-05-30 12:14:55'),
 (27, '', 20, 0, 0, 2, 1, '2009-01-31 01:55:34', '2010-08-22 06:32:15'),
-(20, 'data/compaq_presario.jpg', 0, 1, 1, 1, 1, '2009-01-05 21:49:43', '2011-05-30 12:13:49'),
+(20, 'data/compaq_presario.jpg', 0, 1, 1, 1, 1, '2009-01-05 21:49:43', '2011-07-16 02:14:42'),
 (24, '', 0, 1, 1, 5, 1, '2009-01-20 02:36:26', '2011-05-30 12:15:18'),
 (18, 'data/hp_2.jpg', 0, 1, 0, 2, 1, '2009-01-05 21:49:15', '2011-05-30 12:13:55'),
 (17, '', 0, 1, 1, 4, 1, '2009-01-03 21:08:57', '2011-05-30 12:15:11'),
@@ -375,7 +372,7 @@ INSERT INTO `oc_category` (`category_id`, `image`, `parent_id`, `top`, `column`,
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_category_description`
+-- Table structure for table `oc_category_description`
 --
 
 DROP TABLE IF EXISTS `oc_category_description`;
@@ -391,7 +388,7 @@ CREATE TABLE `oc_category_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_category_description`
+-- Dumping data for table `oc_category_description`
 --
 
 INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES
@@ -437,7 +434,7 @@ INSERT INTO `oc_category_description` (`category_id`, `language_id`, `name`, `de
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_category_to_layout`
+-- Table structure for table `oc_category_to_layout`
 --
 
 DROP TABLE IF EXISTS `oc_category_to_layout`;
@@ -449,14 +446,14 @@ CREATE TABLE `oc_category_to_layout` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_category_to_layout`
+-- Dumping data for table `oc_category_to_layout`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_category_to_store`
+-- Table structure for table `oc_category_to_store`
 --
 
 DROP TABLE IF EXISTS `oc_category_to_store`;
@@ -467,7 +464,7 @@ CREATE TABLE `oc_category_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_category_to_store`
+-- Dumping data for table `oc_category_to_store`
 --
 
 INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
@@ -513,7 +510,7 @@ INSERT INTO `oc_category_to_store` (`category_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_country`
+-- Table structure for table `oc_country`
 --
 
 DROP TABLE IF EXISTS `oc_country`;
@@ -529,7 +526,7 @@ CREATE TABLE `oc_country` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_country`
+-- Dumping data for table `oc_country`
 --
 
 INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES
@@ -776,7 +773,7 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_coupon`
+-- Table structure for table `oc_coupon`
 --
 
 DROP TABLE IF EXISTS `oc_coupon`;
@@ -799,7 +796,7 @@ CREATE TABLE `oc_coupon` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_coupon`
+-- Dumping data for table `oc_coupon`
 --
 
 INSERT INTO `oc_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logged`, `shipping`, `total`, `date_start`, `date_end`, `uses_total`, `uses_customer`, `status`, `date_added`) VALUES
@@ -810,7 +807,7 @@ INSERT INTO `oc_coupon` (`coupon_id`, `name`, `code`, `type`, `discount`, `logge
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_coupon_history`
+-- Table structure for table `oc_coupon_history`
 --
 
 DROP TABLE IF EXISTS `oc_coupon_history`;
@@ -825,14 +822,14 @@ CREATE TABLE `oc_coupon_history` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_coupon_history`
+-- Dumping data for table `oc_coupon_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_coupon_product`
+-- Table structure for table `oc_coupon_product`
 --
 
 DROP TABLE IF EXISTS `oc_coupon_product`;
@@ -844,7 +841,7 @@ CREATE TABLE `oc_coupon_product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_coupon_product`
+-- Dumping data for table `oc_coupon_product`
 --
 
 INSERT INTO `oc_coupon_product` (`coupon_product_id`, `coupon_id`, `product_id`) VALUES
@@ -854,7 +851,7 @@ INSERT INTO `oc_coupon_product` (`coupon_product_id`, `coupon_id`, `product_id`)
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_currency`
+-- Table structure for table `oc_currency`
 --
 
 DROP TABLE IF EXISTS `oc_currency`;
@@ -872,7 +869,7 @@ CREATE TABLE `oc_currency` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_currency`
+-- Dumping data for table `oc_currency`
 --
 
 INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_place`, `value`, `status`, `date_modified`) VALUES
@@ -883,7 +880,7 @@ INSERT INTO `oc_currency` (`currency_id`, `title`, `code`, `symbol_left`, `symbo
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_customer`
+-- Table structure for table `oc_customer`
 --
 
 DROP TABLE IF EXISTS `oc_customer`;
@@ -904,19 +901,20 @@ CREATE TABLE `oc_customer` (
   `ip` varchar(15) COLLATE utf8_general_ci NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
+  `token` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`customer_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_customer`
+-- Dumping data for table `oc_customer`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_customer_group`
+-- Table structure for table `oc_customer_group`
 --
 
 DROP TABLE IF EXISTS `oc_customer_group`;
@@ -927,7 +925,7 @@ CREATE TABLE `oc_customer_group` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_customer_group`
+-- Dumping data for table `oc_customer_group`
 --
 
 INSERT INTO `oc_customer_group` (`customer_group_id`, `name`) VALUES
@@ -937,7 +935,7 @@ INSERT INTO `oc_customer_group` (`customer_group_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_customer_ip`
+-- Table structure for table `oc_customer_ip`
 --
 
 DROP TABLE IF EXISTS `oc_customer_ip`;
@@ -951,14 +949,14 @@ CREATE TABLE `oc_customer_ip` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_customer_ip`
+-- Dumping data for table `oc_customer_ip`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_customer_reward`
+-- Table structure for table `oc_customer_reward`
 --
 
 DROP TABLE IF EXISTS `oc_customer_reward`;
@@ -973,14 +971,14 @@ CREATE TABLE `oc_customer_reward` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_customer_reward`
+-- Dumping data for table `oc_customer_reward`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_customer_transaction`
+-- Table structure for table `oc_customer_transaction`
 --
 
 DROP TABLE IF EXISTS `oc_customer_transaction`;
@@ -995,14 +993,14 @@ CREATE TABLE `oc_customer_transaction` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_customer_transaction`
+-- Dumping data for table `oc_customer_transaction`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_download`
+-- Table structure for table `oc_download`
 --
 
 DROP TABLE IF EXISTS `oc_download`;
@@ -1016,14 +1014,14 @@ CREATE TABLE `oc_download` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_download`
+-- Dumping data for table `oc_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_download_description`
+-- Table structure for table `oc_download_description`
 --
 
 DROP TABLE IF EXISTS `oc_download_description`;
@@ -1035,14 +1033,14 @@ CREATE TABLE `oc_download_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_download_description`
+-- Dumping data for table `oc_download_description`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_extension`
+-- Table structure for table `oc_extension`
 --
 
 DROP TABLE IF EXISTS `oc_extension`;
@@ -1054,7 +1052,7 @@ CREATE TABLE `oc_extension` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_extension`
+-- Dumping data for table `oc_extension`
 --
 
 INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
@@ -1082,7 +1080,7 @@ INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_geo_zone`
+-- Table structure for table `oc_geo_zone`
 --
 
 DROP TABLE IF EXISTS `oc_geo_zone`;
@@ -1096,7 +1094,7 @@ CREATE TABLE `oc_geo_zone` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_geo_zone`
+-- Dumping data for table `oc_geo_zone`
 --
 
 INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`, `date_added`) VALUES
@@ -1105,7 +1103,7 @@ INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_information`
+-- Table structure for table `oc_information`
 --
 
 DROP TABLE IF EXISTS `oc_information`;
@@ -1117,7 +1115,7 @@ CREATE TABLE `oc_information` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_information`
+-- Dumping data for table `oc_information`
 --
 
 INSERT INTO `oc_information` (`information_id`, `sort_order`, `status`) VALUES
@@ -1129,7 +1127,7 @@ INSERT INTO `oc_information` (`information_id`, `sort_order`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_information_description`
+-- Table structure for table `oc_information_description`
 --
 
 DROP TABLE IF EXISTS `oc_information_description`;
@@ -1142,7 +1140,7 @@ CREATE TABLE `oc_information_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_information_description`
+-- Dumping data for table `oc_information_description`
 --
 
 INSERT INTO `oc_information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
@@ -1154,7 +1152,7 @@ INSERT INTO `oc_information_description` (`information_id`, `language_id`, `titl
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_information_to_layout`
+-- Table structure for table `oc_information_to_layout`
 --
 
 DROP TABLE IF EXISTS `oc_information_to_layout`;
@@ -1166,14 +1164,14 @@ CREATE TABLE `oc_information_to_layout` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_information_to_layout`
+-- Dumping data for table `oc_information_to_layout`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_information_to_store`
+-- Table structure for table `oc_information_to_store`
 --
 
 DROP TABLE IF EXISTS `oc_information_to_store`;
@@ -1184,7 +1182,7 @@ CREATE TABLE `oc_information_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_information_to_store`
+-- Dumping data for table `oc_information_to_store`
 --
 
 INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
@@ -1196,7 +1194,7 @@ INSERT INTO `oc_information_to_store` (`information_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_language`
+-- Table structure for table `oc_language`
 --
 
 DROP TABLE IF EXISTS `oc_language`;
@@ -1215,7 +1213,7 @@ CREATE TABLE `oc_language` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_language`
+-- Dumping data for table `oc_language`
 --
 
 INSERT INTO `oc_language` (`language_id`, `name`, `code`, `locale`, `image`, `directory`, `filename`, `sort_order`, `status`) VALUES
@@ -1225,7 +1223,7 @@ INSERT INTO `oc_language` (`language_id`, `name`, `code`, `locale`, `image`, `di
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_layout`
+-- Table structure for table `oc_layout`
 --
 
 DROP TABLE IF EXISTS `oc_layout`;
@@ -1236,7 +1234,7 @@ CREATE TABLE `oc_layout` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_layout`
+-- Dumping data for table `oc_layout`
 --
 
 INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
@@ -1255,7 +1253,7 @@ INSERT INTO `oc_layout` (`layout_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_layout_route`
+-- Table structure for table `oc_layout_route`
 --
 
 DROP TABLE IF EXISTS `oc_layout_route`;
@@ -1268,7 +1266,7 @@ CREATE TABLE `oc_layout_route` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_layout_route`
+-- Dumping data for table `oc_layout_route`
 --
 
 INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `route`) VALUES
@@ -1286,7 +1284,7 @@ INSERT INTO `oc_layout_route` (`layout_route_id`, `layout_id`, `store_id`, `rout
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_length_class`
+-- Table structure for table `oc_length_class`
 --
 
 DROP TABLE IF EXISTS `oc_length_class`;
@@ -1297,7 +1295,7 @@ CREATE TABLE `oc_length_class` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_length_class`
+-- Dumping data for table `oc_length_class`
 --
 
 INSERT INTO `oc_length_class` (`length_class_id`, `value`) VALUES
@@ -1307,7 +1305,7 @@ INSERT INTO `oc_length_class` (`length_class_id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_length_class_description`
+-- Table structure for table `oc_length_class_description`
 --
 
 DROP TABLE IF EXISTS `oc_length_class_description`;
@@ -1320,7 +1318,7 @@ CREATE TABLE `oc_length_class_description` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_length_class_description`
+-- Dumping data for table `oc_length_class_description`
 --
 
 INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `title`, `unit`) VALUES
@@ -1330,7 +1328,7 @@ INSERT INTO `oc_length_class_description` (`length_class_id`, `language_id`, `ti
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_manufacturer`
+-- Table structure for table `oc_manufacturer`
 --
 
 DROP TABLE IF EXISTS `oc_manufacturer`;
@@ -1343,7 +1341,7 @@ CREATE TABLE `oc_manufacturer` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_manufacturer`
+-- Dumping data for table `oc_manufacturer`
 --
 
 INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`) VALUES
@@ -1357,7 +1355,7 @@ INSERT INTO `oc_manufacturer` (`manufacturer_id`, `name`, `image`, `sort_order`)
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_manufacturer_to_store`
+-- Table structure for table `oc_manufacturer_to_store`
 --
 
 DROP TABLE IF EXISTS `oc_manufacturer_to_store`;
@@ -1368,7 +1366,7 @@ CREATE TABLE `oc_manufacturer_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_manufacturer_to_store`
+-- Dumping data for table `oc_manufacturer_to_store`
 --
 
 INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
@@ -1382,7 +1380,7 @@ INSERT INTO `oc_manufacturer_to_store` (`manufacturer_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_option`
+-- Table structure for table `oc_option`
 --
 
 DROP TABLE IF EXISTS `oc_option`;
@@ -1394,7 +1392,7 @@ CREATE TABLE `oc_option` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_option`
+-- Dumping data for table `oc_option`
 --
 
 INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
@@ -1413,7 +1411,7 @@ INSERT INTO `oc_option` (`option_id`, `type`, `sort_order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_option_description`
+-- Table structure for table `oc_option_description`
 --
 
 DROP TABLE IF EXISTS `oc_option_description`;
@@ -1425,7 +1423,7 @@ CREATE TABLE `oc_option_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_option_description`
+-- Dumping data for table `oc_option_description`
 --
 
 INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
@@ -1444,19 +1442,20 @@ INSERT INTO `oc_option_description` (`option_id`, `language_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_option_value`
+-- Table structure for table `oc_option_value`
 --
 
 DROP TABLE IF EXISTS `oc_option_value`;
 CREATE TABLE `oc_option_value` (
   `option_value_id` int(11) NOT NULL AUTO_INCREMENT,
   `option_id` int(11) NOT NULL,
+  `image` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_value_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_option_value`
+-- Dumping data for table `oc_option_value`
 --
 
 INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `sort_order`) VALUES
@@ -1478,7 +1477,7 @@ INSERT INTO `oc_option_value` (`option_value_id`, `option_id`, `sort_order`) VAL
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_option_value_description`
+-- Table structure for table `oc_option_value_description`
 --
 
 DROP TABLE IF EXISTS `oc_option_value_description`;
@@ -1491,7 +1490,7 @@ CREATE TABLE `oc_option_value_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_option_value_description`
+-- Dumping data for table `oc_option_value_description`
 --
 
 INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `option_id`, `name`) VALUES
@@ -1513,14 +1512,14 @@ INSERT INTO `oc_option_value_description` (`option_value_id`, `language_id`, `op
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order`
+-- Table structure for table `oc_order`
 --
 
 DROP TABLE IF EXISTS `oc_order`;
 CREATE TABLE `oc_order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_no` int(11) NOT NULL DEFAULT '0',
-  `invoice_prefix` varchar(10) COLLATE utf8_general_ci NOT NULL,
+  `invoice_prefix` varchar(26) COLLATE utf8_general_ci NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT '0',
   `store_name` varchar(64) COLLATE utf8_general_ci NOT NULL,
   `store_url` varchar(255) COLLATE utf8_general_ci NOT NULL,
@@ -1574,14 +1573,14 @@ CREATE TABLE `oc_order` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order`
+-- Dumping data for table `oc_order`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_download`
+-- Table structure for table `oc_order_download`
 --
 
 DROP TABLE IF EXISTS `oc_order_download`;
@@ -1597,14 +1596,14 @@ CREATE TABLE `oc_order_download` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_download`
+-- Dumping data for table `oc_order_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_history`
+-- Table structure for table `oc_order_history`
 --
 
 DROP TABLE IF EXISTS `oc_order_history`;
@@ -1619,14 +1618,14 @@ CREATE TABLE `oc_order_history` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_history`
+-- Dumping data for table `oc_order_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_option`
+-- Table structure for table `oc_order_option`
 --
 
 DROP TABLE IF EXISTS `oc_order_option`;
@@ -1643,14 +1642,14 @@ CREATE TABLE `oc_order_option` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_option`
+-- Dumping data for table `oc_order_option`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_product`
+-- Table structure for table `oc_order_product`
 --
 
 DROP TABLE IF EXISTS `oc_order_product`;
@@ -1668,7 +1667,7 @@ CREATE TABLE `oc_order_product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_product`
+-- Dumping data for table `oc_order_product`
 --
 
 INSERT INTO `oc_order_product` (`order_product_id`, `order_id`, `product_id`, `name`, `model`, `quantity`, `price`, `total`, `tax`) VALUES
@@ -1677,7 +1676,7 @@ INSERT INTO `oc_order_product` (`order_product_id`, `order_id`, `product_id`, `n
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_status`
+-- Table structure for table `oc_order_status`
 --
 
 DROP TABLE IF EXISTS `oc_order_status`;
@@ -1689,7 +1688,7 @@ CREATE TABLE `oc_order_status` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_status`
+-- Dumping data for table `oc_order_status`
 --
 
 INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
@@ -1711,7 +1710,7 @@ INSERT INTO `oc_order_status` (`order_status_id`, `language_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_order_total`
+-- Table structure for table `oc_order_total`
 --
 
 DROP TABLE IF EXISTS `oc_order_total`;
@@ -1728,7 +1727,7 @@ CREATE TABLE `oc_order_total` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_order_total`
+-- Dumping data for table `oc_order_total`
 --
 
 INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `text`, `value`, `sort_order`) VALUES
@@ -1740,7 +1739,7 @@ INSERT INTO `oc_order_total` (`order_total_id`, `order_id`, `code`, `title`, `te
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product`
+-- Table structure for table `oc_product`
 --
 
 DROP TABLE IF EXISTS `oc_product`;
@@ -1776,7 +1775,7 @@ CREATE TABLE `oc_product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product`
+-- Dumping data for table `oc_product`
 --
 
 INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `date_added`, `date_modified`, `viewed`) VALUES
@@ -1804,7 +1803,7 @@ INSERT INTO `oc_product` (`product_id`, `model`, `sku`, `upc`, `location`, `quan
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_attribute`
+-- Table structure for table `oc_product_attribute`
 --
 
 DROP TABLE IF EXISTS `oc_product_attribute`;
@@ -1817,7 +1816,7 @@ CREATE TABLE `oc_product_attribute` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_attribute`
+-- Dumping data for table `oc_product_attribute`
 --
 
 INSERT INTO `oc_product_attribute` (`product_id`, `attribute_id`, `language_id`, `text`) VALUES
@@ -1830,7 +1829,7 @@ INSERT INTO `oc_product_attribute` (`product_id`, `attribute_id`, `language_id`,
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_description`
+-- Table structure for table `oc_product_description`
 --
 
 DROP TABLE IF EXISTS `oc_product_description`;
@@ -1846,7 +1845,7 @@ CREATE TABLE `oc_product_description` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_description`
+-- Dumping data for table `oc_product_description`
 --
 
 INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `description`, `meta_description`, `meta_keyword`) VALUES
@@ -1874,7 +1873,7 @@ INSERT INTO `oc_product_description` (`product_id`, `language_id`, `name`, `desc
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_discount`
+-- Table structure for table `oc_product_discount`
 --
 
 DROP TABLE IF EXISTS `oc_product_discount`;
@@ -1892,7 +1891,7 @@ CREATE TABLE `oc_product_discount` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_discount`
+-- Dumping data for table `oc_product_discount`
 --
 
 INSERT INTO `oc_product_discount` (`product_discount_id`, `product_id`, `customer_group_id`, `quantity`, `priority`, `price`, `date_start`, `date_end`) VALUES
@@ -1904,7 +1903,7 @@ INSERT INTO `oc_product_discount` (`product_discount_id`, `product_id`, `custome
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_image`
+-- Table structure for table `oc_product_image`
 --
 
 DROP TABLE IF EXISTS `oc_product_image`;
@@ -1912,11 +1911,12 @@ CREATE TABLE `oc_product_image` (
   `product_image_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `image` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
+  `sort_order` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`product_image_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_image`
+-- Dumping data for table `oc_product_image`
 --
 
 INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`) VALUES
@@ -1987,7 +1987,7 @@ INSERT INTO `oc_product_image` (`product_image_id`, `product_id`, `image`) VALUE
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_option`
+-- Table structure for table `oc_product_option`
 --
 
 DROP TABLE IF EXISTS `oc_product_option`;
@@ -2001,7 +2001,7 @@ CREATE TABLE `oc_product_option` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_option`
+-- Dumping data for table `oc_product_option`
 --
 
 INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`, `option_value`, `required`) VALUES
@@ -2020,7 +2020,7 @@ INSERT INTO `oc_product_option` (`product_option_id`, `product_id`, `option_id`,
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_option_value`
+-- Table structure for table `oc_product_option_value`
 --
 
 DROP TABLE IF EXISTS `oc_product_option_value`;
@@ -2042,7 +2042,7 @@ CREATE TABLE `oc_product_option_value` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_option_value`
+-- Dumping data for table `oc_product_option_value`
 --
 
 INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_option_id`, `product_id`, `option_id`, `option_value_id`, `quantity`, `subtract`, `price`, `price_prefix`, `points`, `points_prefix`, `weight`, `weight_prefix`) VALUES
@@ -2059,12 +2059,14 @@ INSERT INTO `oc_product_option_value` (`product_option_value_id`, `product_optio
 (11, 223, 42, 2, 45, 3998, 1, '40.0000', '+', 0, '+', '40.00000000', '+'),
 (12, 224, 35, 11, 46, 0, 1, '5.0000', '+', 0, '+', '0.00000000', '+'),
 (13, 224, 35, 11, 47, 10, 1, '10.0000', '+', 0, '+', '0.00000000', '+'),
-(14, 224, 35, 11, 48, 15, 1, '15.0000', '+', 0, '+', '0.00000000', '+');
+(14, 224, 35, 11, 48, 15, 1, '15.0000', '+', 0, '+', '0.00000000', '+'),
+(16, 226, 30, 5, 40, 5, 1, '0.0000', '+', 0, '+', '0.00000000', '+'),
+(15, 226, 30, 5, 39, 2, 1, '0.0000', '+', 0, '+', '0.00000000', '+');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_related`
+-- Table structure for table `oc_product_related`
 --
 
 DROP TABLE IF EXISTS `oc_product_related`;
@@ -2075,7 +2077,7 @@ CREATE TABLE `oc_product_related` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_related`
+-- Dumping data for table `oc_product_related`
 --
 
 INSERT INTO `oc_product_related` (`product_id`, `related_id`) VALUES
@@ -2100,7 +2102,7 @@ CREATE TABLE `oc_product_reward` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_reward`
+-- Dumping data for table `oc_product_reward`
 --
 
 INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_group_id`, `points`) VALUES
@@ -2148,7 +2150,7 @@ INSERT INTO `oc_product_reward` (`product_reward_id`, `product_id`, `customer_gr
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_special`
+-- Table structure for table `oc_product_special`
 --
 
 DROP TABLE IF EXISTS `oc_product_special`;
@@ -2165,7 +2167,7 @@ CREATE TABLE `oc_product_special` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_special`
+-- Dumping data for table `oc_product_special`
 --
 
 INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_group_id`, `priority`, `price`, `date_start`, `date_end`) VALUES
@@ -2187,7 +2189,7 @@ INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_tag`
+-- Table structure for table `oc_product_tag`
 --
 
 DROP TABLE IF EXISTS `oc_product_tag`;
@@ -2196,11 +2198,14 @@ CREATE TABLE `oc_product_tag` (
   `product_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `tag` varchar(32) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`product_tag_id`)
+  PRIMARY KEY (`product_tag_id`),
+  KEY `product_id` (`product_id`),
+  KEY `language_id` (`language_id`),
+  KEY `tag` (`tag`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_tag`
+-- Dumping data for table `oc_product_tag`
 --
 
 INSERT INTO `oc_product_tag` (`product_tag_id`, `product_id`, `language_id`, `tag`) VALUES
@@ -2210,7 +2215,7 @@ INSERT INTO `oc_product_tag` (`product_tag_id`, `product_id`, `language_id`, `ta
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_to_category`
+-- Table structure for table `oc_product_to_category`
 --
 
 DROP TABLE IF EXISTS `oc_product_to_category`;
@@ -2222,7 +2227,7 @@ CREATE TABLE `oc_product_to_category` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_to_category`
+-- Dumping data for table `oc_product_to_category`
 --
 
 INSERT INTO `oc_product_to_category` (`product_id`, `category_id`) VALUES
@@ -2262,7 +2267,7 @@ INSERT INTO `oc_product_to_category` (`product_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_to_download`
+-- Table structure for table `oc_product_to_download`
 --
 
 DROP TABLE IF EXISTS `oc_product_to_download`;
@@ -2273,14 +2278,14 @@ CREATE TABLE `oc_product_to_download` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_to_download`
+-- Dumping data for table `oc_product_to_download`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_to_layout`
+-- Table structure for table `oc_product_to_layout`
 --
 
 DROP TABLE IF EXISTS `oc_product_to_layout`;
@@ -2292,14 +2297,14 @@ CREATE TABLE `oc_product_to_layout` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_to_layout`
+-- Dumping data for table `oc_product_to_layout`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_product_to_store`
+-- Table structure for table `oc_product_to_store`
 --
 
 DROP TABLE IF EXISTS `oc_product_to_store`;
@@ -2310,7 +2315,7 @@ CREATE TABLE `oc_product_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_product_to_store`
+-- Dumping data for table `oc_product_to_store`
 --
 
 INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
@@ -2338,7 +2343,7 @@ INSERT INTO `oc_product_to_store` (`product_id`, `store_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_return`
+-- Table structure for table `oc_return`
 --
 
 DROP TABLE IF EXISTS `oc_return`;
@@ -2359,14 +2364,14 @@ CREATE TABLE `oc_return` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_return`
+-- Dumping data for table `oc_return`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_return_action`
+-- Table structure for table `oc_return_action`
 --
 
 DROP TABLE IF EXISTS `oc_return_action`;
@@ -2378,7 +2383,7 @@ CREATE TABLE `oc_return_action` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_return_action`
+-- Dumping data for table `oc_return_action`
 --
 
 INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUES
@@ -2389,7 +2394,7 @@ INSERT INTO `oc_return_action` (`return_action_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_return_history`
+-- Table structure for table `oc_return_history`
 --
 
 DROP TABLE IF EXISTS `oc_return_history`;
@@ -2404,14 +2409,14 @@ CREATE TABLE `oc_return_history` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_return_history`
+-- Dumping data for table `oc_return_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_return_product`
+-- Table structure for table `oc_return_product`
 --
 
 DROP TABLE IF EXISTS `oc_return_product`;
@@ -2430,14 +2435,14 @@ CREATE TABLE `oc_return_product` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_return_product`
+-- Dumping data for table `oc_return_product`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_return_reason`
+-- Table structure for table `oc_return_reason`
 --
 
 DROP TABLE IF EXISTS `oc_return_reason`;
@@ -2449,7 +2454,7 @@ CREATE TABLE `oc_return_reason` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_return_reason`
+-- Dumping data for table `oc_return_reason`
 --
 
 INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUES
@@ -2462,7 +2467,7 @@ INSERT INTO `oc_return_reason` (`return_reason_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_return_status`
+-- Table structure for table `oc_return_status`
 --
 
 DROP TABLE IF EXISTS `oc_return_status`;
@@ -2474,7 +2479,7 @@ CREATE TABLE `oc_return_status` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_return_status`
+-- Dumping data for table `oc_return_status`
 --
 
 INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUES
@@ -2485,7 +2490,7 @@ INSERT INTO `oc_return_status` (`return_status_id`, `language_id`, `name`) VALUE
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_review`
+-- Table structure for table `oc_review`
 --
 
 DROP TABLE IF EXISTS `oc_review`;
@@ -2504,14 +2509,14 @@ CREATE TABLE `oc_review` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_review`
+-- Dumping data for table `oc_review`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_setting`
+-- Table structure for table `oc_setting`
 --
 
 DROP TABLE IF EXISTS `oc_setting`;
@@ -2526,7 +2531,7 @@ CREATE TABLE `oc_setting` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_setting`
+-- Dumping data for table `oc_setting`
 --
 
 INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `serialized`) VALUES
@@ -2628,6 +2633,8 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (20543, 0, 'config', 'config_length_class_id', '1', 0),
 (20548, 0, 'config', 'config_invoice_prefix', 'INV-2011-00', 0),
 (20547, 0, 'config', 'config_tax', '1', 0),
+(24287, 0, 'config', 'config_tax_customer', 'shipping', 0),
+(24286, 0, 'config', 'config_tax_default', 'shipping', 0),
 (20546, 0, 'config', 'config_admin_limit', '20', 0),
 (20545, 0, 'config', 'config_catalog_limit', '15', 0),
 (19410, 0, 'free_checkout', 'free_checkout_status', '1', 0),
@@ -2655,7 +2662,7 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_stock_status`
+-- Table structure for table `oc_stock_status`
 --
 
 DROP TABLE IF EXISTS `oc_stock_status`;
@@ -2667,7 +2674,7 @@ CREATE TABLE `oc_stock_status` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_stock_status`
+-- Dumping data for table `oc_stock_status`
 --
 
 INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
@@ -2679,7 +2686,7 @@ INSERT INTO `oc_stock_status` (`stock_status_id`, `language_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_store`
+-- Table structure for table `oc_store`
 --
 
 DROP TABLE IF EXISTS `oc_store`;
@@ -2692,14 +2699,14 @@ CREATE TABLE `oc_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_store`
+-- Dumping data for table `oc_store`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_tax_class`
+-- Table structure for table `oc_tax_class`
 --
 
 DROP TABLE IF EXISTS `oc_tax_class`;
@@ -2713,7 +2720,7 @@ CREATE TABLE `oc_tax_class` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_tax_class`
+-- Dumping data for table `oc_tax_class`
 --
 
 INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`, `date_modified`) VALUES
@@ -2722,33 +2729,82 @@ INSERT INTO `oc_tax_class` (`tax_class_id`, `title`, `description`, `date_added`
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_tax_rate`
+-- Table structure for table `oc_tax_rate`
 --
 
 DROP TABLE IF EXISTS `oc_tax_rate`;
 CREATE TABLE `oc_tax_rate` (
   `tax_rate_id` int(11) NOT NULL AUTO_INCREMENT,
   `geo_zone_id` int(11) NOT NULL DEFAULT '0',
-  `tax_class_id` int(11) NOT NULL,
-  `priority` int(5) NOT NULL DEFAULT '1',
-  `rate` decimal(7,4) NOT NULL DEFAULT '0.0000',
-  `description` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `name` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `rate` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `type` char(1) COLLATE utf8_general_ci NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`tax_rate_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_tax_rate`
+-- Dumping data for table `oc_tax_rate`
 --
 
-INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `tax_class_id`, `priority`, `rate`, `description`, `date_modified`, `date_added`) VALUES
-(86, 3, 9, 1, '18.0000', 'НДС 18%', '0000-00-00 00:00:00', '2011-03-09 21:17:10');
+INSERT INTO `oc_tax_rate` (`tax_rate_id`, `geo_zone_id`, `name`, `rate`, `type`, `date_added`, `date_modified`) VALUES
+(86, 3, 'НДС 18%', '18.0000', 'P', '2011-03-09 21:17:10', '2011-09-22 22:24:29'),
+(87, 3, 'Eco Tax (-2.00)', '2.0000', 'F', '2011-09-21 21:49:23', '2011-09-23 00:40:19');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_url_alias`
+-- Table structure for table `oc_tax_rate_to_customer_group`
+--
+
+DROP TABLE IF EXISTS `oc_tax_rate_to_customer_group`;
+CREATE TABLE `oc_tax_rate_to_customer_group` (
+  `tax_rate_id` int(11) NOT NULL,
+  `customer_group_id` int(11) NOT NULL,
+  PRIMARY KEY (`tax_rate_id`,`customer_group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_tax_rate_to_customer_group`
+--
+
+INSERT INTO `oc_tax_rate_to_customer_group` (`tax_rate_id`, `customer_group_id`) VALUES
+(86, 6),
+(86, 8),
+(87, 6),
+(87, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_tax_rule`
+--
+
+DROP TABLE IF EXISTS `oc_tax_rule`;
+CREATE TABLE `oc_tax_rule` (
+  `tax_rule_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tax_class_id` int(11) NOT NULL,
+  `tax_rate_id` int(11) NOT NULL,
+  `based` varchar(10) COLLATE utf8_general_ci NOT NULL,
+  `priority` int(5) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`tax_rule_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_tax_rule`
+--
+
+INSERT INTO `oc_tax_rule` (`tax_rule_id`, `tax_class_id`, `tax_rate_id`, `based`, `priority`) VALUES
+(121, 10, 86, 'payment', 1),
+(120, 10, 87, 'store', 0),
+(128, 9, 86, 'shipping', 1),
+(127, 9, 87, 'shipping', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_url_alias`
 --
 
 DROP TABLE IF EXISTS `oc_url_alias`;
@@ -2760,7 +2816,7 @@ CREATE TABLE `oc_url_alias` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_url_alias`
+-- Dumping data for table `oc_url_alias`
 --
 
 INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
@@ -2777,7 +2833,7 @@ INSERT INTO `oc_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_user`
+-- Table structure for table `oc_user`
 --
 
 DROP TABLE IF EXISTS `oc_user`;
@@ -2797,13 +2853,13 @@ CREATE TABLE `oc_user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_user`
+-- Dumping data for table `oc_user`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_user_group`
+-- Table structure for table `oc_user_group`
 --
 
 DROP TABLE IF EXISTS `oc_user_group`;
@@ -2815,17 +2871,17 @@ CREATE TABLE `oc_user_group` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_user_group`
+-- Dumping data for table `oc_user_group`
 --
 
 INSERT INTO `oc_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Главный администратор', 'a:2:{s:6:"access";a:131:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:11:"design/menu";i:13;s:14:"extension/feed";i:14;s:16:"extension/module";i:15;s:17:"extension/payment";i:16;s:18:"extension/shipping";i:17;s:15:"extension/total";i:18;s:16:"feed/google_base";i:19;s:19:"feed/google_sitemap";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:25:"localisation/weight_class";i:32;s:17:"localisation/zone";i:33;s:14:"module/account";i:34;s:16:"module/affiliate";i:35;s:13:"module/banner";i:36;s:17:"module/bestseller";i:37;s:15:"module/category";i:38;s:15:"module/featured";i:39;s:18:"module/google_talk";i:40;s:18:"module/information";i:41;s:13:"module/latest";i:42;s:19:"module/manufacturer";i:43;s:16:"module/slideshow";i:44;s:14:"module/special";i:45;s:12:"module/store";i:46;s:14:"module/welcome";i:47;s:16:"payment/alertpay";i:48;s:24:"payment/authorizenet_aim";i:49;s:21:"payment/bank_transfer";i:50;s:14:"payment/cheque";i:51;s:11:"payment/cod";i:52;s:21:"payment/free_checkout";i:53;s:14:"payment/liqpay";i:54;s:20:"payment/moneybookers";i:55;s:14:"payment/nochex";i:56;s:15:"payment/paymate";i:57;s:16:"payment/paypoint";i:58;s:26:"payment/perpetual_payments";i:59;s:14:"payment/pp_pro";i:60;s:17:"payment/pp_pro_uk";i:61;s:19:"payment/pp_standard";i:62;s:15:"payment/sagepay";i:63;s:22:"payment/sagepay_direct";i:64;s:18:"payment/sagepay_us";i:65;s:19:"payment/twocheckout";i:66;s:16:"payment/worldpay";i:67;s:16:"report/purchased";i:68;s:11:"report/sale";i:69;s:13:"report/viewed";i:70;s:14:"sale/affiliate";i:71;s:12:"sale/contact";i:72;s:11:"sale/coupon";i:73;s:13:"sale/customer";i:74;s:19:"sale/customer_group";i:75;s:10:"sale/order";i:76;s:11:"sale/return";i:77;s:12:"sale/voucher";i:78;s:18:"sale/voucher_theme";i:79;s:15:"setting/setting";i:80;s:13:"setting/store";i:81;s:17:"shipping/citylink";i:82;s:13:"shipping/flat";i:83;s:13:"shipping/free";i:84;s:13:"shipping/item";i:85;s:23:"shipping/parcelforce_48";i:86;s:15:"shipping/pickup";i:87;s:19:"shipping/royal_mail";i:88;s:12:"shipping/ups";i:89;s:13:"shipping/usps";i:90;s:15:"shipping/weight";i:91;s:11:"tool/backup";i:92;s:14:"tool/error_log";i:93;s:12:"total/coupon";i:94;s:12:"total/credit";i:95;s:14:"total/handling";i:96;s:19:"total/low_order_fee";i:97;s:12:"total/reward";i:98;s:14:"total/shipping";i:99;s:15:"total/sub_total";i:100;s:9:"total/tax";i:101;s:11:"total/total";i:102;s:13:"total/voucher";i:103;s:9:"user/user";i:104;s:20:"user/user_permission";i:105;s:19:"shipping/royal_mail";i:106;s:12:"shipping/ups";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:19:"payment/pp_standard";i:110;s:19:"payment/pp_standard";i:111;s:19:"payment/pp_standard";i:112;s:21:"payment/free_checkout";i:113;s:16:"payment/alertpay";i:114;s:24:"payment/authorizenet_aim";i:115;s:21:"payment/bank_transfer";i:116;s:14:"payment/cheque";i:117;s:14:"payment/liqpay";i:118;s:20:"payment/moneybookers";i:119;s:14:"payment/nochex";i:120;s:15:"payment/paymate";i:121;s:16:"payment/paypoint";i:122;s:26:"payment/perpetual_payments";i:123;s:17:"payment/pp_pro_uk";i:124;s:14:"payment/pp_pro";i:125;s:19:"payment/pp_standard";i:126;s:15:"payment/sagepay";i:127;s:16:"payment/worldpay";i:128;s:19:"payment/twocheckout";i:129;s:18:"payment/sagepay_us";i:130;s:22:"payment/sagepay_direct";}s:6:"modify";a:131:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:11:"design/menu";i:13;s:14:"extension/feed";i:14;s:16:"extension/module";i:15;s:17:"extension/payment";i:16;s:18:"extension/shipping";i:17;s:15:"extension/total";i:18;s:16:"feed/google_base";i:19;s:19:"feed/google_sitemap";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:25:"localisation/weight_class";i:32;s:17:"localisation/zone";i:33;s:14:"module/account";i:34;s:16:"module/affiliate";i:35;s:13:"module/banner";i:36;s:17:"module/bestseller";i:37;s:15:"module/category";i:38;s:15:"module/featured";i:39;s:18:"module/google_talk";i:40;s:18:"module/information";i:41;s:13:"module/latest";i:42;s:19:"module/manufacturer";i:43;s:16:"module/slideshow";i:44;s:14:"module/special";i:45;s:12:"module/store";i:46;s:14:"module/welcome";i:47;s:16:"payment/alertpay";i:48;s:24:"payment/authorizenet_aim";i:49;s:21:"payment/bank_transfer";i:50;s:14:"payment/cheque";i:51;s:11:"payment/cod";i:52;s:21:"payment/free_checkout";i:53;s:14:"payment/liqpay";i:54;s:20:"payment/moneybookers";i:55;s:14:"payment/nochex";i:56;s:15:"payment/paymate";i:57;s:16:"payment/paypoint";i:58;s:26:"payment/perpetual_payments";i:59;s:14:"payment/pp_pro";i:60;s:17:"payment/pp_pro_uk";i:61;s:19:"payment/pp_standard";i:62;s:15:"payment/sagepay";i:63;s:22:"payment/sagepay_direct";i:64;s:18:"payment/sagepay_us";i:65;s:19:"payment/twocheckout";i:66;s:16:"payment/worldpay";i:67;s:16:"report/purchased";i:68;s:11:"report/sale";i:69;s:13:"report/viewed";i:70;s:14:"sale/affiliate";i:71;s:12:"sale/contact";i:72;s:11:"sale/coupon";i:73;s:13:"sale/customer";i:74;s:19:"sale/customer_group";i:75;s:10:"sale/order";i:76;s:11:"sale/return";i:77;s:12:"sale/voucher";i:78;s:18:"sale/voucher_theme";i:79;s:15:"setting/setting";i:80;s:13:"setting/store";i:81;s:17:"shipping/citylink";i:82;s:13:"shipping/flat";i:83;s:13:"shipping/free";i:84;s:13:"shipping/item";i:85;s:23:"shipping/parcelforce_48";i:86;s:15:"shipping/pickup";i:87;s:19:"shipping/royal_mail";i:88;s:12:"shipping/ups";i:89;s:13:"shipping/usps";i:90;s:15:"shipping/weight";i:91;s:11:"tool/backup";i:92;s:14:"tool/error_log";i:93;s:12:"total/coupon";i:94;s:12:"total/credit";i:95;s:14:"total/handling";i:96;s:19:"total/low_order_fee";i:97;s:12:"total/reward";i:98;s:14:"total/shipping";i:99;s:15:"total/sub_total";i:100;s:9:"total/tax";i:101;s:11:"total/total";i:102;s:13:"total/voucher";i:103;s:9:"user/user";i:104;s:20:"user/user_permission";i:105;s:19:"shipping/royal_mail";i:106;s:12:"shipping/ups";i:107;s:12:"shipping/ups";i:108;s:13:"shipping/usps";i:109;s:19:"payment/pp_standard";i:110;s:19:"payment/pp_standard";i:111;s:19:"payment/pp_standard";i:112;s:21:"payment/free_checkout";i:113;s:16:"payment/alertpay";i:114;s:24:"payment/authorizenet_aim";i:115;s:21:"payment/bank_transfer";i:116;s:14:"payment/cheque";i:117;s:14:"payment/liqpay";i:118;s:20:"payment/moneybookers";i:119;s:14:"payment/nochex";i:120;s:15:"payment/paymate";i:121;s:16:"payment/paypoint";i:122;s:26:"payment/perpetual_payments";i:123;s:17:"payment/pp_pro_uk";i:124;s:14:"payment/pp_pro";i:125;s:19:"payment/pp_standard";i:126;s:15:"payment/sagepay";i:127;s:16:"payment/worldpay";i:128;s:19:"payment/twocheckout";i:129;s:18:"payment/sagepay_us";i:130;s:22:"payment/sagepay_direct";}}'),
+(1, 'Главный администратор', 'a:2:{s:6:"access";a:119:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:14:"extension/feed";i:13;s:16:"extension/module";i:14;s:17:"extension/payment";i:15;s:18:"extension/shipping";i:16;s:15:"extension/total";i:17;s:16:"feed/google_base";i:18;s:19:"feed/google_sitemap";i:19;s:18:"feed/yandex_market";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:21:"localisation/tax_rate";i:32;s:25:"localisation/weight_class";i:33;s:17:"localisation/zone";i:34;s:14:"module/account";i:35;s:16:"module/affiliate";i:36;s:13:"module/banner";i:37;s:17:"module/bestseller";i:38;s:15:"module/carousel";i:39;s:15:"module/category";i:40;s:15:"module/featured";i:41;s:18:"module/google_talk";i:42;s:18:"module/information";i:43;s:13:"module/latest";i:44;s:16:"module/slideshow";i:45;s:14:"module/special";i:46;s:12:"module/store";i:47;s:14:"module/welcome";i:48;s:16:"payment/alertpay";i:49;s:24:"payment/authorizenet_aim";i:50;s:21:"payment/bank_transfer";i:51;s:14:"payment/cheque";i:52;s:11:"payment/cod";i:53;s:21:"payment/free_checkout";i:54;s:14:"payment/liqpay";i:55;s:20:"payment/moneybookers";i:56;s:14:"payment/nochex";i:57;s:15:"payment/paymate";i:58;s:16:"payment/paypoint";i:59;s:26:"payment/perpetual_payments";i:60;s:14:"payment/pp_pro";i:61;s:17:"payment/pp_pro_uk";i:62;s:19:"payment/pp_standard";i:63;s:15:"payment/sagepay";i:64;s:22:"payment/sagepay_direct";i:65;s:18:"payment/sagepay_us";i:66;s:19:"payment/twocheckout";i:67;s:28:"payment/web_payment_software";i:68;s:20:"payment/webmoney_wme";i:69;s:20:"payment/webmoney_wmr";i:70;s:20:"payment/webmoney_wmu";i:71;s:20:"payment/webmoney_wmz";i:72;s:16:"payment/worldpay";i:73;s:27:"report/affiliate_commission";i:74;s:22:"report/customer_credit";i:75;s:21:"report/customer_order";i:76;s:22:"report/customer_reward";i:77;s:24:"report/product_purchased";i:78;s:21:"report/product_viewed";i:79;s:18:"report/sale_coupon";i:80;s:17:"report/sale_order";i:81;s:18:"report/sale_return";i:82;s:20:"report/sale_shipping";i:83;s:15:"report/sale_tax";i:84;s:14:"sale/affiliate";i:85;s:12:"sale/contact";i:86;s:11:"sale/coupon";i:87;s:13:"sale/customer";i:88;s:19:"sale/customer_group";i:89;s:10:"sale/order";i:90;s:11:"sale/return";i:91;s:12:"sale/voucher";i:92;s:18:"sale/voucher_theme";i:93;s:15:"setting/setting";i:94;s:13:"setting/store";i:95;s:17:"shipping/citylink";i:96;s:13:"shipping/flat";i:97;s:13:"shipping/free";i:98;s:13:"shipping/item";i:99;s:23:"shipping/parcelforce_48";i:100;s:15:"shipping/pickup";i:101;s:19:"shipping/royal_mail";i:102;s:12:"shipping/ups";i:103;s:13:"shipping/usps";i:104;s:15:"shipping/weight";i:105;s:11:"tool/backup";i:106;s:14:"tool/error_log";i:107;s:12:"total/coupon";i:108;s:12:"total/credit";i:109;s:14:"total/handling";i:110;s:19:"total/low_order_fee";i:111;s:12:"total/reward";i:112;s:14:"total/shipping";i:113;s:15:"total/sub_total";i:114;s:9:"total/tax";i:115;s:11:"total/total";i:116;s:13:"total/voucher";i:117;s:9:"user/user";i:118;s:20:"user/user_permission";}s:6:"modify";a:119:{i:0;s:17:"catalog/attribute";i:1;s:23:"catalog/attribute_group";i:2;s:16:"catalog/category";i:3;s:16:"catalog/download";i:4;s:19:"catalog/information";i:5;s:20:"catalog/manufacturer";i:6;s:14:"catalog/option";i:7;s:15:"catalog/product";i:8;s:14:"catalog/review";i:9;s:18:"common/filemanager";i:10;s:13:"design/banner";i:11;s:13:"design/layout";i:12;s:14:"extension/feed";i:13;s:16:"extension/module";i:14;s:17:"extension/payment";i:15;s:18:"extension/shipping";i:16;s:15:"extension/total";i:17;s:16:"feed/google_base";i:18;s:19:"feed/google_sitemap";i:19;s:18:"feed/yandex_market";i:20;s:20:"localisation/country";i:21;s:21:"localisation/currency";i:22;s:21:"localisation/geo_zone";i:23;s:21:"localisation/language";i:24;s:25:"localisation/length_class";i:25;s:25:"localisation/order_status";i:26;s:26:"localisation/return_action";i:27;s:26:"localisation/return_reason";i:28;s:26:"localisation/return_status";i:29;s:25:"localisation/stock_status";i:30;s:22:"localisation/tax_class";i:31;s:21:"localisation/tax_rate";i:32;s:25:"localisation/weight_class";i:33;s:17:"localisation/zone";i:34;s:14:"module/account";i:35;s:16:"module/affiliate";i:36;s:13:"module/banner";i:37;s:17:"module/bestseller";i:38;s:15:"module/carousel";i:39;s:15:"module/category";i:40;s:15:"module/featured";i:41;s:18:"module/google_talk";i:42;s:18:"module/information";i:43;s:13:"module/latest";i:44;s:16:"module/slideshow";i:45;s:14:"module/special";i:46;s:12:"module/store";i:47;s:14:"module/welcome";i:48;s:16:"payment/alertpay";i:49;s:24:"payment/authorizenet_aim";i:50;s:21:"payment/bank_transfer";i:51;s:14:"payment/cheque";i:52;s:11:"payment/cod";i:53;s:21:"payment/free_checkout";i:54;s:14:"payment/liqpay";i:55;s:20:"payment/moneybookers";i:56;s:14:"payment/nochex";i:57;s:15:"payment/paymate";i:58;s:16:"payment/paypoint";i:59;s:26:"payment/perpetual_payments";i:60;s:14:"payment/pp_pro";i:61;s:17:"payment/pp_pro_uk";i:62;s:19:"payment/pp_standard";i:63;s:15:"payment/sagepay";i:64;s:22:"payment/sagepay_direct";i:65;s:18:"payment/sagepay_us";i:66;s:19:"payment/twocheckout";i:67;s:28:"payment/web_payment_software";i:68;s:20:"payment/webmoney_wme";i:69;s:20:"payment/webmoney_wmr";i:70;s:20:"payment/webmoney_wmu";i:71;s:20:"payment/webmoney_wmz";i:72;s:16:"payment/worldpay";i:73;s:27:"report/affiliate_commission";i:74;s:22:"report/customer_credit";i:75;s:21:"report/customer_order";i:76;s:22:"report/customer_reward";i:77;s:24:"report/product_purchased";i:78;s:21:"report/product_viewed";i:79;s:18:"report/sale_coupon";i:80;s:17:"report/sale_order";i:81;s:18:"report/sale_return";i:82;s:20:"report/sale_shipping";i:83;s:15:"report/sale_tax";i:84;s:14:"sale/affiliate";i:85;s:12:"sale/contact";i:86;s:11:"sale/coupon";i:87;s:13:"sale/customer";i:88;s:19:"sale/customer_group";i:89;s:10:"sale/order";i:90;s:11:"sale/return";i:91;s:12:"sale/voucher";i:92;s:18:"sale/voucher_theme";i:93;s:15:"setting/setting";i:94;s:13:"setting/store";i:95;s:17:"shipping/citylink";i:96;s:13:"shipping/flat";i:97;s:13:"shipping/free";i:98;s:13:"shipping/item";i:99;s:23:"shipping/parcelforce_48";i:100;s:15:"shipping/pickup";i:101;s:19:"shipping/royal_mail";i:102;s:12:"shipping/ups";i:103;s:13:"shipping/usps";i:104;s:15:"shipping/weight";i:105;s:11:"tool/backup";i:106;s:14:"tool/error_log";i:107;s:12:"total/coupon";i:108;s:12:"total/credit";i:109;s:14:"total/handling";i:110;s:19:"total/low_order_fee";i:111;s:12:"total/reward";i:112;s:14:"total/shipping";i:113;s:15:"total/sub_total";i:114;s:9:"total/tax";i:115;s:11:"total/total";i:116;s:13:"total/voucher";i:117;s:9:"user/user";i:118;s:20:"user/user_permission";}}'),
 (10, 'Демонстрация', '');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_voucher`
+-- Table structure for table `oc_voucher`
 --
 
 DROP TABLE IF EXISTS `oc_voucher`;
@@ -2846,14 +2902,14 @@ CREATE TABLE `oc_voucher` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_voucher`
+-- Dumping data for table `oc_voucher`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_voucher_history`
+-- Table structure for table `oc_voucher_history`
 --
 
 DROP TABLE IF EXISTS `oc_voucher_history`;
@@ -2867,14 +2923,14 @@ CREATE TABLE `oc_voucher_history` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_voucher_history`
+-- Dumping data for table `oc_voucher_history`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_voucher_theme`
+-- Table structure for table `oc_voucher_theme`
 --
 
 DROP TABLE IF EXISTS `oc_voucher_theme`;
@@ -2885,7 +2941,7 @@ CREATE TABLE `oc_voucher_theme` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_voucher_theme`
+-- Dumping data for table `oc_voucher_theme`
 --
 
 INSERT INTO `oc_voucher_theme` (`voucher_theme_id`, `image`) VALUES
@@ -2896,7 +2952,7 @@ INSERT INTO `oc_voucher_theme` (`voucher_theme_id`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_voucher_theme_description`
+-- Table structure for table `oc_voucher_theme_description`
 --
 
 DROP TABLE IF EXISTS `oc_voucher_theme_description`;
@@ -2908,7 +2964,7 @@ CREATE TABLE `oc_voucher_theme_description` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_voucher_theme_description`
+-- Dumping data for table `oc_voucher_theme_description`
 --
 
 INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `name`) VALUES
@@ -2919,7 +2975,7 @@ INSERT INTO `oc_voucher_theme_description` (`voucher_theme_id`, `language_id`, `
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_weight_class`
+-- Table structure for table `oc_weight_class`
 --
 
 DROP TABLE IF EXISTS `oc_weight_class`;
@@ -2930,7 +2986,7 @@ CREATE TABLE `oc_weight_class` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_weight_class`
+-- Dumping data for table `oc_weight_class`
 --
 
 INSERT INTO `oc_weight_class` (`weight_class_id`, `value`) VALUES
@@ -2940,7 +2996,7 @@ INSERT INTO `oc_weight_class` (`weight_class_id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_weight_class_description`
+-- Table structure for table `oc_weight_class_description`
 --
 
 DROP TABLE IF EXISTS `oc_weight_class_description`;
@@ -2953,7 +3009,7 @@ CREATE TABLE `oc_weight_class_description` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_weight_class_description`
+-- Dumping data for table `oc_weight_class_description`
 --
 
 INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `title`, `unit`) VALUES
@@ -2963,7 +3019,7 @@ INSERT INTO `oc_weight_class_description` (`weight_class_id`, `language_id`, `ti
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_zone`
+-- Table structure for table `oc_zone`
 --
 
 DROP TABLE IF EXISTS `oc_zone`;
@@ -2977,7 +3033,7 @@ CREATE TABLE `oc_zone` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_zone`
+-- Dumping data for table `oc_zone`
 --
 
 INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
@@ -5901,14 +5957,14 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (2922, 187, 'N', 'Northern', 1),
 (2923, 187, 'S', 'Southern', 1),
 (2924, 187, 'W', 'Western', 1),
-(2925, 189, 'BA', 'BanskobystrickГЅ', 1),
-(2926, 189, 'BR', 'BratislavskГЅ', 1),
-(2927, 189, 'KO', 'KoЕЎickГЅ', 1),
+(2925, 189, 'BA', 'Banskobystrický', 1),
+(2926, 189, 'BR', 'Bratislavský', 1),
+(2927, 189, 'KO', 'Košický', 1),
 (2928, 189, 'NI', 'Nitriansky', 1),
-(2929, 189, 'PR', 'PreЕЎovskГЅ', 1),
-(2930, 189, 'TC', 'TrenДЌiansky', 1),
-(2931, 189, 'TV', 'TrnavskГЅ', 1),
-(2932, 189, 'ZI', 'ЕЅilinskГЅ', 1),
+(2929, 189, 'PR', 'Prešovský', 1),
+(2930, 189, 'TC', 'Trenčiansky', 1),
+(2931, 189, 'TV', 'Trnavský', 1),
+(2932, 189, 'ZI', 'Žilinský', 1),
 (2933, 191, 'CE', 'Central', 1),
 (2934, 191, 'CH', 'Choiseul', 1),
 (2935, 191, 'GC', 'Guadalcanal', 1),
@@ -6914,12 +6970,24 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (3953, 222, 'LDY', 'County Londonderry', 1),
 (3954, 222, 'TYR', 'County Tyrone', 1),
 (3955, 222, 'CMA', 'Cumbria', 1),
-(3956, 220, 'KE', 'Херсон', 1);
+(3956, 190, '1', 'Pomurska', 1),
+(3957, 190, '2', 'Podravska', 1),
+(3958, 190, '3', 'Koroška', 1),
+(3959, 190, '4', 'Savinjska', 1),
+(3960, 190, '5', 'Zasavska', 1),
+(3961, 190, '6', 'Spodnjeposavska', 1),
+(3962, 190, '7', 'Jugovzhodna Slovenija', 1),
+(3963, 190, '8', 'Osrednjeslovenska', 1),
+(3964, 190, '9', 'Gorenjska', 1),
+(3965, 190, '10', 'Notranjsko-kraška', 1),
+(3966, 190, '11', 'Goriška', 1),
+(3967, 190, '12', 'Obalno-kraška', 1),
+(3968, 220, 'KE', 'Херсон', 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `oc_zone_to_geo_zone`
+-- Table structure for table `oc_zone_to_geo_zone`
 --
 
 DROP TABLE IF EXISTS `oc_zone_to_geo_zone`;
@@ -6934,7 +7002,7 @@ CREATE TABLE `oc_zone_to_geo_zone` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Дамп данных таблицы `oc_zone_to_geo_zone`
+-- Dumping data for table `oc_zone_to_geo_zone`
 --
 
 INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id`, `geo_zone_id`, `date_added`, `date_modified`) VALUES

@@ -150,6 +150,14 @@ $('#button-login').live('click', function() {
 			if (json['redirect']) {
 				location = json['redirect'];
 			}
+			
+			if (json['total']) {
+				$('#cart_total').html(json['total']);
+			}
+			
+			if (json['logged']) {
+				$('#welcome').html(json['logged']);
+			}
 						
 			if (json['error']) {
 				$('#checkout .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '</div>');

@@ -42,6 +42,7 @@ $_['button_back']             = 'Back';
 $_['button_remove']           = 'Remove';
 $_['button_backup']           = 'Backup';
 $_['button_restore']          = 'Restore';
+$_['button_upload']           = 'Upload';
 $_['button_invoice']          = 'Print Invoice';
 $_['button_add_address']      = 'Add Address';
 $_['button_add_attribute']    = 'Add Attribute';
@@ -53,16 +54,19 @@ $_['button_add_discount']     = 'Add Discount';
 $_['button_add_special']      = 'Add Special';
 $_['button_add_image']        = 'Add Image';
 $_['button_add_geo_zone']     = 'Add Geo Zone';
-$_['button_add_rate']         = 'Add Tax Rate';
 $_['button_add_history']      = 'Add History';
 $_['button_add_transaction']  = 'Add Transaction';
 $_['button_add_total']        = 'Add Total';
 $_['button_add_reward']       = 'Add Reward Points';
 $_['button_add_route']        = 'Add Route';
+$_['button_add_rule' ]        = 'Add Rule';
 $_['button_add_module']       = 'Add Module';
 $_['button_add_link']         = 'Add Link';
 $_['button_approve']          = 'Approve';
 $_['button_reset']            = 'Reset';
+$_['button_enable']           = 'Enable';
+$_['button_disable']          = 'Disable';
+$_['button_add_rate']         = 'Add Tax Rate';
 
 // Tab
 $_['tab_address']             = 'Address';
@@ -73,7 +77,7 @@ $_['tab_data']                = 'Data';
 $_['tab_design']              = 'Design';
 $_['tab_discount']            = 'Discount';
 $_['tab_general']             = 'General';
-$_['tab_ip']                 = 'IP Addresses';
+$_['tab_ip']                  = 'IP Addresses';
 $_['tab_links']               = 'Links';
 $_['tab_image']               = 'Image';
 $_['tab_option']              = 'Option';
@@ -94,6 +98,7 @@ $_['tab_shipping']            = 'Shipping Details';
 $_['tab_total']               = 'Totals';
 $_['tab_transaction']         = 'Transactions';
 $_['tab_voucher_history']     = 'Voucher History';
+$_['tab_sms']		      = 'SMS';
 
 // Error
 $_['error_upload_1']          = 'Warning: The uploaded file exceeds the upload_max_filesize directive in php.ini!';

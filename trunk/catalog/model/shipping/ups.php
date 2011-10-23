@@ -255,7 +255,7 @@ class ModelShippingUps extends Model {
 								'title'        => $service_code[$this->config->get('ups_origin')][$code],
 								'cost'         => $this->currency->convert($cost, $currency, $this->config->get('config_currency')),
 								'tax_class_id' => $this->config->get('ups_tax_class_id'),
-								'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, $this->config->get('config_currency'), $this->currency->getCode()), $this->config->get('ups_tax_class_id'), $this->config->get('config_tax')))
+								'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, $currency, $this->currency->getCode()), $this->config->get('ups_tax_class_id'), $this->config->get('config_tax')))
 							);
 						}
 					}
@@ -267,6 +267,11 @@ class ModelShippingUps extends Model {
 			if ($this->config->get('ups_display_weight')) {	  
 				$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('ups_weight_class_id')) . ')';
 			}
+		
+			function comparecost ($a, $b) {
+				return $a['cost'] > $b['cost'];
+			}
+			uasort($quote_data, 'comparecost');
 		
 			$method_data = array(
 				'code'       => 'ups',

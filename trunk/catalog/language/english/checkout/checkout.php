@@ -20,6 +20,8 @@ $_['text_register']                  = 'Register Account';
 $_['text_guest']                     = 'Guest Checkout';
 $_['text_register_account']          = 'By creating an account you will be able to shop faster, be up to date on an order\'s status, and keep track of the orders you have previously made.';
 $_['text_forgotten']                 = 'Forgotten Password';
+$_['text_logged']                    = 'You are logged in as <a href="%s">%s</a> <b>(</b> <a href="%s">Logout</a> <b>)</b>';
+$_['text_items']                     = '%s item(s) - %s';
 $_['text_your_details']              = 'Your Personal Details';
 $_['text_your_address']              = 'Your Address';
 $_['text_your_password']             = 'Your Password';
@@ -58,7 +60,6 @@ $_['entry_shipping'] 	             = 'My delivery and billing addresses are the 
 
 // Error
 $_['error_warning']                  = 'There was a problem while trying to process your order! If the problem persists please try selecting a different payment method or you can contact the store owner by <a href="%s">clicking here</a>.';
-$_['error_minimum']                  = 'Minimum order amount for %s is %s!';	
 $_['error_login']                    = 'Warning: No match for E-Mail Address and/or Password.';
 $_['error_exists']                   = 'Warning: E-Mail Address is already registered!';
 $_['error_firstname']                = 'First Name must be between 1 and 32 characters!';

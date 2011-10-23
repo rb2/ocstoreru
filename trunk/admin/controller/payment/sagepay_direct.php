@@ -145,7 +145,7 @@ class ControllerPaymentSagepayDirect extends Controller {
 		$this->template = 'payment/sagepay_direct.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());

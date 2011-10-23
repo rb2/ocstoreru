@@ -6,7 +6,9 @@ class ControllerPaymentPaymate extends Controller {
 		$this->load->model('checkout/order');
 		
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
-
+		
+		$this->data['action'] = 'https://www.paymate.com/PayMate/ExpressPayment';
+		
 		$this->data['mid'] = $this->config->get('paymate_username');
 
 		$this->data['return'] = $this->url->link('payment/paymate/callback', 'oid=' . $order_info['order_id'] . '&conf=' . base64_encode($order_info['payment_firstname'] . $order_info['payment_lastname']));
@@ -51,8 +53,6 @@ class ControllerPaymentPaymate extends Controller {
 		$this->data['regindi_state'] = html_entity_decode($order_info['payment_zone'], ENT_QUOTES, 'UTF-8');
 		$this->data['regindi_pcode'] = html_entity_decode($order_info['payment_postcode'], ENT_QUOTES, 'UTF-8');
 		$this->data['pmt_country'] = $order_info['payment_iso_code_2'];
-
-		$this->data['action'] = 'https://www.paymate.com/PayMate/ExpressPayment';
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/paymate.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/payment/paymate.tpl';

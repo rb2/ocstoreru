@@ -258,7 +258,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->template = 'localisation/length_class_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -357,7 +357,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->template = 'localisation/length_class_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -369,11 +369,11 @@ class ControllerLocalisationLengthClass extends Controller {
 		}
 
 		foreach ($this->request->post['length_class_description'] as $language_id => $value) {
-			if ((strlen(utf8_decode($value['title'])) < 3) || (strlen(utf8_decode($value['title'])) > 32)) {
+			if ((utf8_strlen($value['title']) < 3) || (utf8_strlen($value['title']) > 32)) {
 				$this->error['title'][$language_id] = $this->language->get('error_title');
 			}
 
-			if ((!$value['unit']) || (strlen(utf8_decode($value['unit'])) > 4)) {
+			if (!$value['unit'] || (utf8_strlen($value['unit']) > 4)) {
 				$this->error['unit'][$language_id] = $this->language->get('error_unit');
 			}
 		}

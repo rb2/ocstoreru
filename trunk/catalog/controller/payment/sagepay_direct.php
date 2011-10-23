@@ -269,9 +269,7 @@ class ControllerPaymentSagepayDirect extends Controller {
 			$json['error'] = $data['StatusDetail'];
 		}
 
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));
+		$this->response->setOutput(json_encode($json));
 	}	 
 	
 	public function callback() {

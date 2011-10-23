@@ -260,20 +260,23 @@ class ControllerLocalisationTaxClass extends Controller {
 
 	private function getForm() {
 		$this->data['heading_title'] = $this->language->get('heading_title');
-				
+		
+		$this->data['text_shipping'] = $this->language->get('text_shipping');	
+		$this->data['text_payment'] = $this->language->get('text_payment');	
+		$this->data['text_store'] = $this->language->get('text_store');	
+						
 		$this->data['entry_title'] = $this->language->get('entry_title');
 		$this->data['entry_description'] = $this->language->get('entry_description');
-		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$this->data['entry_rate'] = $this->language->get('entry_rate');
+		$this->data['entry_based'] = $this->language->get('entry_based');
 		$this->data['entry_priority'] = $this->language->get('entry_priority');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
-		$this->data['button_add_rate'] = $this->language->get('button_add_rate');
+		$this->data['button_add_rule'] = $this->language->get('button_add_rule');
 		$this->data['button_remove'] = $this->language->get('button_remove');
 		
 		$this->data['tab_general'] = $this->language->get('tab_general');
-		$this->data['tab_rate'] = $this->language->get('tab_rate');
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -349,16 +352,16 @@ class ControllerLocalisationTaxClass extends Controller {
 			$this->data['description'] = '';
 		}
 
-		$this->load->model('localisation/geo_zone');
+		$this->load->model('localisation/tax_rate');
 		
-		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
+		$this->data['tax_rates'] = $this->model_localisation_tax_rate->getTaxRates();
 		
-		if (isset($this->request->post['tax_rate'])) {
-			$this->data['tax_rates'] = $this->request->post['tax_rate'];
+		if (isset($this->request->post['tax_rule'])) {
+			$this->data['tax_rules'] = $this->request->post['tax_rule'];
 		} elseif (isset($this->request->get['tax_class_id'])) {
-			$this->data['tax_rates'] = $this->model_localisation_tax_class->getTaxRates($this->request->get['tax_class_id']);
+			$this->data['tax_rules'] = $this->model_localisation_tax_class->getTaxRules($this->request->get['tax_class_id']);
 		} else {
-			$this->data['tax_rates'] = array();
+			$this->data['tax_rules'] = array();
 		}
 
 		$this->template = 'localisation/tax_class_form.tpl';
@@ -383,22 +386,6 @@ class ControllerLocalisationTaxClass extends Controller {
 			$this->error['description'] = $this->language->get('error_description');
 		}
 		
-		if (isset($this->request->post['tax_rate'])) {
-			foreach ($this->request->post['tax_rate'] as $value) {
-				if (!$value['priority']) {
-					$this->error['warning'] = $this->language->get('error_priority');
-				}
-
-				if (!$value['rate']) { 
-					$this->error['warning'] = $this->language->get('error_rate');
-				}
-
-				if ((strlen(utf8_decode($value['description'])) < 3) || (strlen(utf8_decode($value['description'])) > 255)) {
-					$this->error['warning'] = $this->language->get('error_description');
-				}
-			}
-		}
-		
 		if (!$this->error) {
 			return true;
 		} else {
@@ -414,7 +401,7 @@ class ControllerLocalisationTaxClass extends Controller {
 		$this->load->model('catalog/product');
 
 		foreach ($this->request->post['selected'] as $tax_class_id) {
-			$product_total = $this->model_catalog_product->getTotalproductsByTaxClassId($tax_class_id);
+			$product_total = $this->model_catalog_product->getTotalProductsByTaxClassId($tax_class_id);
 
 			if ($product_total) {
 				$this->error['warning'] = sprintf($this->language->get('error_product'), $product_total);

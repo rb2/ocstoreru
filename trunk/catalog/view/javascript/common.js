@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	/* Search */
 	$('.button-search').bind('click', function() {
-		url = 'index.php?route=product/search';
-		 
+		url = $('base').attr('href') + 'index.php?route=product/search';
+				 
 		var filter_name = $('input[name=\'filter_name\']').attr('value')
 		
 		if (filter_name) {
@@ -14,7 +14,7 @@ $(document).ready(function() {
 	
 	$('#header input[name=\'filter_name\']').keydown(function(e) {
 		if (e.keyCode == 13) {
-			url = 'index.php?route=product/search';
+			url = $('base').attr('href') + 'index.php?route=product/search';
 			 
 			var filter_name = $('input[name=\'filter_name\']').attr('value')
 			
@@ -86,12 +86,12 @@ $(document).ready(function() {
 			});	
 		}
 	}
-});
-
-$('.success img, .warning img, .attention img, .information img').live('click', function() {
-	$(this).parent().fadeOut('slow', function() {
-		$(this).remove();
-	});
+	
+	$('.success img, .warning img, .attention img, .information img').live('click', function() {
+		$(this).parent().fadeOut('slow', function() {
+			$(this).remove();
+		});
+	});	
 });
 
 function addToCart(product_id) {
@@ -110,13 +110,17 @@ function addToCart(product_id) {
 			if (json['error']) {
 				if (json['error']['warning']) {
 					$('#notification').html('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+					
+					$('.warning').fadeIn('slow');
+					
+					$('html, body').animate({ scrollTop: 0 }, 'slow');
 				}
 			}	 
 						
 			if (json['success']) {
-				$('#notification').html('<div class="attention" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 				
-				$('.attention').fadeIn('slow');
+				$('.success').fadeIn('slow');
 				
 				$('#cart_total').html(json['total']);
 				
@@ -172,9 +176,9 @@ function addToWishList(product_id) {
 			$('.success, .warning, .attention, .information').remove();
 						
 			if (json['success']) {
-				$('#notification').html('<div class="attention" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 				
-				$('.attention').fadeIn('slow');
+				$('.success').fadeIn('slow');
 				
 				$('#wishlist_total').html(json['total']);
 				
@@ -194,9 +198,9 @@ function addToCompare(product_id) {
 			$('.success, .warning, .attention, .information').remove();
 						
 			if (json['success']) {
-				$('#notification').html('<div class="attention" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 				
-				$('.attention').fadeIn('slow');
+				$('.success').fadeIn('slow');
 				
 				$('#compare_total').html(json['total']);
 				

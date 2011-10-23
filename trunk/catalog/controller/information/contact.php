@@ -26,21 +26,6 @@ class ControllerInformationContact extends Controller {
 	  		$this->redirect($this->url->link('information/contact/success'));
     	}
 
-		// http://www.assembla.com/spaces/ocstoreru/tickets/6
-		// Автозаполнение email и name на странице Наши контакты
-		$this->load->model('account/customer');
-		if ($this->customer->isLogged()) {
-			$customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
-			
-			$email = $customer_info['email'];
-			$name = $customer_info['firstname'];
-			
-		} else {
-			$email = '';
-			$name = '';	
-		}
-
-
       	$this->data['breadcrumbs'] = array();
 
       	$this->data['breadcrumbs'][] = array(
@@ -103,13 +88,13 @@ class ControllerInformationContact extends Controller {
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
 		} else {
-			$this->data['name'] = $name;
+			$this->data['name'] = $this->customer->getFirstName();
 		}
 
 		if (isset($this->request->post['email'])) {
 			$this->data['email'] = $this->request->post['email'];
 		} else {
-			$this->data['email'] = $email;
+			$this->data['email'] = $this->customer->getEmail();
 		}
 		
 		if (isset($this->request->post['enquiry'])) {
@@ -198,7 +183,7 @@ class ControllerInformationContact extends Controller {
 	}
 	
   	private function validate() {
-    	if ((strlen(utf8_decode($this->request->post['name'])) < 3) || (strlen(utf8_decode($this->request->post['name'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
       		$this->error['name'] = $this->language->get('error_name');
     	}
 
@@ -206,7 +191,7 @@ class ControllerInformationContact extends Controller {
       		$this->error['email'] = $this->language->get('error_email');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['enquiry'])) < 10) || (strlen(utf8_decode($this->request->post['enquiry'])) > 3000)) {
+    	if ((utf8_strlen($this->request->post['enquiry']) < 10) || (utf8_strlen($this->request->post['enquiry']) > 3000)) {
       		$this->error['enquiry'] = $this->language->get('error_enquiry');
     	}
 

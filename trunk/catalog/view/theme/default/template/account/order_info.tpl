@@ -67,7 +67,7 @@
             <?php } else { ?>
             <input type="checkbox" name="selected[]" value="<?php echo $product['order_product_id']; ?>" />
             <?php } ?></td>
-          <td class="left"><?php echo $product['name']; ?>
+          <td class="left"><?php echo $product['name']; ?><input type="hidden" name="" value="" />
             <?php foreach ($product['option'] as $option) { ?>
             <br />
             &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
@@ -92,7 +92,7 @@
     <div class="buttons">
       <div class="right"><?php echo $text_action; ?>
         <select name="action" onchange="$('#order').submit();">
-          <option value=""><?php echo $text_selected; ?></option>
+          <option value="" selected="selected"><?php echo $text_selected; ?></option>
           <option value="reorder"><?php echo $text_reorder; ?></option>
           <option value="return"><?php echo $text_return; ?></option>
         </select>

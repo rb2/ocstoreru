@@ -3,8 +3,8 @@
 $_['heading_title']         = 'Customer';
 
 // Text
-$_['text_login']            = 'Login';
 $_['text_success']          = 'Success: You have modified customers!';
+$_['text_default']          = 'Default';
 $_['text_approved']         = 'You have approved %s accounts!';
 $_['text_wait']             = 'Please Wait!';
 $_['text_balance']          = 'Balance:';
@@ -14,6 +14,7 @@ $_['column_name']           = 'Customer Name';
 $_['column_email']          = 'E-Mail';
 $_['column_customer_group'] = 'Customer Group';
 $_['column_status']         = 'Status'; 
+$_['column_login']          = 'Login into Store';
 $_['column_approved']       = 'Approved';
 $_['column_date_added']     = 'Date Added';
 $_['column_description']    = 'Description';
@@ -49,6 +50,7 @@ $_['entry_description']     = 'Description:';
 // Error
 $_['error_warning']         = 'Warning: Please check the form carefully for errors!';
 $_['error_permission']      = 'Warning: You do not have permission to modify customers!';
+$_['error_exists']          = 'Warning: E-Mail Address is already registered!';
 $_['error_firstname']       = 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']        = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']           = 'E-Mail Address does not appear to be valid!';

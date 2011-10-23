@@ -140,7 +140,7 @@ class ControllerPaymentPerpetualPayments extends Controller {
 		$this->template = 'payment/perpetual_payments.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());

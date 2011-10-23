@@ -5,8 +5,8 @@
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
 <script type="text/javascript" src="view/javascript/jquery/jquery-1.6.1.min.js"></script>
-<script type="text/javascript" src="view/javascript/jquery/ui/jquery-ui-1.8.9.custom.min.js"></script>
-<link rel="stylesheet" type="text/css" href="view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.9.custom.css" />
+<script type="text/javascript" src="view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
 <script type="text/javascript" src="view/javascript/jquery/ui/external/jquery.bgiframe-2.1.2.js"></script>
 <script type="text/javascript" src="view/javascript/jquery/jstree/jquery.tree.min.js"></script>
 <script type="text/javascript" src="view/javascript/jquery/ajaxupload.js"></script>
@@ -254,7 +254,7 @@ $(document).ready(function () {
 			$.ajax({
 				url: 'index.php?route=common/filemanager/delete&token=<?php echo $token; ?>',
 				type: 'POST',
-				data: 'path=' + path,
+				data: 'path=' + encodeURIComponent(path),
 				dataType: 'json',
 				success: function(json) {
 					if (json.success) {
@@ -521,7 +521,7 @@ $(document).ready(function () {
 			this.submit();
 		},
 		onSubmit: function(file, extension) {
-			$('#upload').append('<img src="view/image/loading.gif" id="loading" style="padding-left: 5px;" />');
+			$('#upload').append('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');
 		},
 		onComplete: function(file, json) {
 			if (json.success) {
@@ -536,7 +536,7 @@ $(document).ready(function () {
 				alert(json.error);
 			}
 			
-			$('#loading').remove();	
+			$('.loading').remove();	
 		}
 	});
 	

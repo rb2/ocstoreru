@@ -131,7 +131,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->template = 'catalog/category_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -143,6 +143,8 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_default'] = $this->language->get('text_default');
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
+		$this->data['text_browse'] = $this->language->get('text_browse');
+		$this->data['text_clear'] = $this->language->get('text_clear');		
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
     	$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_percent'] = $this->language->get('text_percent');
@@ -215,7 +217,7 @@ class ControllerCatalogCategory extends Controller {
 
 		if (isset($this->request->post['category_description'])) {
 			$this->data['category_description'] = $this->request->post['category_description'];
-		} elseif (isset($category_info)) {
+		} elseif (isset($this->request->get['category_id'])) {
 			$this->data['category_description'] = $this->model_catalog_category->getCategoryDescriptions($this->request->get['category_id']);
 		} else {
 			$this->data['category_description'] = array();
@@ -231,7 +233,7 @@ class ControllerCatalogCategory extends Controller {
 
 		if (isset($this->request->post['parent_id'])) {
 			$this->data['parent_id'] = $this->request->post['parent_id'];
-		} elseif (isset($category_info)) {
+		} elseif (!empty($category_info)) {
 			$this->data['parent_id'] = $category_info['parent_id'];
 		} else {
 			$this->data['parent_id'] = 0;
@@ -243,7 +245,7 @@ class ControllerCatalogCategory extends Controller {
 		
 		if (isset($this->request->post['category_store'])) {
 			$this->data['category_store'] = $this->request->post['category_store'];
-		} elseif (isset($category_info)) {
+		} elseif (isset($this->request->get['category_id'])) {
 			$this->data['category_store'] = $this->model_catalog_category->getCategoryStores($this->request->get['category_id']);
 		} else {
 			$this->data['category_store'] = array(0);
@@ -251,7 +253,7 @@ class ControllerCatalogCategory extends Controller {
 		
 		if (isset($this->request->post['keyword'])) {
 			$this->data['keyword'] = $this->request->post['keyword'];
-		} elseif (isset($category_info)) {
+		} elseif (!empty($category_info)) {
 			$this->data['keyword'] = $category_info['keyword'];
 		} else {
 			$this->data['keyword'] = '';
@@ -259,7 +261,7 @@ class ControllerCatalogCategory extends Controller {
 
 		if (isset($this->request->post['image'])) {
 			$this->data['image'] = $this->request->post['image'];
-		} elseif (isset($category_info)) {
+		} elseif (!empty($category_info)) {
 			$this->data['image'] = $category_info['image'];
 		} else {
 			$this->data['image'] = '';
@@ -267,15 +269,17 @@ class ControllerCatalogCategory extends Controller {
 		
 		$this->load->model('tool/image');
 
-		if (isset($category_info) && $category_info['image'] && file_exists(DIR_IMAGE . $category_info['image'])) {
-			$this->data['preview'] = $this->model_tool_image->resize($category_info['image'], 100, 100);
+		if (!empty($category_info) && $category_info['image'] && file_exists(DIR_IMAGE . $category_info['image'])) {
+			$this->data['thumb'] = $this->model_tool_image->resize($category_info['image'], 100, 100);
 		} else {
-			$this->data['preview'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+			$this->data['thumb'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
 		}
+		
+		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
 		
 		if (isset($this->request->post['top'])) {
 			$this->data['top'] = $this->request->post['top'];
-		} elseif (isset($category_info)) {
+		} elseif (!empty($category_info)) {
 			$this->data['top'] = $category_info['top'];
 		} else {
 			$this->data['top'] = 0;
@@ -283,7 +287,7 @@ class ControllerCatalogCategory extends Controller {
 		
 		if (isset($this->request->post['column'])) {
 			$this->data['column'] = $this->request->post['column'];
-		} elseif (isset($category_info)) {
+		} elseif (!empty($category_info)) {
 			$this->data['column'] = $category_info['column'];
 		} else {
 			$this->data['column'] = 1;
@@ -291,7 +295,7 @@ class ControllerCatalogCategory extends Controller {
 				
 		if (isset($this->request->post['sort_order'])) {
 			$this->data['sort_order'] = $this->request->post['sort_order'];
-		} elseif (isset($category_info)) {
+		} elseif (!empty($category_info)) {
 			$this->data['sort_order'] = $category_info['sort_order'];
 		} else {
 			$this->data['sort_order'] = 0;
@@ -299,7 +303,7 @@ class ControllerCatalogCategory extends Controller {
 		
 		if (isset($this->request->post['status'])) {
 			$this->data['status'] = $this->request->post['status'];
-		} elseif (isset($category_info)) {
+		} elseif (!empty($category_info)) {
 			$this->data['status'] = $category_info['status'];
 		} else {
 			$this->data['status'] = 1;
@@ -307,7 +311,7 @@ class ControllerCatalogCategory extends Controller {
 				
 		if (isset($this->request->post['category_layout'])) {
 			$this->data['category_layout'] = $this->request->post['category_layout'];
-		} elseif (isset($category_info)) {
+		} elseif (isset($this->request->get['category_id'])) {
 			$this->data['category_layout'] = $this->model_catalog_category->getCategoryLayouts($this->request->get['category_id']);
 		} else {
 			$this->data['category_layout'] = array();
@@ -320,7 +324,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->template = 'catalog/category_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -332,7 +336,7 @@ class ControllerCatalogCategory extends Controller {
 		}
 
 		foreach ($this->request->post['category_description'] as $language_id => $value) {
-			if ((strlen(utf8_decode($value['name'])) < 2) || (strlen(utf8_decode($value['name'])) > 255)) {
+			if ((utf8_strlen($value['name']) < 2) || (utf8_strlen($value['name']) > 255)) {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
 		}

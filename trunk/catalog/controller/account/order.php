@@ -106,20 +106,20 @@ class ControllerAccountOrder extends Controller {
 	}
 	
 	public function info() { 
-		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/order/info', 'order_id=' . $order_id, 'SSL');
-			
-			$this->redirect($this->url->link('account/login', '', 'SSL'));
-    	}
-			
-		$this->language->load('account/order');
-		
 		if (isset($this->request->get['order_id'])) {
 			$order_id = $this->request->get['order_id'];
 		} else {
 			$order_id = 0;
 		}	
 		
+		if (!$this->customer->isLogged()) {
+			$this->session->data['redirect'] = $this->url->link('account/order/info', 'order_id=' . $order_id, 'SSL');
+			
+			$this->redirect($this->url->link('account/login', '', 'SSL'));
+    	}
+		
+		$this->language->load('account/order');
+				
 		$this->load->model('account/order');
 			
 		$order_info = $this->model_account_order->getOrder($order_id);
@@ -153,10 +153,23 @@ class ControllerAccountOrder extends Controller {
 				}
 				
 				if ($this->request->post['action'] == 'return') {
+					$order_product_data = array();
+					
+					$order_products = $this->model_account_order->getOrderProducts($order_id);
+					
+					foreach ($order_products as $order_product) {
+						if (in_array($order_product['order_product_id'], $this->request->post['selected'])) {
+							$order_product_data[] = array(
+								'name'  => $order_product['name'],
+								'model' => $order_product['model']
+							);
+						}
+					}
+					
 					$this->session->data['return'] = array(
 						'order_id'   => $order_info['order_id'],
 						'date_added' => $order_info['date_added'],
-						'product'    => $this->model_account_order->getOrderProducts($order_id)
+						'product'    => $order_product_data
 					);
 					
 					$this->redirect($this->url->link('account/return/insert', '', 'SSL'));	
@@ -231,7 +244,7 @@ class ControllerAccountOrder extends Controller {
 				$this->data['error_warning'] = '';
 			}
 			
-			$this->data['action'] = $this->url->link('account/order/info', 'order_id=' . $this->request->get['order_id'] . $url, 'SSL');
+			$this->data['action'] = $this->url->link('account/order/info', 'order_id=' . $this->request->get['order_id'], 'SSL');
 			
 			if ($order_info['invoice_no']) {
 				$this->data['invoice_no'] = $order_info['invoice_prefix'] . $order_info['invoice_no'];

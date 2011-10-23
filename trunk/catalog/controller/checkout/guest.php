@@ -19,27 +19,27 @@ class ControllerCheckoutGuest extends Controller {
 					
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			if (!$json) {
-				if ((strlen(utf8_decode($this->request->post['firstname'])) < 1) || (strlen(utf8_decode($this->request->post['firstname'])) > 32)) {
+				if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 					$json['error']['firstname'] = $this->language->get('error_firstname');
 				}
 		
-				if ((strlen(utf8_decode($this->request->post['lastname'])) < 1) || (strlen(utf8_decode($this->request->post['lastname'])) > 32)) {
+				if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
 					$json['error']['lastname'] = $this->language->get('error_lastname');
 				}
 		
-				if ((strlen(utf8_decode($this->request->post['email'])) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
+				if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
 					$json['error']['email'] = $this->language->get('error_email');
 				}
 				
-				if ((strlen(utf8_decode($this->request->post['telephone'])) < 3) || (strlen(utf8_decode($this->request->post['telephone'])) > 32)) {
+				if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
 					$json['error']['telephone'] = $this->language->get('error_telephone');
 				}
 				
-				if ((strlen(utf8_decode($this->request->post['address_1'])) < 3) || (strlen(utf8_decode($this->request->post['address_1'])) > 128)) {
+				if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
 					$json['error']['address_1'] = $this->language->get('error_address_1');
 				}
 		
-				if ((strlen(utf8_decode($this->request->post['city'])) < 2) || (strlen(utf8_decode($this->request->post['city'])) > 128)) {
+				if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
 					$json['error']['city'] = $this->language->get('error_city');
 				}
 				
@@ -47,7 +47,7 @@ class ControllerCheckoutGuest extends Controller {
 				
 				$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 				
-				if ($country_info && $country_info['postcode_required'] && (strlen(utf8_decode($this->request->post['postcode'])) < 2) || (strlen(utf8_decode($this->request->post['postcode'])) > 10)) {
+				if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 					$json['error']['postcode'] = $this->language->get('error_postcode');
 				}
 		
@@ -141,8 +141,6 @@ class ControllerCheckoutGuest extends Controller {
 						$this->session->data['guest']['shipping']['zone'] = '';
 						$this->session->data['guest']['shipping']['zone_code'] = '';
 					}
-					
-					$this->tax->setZone($this->request->post['country_id'], $this->request->post['zone_id']);				
 				}
 				
 				unset($this->session->data['shipping_methods']);
@@ -264,9 +262,7 @@ class ControllerCheckoutGuest extends Controller {
 			$json['output'] = $this->render();	
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));			
+		$this->response->setOutput(json_encode($json));			
   	}
   	
 	public function shipping() {
@@ -275,19 +271,19 @@ class ControllerCheckoutGuest extends Controller {
 		$json = array();
 		
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
-			if ((strlen(utf8_decode($this->request->post['firstname'])) < 1) || (strlen(utf8_decode($this->request->post['firstname'])) > 32)) {
+			if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 				$json['error']['firstname'] = $this->language->get('error_firstname');
 			}
 	
-			if ((strlen(utf8_decode($this->request->post['lastname'])) < 1) || (strlen(utf8_decode($this->request->post['lastname'])) > 32)) {
+			if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
 				$json['error']['lastname'] = $this->language->get('error_lastname');
 			}
 			
-			if ((strlen(utf8_decode($this->request->post['address_1'])) < 3) || (strlen(utf8_decode($this->request->post['address_1'])) > 128)) {
+			if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
 				$json['error']['address_1'] = $this->language->get('error_address_1');
 			}
 	
-			if ((strlen(utf8_decode($this->request->post['city'])) < 2) || (strlen(utf8_decode($this->request->post['city'])) > 128)) {
+			if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
 				$json['error']['city'] = $this->language->get('error_city');
 			}
 			
@@ -295,7 +291,7 @@ class ControllerCheckoutGuest extends Controller {
 			
 			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 			
-			if ($country_info && $country_info['postcode_required'] && (strlen(utf8_decode($this->request->post['postcode'])) < 2) || (strlen(utf8_decode($this->request->post['postcode'])) > 10)) {
+			if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 				$json['error']['postcode'] = $this->language->get('error_postcode');
 			}
 	
@@ -345,11 +341,10 @@ class ControllerCheckoutGuest extends Controller {
 					$this->session->data['guest']['shipping']['zone'] = '';
 					$this->session->data['guest']['shipping']['zone_code'] = '';
 				}
-				
-				if ($this->cart->hasShipping()) {
-					$this->tax->setZone($this->request->post['country_id'], $this->request->post['zone_id']);
-				}
 			}
+			
+			unset($this->session->data['shipping_methods']);
+			unset($this->session->data['shipping_method']);			
 		} else {
 			$this->data['text_select'] = $this->language->get('text_select');
 	
@@ -432,9 +427,7 @@ class ControllerCheckoutGuest extends Controller {
 			$json['output'] = $this->render();	
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));		
+		$this->response->setOutput(json_encode($json));		
 	}
 	
   	public function zone() {

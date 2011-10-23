@@ -119,8 +119,8 @@ class ModelLocalisationCurrency extends Model {
 			$lines = explode("\n", trim($content));
 				
 			foreach ($lines as $line) {
-				$currency = substr($line, 4, 3);
-				$value = substr($line, 11, 6);
+				$currency = utf8_substr($line, 4, 3);
+				$value = utf8_substr($line, 11, 6);
 				
 				if ((float)$value) {
 					$this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '" . (float)$value . "', date_modified = '" .  $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE code = '" . $this->db->escape($currency) . "'");

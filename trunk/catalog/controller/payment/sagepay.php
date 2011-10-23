@@ -189,14 +189,14 @@ class ControllerPaymentSagepay extends Controller {
 	private function simpleXor($string, $password) {
 		$data = array();
 
-		for ($i = 0; $i < strlen(utf8_decode($password)); $i++) {
+		for ($i = 0; $i < utf8_strlen($password); $i++) {
 			$data[$i] = ord(substr($password, $i, 1));
 		}
 
 		$output = '';
 
-		for ($i = 0; $i < strlen(utf8_decode($string)); $i++) {
-    		$output .= chr(ord(substr($string, $i, 1)) ^ ($data[$i % strlen(utf8_decode($password))]));
+		for ($i = 0; $i < utf8_strlen($string); $i++) {
+    		$output .= chr(ord(substr($string, $i, 1)) ^ ($data[$i % utf8_strlen($password)]));
 		}
 
 		return $output;		

@@ -1,6 +1,6 @@
 <?php
 final class Language {
-  	private $directory;
+	private $directory;
 	private $data = array();
  
 	public function __construct($directory) {
@@ -23,7 +23,7 @@ final class Language {
 			
 			return $this->data;
 		} else {
-			echo 'Error: Could not load language ' . $filename . '!';
+			trigger_error('Error: Could not load language ' . $filename . '!');
 			exit();
 		}
   	}

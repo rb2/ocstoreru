@@ -4,7 +4,7 @@ $_['heading_title']   = 'Корзина';
 
 // Text
 $_['text_weight']     = 'Вес товаров корзины:';
-$_['text_points']     = 'Бонусных баллов: %s';
+$_['text_reward']     = 'Бонусных баллов: %s';
 $_['text_items']      = '%s шт. - %s';
 $_['text_success']    = 'Товар <a href="%s">%s</a> добавлен в Вашу <a href="%s">корзину</a>!';
 $_['text_empty']      = 'Ваша корзина пуста!';

@@ -65,11 +65,11 @@ class ControllerAffiliateTracking extends Controller {
 	public function autocomplete() {
 		$json = array();
 		
-		if (isset($this->request->post['filter_name'])) {
+		if (isset($this->request->get['filter_name'])) {
 			$this->load->model('catalog/product');
 			 
 			$data = array(
-				'filter_name' => $this->request->post['filter_name'],
+				'filter_name' => $this->request->get['filter_name'],
 				'start'       => 0,
 				'limit'       => 20
 			);
@@ -83,10 +83,8 @@ class ControllerAffiliateTracking extends Controller {
 				);	
 			}
 		}
-		
-		$this->load->library('json');
 
-		$this->response->setOutput(Json::encode($json));
+		$this->response->setOutput(json_encode($json));
 	}
 }
 ?>

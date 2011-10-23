@@ -40,5 +40,13 @@ final class Weight {
 			return number_format($value, 2, $decimal_point, $thousand_point);
 		}
 	}
+	
+	public function getUnit($weight_class_id) {
+		if (isset($this->weights[$weight_class_id])) {
+    		return $this->weights[$weight_class_id]['unit'];
+		} else {
+			return '';
+		}
+	}	
 }
 ?>

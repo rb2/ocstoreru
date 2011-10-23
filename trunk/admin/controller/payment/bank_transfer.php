@@ -131,7 +131,7 @@ class ControllerPaymentBankTransfer extends Controller {
 		$this->template = 'payment/bank_transfer.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());

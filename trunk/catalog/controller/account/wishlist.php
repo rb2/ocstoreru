@@ -168,10 +168,8 @@ class ControllerAccountWishList extends Controller {
 			
 			$json['total'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
 		}	
-
-		$this->load->library('json');
 		
-		$this->response->setOutput(Json::encode($json));
+		$this->response->setOutput(json_encode($json));
 	}		
 }
 ?>

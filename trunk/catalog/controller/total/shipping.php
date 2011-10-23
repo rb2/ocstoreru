@@ -1,7 +1,7 @@
 <?php 
 class ControllerTotalShipping extends Controller {
 	public function index() {
-		if ($this->cart->hasShipping() && $this->config->get('shipping_estimator')) {
+		if (!isset($this->session->data['address_id']) && $this->cart->hasShipping() && $this->config->get('shipping_estimator')) {
 			$this->language->load('total/shipping');
 			
 			$this->data['heading_title'] = $this->language->get('heading_title');
@@ -16,8 +16,8 @@ class ControllerTotalShipping extends Controller {
 			$this->data['button_quote'] = $this->language->get('button_quote');
 			$this->data['button_shipping'] = $this->language->get('button_shipping');
 			
-			if (isset($this->session->data['country_id'])) {
-				$this->data['country_id'] = $this->session->data['country_id'];			  	
+			if (isset($this->session->data['guest']['shipping']['country_id'])) {
+				$this->data['country_id'] = $this->session->data['guest']['shipping']['country_id'];			  	
 			} else {
 				$this->data['country_id'] = $this->config->get('config_country_id');
 			}
@@ -26,14 +26,14 @@ class ControllerTotalShipping extends Controller {
 			
 			$this->data['countries'] = $this->model_localisation_country->getCountries();
 						
-			if (isset($this->session->data['zone_id'])) {
-				$this->data['zone_id'] = $this->session->data['zone_id'];			
+			if (isset($this->session->data['guest']['shipping']['zone_id'])) {
+				$this->data['zone_id'] = $this->session->data['guest']['shipping']['zone_id'];			
 			} else {
 				$this->data['zone_id'] = '';
 			}
 			
-			if (isset($this->session->data['postcode'])) {
-				$this->data['postcode'] = $this->session->data['postcode'];					
+			if (isset($this->session->data['guest']['shipping']['postcode'])) {
+				$this->data['postcode'] = $this->session->data['guest']['shipping']['postcode'];					
 			} else {
 				$this->data['postcode'] = '';
 			}
@@ -82,16 +82,16 @@ class ControllerTotalShipping extends Controller {
 			
 			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 			
-			if ($country_info && $country_info['postcode_required'] && (strlen(utf8_decode($this->request->post['postcode'])) < 2) || (strlen(utf8_decode($this->request->post['postcode'])) > 10)) {
+			if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 				$json['error']['postcode'] = $this->language->get('error_postcode');
 			}
 							
 			if (!isset($json['error'])) {		
-				$this->tax->setZone($this->request->post['country_id'], $this->request->post['zone_id']);
+				$this->tax->setShippingAddress($this->request->post['country_id'], $this->request->post['zone_id']);
 			
-				$this->session->data['country_id'] = $this->request->post['country_id'];
-				$this->session->data['zone_id'] = $this->request->post['zone_id'];
-				$this->session->data['postcode'] = $this->request->post['postcode'];
+				$this->session->data['guest']['shipping']['country_id'] = $this->request->post['country_id'];
+				$this->session->data['guest']['shipping']['zone_id'] = $this->request->post['zone_id'];
+				$this->session->data['guest']['shipping']['postcode'] = $this->request->post['postcode'];
 			
 				if ($country_info) {
 					$country = $country_info['name'];
@@ -178,9 +178,7 @@ class ControllerTotalShipping extends Controller {
 			}	
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));						
+		$this->response->setOutput(json_encode($json));						
 	}
 	
 	public function calculate() {
@@ -206,9 +204,7 @@ class ControllerTotalShipping extends Controller {
 			$json['redirect'] = $this->url->link('checkout/cart', '', 'SSL');			
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));			
+		$this->response->setOutput(json_encode($json));			
 	}
 	
   	public function zone() {

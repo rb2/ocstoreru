@@ -580,19 +580,19 @@ class ControllerAccountReturn extends Controller {
       		$this->error['order_id'] = $this->language->get('error_order_id');
     	}
 		
-		if ((strlen(utf8_decode($this->request->post['firstname'])) < 1) || (strlen(utf8_decode($this->request->post['firstname'])) > 32)) {
+		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['lastname'])) < 1) || (strlen(utf8_decode($this->request->post['lastname'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
       		$this->error['lastname'] = $this->language->get('error_lastname');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['email'])) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
+    	if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
       		$this->error['email'] = $this->language->get('error_email');
     	}
 		
-    	if ((strlen(utf8_decode($this->request->post['telephone'])) < 3) || (strlen(utf8_decode($this->request->post['telephone'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
       		$this->error['telephone'] = $this->language->get('error_telephone');
     	}		
 
@@ -604,11 +604,11 @@ class ControllerAccountReturn extends Controller {
 					$this->error['reason'][$key] = $this->language->get('error_reason');
 				}	
 				
-				if ((strlen(utf8_decode($value['name'])) < 1) || (strlen(utf8_decode($value['name'])) > 255)) {
+				if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 255)) {
 					$this->error['name'][$key] = $this->language->get('error_name');
 				}	
 				
-				if ((strlen(utf8_decode($value['model'])) < 1) || (strlen(utf8_decode($value['model'])) > 64)) {
+				if ((utf8_strlen($value['model']) < 1) || (utf8_strlen($value['model']) > 64)) {
 					$this->error['model'][$key] = $this->language->get('error_model');
 				}							
 			}			

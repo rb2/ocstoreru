@@ -11,7 +11,7 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/customer.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
+      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
       <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a>
@@ -88,6 +88,18 @@
                 <?php } ?></td>
             </tr>
             <tr>
+              <td><?php echo $entry_category; ?></td>
+              <td><div class="scrollbox">
+                  <?php $class = 'odd'; ?>
+                  <?php foreach ($categories as $category) { ?>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div class="<?php echo $class; ?>">
+                    <input type="checkbox" name="category[]" value="<?php echo $category['category_id']; ?>" />
+                    <?php echo $category['name']; ?> </div>
+                  <?php } ?>
+                </div></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_product; ?></td>
               <td><input type="text" name="product" value="" /></td>
             </tr>
@@ -143,16 +155,37 @@
   </div>
 </div>
 <script type="text/javascript"><!--
+$('input[name=\'category[]\']').bind('change', function() {
+	var filter_category_id = this;
+	
+	$.ajax({
+		url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_category_id=' +  filter_category_id.value + '&limit=10000',
+		dataType: 'json',
+		success: function(json) {
+			for (i = 0; i < json.length; i++) {
+				if ($(filter_category_id).attr('checked') == 'checked') {
+					$('#coupon-product' + json[i]['product_id']).remove();
+					
+					$('#coupon-product').append('<div id="coupon-product' + json[i]['product_id'] + '">' + json[i]['name'] + '<img src="view/image/delete.png" /><input type="hidden" name="coupon_product[]" value="' + json[i]['product_id'] + '" /></div>');
+				} else {
+					$('#coupon-product' + json[i]['product_id']).remove();
+				}			
+			}
+			
+			$('#coupon-product div:odd').attr('class', 'odd');
+			$('#coupon-product div:even').attr('class', 'even');			
+		}
+	});
+});
+
 $('input[name=\'product\']').autocomplete({
 	delay: 0,
 	source: function(request, response) {
 		$.ajax({
-			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>',
-			type: 'POST',
+			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
 			dataType: 'json',
-			data: 'filter_name=' +  encodeURIComponent(request.term),
-			success: function(data) {		
-				response($.map(data, function(item) {
+			success: function(json) {		
+				response($.map(json, function(item) {
 					return {
 						label: item.name,
 						value: item.product_id

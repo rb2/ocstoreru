@@ -5,8 +5,8 @@ $_['direction']               = 'ltr';
 $_['date_format_short']       = 'd.m.Y';
 $_['date_format_long']        = 'l, d F Y';
 $_['time_format']             = 'H:i:s';
-$_['decimal_point']           = '.';
-$_['thousand_point']          = ',';
+$_['decimal_point']           = ',';
+$_['thousand_point']          = '';
 
 // Text
 $_['text_yes']                = 'Да';
@@ -30,8 +30,6 @@ $_['text_home']               = 'Главная';
 // Button
 $_['button_insert']           = 'Добавить';
 $_['button_delete']           = 'Удалить';
-$_['button_enable']           = 'Включить';
-$_['button_disable']          = 'Отключить';
 $_['button_save']             = 'Сохранить';
 $_['button_cancel']           = 'Отменить';
 $_['button_clear']            = 'Очистить журнал';
@@ -44,6 +42,7 @@ $_['button_back']             = 'Назад';
 $_['button_remove']           = 'Удалить';
 $_['button_backup']           = 'Бэкап';
 $_['button_restore']          = 'Восстановить';
+$_['button_upload']           = 'Upload';
 $_['button_invoice']          = 'Показать счет';
 $_['button_add_address']      = 'Добавить адрес';
 $_['button_add_attribute']    = 'Добавить атрибут';
@@ -55,16 +54,19 @@ $_['button_add_discount']     = 'Добавить скидку';
 $_['button_add_special']      = 'Добавить акцию';
 $_['button_add_image']        = 'Добавить изображение';
 $_['button_add_geo_zone']     = 'Добавить географическую зону';
-$_['button_add_rate']         = 'Добавить налоговую ставку';
 $_['button_add_history']      = 'Добавить историю';
 $_['button_add_transaction']  = 'Добавить транзакцию';
 $_['button_add_total']        = 'Добавить итого';
 $_['button_add_reward']       = 'Добавить бонусные баллы';
 $_['button_add_route']        = 'Добавить путь';
+$_['button_add_rule' ]        = 'Add Rule';
 $_['button_add_module']       = 'Добавить модуль';
 $_['button_add_link']         = 'Добавить ссылку';
 $_['button_approve']          = 'Активировать';
 $_['button_reset']            = 'Сброс';
+$_['button_enable']           = 'Включить';
+$_['button_disable']          = 'Отключить';
+$_['button_add_rate']         = 'Добавить налоговую ставку';
 
 // Tab
 $_['tab_address']             = 'Адрес';
@@ -93,10 +95,10 @@ $_['tab_return']              = 'Подробности возвратов';
 $_['tab_return_history']      = 'История возвратов';
 $_['tab_reward']              = 'Бонусные баллы';
 $_['tab_shipping']            = 'Адрес доставки';
-$_['tab_sms']				  = 'SMS';
 $_['tab_total']               = 'Totals';
 $_['tab_transaction']         = 'Транзакции';
 $_['tab_voucher_history']     = 'История подарочных сертификатов';
+$_['tab_sms']		      = 'SMS';
 
 // Error
 $_['error_upload_1']          = 'Размер загружаемого файла превышает максимальный размер, указанный в php.ini!';

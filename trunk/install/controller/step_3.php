@@ -185,7 +185,7 @@ class ControllerStep3 extends Controller {
 			'footer'
 		);
 		
-		$this->response->setOutput($this->render(TRUE));		
+		$this->response->setOutput($this->render());		
 	}
 	
 	private function validate() {
@@ -209,7 +209,7 @@ class ControllerStep3 extends Controller {
 			$this->error['password'] = 'Password required!';
 		}
 
-		if ((strlen(utf8_decode($this->request->post['email'])) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
+		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
 			$this->error['email'] = 'Invalid E-Mail!';
 		}
 
@@ -232,9 +232,9 @@ class ControllerStep3 extends Controller {
 		}	
 		
     	if (!$this->error) {
-      		return TRUE;
+      		return true;
     	} else {
-      		return FALSE;
+      		return false;
     	}		
 	}
 }

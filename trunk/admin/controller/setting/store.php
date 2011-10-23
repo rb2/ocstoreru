@@ -170,7 +170,7 @@ class ControllerSettingStore extends Controller {
 		$this->template = 'setting/store_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -183,7 +183,11 @@ class ControllerSettingStore extends Controller {
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
-		
+ 		$this->data['text_browse'] = $this->language->get('text_browse');
+		$this->data['text_clear'] = $this->language->get('text_clear');			
+		$this->data['text_shipping'] = $this->language->get('text_shipping');	
+		$this->data['text_payment'] = $this->language->get('text_payment');	
+				
 		$this->data['entry_url'] = $this->language->get('entry_url');
 		$this->data['entry_ssl'] = $this->language->get('entry_ssl');	
 		$this->data['entry_name'] = $this->language->get('entry_name');
@@ -202,6 +206,8 @@ class ControllerSettingStore extends Controller {
 		$this->data['entry_currency'] = $this->language->get('entry_currency');
 		$this->data['entry_catalog_limit'] = $this->language->get('entry_catalog_limit');
 		$this->data['entry_tax'] = $this->language->get('entry_tax');
+		$this->data['entry_tax_default'] = $this->language->get('entry_tax_default');
+		$this->data['entry_tax_customer'] = $this->language->get('entry_tax_customer');		
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
 		$this->data['entry_customer_approval'] = $this->language->get('entry_customer_approval');
@@ -215,11 +221,10 @@ class ControllerSettingStore extends Controller {
 		$this->data['entry_ajax_cart'] = $this->language->get('entry_ajax_cart');
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
 		$this->data['entry_icon'] = $this->language->get('entry_icon');
+		$this->data['entry_image_category'] = $this->language->get('entry_image_category');
 		$this->data['entry_image_thumb'] = $this->language->get('entry_image_thumb');
 		$this->data['entry_image_popup'] = $this->language->get('entry_image_popup');
 		$this->data['entry_image_product'] = $this->language->get('entry_image_product');
-		$this->data['entry_image_manufacturer'] = $this->language->get('entry_image_manufacturer');
-		$this->data['entry_image_category'] = $this->language->get('entry_image_category');
 		$this->data['entry_image_additional'] = $this->language->get('entry_image_additional');
 		$this->data['entry_image_related'] = $this->language->get('entry_image_related');
 		$this->data['entry_image_compare'] = $this->language->get('entry_image_compare');
@@ -286,7 +291,13 @@ class ControllerSettingStore extends Controller {
 		} else {
 			$this->data['error_title'] = '';
 		}
-
+		
+ 		if (isset($this->error['image_category'])) {
+			$this->data['error_image_category'] = $this->error['image_category'];
+		} else {
+			$this->data['error_image_category'] = '';
+		}
+		
  		if (isset($this->error['image_thumb'])) {
 			$this->data['error_image_thumb'] = $this->error['image_thumb'];
 		} else {
@@ -303,18 +314,6 @@ class ControllerSettingStore extends Controller {
 			$this->data['error_image_product'] = $this->error['image_product'];
 		} else {
 			$this->data['error_image_product'] = '';
-		}
-				
- 		if (isset($this->error['image_category'])) {
-			$this->data['error_image_category'] = $this->error['image_category'];
-		} else {
-			$this->data['error_image_category'] = '';
-		}
-		
- 		if (isset($this->error['image_manufacturer'])) {
-			$this->data['error_image_manufacturer'] = $this->error['image_manufacturer'];
-		} else {
-			$this->data['error_image_manufacturer'] = '';
 		}
 				
  		if (isset($this->error['image_additional'])) {
@@ -556,7 +555,23 @@ class ControllerSettingStore extends Controller {
 		} else {
 			$this->data['config_tax'] = '';
 		}
-
+		
+		if (isset($this->request->post['config_tax_default'])) {
+			$this->data['config_tax_default'] = $this->request->post['config_tax_default'];
+		} elseif (isset($store_info['config_tax_default'])) {
+			$this->data['config_tax_default'] = $store_info['config_tax_default'];			
+		} else {
+			$this->data['config_tax_default'] = '';
+		}
+			
+		if (isset($this->request->post['config_tax_customer'])) {
+			$this->data['config_tax_customer'] = $this->request->post['config_tax_customer'];
+		} elseif (isset($store_info['config_tax_customer'])) {
+			$this->data['config_tax_customer'] = $store_info['config_tax_customer'];			
+		} else {
+			$this->data['config_tax_customer'] = '';
+		}
+		
 		$this->load->model('sale/customer_group');
 		
 		$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
@@ -679,6 +694,16 @@ class ControllerSettingStore extends Controller {
 			$this->data['icon'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
 		}
 		
+		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		
+		if (isset($this->request->post['config_image_category_height'])) {
+			$this->data['config_image_category_height'] = $this->request->post['config_image_category_height'];
+		} elseif (isset($store_info['config_image_category_height'])) {
+			$this->data['config_image_category_height'] = $store_info['config_image_category_height'];			
+		} else {
+			$this->data['config_image_category_height'] = 80;
+		}	
+				
 		if (isset($this->request->post['config_image_thumb_width'])) {
 			$this->data['config_image_thumb_width'] = $this->request->post['config_image_thumb_width'];
 		} elseif (isset($store_info['config_image_thumb_width'])) {
@@ -733,30 +758,6 @@ class ControllerSettingStore extends Controller {
 			$this->data['config_image_category_width'] = $store_info['config_image_category_width'];			
 		} else {
 			$this->data['config_image_category_width'] = 80;
-		}
-						
-		if (isset($this->request->post['config_image_category_height'])) {
-			$this->data['config_image_category_height'] = $this->request->post['config_image_category_height'];
-		} elseif (isset($store_info['config_image_category_height'])) {
-			$this->data['config_image_category_height'] = $store_info['config_image_category_height'];			
-		} else {
-			$this->data['config_image_category_height'] = 80;
-		}	
-				
-		if (isset($this->request->post['config_image_manufacturer_width'])) {
-			$this->data['config_image_manufacturer_width'] = $this->request->post['config_image_manufacturer_width'];
-		} elseif (isset($store_info['config_image_manufacturer_width'])) {
-			$this->data['config_image_manufacturer_width'] = $store_info['config_image_manufacturer_width'];			
-		} else {
-			$this->data['config_image_manufacturer_width'] = 80;
-		}
-						
-		if (isset($this->request->post['config_image_manufacturer_height'])) {
-			$this->data['config_image_manufacturer_height'] = $this->request->post['config_image_manufacturer_height'];
-		} elseif (isset($store_info['config_image_manufacturer_height'])) {
-			$this->data['config_image_manufacturer_height'] = $store_info['config_image_manufacturer_height'];			
-		} else {
-			$this->data['config_image_manufacturer_height'] = 80;
 		}
 
 		if (isset($this->request->post['config_image_additional_width'])) {
@@ -850,7 +851,7 @@ class ControllerSettingStore extends Controller {
 		$this->template = 'setting/store_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -869,19 +870,19 @@ class ControllerSettingStore extends Controller {
 			$this->error['name'] = $this->language->get('error_name');
 		}	
 		
-		if ((strlen(utf8_decode($this->request->post['config_owner'])) < 3) || (strlen(utf8_decode($this->request->post['config_owner'])) > 64)) {
+		if ((utf8_strlen($this->request->post['config_owner']) < 3) || (utf8_strlen($this->request->post['config_owner']) > 64)) {
 			$this->error['owner'] = $this->language->get('error_owner');
 		}
 
-		if ((strlen(utf8_decode($this->request->post['config_address'])) < 3) || (strlen(utf8_decode($this->request->post['config_address'])) > 256)) {
+		if ((utf8_strlen($this->request->post['config_address']) < 3) || (utf8_strlen($this->request->post['config_address']) > 256)) {
 			$this->error['address'] = $this->language->get('error_address');
 		}
 		
-    	if ((strlen(utf8_decode($this->request->post['config_email'])) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['config_email'])) {
+    	if ((utf8_strlen($this->request->post['config_email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['config_email'])) {
       		$this->error['email'] = $this->language->get('error_email');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['config_telephone'])) < 3) || (strlen(utf8_decode($this->request->post['config_telephone'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['config_telephone']) < 3) || (utf8_strlen($this->request->post['config_telephone']) > 32)) {
       		$this->error['telephone'] = $this->language->get('error_telephone');
     	}
 		
@@ -889,6 +890,10 @@ class ControllerSettingStore extends Controller {
 			$this->error['title'] = $this->language->get('error_title');
 		}	
 		
+		if (!$this->request->post['config_image_category_width'] || !$this->request->post['config_image_category_height']) {
+			$this->error['image_category'] = $this->language->get('error_image_category');
+		}
+				
 		if (!$this->request->post['config_image_thumb_width'] || !$this->request->post['config_image_thumb_height']) {
 			$this->error['image_thumb'] = $this->language->get('error_image_thumb');
 		}	
@@ -899,14 +904,6 @@ class ControllerSettingStore extends Controller {
 			
 		if (!$this->request->post['config_image_product_width'] || !$this->request->post['config_image_product_height']) {
 			$this->error['image_product'] = $this->language->get('error_image_product');
-		}
-				
-		if (!$this->request->post['config_image_category_width'] || !$this->request->post['config_image_category_height']) {
-			$this->error['image_category'] = $this->language->get('error_image_category');
-		}
-		
-		if (!$this->request->post['config_image_manufacturer_width'] || !$this->request->post['config_image_manufacturer_height']) {
-			$this->error['image_manufacturer'] = $this->language->get('error_image_manufacturer');
 		}
 		
 		if (!$this->request->post['config_image_additional_width'] || !$this->request->post['config_image_additional_height']) {

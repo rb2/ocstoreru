@@ -103,13 +103,35 @@
           <b><?php echo $option['name']; ?>:</b><br />
           <?php foreach ($option['option_value'] as $option_value) { ?>
           <input type="checkbox" name="option[<?php echo $option['product_option_id']; ?>][]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" />
-          <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>"> <?php echo $option_value['name']; ?>
+          <label for="option-value-<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
             <?php if ($option_value['price']) { ?>
             (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
             <?php } ?>
           </label>
           <br />
           <?php } ?>
+        </div>
+        <br />
+        <?php } ?>
+        <?php if ($option['type'] == 'image') { ?>
+        <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
+          <?php if ($option['required']) { ?>
+          <span class="required">*</span>
+          <?php } ?>
+          <b><?php echo $option['name']; ?>:</b><br />
+            <table class="option-image">
+              <?php foreach ($option['option_value'] as $option_value) { ?>
+              <tr>
+                <td style="width: 1px;"><input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" /></td>
+                <td><label for="option-value-<?php echo $option_value['product_option_value_id']; ?>"><img src="<?php echo $option_value['image']; ?>" alt="<?php echo $option_value['name'] . ($option_value['price'] ? ' ' . $option_value['price_prefix'] . $option_value['price'] : ''); ?>" /></label></td>
+                <td><label for="option-value-<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
+                    <?php if ($option_value['price']) { ?>
+                    (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
+                    <?php } ?>
+                  </label></td>
+              </tr>
+              <?php } ?>
+            </table>
         </div>
         <br />
         <?php } ?>
@@ -304,7 +326,7 @@
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
 $('.fancybox').fancybox({cyclic: true});
-//--></script>
+//--></script> 
 <script type="text/javascript"><!--
 $('#button-cart').bind('click', function() {
 	$.ajax({
@@ -328,9 +350,9 @@ $('#button-cart').bind('click', function() {
 			}	 
 						
 			if (json['success']) {
-				$('#notification').html('<div class="attention" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
-				$('.attention').fadeIn('slow');
+				$('.success').fadeIn('slow');
 					
 				$('#cart_total').html(json['total']);
 				
@@ -351,7 +373,7 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 	autoSubmit: true,
 	responseType: 'json',
 	onSubmit: function(file, extension) {
-		$('#button-option-<?php echo $option['product_option_id']; ?>').after('<img src="catalog/view/theme/default/image/loading.gif" id="loading" style="padding-left: 5px;" />');
+		$('#button-option-<?php echo $option['product_option_id']; ?>').after('<img src="catalog/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
 	},
 	onComplete: function(file, json) {
 		$('.error').remove();
@@ -366,7 +388,7 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 			$('#option-<?php echo $option['product_option_id']; ?>').after('<span class="error">' + json.error + '</span>');
 		}
 		
-		$('#loading').remove();	
+		$('.loading').remove();	
 	}
 });
 //--></script>
@@ -426,6 +448,7 @@ $('#tabs a').tabs();
 if ($.browser.msie && $.browser.version == 6) {
 	$('.date, .datetime, .time').bgIframe();
 }
+
 $('.date').datepicker({dateFormat: 'yy-mm-dd'});
 $('.datetime').datetimepicker({
 	dateFormat: 'yy-mm-dd',

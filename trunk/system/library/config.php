@@ -24,7 +24,8 @@ final class Config {
 	  
 	  		$this->data = array_merge($this->data, $cfg);
 		} else {
-			exit('Error: Could not load config ' . $filename . '!');
+			trigger_error('Error: Could not load config ' . $filename . '!');
+			exit();
 		}
   	}
 }

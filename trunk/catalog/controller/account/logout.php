@@ -5,6 +5,7 @@ class ControllerAccountLogout extends Controller {
       		$this->customer->logout();
 	  		$this->cart->clear();
 			
+			unset($this->session->data['wishlist']);
 			unset($this->session->data['shipping_address_id']);
 			unset($this->session->data['shipping_method']);
 			unset($this->session->data['shipping_methods']);
@@ -14,8 +15,9 @@ class ControllerAccountLogout extends Controller {
 			unset($this->session->data['comment']);
 			unset($this->session->data['order_id']);
 			unset($this->session->data['coupon']);
-			
-			$this->tax->setZone($this->config->get('config_country_id'), $this->config->get('config_zone_id'));
+			unset($this->session->data['reward']);			
+			unset($this->session->data['voucher']);
+			unset($this->session->data['vouchers']);
 			
       		$this->redirect($this->url->link('account/logout', '', 'SSL'));
     	}

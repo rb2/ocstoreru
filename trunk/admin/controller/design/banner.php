@@ -255,7 +255,7 @@ class ControllerDesignBanner extends Controller {
 		$this->template = 'design/banner_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -268,6 +268,8 @@ class ControllerDesignBanner extends Controller {
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_default'] = $this->language->get('text_default');
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
+ 		$this->data['text_browse'] = $this->language->get('text_browse');
+		$this->data['text_clear'] = $this->language->get('text_clear');			
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_title'] = $this->language->get('entry_title');
@@ -342,7 +344,7 @@ class ControllerDesignBanner extends Controller {
 
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
-		} elseif (isset($banner_info)) {
+		} elseif (!empty($banner_info)) {
 			$this->data['name'] = $banner_info['name'];
 		} else {
 			$this->data['name'] = '';
@@ -350,7 +352,7 @@ class ControllerDesignBanner extends Controller {
 		
 		if (isset($this->request->post['status'])) {
 			$this->data['status'] = $this->request->post['status'];
-		} elseif (isset($banner_info)) {
+		} elseif (!empty($banner_info)) {
 			$this->data['status'] = $banner_info['status'];
 		} else {
 			$this->data['status'] = true;
@@ -364,7 +366,7 @@ class ControllerDesignBanner extends Controller {
 	
 		if (isset($this->request->post['banner_image'])) {
 			$banner_images = $this->request->post['banner_image'];
-		} elseif (isset($banner_info)) {
+		} elseif (isset($this->request->get['banner_id'])) {
 			$banner_images = $this->model_design_banner->getBannerImages($this->request->get['banner_id']);	
 		} else {
 			$banner_images = array();
@@ -383,7 +385,7 @@ class ControllerDesignBanner extends Controller {
 				'banner_image_description' => $banner_image['banner_image_description'],
 				'link'                     => $banner_image['link'],
 				'image'                    => $image,
-				'preview'                  => $this->model_tool_image->resize($image, 100, 100)
+				'thumb'                    => $this->model_tool_image->resize($image, 100, 100)
 			);	
 		} 
 	
@@ -392,7 +394,7 @@ class ControllerDesignBanner extends Controller {
 		$this->template = 'design/banner_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -403,14 +405,14 @@ class ControllerDesignBanner extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((strlen(utf8_decode($this->request->post['name'])) < 3) || (strlen(utf8_decode($this->request->post['name'])) > 64)) {
+		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
 			$this->error['name'] = $this->language->get('error_name');
 		}
 		
 		if (isset($this->request->post['banner_image'])) {
 			foreach ($this->request->post['banner_image'] as $banner_image_id => $banner_image) {
 				foreach ($banner_image['banner_image_description'] as $language_id => $banner_image_description) {
-					if ((strlen(utf8_decode($banner_image_description['title'])) < 2) || (strlen(utf8_decode($banner_image_description['title'])) > 64)) {
+					if ((utf8_strlen($banner_image_description['title']) < 2) || (utf8_strlen($banner_image_description['title']) > 64)) {
 						$this->error['banner_image'][$banner_image_id][$language_id] = $this->language->get('error_title'); 
 					}					
 				}

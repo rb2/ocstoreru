@@ -8,21 +8,22 @@ $_['text_plus']              = '+';
 $_['text_minus']             = '-';
 $_['text_default']           = 'Основной магазин';
 $_['text_image_manager']     = 'Менеджер изображений';
+$_['text_browse']            = 'Browse Files';
+$_['text_clear']             = 'Clear Image';
 $_['text_option']            = 'Опция';
 $_['text_option_value']      = 'Значение опции';
 $_['text_percent']           = 'Процент';
 $_['text_amount']            = 'Фиксированная сумма';
 
 // Column
-$_['column_date_added']  		= 'Добавлено';
 $_['column_name']            	= 'Название товара';
 $_['column_model']           	= 'Модель';
 $_['column_image']           	= 'Изображения';
-$_['column_manufacturer_price']	= 'Цена производителя';
 $_['column_price']           	= 'Цена на сайте';
 $_['column_quantity']        	= 'Количество';
 $_['column_status']          	= 'Статус';
 $_['column_action']          	= 'Действие';
+$_['column_date_added']  	= 'Добавлено';
 $_['entry_title']            	= 'Тег "title"';
 $_['entry_h1']               	= 'Заголовок "h1"';
 
@@ -43,9 +44,8 @@ $_['entry_date_available']   = 'Дата поступления:';
 $_['entry_quantity']         = 'Количество:';
 $_['entry_minimum']          = 'Минимальное количество:<br/><span class="help">Указание минимально количества в заказе</span>';
 $_['entry_stock_status']     = 'Остутствие на складе:<br /><span class="help">Статус, показываемый, когда товара нет на складе</span>';
+$_['entry_price']            = 'Price:';
 $_['entry_tax_class']        = 'Налог:';
-$_['entry_manufacturer_price'] = 'Цена производителя:';
-$_['entry_price']            = 'Цена:';
 $_['entry_points']           = 'Баллы:<br/><span class="help">Количество баллов для покупки продукта. Поставьте 0, чтобы не использовать баллы.</span>';
 $_['entry_option_points']    = 'Баллы:';
 $_['entry_subtract']         = 'Вычитать со склада:';

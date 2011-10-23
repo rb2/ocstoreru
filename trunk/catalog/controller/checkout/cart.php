@@ -119,16 +119,30 @@ class ControllerCheckoutCart extends Controller {
 			
       		$this->data['products'] = array();
 
-      		foreach ($this->cart->getProducts() as $result) {
-				if ($result['image']) {
-					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
+			$products = $this->cart->getProducts();
+
+      		foreach ($products as $product) {
+				$product_total = 0;
+					
+				foreach ($products as $product_2) {
+					if ($product_2['product_id'] == $product['product_id']) {
+						$product_total += $product_2['quantity'];
+					}
+				}			
+				
+				if ($product['minimum'] > $product_total) {
+					$this->data['error_warning'] = sprintf($this->language->get('error_minimum'), $product['name'], $product['minimum']);
+				}				
+					
+				if ($product['image']) {
+					$image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
 				} else {
 					$image = '';
 				}
 
 				$option_data = array();
 
-        		foreach ($result['option'] as $option) {
+        		foreach ($product['option'] as $option) {
 					if ($option['type'] != 'file') {
 						$option_data[] = array(
 							'name'  => $option['name'],
@@ -149,29 +163,29 @@ class ControllerCheckoutCart extends Controller {
         		}
 				
 				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-					$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					$price = $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')));
 				} else {
 					$price = false;
 				}
 
 				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-					$total = $this->currency->format($this->tax->calculate($result['total'], $result['tax_class_id'], $this->config->get('config_tax')));
+					$total = $this->currency->format($this->tax->calculate($product['total'], $product['tax_class_id'], $this->config->get('config_tax')));
 				} else {
 					$total = false;
 				}
 				
         		$this->data['products'][] = array(
-          			'key'      => $result['key'],
+          			'key'      => $product['key'],
           			'thumb'    => $image,
-					'name'     => $result['name'],
-          			'model'    => $result['model'],
+					'name'     => $product['name'],
+          			'model'    => $product['model'],
           			'option'   => $option_data,
-          			'quantity' => $result['quantity'],
-          			'stock'    => $result['stock'],
-					'points'   => ($result['points'] ? sprintf($this->language->get('text_points'), $result['points']) : ''),
+          			'quantity' => $product['quantity'],
+          			'stock'    => $product['stock'],
+					'reward'   => ($product['reward'] ? sprintf($this->language->get('text_reward'), $product['reward']) : ''),
 					'price'    => $price,
 					'total'    => $total,
-					'href'     => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+					'href'     => $this->url->link('product/product', 'product_id=' . $product['product_id'])
         		);
       		}
 			
@@ -300,7 +314,6 @@ class ControllerCheckoutCart extends Controller {
 			$product_info = $this->model_catalog_product->getProduct($this->request->post['product_id']);
 			
 			if ($product_info) {						
-				// Minimum quantity validation
 				if (isset($this->request->post['quantity'])) {
 					$quantity = $this->request->post['quantity'];
 				} else {
@@ -309,11 +322,11 @@ class ControllerCheckoutCart extends Controller {
 				
 				$product_total = 0;
 				
-				foreach ($this->session->data['cart'] as $key => $value) {
-					$product = explode(':', $key);
-					
-					if ($product[0] == $this->request->post['product_id']) {
-						$product_total += $value;
+				$products = $this->cart->getProducts();
+				
+				foreach ($products as $product_2) {
+					if ($product_2['product_id'] == $this->request->post['product_id']) {
+						$product_total += $product_2['quantity'];
 					}
 				}
 				
@@ -321,7 +334,6 @@ class ControllerCheckoutCart extends Controller {
 					$json['error']['warning'] = sprintf($this->language->get('error_minimum'), $product_info['name'], $product_info['minimum']);
 				}
 				
-				// Option validation
 				if (isset($this->request->post['option'])) {
 					$option = array_filter($this->request->post['option']);
 				} else {
@@ -353,6 +365,11 @@ class ControllerCheckoutCart extends Controller {
 		
       	if (isset($this->request->post['remove'])) {
         	$this->cart->remove($this->request->post['remove']);
+			
+			unset($this->session->data['shipping_methods']);
+			unset($this->session->data['shipping_method']);
+			unset($this->session->data['payment_methods']);
+			unset($this->session->data['payment_method']);				
       	}
 
       	if (isset($this->request->post['voucher'])) {
@@ -412,16 +429,17 @@ class ControllerCheckoutCart extends Controller {
 			}
 				
 			$this->data['products'][] = array(
-				'key'      => $result['key'],
-				'thumb'    => $image,
-				'name'     => $result['name'],
-				'model'    => $result['model'],
-				'option'   => $option_data,
-				'quantity' => $result['quantity'],
-				'stock'    => $result['stock'],
-				'price'    => $price,
-				'total'    => $total,
-				'href'     => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+				'key'        => $result['key'],
+				'product_id' => $result['product_id'],
+				'thumb'      => $image,
+				'name'       => $result['name'],
+				'model'      => $result['model'],
+				'option'     => $option_data,
+				'quantity'   => $result['quantity'],
+				'stock'      => $result['stock'],
+				'price'      => $price,
+				'total'      => $total,
+				'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'])
 			);
 		}
 		
@@ -472,7 +490,7 @@ class ControllerCheckoutCart extends Controller {
 	
 			array_multisort($sort_order, SORT_ASC, $total_data);
 		}
-					
+		
 		$json['total'] = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total));
 		
 		$this->data['totals'] = $total_data;
@@ -487,9 +505,7 @@ class ControllerCheckoutCart extends Controller {
 		
 		$json['output'] = $this->render();
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));
+		$this->response->setOutput(json_encode($json));
 	}
 }
 ?>

@@ -1,26 +1,33 @@
-# Подробнее на http://myopencart.ru
+# 1.To use URL Alias you need to be running apache with mod_rewrite enabled. 
+
+# 2. In your opencart directory rename htaccess.txt to .htaccess.
+
+# For any support issues please visit: http://www.opencart.com
 
 Options +FollowSymlinks
 
-# Запретить листинг директорий
+# Prevent Directoy listing 
 Options -Indexes
 
-# Закрыть доступ к файлам шаблонов
+# Prevent Direct Access to files
 <FilesMatch "\.(tpl|ini|log)">
-Order deny,allow
-Deny from all
+ Order deny,allow
+ Deny from all
 </FilesMatch>
 
-# Необходимо для ЧПУ.
+# SEO URL Settings
 RewriteEngine On
+# If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/ 
+
 RewriteBase /
+RewriteRule sitemap.xml /index.php?route=feed/google_sitemap
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
 
-### Additional Settings that may need to be enabled for some servers
+### Additional Settings that may need to be enabled for some servers 
 ### Uncomment the commands by removing the # sign in front of it.
-### If you get an "Internal Server Error 500" after enabling, then restore the # as this means your host doesn't allow that.
+### If you get an "Internal Server Error 500" after enabling any of the following settings, restore the # as this means your host doesn't allow that.
 
 # 1. If your cart only allows you to add one item at a time, it is possible register_globals is on. This may work to disable it:
 # php_flag register_globals off

@@ -26,7 +26,7 @@
               <?php } ?></td>
           </tr>
           <tr>
-            <td>Пароль:</td>
+            <td><span class="required">&nbsp;</span>Пароль:</td>
             <td><input type="text" name="db_password" value="<?php echo $db_password; ?>" /></td>
           </tr>
           <tr>
@@ -38,7 +38,7 @@
               <?php } ?></td>
           </tr>
           <tr>
-            <td>Префикс БД:</td>
+            <td><span class="required">&nbsp;</span>Префикс БД:</td>
             <td><input type="text" name="db_prefix" value="<?php echo $db_prefix; ?>" /></td>
           </tr>
         </table>

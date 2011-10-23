@@ -48,7 +48,7 @@ class ControllerToolErrorLog extends Controller {
 		$this->template = 'tool/error_log.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());

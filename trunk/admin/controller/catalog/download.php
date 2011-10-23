@@ -290,7 +290,7 @@ class ControllerCatalogDownload extends Controller {
 		$this->template = 'catalog/download_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -391,7 +391,7 @@ class ControllerCatalogDownload extends Controller {
 		
 		if (isset($this->request->post['remaining'])) {
       		$this->data['remaining'] = $this->request->post['remaining'];
-    	} elseif (isset($download_info['remaining'])) {
+    	} elseif (!empty($download_info['remaining'])) {
       		$this->data['remaining'] = $download_info['remaining'];
     	} else {
       		$this->data['remaining'] = 1;
@@ -406,7 +406,7 @@ class ControllerCatalogDownload extends Controller {
 		$this->template = 'catalog/download_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());	
@@ -418,17 +418,17 @@ class ControllerCatalogDownload extends Controller {
     	}
 	
     	foreach ($this->request->post['download_description'] as $language_id => $value) {
-      		if ((strlen(utf8_decode($value['name'])) < 3) || (strlen(utf8_decode($value['name'])) > 64)) {
+      		if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
         		$this->error['name'][$language_id] = $this->language->get('error_name');
       		}
     	}	
 
 		if ($this->request->files['download']['name']) {
-			if ((strlen(utf8_decode($this->request->files['download']['name'])) < 3) || (strlen(utf8_decode($this->request->files['download']['name'])) > 128)) {
+			if ((utf8_strlen($this->request->files['download']['name']) < 3) || (utf8_strlen($this->request->files['download']['name']) > 128)) {
         		$this->error['download'] = $this->language->get('error_filename');
 	  		}	  	
 			
-			if (substr(strrchr($this->request->files['download']['name'], '.'), 1) == 'php') {
+			if (utf8_substr(strrchr($this->request->files['download']['name'], '.'), 1) == 'php') {
        	   		$this->error['download'] = $this->language->get('error_filetype');
        		}	
 						

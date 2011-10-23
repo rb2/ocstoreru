@@ -39,3 +39,10 @@
   <a id="button-login" class="button"><span><?php echo $button_login; ?></span></a><br />
   <br />
 </div>
+<script type="text/javascript"><!--
+$('#login input').keydown(function(e) {
+	if (e.keyCode == 13) {
+		$('#button-login').click();
+	}
+});
+//--></script>   

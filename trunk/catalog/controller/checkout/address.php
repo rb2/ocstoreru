@@ -31,19 +31,19 @@ class ControllerCheckoutAddress extends Controller {
 				} 
 				
 				if ($this->request->post['payment_address'] == 'new') {
-					if ((strlen(utf8_decode($this->request->post['firstname'])) < 1) || (strlen(utf8_decode($this->request->post['firstname'])) > 32)) {
+					if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 						$json['error']['firstname'] = $this->language->get('error_firstname');
 					}
 			
-					if ((strlen(utf8_decode($this->request->post['lastname'])) < 1) || (strlen(utf8_decode($this->request->post['lastname'])) > 32)) {
+					if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
 						$json['error']['lastname'] = $this->language->get('error_lastname');
 					}
 			
-					if ((strlen(utf8_decode($this->request->post['address_1'])) < 3) || (strlen(utf8_decode($this->request->post['address_1'])) > 64)) {
+					if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 64)) {
 						$json['error']['address_1'] = $this->language->get('error_address_1');
 					}
 			
-					if ((strlen(utf8_decode($this->request->post['city'])) < 2) || (strlen(utf8_decode($this->request->post['city'])) > 32)) {
+					if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 32)) {
 						$json['error']['city'] = $this->language->get('error_city');
 					}
 					
@@ -51,7 +51,7 @@ class ControllerCheckoutAddress extends Controller {
 					
 					$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 					
-					if ($country_info && $country_info['postcode_required'] && (strlen(utf8_decode($this->request->post['postcode'])) < 2) || (strlen(utf8_decode($this->request->post['postcode'])) > 10)) {
+					if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 						$json['error']['postcode'] = $this->language->get('error_postcode');
 					}
 					
@@ -113,9 +113,7 @@ class ControllerCheckoutAddress extends Controller {
 			$json['output'] = $this->render();
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));		
+		$this->response->setOutput(json_encode($json));		
   	}
 	
 	public function shipping() {
@@ -146,12 +144,6 @@ class ControllerCheckoutAddress extends Controller {
 					
 					if (!$json) {			
 						$this->session->data['shipping_address_id'] = $this->request->post['address_id'];
-
-						$address_info = $this->model_account_address->getAddress($this->request->post['address_id']);
-					
-						if ($address_info) {
-							$this->tax->setZone($address_info['country_id'], $address_info['zone_id']);
-						}
 												
 						unset($this->session->data['shipping_methods']);
 						unset($this->session->data['shipping_method']);	
@@ -159,19 +151,19 @@ class ControllerCheckoutAddress extends Controller {
 				} 
 				
 				if ($this->request->post['shipping_address'] == 'new') {
-					if ((strlen(utf8_decode($this->request->post['firstname'])) < 1) || (strlen(utf8_decode($this->request->post['firstname'])) > 32)) {
+					if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 						$json['error']['firstname'] = $this->language->get('error_firstname');
 					}
 			
-					if ((strlen(utf8_decode($this->request->post['lastname'])) < 1) || (strlen(utf8_decode($this->request->post['lastname'])) > 32)) {
+					if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
 						$json['error']['lastname'] = $this->language->get('error_lastname');
 					}
 			
-					if ((strlen(utf8_decode($this->request->post['address_1'])) < 3) || (strlen(utf8_decode($this->request->post['address_1'])) > 64)) {
+					if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 64)) {
 						$json['error']['address_1'] = $this->language->get('error_address_1');
 					}
 			
-					if ((strlen(utf8_decode($this->request->post['city'])) < 2) || (strlen(utf8_decode($this->request->post['city'])) > 128)) {
+					if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
 						$json['error']['city'] = $this->language->get('error_city');
 					}
 					
@@ -179,7 +171,7 @@ class ControllerCheckoutAddress extends Controller {
 					
 					$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 					
-					if ($country_info && $country_info['postcode_required'] && (strlen(utf8_decode($this->request->post['postcode'])) < 2) || (strlen(utf8_decode($this->request->post['postcode'])) > 10)) {
+					if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 						$json['error']['postcode'] = $this->language->get('error_postcode');
 					}
 					
@@ -193,10 +185,6 @@ class ControllerCheckoutAddress extends Controller {
 					
 					if (!$json) {								
 						$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
-						
-						if ($this->cart->hasShipping()) {
-							$this->tax->setZone($this->request->post['country_id'], $this->request->post['zone_id']);
-						}
 												
 						unset($this->session->data['shipping_methods']);
 						unset($this->session->data['shipping_method']);
@@ -244,10 +232,8 @@ class ControllerCheckoutAddress extends Controller {
 					
 			$json['output'] = $this->render();
 		}
-					
-		$this->load->library('json');
 				
-		$this->response->setOutput(Json::encode($json));
+		$this->response->setOutput(json_encode($json));
   	}	
 	
   	public function zone() {

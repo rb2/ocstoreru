@@ -43,8 +43,10 @@ final class Customer {
   		}
 	}
 		
-  	public function login($email, $password) {
-		if (!$this->config->get('config_customer_approval')) {
+  	public function login($email, $password, $override = false) {
+		if ($override) {
+			$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer where LOWER(email) = '" . $this->db->escape(strtolower($email)) . "' AND status = '1'");
+		} elseif (!$this->config->get('config_customer_approval')) {
 			$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(strtolower($email)) . "' AND password = '" . $this->db->escape(md5($password)) . "' AND status = '1'");
 		} else {
 			$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(strtolower($email)) . "' AND password = '" . $this->db->escape(md5($password)) . "' AND status = '1' AND approved = '1'");
@@ -53,7 +55,7 @@ final class Customer {
 		if ($customer_query->num_rows) {
 			$this->session->data['customer_id'] = $customer_query->row['customer_id'];	
 		    
-			if (($customer_query->row['cart']) && (is_string($customer_query->row['cart']))) {
+			if ($customer_query->row['cart'] && is_string($customer_query->row['cart'])) {
 				$cart = unserialize($customer_query->row['cart']);
 				
 				foreach ($cart as $key => $value) {
@@ -65,7 +67,7 @@ final class Customer {
 				}			
 			}
 
-			if (($customer_query->row['wishlist']) && (is_string($customer_query->row['wishlist']))) {
+			if ($customer_query->row['wishlist'] && is_string($customer_query->row['wishlist'])) {
 				if (!isset($this->session->data['wishlist'])) {
 					$this->session->data['wishlist'] = array();
 				}
@@ -96,8 +98,8 @@ final class Customer {
       		return false;
     	}
   	}
-  
-  	public function logout() {
+  	
+	public function logout() {
 		unset($this->session->data['customer_id']);
 
 		$this->customer_id = '';
@@ -109,8 +111,6 @@ final class Customer {
 		$this->newsletter = '';
 		$this->customer_group_id = '';
 		$this->address_id = '';
-		
-		session_destroy();
   	}
   
   	public function isLogged() {

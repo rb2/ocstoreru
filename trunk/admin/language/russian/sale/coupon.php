@@ -28,6 +28,7 @@ $_['entry_discount']      = 'Скидка:';
 $_['entry_logged']        = 'Авторизация пользователя:<br /><span class="help">Пользователь должен войти чтобы использовать купон.</span>';
 $_['entry_shipping']      = 'Бесплатная доставка:';
 $_['entry_total']         = 'Итого: <br /><span class="help">Сумма, до которой купон действителен.</span>';
+$_['entry_category']      = 'Category:<br /><span class="help">Choose all products under selected category.</span>';
 $_['entry_product']       = 'Товары: <br /><span class="help">Выберите товар, к которому применять купон. Если товар не выбран, то купон будет действовать на всю корзину.</span>';
 $_['entry_date_start']    = 'Дата начала:';
 $_['entry_date_end']      = 'Дата окончания:';

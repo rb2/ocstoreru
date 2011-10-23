@@ -252,7 +252,7 @@ class ControllerSaleVoucherTheme extends Controller {
 		$this->template = 'sale/voucher_theme_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -262,7 +262,9 @@ class ControllerSaleVoucherTheme extends Controller {
      	$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
-    	
+ 		$this->data['text_browse'] = $this->language->get('text_browse');
+		$this->data['text_clear'] = $this->language->get('text_clear');			
+   	
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_image'] = $this->language->get('entry_image');
 
@@ -343,7 +345,7 @@ class ControllerSaleVoucherTheme extends Controller {
 		
 		if (isset($this->request->post['image'])) {
 			$this->data['image'] = $this->request->post['image'];
-		} elseif (isset($voucher_theme_info)) {
+		} elseif (!empty($voucher_theme_info)) {
 			$this->data['image'] = $voucher_theme_info['image'];
 		} else {
 			$this->data['image'] = '';
@@ -352,15 +354,17 @@ class ControllerSaleVoucherTheme extends Controller {
 		$this->load->model('tool/image');
 
 		if (isset($voucher_theme_info) && $voucher_theme_info['image'] && file_exists(DIR_IMAGE . $voucher_theme_info['image'])) {
-			$this->data['preview'] = $this->model_tool_image->resize($voucher_theme_info['image'], 100, 100);
+			$this->data['thumb'] = $this->model_tool_image->resize($voucher_theme_info['image'], 100, 100);
 		} else {
-			$this->data['preview'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+			$this->data['thumb'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
 		}
+		
+		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
 				
 		$this->template = 'sale/voucher_theme_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());	
@@ -372,7 +376,7 @@ class ControllerSaleVoucherTheme extends Controller {
     	}
 	
     	foreach ($this->request->post['voucher_theme_description'] as $language_id => $value) {
-      		if ((strlen(utf8_decode($value['name'])) < 3) || (strlen(utf8_decode($value['name'])) > 32)) {
+      		if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 32)) {
         		$this->error['name'][$language_id] = $this->language->get('error_name');
       		}
     	}

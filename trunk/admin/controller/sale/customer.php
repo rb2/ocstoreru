@@ -424,7 +424,6 @@ class ControllerSaleCustomer extends Controller {
 				'approved'       => ($result['approved'] ? $this->language->get('text_yes') : $this->language->get('text_no')),
 				'ip'             => $result['ip'],
 				'date_added'     => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'login'          => $this->url->link('sale/customer/login', 'token=' . $this->session->data['token'] . '&customer_id=' . $result['customer_id'], 'SSL'),
 				'selected'       => isset($this->request->post['selected']) && in_array($result['customer_id'], $this->request->post['selected']),
 				'action'         => $action
 			);
@@ -435,9 +434,10 @@ class ControllerSaleCustomer extends Controller {
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_yes'] = $this->language->get('text_yes');
-		$this->data['text_no'] = $this->language->get('text_no');		
+		$this->data['text_no'] = $this->language->get('text_no');	
+		$this->data['text_select'] = $this->language->get('text_select');	
+		$this->data['text_default'] = $this->language->get('text_default');		
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
-		$this->data['text_login'] = $this->language->get('text_login');
 
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_email'] = $this->language->get('column_email');
@@ -446,6 +446,7 @@ class ControllerSaleCustomer extends Controller {
 		$this->data['column_approved'] = $this->language->get('column_approved');
 		$this->data['column_ip'] = $this->language->get('column_ip');
 		$this->data['column_date_added'] = $this->language->get('column_date_added');
+		$this->data['column_login'] = $this->language->get('column_login');
 		$this->data['column_action'] = $this->language->get('column_action');		
 		
 		$this->data['button_approve'] = $this->language->get('button_approve');
@@ -575,14 +576,18 @@ class ControllerSaleCustomer extends Controller {
 		$this->load->model('sale/customer_group');
 		
     	$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
+
+		$this->load->model('setting/store');
 		
+		$this->data['stores'] = $this->model_setting_store->getStores();
+				
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
 		
 		$this->template = 'sale/customer_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -886,7 +891,7 @@ class ControllerSaleCustomer extends Controller {
 		
 		$this->data['ips'] = array();
     	
-		if (isset($customer_info)) {
+		if (!empty($customer_info)) {
 			$results = $this->model_sale_customer->getIpsByCustomerId($this->request->get['customer_id']);
 		
 			foreach ($results as $result) {
@@ -902,7 +907,7 @@ class ControllerSaleCustomer extends Controller {
 		$this->template = 'sale/customer_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -913,24 +918,36 @@ class ControllerSaleCustomer extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['firstname'])) < 1) || (strlen(utf8_decode($this->request->post['firstname'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['lastname'])) < 1) || (strlen(utf8_decode($this->request->post['lastname'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
       		$this->error['lastname'] = $this->language->get('error_lastname');
     	}
 
-		if ((strlen(utf8_decode($this->request->post['email'])) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
+		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
       		$this->error['email'] = $this->language->get('error_email');
     	}
-
-    	if ((strlen(utf8_decode($this->request->post['telephone'])) < 3) || (strlen(utf8_decode($this->request->post['telephone'])) > 32)) {
+		
+		$customer_info = $this->model_sale_customer->getCustomerByEmail($this->request->post['email']);
+		
+		if (!isset($this->request->get['customer_id'])) {
+			if ($customer_info) {
+				$this->error['warning'] = $this->language->get('error_exists');
+			}
+		} else {
+			if ($customer_info && ($this->request->get['customer_id'] != $customer_info['customer_id'])) {
+				$this->error['warning'] = $this->language->get('error_exists');
+			}
+		}
+		
+    	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
       		$this->error['telephone'] = $this->language->get('error_telephone');
     	}
 
-    	if (($this->request->post['password']) || (!isset($this->request->get['customer_id']))) {
-      		if ((strlen(utf8_decode($this->request->post['password'])) < 4) || (strlen(utf8_decode($this->request->post['password'])) > 20)) {
+    	if ($this->request->post['password'] || (!isset($this->request->get['customer_id']))) {
+      		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
         		$this->error['password'] = $this->language->get('error_password');
       		}
 	
@@ -941,23 +958,19 @@ class ControllerSaleCustomer extends Controller {
 
 		if (isset($this->request->post['address'])) {
 			foreach ($this->request->post['address'] as $key => $value) {
-				if ((strlen(utf8_decode($value['firstname'])) < 1) || (strlen(utf8_decode($value['firstname'])) > 32)) {
+				if ((utf8_strlen($value['firstname']) < 1) || (utf8_strlen($value['firstname']) > 32)) {
 					$this->error['address_firstname'][$key] = $this->language->get('error_firstname');
 				}
 				
-				if ((strlen(utf8_decode($value['lastname'])) < 1) || (strlen(utf8_decode($value['lastname'])) > 32)) {
+				if ((utf8_strlen($value['lastname']) < 1) || (utf8_strlen($value['lastname']) > 32)) {
 					$this->error['address_lastname'][$key] = $this->language->get('error_lastname');
 				}	
 				
-				if ((strlen(utf8_decode($value['lastname'])) < 1) || (strlen(utf8_decode($value['lastname'])) > 32)) {
-					$this->error['address_lastname'][$key] = $this->language->get('error_lastname');
-				}
-				
-				if ((strlen(utf8_decode($value['address_1'])) < 3) || (strlen(utf8_decode($value['address_1'])) > 128)) {
+				if ((utf8_strlen($value['address_1']) < 3) || (utf8_strlen($value['address_1']) > 128)) {
 					$this->error['address_address_1'][$key] = $this->language->get('error_address_1');
 				}
 			
-				if ((strlen(utf8_decode($value['city'])) < 2) || (strlen(utf8_decode($value['city'])) > 128)) {
+				if ((utf8_strlen($value['city']) < 2) || (utf8_strlen($value['city']) > 128)) {
 					$this->error['address_city'][$key] = $this->language->get('error_city');
 				} 
 	
@@ -965,7 +978,7 @@ class ControllerSaleCustomer extends Controller {
 				
 				$country_info = $this->model_localisation_country->getCountry($value['country_id']);
 						
-				if ($country_info && $country_info['postcode_required'] && (strlen(utf8_decode($value['postcode'])) < 2) || (strlen(utf8_decode($value['postcode'])) > 10)) {
+				if ($country_info && $country_info['postcode_required'] && (utf8_strlen($value['postcode']) < 2) || (utf8_strlen($value['postcode']) > 10)) {
 					$this->error['address_postcode'][$key] = $this->language->get('error_postcode');
 				}
 			
@@ -1012,13 +1025,29 @@ class ControllerSaleCustomer extends Controller {
 		}
 		
 		$this->load->model('sale/customer');
-				
+		
 		$customer_info = $this->model_sale_customer->getCustomer($customer_id);
 				
 		if ($customer_info) {
-			$this->session->data['customer_id'] = $customer_id;
-				
-			$this->redirect(HTTP_CATALOG);
+			$token = md5(mt_rand());
+			
+			$this->model_sale_customer->editToken($customer_id, $token);
+			
+			if (isset($this->request->get['store_id'])) {
+				$store_id = $this->request->get['store_id'];
+			} else {
+				$store_id = 0;
+			}
+					
+			$this->load->model('setting/store');
+			
+			$store_info = $this->model_setting_store->getStore($store_id);
+			
+			if ($store_info) {
+				$this->redirect($store_info['url'] . 'index.php?route=account/login&token=' . $token);
+			} else { 
+				$this->redirect(HTTP_CATALOG . 'index.php?route=account/login&token=' . $token);
+			}
 		} else {
 			$this->load->language('error/not_found');
 
@@ -1045,7 +1074,7 @@ class ControllerSaleCustomer extends Controller {
 			$this->template = 'error/not_found.tpl';
 			$this->children = array(
 				'common/header',
-				'common/footer',
+				'common/footer'
 			);
 		
 			$this->response->setOutput($this->render());
@@ -1128,6 +1157,7 @@ class ControllerSaleCustomer extends Controller {
 		$pagination->total = $transaction_total;
 		$pagination->page = $page;
 		$pagination->limit = 10; 
+		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('sale/customer/transaction', 'token=' . $this->session->data['token'] . '&customer_id=' . $this->request->get['customer_id'] . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
@@ -1189,6 +1219,7 @@ class ControllerSaleCustomer extends Controller {
 		$pagination->total = $reward_total;
 		$pagination->page = $page;
 		$pagination->limit = 10; 
+		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('sale/customer/reward', 'token=' . $this->session->data['token'] . '&customer_id=' . $this->request->get['customer_id'] . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
@@ -1201,11 +1232,11 @@ class ControllerSaleCustomer extends Controller {
 	public function autocomplete() {
 		$json = array();
 		
-		if (isset($this->request->post['filter_name'])) {
+		if (isset($this->request->get['filter_name'])) {
 			$this->load->model('sale/customer');
 			
 			$data = array(
-				'filter_name' => $this->request->post['filter_name'],
+				'filter_name' => $this->request->get['filter_name'],
 				'start'       => 0,
 				'limit'       => 20
 			);
@@ -1234,24 +1265,20 @@ class ControllerSaleCustomer extends Controller {
 		}
 
 		array_multisort($sort_order, SORT_ASC, $json);
-				
-		$this->load->library('json');
 
-		$this->response->setOutput(Json::encode($json));
+		$this->response->setOutput(json_encode($json));
 	}		
 	
 	public function address() {
 		$json = array();
 		
-		if (isset($this->request->post['address_id']) && $this->request->post['address_id']) {
+		if (isset($this->request->get['address_id']) && $this->request->get['address_id']) {
 			$this->load->model('sale/customer');
 			
-			$json = $this->model_sale_customer->getAddress($this->request->post['address_id']);
+			$json = $this->model_sale_customer->getAddress($this->request->get['address_id']);
 		}
-		
-		$this->load->library('json');
 
-		$this->response->setOutput(Json::encode($json));		
+		$this->response->setOutput(json_encode($json));		
 	}
 }
 ?>

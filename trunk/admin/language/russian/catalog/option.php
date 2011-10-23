@@ -8,6 +8,7 @@ $_['text_choose']         = 'Выбор';
 $_['text_select']         = 'Список';
 $_['text_radio']          = 'Переключатель';
 $_['text_checkbox']       = 'Флажок';
+$_['text_image']          = 'Image';
 $_['text_input']          = 'Поле ввода';
 $_['text_text']           = 'Текст';
 $_['text_textarea']       = 'Текстовая область';
@@ -15,6 +16,9 @@ $_['text_file']           = 'Файл';
 $_['text_date']           = 'Дата';
 $_['text_datetime']       = 'Дата и время';
 $_['text_time']           = 'Время';
+$_['text_image_manager']  = 'Image Manager';
+$_['text_browse']         = 'Browse Files';
+$_['text_clear']          = 'Clear Image';
 
 // Column
 $_['column_name']         = 'Опция';
@@ -25,6 +29,7 @@ $_['column_action']       = 'Действие';
 $_['entry_name']         = 'Название опции:';
 $_['entry_type']         = 'Тип:';
 $_['entry_value']        = 'Значение опции:';
+$_['entry_image']        = 'Image:';
 $_['entry_sort_order']   = 'Порядок сортировки:';
 
 // Error

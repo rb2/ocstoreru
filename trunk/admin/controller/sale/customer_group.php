@@ -252,7 +252,7 @@ class ControllerSaleCustomerGroup extends Controller {
 		$this->template = 'sale/customer_group_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -331,7 +331,7 @@ class ControllerSaleCustomerGroup extends Controller {
 		$this->template = 'sale/customer_group_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render()); 
@@ -342,7 +342,7 @@ class ControllerSaleCustomerGroup extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((strlen(utf8_decode($this->request->post['name'])) < 3) || (strlen(utf8_decode($this->request->post['name'])) > 64)) {
+		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
 			$this->error['name'] = $this->language->get('error_name');
 		}
 

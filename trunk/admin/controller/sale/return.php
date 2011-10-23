@@ -510,7 +510,7 @@ class ControllerSaleReturn extends Controller {
 		$this->template = 'sale/return_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -739,7 +739,7 @@ class ControllerSaleReturn extends Controller {
 		
 		if (isset($this->request->post['return_product'])) {
 			$this->data['return_products'] = $this->request->post['return_product'];
-		} elseif (isset($return_info)) {
+		} elseif (isset($this->request->get['return_id'])) {
 			$this->data['return_products'] = $this->model_sale_return->getReturnProducts($this->request->get['return_id']);
 		} else {
 			$this->data['return_products'] = array();
@@ -756,7 +756,7 @@ class ControllerSaleReturn extends Controller {
 		$this->template = 'sale/return_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -884,7 +884,7 @@ class ControllerSaleReturn extends Controller {
 			$order_info = $this->model_sale_order->getOrder($return_info['order_id']);
 			
 			if ($return_info['order_id'] && $order_info) {
-				$this->data['order'] = $this->url->link('sale/order/update', 'token=' . $this->session->data['token'] . '&order_id=' . $return_info['order_id'], 'SSL');
+				$this->data['order'] = $this->url->link('sale/order/view', 'token=' . $this->session->data['token'] . '&order_id=' . $return_info['order_id'], 'SSL');
 			} else {
 				$this->data['order'] = '';
 			}
@@ -929,7 +929,7 @@ class ControllerSaleReturn extends Controller {
 			$this->template = 'sale/return_info.tpl';
 			$this->children = array(
 				'common/header',
-				'common/footer',
+				'common/footer'
 			);
 					
 			$this->response->setOutput($this->render());		
@@ -959,7 +959,7 @@ class ControllerSaleReturn extends Controller {
 			$this->template = 'error/not_found.tpl';
 			$this->children = array(
 				'common/header',
-				'common/footer',
+				'common/footer'
 			);
 		
 			$this->response->setOutput($this->render());			
@@ -971,19 +971,19 @@ class ControllerSaleReturn extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['firstname'])) < 1) || (strlen(utf8_decode($this->request->post['firstname'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['lastname'])) < 1) || (strlen(utf8_decode($this->request->post['lastname'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
       		$this->error['lastname'] = $this->language->get('error_lastname');
     	}
 
-    	if ((strlen(utf8_decode($this->request->post['email'])) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
+    	if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
       		$this->error['email'] = $this->language->get('error_email');
     	}
 		
-    	if ((strlen(utf8_decode($this->request->post['telephone'])) < 3) || (strlen(utf8_decode($this->request->post['telephone'])) > 32)) {
+    	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
       		$this->error['telephone'] = $this->language->get('error_telephone');
     	}
 		
@@ -1029,9 +1029,7 @@ class ControllerSaleReturn extends Controller {
 			$json['success'] = $this->language->get('text_success');
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));	
+		$this->response->setOutput(json_encode($json));	
   	}	
 		
 	public function history() {
@@ -1074,7 +1072,7 @@ class ControllerSaleReturn extends Controller {
         	$this->data['histories'][] = array(
 				'notify'     => $result['notify'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
 				'status'     => $result['status'],
-				'comment'    => $result['comment'],
+				'comment'    => nl2br($result['comment']),
         		'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
         	);
       	}			

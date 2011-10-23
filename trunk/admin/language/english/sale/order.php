@@ -42,18 +42,20 @@ $_['text_ship_to']            = 'Ship To (if different address)';
 $_['text_abandoned_orders']   = 'Abandoned Orders';
 $_['text_default']            = 'Default';
 $_['text_wait']               = 'Please Wait!';
+$_['text_create_invoice_no']  = 'Create Invoice No.';
 $_['text_reward_add']         = 'Add Reward Points';
-$_['text_reward_added']       = 'Reward Points Added!';
+$_['text_reward_added']       = 'Success: Reward points added!';
 $_['text_reward_remove']      = 'Remove Reward Points';
-$_['text_reward_removed']     = 'Reward Points Removed!';
+$_['text_reward_removed']     = 'Success: Reward points removed!';
 $_['text_commission_add']     = 'Add Commission';
-$_['text_commission_added']   = 'Commission Added!';
+$_['text_commission_added']   = 'Success: Commission added!';
 $_['text_commission_remove']  = 'Remove Commission';
-$_['text_commission_removed'] = 'Commission Removed!';
+$_['text_commission_removed'] = 'Success: Commission removed!';
 $_['text_credit_add']         = 'Add Credit';
-$_['text_credit_added']       = 'Account Credit Added!';
+$_['text_credit_added']       = 'Success: Account credit added!';
 $_['text_credit_remove']      = 'Remove Credit';
-$_['text_credit_removed']     = 'Account Credit Removed!';
+$_['text_credit_removed']     = 'Success: Account credit removed!';
+$_['text_upload']             = 'Your file was successfully uploaded!';
 
 // Column
 $_['column_order_id']         = 'Order ID';
@@ -76,6 +78,7 @@ $_['column_action']           = 'Action';
 // Entry
 $_['entry_store']             = 'Store:';
 $_['entry_customer']          = 'Customer:';
+$_['entry_customer_group']    = 'Customer Group:';
 $_['entry_firstname']         = 'First Name:';
 $_['entry_lastname']          = 'Last Name:';
 $_['entry_email']             = 'E-Mail:';
@@ -90,16 +93,17 @@ $_['entry_postcode']          = 'Postcode:';
 $_['entry_country']           = 'Country:';
 $_['entry_zone']              = 'Region / State:';
 $_['entry_zone_code']         = 'Region / State Code:';
-$_['entry_product']           = 'Product:';
-$_['entry_model']             = 'Model:';
+$_['entry_product']           = 'Choose Product:';
+$_['entry_option']            = 'Choose Option(s):';
 $_['entry_quantity']          = 'Quantity:';
-$_['entry_price']             = 'Unit Price:';
 $_['entry_affiliate']         = 'Affiliate:';
 $_['entry_order_status']      = 'Order Status:';
 $_['entry_notify']            = 'Notify Customer:';
 $_['entry_comment']           = 'Comment:';
 $_['entry_shipping']          = 'Shipping Method:';
 $_['entry_payment']           = 'Payment Method:';
+$_['entry_price']             = 'Цена за еденицу:';
+$_['entry_model']             = 'Модель:';
 
 // Error
 $_['error_permission']        = 'Warning: You do not have permission to modify orders!';
@@ -114,4 +118,8 @@ $_['error_city']              = 'City must be between 3 and 128 characters!';
 $_['error_postcode']          = 'Postcode must be between 2 and 10 characters for this country!';
 $_['error_country']           = 'Please select a country!';
 $_['error_zone']              = 'Please select a region / state!';
+$_['error_upload']            = 'Upload required!';
+$_['error_filename']          = 'Filename must be between 3 and 128 characters!';
+$_['error_filetype']          = 'Invalid file type!';
+$_['error_action']            = 'Warning: Could not complete this action!';
 ?>

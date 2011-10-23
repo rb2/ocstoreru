@@ -11,7 +11,7 @@ class ModelCatalogOption extends Model {
 
 		if (isset($data['option_value'])) {
 			foreach ($data['option_value'] as $option_value) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int)$option_id . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int)$option_id . "', image = '" . $this->db->escape($option_value['image']) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
 				
 				$option_value_id = $this->db->getLastId();
 				
@@ -37,9 +37,9 @@ class ModelCatalogOption extends Model {
 		if (isset($data['option_value'])) {
 			foreach ($data['option_value'] as $option_value) {
 				if ($option_value['option_value_id']) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_value_id = '" . (int)$option_value['option_value_id'] . "', option_id = '" . (int)$option_id . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
+					$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_value_id = '" . (int)$option_value['option_value_id'] . "', option_id = '" . (int)$option_id . "', image = '" . $this->db->escape($option_value['image']) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
 				} else {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int)$option_id . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
+					$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int)$option_id . "', image = '" . $this->db->escape($option_value['image']) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
 				}
 				
 				$option_value_id = $this->db->getLastId();
@@ -68,7 +68,7 @@ class ModelCatalogOption extends Model {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "option` o LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE od.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		
 		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$sql .= " AND LCASE(od.name) LIKE '" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%'";
+			$sql .= " AND LCASE(od.name) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
 		}
 
 		$sort_data = array(
@@ -127,6 +127,7 @@ class ModelCatalogOption extends Model {
 			$option_value_data[] = array(
 				'option_value_id' => $option_value['option_value_id'],
 				'name'            => $option_value['name'],
+				'image'           => $option_value['image'],
 				'sort_order'      => $option_value['sort_order']
 			);
 		}
@@ -151,6 +152,7 @@ class ModelCatalogOption extends Model {
 			$option_value_data[] = array(
 				'option_value_id'          => $option_value['option_value_id'],
 				'option_value_description' => $option_value_description_data,
+				'image'                    => $option_value['image'],
 				'sort_order'               => $option_value['sort_order']
 			);
 		}

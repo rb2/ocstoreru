@@ -46,6 +46,10 @@ class ModelSaleCustomer extends Model {
 			}
 		}
 	}
+
+	public function editToken($customer_id, $token) {
+		$this->db->query("UPDATE " . DB_PREFIX . "customer SET token = '" . $this->db->escape($token) . "' WHERE customer_id = '" . (int)$customer_id . "'");
+	}
 	
 	public function deleteCustomer($customer_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
@@ -60,21 +64,27 @@ class ModelSaleCustomer extends Model {
 	
 		return $query->row;
 	}
-		
+	
+	public function getCustomerByEmail($email) {
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "customer WHERE email = '" . $this->db->escape($email) . "'");
+	
+		return $query->row;
+	}
+			
 	public function getCustomers($data = array()) {
 		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cg.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group cg ON (c.customer_group_id = cg.customer_group_id)";
 
 		$implode = array();
 		
-		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE '%" . $this->db->escape(mb_strtolower($data['filter_name'], 'UTF-8')) . "%'";
+		if (!empty($data['filter_name'])) {
+			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
 		}
 		
-		if (isset($data['filter_email']) && !is_null($data['filter_email'])) {
-			$implode[] = "c.email LIKE '%" . $this->db->escape($data['filter_email']) . "%'";
+		if (!empty($data['filter_email'])) {
+			$implode[] = "LCASE(c.email) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_email'])) . "%'";
 		}
 		
-		if (isset($data['filter_customer_group_id']) && !is_null($data['filter_customer_group_id'])) {
+		if (!empty($data['filter_customer_group_id'])) {
 			$implode[] = "cg.customer_group_id = '" . $this->db->escape($data['filter_customer_group_id']) . "'";
 		}	
 		
@@ -86,11 +96,11 @@ class ModelSaleCustomer extends Model {
 			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
 		}	
 			
-		if (isset($data['filter_ip']) && !is_null($data['filter_ip'])) {
+		if (!empty($data['filter_ip'])) {
 			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
 		}	
 				
-		if (isset($data['filter_date_added']) && !is_null($data['filter_date_added'])) {
+		if (!empty($data['filter_date_added'])) {
 			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
 		
@@ -156,7 +166,7 @@ class ModelSaleCustomer extends Model {
 				$store_url = HTTP_CATALOG . 'index.php?route=account/login';
 			}
 	
-			$message  = sprintf($this->language->get('text_approve_welcome'), $store_name) . "\n\n";;
+			$message  = sprintf($this->language->get('text_approve_welcome'), $store_name) . "\n\n";
 			$message .= $this->language->get('text_approve_login') . "\n";
 			$message .= $store_url . "\n\n";
 			$message .= $this->language->get('text_approve_services') . "\n\n";
@@ -179,7 +189,7 @@ class ModelSaleCustomer extends Model {
 			$mail->send();
 		}		
 	}
-	
+		
 	public function getCustomersByNewsletter() {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE newsletter = '1' ORDER BY firstname, lastname, email");
 	
@@ -270,21 +280,21 @@ class ModelSaleCustomer extends Model {
 		
 		return $address_data;
 	}	
-			
+				
 	public function getTotalCustomers($data = array()) {
       	$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer";
 		
 		$implode = array();
 		
-		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+		if (!empty($data['filter_name'])) {
+			$implode[] = "LCASE(CONCAT(firstname, ' ', lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
 		}
 		
-		if (isset($data['filter_email']) && !is_null($data['filter_email'])) {
-			$implode[] = "LCASE(email) LIKE '%" . $this->db->escape($data['filter_email']) . "%'";
+		if (!empty($data['filter_email'])) {
+			$implode[] = "LCASE(email) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_email'])) . "%'";
 		}
 		
-		if (isset($data['filter_customer_group_id']) && !is_null($data['filter_customer_group_id'])) {
+		if (!empty($data['filter_customer_group_id'])) {
 			$implode[] = "customer_group_id = '" . $this->db->escape($data['filter_customer_group_id']) . "'";
 		}	
 				
@@ -296,7 +306,7 @@ class ModelSaleCustomer extends Model {
 			$implode[] = "approved = '" . (int)$data['filter_approved'] . "'";
 		}		
 				
-		if (isset($data['filter_date_added']) && !is_null($data['filter_date_added'])) {
+		if (!empty($data['filter_date_added'])) {
 			$implode[] = "DATE(date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
 		
@@ -403,7 +413,7 @@ class ModelSaleCustomer extends Model {
 		return $query->row['total'];
 	}
 	
-	public function getTotalCustomerTransactionsByOrderId($order_id) {
+	public function getTotalTransactionsByOrderId($order_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_transaction WHERE order_id = '" . (int)$order_id . "'");
 	
 		return $query->row['total'];
@@ -478,7 +488,6 @@ class ModelSaleCustomer extends Model {
 	
 		return $query->row['total'];
 	}
-	
 	
 	public function getIpsByCustomerId($customer_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_ip WHERE customer_id = '" . (int)$customer_id . "'");

@@ -252,7 +252,7 @@ class ControllerUserUserPermission extends Controller {
 		$this->template = 'user/user_group_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -261,9 +261,6 @@ class ControllerUserUserPermission extends Controller {
 	private function getForm() {
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
-		$this->data['text_select_all'] = $this->language->get('text_select_all');
-		$this->data['text_unselect_all'] = $this->language->get('text_unselect_all');
-				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_access'] = $this->language->get('entry_access');
 		$this->data['entry_modify'] = $this->language->get('entry_modify');
@@ -327,7 +324,7 @@ class ControllerUserUserPermission extends Controller {
 
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
-		} elseif (isset($user_group_info)) {
+		} elseif (!empty($user_group_info)) {
 			$this->data['name'] = $user_group_info['name'];
 		} else {
 			$this->data['name'] = '';
@@ -379,7 +376,7 @@ class ControllerUserUserPermission extends Controller {
 		$this->template = 'user/user_group_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -390,7 +387,7 @@ class ControllerUserUserPermission extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((strlen(utf8_decode($this->request->post['name'])) < 3) || (strlen(utf8_decode($this->request->post['name'])) > 64)) {
+		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
 			$this->error['name'] = $this->language->get('error_name');
 		}
 

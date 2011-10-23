@@ -92,7 +92,7 @@ class ControllerPaymentPPStandard extends Controller {
 					'weight'   => 0
 				);	
 			} else {
-				$this->data['discount_amount_cart'] -= $this->currency->format($total, $currency, FALSE, FALSE);
+				$this->data['discount_amount_cart'] -= $this->currency->format($total, $currency, false, false);
 			}
 			
 			$this->data['currency_code'] = $currency;

@@ -181,7 +181,7 @@ class ControllerReportSaleOrder extends Controller {
 		$this->template = 'report/sale_order.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());

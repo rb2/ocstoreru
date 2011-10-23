@@ -255,7 +255,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->template = 'localisation/geo_zone_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -367,7 +367,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->template = 'localisation/geo_zone_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -378,11 +378,11 @@ class ControllerLocalisationGeoZone extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((strlen(utf8_decode($this->request->post['name'])) < 3) || (strlen(utf8_decode($this->request->post['name'])) > 32)) {
+		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
 			$this->error['name'] = $this->language->get('error_name');
 		}
 
-		if ((strlen(utf8_decode($this->request->post['description'])) < 3) || (strlen(utf8_decode($this->request->post['description'])) > 255)) {
+		if ((utf8_strlen($this->request->post['description']) < 3) || (utf8_strlen($this->request->post['description']) > 255)) {
 			$this->error['description'] = $this->language->get('error_description');
 		}
 
@@ -398,10 +398,10 @@ class ControllerLocalisationGeoZone extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		$this->load->model('localisation/tax_class');
+		$this->load->model('localisation/tax_rate');
 
 		foreach ($this->request->post['selected'] as $geo_zone_id) {
-			$tax_rate_total = $this->model_localisation_tax_class->getTotalTaxRatesByGeoZoneId($geo_zone_id);
+			$tax_rate_total = $this->model_localisation_tax_rate->getTotalTaxRatesByGeoZoneId($geo_zone_id);
 
 			if ($tax_rate_total) {
 				$this->error['warning'] = sprintf($this->language->get('error_tax_rate'), $tax_rate_total);

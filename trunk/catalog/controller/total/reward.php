@@ -73,9 +73,7 @@ class ControllerTotalReward extends Controller {
 			}
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));		
+		$this->response->setOutput(json_encode($json));		
 	}
 }
 ?>

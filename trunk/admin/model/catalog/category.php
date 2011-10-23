@@ -96,8 +96,8 @@ class ModelCatalogCategory extends Model {
 		return $query->row;
 	} 
 	
-	public function getCategories($parent_id) {
-		$category_data = $this->cache->get('category.' . $this->config->get('config_language_id') . '.' . $parent_id);
+	public function getCategories($parent_id = 0) {
+		$category_data = $this->cache->get('category.' . (int)$this->config->get('config_language_id') . '.' . (int)$parent_id);
 	
 		if (!$category_data) {
 			$category_data = array();
@@ -115,7 +115,7 @@ class ModelCatalogCategory extends Model {
 				$category_data = array_merge($category_data, $this->getCategories($result['category_id']));
 			}	
 	
-			$this->cache->set('category.' . $this->config->get('config_language_id') . '.' . $parent_id, $category_data);
+			$this->cache->set('category.' . (int)$this->config->get('config_language_id') . '.' . (int)$parent_id, $category_data);
 		}
 		
 		return $category_data;
@@ -124,12 +124,10 @@ class ModelCatalogCategory extends Model {
 	public function getPath($category_id) {
 		$query = $this->db->query("SELECT name, parent_id FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY c.sort_order, cd.name ASC");
 		
-		$category_info = $query->row;
-		
-		if ($category_info['parent_id']) {
-			return $this->getPath($category_info['parent_id'], $this->config->get('config_language_id')) . $this->language->get('text_separator') . $category_info['name'];
+		if ($query->row['parent_id']) {
+			return $this->getPath($query->row['parent_id'], $this->config->get('config_language_id')) . $this->language->get('text_separator') . $query->row['name'];
 		} else {
-			return $category_info['name'];
+			return $query->row['name'];
 		}
 	}
 	
@@ -193,8 +191,6 @@ class ModelCatalogCategory extends Model {
 	}		
 
 	public function getCategoriesByParentId($parent_id = 0) {
-		// See ticket #14
-		// $query = $this->db->query("SELECT *, (SELECT COUNT(parent_id) FROM " . DB_PREFIX . "category WHERE parent_id = c.category_id) AS children FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' ORDER BY c.sort_order, cd.name");
 		$query = $this->db->query("SELECT *, (SELECT COUNT(parent_id) FROM " . DB_PREFIX . "category WHERE parent_id = c.category_id) AS children FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY c.sort_order, cd.name");
 		
 		return $query->rows;
@@ -204,9 +200,7 @@ class ModelCatalogCategory extends Model {
 		$category_data = $this->cache->get('category.all.' . $this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id'));
 
 		if (!$category_data || !is_array($category_data)) {
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id')
-				// . "'  AND c.status = '1' ORDER BY c.parent_id, c.sort_order, cd.name");
-				. "'  ORDER BY c.parent_id, c.sort_order, cd.name");
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  ORDER BY c.parent_id, c.sort_order, cd.name");
 
 			$category_data = array();
 			foreach ($query->rows as $row) {

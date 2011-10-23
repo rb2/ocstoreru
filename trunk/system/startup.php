@@ -3,8 +3,8 @@
 error_reporting(E_ALL);
 
 // Check Version
-if (version_compare(phpversion(), '5.1.0', '<') == TRUE) {
-	exit('PHP5.1+ Required');
+if (version_compare(phpversion(), '5.2.0', '<') == true) {
+	exit('PHP5.2+ Required');
 }
 
 // Register Globals
@@ -19,7 +19,7 @@ if (ini_get('register_globals')) {
 
 	foreach ($globals as $global) {
 		foreach(array_keys($global) as $key) {
-			unset($$key);
+			unset(${$key}); 
 		}
 	}
 }
@@ -45,7 +45,7 @@ if (ini_get('magic_quotes_gpc')) {
 }
 
 if (!ini_get('date.timezone')) {
-	date_default_timezone_set('Europe/Moscow');
+	date_default_timezone_set('UTC');
 }
 
 // Windows IIS Compatibility  
@@ -68,6 +68,10 @@ if (!isset($_SERVER['REQUEST_URI'])) {
 		$_SERVER['REQUEST_URI'] .= '?' . $_SERVER['QUERY_STRING']; 
 	} 
 }
+
+// Helper
+require_once(DIR_SYSTEM . 'helper/json.php'); 
+require_once(DIR_SYSTEM . 'helper/utf8.php'); 
 
 // Engine
 require_once(DIR_SYSTEM . 'engine/action.php'); 

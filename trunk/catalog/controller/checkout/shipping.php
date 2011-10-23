@@ -13,7 +13,7 @@ class ControllerCheckoutShipping extends Controller {
 			$shipping_address = $this->session->data['guest']['shipping'];
 		}	
 		
-		if (!isset($shipping_address)) {								
+		if (empty($shipping_address)) {								
 			$json['redirect'] = $this->url->link('checkout/checkout', '', 'SSL');
 		}
 				
@@ -43,8 +43,6 @@ class ControllerCheckoutShipping extends Controller {
 			}			
 		} else {
 			if (isset($shipping_address)) {
-				$this->tax->setZone($shipping_address['country_id'], $shipping_address['zone_id']);
-				
 				if (!isset($this->session->data['shipping_methods'])) {
 					$quote_data = array();
 					
@@ -119,9 +117,7 @@ class ControllerCheckoutShipping extends Controller {
 			$json['output'] = $this->render();	
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));		
+		$this->response->setOutput(json_encode($json));		
   	}
 }
 ?>

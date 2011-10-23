@@ -41,31 +41,31 @@ class ModelSaleReturn extends Model {
 
 		$implode = array();
 		
-		if (isset($data['filter_return_id']) && !is_null($data['filter_return_id'])) {
+		if (!empty($data['filter_return_id'])) {
 			$implode[] = "r.return_id = '" . (int)$data['filter_return_id'] . "'";
 		}
 		
-		if (isset($data['filter_order_id']) && !is_null($data['filter_order_id'])) {
+		if (!empty($data['filter_order_id'])) {
 			$implode[] = "r.order_id = '" . $this->db->escape($data['filter_order_id']) . "'";
 		}
 						
-		if (isset($data['filter_customer']) && !is_null($data['filter_customer'])) {
-			$implode[] = "LCASE(CONCAT(r.firstname, ' ', r.lastname)) LIKE '" . $this->db->escape(mb_strtolower($data['filter_customer'], 'UTF-8')) . "%'";
+		if (!empty($data['filter_customer'])) {
+			$implode[] = "LCASE(CONCAT(r.firstname, ' ', r.lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_customer'])) . "%'";
 		}
 		
-		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+		if (!empty($data['filter_quantity'])) {
 			$implode[] = "(SELECT SUM(rp.quantity) FROM " . DB_PREFIX . "return_product rp WHERE rp.return_id = r.return_id GROUP BY rp.return_id) = '" . (int)$data['filter_quantity'] . "'";
 		}	
 				
-		if (isset($data['filter_return_status_id']) && !is_null($data['filter_return_status_id'])) {
+		if (!empty($data['filter_return_status_id'])) {
 			$implode[] = "r.return_status_id = '" . (int)$data['filter_return_status_id'] . "'";
 		}	
 		
-		if (isset($data['filter_date_added']) && !is_null($data['filter_date_added'])) {
+		if (!empty($data['filter_date_added'])) {
 			$implode[] = "DATE(r.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
 
-		if (isset($data['filter_date_modified']) && !is_null($data['filter_date_modified'])) {
+		if (!empty($data['filter_date_modified'])) {
 			$implode[] = "DATE(r.date_modified) = DATE('" . $this->db->escape($data['filter_date_modified']) . "')";
 		}
 				
@@ -79,13 +79,14 @@ class ModelSaleReturn extends Model {
 			'customer',
 			'quantity',
 			'status',
-			'r.date_added'
+			'r.date_added',
+			'r.date_modified'
 		);	
 			
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];	
 		} else {
-			$sql .= " ORDER BY name";	
+			$sql .= " ORDER BY r.return_id";	
 		}
 			
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -116,31 +117,31 @@ class ModelSaleReturn extends Model {
 		
 		$implode = array();
 		
-		if (isset($data['filter_return_id']) && !is_null($data['filter_return_id'])) {
+		if (!empty($data['filter_return_id'])) {
 			$implode[] = "r.return_id = '" . (int)$data['filter_return_id'] . "'";
 		}
 				
-		if (isset($data['filter_customer']) && !is_null($data['filter_customer'])) {
-			$implode[] = "LCASE(CONCAT(r.firstname, ' ', r.lastname)) LIKE '" . $this->db->escape(mb_strtolower($data['filter_customer'], 'UTF-8')) . "%'";
+		if (!empty($data['filter_customer'])) {
+			$implode[] = "LCASE(CONCAT(r.firstname, ' ', r.lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_customer'])) . "%'";
 		}
 		
-		if (isset($data['filter_order_id']) && !is_null($data['filter_order_id'])) {
+		if (!empty($data['filter_order_id'])) {
 			$implode[] = "r.order_id = '" . $this->db->escape($data['filter_order_id']) . "'";
 		}
 		
-		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+		if (!empty($data['filter_quantity'])) {
 			$implode[] = "(SELECT SUM(rp.quantity) FROM " . DB_PREFIX . "return_product rp WHERE rp.return_id = r.return_id GROUP BY rp.return_id) = '" . (int)$data['filter_quantity'] . "'";
 		}	
 				
-		if (isset($data['filter_return_status_id']) && !is_null($data['filter_return_status_id'])) {
+		if (!empty($data['filter_return_status_id'])) {
 			$implode[] = "r.return_status_id = '" . (int)$data['filter_return_status_id'] . "'";
 		}	
 		
-		if (isset($data['filter_date_added']) && !is_null($data['filter_date_added'])) {
+		if (!empty($data['filter_date_added'])) {
 			$implode[] = "DATE(r.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
 		
-		if (isset($data['filter_date_modified']) && !is_null($data['filter_date_modified'])) {
+		if (!empty($data['filter_date_modified'])) {
 			$implode[] = "DATE(r.date_modified) = DATE('" . $this->db->escape($data['filter_date_modified']) . "')";
 		}
 				

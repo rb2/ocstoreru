@@ -23,8 +23,6 @@ class ControllerShippingUPS extends Controller {
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');		
-		$this->data['text_select_all'] = $this->language->get('text_select_all');
-		$this->data['text_unselect_all'] = $this->language->get('text_unselect_all');		
 		$this->data['text_all_zones'] = $this->language->get('text_all_zones');
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_next_day_air'] = $this->language->get('text_next_day_air');
@@ -39,7 +37,7 @@ class ControllerShippingUPS extends Controller {
 		$this->data['text_next_day_air_saver'] = $this->language->get('text_next_day_air_saver');
 		$this->data['text_next_day_air_early_am'] = $this->language->get('text_next_day_air_early_am');
 		$this->data['text_expedited'] = $this->language->get('text_expedited');
-		$this->data['text_2nd_day_air_am'] = $this->language->get('text_standard');
+		$this->data['text_2nd_day_air_am'] = $this->language->get('text_2nd_day_air_am');
 		$this->data['text_saver'] = $this->language->get('text_saver');
 		$this->data['text_express_early_am'] = $this->language->get('text_express_early_am');
 		$this->data['text_express_plus'] = $this->language->get('text_express_plus');
@@ -70,7 +68,7 @@ class ControllerShippingUPS extends Controller {
 		$this->data['entry_length_code'] = $this->language->get('entry_length_code');
 		$this->data['entry_length_class'] = $this->language->get('entry_length_class');
 		$this->data['entry_dimension'] = $this->language->get('entry_dimension');
-		$this->data['entry_tax'] = $this->language->get('entry_tax');
+		$this->data['entry_tax_class'] = $this->language->get('entry_tax_class');
 		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -752,7 +750,7 @@ class ControllerShippingUPS extends Controller {
 		$this->template = 'shipping/ups.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 		
  		$this->response->setOutput($this->render());

@@ -18,8 +18,8 @@
           <tr>
             <td>Версия PHP:</td>
             <td><?php echo phpversion(); ?></td>
-            <td>5.0+</td>
-            <td align="center"><?php echo (phpversion() >= '5.0') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
+            <td>5.2+</td>
+            <td align="center"><?php echo (phpversion() >= '5.2') ? '<img src="view/image/good.png" alt="Хорошо" />' : '<img src="view/image/bad.png" alt="Плохо" />'; ?></td>
           </tr>
           <tr>
             <td>Register Globals:</td>

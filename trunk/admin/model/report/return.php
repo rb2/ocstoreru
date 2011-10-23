@@ -3,17 +3,17 @@ class ModelReportReturn extends Model {
 	public function getReturns($data = array()) {
 		$sql = "SELECT MIN(tmp.date_added) AS date_start, MAX(tmp.date_added) AS date_end, COUNT(tmp.return_id) AS `returns`, SUM(tmp.products) AS products FROM (SELECT r.return_id, (SELECT SUM(rp.quantity) FROM `" . DB_PREFIX . "return_product` rp WHERE rp.return_id = r.return_id) AS products, r.date_added FROM `" . DB_PREFIX . "return` r"; 
 
-		if (isset($data['filter_return_status_id']) && $data['filter_return_status_id']) {
+		if (!empty($data['filter_return_status_id'])) {
 			$sql .= " WHERE r.return_status_id = '" . (int)$data['filter_return_status_id'] . "'";
 		} else {
 			$sql .= " WHERE r.return_status_id > '0'";
 		}
 		
-		if (isset($data['filter_date_start']) && $data['filter_date_start']) {
+		if (!empty($data['filter_date_start'])) {
 			$sql .= " AND DATE(r.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
 		}
 
-		if (isset($data['filter_date_end']) && $data['filter_date_end']) {
+		if (!empty($data['filter_date_end'])) {
 			$sql .= " AND DATE(r.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
 		}
 		
@@ -59,7 +59,7 @@ class ModelReportReturn extends Model {
 	}	
 	
 	public function getTotalReturns($data = array()) {
-		if (isset($data['filter_group'])) {
+		if (!empty($data['filter_group'])) {
 			$group = $data['filter_group'];
 		} else {
 			$group = 'week';
@@ -81,17 +81,17 @@ class ModelReportReturn extends Model {
 				break;									
 		}
 		
-		if (isset($data['filter_return_status_id']) && $data['filter_return_status_id']) {
+		if (!empty($data['filter_return_status_id'])) {
 			$sql .= " WHERE return_status_id = '" . (int)$data['filter_return_status_id'] . "'";
 		} else {
 			$sql .= " WHERE return_status_id > '0'";
 		}
 				
-		if (isset($data['filter_date_start']) && $data['filter_date_start']) {
+		if (!empty($data['filter_date_start'])) {
 			$sql .= " AND DATE(date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
 		}
 
-		if (isset($data['filter_date_end']) && $data['filter_date_end']) {
+		if (!empty($data['filter_date_end'])) {
 			$sql .= " AND DATE(date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
 		}
 

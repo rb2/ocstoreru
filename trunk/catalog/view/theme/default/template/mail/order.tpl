@@ -92,10 +92,7 @@ table.list .center {
     </thead>
     <tbody>
       <tr>
-        <td class="left"><?php if ($invoice_no) { ?>
-          <b><?php echo $text_invoice_no; ?></b> <?php echo $invoice_no; ?><br />
-          <?php } ?>
-          <b><?php echo $text_order_id; ?></b> <?php echo $order_id; ?><br />
+        <td class="left"><b><?php echo $text_order_id; ?></b> <?php echo $order_id; ?><br />
           <b><?php echo $text_date_added; ?></b> <?php echo $date_added; ?><br />
           <b><?php echo $text_payment_method; ?></b> <?php echo $payment_method; ?><br />
           <?php if ($shipping_method) { ?>
@@ -107,6 +104,20 @@ table.list .center {
       </tr>
     </tbody>
   </table>
+  <?php if ($comment) { ?>
+    <table class="list">
+    <thead>
+      <tr>
+        <td class="left"><?php echo $text_instruction; ?></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="left"><?php echo $comment; ?></td>
+      </tr>
+    </tbody>
+  </table>
+  <?php } ?>
   <table class="list">
     <thead>
       <tr>

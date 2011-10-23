@@ -25,6 +25,7 @@ $_['entry_captcha']    = 'Введите код:';
 // Error
 $_['error_permission'] = 'У Вас нет прав для изменения списка пользователей!';
 $_['error_account']    = 'Вы не можете удалить свой собственный аккаунт!';
+$_['error_exists']     = 'Warning: Username is already in use!';
 $_['error_username']   = 'Имя пользователя должно быть от 3 до 20 символов!';
 $_['error_password']   = 'Пароль должен быть от 3 до 20 символов!';
 $_['error_confirm']    = 'Пароли не совпадают!';

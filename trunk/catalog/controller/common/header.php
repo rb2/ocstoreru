@@ -108,7 +108,7 @@ class ControllerCommonHeader extends Controller {
 			$url = '';
 			
 			if ($data) {
-				$url = '&' . urldecode(http_build_query($data));
+				$url = '&' . urldecode(http_build_query($data, '', '&'));
 			}			
 			
 			$this->data['redirect'] = $this->url->link($route, $url);

@@ -8,20 +8,24 @@ $_['text_plus']              = '+';
 $_['text_minus']             = '-';
 $_['text_default']           = 'Default';
 $_['text_image_manager']     = 'Image Manager';
+$_['text_browse']            = 'Browse Files';
+$_['text_clear']             = 'Clear Image';
 $_['text_option']            = 'Option';
 $_['text_option_value']      = 'Option Value';
 $_['text_percent']           = 'Percentage';
 $_['text_amount']            = 'Fixed Amount';
 
 // Column
-$_['column_name']            	= 'Product Name';
-$_['column_model']           	= 'Model';
-$_['column_image']           	= 'Image';
-$_['column_manufacturer_price']	= 'Manufacturer Price';
-$_['column_price']           	= 'Price';
-$_['column_quantity']        	= 'Quantity';
-$_['column_status']          	= 'Status';
-$_['column_action']          	= 'Action';
+$_['column_name']            = 'Product Name';
+$_['column_model']           = 'Model';
+$_['column_image']           = 'Image';
+$_['column_price']           = 'Price';
+$_['column_quantity']        = 'Quantity';
+$_['column_status']          = 'Status';
+$_['column_action']          = 'Action';
+$_['column_date_added']      = 'Added';
+$_['entry_title']            = 'Tag "title"';
+$_['entry_h1']               = 'Header "h1"';
 
 // Entry
 $_['entry_name']             = 'Product Name:';
@@ -40,9 +44,8 @@ $_['entry_date_available']   = 'Date Available:';
 $_['entry_quantity']         = 'Quantity:';
 $_['entry_minimum']          = 'Minimum Quantity:<br/><span class="help">Force a minimum ordered amount</span>';
 $_['entry_stock_status']     = 'Out Of Stock Status:<br/><span class="help">Status shown when a product is out of stock</span>';
-$_['entry_tax_class']        = 'Tax Class:';
-$_['entry_manufacturer_price'] = 'Manufacturer Price:';
 $_['entry_price']            = 'Price:';
+$_['entry_tax_class']        = 'Tax Class:';
 $_['entry_points']           = 'Points:<br/><span class="help">Number of points needed to buy this item. If you don\'t want this product to be purchased with points leave as 0.</span>';
 $_['entry_option_points']    = 'Points:';
 $_['entry_subtract']         = 'Subtract Stock:';
@@ -65,10 +68,11 @@ $_['entry_status']           = 'Status:';
 $_['entry_sort_order']       = 'Sort Order:';
 $_['entry_category']         = 'Categories:';
 $_['entry_download']         = 'Downloads:';
-$_['entry_related']          = 'Related Products:';
+$_['entry_related']          = 'Related Products:<br /><span class="help">(Autocomplete)</span>';
 $_['entry_tag']          	 = 'Product Tags:<br /><span class="help">comma separated</span>';
 $_['entry_reward']           = 'Reward Points:';
 $_['entry_layout']           = 'Layout Override:';
+$_['entry_main_category']    = 'Category:';
 
 // Error
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';

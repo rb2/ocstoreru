@@ -11,7 +11,7 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/customer.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
+      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
       <div class="vtabs"><a href="#tab-return"><?php echo $tab_return; ?></a><a href="#tab-product"><?php echo $tab_product; ?></a></div>
@@ -131,7 +131,7 @@
                     <?php } ?>
                     <?php } ?>
                   </select></td>
-                <td class="left"><a onclick="$('#product-row<?php echo $product_row; ?>').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>
+                <td class="left"><a onclick="$('#product-row<?php echo $product_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
               </tr>
             </tbody>
             <?php $product_row++; ?>
@@ -139,7 +139,7 @@
             <tfoot>
               <tr>
                 <td colspan="7"></td>
-                <td class="left"><a onclick="addProduct();" class="button"><span><?php echo $button_add_product; ?></span></a></td>
+                <td class="left"><a onclick="addProduct();" class="button"><?php echo $button_add_product; ?></a></td>
               </tr>
             </tfoot>
           </table>
@@ -169,12 +169,10 @@ $('input[name=\'customer\']').catcomplete({
 	delay: 0,
 	source: function(request, response) {
 		$.ajax({
-			url: 'index.php?route=sale/customer/autocomplete&token=<?php echo $token; ?>',
-			type: 'POST',
+			url: 'index.php?route=sale/customer/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
 			dataType: 'json',
-			data: 'filter_name=' +  encodeURIComponent(request.term),
-			success: function(data) {	
-				response($.map(data, function(item) {
+			success: function(json) {	
+				response($.map(json, function(item) {
 					return {
 						category: item.customer_group,
 						label: item.name,
@@ -225,7 +223,7 @@ function addProduct() {
     html += '      <option value="<?php echo $return_action['return_action_id']; ?>"><?php echo $return_action['name']; ?></option>';
     <?php } ?>
     html += '    </select></td>';	
-    html += '    <td class="left"><a onclick="$(\'#product-row' + product_row + '\').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>';
+    html += '    <td class="left"><a onclick="$(\'#product-row' + product_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
     html += '  </tr>';
 	html += '</tbody>';
 	
@@ -241,12 +239,10 @@ function productautocomplete(product_row) {
 		delay: 0,
 		source: function(request, response) {
 			$.ajax({
-				url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>',
-				type: 'POST',
+				url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
 				dataType: 'json',
-				data: 'filter_name=' +  encodeURIComponent(request.term),
-				success: function(data) {	
-					response($.map(data, function(item) {
+				success: function(json) {	
+					response($.map(json, function(item) {
 						return {
 							label: item.name,
 							value: item.product_id,

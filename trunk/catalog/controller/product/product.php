@@ -210,7 +210,7 @@ class ControllerProductProduct extends Controller {
 			
 			foreach ($results as $result) {
 				$this->data['images'][] = array(
-					'popup' => $this->model_tool_image->resize($result['image'] , $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
+					'popup' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
 					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))
 				);
 			}	
@@ -247,7 +247,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['options'] = array();
 			
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) { 
-				if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox') { 
+				if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') { 
 					$option_value_data = array();
 					
 					foreach ($option['option_value'] as $option_value) {
@@ -256,6 +256,7 @@ class ControllerProductProduct extends Controller {
 								'product_option_value_id' => $option_value['product_option_value_id'],
 								'option_value_id'         => $option_value['option_value_id'],
 								'name'                    => $option_value['name'],
+								'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
 								'price'                   => (float)$option_value['price'] ? $this->currency->format($this->tax->calculate($option_value['price'], $product_info['tax_class_id'], $this->config->get('config_tax'))) : false,
 								'price_prefix'            => $option_value['price_prefix']
 							);
@@ -480,11 +481,11 @@ class ControllerProductProduct extends Controller {
 		
 		$json = array();
 		
-		if ((strlen(utf8_decode($this->request->post['name'])) < 3) || (strlen(utf8_decode($this->request->post['name'])) > 25)) {
+		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
 			$json['error'] = $this->language->get('error_name');
 		}
 		
-		if ((strlen(utf8_decode($this->request->post['text'])) < 25) || (strlen(utf8_decode($this->request->post['text'])) > 1000)) {
+		if ((utf8_strlen($this->request->post['text']) < 25) || (utf8_strlen($this->request->post['text']) > 1000)) {
 			$json['error'] = $this->language->get('error_text');
 		}
 
@@ -502,9 +503,7 @@ class ControllerProductProduct extends Controller {
 			$json['success'] = $this->language->get('text_success');
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));
+		$this->response->setOutput(json_encode($json));
 	}
 	
 	public function captcha() {
@@ -522,8 +521,10 @@ class ControllerProductProduct extends Controller {
 		
 		$json = array();
 		
-		if (isset($this->request->files['file']['name']) && $this->request->files['file']['name']) {
-			if ((strlen(utf8_decode($this->request->files['file']['name'])) < 3) || (strlen(utf8_decode($this->request->files['file']['name'])) > 128)) {
+		if (!empty($this->request->files['file']['name'])) {
+			$filename = basename(html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8'));
+			
+			if ((strlen($filename) < 3) || (strlen($filename) > 128)) {
         		$json['error'] = $this->language->get('error_filename');
 	  		}	  	
 			
@@ -535,7 +536,7 @@ class ControllerProductProduct extends Controller {
 				$allowed[] = trim($filetype);
 			}
 			
-			if (!in_array(substr(strrchr($this->request->files['file']['name'], '.'), 1), $allowed)) {
+			if (!in_array(substr(strrchr($filename, '.'), 1), $allowed)) {
 				$json['error'] = $this->language->get('error_filetype');
        		}	
 						
@@ -548,7 +549,7 @@ class ControllerProductProduct extends Controller {
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && !isset($json['error'])) {
 			if (is_uploaded_file($this->request->files['file']['tmp_name']) && file_exists($this->request->files['file']['tmp_name'])) {
-				$file = basename($this->request->files['file']['name']) . '.' . md5(rand());
+				$file = basename($filename) . '.' . md5(rand());
 				
 				// Hide the uploaded file name sop people can not link to it directly.
 				$this->load->library('encryption');
@@ -563,9 +564,7 @@ class ControllerProductProduct extends Controller {
 			$json['success'] = $this->language->get('text_upload');
 		}	
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));		
+		$this->response->setOutput(json_encode($json));		
 	}
 }
 ?>

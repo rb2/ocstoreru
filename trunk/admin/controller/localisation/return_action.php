@@ -252,7 +252,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		$this->template = 'localisation/return_action_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -329,7 +329,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		$this->template = 'localisation/return_action_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());	
@@ -341,7 +341,7 @@ class ControllerLocalisationReturnAction extends Controller {
     	}
 	
     	foreach ($this->request->post['return_action'] as $language_id => $value) {
-      		if ((strlen(utf8_decode($value['name'])) < 3) || (strlen(utf8_decode($value['name'])) > 32)) {
+      		if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 32)) {
         		$this->error['name'][$language_id] = $this->language->get('error_name');
       		}
     	}

@@ -30,12 +30,6 @@
             <td><b><?php echo $text_invoice_no; ?></b></td>
             <td><?php echo $order['invoice_no']; ?></td>
           </tr>
-          <?php if ($order['invoice_date']) { ?>
-          <tr>
-            <td><b><?php echo $text_invoice_date; ?></b></td>
-            <td><?php echo $order['invoice_date']; ?></td>
-          </tr>
-          <?php } ?>
           <?php } ?>
           <tr>
             <td><b><?php echo $text_order_id; ?></b></td>

@@ -179,11 +179,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$data['shipping_method'] = '';
 			}
 			
-			if ($this->cart->hasShipping()) {
-				$this->tax->setZone($shipping_address['country_id'], $shipping_address['zone_id']);
-			} else {
-				$this->tax->setZone($payment_address['country_id'], $payment_address['zone_id']);
-			}				
+			$this->load->library('encryption');
 			
 			$product_data = array();
 		
@@ -204,8 +200,6 @@ class ControllerCheckoutConfirm extends Controller {
 							'type'                    => $option['type']
 						);					
 					} else {
-						$this->load->library('encryption');
-						
 						$encryption = new Encryption($this->config->get('config_encryption'));
 						
 						$option_data[] = array(
@@ -232,7 +226,7 @@ class ControllerCheckoutConfirm extends Controller {
 					'subtract'   => $product['subtract'],
 					'price'      => $product['price'],
 					'total'      => $product['total'],
-					'tax'        => $this->tax->getRate($product['tax_class_id'])
+					'tax'        => $this->tax->getTax($product['total'], $product['tax_class_id'])
 				); 
 			}
 			
@@ -334,7 +328,7 @@ class ControllerCheckoutConfirm extends Controller {
 					'option'     => $option_data,
 					'quantity'   => $product['quantity'],
 					'subtract'   => $product['subtract'],
-					'tax'        => $this->tax->getRate($product['tax_class_id']),
+					'tax'        => $this->tax->getTax($product['total'], $product['tax_class_id']),
 					'price'      => $this->currency->format($product['price']),
 					'total'      => $this->currency->format($product['total']),
 					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id'])
@@ -366,9 +360,7 @@ class ControllerCheckoutConfirm extends Controller {
 			$json['output'] = $this->render();
 		}
 		
-		$this->load->library('json');
-		
-		$this->response->setOutput(Json::encode($json));		
+		$this->response->setOutput(json_encode($json));		
   	}
 }
 ?>

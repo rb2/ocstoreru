@@ -4,6 +4,7 @@ class ControllerProductManufacturer extends Controller {
 		$this->language->load('product/manufacturer');
 		
 		$this->load->model('catalog/manufacturer');
+		
 		$this->load->model('tool/image');		
 		
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -34,10 +35,10 @@ class ControllerProductManufacturer extends Controller {
 		$results = $this->model_catalog_manufacturer->getManufacturers();
 	
 		foreach ($results as $result) {
-			if (is_int(mb_substr($result['name'], 0, 1, 'UTF-8'))) {
+			if (is_numeric(utf8_substr($result['name'], 0, 1))) {
 				$key = '0 - 9';
 			} else {
-				$key = mb_substr(strtoupper($result['name']), 0, 1, 'UTF-8');
+				$key = substr(utf8_strtoupper($result['name']), 0, 1);
 			}
 			
 			if (!isset($this->data['manufacturers'][$key])) {

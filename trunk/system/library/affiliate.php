@@ -62,8 +62,6 @@ final class Affiliate {
 		$this->email = '';
 		$this->telephone = '';
 		$this->fax = '';
-		
-		session_destroy();
   	}
   
   	public function isLogged() {

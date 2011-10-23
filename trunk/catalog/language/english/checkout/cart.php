@@ -4,7 +4,7 @@ $_['heading_title']   = 'Shopping Cart';
 
 // Text
 $_['text_weight']  	  = 'Cart Weight:';
-$_['text_points']     = 'Reward Points: %s';
+$_['text_reward']     = 'Reward Points: %s';
 $_['text_items']      = '%s item(s) - %s';
 $_['text_success']    = 'Success: You have added <a href="%s">%s</a> to your <a href="%s">shopping cart</a>!';
 $_['text_empty']      = 'Your shopping cart is empty!';

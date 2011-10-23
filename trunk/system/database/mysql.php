@@ -43,10 +43,11 @@ final class MySQL {
 
 				return $query;	
     		} else {
-				return TRUE;
+				return true;
 			}
 		} else {
-			exit('Error: ' . mysql_error($this->connection) . '<br />Error No: ' . mysql_errno($this->connection) . '<br />' . $sql);
+			trigger_error('Error: ' . mysql_error($this->connection) . '<br />Error No: ' . mysql_errno($this->connection) . '<br />' . $sql);
+			exit();
     	}
   	}
 	

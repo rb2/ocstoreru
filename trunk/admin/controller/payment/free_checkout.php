@@ -88,7 +88,7 @@ class ControllerPaymentFreeCheckout extends Controller {
 		$this->template = 'payment/free_checkout.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 			
 		$this->response->setOutput($this->render());

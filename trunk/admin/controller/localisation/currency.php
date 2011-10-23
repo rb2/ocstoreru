@@ -261,7 +261,7 @@ class ControllerLocalisationCurrency extends Controller {
 		$this->template = 'localisation/currency_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -395,7 +395,7 @@ class ControllerLocalisationCurrency extends Controller {
     	if (isset($this->request->post['status'])) {
       		$this->data['status'] = $this->request->post['status'];
     	} elseif (isset($currency_info)) {
-			$this->data['status'] = @$currency_info['status'];
+			$this->data['status'] = $currency_info['status'];
 		} else {
       		$this->data['status'] = '';
     	}
@@ -403,7 +403,7 @@ class ControllerLocalisationCurrency extends Controller {
 		$this->template = 'localisation/currency_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -414,11 +414,11 @@ class ControllerLocalisationCurrency extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		} 
 
-		if ((strlen(utf8_decode($this->request->post['title'])) < 3) || (strlen(utf8_decode($this->request->post['title'])) > 32)) {
+		if ((utf8_strlen($this->request->post['title']) < 3) || (utf8_strlen($this->request->post['title']) > 32)) {
 			$this->error['title'] = $this->language->get('error_title');
 		}
 
-		if (strlen(utf8_decode($this->request->post['code'])) != 3) {
+		if (utf8_strlen($this->request->post['code']) != 3) {
 			$this->error['code'] = $this->language->get('error_code');
 		}
 

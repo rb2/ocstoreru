@@ -3,6 +3,19 @@ class ControllerAccountLogin extends Controller {
 	private $error = array();
 	
 	public function index() {
+		// Login override for admin users
+		if (!empty($this->request->get['token'])) {
+			$this->customer->logout();
+			
+			$this->load->model('account/customer');
+			
+			$customer_info = $this->model_account_customer->getCustomerByToken($this->request->get['token']);
+			
+		 	if ($customer_info && $this->customer->login($customer_info['email'], '', true)) {
+				$this->redirect($this->url->link('account/account', '', 'SSL')); 
+			}
+		}		
+		
 		if ($this->customer->isLogged()) {  
       		$this->redirect($this->url->link('account/account', '', 'SSL'));
     	}
@@ -10,17 +23,9 @@ class ControllerAccountLogin extends Controller {
     	$this->language->load('account/login');
 
     	$this->document->setTitle($this->language->get('heading_title'));
-						
+								
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			unset($this->session->data['guest']);
-			
-			$this->load->model('account/address');
-
-			$address_info = $this->model_account_address->getAddress($this->customer->getAddressId());
-
-			if ($address_info) {
-				$this->tax->setZone($address_info['country_id'], $address_info['zone_id']);
-			}			
 			
 			// Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], HTTP_SERVER) !== false || strpos($this->request->post['redirect'], HTTPS_SERVER) !== false)) {

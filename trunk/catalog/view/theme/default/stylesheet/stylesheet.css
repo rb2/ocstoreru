@@ -4,6 +4,7 @@ html {
 	padding: 0;
 }
 body {
+	background-color: #ffffff;
 	color: #000000;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0px;
@@ -340,9 +341,6 @@ label {
 #menu > ul > li:hover {
 	background: #000;
 }
-#menu > ul > li > a.active {
-	background: #000;
-}
 #menu > ul > li > a {
 	font-size: 13px;
 	color: #FFF;
@@ -409,10 +407,6 @@ label {
 .attention {
 	background: #FFF5CC url('../image/attention.png') 10px center no-repeat;
 	border: 1px solid #F2DD8C;
-}
-.information {
-	background: #E8F6FF url('../image/information.png') 10px center no-repeat;
-	border: 1px solid #B8E2FB;
 }
 .success .close, .warning .close, .attention .close, .information .close {
 	float: right;
@@ -490,14 +484,6 @@ table.list .right {
 table.list .center {
 	text-align: center;
 	padding: 7px;
-}
-table.list .asc {
-	padding-right: 15px;
-	background: url('../image/asc.png') right center no-repeat;
-}
-table.list .desc {
-	padding-right: 15px;
-	background: url('../image/desc.png') right center no-repeat;
 }
 .pagination {
 	border-top: 1px solid #EEEEEE;
@@ -641,13 +627,15 @@ a.button:hover span {
 	width: 100%;
 	overflow: auto;
 }
-	
 .box-product > div {
-	width: 134px;
+	width: 130px;
 	display: inline-block;
 	vertical-align: top;
 	margin-right: 20px;
-	margin-bottom: 15px;	
+	margin-bottom: 20px;	
+}
+#column-left + #column-right + #content .box-product > div {
+	width: 119px;
 }
 .box-product .image {
 	display: block;
@@ -896,11 +884,14 @@ a.button:hover span {
 	overflow: auto;
 }
 .product-grid > div {
-	width: 134px;
+	width: 130px;
 	display: inline-block;
 	vertical-align: top;
 	margin-right: 20px;
 	margin-bottom: 15px;
+}
+#column-left + #column-right + #content .product-grid > div {
+	width: 125px;
 }
 .product-grid .image {
 	display: block;
@@ -1045,6 +1036,20 @@ a.button:hover span {
 	padding: 0px 5px 10px 5px;
 	margin-bottom: 10px;
 	color: #000000;
+}
+.product-info .option-image {
+	margin-top: 3px;
+	margin-bottom: 10px;
+}
+.product-info .option-image label {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.product-info .option-image img {
+	margin-right: 5px;
+	border: 1px solid #CCCCCC;
+	cursor: pointer;
 }
 .product-info .cart {
 	border-bottom: 1px solid #E7E7E7;

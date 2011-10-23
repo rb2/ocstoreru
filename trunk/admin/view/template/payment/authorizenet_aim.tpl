@@ -11,7 +11,7 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/payment.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
+      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
@@ -31,11 +31,8 @@
               <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_hash; ?></td>
-            <td><input type="text" name="authorizenet_aim_hash" value="<?php echo $authorizenet_aim_hash; ?>" />
-              <?php if ($error_hash) { ?>
-              <span class="error"><?php echo $error_hash; ?></span>
-              <?php } ?></td>
+            <td><?php echo $entry_hash; ?></td>
+            <td><input type="text" name="authorizenet_aim_hash" value="<?php echo $authorizenet_aim_hash; ?>" /></td>
           </tr>
           <tr>
             <td><?php echo $entry_server; ?></td>

@@ -5,8 +5,8 @@ $_['direction']             = 'ltr';
 $_['date_format_short']     = 'd.m.Y';
 $_['date_format_long']      = 'l dS F Y';
 $_['time_format']           = 'h:i:s A';
-$_['decimal_point']         = '.';
-$_['thousand_point']        = ' ';
+$_['decimal_point']         = ',';
+$_['thousand_point']        = '';
 
 // Text
 $_['text_home']             = 'Главная';
@@ -22,7 +22,7 @@ $_['text_separator']        = ' &raquo; ';
 $_['button_add_address']    = 'Добавить адрес';
 $_['button_back']           = 'Назад';
 $_['button_continue']       = 'Вперед';
-$_['button_cart']    		= 'Купить';
+$_['button_cart']    	    = 'Купить';
 $_['button_compare']        = 'В сравнения';
 $_['button_wishlist']       = 'В заметки';
 $_['button_checkout']       = 'Оформить заказ';

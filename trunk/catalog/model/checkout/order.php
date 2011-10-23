@@ -145,21 +145,13 @@ class ModelCheckoutOrder extends Model {
 		}
 	}	
 
-	public function confirm($order_id, $order_status_id, $comment = '') {
+	public function confirm($order_id, $order_status_id, $comment = '', $notify = false) {
 		$order_info = $this->getOrder($order_id);
 		 
 		if ($order_info && !$order_info['order_status_id']) {
-			$query = $this->db->query("SELECT MAX(invoice_no) AS invoice_no FROM `" . DB_PREFIX . "order` WHERE invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "'");
-	
-			if ($query->row['invoice_no']) {
-				$invoice_no = (int)$query->row['invoice_no'] + 1;
-			} else {
-				$invoice_no = 1;
-			}
-			
-			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET invoice_no = '" . (int)$invoice_no . "', invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "', order_status_id = '" . (int)$order_status_id . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
+			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$order_status_id . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
 
-			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '1', comment = '" . $this->db->escape($comment) . "', date_added = NOW()");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '1', comment = '" . $this->db->escape(($comment && $notify) ? $comment : '') . "', date_added = NOW()");
 
 			$order_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
 			
@@ -220,7 +212,7 @@ class ModelCheckoutOrder extends Model {
 			$template->data['text_link'] = $language->get('text_new_link');
 			$template->data['text_download'] = $language->get('text_new_download');
 			$template->data['text_order_detail'] = $language->get('text_new_order_detail');
-			$template->data['text_invoice_no'] = $language->get('text_new_invoice_no');
+			$template->data['text_instruction'] = $language->get('text_new_instruction');
 			$template->data['text_order_id'] = $language->get('text_new_order_id');
 			$template->data['text_date_added'] = $language->get('text_new_date_added');
 			$template->data['text_payment_method'] = $language->get('text_new_payment_method');	
@@ -236,7 +228,7 @@ class ModelCheckoutOrder extends Model {
 			$template->data['text_price'] = $language->get('text_new_price');
 			$template->data['text_total'] = $language->get('text_new_total');
 			$template->data['text_footer'] = $language->get('text_new_footer');
-			$template->data['text_powered'] = sprintf($language->get('text_new_powered'), $this->config->get('config_name'), date('Y', time()));
+			$template->data['text_powered'] = $language->get('text_new_powered');
 			
 			$template->data['logo'] = 'cid:' . md5(basename($this->config->get('config_logo')));		
 			$template->data['store_name'] = $order_info['store_name'];
@@ -250,7 +242,6 @@ class ModelCheckoutOrder extends Model {
 				$template->data['download'] = '';
 			}
 			
-			$template->data['invoice_no'] = $invoice_no;
 			$template->data['order_id'] = $order_id;
 			$template->data['date_added'] = date($language->get('date_format_short'), strtotime($order_info['date_added']));    	
 			$template->data['payment_method'] = $order_info['payment_method'];
@@ -258,6 +249,12 @@ class ModelCheckoutOrder extends Model {
 			$template->data['email'] = $order_info['email'];
 			$template->data['telephone'] = $order_info['telephone'];
 			$template->data['ip'] = $order_info['ip'];
+			
+			if ($comment && $notify) {
+				$template->data['comment'] = nl2br($comment);
+			} else {
+				$template->data['comment'] = '';
+			}
 									
 			if ($order_info['shipping_address_format']) {
 				$format = $order_info['shipping_address_format'];
@@ -373,6 +370,12 @@ class ModelCheckoutOrder extends Model {
 			$text .= $language->get('text_new_order_id') . ' ' . $order_id . "\n";
 			$text .= $language->get('text_new_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n";
 			$text .= $language->get('text_new_order_status') . ' ' . $order_status . "\n\n";
+			
+			if ($comment && $notify) {
+				$text .= $language->get('text_new_instruction') . "\n\n";
+				$text .= $comment . "\n\n";
+			}
+			
 			$text .= $language->get('text_new_products') . "\n";
 			
 			foreach ($order_product_query->rows as $result) {
@@ -393,13 +396,11 @@ class ModelCheckoutOrder extends Model {
 				$text .= $result['title'] . ' ' . html_entity_decode($result['text'], ENT_NOQUOTES, 'UTF-8') . "\n";
 			}			
 			
-			$order_total = $result['text'];
-			
 			$text .= "\n";
 			
 			if ($order_info['customer_id']) {
 				$text .= $language->get('text_new_link') . "\n";
-				$text .= $order_info['store_url'] . 'index.php?route=account/invoice&order_id=' . $order_id . "\n\n";
+				$text .= $order_info['store_url'] . 'index.php?route=account/order/info&order_id=' . $order_id . "\n\n";
 			}
 		
 			if ($order_download_query->num_rows) {
@@ -448,13 +449,13 @@ class ModelCheckoutOrder extends Model {
 					$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . $result['order_product_id'] . "'");
 					
 					foreach ($order_option_query->rows as $option) {
-						$text .= chr(9) . '-' . $option['name'] . (strlen($option['value']) > 20 ? substr($option['value'], 0, 20) . '..' : $option['value']) . "\n";
+						$text .= chr(9) . '-' . $option['name'] . ' ' . (strlen($option['value']) > 20 ? substr($option['value'], 0, 20) . '..' : $option['value']) . "\n";
 					}
 				}
 				
 				$text .= "\n";
 
-				$text.= $language->get('text_new_order_total') . "\n";
+				$text .= $language->get('text_new_order_total') . "\n";
 				
 				foreach ($order_total_query->rows as $result) {
 					$text .= $result['title'] . ' ' . html_entity_decode($result['text'], ENT_NOQUOTES, 'UTF-8') . "\n";
@@ -490,7 +491,7 @@ class ModelCheckoutOrder extends Model {
 				$emails = explode(',', $this->config->get('config_alert_emails'));
 				
 				foreach ($emails as $email) {
-					if ($email && preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i', $email)) {
+					if ($email && preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email)) {
 						$mail->setTo($email);
 						$mail->send();
 					}

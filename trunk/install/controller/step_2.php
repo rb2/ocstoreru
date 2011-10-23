@@ -31,12 +31,13 @@ class ControllerStep2 extends Controller {
 			'header',
 			'footer'
 		);		
-		$this->response->setOutput($this->render(TRUE));
+		
+		$this->response->setOutput($this->render());
 	}
 	
 	private function validate() {
-		if (phpversion() < '5.0') {
-			$this->error['warning'] = 'Warning: You need to use PHP5 or above for OpenCart to work!';
+		if (phpversion() < '5.2') {
+			$this->error['warning'] = 'Warning: You need to use PHP5.2 or above for OpenCart to work!';
 		}
 
 		if (!ini_get('file_uploads')) {
@@ -92,9 +93,9 @@ class ControllerStep2 extends Controller {
 		}
 		
     	if (!$this->error) {
-      		return TRUE;
+      		return true;
     	} else {
-      		return FALSE;
+      		return false;
     	}
 	}
 }

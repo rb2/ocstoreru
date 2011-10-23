@@ -6,6 +6,8 @@ $_['heading_title']      = 'Производители';
 $_['text_success']       = 'Список производителей обновлен!';
 $_['text_default']       = 'Основной магазин';
 $_['text_image_manager'] = 'Менеджер изображений';
+$_['text_browse']        = 'Browse Files';
+$_['text_clear']         = 'Clear Image';
 $_['text_percent']       = 'Процент';
 $_['text_amount']        = 'Фиксированная сумма';
 

@@ -61,12 +61,6 @@ class ControllerPaymentAuthorizenetAim extends Controller {
 		} else {
 			$this->data['error_key'] = '';
 		}
-
- 		if (isset($this->error['hash'])) {
-			$this->data['error_hash'] = $this->error['hash'];
-		} else {
-			$this->data['error_hash'] = '';
-		}
 		
   		$this->data['breadcrumbs'] = array();
 
@@ -169,7 +163,7 @@ class ControllerPaymentAuthorizenetAim extends Controller {
 		$this->template = 'payment/authorizenet_aim.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -186,10 +180,6 @@ class ControllerPaymentAuthorizenetAim extends Controller {
 
 		if (!$this->request->post['authorizenet_aim_key']) {
 			$this->error['key'] = $this->language->get('error_key');
-		}
-
-		if (!$this->request->post['authorizenet_aim_hash']) {
-			$this->error['hash'] = $this->language->get('error_hash');
 		}
 		
 		if (!$this->error) {

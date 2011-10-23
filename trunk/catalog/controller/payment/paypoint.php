@@ -96,7 +96,7 @@ class ControllerPaymentPaypoint extends Controller {
 		$this->data['text_failure'] = $this->language->get('text_failure');
 		$this->data['text_failure_wait'] = sprintf($this->language->get('text_failure_wait'), $this->url->link('checkout/cart'));
 	
-		if (isset($this->request->get['valid']) && $this->request->get['valid'] == 'true') {
+		if (isset($this->request->get['valid']) && $this->request->get['valid'] == 'A') {
 			$this->load->library('encryption');
 			
 			$encryption = new Encryption($this->config->get('config_encryption'));

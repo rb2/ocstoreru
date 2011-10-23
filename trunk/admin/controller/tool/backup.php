@@ -29,9 +29,6 @@ class ControllerToolBackup extends Controller {
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
-		$this->data['text_select_all'] = $this->language->get('text_select_all');
-		$this->data['text_unselect_all'] = $this->language->get('text_unselect_all');
-		
 		$this->data['entry_restore'] = $this->language->get('entry_restore');
 		$this->data['entry_backup'] = $this->language->get('entry_backup');
 		 
@@ -79,14 +76,14 @@ class ControllerToolBackup extends Controller {
 		$this->template = 'tool/backup.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
 	}
 	
 	public function backup() {
-		if ($this->request->server['REQUEST_METHOD'] == 'POST' && $this->validate()) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->response->addheader('Pragma: public');
 			$this->response->addheader('Expires: 0');
 			$this->response->addheader('Content-Description: File Transfer');

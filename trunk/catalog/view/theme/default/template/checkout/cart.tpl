@@ -50,8 +50,8 @@
                   - <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small><br />
                   <?php } ?>
                 </div>
-                <?php if ($product['points']) { ?>
-                <small><?php echo $product['points']; ?></small>
+                <?php if ($product['reward']) { ?>
+                <small><?php echo $product['reward']; ?></small>
                 <?php } ?></td>
               <td class="model"><?php echo $product['model']; ?></td>
               <td class="quantity"><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="3" /></td>

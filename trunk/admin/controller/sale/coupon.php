@@ -282,7 +282,7 @@ class ControllerSaleCoupon extends Controller {
     	$this->data['text_no'] = $this->language->get('text_no');
     	$this->data['text_percent'] = $this->language->get('text_percent');
     	$this->data['text_amount'] = $this->language->get('text_amount');
-		
+				
 		$this->data['entry_name'] = $this->language->get('entry_name');
     	$this->data['entry_description'] = $this->language->get('entry_description');
     	$this->data['entry_code'] = $this->language->get('entry_code');
@@ -291,6 +291,7 @@ class ControllerSaleCoupon extends Controller {
 		$this->data['entry_shipping'] = $this->language->get('entry_shipping');
 		$this->data['entry_type'] = $this->language->get('entry_type');
 		$this->data['entry_total'] = $this->language->get('entry_total');
+		$this->data['entry_category'] = $this->language->get('entry_category');
 		$this->data['entry_product'] = $this->language->get('entry_product');
     	$this->data['entry_date_start'] = $this->language->get('entry_date_start');
     	$this->data['entry_date_end'] = $this->language->get('entry_date_end');
@@ -384,7 +385,7 @@ class ControllerSaleCoupon extends Controller {
 		
     	if (isset($this->request->post['name'])) {
       		$this->data['name'] = $this->request->post['name'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['name'] = $coupon_info['name'];
 		} else {
       		$this->data['name'] = '';
@@ -392,7 +393,7 @@ class ControllerSaleCoupon extends Controller {
 		
     	if (isset($this->request->post['code'])) {
       		$this->data['code'] = $this->request->post['code'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['code'] = $coupon_info['code'];
 		} else {
       		$this->data['code'] = '';
@@ -400,7 +401,7 @@ class ControllerSaleCoupon extends Controller {
 		
     	if (isset($this->request->post['type'])) {
       		$this->data['type'] = $this->request->post['type'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['type'] = $coupon_info['type'];
 		} else {
       		$this->data['type'] = '';
@@ -408,7 +409,7 @@ class ControllerSaleCoupon extends Controller {
 		
     	if (isset($this->request->post['discount'])) {
       		$this->data['discount'] = $this->request->post['discount'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['discount'] = $coupon_info['discount'];
 		} else {
       		$this->data['discount'] = '';
@@ -416,7 +417,7 @@ class ControllerSaleCoupon extends Controller {
 
     	if (isset($this->request->post['logged'])) {
       		$this->data['logged'] = $this->request->post['logged'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['logged'] = $coupon_info['logged'];
 		} else {
       		$this->data['logged'] = '';
@@ -424,7 +425,7 @@ class ControllerSaleCoupon extends Controller {
 		
     	if (isset($this->request->post['shipping'])) {
       		$this->data['shipping'] = $this->request->post['shipping'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['shipping'] = $coupon_info['shipping'];
 		} else {
       		$this->data['shipping'] = '';
@@ -432,7 +433,7 @@ class ControllerSaleCoupon extends Controller {
 
     	if (isset($this->request->post['total'])) {
       		$this->data['total'] = $this->request->post['total'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['total'] = $coupon_info['total'];
 		} else {
       		$this->data['total'] = '';
@@ -440,7 +441,7 @@ class ControllerSaleCoupon extends Controller {
 		
 		if (isset($this->request->post['coupon_product'])) {
 			$products = $this->request->post['coupon_product'];
-		} elseif (isset($coupon_info)) {		
+		} elseif (isset($this->request->get['coupon_id'])) {		
 			$products = $this->model_sale_coupon->getCouponProducts($this->request->get['coupon_id']);
 		} else {
 			$products = array();
@@ -460,7 +461,11 @@ class ControllerSaleCoupon extends Controller {
 				);
 			}
 		}
-			
+
+		$this->load->model('catalog/category');
+				
+		$this->data['categories'] = $this->model_catalog_category->getCategories(0);
+					
 		if (isset($this->request->post['date_start'])) {
        		$this->data['date_start'] = $this->request->post['date_start'];
 		} elseif (isset($coupon_info)) {
@@ -515,11 +520,11 @@ class ControllerSaleCoupon extends Controller {
       		$this->error['warning'] = $this->language->get('error_permission');
     	}
       	
-		if ((strlen(utf8_decode($this->request->post['name'])) < 3) || (strlen(utf8_decode($this->request->post['name'])) > 128)) {
+		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 128)) {
         	$this->error['name'] = $this->language->get('error_name');
       	}
 			
-    	if ((strlen(utf8_decode($this->request->post['code'])) < 3) || (strlen(utf8_decode($this->request->post['code'])) > 10)) {
+    	if ((utf8_strlen($this->request->post['code']) < 3) || (utf8_strlen($this->request->post['code']) > 10)) {
       		$this->error['code'] = $this->language->get('error_code');
     	}
 		

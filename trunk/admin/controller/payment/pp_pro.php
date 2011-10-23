@@ -162,7 +162,7 @@ class ControllerPaymentPPPro extends Controller {
 		$this->template = 'payment/pp_pro.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());

@@ -8,7 +8,7 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="window.open('<?php echo $invoice; ?>');" class="button"><span><?php echo $button_invoice; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
+      <div class="buttons"><a onclick="window.open('<?php echo $invoice; ?>');" class="button"><?php echo $button_invoice; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
       <div class="vtabs"><a href="#tab-order"><?php echo $tab_order; ?></a><a href="#tab-payment"><?php echo $tab_payment; ?></a>
@@ -22,9 +22,13 @@
             <td><?php echo $text_order_id; ?></td>
             <td>#<?php echo $order_id; ?></td>
           </tr>
-          <tr>
+          <tr> 
             <td><?php echo $text_invoice_no; ?></td>
-            <td><?php echo $invoice_no; ?></td>
+            <td><?php if ($invoice_no) { ?>
+              <?php echo $invoice_no; ?>
+              <?php } else { ?>
+              <span id="invoice"><b>[</b> <a id="invoice-create"><?php echo $text_create_invoice_no; ?></a> <b>]</b></span>
+              <?php } ?></td>
           </tr>
           <tr>
             <td><?php echo $text_store_name; ?></td>
@@ -74,9 +78,9 @@
             <td><?php echo $total; ?>
               <?php if ($credit && $customer) { ?>
               <?php if (!$credit_total) { ?>
-              <img src="view/image/add.png" alt="<?php echo $text_credit_add; ?>" title="<?php echo $text_credit_add; ?>" id="credit_add" class="icon" />
+              <span id="credit"><b>[</b> <a id="credit-add"><?php echo $text_credit_add; ?></a> <b>]</b></span>
               <?php } else { ?>
-              <img src="view/image/delete.png" alt="<?php echo $text_credit_remove; ?>" title="<?php echo $text_credit_remove; ?>" id="credit_remove" class="icon" />
+              <span id="credit"><b>[</b> <a id="credit-remove"><?php echo $text_credit_remove; ?></a> <b>]</b></span>
               <?php } ?>
               <?php } ?></td>
           </tr>
@@ -85,9 +89,9 @@
             <td><?php echo $text_reward; ?></td>
             <td><?php echo $reward; ?>
               <?php if (!$reward_total) { ?>
-              <img src="view/image/add.png" alt="<?php echo $text_reward_add; ?>" title="<?php echo $text_reward_add; ?>" id="reward_add" class="icon" />
+              <span id="reward"><b>[</b> <a id="reward-add"><?php echo $text_reward_add; ?></a> <b>]</b></span>
               <?php } else { ?>
-              <img src="view/image/delete.png" alt="<?php echo $text_reward_remove; ?>" title="<?php echo $text_reward_remove; ?>" id="reward_remove" class="icon" />
+              <span id="reward"><b>[</b> <a id="reward-remove"><?php echo $text_reward_remove; ?></a> <b>]</b></span>
               <?php } ?></td>
           </tr>
           <?php } ?>
@@ -112,9 +116,9 @@
             <td><?php echo $text_commission; ?></td>
             <td><?php echo $commission; ?>
               <?php if (!$commission_total) { ?>
-              <img src="view/image/add.png" alt="<?php echo $text_commission_add; ?>" title="<?php echo $text_commission_add; ?>" id="commission_add" class="icon" />
+              <span id="commission"><b>[</b> <a id="commission-add"><?php echo $text_commission_add; ?></a> <b>]</b></span>
               <?php } else { ?>
-              <img src="view/image/delete.png" alt="<?php echo $text_commission_remove; ?>" title="<?php echo $text_commission_remove; ?>" id="commission_remove" class="icon" />
+              <span id="commission"><b>[</b> <a id="commission-remove"><?php echo $text_commission_remove; ?></a> <b>]</b></span>
               <?php } ?></td>
           </tr>
           <?php } ?>
@@ -331,7 +335,7 @@
           <tr>
             <td><?php echo $entry_comment; ?></td>
             <td><textarea name="comment" cols="40" rows="8" style="width: 99%"></textarea>
-              <div style="margin-top: 10px; text-align: right;"><a onclick="history();" id="button-history" class="button"><span><?php echo $button_add_history; ?></span></a></div></td>
+              <div style="margin-top: 10px; text-align: right;"><a onclick="history();" id="button-history" class="button"><?php echo $button_add_history; ?></a></div></td>
           </tr>
         </table>
       </div>
@@ -339,139 +343,224 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-$('#reward_add').live('click', function() {
+$('#invoice-create').live('click', function() {
 	$.ajax({
-		type: 'POST',
-		url: 'index.php?route=sale/order/addreward&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
+		url: 'index.php?route=sale/order/createinvoiceno&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		dataType: 'json',
+		beforeSend: function() {
+			$('#invoice').after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');	
+		},
+		complete: function() {
+			$('.loading').remove();
+		},
 		success: function(json) {
-			if (json.error) {
-				alert(json.error);
+			$('.success').remove();
+			$('.warning').remove();
+						
+			if (json['error']) {
+				$('#tab-order').prepend('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
 			}
 			
-			if (json.success) {
-				alert(json.success);
-
-				$('#reward_add').fadeOut();
-                
-				$('#reward_add').replaceWith('<img src="view/image/delete.png" alt="<?php echo $text_reward_remove; ?>" id="reward_remove" class="icon" />');
-      		  			
-				$('#reward_remove').fadeIn();
+			if (json.invoice_no) {
+				$('#invoice').fadeOut('slow', function() {
+					$('#invoice').html(json['invoice_no']);
+					
+					$('#invoice').fadeIn('slow');
+				});
 			}
 		}
 	});
 });
 
-$('#reward_remove').live('click', function() {
-	$.ajax({
-		type: 'POST',
-		url: 'index.php?route=sale/order/removereward&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
-		dataType: 'json',
-		success: function(json) {
-			if (json.error) {
-				alert(json.error);
-			}
-			
-			if (json.success) {
-				alert(json.success);
-				
-				$('#reward_remove').fadeOut();
-				
-				$('#reward_remove').replaceWith('<img src="view/image/add.png" alt="<?php echo $text_reward_add; ?>" id="reward_add" class="icon" />');
-				
-				$('#reward_add').fadeIn();
-			}
-		}
-	});
-});
-
-$('#commission_add').live('click', function() {
-	$.ajax({
-		type: 'POST',
-		url: 'index.php?route=sale/order/addcommission&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
-		dataType: 'json',
-		success: function(json) {
-			if (json.error) {
-				alert(json.error);
-			}
-			
-			if (json.success) {
-				alert(json.success);
-
-				$('#commission_add').fadeOut();
-                
-				$('#commission_add').replaceWith('<img src="view/image/delete.png" alt="<?php echo $text_commission_remove; ?>" id="commission_remove" class="icon" />');
-      		  			
-				$('#commission_remove').fadeIn();
-			}
-		}
-	});
-});
-
-$('#commission_remove').live('click', function() {
-	$.ajax({
-		type: 'POST',
-		url: 'index.php?route=sale/order/removecommission&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
-		dataType: 'json',
-		success: function(json) {
-			if (json.error) {
-				alert(json.error);
-			}
-			
-			if (json.success) {
-				alert(json.success);
-				
-				$('#commission_remove').fadeOut();
-				
-				$('#commission_remove').replaceWith('<img src="view/image/add.png" alt="<?php echo $text_commission_add; ?>" id="commission_add" class="icon" />');
-				
-				$('#commission_add').fadeIn();
-			}
-		}
-	});
-});
-
-$('#credit_add').live('click', function() {
+$('#credit-add').live('click', function() {
 	$.ajax({
 		type: 'POST',
 		url: 'index.php?route=sale/order/addcredit&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		dataType: 'json',
+		beforeSend: function() {
+			$('#credit').after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');			
+		},
+		complete: function() {
+			$('.loading').remove();
+		},			
 		success: function(json) {
-			if (json.error) {
-				alert(json.error);
+			$('.success').remove();
+			$('.warning').remove();
+			
+			if (json['error']) {
+				$('.breadcrumb').after('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
 			}
 			
-			if (json.success) {
-				alert(json.success);
-
-				$('#credit_add').fadeOut();
-                
-				$('#credit_add').replaceWith('<img src="view/image/delete.png" alt="<?php echo $text_credit_remove; ?>" id="credit_remove" class="icon" />');
-      		  			
-				$('#credit_remove').fadeIn();
+			if (json['success']) {
+                $('.breadcrumb').after('<div class="success" style="display: none;">' + json['success'] + '</div>');
+				
+				$('.success').fadeIn('slow');
+				
+				$('#credit').html('<b>[</b> <a id="credit-remove"><?php echo $text_credit_remove; ?></a> <b>]</b>');
 			}
 		}
 	});
 });
 
-$('#credit_remove').live('click', function() {
+$('#credit-remove').live('click', function() {
 	$.ajax({
 		type: 'POST',
 		url: 'index.php?route=sale/order/removecredit&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		dataType: 'json',
+		beforeSend: function() {
+			$('#credit').after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');			
+		},
+		complete: function() {
+			$('.loading').remove();
+		},			
 		success: function(json) {
-			if (json.error) {
-				alert(json.error);
+			$('.success').remove();
+			$('.warning').remove();
+						
+			if (json['error']) {
+				 $('.breadcrumb').after('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
 			}
 			
-			if (json.success) {
-				alert(json.success);
+			if (json['success']) {
+                 $('.breadcrumb').after('<div class="success" style="display: none;">' + json['success'] + '</div>');
 				
-				$('#credit_remove').fadeOut();
+				$('.success').fadeIn('slow');
 				
-				$('#credit_remove').replaceWith('<img src="view/image/add.png" alt="<?php echo $text_credit_add; ?>" id="credit_add" class="icon" />');
+				$('#credit').html('<b>[</b> <a id="credit-add"><?php echo $text_credit_add; ?></a> <b>]</b>');
+			}
+		}
+	});
+});
+
+$('#reward-add').live('click', function() {
+	$.ajax({
+		type: 'POST',
+		url: 'index.php?route=sale/order/addreward&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
+		dataType: 'json',
+		beforeSend: function() {
+			$('#reward').after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');			
+		},
+		complete: function() {
+			$('.loading').remove();
+		},									
+		success: function(json) {
+			$('.success').remove();
+			$('.warning').remove();
+						
+			if (json['error']) {
+				 $('.breadcrumb').after('<div class="warning" style="display: none;">' + json['error'] + '</div>');
 				
-				$('#credit_add').fadeIn();
+				$('.warning').fadeIn('slow');
+			}
+			
+			if (json['success']) {
+                 $('.breadcrumb').after('<div class="success" style="display: none;">' + json['success'] + '</div>');
+				
+				$('.success').fadeIn('slow');
+
+				$('#reward').html('<b>[</b> <a id="reward-remove"><?php echo $text_reward_remove; ?></a> <b>]</b>');
+			}
+		}
+	});
+});
+
+$('#reward-remove').live('click', function() {
+	$.ajax({
+		type: 'POST',
+		url: 'index.php?route=sale/order/removereward&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
+		dataType: 'json',
+		beforeSend: function() {
+			$('#reward').after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+		},
+		complete: function() {
+			$('.loading').remove();
+		},				
+		success: function(json) {
+			$('.success').remove();
+			$('.warning').remove();
+						
+			if (json['error']) {
+				 $('.breadcrumb').after('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
+			}
+			
+			if (json['success']) {
+                 $('.breadcrumb').after('<div class="success" style="display: none;">' + json['success'] + '</div>');
+				
+				$('.success').fadeIn('slow');
+				
+				$('#reward').html('<b>[</b> <a id="reward-add"><?php echo $text_reward_add; ?></a> <b>]</b>');
+			}
+		}
+	});
+});
+
+$('#commission-add').live('click', function() {
+	$.ajax({
+		type: 'POST',
+		url: 'index.php?route=sale/order/addcommission&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
+		dataType: 'json',
+		beforeSend: function() {
+			$('#commission').after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');			
+		},
+		complete: function() {
+			$('.loading').remove();
+		},			
+		success: function(json) {
+			$('.success').remove();
+			$('.warning').remove();
+						
+			if (json['error']) {
+				 $('.breadcrumb').after('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
+			}
+			
+			if (json['success']) {
+                 $('.breadcrumb').after('<div class="success" style="display: none;">' + json['success'] + '</div>');
+				
+				$('.success').fadeIn('slow');
+                
+				$('#commission').html('<b>[</b> <a id="commission-remove"><?php echo $text_commission_remove; ?></a> <b>]</b>');
+			}
+		}
+	});
+});
+
+$('#commission-remove').live('click', function() {
+	$.ajax({
+		type: 'POST',
+		url: 'index.php?route=sale/order/removecommission&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
+		dataType: 'json',
+		beforeSend: function() {
+			$('#commission').after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');			
+		},
+		complete: function() {
+			$('.loading').remove();
+		},			
+		success: function(json) {
+			$('.success').remove();
+			$('.warning').remove();
+						
+			if (json['error']) {
+				 $('.breadcrumb').after('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
+			}
+			
+			if (json['success']) {
+                 $('.breadcrumb').after('<div class="success" style="display: none;">' + json['success'] + '</div>');
+				
+				$('.success').fadeIn('slow');
+				
+				$('#commission').html('<b>[</b> <a id="commission-add"><?php echo $text_commission_add; ?></a> <b>]</b>');
 			}
 		}
 	});

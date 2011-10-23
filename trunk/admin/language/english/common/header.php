@@ -63,7 +63,9 @@ $_['text_setting']                     = 'Settings';
 $_['text_stock_status']                = 'Stock Statuses';
 $_['text_support']                     = 'Support Forum';
 $_['text_system']                      = 'System';
+$_['text_tax']                         = 'Taxes';
 $_['text_tax_class']                   = 'Tax Classes';
+$_['text_tax_rate']                    = 'Tax Rates';
 $_['text_total']                       = 'Order Totals';
 $_['text_user']                        = 'Users';
 $_['text_documentation']               = 'Documentation';
@@ -74,4 +76,6 @@ $_['text_voucher_theme']               = 'Voucher Themes';
 $_['text_weight_class']                = 'Weight Classes';
 $_['text_length_class']                = 'Length Classes';
 $_['text_zone']                        = 'Zones';
+$_['text_poll']			       = 'Poll';
+$_['text_dataexchange']		       = 'Import/Export';
 ?>

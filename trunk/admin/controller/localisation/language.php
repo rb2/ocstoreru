@@ -258,7 +258,7 @@ class ControllerLocalisationLanguage extends Controller {
 		$this->template = 'localisation/language_list.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -433,7 +433,7 @@ class ControllerLocalisationLanguage extends Controller {
 		$this->template = 'localisation/language_form.tpl';
 		$this->children = array(
 			'common/header',
-			'common/footer',
+			'common/footer'
 		);
 				
 		$this->response->setOutput($this->render());
@@ -444,11 +444,11 @@ class ControllerLocalisationLanguage extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((strlen(utf8_decode($this->request->post['name'])) < 3) || (strlen(utf8_decode($this->request->post['name'])) > 32)) {
+		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
 			$this->error['name'] = $this->language->get('error_name');
 		}
 
-		if (strlen(utf8_decode($this->request->post['code'])) < 2) {
+		if (utf8_strlen($this->request->post['code']) < 2) {
 			$this->error['code'] = $this->language->get('error_code');
 		}
 
@@ -464,7 +464,7 @@ class ControllerLocalisationLanguage extends Controller {
 			$this->error['filename'] = $this->language->get('error_filename');
 		}
 		
-		if ((strlen(utf8_decode($this->request->post['image'])) < 3) || (strlen(utf8_decode($this->request->post['image'])) > 32)) {
+		if ((utf8_strlen($this->request->post['image']) < 3) || (utf8_strlen($this->request->post['image']) > 32)) {
 			$this->error['image'] = $this->language->get('error_image');
 		}
 

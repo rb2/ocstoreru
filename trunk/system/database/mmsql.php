@@ -42,10 +42,11 @@ final class MSSQL {
 
 				return $query;	
     		} else {
-				return TRUE;
+				return true;
 			}
 		} else {
-      		exit('Error: ' . mssql_get_last_message($this->connection) . '<br />' . $sql);
+			trigger_error('Error: ' . mssql_get_last_message($this->connection) . '<br />' . $sql);
+      		exit();
     	}
   	}
 	
@@ -58,7 +59,7 @@ final class MSSQL {
   	}
 
   	public function getLastId() {
-		$last_id = FALSE;
+		$last_id = false;
 		
 		$resource = mssql_query("SELECT @@identity AS id", $this->connection);
 		
