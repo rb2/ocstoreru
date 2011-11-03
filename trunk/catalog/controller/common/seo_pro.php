@@ -259,7 +259,9 @@ class ControllerCommonSeoPro extends Controller {
 
 		$seo_url = str_replace('&amp;', '&', $seo_url);
 
-		if ($link != rawurldecode(ltrim(parse_url($seo_url, PHP_URL_PATH), '/'))) {
+		$link = parse_url($this->config->get('config_url'), PHP_URL_PATH) . $link;
+
+		if ($link != rawurldecode(parse_url($seo_url, PHP_URL_PATH))) {
 			$get[] = 'route';
 
 			$data = array_diff_key($this->request->get, array_flip($get));
