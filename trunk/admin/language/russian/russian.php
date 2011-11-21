@@ -64,9 +64,6 @@ $_['button_add_module']       = 'Добавить модуль';
 $_['button_add_link']         = 'Добавить ссылку';
 $_['button_approve']          = 'Активировать';
 $_['button_reset']            = 'Сброс';
-$_['button_enable']           = 'Включить';
-$_['button_disable']          = 'Отключить';
-$_['button_add_rate']         = 'Добавить налоговую ставку';
 
 // Tab
 $_['tab_address']             = 'Адрес';
@@ -77,7 +74,7 @@ $_['tab_data']                = 'Данные';
 $_['tab_design']              = 'Дизайн';
 $_['tab_discount']            = 'Скидка';
 $_['tab_general']             = 'Общие';
-$_['tab_ip']				  = 'IP адреса';
+$_['tab_ip']                  = 'IP адреса';
 $_['tab_links']               = 'Связи';
 $_['tab_image']               = 'Изображения';
 $_['tab_option']              = 'Опции';
@@ -98,7 +95,6 @@ $_['tab_shipping']            = 'Адрес доставки';
 $_['tab_total']               = 'Totals';
 $_['tab_transaction']         = 'Транзакции';
 $_['tab_voucher_history']     = 'История подарочных сертификатов';
-$_['tab_sms']		      = 'SMS';
 
 // Error
 $_['error_upload_1']          = 'Размер загружаемого файла превышает максимальный размер, указанный в php.ini!';

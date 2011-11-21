@@ -31,13 +31,13 @@
 // Confirm Actions (delete, uninstall)
 //-----------------------------------------
 $(document).ready(function(){
-	$(".scrollbox").each(function(i) {
+    $(".scrollbox").each(function(i) {
         if ($(this).attr('id') == null) {
-			$(this).attr('id', 'scrollbox_' + i);
-			sbox = '#' + $(this).attr('id');
-			$(this).after('<span><a onclick="$(\'' + sbox + ' :checkbox\').attr(\'checked\', \'checked\');"><u><?php echo $text_select_all; ?></u></a> / <a onclick="$(\'' + sbox + ' :checkbox\').removeAttr(\'checked\');"><u><?php echo $text_unselect_all; ?></u></a></span>');
+            $(this).attr('id', 'scrollbox_' + i);
+            sbox = '#' + $(this).attr('id');
+            $(this).after('<span><a onclick="$(\'' + sbox + ' :checkbox\').attr(\'checked\', \'checked\');"><u><?php echo $text_select_all; ?></u></a> / <a onclick="$(\'' + sbox + ' :checkbox\').removeAttr(\'checked\');"><u><?php echo $text_unselect_all; ?></u></a></span>');
         }
-	});
+    });
 	
     // Confirm Delete
     $('#form').submit(function(){
@@ -152,7 +152,7 @@ $(document).ready(function(){
               <li><a href="<?php echo $geo_zone; ?>"><?php echo $text_geo_zone; ?></a></li>
               <li><a class="parent"><?php echo $text_tax; ?></a>
                 <ul>
-              <li><a href="<?php echo $tax_class; ?>"><?php echo $text_tax_class; ?></a></li>
+                  <li><a href="<?php echo $tax_class; ?>"><?php echo $text_tax_class; ?></a></li>
                   <li><a href="<?php echo $tax_rate; ?>"><?php echo $text_tax_rate; ?></a></li>
                 </ul>
               </li>
@@ -192,7 +192,7 @@ $(document).ready(function(){
             <ul>
               <li><a href="<?php echo $report_affiliate_commission; ?>"><?php echo $text_report_affiliate_commission; ?></a></li>
             </ul>
-          </li>          
+          </li>
         </ul>
       </li>
       <li id="help"><a class="top"><?php echo $text_help; ?></a>

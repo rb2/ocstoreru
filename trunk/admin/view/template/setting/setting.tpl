@@ -440,7 +440,7 @@
                   <?php } ?>
                   <?php } ?>
                 </select></td>
-            </tr>            
+            </tr>
             <tr>
               <td><?php echo $entry_return_status; ?></td>
               <td><select name="config_return_status_id">
@@ -655,7 +655,7 @@
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
-			<tr>
+            <tr>
               <td><?php echo $entry_account_mail; ?></td>
               <td><?php if ($config_account_mail) { ?>
                 <input type="radio" name="config_account_mail" value="1" checked="checked" />

@@ -362,14 +362,14 @@ class ControllerCatalogProduct extends Controller {
 			$special = false;
 			
 			$product_specials = $this->model_catalog_product->getProductSpecials($result['product_id']);
-
+			
 			foreach ($product_specials  as $product_special) {
 				if (($product_special['date_start'] == '0000-00-00' || $product_special['date_start'] > date('Y-m-d')) && ($product_special['date_end'] == '0000-00-00' || $product_special['date_end'] < date('Y-m-d'))) {
 					$special = $product_special['price'];
 			
 					break;
 				}					
-            }
+			}
 	
       		$this->data['products'][] = array(
 				'product_id' => $result['product_id'],
@@ -810,7 +810,7 @@ class ControllerCatalogProduct extends Controller {
     	} else {
 			$this->data['shipping'] = 1;
 		}
-      	
+		
     	if (isset($this->request->post['price'])) {
       		$this->data['price'] = $this->request->post['price'];
     	} else if (!empty($product_info)) {
@@ -882,7 +882,7 @@ class ControllerCatalogProduct extends Controller {
     	} else {
 			$this->data['stock_status_id'] = $this->config->get('config_stock_status_id');
 		}
-		
+				
     	if (isset($this->request->post['status'])) {
       		$this->data['status'] = $this->request->post['status'];
     	} else if (!empty($product_info)) {
@@ -890,7 +890,7 @@ class ControllerCatalogProduct extends Controller {
 		} else {
       		$this->data['status'] = 1;
     	}
-		
+
     	if (isset($this->request->post['weight'])) {
       		$this->data['weight'] = $this->request->post['weight'];
 		} else if (!empty($product_info)) {
@@ -1042,7 +1042,7 @@ class ControllerCatalogProduct extends Controller {
 			}
 			
 			$this->data['product_images'][] = array(
-				'image'   => $image,
+				'image'      => $image,
 				'thumb'      => $this->model_tool_image->resize($image, 100, 100),
 				'sort_order' => $product_image['sort_order'],
 			);
@@ -1247,13 +1247,13 @@ class ControllerCatalogProduct extends Controller {
 			} else {
 				$limit = 20;	
 			}			
-			
+						
 			$data = array(
 				'filter_name'         => $filter_name,
 				'filter_model'        => $filter_model,
 				'filter_category_id'  => $filter_category_id,
 				'filter_sub_category' => $filter_sub_category,
-				'start'       => 0,
+				'start'               => 0,
 				'limit'               => $limit
 			);
 			
@@ -1307,7 +1307,7 @@ class ControllerCatalogProduct extends Controller {
 				);	
 			}
 		}
-		
+
 		$this->response->setOutput(json_encode($json));
 	}
 

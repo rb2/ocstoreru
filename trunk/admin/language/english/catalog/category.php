@@ -13,8 +13,6 @@ $_['text_clear']             = 'Clear Image';
 $_['column_name']            = 'Category Name';
 $_['column_sort_order']      = 'Sort Order';
 $_['column_action']          = 'Action';
-$_['entry_title']            = 'Tag "title"';
-$_['entry_h1']               = 'Header "h1"';
 
 // Entry
 $_['entry_name']             = 'Category Name:';

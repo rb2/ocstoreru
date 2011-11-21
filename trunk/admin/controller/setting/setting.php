@@ -192,7 +192,7 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['error_image_product'] = '';
 		}
-				
+		
  		if (isset($this->error['image_additional'])) {
 			$this->data['error_image_additional'] = $this->error['image_additional'];
 		} else {
@@ -424,7 +424,7 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_tax'] = $this->config->get('config_tax');			
 		}
-						
+		
 		if (isset($this->request->post['config_tax_default'])) {
 			$this->data['config_tax_default'] = $this->request->post['config_tax_default'];
 		} else {
@@ -656,7 +656,7 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_image_product_height'] = $this->config->get('config_image_product_height');
 		}
-		
+
 		if (isset($this->request->post['config_image_additional_width'])) {
 			$this->data['config_image_additional_width'] = $this->request->post['config_image_additional_width'];
 		} else {

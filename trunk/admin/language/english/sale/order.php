@@ -102,8 +102,6 @@ $_['entry_notify']            = 'Notify Customer:';
 $_['entry_comment']           = 'Comment:';
 $_['entry_shipping']          = 'Shipping Method:';
 $_['entry_payment']           = 'Payment Method:';
-$_['entry_price']             = 'Цена за еденицу:';
-$_['entry_model']             = 'Модель:';
 
 // Error
 $_['error_permission']        = 'Warning: You do not have permission to modify orders!';

@@ -64,9 +64,6 @@ $_['button_add_module']       = 'Add Module';
 $_['button_add_link']         = 'Add Link';
 $_['button_approve']          = 'Approve';
 $_['button_reset']            = 'Reset';
-$_['button_enable']           = 'Enable';
-$_['button_disable']          = 'Disable';
-$_['button_add_rate']         = 'Add Tax Rate';
 
 // Tab
 $_['tab_address']             = 'Address';
@@ -98,7 +95,6 @@ $_['tab_shipping']            = 'Shipping Details';
 $_['tab_total']               = 'Totals';
 $_['tab_transaction']         = 'Transactions';
 $_['tab_voucher_history']     = 'Voucher History';
-$_['tab_sms']		      = 'SMS';
 
 // Error
 $_['error_upload_1']          = 'Warning: The uploaded file exceeds the upload_max_filesize directive in php.ini!';
