@@ -38,7 +38,7 @@ class ControllerProductManufacturer extends Controller {
 			if (is_numeric(utf8_substr($result['name'], 0, 1))) {
 				$key = '0 - 9';
 			} else {
-				$key = substr(utf8_strtoupper($result['name']), 0, 1);
+				$key = utf8_truncate(utf8_strtoupper($result['name']), 1, '');
 			}
 			
 			if (!isset($this->data['manufacturers'][$key])) {
@@ -221,17 +221,11 @@ class ControllerProductManufacturer extends Controller {
 					$rating = false;
 				}
 			
-				$cut_descr_symbols = 400;
-				$descr_plaintext = strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'));
-				if( mb_strlen($descr_plaintext, 'UTF-8') > $cut_descr_symbols )
-				{
-					$descr_plaintext = mb_substr($descr_plaintext, 0, $cut_descr_symbols, 'UTF-8') . '&nbsp;&hellip;';
-				}
 				$this->data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
-					'description' => $descr_plaintext,
+					'description' => utf8_truncate(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 400, '&nbsp;&hellip;', true),
 					'price'       => $price,
 					'special'     => $special,
 					'tax'         => $tax,

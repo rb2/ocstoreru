@@ -335,14 +335,14 @@ class ModelCheckoutOrder extends Model {
 					if ($option['type'] != 'file') {
 						$option_data[] = array(
 							'name'  => $option['name'],
-							'value' => (strlen($option['value']) > 20 ? substr($option['value'], 0, 20) . '..' : $option['value'])
+							'value' => utf8_truncate($option['value'])
 						);
 					} else {
 						$filename = substr($option['value'], 0, strrpos($option['value'], '.'));
 						
 						$option_data[] = array(
 							'name'  => $option['name'],
-							'value' => (strlen($filename) > 20 ? substr($filename, 0, 20) . '..' : $filename)
+							'value' => utf8_truncate($filename)
 						);	
 					}
 				}
@@ -384,7 +384,7 @@ class ModelCheckoutOrder extends Model {
 				$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . $result['order_product_id'] . "'");
 				
 				foreach ($order_option_query->rows as $option) {
-					$text .= chr(9) . '-' . $option['name'] . ' ' . (strlen($option['value']) > 20 ? substr($option['value'], 0, 20) . '..' : $option['value']) . "\n";
+					$text .= chr(9) . '-' . $option['name'] . ' ' . utf8_truncate($option['value']) . "\n";
 				}
 			}
 			
@@ -449,7 +449,7 @@ class ModelCheckoutOrder extends Model {
 					$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . $result['order_product_id'] . "'");
 					
 					foreach ($order_option_query->rows as $option) {
-						$text .= chr(9) . '-' . $option['name'] . ' ' . (strlen($option['value']) > 20 ? substr($option['value'], 0, 20) . '..' : $option['value']) . "\n";
+						$text .= chr(9) . '-' . $option['name'] . ' ' . utf8_truncate($option['value']) . "\n";
 					}
 				}
 				

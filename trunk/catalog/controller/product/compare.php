@@ -107,19 +107,13 @@ class ControllerProductCompare extends Controller {
 					}
 				}
 															
-				$cut_descr_symbols = 400;
-				$descr_plaintext = strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8'));
-				if( mb_strlen($descr_plaintext, 'UTF-8') > $cut_descr_symbols )
-				{
-					$descr_plaintext = mb_substr($descr_plaintext, 0, $cut_descr_symbols, 'UTF-8') . '&nbsp;&hellip;';
-				}
 				$this->data['products'][$product_id] = array(
 					'product_id'   => $product_info['product_id'],
 					'name'         => $product_info['name'],
 					'thumb'        => $image,
 					'price'        => $price,
 					'special'      => $special,
-					'description'  => $descr_plaintext,
+					'description'  => utf8_truncate(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')), 400, '&nbsp;&hellip;', true),
 					'model'        => $product_info['model'],
 					'manufacturer' => $product_info['manufacturer'],
 					'availability' => $availability,

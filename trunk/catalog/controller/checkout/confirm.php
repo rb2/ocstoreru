@@ -305,7 +305,7 @@ class ControllerCheckoutConfirm extends Controller {
 					if ($option['type'] != 'file') {
 						$option_data[] = array(
 							'name'  => $option['name'],
-							'value' => (strlen($option['option_value']) > 20 ? substr($option['option_value'], 0, 20) . '..' : $option['option_value'])
+							'value' => utf8_truncate($option['option_value'])
 						);
 					} else {
 						$this->load->library('encryption');
@@ -316,7 +316,7 @@ class ControllerCheckoutConfirm extends Controller {
 						
 						$option_data[] = array(
 							'name'  => $option['name'],
-							'value' => (strlen($file) > 20 ? substr($file, 0, 20) . '..' : $file)
+							'value' => utf8_truncate($file)
 						);												
 					}
 				}  

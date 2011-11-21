@@ -340,14 +340,14 @@ class ControllerAccountOrder extends Controller {
           			if ($option['type'] != 'file') {
 						$option_data[] = array(
 							'name'  => $option['name'],
-							'value' => (strlen($option['value']) > 20 ? substr($option['value'], 0, 20) . '..' : $option['value']),
+							'value' => utf8_truncate($option['value']),
 						);
 					} else {
 						$filename = substr($option['value'], 0, strrpos($option['value'], '.'));
 						
 						$option_data[] = array(
 							'name'  => $option['name'],
-							'value' => (strlen($filename) > 20 ? substr($filename, 0, 20) . '..' : $filename)
+							'value' => utf8_truncate($filename)
 						);						
 					}
         		}
