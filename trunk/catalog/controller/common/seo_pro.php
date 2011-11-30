@@ -10,7 +10,7 @@ class ControllerCommonSeoPro extends Controller {
 		if (isset($this->request->get['_route_'])) {
 			$route = $this->request->get['_route_'];
 			unset($this->request->get['_route_']);
-			$parts = explode('/', trim(mb_strtolower($route, 'UTF-8'), '/'));
+			$parts = explode('/', trim(utf8_strtolower($route, 'UTF-8'), '/'));
 			list($last_part) = explode('.', array_pop($parts));
 			array_push($parts, $last_part);
 
@@ -20,7 +20,7 @@ class ControllerCommonSeoPro extends Controller {
 			if ($query->num_rows == sizeof($parts)) {
 				$queries = array();
 				foreach ($query->rows as $row) {
-					$queries[mb_strtolower($row['keyword'], 'UTF-8')] = $row['query'];
+					$queries[utf8_strtolower($row['keyword'], 'UTF-8')] = $row['query'];
 				}
 
 				reset($parts);
