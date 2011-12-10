@@ -81,13 +81,16 @@ class ControllerCommonSeoPro extends Controller {
 		switch ($route) {
 			case 'product/product':
 				if (isset($data['product_id'])) {
-					$product_id = $data['product_id'];
+					$tmp = $data;
 					$data = array();
 					if ($this->config->get('config_seo_url_include_path')) {
 						$data['path'] = $this->getPathByProduct($product_id);
 						if (!$data['path']) return $link;
 					}
-					$data['product_id'] = $product_id;
+					$data['product_id'] = $tmp['product_id'];
+					if (isset($tmp['tracking'])) {
+						$data['tracking'] = $tmp['tracking'];
+					}
 				}
 				break;
 
