@@ -84,7 +84,7 @@ class ControllerCommonSeoPro extends Controller {
 					$tmp = $data;
 					$data = array();
 					if ($this->config->get('config_seo_url_include_path')) {
-						$data['path'] = $this->getPathByProduct($product_id);
+						$data['path'] = $this->getPathByProduct($tmp['product_id']);
 						if (!$data['path']) return $link;
 					}
 					$data['product_id'] = $tmp['product_id'];
