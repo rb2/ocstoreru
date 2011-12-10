@@ -10,7 +10,7 @@ $_['text_your_details']    = 'Основные данные';
 $_['text_your_address']    = 'Ваш адрес';
 $_['text_newsletter']      = 'Подписка на новости';
 $_['text_your_password']   = 'Ваш пароль';
-$_['text_agree']           = 'Я прочитал и принимаю <a class="thickbox" href="%s" alt="%s"><b>%s</b></a>';
+$_['text_agree']           = 'Я прочитал и принимаю <a class="fancybox" href="%s" alt="%s"><b>%s</b></a>';
 
 // Entry
 $_['entry_firstname']      = 'Имя Отчество:';

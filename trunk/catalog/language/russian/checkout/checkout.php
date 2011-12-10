@@ -25,7 +25,7 @@ $_['text_items']                     = '%s item(s) - %s';
 $_['text_your_details']              = 'Личные данные';
 $_['text_your_address']              = 'Адрес';
 $_['text_your_password']             = 'Пароль';
-$_['text_agree']                     = 'Я прочитал и согласен с правилами <a class="thickbox" href="%s" alt="%s"><b>%s</b></a>';
+$_['text_agree']                     = 'Я прочитал и согласен с правилами <a class="fancybox" href="%s" alt="%s"><b>%s</b></a>';
 $_['text_address_new']               = 'Добавить новый адрес';
 $_['text_address_existing']          = 'Использовать существующий адрес';
 $_['text_shipping_method']           = 'Пожалуйста укажите способ доставки:';
