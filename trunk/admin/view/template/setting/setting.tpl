@@ -17,7 +17,7 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a></div>
+      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><a href="#tab-sms"><?php echo $tab_sms; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a></div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
           <table class="form">
@@ -672,6 +672,62 @@
             <tr>
               <td><?php echo $entry_alert_emails; ?></td>
               <td><textarea name="config_alert_emails" cols="40" rows="5"><?php echo $config_alert_emails; ?></textarea></td>
+            </tr>
+          </table>
+        </div>
+        <div id="tab-sms">
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_sms_alert; ?></td>
+              <td><?php if ($config_sms_alert) { ?>
+                <input type="radio" name="config_sms_alert" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_sms_alert" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_sms_alert" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_sms_alert" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_sms_gatename; ?></td>
+              <td>
+                <select name="config_sms_gatename">
+                <?php foreach($sms_gatenames as $sms_gatename) { ?>
+                <?php if ($config_sms_gatename == $sms_gatename) { ?>
+                <option value="<?php echo $sms_gatename; ?>" selected="selected"><?php echo $sms_gatename; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $sms_gatename; ?>"><?php echo $sms_gatename; ?></option>
+                <?php } ?>
+                <?php } ?>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_sms_from; ?></td>
+              <td><input type="text" name="config_sms_from" value="<?php echo $config_sms_from; ?>" maxlength="15" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_sms_to; ?></td>
+              <td><input type="text" name="config_sms_to" value="<?php echo $config_sms_to; ?>" maxlength="15" /></td>
+            </tr>
+            <tr>
+              <td valign="top"><?php echo $entry_sms_copy; ?></td>
+              <td><textarea name="config_sms_copy" cols="40"><?php echo $config_sms_copy; ?></textarea></td>
+            </tr>
+            <tr>
+              <td valign="top"><?php echo $entry_sms_message; ?></td>
+              <td><textarea name="config_sms_message" cols="40" rows="5"><?php echo $config_sms_message; ?></textarea></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_sms_gate_username; ?></td>
+              <td><input type="text" name="config_sms_gate_username" value="<?php echo $config_sms_gate_username; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_sms_gate_password; ?></td>
+              <td><input type="text" name="config_sms_gate_password" value="<?php echo $config_sms_gate_password; ?>" /></td>
             </tr>
           </table>
         </div>

@@ -95,6 +95,7 @@ $_['tab_shipping']            = 'Адрес доставки';
 $_['tab_total']               = 'Totals';
 $_['tab_transaction']         = 'Транзакции';
 $_['tab_voucher_history']     = 'История подарочных сертификатов';
+$_['tab_sms']                 = 'SMS';
 
 // Error
 $_['error_upload_1']          = 'Размер загружаемого файла превышает максимальный размер, указанный в php.ini!';

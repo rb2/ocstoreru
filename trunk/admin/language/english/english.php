@@ -95,6 +95,7 @@ $_['tab_shipping']            = 'Shipping Details';
 $_['tab_total']               = 'Totals';
 $_['tab_transaction']         = 'Transactions';
 $_['tab_voucher_history']     = 'Voucher History';
+$_['tab_sms']                 = 'SMS';
 
 // Error
 $_['error_upload_1']          = 'Warning: The uploaded file exceeds the upload_max_filesize directive in php.ini!';
