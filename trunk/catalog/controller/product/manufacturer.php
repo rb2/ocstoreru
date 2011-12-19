@@ -127,7 +127,14 @@ class ControllerProductManufacturer extends Controller {
 		$manufacturer_info = $this->model_catalog_manufacturer->getManufacturer($manufacturer_id);
 	
 		if ($manufacturer_info) {
-			$this->document->setTitle($manufacturer_info['name']);
+			if ($manufacturer_info['seo_title']) {
+				$this->document->setTitle($manufacturer_info['seo_title']);
+			} else {
+				$this->document->setTitle($manufacturer_info['name']);
+			}
+
+			$this->document->setDescription($manufacturer_info['meta_description']);
+			$this->document->setKeywords($manufacturer_info['meta_keyword']);
 			
 			$url = '';
 			
@@ -152,6 +159,10 @@ class ControllerProductManufacturer extends Controller {
 				'href'      => $this->url->link('product/manufacturer/product', 'manufacturer_id=' . $this->request->get['manufacturer_id'] . $url),
       			'separator' => $this->language->get('text_separator')
    			);
+
+			$this->data['seo_h1'] = $manufacturer_info['seo_h1'];
+
+			$this->data['description'] = html_entity_decode($manufacturer_info['description'], ENT_QUOTES, 'UTF-8');
 		
 			$this->data['heading_title'] = $manufacturer_info['name'];
 			

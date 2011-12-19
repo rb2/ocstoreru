@@ -26,8 +26,8 @@ $_['column_action']          	= 'Действие';
 
 // Entry
 $_['entry_name']             = 'Название товара:';
-$_['entry_meta_keyword'] 	 = 'Мета-тег "Ключевые слова":';
-$_['entry_meta_description'] = 'Мета-тег "Описание":';
+$_['entry_meta_keyword']     = 'Мета-тег Keywords:';
+$_['entry_meta_description'] = 'Мета-тег Description:';
 $_['entry_description']      = 'Описание:';
 $_['entry_store']            = 'Магазины:';
 $_['entry_keyword']          = 'SEO URL:<br/><span class="help">Должно быть уникальным на всю систему.</span>';
@@ -70,6 +70,8 @@ $_['entry_tag']          	 = 'Теги товара:<br /><span class="help">р�
 $_['entry_reward']           = 'Бонусные баллы:';
 $_['entry_layout']           = 'Изменить схему:';
 $_['entry_main_category']    = 'Категория:';
+$_['entry_seo_title']        = 'HTML-тег Title:';
+$_['entry_seo_h1']           = 'HTML-тег H1:';
 
 // Error
 $_['error_warning']          = 'Внимательно проверьте форму на ошибки!';

@@ -72,10 +72,17 @@ class ControllerProductCategory extends Controller {
 		$category_info = $this->model_catalog_category->getCategory($category_id);
 	
 		if ($category_info) {
-	  		$this->document->setTitle($category_info['name']);
+			if ($category_info['seo_title']) {
+		  		$this->document->setTitle($category_info['seo_title']);
+			} else {
+		  		$this->document->setTitle($category_info['name']);
+			}
+
 			$this->document->setDescription($category_info['meta_description']);
 			$this->document->setKeywords($category_info['meta_keyword']);
 			
+			$this->data['seo_h1'] = $category_info['seo_h1'];
+
 			$this->data['heading_title'] = $category_info['name'];
 			
 			$this->data['text_refine'] = $this->language->get('text_refine');

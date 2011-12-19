@@ -64,6 +64,9 @@
     <?php } ?>
   </div>
   <div class="pagination"><?php echo $pagination; ?></div>
+  <?php if ($description) { ?>
+  <div class="manufacturer-info"><?php echo $description; ?></div>
+  <?php } ?>
   <?php } else { ?>
   <div class="content"><?php echo $text_empty; ?></div>
   <div class="buttons">

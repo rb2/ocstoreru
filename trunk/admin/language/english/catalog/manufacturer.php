@@ -23,6 +23,11 @@ $_['entry_keyword']      = 'SEO Keyword:';
 $_['entry_image']        = 'Image:';
 $_['entry_sort_order']   = 'Sort Order:';
 $_['entry_type']         = 'Type:';
+$_['entry_meta_keyword'] = 'Meta Tag Keywords:';
+$_['entry_meta_description'] = 'Meta Tag Description:';
+$_['entry_description']  = 'Description:';
+$_['entry_seo_title']    = 'HTML Tag Title:';
+$_['entry_seo_h1']       = 'HTML Tag H1:';
 
 // Error
 $_['error_permission']   = 'Warning: You do not have permission to modify manufacturers!';

@@ -70,6 +70,8 @@ $_['entry_tag']          	 = 'Product Tags:<br /><span class="help">comma separa
 $_['entry_reward']           = 'Reward Points:';
 $_['entry_layout']           = 'Layout Override:';
 $_['entry_main_category']    = 'Category:';
+$_['entry_seo_title']        = 'HTML Tag Title:';
+$_['entry_seo_h1']           = 'HTML Tag H1:';
 
 // Error
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';
