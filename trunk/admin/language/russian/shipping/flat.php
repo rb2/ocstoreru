@@ -8,7 +8,7 @@ $_['text_success']     = 'Настройки модуля обновлены!';
 
 // Entry
 $_['entry_cost']       = 'Стоимость:';
-$_['entry_tax_class']  = 'Налог:';
+$_['entry_tax_class']  = 'Налоговый класс:';
 $_['entry_geo_zone']   = 'Географическая зона:';
 $_['entry_status']     = 'Статус:';
 $_['entry_sort_order'] = 'Порядок сортировки:';

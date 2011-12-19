@@ -1,31 +1,31 @@
 <?php
 // Heading
-$_['heading_title']        = 'Tax Rates';
+$_['heading_title']        = 'Налоговая ставка';
 
 // Text
-$_['text_percent']         = 'Percentage';
-$_['text_amount']          = 'Fixed Amount';
-$_['text_success']         = 'Success: You have modified tax classes!';
+$_['text_percent']         = 'Проценты';
+$_['text_amount']          = 'Фиксированный платеж';
+$_['text_success']         = 'Изменения сохранены!';
 
 // Column
-$_['column_name']          = 'Tax Name';
-$_['column_rate']          = 'Tax Rate';
-$_['column_type']          = 'Type';
-$_['column_geo_zone']      = 'Geo Zone';
-$_['column_date_added']    = 'Date Added';
-$_['column_date_modified'] = 'Date Modified';
-$_['column_action']        = 'Action';
+$_['column_name']          = 'Налог';
+$_['column_rate']          = 'Налоговая ставка';
+$_['column_type']          = 'Тип';
+$_['column_geo_zone']      = 'Географицеская зона';
+$_['column_date_added']    = 'Дата добавления';
+$_['column_date_modified'] = 'Дата изменения';
+$_['column_action']        = 'Действие';
 
 // Entry
-$_['entry_name']           = 'Tax Name:';
-$_['entry_rate']           = 'Tax Rate:';
-$_['entry_type']           = 'Type:';
-$_['entry_customer_group'] = 'Customer Group:';
-$_['entry_geo_zone']       = 'Geo Zone:';
+$_['entry_name']           = 'Налог:';
+$_['entry_rate']           = 'Налоговая ставка:';
+$_['entry_type']           = 'Тип:';
+$_['entry_customer_group'] = 'Группа клиентов:';
+$_['entry_geo_zone']       = 'Географицеская зона:';
 
 // Error
-$_['error_permission']     = 'Warning: You do not have permission to modify tax classes!';
-$_['error_tax_rule']       = 'Warning: This tax rate cannot be deleted as it is currently assigned to %s tax classes!';
-$_['error_name']           = 'Tax Name must be between 3 and 32 characters!';
-$_['error_rate']           = 'Tax Rate required!';
+$_['error_permission']     = 'Вы не можете изменять налоговые классы!';
+$_['error_tax_rule']       = 'Эта ставка налога не может быть удалена, так как назначена %s налоговым классам!';
+$_['error_name']           = 'Налоговое имя должно быть от 3 до 32 символов!';
+$_['error_rate']           = 'Необходимо указать налоговую ставку!';
 ?>

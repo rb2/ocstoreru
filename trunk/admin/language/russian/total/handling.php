@@ -9,7 +9,7 @@ $_['text_success']     = 'Настройки модуля обновлены!';
 // Entry
 $_['entry_total']      = 'Сумма заказа:';
 $_['entry_fee']        = 'Плата:';
-$_['entry_tax_class']  = 'Налоги:';
+$_['entry_tax_class']  = 'Налоговый класс:';
 $_['entry_status']     = 'Статус:';
 $_['entry_sort_order'] = 'Порядок сортировки:';
 

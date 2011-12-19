@@ -5,8 +5,8 @@ $_['heading_title']	 = 'Тематика подарочного сертифик
 // Text
 $_['text_success']	 = 'Тематика подарочного сертификата успешно изменена!';
 $_['text_image_manager'] = 'Менеджер изображений';
-$_['text_browse']        = 'Browse Files';
-$_['text_clear']         = 'Clear Image';
+$_['text_browse']        = 'Обзор';
+$_['text_clear']         = 'Очистить';
 
 // Column
 $_['column_name']	 = 'Названия тематики';

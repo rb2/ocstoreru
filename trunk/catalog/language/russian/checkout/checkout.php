@@ -20,8 +20,8 @@ $_['text_register']                  = 'Создать учётную запис
 $_['text_guest']                     = 'Оформить без регистрации';
 $_['text_register_account']          = 'Создав учетную запись Вы сможетете совершать покупки быстрее, отслеживать статус заказов и сохранять историю покупок.';
 $_['text_forgotten']                 = 'Забыли пароль?';
-$_['text_logged']                    = 'You are logged in as <a href="%s">%s</a> <b>(</b> <a href="%s">Logout</a> <b>)</b>';
-$_['text_items']                     = '%s item(s) - %s';
+$_['text_logged']                    = 'Вы вошли как <a href="%s">%s</a> <b>(</b> <a href="%s">Выйти</a> <b>)</b>';
+$_['text_items']                     = '%s товар(ов) - %s';
 $_['text_your_details']              = 'Личные данные';
 $_['text_your_address']              = 'Адрес';
 $_['text_your_password']             = 'Пароль';

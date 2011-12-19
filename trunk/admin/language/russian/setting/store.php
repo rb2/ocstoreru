@@ -5,10 +5,10 @@ $_['heading_title']		= 'Управление магазинами';
 // Text
 $_['text_success']		= 'Магазины обновлены!';
 $_['text_image_manager']	= 'Менеджер изображений';
-$_['text_browse']               = 'Browse Files';
-$_['text_clear']                = 'Clear Image';
-$_['text_shipping']             = 'Shipping Address';
-$_['text_payment']              = 'Payment Address';
+$_['text_browse']              = 'Обзор';
+$_['text_clear']               = 'Очистить';
+$_['text_shipping']            = 'Адрес доставки';
+$_['text_payment']             = 'Адрес плательщика';
 
 // Column
 $_['column_name']		= 'Название магазина';

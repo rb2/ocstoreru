@@ -42,7 +42,7 @@ $_['text_ship_to']            = 'Адрес доставки';
 $_['text_abandoned_orders']   = 'Брошенные заказы';
 $_['text_default']            = 'Значение по умолчанию';
 $_['text_wait']	              = 'Пожалуйста, подождите!';
-$_['text_create_invoice_no']  = 'Create Invoice No.';
+$_['text_create_invoice_no']  = 'Создать счет-фактуру №';
 $_['text_reward_add']         = 'Добавить бонусные баллы';
 $_['text_reward_added']       = 'Бонусные баллы добавлены!';
 $_['text_reward_remove']      = 'Удалить бонусные баллы';
@@ -55,7 +55,7 @@ $_['text_credit_add']         = 'Добавить кредит';
 $_['text_credit_added']       = 'Кредит добавлен!';
 $_['text_credit_remove']      = 'Удалить кредит';
 $_['text_credit_removed']     = 'Кредит удален!';
-$_['text_upload']             = 'Your file was successfully uploaded!';
+$_['text_upload']             = 'Ваш файл был успешно загружен!';
 
 // Column
 $_['column_order_id']         = '№ заказа';
@@ -78,7 +78,7 @@ $_['column_action']           = 'Действие';
 // Entry
 $_['entry_store']             = 'Магазин:';
 $_['entry_customer']          = 'Клиент:';
-$_['entry_customer_group']    = 'Customer Group:';
+$_['entry_customer_group']    = 'Группа покупателей:';
 $_['entry_firstname']         = 'Имя, Отчество:';
 $_['entry_lastname']          = 'Фамилия:';
 $_['entry_email']             = 'E-Mail:';

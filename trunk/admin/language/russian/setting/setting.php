@@ -5,10 +5,10 @@ $_['heading_title']			= 'Настройки';
 // Text
 $_['text_success']			= 'Настройки успешно изменены!';
 $_['text_image_manager']		= 'Менеджер изображений';
-$_['text_browse']              		= 'Browse Files';
-$_['text_clear']               		= 'Clear Image';
-$_['text_shipping']            		= 'Shipping Address';
-$_['text_payment']             		= 'Payment Address';
+$_['text_browse']                 = 'Обзор';
+$_['text_clear']                  = 'Очистить';
+$_['text_shipping']            		= 'Адрес доставки';
+$_['text_payment']             		= 'Адрес плательщика';
 $_['text_mail']				= 'Mail';
 $_['text_smtp']				= 'SMTP';
 $_['text_seo_url']			= 'Default';
@@ -61,7 +61,7 @@ $_['entry_upload_allowed']		= 'Разрешенные для загрузки т
 $_['entry_cart_weight']			= 'Показывать вес на странице корзины:<br /><span class="help">Показывает вес заказанных товаров на странице корзины</span>';
 $_['entry_logo']			= 'Логотип:';
 $_['entry_icon']			= 'Иконка:<br /><span class="help">Должна быть в PNG 16px на 16px.</span>';
-$_['entry_image_category']     		= 'Размер изображений списка категорий:';
+$_['entry_image_category']     = 'Размер изображения в списке категорий:';
 $_['entry_image_thumb']			= 'Размер большого изображения товара:';
 $_['entry_image_popup']			= 'Размер всплывающего изображения товара:';
 $_['entry_image_product']		= 'Размер изображения в списке товаров:';

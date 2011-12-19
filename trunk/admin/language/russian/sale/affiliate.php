@@ -55,7 +55,7 @@ $_['entry_description']         = 'Описание:';
 
 // Error
 $_['error_permission']          = 'У Вас нет прав для управления партнерами!';
-$_['error_exists']              = 'Warning: E-Mail Address is already registered!';
+$_['error_exists']              = 'Ошибка: E-Mail адрес уже зарегистрирован!';
 $_['error_firstname']           = 'Имя должно быть от 1 до 32 символов!';
 $_['error_lastname']            = 'Фамилия должна быть от 1 до 32 символов!';
 $_['error_email']               = 'E-Mail адрес введен неверно!';

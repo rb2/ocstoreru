@@ -6,8 +6,8 @@ $_['heading_title']          = 'Категории';
 $_['text_success']           = 'Список категорий обновлен!';
 $_['text_default']           = 'Основной магазин';
 $_['text_image_manager']     = 'Менеджер изображений';
-$_['text_browse']            = 'Browse Files';
-$_['text_clear']             = 'Clear Image';
+$_['text_browse']            = 'Обзор';
+$_['text_clear']             = 'Очистить';
 
 // Column
 $_['column_name']            = 'Название категории';

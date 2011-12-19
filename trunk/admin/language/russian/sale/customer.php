@@ -4,7 +4,7 @@ $_['heading_title']           = 'Покупатели';
 
 // Text
 $_['text_success']            = 'Вы изменили данные о покупателях!';
-$_['text_default']            = 'Default';
+$_['text_default']            = 'По умолчанию';
 $_['text_approved']           = 'Вы активировали %s аккаунт!';
 $_['text_wait']               = 'Подождите!';
 $_['text_balance']            = 'Баланс:';
@@ -14,7 +14,7 @@ $_['column_name']             = 'Имя покупателя';
 $_['column_email']            = 'E-Mail';
 $_['column_customer_group']   = 'Группа клиентов';
 $_['column_status']           = 'Статус';
-$_['column_login']            = 'Login into Store';
+$_['column_login']            = 'Войти в магазин';
 $_['column_approved']         = 'Активирован';
 $_['column_date_added']       = 'Дата добавления';
 $_['column_description']      = 'Описание';
@@ -50,7 +50,7 @@ $_['entry_description']       = 'Описание:';
 // Error
 $_['error_warning']           = 'Внимательно проверьте форму на ошибки!';
 $_['error_permission']        = 'У Вас нет прав для изменения покупателей!';
-$_['error_exists']            = 'Warning: E-Mail Address is already registered!';
+$_['error_exists']            = 'Ошибка: E-Mail адрес уже зарегистрирован!';
 $_['error_firstname']         = 'Имя должно быть от 1 до 32 символов!';
 $_['error_lastname']          = 'Фамилия должна быть от 1 до 32 символов!';
 $_['error_email']             = 'E-Mail адрес введен неверно!';
