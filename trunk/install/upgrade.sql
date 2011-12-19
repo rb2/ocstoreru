@@ -83,29 +83,26 @@ ALTER TABLE oc_product_tag ADD INDEX tag (tag);
 
 #### START ADD TITLE AND H1
 
-ALTER TABLE `oc_category_description` 
-  ADD `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '';
+ALTER TABLE oc_category_description ADD seo_title varchar(255) COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE oc_category_description ADD seo_h1 varchar(255) COLLATE utf8_general_ci NOT NULL;
 
-ALTER TABLE `oc_information_description` 
-  ADD `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '';
+ALTER TABLE oc_information_description ADD meta_description varchar(255) COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE oc_information_description ADD meta_keyword varchar(255) COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE oc_information_description ADD seo_title varchar(255) COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE oc_information_description ADD seo_h1 varchar(255) COLLATE utf8_general_ci NOT NULL;
 
-CREATE TABLE `oc_manufacturer_description` (
-  `manufacturer_id` int(11) NOT NULL DEFAULT '0',
-  `language_id` int(11) NOT NULL DEFAULT '0',
-  `description` text COLLATE utf8_general_ci NOT NULL,
-  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  PRIMARY KEY  (`manufacturer_id`,`language_id`)
+ALTER TABLE oc_product_description ADD seo_title varchar(255) COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE oc_product_description ADD seo_h1 varchar(255) COLLATE utf8_general_ci NOT NULL;
+
+CREATE TABLE IF NOT EXISTS oc_manufacturer_description (
+  manufacturer_id int(11) NOT NULL DEFAULT '0',
+  language_id int(11) NOT NULL DEFAULT '0',
+  description text COLLATE utf8_general_ci NOT NULL,
+  meta_description varchar(255) COLLATE utf8_general_ci NOT NULL,
+  meta_keyword varchar(255) COLLATE utf8_general_ci NOT NULL,
+  seo_title varchar(255) COLLATE utf8_general_ci NOT NULL,
+  seo_h1 varchar(255) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (manufacturer_id,language_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `oc_manufacturer_description` (`manufacturer_id`, `language_id`) VALUES SELECT `manufacturer_id`, `language_id` FROM `oc_manufacturer` , `oc_language`;
-
-ALTER TABLE `oc_product_description` 
-  ADD `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '';
+INSERT INTO oc_manufacturer_description (manufacturer_id, language_id) VALUES SELECT manufacturer_id, language_id FROM oc_manufacturer , oc_language;

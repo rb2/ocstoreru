@@ -383,6 +383,8 @@ CREATE TABLE `oc_category_description` (
   `description` text COLLATE utf8_general_ci NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL, 
+  `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`category_id`,`language_id`),
   KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -1136,6 +1138,10 @@ CREATE TABLE `oc_information_description` (
   `language_id` int(11) NOT NULL,
   `title` varchar(64) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `description` text COLLATE utf8_general_ci NOT NULL,
+  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL, 
+  `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL, 
+  `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL, 
+  `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`information_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -1840,6 +1846,8 @@ CREATE TABLE `oc_product_description` (
   `description` text COLLATE utf8_general_ci NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL, 
+  `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`product_id`,`language_id`),
   KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -7009,24 +7017,6 @@ INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id
 (57, 176, 0, 3, '2010-02-26 22:33:24', '0000-00-00 00:00:00');
 
 --
--- Change structure for table `oc_category_description`
---
-
-ALTER TABLE `oc_category_description` 
-  ADD `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '';
-
---
--- Change structure for table `oc_information_description`
---
-
-ALTER TABLE `oc_information_description` 
-  ADD `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '';
-
---
 -- Table structure for table `oc_manufacturer_description`
 --
 
@@ -7035,23 +7025,17 @@ CREATE TABLE `oc_manufacturer_description` (
   `manufacturer_id` int(11) NOT NULL DEFAULT '0',
   `language_id` int(11) NOT NULL DEFAULT '0',
   `description` text COLLATE utf8_general_ci NOT NULL,
-  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY  (`manufacturer_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Create data for table `oc_manufacturer_description`
+-- Dumping data for table `oc_manufacturer_description`
 --
 
-INSERT INTO `oc_manufacturer_description` (`manufacturer_id`, `language_id`) VALUES SELECT `manufacturer_id`, `language_id` FROM `oc_manufacturer` , `oc_language`;
-
---
--- Change structure for table `oc_product_description`
---
-
-ALTER TABLE `oc_product_description` 
-  ADD `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '', 
-  ADD `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL DEFAULT '';
+INSERT INTO `oc_manufacturer_description` (`manufacturer_id`, `language_id`) VALUES 
+(5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1),
+(5, 2), (6, 2), (7, 2), (8, 2), (9, 2), (10, 2);
