@@ -59,6 +59,7 @@ $_['entry_image_compare']      = 'Compare Image Size:';
 $_['entry_image_wishlist']     = 'Wish List Image Size:';
 $_['entry_image_cart']         = 'Cart Image Size:';
 $_['entry_use_ssl']            = 'Use SSL:<br /><span class="help">To use SSL check with your host if a SSL certificate is installed.</span>';
+$_['entry_registred_group']    = 'Группа зарегистрированных:<br /><span class="help">Назначается при регистрации.</span>';
 
 // Error
 $_['error_warning']            = 'Warning: Please check the form carefully for errors!';

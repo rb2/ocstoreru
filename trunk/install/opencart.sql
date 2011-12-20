@@ -2665,7 +2665,8 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (20537, 0, 'config', 'config_country_id', '176', 0),
 (20538, 0, 'config', 'config_zone_id', '2761', 0),
 (20539, 0, 'config', 'config_language', 'ru', 0),
-(20540, 0, 'config', 'config_admin_language', 'ru', 0);
+(20540, 0, 'config', 'config_admin_language', 'ru', 0),
+('', 0, 'config', 'config_registred_group_id', '8', 0);
 
 -- --------------------------------------------------------
 

@@ -37,8 +37,8 @@ $_['entry_tax']			= 'Отображать цены с налогом:';
 
 $_['entry_tax_default']         = 'Use Store Tax Address:<br /><span class="help">Use the store address to calculate taxes if no one is logged in. You can choose to use the store address for the customers shipping or payment address.</span>';
 $_['entry_tax_customer']        = 'Use Customer Tax Address:<br /><span class="help">Use the customers default address when they login to calculate taxes. You can choose to use the default address for the customers shipping or payment address.</span>';
-$_['entry_customer_group']	= 'Группа покупателей:<br /><span class="help">Группа покупателей по умолчанию.</span>';
-$_['entry_customer_price']	= 'Требуется логин для просмотра цен:<br /><span class="help">Показывать цены только зарегистрированнным клиентам.</span>';
+$_['entry_customer_group']     = 'Группа для гостей:<br /><span class="help">Используется по умолчанию.</span>';
+$_['entry_customer_price']     = 'Не показывать цены гостям:';
 $_['entry_customer_approval']	= 'Активация новых пользователей:<br /><span class="help">Не позволять входить новым клиентам под своим логином и паролем до одобрения аккаунта.</span>';
 $_['entry_guest_checkout']	= 'Оформление заказа без регистрации:<br /><span class="help">Позволить клиентам оформлять заказы без регистрации Личного кабинета. Эта функция не будет доступна, если в корзине будут загружаемые в виде файла товары.</span>';
 $_['entry_account']		= 'Подтверждение при регистрации:<br /><span class="help">Требовать подтверждение согласия с правилами при регистрации аккаунта.</span>';
@@ -59,6 +59,7 @@ $_['entry_image_compare']	= 'Размер изображений при срав
 $_['entry_image_wishlist']	= 'Размер изображений в заметках:';
 $_['entry_image_cart']		= 'Размер изображений товаров в корзине:';
 $_['entry_use_ssl']		= 'Использовать SSL:<br /><span class="help">Для использования SSL убедитесь что Ваш хостинг поддерживает SSL сертификат и пропишите SSL адреса в файле конфигурации.</span>';
+$_['entry_registred_group']    = 'Группа зарегистрированных:<br /><span class="help">Назначается при регистрации.</span>';
 
 // Error
 $_['error_warning']		= 'Внимательно проверьте форму на ошибки!';

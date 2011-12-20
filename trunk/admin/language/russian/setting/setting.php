@@ -40,8 +40,8 @@ $_['entry_tax_default']        		= 'Use Store Tax Address:<br /><span class="hel
 $_['entry_tax_customer']       		= 'Use Customer Tax Address:<br /><span class="help">Use the customers default address when they login to calculate taxes. You can choose to use the default address for the customers shipping or payment address.</span>';
 $_['entry_invoice']			= 'Начальный № счета-фактуры:<br /><span class="help">Установите стартовый номер счета-фактуры.</span>';
 $_['entry_invoice_prefix']		= 'Префикс счета-фактуры:<br /><span class="help">Установите префикс счета-фактуры. Пример: INV-2011-00</span>';
-$_['entry_customer_group']		= 'Группа покупателей:<br /><span class="help">Группа покупателей по умолчанию.</span>';
-$_['entry_customer_price']		= 'Показывать цены только залогиненным:<br /><span class="help">Показывать цены только зарегистрированнным клиентам.</span>';
+$_['entry_customer_group']     = 'Группа для гостей:<br /><span class="help">Используется по умолчанию.</span>';
+$_['entry_customer_price']     = 'Не показывать цены гостям:';
 $_['entry_customer_approval']		= 'Активация новых пользователей:<br /><span class="help">Не позволять входить новым клиентам под своим логином и паролем до одобрения аккаунта.</span>';
 $_['entry_guest_checkout']		= 'Оформление заказа без регистрации:<br /><span class="help">Позволить клиентам оформлять заказы без регистрации Личного кабинета. Эта функция не будет доступна, если в корзине будут загружаемые в виде файла товары.</span>';
 $_['entry_account']			= 'Подтверждение при регистрации:<br /><span class="help">Требовать подтверждение согласия с правилами при регистрации аккаунта.</span>';
@@ -100,6 +100,7 @@ $_['entry_sms_copy']            = 'Дополнительные номера:<br
 $_['entry_seo_url_type']		= 'Тип ЧПУ:';
 $_['entry_seo_url_include_path']	= 'ЧПУ товаров с категориями:<span class="help">/category/subcategory/product<br />(только для SeoPro)</span>';
 $_['entry_seo_url_postfix']		= 'Окончание ЧПУ:<span class="help">Например .html<br />(только для SeoPro)</span>';
+$_['entry_registred_group']    = 'Группа зарегистрированных:<br /><span class="help">Назначается при регистрации.</span>';
 
 // Error
 $_['error_warning']			= 'Внимательно проверьте форму на ошибки!';

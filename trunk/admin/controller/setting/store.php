@@ -231,6 +231,7 @@ class ControllerSettingStore extends Controller {
 		$this->data['entry_image_wishlist'] = $this->language->get('entry_image_wishlist');
 		$this->data['entry_image_cart'] = $this->language->get('entry_image_cart');
 		$this->data['entry_use_ssl'] = $this->language->get('entry_use_ssl');
+		$this->data['entry_registred_group'] = $this->language->get('entry_registred_group');
 				
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -575,6 +576,14 @@ class ControllerSettingStore extends Controller {
 		$this->load->model('sale/customer_group');
 		
 		$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
+		
+		if (isset($this->request->post['config_registred_group_id'])) {
+			$this->data['config_registred_group_id'] = $this->request->post['config_registred_group_id'];
+		} elseif (isset($store_info['config_registred_group_id'])) {
+			$this->data['config_registred_group_id'] = $store_info['config_registred_group_id'];			
+		} else {
+			$this->data['config_registred_group_id'] = '';
+		}
 		
 		if (isset($this->request->post['config_customer_group_id'])) {
 			$this->data['config_customer_group_id'] = $this->request->post['config_customer_group_id'];

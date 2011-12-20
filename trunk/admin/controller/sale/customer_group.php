@@ -362,6 +362,10 @@ class ControllerSaleCustomerGroup extends Controller {
 		$this->load->model('sale/customer');
       	
 		foreach ($this->request->post['selected'] as $customer_group_id) {
+    		if ($this->config->get('config_registred_group_id') == $customer_group_id) {
+	  			$this->error['warning'] = $this->language->get('error_registred');	
+			}  
+			
     		if ($this->config->get('config_customer_group_id') == $customer_group_id) {
 	  			$this->error['warning'] = $this->language->get('error_default');	
 			}  
