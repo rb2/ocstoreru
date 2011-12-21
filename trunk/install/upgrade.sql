@@ -105,4 +105,4 @@ CREATE TABLE IF NOT EXISTS oc_manufacturer_description (
   PRIMARY KEY (manufacturer_id,language_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO oc_manufacturer_description (manufacturer_id, language_id) VALUES SELECT manufacturer_id, language_id FROM oc_manufacturer , oc_language;
+INSERT INTO oc_manufacturer_description (manufacturer_id, language_id) SELECT manufacturer_id, language_id FROM oc_manufacturer , oc_language;
