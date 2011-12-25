@@ -175,6 +175,12 @@ class ControllerCommonHeader extends Controller {
 		}
 		
 		// Menu
+		if (isset($this->request->get['path'])) {
+			$parts = explode('_', (string)$this->request->get['path']);
+		} else {
+			$parts = array();
+		}
+
 		$this->load->model('catalog/category');
 		$this->load->model('catalog/product');
 		
@@ -208,25 +214,10 @@ class ControllerCommonHeader extends Controller {
 					'children' => $children_data,
 					'column'   => $category['column'] ? $category['column'] : 1,
 					'href'     => $this->url->link('product/category', 'path=' . $category['category_id']),
-					'category_id' => $category['category_id']	// http://rb.labtodo.com/opencart-15x-show-current-category-in-menu
+					'active'   => in_array($category['category_id'], $parts)
 				);
 			}
 		}
-
-		// http://rb.labtodo.com/opencart-15x-show-current-category-in-menu :: BEGIN
-		if (isset($this->request->get['path'])) {
-			$parts = explode('_', (string)$this->request->get['path']);
-		} else {
-			$parts = array();
-		}
-
-		if (isset($parts[0])) {
-			$this->data['category_id'] = $parts[0];
-		} else {
-			$this->data['category_id'] = 0;
-		}
-		// http://rb.labtodo.com/opencart-15x-show-current-category-in-menu :: END
-
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/header.tpl';
