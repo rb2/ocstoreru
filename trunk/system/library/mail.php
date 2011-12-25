@@ -101,7 +101,7 @@ final class Mail {
 		$header .= 'Reply-To: ' . '=?utf-8?B?'.base64_encode($this->sender).'?=' . '<' . $this->from . '>' . $this->newline;
 		$header .= 'Return-Path: ' . $this->from . $this->newline;
 		$header .= 'X-Mailer: PHP/' . phpversion() . $this->newline;
-		$header .= 'Content-Type: multipart/related; boundary="' . $boundary . '"' . $this->newline;
+		$header .= 'Content-Type: multipart/related; boundary="' . $boundary . '"' . $this->newline . $this->newline;
 
 		if (!$this->html) {
 			$message  = '--' . $boundary . $this->newline;
