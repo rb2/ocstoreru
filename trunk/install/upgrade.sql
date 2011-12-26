@@ -16,7 +16,7 @@
 # opencartforum.ru
 # myopencart.ru
 
-#### START UPGRADE OCSTORE 1.0.2
+#### START UPGRADE OCSTORE 1.5.1.3
 
 CREATE TABLE IF NOT EXISTS oc_manufacturer_description (
   manufacturer_id INT(11) NOT NULL,
