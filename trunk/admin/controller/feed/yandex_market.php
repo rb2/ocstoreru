@@ -140,7 +140,7 @@ class ControllerFeedYandexMarket extends Controller {
 			'common/footer'
 		);
 
-		$this->response->setOutput($this->render(), $this->config->get('config_compression'));
+		$this->response->setOutput($this->render());
 	}
 
 	private function validate() {

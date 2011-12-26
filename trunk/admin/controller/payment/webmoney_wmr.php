@@ -143,7 +143,7 @@ class ControllerPaymentWebmoneyWMR extends Controller {
 			'common/footer'
 		);
 		
-		$this->response->setOutput($this->render(TRUE), $this->config->get('config_compression'));
+		$this->response->setOutput($this->render());
 	}
 	
 	private function validate() {
