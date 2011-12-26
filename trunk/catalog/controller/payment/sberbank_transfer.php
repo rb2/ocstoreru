@@ -9,6 +9,8 @@ class ControllerPaymentSberBankTransfer extends Controller {
 		$this->data['text_payment_coment'] = $this->language->get('text_payment_coment');
 		if ($this->customer->isLogged()) {
 			$this->data['text_order_history'] = str_replace('{href}', $this->url->link('account/order', '', 'SSL'), $this->language->get('text_order_history'));
+		} else {
+			$this->data['text_order_history'] = '';
 		}
 
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
@@ -25,15 +27,16 @@ class ControllerPaymentSberBankTransfer extends Controller {
 	}
 
 	public function printpay() {
-		$this->load->model('account/order');
 
 		if (!empty($this->request->get['order_id'])) {
-			$order_id = $this->request->get['order_id'];
-		} else {
-			$order_id = $this->session->data['order_id'];
-		}
+			$this->load->model('account/order');
 
-		$order_info = $this->model_account_order->getOrder($order_id);
+			$order_info = $this->model_account_order->getOrder($this->request->get['order_id']);
+		} else {
+			$this->load->model('checkout/order');
+
+			$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+		}
 
 		if (!$order_info) {
 			return $this->forward('account/order');
