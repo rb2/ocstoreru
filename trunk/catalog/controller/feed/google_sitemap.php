@@ -12,7 +12,7 @@ class ControllerFeedGoogleSitemap extends Controller {
 			foreach ($products as $product) {
 				$output .= '<url>';
 				$output .= '<loc>' . str_replace('&', '&amp;', str_replace('&amp;', '&', $this->url->link('product/product', 'product_id=' . $product['product_id']))) . '</loc>';
-				$output .= '<lastmod>' . date('c', strtotime(max($product['date_added'], $product['date_modified']))) . '</lastmod>';
+				$output .= '<lastmod>' . substr(max($product['date_added'], $product['date_modified']), 0, 10) . '</lastmod>';
 				$output .= '<changefreq>weekly</changefreq>';
 				$output .= '<priority>1.0</priority>';
 				$output .= '</url>';
@@ -67,7 +67,7 @@ class ControllerFeedGoogleSitemap extends Controller {
 
 			$output .= '<url>';
 			$output .= '<loc>' . str_replace('&', '&amp;', str_replace('&amp;', '&', $this->url->link('product/category', 'path=' . $new_path))) . '</loc>';
-			$output .= '<lastmod>' . date('c', strtotime(max($result['date_added'], $result['date_modified']))) . '</lastmod>';
+			$output .= '<lastmod>' . substr(max($result['date_added'], $result['date_modified']), 0, 10) . '</lastmod>';
 			$output .= '<changefreq>weekly</changefreq>';
 			$output .= '<priority>0.7</priority>';
 			$output .= '</url>';
