@@ -16,18 +16,18 @@ $_['text_percent']           = 'Процент';
 $_['text_amount']            = 'Фиксированная сумма';
 
 // Column
-$_['column_name']            	= 'Название товара';
-$_['column_model']           	= 'Модель';
-$_['column_image']           	= 'Изображения';
-$_['column_price']           	= 'Цена на сайте';
-$_['column_quantity']        	= 'Количество';
-$_['column_status']          	= 'Статус';
-$_['column_action']          	= 'Действие';
+$_['column_name']            = 'Название товара';
+$_['column_model']           = 'Модель';
+$_['column_image']           = 'Изображения';
+$_['column_price']           = 'Цена на сайте';
+$_['column_quantity']        = 'Количество';
+$_['column_status']          = 'Статус';
+$_['column_action']          = 'Действие';
 
 // Entry
 $_['entry_name']             = 'Название товара:';
 $_['entry_meta_keyword']     = 'Мета-тег Keywords:';
-$_['entry_meta_description'] = 'Мета-тег Description:';
+$_['entry_meta_description'] = 'Мета-тег "Описание":';
 $_['entry_description']      = 'Описание:';
 $_['entry_store']            = 'Магазины:';
 $_['entry_keyword']          = 'SEO URL:<br/><span class="help">Должно быть уникальным на всю систему.</span>';

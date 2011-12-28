@@ -12,15 +12,15 @@ $_['column_date_added'] = 'Добавлено';
 $_['column_action']     = 'Действие';
 
 // Entry
-$_['entry_username']   = 'Логин:';
-$_['entry_password']   = 'Пароль:';
-$_['entry_confirm']    = 'Подтверждение:';
-$_['entry_firstname']  = 'Имя, Отчество:';
-$_['entry_lastname']   = 'Фамилия:';
-$_['entry_email']      = 'E-Mail:';
-$_['entry_user_group'] = 'Группа пользователей:';
-$_['entry_status']     = 'Статус:';
-$_['entry_captcha']    = 'Введите код:';
+$_['entry_username']   	= 'Логин:';
+$_['entry_password']   	= 'Пароль:';
+$_['entry_confirm']    	= 'Подтверждение:';
+$_['entry_firstname']  	= 'Имя, Отчество:';
+$_['entry_lastname']   	= 'Фамилия:';
+$_['entry_email']      	= 'E-Mail:';
+$_['entry_user_group'] 	= 'Группа пользователей:';
+$_['entry_status']     	= 'Статус:';
+$_['entry_captcha']    	= 'Введите код:';
 
 // Error
 $_['error_permission'] = 'У Вас нет прав для изменения списка пользователей!';

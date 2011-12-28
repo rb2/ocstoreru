@@ -105,19 +105,19 @@ $_['entry_payment']           = 'Способ оплаты:';
 
 // Error
 $_['error_permission']        = 'У Вас нет прав для изменения заказов!';
-$_['error_firstname']         = 'First Name must be between 1 and 32 characters!';
-$_['error_lastname']          = 'Last Name must be between 1 and 32 characters!';
+$_['error_firstname']         = 'Имя должно быть от 1 до 32 символов!';
+$_['error_lastname']          = 'Фамилия должна быть от 1 до 32 символов!';
 $_['error_email']             = 'E-Mail адрес введен неверно!';
-$_['error_telephone']         = 'Telephone must be between 3 and 32 characters!';
-$_['error_password']          = 'Password must be between 3 and 20 characters!';
-$_['error_confirm']           = 'Password and password confirmation do not match!';
-$_['error_address_1']         = 'Address 1 must be between 3 and 128 characters!';
-$_['error_city']              = 'City must be between 3 and 128 characters!';
-$_['error_postcode']          = 'Postcode must be between 2 and 10 characters for this country!';
-$_['error_country']           = 'Please select a country!';
-$_['error_zone']              = 'Please select a region / state!';
-$_['error_upload']            = 'Upload required!';
-$_['error_filename']          = 'Filename must be between 3 and 128 characters!';
-$_['error_filetype']          = 'Invalid file type!';
-$_['error_action']            = 'Warning: Could not complete this action!';
+$_['error_telephone']         = 'Телефон должен быть от 3 до 32 символов!';
+$_['error_password']          = 'Пароль должен быть от 3 до 20 символов!';
+$_['error_confirm']           = 'Пароли не совпадают!';
+$_['error_address_1']         = 'Адрес должен быть от 3 до 128 символов!';
+$_['error_city']              = 'Город должен быть от 2 до 128 символов!';
+$_['error_postcode']          = 'Индекс должен быть от 2 до 10 символов для этой страны!';
+$_['error_country']           = 'Выберите страну!';
+$_['error_zone']              = 'Выберите регион / область!';
+$_['error_upload']            = 'Необходима загрузка!';
+$_['error_filename']          = 'Имя файла должно быть от 3 до 128 символов!';
+$_['error_filetype']          = 'Неправильный тип файла!';
+$_['error_action']            = 'Не получается выполнить это действие!';
 ?>
