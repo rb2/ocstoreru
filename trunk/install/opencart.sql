@@ -7023,8 +7023,8 @@ INSERT INTO `oc_zone_to_geo_zone` (`zone_to_geo_zone_id`, `country_id`, `zone_id
 
 DROP TABLE IF EXISTS `oc_manufacturer_description`;
 CREATE TABLE `oc_manufacturer_description` (
-  `manufacturer_id` int(11) NOT NULL DEFAULT '0',
-  `language_id` int(11) NOT NULL DEFAULT '0',
+  `manufacturer_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
   `description` text COLLATE utf8_general_ci NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL,

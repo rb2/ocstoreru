@@ -64,7 +64,7 @@ ALTER TABLE oc_product_image ADD sort_order int(3) NOT NULL DEFAULT '0' AFTER im
 ALTER TABLE oc_tax_rate ADD `name` varchar(32) NOT NULL COLLATE utf8_general_ci AFTER geo_zone_id;
 ALTER TABLE oc_tax_rate ADD `type` char(1) NOT NULL COLLATE utf8_general_ci AFTER rate;
 
-ALTER TABLE oc_order MODIFY invoice_prefix varchar(26) NOT NULL COLLATE utf8_general_ci;
+ALTER TABLE `oc_order` MODIFY invoice_prefix varchar(26) NOT NULL COLLATE utf8_general_ci;
 
 ALTER TABLE oc_tax_rate MODIFY rate decimal(15,4) NOT NULL DEFAULT '0.0000' AFTER `name`;
 ALTER TABLE oc_tax_rate MODIFY date_added DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `type`;
