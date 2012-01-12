@@ -103,6 +103,10 @@ class ControllerCommonSeoPro extends Controller {
 				}
 				break;
 
+			case 'information/information/info':
+				return $link;
+				break;
+
 			default:
 				break;
 		}
