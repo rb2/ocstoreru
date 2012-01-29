@@ -98,15 +98,18 @@ final class Mail {
 		$header .= 'Reply-To: ' . '=?utf-8?B?'.base64_encode($this->sender).'?=' . '<' . $this->from . '>' . $this->newline;
 		$header .= 'Return-Path: ' . $this->from . $this->newline;
 		$header .= 'X-Mailer: PHP/' . phpversion() . $this->newline;
+		$header .= 'X-ocStore-Site: ' . getenv('SERVER_NAME') . $this->newline;
 		$header .= 'MIME-Version: 1.0' . $this->newline;
-		$header .= 'Content-Type: multipart/mixed; boundary="' . $boundary . '"' . $this->newline;
+		$header .= 'Content-Type: multipart/related; boundary="' . $boundary . '";' . $this->newline;
 
 		if (!$this->html) {
+			$header .= "\t" . 'type="text/plain"';
 			$message  = '--' . $boundary . $this->newline;
 			$message .= 'Content-Type: text/plain; charset="utf-8"' . $this->newline;
 			$message .= 'Content-Transfer-Encoding: 8bit' . $this->newline . $this->newline;
 			$message .= $this->text . $this->newline;
 		} else {
+			$header .= "\t" . 'type="multipart/alternative"';
 			$message  = '--' . $boundary . $this->newline;
 			$message .= 'Content-Type: multipart/alternative; boundary="' . $boundary . '_alt"' . $this->newline . $this->newline;
 			$message .= '--' . $boundary . '_alt' . $this->newline;
@@ -117,6 +120,8 @@ final class Mail {
 				$message .= $this->text . $this->newline;
 			} else {
 				$message .= 'This is a HTML email and your email client software does not support HTML email!' . $this->newline;
+				$message .= $this->newline . 'Это письмо написано в HTML-формате, но ваша программа не поддерживает отображение' . $this->newline; 
+				$message .= 'таких писем. Включите поддержку HTML в вашей почтовой программе или замените программу.' . $this->newline;
 			}
 
 			$message .= '--' . $boundary . '_alt' . $this->newline;
@@ -134,10 +139,10 @@ final class Mail {
 				fclose($handle);
 
 				$message .= '--' . $boundary . $this->newline;
-				$message .= 'Content-Type: application/octetstream' . $this->newline;
+				$message .= 'Content-Type: ' . mime_content_type($attachment['file']) . '; name="' . $attachment['filename'] . '"' . $this->newline;
 				$message .= 'Content-Transfer-Encoding: base64' . $this->newline;
-				$message .= 'Content-Disposition: attachment; filename="' . basename($attachment['filename']) . '"' . $this->newline;
-				$message .= 'Content-ID: <' . basename($attachment['filename']) . '>' . $this->newline . $this->newline;
+				$message .= 'Content-Disposition: inline; filename="' . $attachment['filename'] . '"' . $this->newline;
+				$message .= 'Content-ID: <' . $attachment['filename'] . '>' . $this->newline . $this->newline;
 				$message .= chunk_split(base64_encode($content));
 			}
 		}
@@ -339,7 +344,7 @@ final class Mail {
 					error_log('Error: DATA not accepted from server!');
 				}
 
-				fputs($handle, $header . $message . $this->crlf);
+				fputs($handle, $header . $this->newline . $this->newline . $message . $this->crlf);
 				fputs($handle, '.' . $this->crlf);
 
 				$reply = '';
