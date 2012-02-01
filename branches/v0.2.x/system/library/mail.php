@@ -174,23 +174,26 @@ final class Mail {
 					}
 				}
 
-				if (substr($this->hostname, 0, 3) == 'tls') {
-					fputs($handle, 'STARTTLS' . $this->crlf);
-
-					while ($line = fgets($handle, 515)) {
-						$reply .= $line;
-
-						if (substr($line, 3, 1) == ' ') {
-							break;
-						}
-					}
-
-					if (substr($reply, 0, 3) != 220) {
-						error_log('Error: STARTTLS not accepted from server!');
-					}
-				}
+# абсолютно нерабочий код, т.к. имя хоста с префиксом 'tls://' включает соответствующее шифрование с самого начала,
+# тогда как команда STARTTLS сама по себе не инициализирует начало зашифрованной сессии
+#				if (substr($this->hostname, 0, 3) == 'tls') {
+#					fputs($handle, 'STARTTLS' . $this->crlf);
+#
+#					while ($line = fgets($handle, 515)) {
+#						$reply .= $line;
+#
+#						if (substr($line, 3, 1) == ' ') {
+#							break;
+#						}
+#					}
+#
+#					if (substr($reply, 0, 3) != 220) {
+#						error_log('Error: STARTTLS not accepted from server!');
+#					}
+#				}
 
 				if (!empty($this->username)  && !empty($this->password)) {
+					$starttls = false;
 					fputs($handle, 'EHLO ' . getenv('SERVER_NAME') . $this->crlf);
 
 					$reply = '';
@@ -198,13 +201,37 @@ final class Mail {
 					while ($line = fgets($handle, 515)) {
 						$reply .= $line;
 
+						if (substr($line, 4, 8) == 'STARTTLS') {
+							$starttls = true;
+						}
 						if (substr($line, 3, 1) == ' ') {
 							break;
 						}
 					}
 
 					if (substr($reply, 0, 3) != 250) {
-						error_log('Error: EHLO not accepted from server!');
+						error_log('Error: EHLO not accepted from server! (' . $reply . ')');
+					}
+
+					//включить TLS-шифрование, если сервер поддерживает STARTTLS
+					if ($starttls and (substr($this->hostname, 0, 6) != 'ssl://') and
+										(substr($this->hostname, 0, 6) != 'tls://') and
+										fputs($handle, 'STARTTLS' . $this->crlf))
+					{
+						$reply = '';
+						while ($line = fgets($handle, 515)) {
+							$reply .= $line;
+							if (substr($line, 3, 1) == ' ') {
+								break;
+							}
+						}
+						if (substr($reply, 0, 3) == 220) {
+							if ( !stream_socket_enable_crypto($handle, true, STREAM_CRYPTO_METHOD_TLS_CLIENT) ) {
+								error_log('Error: TLS handshake failure, connection not encrypted!');
+							}
+						} else {
+							error_log('Error: STARTTLS not accepted from server! (' . $reply . ')');
+						}
 					}
 
 					fputs($handle, 'AUTH LOGIN' . $this->crlf);
@@ -220,7 +247,7 @@ final class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 334) {
-						error_log('Error: AUTH LOGIN not accepted from server!');
+						error_log('Error: AUTH LOGIN not accepted from server! (' . $reply . ')');
 					}
 
 					fputs($handle, base64_encode($this->username) . $this->crlf);
@@ -236,7 +263,7 @@ final class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 334) {
-						error_log('Error: Username not accepted from server!');
+						error_log('Error: Username not accepted from server! (' . $reply . ')');
 					}
 
 					fputs($handle, base64_encode($this->password) . $this->crlf);
@@ -252,7 +279,7 @@ final class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 235) {
-						error_log('Error: Password not accepted from server!');
+						error_log('Error: Password not accepted from server! (' . $reply . ')');
 					}
 				} else {
 					fputs($handle, 'HELO ' . getenv('SERVER_NAME') . $this->crlf);
@@ -268,7 +295,7 @@ final class Mail {
 					}
 
 					if (substr($reply, 0, 3) != 250) {
-						error_log('Error: HELO not accepted from server!');
+						error_log('Error: HELO not accepted from server! (' . $reply . ')');
 					}
 				}
 
@@ -289,7 +316,7 @@ final class Mail {
 				}
 
 				if (substr($reply, 0, 3) != 250) {
-					error_log('Error: MAIL FROM not accepted from server!');
+					error_log('Error: MAIL FROM not accepted from server! (' . $reply . ')');
 				}
 
 				if (!is_array($this->to)) {
@@ -306,7 +333,7 @@ final class Mail {
 					}
 
 					if ((substr($reply, 0, 3) != 250) && (substr($reply, 0, 3) != 251)) {
-						error_log('Error: RCPT TO not accepted from server!');
+						error_log('Error: RCPT TO not accepted from server! (' . $reply . ')');
 					}
 				} else {
 					foreach ($this->to as $recipient) {
@@ -323,7 +350,7 @@ final class Mail {
 						}
 
 						if ((substr($reply, 0, 3) != 250) && (substr($reply, 0, 3) != 251)) {
-							error_log('Error: RCPT TO not accepted from server!');
+							error_log('Error: RCPT TO not accepted from server! (' . $reply . ')');
 						}
 					}
 				}
@@ -341,7 +368,7 @@ final class Mail {
 				}
 
 				if (substr($reply, 0, 3) != 354) {
-					error_log('Error: DATA not accepted from server!');
+					error_log('Error: DATA not accepted from server! (' . $reply . ')');
 				}
 
 				fputs($handle, $header . $this->newline . $this->newline . $message . $this->crlf);
@@ -358,7 +385,7 @@ final class Mail {
 				}
 
 				if (substr($reply, 0, 3) != 250) {
-					error_log('Error: DATA not accepted from server!');
+					error_log('Error: DATA not accepted from server! (' . $reply . ')');
 				}
 
 				fputs($handle, 'QUIT' . $this->crlf);
@@ -374,7 +401,7 @@ final class Mail {
 				}
 
 				if (substr($reply, 0, 3) != 221) {
-					error_log('Error: QUIT not accepted from server!');
+					error_log('Error: QUIT not accepted from server! (' . $reply . ')');
 				}
 
 				fclose($handle);
