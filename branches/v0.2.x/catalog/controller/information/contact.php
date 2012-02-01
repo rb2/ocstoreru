@@ -18,6 +18,7 @@ class ControllerInformationContact extends Controller {
 			$mail->timeout = $this->config->get('config_smtp_timeout');				
 			$mail->setTo($this->config->get('config_email'));
 	  		$mail->setFrom($this->request->post['email']);
+			$mail->setMailFrom($this->config->get('config_email'));
 	  		$mail->setSender($this->request->post['name']);
 	  		$mail->setSubject(sprintf($this->language->get('email_subject'), $this->request->post['name']));
 	  		$mail->setText(strip_tags(html_entity_decode($this->request->post['enquiry'], ENT_QUOTES, 'UTF-8')));

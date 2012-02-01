@@ -2,6 +2,7 @@
 final class Mail {
 	protected $to;
 	protected $from;
+	protected $mailfrom = '';
 	protected $sender;
 	protected $subject;
 	protected $text;
@@ -24,6 +25,10 @@ final class Mail {
 
 	public function setFrom($from) {
 		$this->from = $from;
+	}
+
+	public function setMailFrom($email) {
+		$this->mailfrom = $email;
 	}
 
 	public function addheader($header, $value) {
@@ -299,10 +304,11 @@ final class Mail {
 					}
 				}
 
+				$this->mailfrom = $this->mailfrom ? $this->mailfrom : $this->from;
 				if ($this->verp) {
-					fputs($handle, 'MAIL FROM: <' . $this->from . '>XVERP' . $this->crlf);
+					fputs($handle, 'MAIL FROM: <' . $this->mailfrom . '>XVERP' . $this->crlf);
 				} else {
-					fputs($handle, 'MAIL FROM: <' . $this->from . '>' . $this->crlf);
+					fputs($handle, 'MAIL FROM: <' . $this->mailfrom . '>' . $this->crlf);
 				}
 
 				$reply = '';
