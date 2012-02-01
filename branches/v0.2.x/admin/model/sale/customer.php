@@ -148,10 +148,10 @@ class ModelSaleCustomer extends Model {
 			'c.date_added'
 		);
 
-		if ($data['sort'] == 'name')
-		{
-		    $data['sort'] = 'pname';
-		};
+#		if ($data['sort'] == 'name')
+#		{
+#		    $data['sort'] = 'pname';
+#		};
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
