@@ -100,7 +100,7 @@
                 <?php } ?></td>
               <td class="left"><?php echo $product['status']; ?></td>
               <td class="right"><?php foreach ($product['action'] as $action) { ?>
-                [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+                [&nbsp;<a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a>&nbsp;]
                 <?php } ?></td>
             </tr>
             <?php } ?>
