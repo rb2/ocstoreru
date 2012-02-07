@@ -58,12 +58,12 @@ $_['entry_alert_mail']        = 'Оповещение о заказе по E-mai
 $_['entry_account_mail']      = 'Оповещение о новом клиенте:<br /><span class="help">Оповестить владельца магазина о регистрации нового клиента.</span>';
 $_['entry_download']          = 'Разрешить загрузки:';
 $_['entry_download_status']   = 'Статус заказа загрузок:<br /><span class="help">Статус заказа, при котором откроется доступ к загружаемым товарам.</span>';
-$_['entry_mail_protocol']     = 'Почтовый протокол:<br /><span class="help">Выбирайте \'Mail\' до тех пор, пока ваш хостер не отключил функцию php mail.</span>';
-$_['entry_mail_parameter']    = 'Параметры функции mail:<br /><span class="help">ОСТОРОЖНО. Не заполняйте поле, если не знаете, для чего оно. Когда используется \'Mail\', дополнительные параметры почты могут быть указаны тут (напр. "-femail@storeaddress.com").';
-$_['entry_smtp_host']         = 'SMTP хост:';
+$_['entry_mail_protocol']     = 'Почтовый протокол:<br /><span class="help">Выберите \'Mail\', если ваш хостер не отключил функцию php mail.</span>';
+$_['entry_mail_parameter']    = 'Параметры функции mail:<br /><span class="help">ОСТОРОЖНО. Не заполняйте поле, если не знаете, для чего оно. Когда используется \'Mail\', дополнительные параметры почты могут быть указаны тут (напр. "-femail@storeaddress.com").</span>';
+$_['entry_smtp_host']         = 'SMTP хост:<br /><span class="help">Чтобы включить SSL шифрование, используйте префикс \'ssl://\' (напр. "ssl://smtp.gmail.com").</span>';
 $_['entry_smtp_username']     = 'SMTP логин:';
 $_['entry_smtp_password']     = 'SMTP пароль:';
-$_['entry_smtp_port']         = 'SMTP порт:';
+$_['entry_smtp_port']         = 'SMTP порт:<br /><span class="help">Для соединений с использованием SSL-шифрования обычно используется порт 465, а в остальных случаях - порт 587 или 25.</span>';
 $_['entry_smtp_timeout']      = 'SMTP таймаут:';
 $_['entry_sms_gatename']      = 'SMS гейт:<br/><span class="help">Сервис для отправки SMS<br/> Например <a target="_blank" href="http://avisosms.ru?refer=3502">avisosms</a></span>';
 $_['entry_sms_admin_phone']   = 'Телефон администратора:<br/><span class="help">Формат: 7926xxxxxxx</span>';
