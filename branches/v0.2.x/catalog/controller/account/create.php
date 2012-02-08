@@ -40,6 +40,10 @@ class ControllerAccountCreate extends Controller {
 			
 			$message .= HTTPS_SERVER . 'index.php?route=account/login' . "\n\n";
 			$message .= $this->language->get('text_services') . "\n\n";
+			$message .= $this->language->get('text_email') . ' ' . $this->request->post['email'] . "\n";
+			//раскомментируйте следующую строку, если хотите отправлять пользователю его пароль
+#			$message .= $this->language->get('text_password') . ' ' . $this->request->post['password'] . "\n";
+			$message .= "\n";
 			$message .= $this->language->get('text_thanks') . "\n";
 			$message .= $this->config->get('config_name');
 			
