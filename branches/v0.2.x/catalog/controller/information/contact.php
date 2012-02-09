@@ -21,7 +21,7 @@ class ControllerInformationContact extends Controller {
 			$mail->setMailFrom($this->config->get('config_email'));
 	  		$mail->setSender($this->request->post['name']);
 	  		$mail->setSubject(sprintf($this->language->get('email_subject'), $this->request->post['name']));
-	  		$mail->setText(strip_tags(html_entity_decode($this->request->post['enquiry'], ENT_QUOTES, 'UTF-8')));
+	  		$mail->setText(html_entity_decode($this->request->post['enquiry'], ENT_QUOTES, 'UTF-8'));
       		$mail->send();
 
 	  		$this->redirect(HTTPS_SERVER . 'index.php?route=information/contact/success');
