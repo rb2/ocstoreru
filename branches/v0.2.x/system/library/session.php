@@ -17,6 +17,7 @@ final class Session {
 				ini_set('session.gc_maxlifetime', (int)CONF_SESSION_LIFETIME * 60);
 			}
 		
+			ini_set('session.cookie_httponly', true);
 			session_set_cookie_params(0, '/');
 			session_start();
 		}
