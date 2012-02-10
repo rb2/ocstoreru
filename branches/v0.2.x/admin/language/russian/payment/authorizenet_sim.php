@@ -9,7 +9,7 @@ $_['text_success']       = 'Success: You have modified Authorize.Net (AIM) accou
 // Entry
 $_['entry_merchant']     = 'Merchant ID:';
 $_['entry_key']          = 'Transaction Key:';
-$_['entry_callback']     = 'Relay Response URL:<br /><span class="help">Please login and set this at <a href="https://secure.authorize.net" target="_blank" class="txtLink">https://secure.authorize.net</a>.</span>';
+$_['entry_callback']     = 'Relay Response URL:<br /><span class="help">Please login and set this at <a rel="noreferrer" href="https://secure.authorize.net" target="_blank" class="txtLink">https://secure.authorize.net</a>.</span>';
 $_['entry_test']         = 'Test Mode:';
 $_['entry_order_status'] = 'Order Status:';
 $_['entry_geo_zone']     = 'Geo Zone:';

@@ -16,7 +16,7 @@ $_['entry_transaction']  = 'Transaction Method:';
 $_['entry_geo_zone']     = 'Geo Zone:';
 $_['entry_status']       = 'Status:';
 $_['entry_sort_order']   = 'Sort Order:';
-$_['entry_pdt_token']						= 'PDT Token:<br/><span class="help">Payment Data Transfer Token is used for additional security and reliability. Find out how to enable PDT <a href="https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/howto_html_paymentdatatransfer" alt="">here</a></span>';
+$_['entry_pdt_token']						= 'PDT Token:<br/><span class="help">Payment Data Transfer Token is used for additional security and reliability. Find out how to enable PDT <a rel="noreferrer" href="https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/howto_html_paymentdatatransfer" alt="">here</a></span>';
 $_['entry_itemized']						= 'Itemize Products:<br/><span class="help">Show itemized list of products on Paypal invoice instead of store name.</span>';
 $_['entry_debug']							= 'Debug Mode:<br/><span class="help">Logs additional information to the system log.</span>';
 $_['entry_order_status']					= 'Order Status Completed:<br /><span class="help">This is the status set when the payment has been completed successfully.</span>';

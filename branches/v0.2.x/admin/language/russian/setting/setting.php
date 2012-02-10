@@ -65,7 +65,7 @@ $_['entry_smtp_username']     = 'SMTP логин:';
 $_['entry_smtp_password']     = 'SMTP пароль:';
 $_['entry_smtp_port']         = 'SMTP порт:<br /><span class="help">Для соединений с использованием SSL-шифрования обычно используется порт 465, а в остальных случаях - порт 587 или 25.</span>';
 $_['entry_smtp_timeout']      = 'SMTP таймаут:';
-$_['entry_sms_gatename']      = 'SMS гейт:<br/><span class="help">Сервис для отправки SMS<br/> Например <a target="_blank" href="http://avisosms.ru?refer=3502">avisosms</a> (<a target="_blank" href="http://opencartforum.ru/topic/1480-как-настроить-sms-уведомления-в-ocstore/">FAQ</a> по настройке)</span>';
+$_['entry_sms_gatename']      = 'SMS гейт:<br/><span class="help">Сервис для отправки SMS<br/> Например <a target="_blank" rel="noreferrer" href="http://avisosms.ru?refer=3502">avisosms</a> (<a target="_blank" rel="noreferrer" href="http://opencartforum.ru/topic/1480-как-настроить-sms-уведомления-в-ocstore/">FAQ</a> по настройке)</span>';
 $_['entry_sms_admin_phone']   = 'Телефон администратора:<br/><span class="help">Формат: 7926xxxxxxx</span>';
 $_['entry_sms_from']		  = 'Псевдоним отправителя: <br/><span class="help">Например: Domenam.ru</span>';
 $_['entry_sms_message']		  = 'Текст сообщения: <br/><span class="help">Можно использовать теги: <br/> {ID} - номре заказа <br/> {DATE},{TIME}  - дата и время формирования заказа <br/> {SUM} - сумма заказа</span>';
