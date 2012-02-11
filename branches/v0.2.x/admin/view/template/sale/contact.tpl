@@ -29,6 +29,9 @@
             </select></td>
         </tr>
         <tr>
+			<td colspan="2" align="center"><?php echo $entry_allfilters; ?></td>
+        </tr>
+        <tr>
           <td><?php echo $entry_to; ?></td>
           <td><select name="group">
               <option value=""></option>
@@ -45,7 +48,7 @@
             </select></td>
         </tr>
         <tr>
-          <td></td>
+          <td valign="top"><?php echo $entry_client; ?></td>
           <td><table width="100%">
               <tr>
                 <td style="padding: 0;" colspan="3"><input type="text" id="search" value="" style="margin-bottom: 5px;" />
@@ -66,8 +69,8 @@
             </table></td>
         </tr>
 		<tr>
-		  <td><?php echo $entry_product; ?></td>
-		  <td><table>
+		  <td valign="top"><?php echo $entry_product; ?></td>
+		  <td><table width="100%">
 			  <tr>
 			    <td style="padding: 0;" colspan="3"><select id="category" style="margin-bottom: 5px;" onchange="getProducts();">
 			      <?php foreach ($categories as $category) { ?>
@@ -76,12 +79,12 @@
 			      </select></td>
 			  </tr>
 			  <tr>
-			    <td style="padding: 0;"><select multiple="multiple" id="product" size="10" style="width: 350px;">
+			    <td width="49%" style="padding: 0;"><select multiple="multiple" id="product" size="10" style="width: 100%;">
 			      </select></td>
-			    <td style="vertical-align: middle;"><input type="button" value="--&gt;" onclick="addItem();" />
+			    <td width="2%" style="vertical-align: middle;"><input type="button" value="--&gt;" onclick="addItem();" />
 			      <br />
 			      <input type="button" value="&lt;--" onclick="removeItem();" /></td>
-			    <td style="padding: 0;"><select multiple="multiple" id="item" size="10" style="width: 350px;">
+			    <td width="49%" style="padding: 0;"><select multiple="multiple" id="item" size="10" style="width: 100%;">
 			      </select></td>
 			  </tr>
 		    </table>
@@ -90,7 +93,7 @@
 		</tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_subject; ?></td>
-          <td><input name="subject" value="<?php echo $subject; ?>" />
+          <td><input name="subject" type="text" size="78" value="<?php echo $subject; ?>" />
             <?php if ($error_subject) { ?>
             <span class="error"><?php echo $error_subject; ?></span>
             <?php } ?></td>

@@ -128,6 +128,8 @@ class ControllerSaleContact extends Controller {
 		
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_to'] = $this->language->get('entry_to');
+		$this->data['entry_allfilters'] = $this->language->get('entry_allfilters');
+		$this->data['entry_client'] = $this->language->get('entry_client');
 		$this->data['entry_product'] = $this->language->get('entry_product');
 		$this->data['entry_subject'] = $this->language->get('entry_subject');
 		$this->data['entry_message'] = $this->language->get('entry_message');
