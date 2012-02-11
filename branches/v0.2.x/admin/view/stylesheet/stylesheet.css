@@ -225,6 +225,7 @@ body > #container {
 	border-right: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;
 	min-height: 300px;
+	clear: both;
 }
 .button {
 	padding-left: 8px;
