@@ -2563,7 +2563,7 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (20606, 0, 'config', 'config_error_log', '1', 0),
 (20605, 0, 'config', 'config_error_display', '1', 0),
 (20604, 0, 'config', 'config_compression', '0', 0),
-(20603, 0, 'config', 'config_encryption', '12345', 0),
+(20603, 0, 'config', 'config_encryption', SUBSTRING(MD5(RAND()) FROM 1 FOR 8), 0),
 (20602, 0, 'config', 'config_maintenance', '0', 0),
 (20598, 0, 'config', 'config_account_mail', '0', 0),
 (20599, 0, 'config', 'config_alert_emails', '', 0),
