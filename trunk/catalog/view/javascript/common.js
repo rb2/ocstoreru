@@ -6,7 +6,7 @@ $(document).ready(function() {
 		var filter_name = $('input[name=\'filter_name\']').attr('value')
 		
 		if (filter_name) {
-			url += '&filter_name=' + encodeURIComponent(filter_name);
+			url += '&filter_name=' + encodeURIComponent(filter_name) + '&filter_sub_category=true&filter_description=true';
 		}
 		
 		location = url;
@@ -19,7 +19,7 @@ $(document).ready(function() {
 			var filter_name = $('input[name=\'filter_name\']').attr('value')
 			
 			if (filter_name) {
-				url += '&filter_name=' + encodeURIComponent(filter_name);
+				url += '&filter_name=' + encodeURIComponent(filter_name) + '&filter_sub_category=true&filter_description=true';
 			}
 			
 			location = url;

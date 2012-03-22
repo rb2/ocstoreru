@@ -56,11 +56,18 @@ class ModelCatalogProduct extends Model {
 					$words = explode(' ', $data['filter_name']);
 					
 					foreach ($words as $word) {
-						if (!empty($data['filter_description'])) {
-							$implode[] = "LCASE(pd.name) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%' OR LCASE(pd.description) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%'";
-						} else {
-							$implode[] = "LCASE(pd.name) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%'";
-						}				
+						if( !empty($word) )
+						{
+							$lword = $this->db->escape(utf8_strtolower(trim($word)));
+							// Add search by model and SKU
+							$implode[] = 'LCASE(p.model) LIKE "%' . $lword . '%" OR LCASE(p.sku) LIKE "%' . $lword . '%"';
+							// default search by product name and description
+							if (!empty($data['filter_description'])) {
+								$implode[] = "LCASE(pd.name) LIKE '%" . $lword . "%' OR LCASE(pd.description) LIKE '%" . $lword . "%'";
+							} else {
+								$implode[] = "LCASE(pd.name) LIKE '%" . $lword . "%'";
+							}
+						}
 					}
 					
 					if ($implode) {
