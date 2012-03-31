@@ -46,7 +46,6 @@
             <td class="left"><?php echo $column_date_start; ?></td>
             <td class="left"><?php echo $column_date_end; ?></td>
             <td class="right"><?php echo $column_returns; ?></td>
-            <td class="right"><?php echo $column_products; ?></td>
           </tr>
         </thead>
         <tbody>
@@ -56,12 +55,11 @@
             <td class="left"><?php echo $return['date_start']; ?></td>
             <td class="left"><?php echo $return['date_end']; ?></td>
             <td class="right"><?php echo $return['returns']; ?></td>
-            <td class="right"><?php echo $return['products']; ?></td>
           </tr>
           <?php } ?>
           <?php } else { ?>
           <tr>
-            <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
+            <td class="center" colspan="3"><?php echo $text_no_results; ?></td>
           </tr>
           <?php } ?>
         </tbody>

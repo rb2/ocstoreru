@@ -438,14 +438,6 @@
 		    </td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_girth; ?></td>
-            <td><input type="text" name="usps_girth" value="<?php echo $usps_girth; ?>" size="4" />
-		      <?php if ($error_girth) { ?>
-              <span class="error"><?php echo $error_girth; ?></span>
-              <?php } ?>
-		    </td>
-          </tr>
-		  <tr>
             <td><?php echo $entry_display_time; ?></td>
             <td><?php if ($usps_display_time) { ?>
               <input type="radio" name="usps_display_time" value="1" checked="checked" />

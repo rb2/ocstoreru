@@ -8,6 +8,8 @@ $_['text_default']          = 'Default';
 $_['text_approved']         = 'You have approved %s accounts!';
 $_['text_wait']             = 'Please Wait!';
 $_['text_balance']          = 'Balance:';
+$_['text_add_blacklist']    = 'Add Blacklist';
+$_['text_remove_blacklist'] = 'Remove Blacklist';
 
 // Column
 $_['column_name']           = 'Customer Name';
@@ -44,7 +46,7 @@ $_['entry_country']         = 'Country:';
 $_['entry_zone']            = 'Region / State:';
 $_['entry_default']         = 'Default Address:';
 $_['entry_amount']          = 'Amount:';
-$_['entry_points']          = 'Points:';
+$_['entry_points']          = 'Points:<br /><span class="help">Use minus to remove points</span>';
 $_['entry_description']     = 'Description:';
 
 // Error

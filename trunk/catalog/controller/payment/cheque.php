@@ -11,7 +11,7 @@ class ControllerPaymentCheque extends Controller {
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
 		
 		$this->data['payable'] = $this->config->get('cheque_payable');
-		$this->data['address'] = $this->config->get('config_address');
+		$this->data['address'] = nl2br($this->config->get('config_address'));
 
 		$this->data['continue'] = $this->url->link('checkout/success');
 		

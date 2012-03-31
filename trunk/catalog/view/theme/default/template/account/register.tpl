@@ -1,4 +1,8 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
+<?php echo $header; ?>
+<?php if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php } ?>
+<?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -6,11 +10,8 @@
     <?php } ?>
   </div>
   <h1><?php echo $heading_title; ?></h1>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
   <p><?php echo $text_account_already; ?></p>
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="register">
+  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <h2><?php echo $text_your_details; ?></h2>
     <div class="content">
       <table class="form">
@@ -152,11 +153,14 @@
         <?php } else { ?>
         <input type="checkbox" name="agree" value="1" />
         <?php } ?>
-        <a onclick="$('#register').submit();" class="button"><span><?php echo $button_continue; ?></span></a></div>
+        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
+      </div>
     </div>
     <?php } else { ?>
     <div class="buttons">
-      <div class="right"><a onclick="$('#register').submit();" class="button"><span><?php echo $button_continue; ?></span></a></div>
+      <div class="right">
+        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
+      </div>
     </div>
     <?php } ?>
   </form>
@@ -165,10 +169,9 @@
 $('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
 //--></script> 
 <script type="text/javascript"><!--
-$('.fancybox').fancybox({
+$('.colorbox').colorbox({
 	width: 560,
-	height: 560,
-	autoDimensions: false
+	height: 560
 });
-//--></script>  
+//--></script> 
 <?php echo $footer; ?>

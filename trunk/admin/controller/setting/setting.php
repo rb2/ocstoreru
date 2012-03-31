@@ -61,6 +61,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_tax_default'] = $this->language->get('entry_tax_default');
 		$this->data['entry_tax_customer'] = $this->language->get('entry_tax_customer');
 		$this->data['entry_invoice_prefix'] = $this->language->get('entry_invoice_prefix');
+		$this->data['entry_order_edit'] = $this->language->get('entry_order_edit');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
 		$this->data['entry_customer_approval'] = $this->language->get('entry_customer_approval');
@@ -101,6 +102,10 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_alert_mail'] = $this->language->get('entry_alert_mail');
 		$this->data['entry_account_mail'] = $this->language->get('entry_account_mail');
 		$this->data['entry_alert_emails'] = $this->language->get('entry_alert_emails');
+		$this->data['entry_fraud_detection'] = $this->language->get('entry_fraud_detection');
+		$this->data['entry_fraud_key'] = $this->language->get('entry_fraud_key');
+		$this->data['entry_fraud_score'] = $this->language->get('entry_fraud_score');
+		$this->data['entry_fraud_status'] = $this->language->get('entry_fraud_status');
 		$this->data['entry_use_ssl'] = $this->language->get('entry_use_ssl');
 		$this->data['entry_maintenance'] = $this->language->get('entry_maintenance');
 		$this->data['entry_encryption'] = $this->language->get('entry_encryption');
@@ -132,6 +137,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['tab_option'] = $this->language->get('tab_option');
 		$this->data['tab_image'] = $this->language->get('tab_image');
 		$this->data['tab_mail'] = $this->language->get('tab_mail');
+		$this->data['tab_fraud'] = $this->language->get('tab_fraud');
 		$this->data['tab_server'] = $this->language->get('tab_server');
 		$this->data['tab_sms'] = $this->language->get('tab_sms');
 
@@ -463,6 +469,14 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_invoice_prefix'] = 'INV-' . date('Y') . '-00';
 		}
 		
+		if (isset($this->request->post['config_order_edit'])) {
+			$this->data['config_order_edit'] = $this->request->post['config_order_edit'];
+		} elseif ($this->config->get('config_order_edit')) {
+			$this->data['config_order_edit'] = $this->config->get('config_order_edit');			
+		} else {
+			$this->data['config_order_edit'] = 7;
+		}
+				
 		$this->load->model('sale/customer_group');
 		
 		$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
@@ -805,6 +819,30 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_alert_emails'] = $this->config->get('config_alert_emails');
 		}
 
+		if (isset($this->request->post['config_fraud_detection'])) {
+			$this->data['config_fraud_detection'] = $this->request->post['config_fraud_detection']; 
+		} else {
+			$this->data['config_fraud_detection'] = $this->config->get('config_fraud_detection');
+		}	
+				
+		if (isset($this->request->post['config_fraud_key'])) {
+			$this->data['config_fraud_key'] = $this->request->post['config_fraud_key']; 
+		} else {
+			$this->data['config_fraud_key'] = $this->config->get('config_fraud_key');
+		}		
+
+		if (isset($this->request->post['config_fraud_score'])) {
+			$this->data['config_fraud_score'] = $this->request->post['config_fraud_score']; 
+		} else {
+			$this->data['config_fraud_score'] = $this->config->get('config_fraud_score');
+		}	
+			
+		if (isset($this->request->post['config_fraud_status_id'])) {
+			$this->data['config_fraud_status_id'] = $this->request->post['config_fraud_status_id']; 
+		} else {
+			$this->data['config_fraud_status_id'] = $this->config->get('config_fraud_status_id');
+		}		
+				
 		if (isset($this->request->post['config_use_ssl'])) {
 			$this->data['config_use_ssl'] = $this->request->post['config_use_ssl'];
 		} else {
@@ -1029,10 +1067,8 @@ class ControllerSettingSetting extends Controller {
 	}
 	
 	public function template() {
-		$template = basename($this->request->get['template']);
-		
-		if (file_exists(DIR_IMAGE . 'templates/' . $template . '.png')) {
-			$image = HTTPS_IMAGE . 'templates/' . $template . '.png';
+		if (file_exists(DIR_IMAGE . 'templates/' . basename($this->request->get['template']) . '.png')) {
+			$image = HTTPS_IMAGE . 'templates/' . basename($this->request->get['template']) . '.png';
 		} else {
 			$image = HTTPS_IMAGE . 'no_image.jpg';
 		}

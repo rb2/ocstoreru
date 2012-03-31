@@ -72,6 +72,7 @@ class ControllerShippingUPS extends Controller {
 		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
+		$this->data['entry_debug'] = $this->language->get('entry_debug');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -117,6 +118,12 @@ class ControllerShippingUPS extends Controller {
 			$this->data['error_country'] = $this->error['country'];
 		} else {
 			$this->data['error_country'] = '';
+		}
+
+		if (isset($this->error['dimension'])) {
+			$this->data['error_dimension'] = $this->error['dimension'];
+		} else {
+			$this->data['error_dimension'] = '';
 		}
 
   		$this->data['breadcrumbs'] = array();
@@ -747,6 +754,12 @@ class ControllerShippingUPS extends Controller {
 			$this->data['ups_sort_order'] = $this->config->get('ups_sort_order');
 		}	
 		
+		if (isset($this->request->post['ups_debug'])) {
+			$this->data['ups_debug'] = $this->request->post['ups_debug'];
+		} else {
+			$this->data['ups_debug'] = $this->config->get('ups_debug');
+		}
+		
 		$this->template = 'shipping/ups.tpl';
 		$this->children = array(
 			'common/header',
@@ -783,6 +796,18 @@ class ControllerShippingUPS extends Controller {
 
 		if (!$this->request->post['ups_country']) {
 			$this->error['country'] = $this->language->get('error_country');
+		}
+		
+		if (empty($this->request->post['ups_length'])) {
+			$this->error['dimension'] = $this->language->get('error_dimension');
+		}
+		
+		if (empty($this->request->post['ups_width'])) {
+			$this->error['dimension'] = $this->language->get('error_dimension');
+		}
+		
+		if (empty($this->request->post['ups_height'])) {
+			$this->error['dimension'] = $this->language->get('error_dimension');
 		}
 		
 		if (!$this->error) {

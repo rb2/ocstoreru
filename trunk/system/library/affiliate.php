@@ -1,5 +1,5 @@
 <?php
-final class Affiliate {
+class Affiliate {
 	private $affiliate_id;
 	private $firstname;
 	private $lastname;

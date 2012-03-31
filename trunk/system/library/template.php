@@ -1,5 +1,5 @@
 <?php
-final class Template {
+class Template {
 	public $data = array();
 	
 	public function fetch($filename) {

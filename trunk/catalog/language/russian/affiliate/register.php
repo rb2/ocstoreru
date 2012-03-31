@@ -14,7 +14,8 @@ $_['text_your_password']        = 'Пароль';
 $_['text_cheque']               = 'Чек';
 $_['text_paypal']               = 'PayPal';
 $_['text_bank']                 = 'Банковский перевод';
-$_['text_agree']                = 'Я прочитал <a class="fancybox" href="%s" alt="%s"><b>%s</b></a> и согласен с условиями';
+$_['text_agree']                = 'Я прочитал <a class="colorbox" href="%s" alt="%s"><b>%s</b></a> и согласен с условиями';
+
 // Entry
 $_['entry_firstname']           = 'Имя, Отчество:';
 $_['entry_lastname']            = 'Фамилия:';

@@ -30,13 +30,13 @@
   </table>
 </div>
 <div class="buttons">
-  <div class="right"><a id="button-confirm" class="button"><span><?php echo $button_confirm; ?></span></a></div>
+  <div class="right"><input type="button" value="<?php echo $button_confirm; ?>" id="button-confirm" class="button" /></div>
 </div>
 <script type="text/javascript"><!--
 $('#button-confirm').bind('click', function() {
 	$.ajax({
-		type: 'POST',
 		url: 'index.php?route=payment/authorizenet_aim/send',
+		type: 'post',
 		data: $('#payment :input'),
 		dataType: 'json',		
 		beforeSend: function() {

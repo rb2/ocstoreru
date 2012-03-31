@@ -1,5 +1,5 @@
 <?php
-final class Encryption {
+class Encryption {
 	private $key;
 	
 	function __construct($key) {

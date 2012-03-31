@@ -17,7 +17,7 @@
     <textarea name="link" cols="40" rows="5"></textarea>
   </p>
   <div class="buttons">
-    <div class="right"><a href="<?php echo $continue; ?>" class="button"><span><?php echo $button_continue; ?></span></a></div>
+    <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
   </div>
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
@@ -36,7 +36,6 @@ $('input[name=\'product\']').autocomplete({
 				}));
 			}
 		});
-		
 	},
 	select: function(event, ui) {
 		$('input[name=\'product\']').attr('value', ui.item.label);

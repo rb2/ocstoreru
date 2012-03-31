@@ -40,6 +40,7 @@ $_['entry_tax_default']        = 'Use Store Tax Address:<br /><span class="help"
 $_['entry_tax_customer']       = 'Use Customer Tax Address:<br /><span class="help">Use the customers default address when they login to calculate taxes. You can choose to use the default address for the customers shipping or payment address.</span>';
 $_['entry_invoice']            = 'Invoice Start No.:<br /><span class="help">Set the starting number the invoices will begin from.</span>';
 $_['entry_invoice_prefix']     = 'Invoice Prefix:<br /><span class="help">Set the invoice prefix (e.g. INV-2011-00). Invoice ID\'s will start at 1 for each unique prefix</span>';
+$_['entry_order_edit']         = 'Order Editing:<br /><span class="help">Number of days allowed to edit an order. This is required because prices and discounts may change over time corrupting the order if its edited.</span>';
 $_['entry_customer_group']     = 'Customer Group:<br /><span class="help">Default customer group.</span>';
 $_['entry_customer_price']     = 'Login Display Prices:<br /><span class="help">Only show prices when a customer is logged in.</span>';
 $_['entry_customer_approval']  = 'Approve New Customers:<br /><span class="help">Don\'t allow new customer to login until their account has been approved.</span>';
@@ -80,6 +81,10 @@ $_['entry_smtp_timeout']       = 'SMTP Timeout:';
 $_['entry_account_mail']       = 'New Account Alert Mail:<br /><span class="help">Send a email to the store owner when a new account is registered.</span>';
 $_['entry_alert_mail']         = 'New Order Alert Mail:<br /><span class="help">Send a email to the store owner when a new order is created.</span>';
 $_['entry_alert_emails']       = 'Additional Alert E-Mails:<br /><span class="help">Any additional emails you want to receive the alert email, in addition to the main store email. (comma separated)</span>';
+$_['entry_fraud_detection']    = 'Use MaxMind Fraud Detection System:<br /><span class="help">MaxMind is a fraud detections service. If you don\'t have a license key you can <a onclick="window.open(\'http://www.maxmind.com/?rId=opencart\');"><u>sign up here</u></a>. Once you have obtained a key copy and paste it into the field below.</span>';
+$_['entry_fraud_key']          = 'MaxMind License Key:</span>';
+$_['entry_fraud_score']        = 'MaxMind Risk Score:<br /><span class="help">The higher the score the more likly the order is fraudulent. Set a score between 0 - 100.</span>';
+$_['entry_fraud_status']       = 'MaxMind Fraud Order Status:<br /><span class="help">Orders over your set score will be assigned this order status and will not be allowed to reach the complete status automatically.</span>';
 $_['entry_use_ssl']            = 'Use SSL:<br /><span class="help">To use SSL check with your host if a SSL certificate is installed and added the SSL URL to the catalog and admin config files.</span>';
 $_['entry_seo_url']            = 'Use SEO URL\'s:<br /><span class="help">To use SEO URL\'s apache module mod-rewrite must be installed and you need to rename the htaccess.txt to .htaccess.</span>';
 $_['entry_maintenance']        = 'Maintenance Mode:<br /><span class="help">Prevents customers from browsing your store. They will instead see a maintenance message. If logged in as admin, you will see the store as normal.</span>';

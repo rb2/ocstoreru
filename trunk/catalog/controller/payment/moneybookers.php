@@ -41,11 +41,7 @@ class ControllerPaymentMoneybookers extends Controller {
 		
 		$this->data['detail1_text'] = $products;
 		
-		$this->load->library('encryption');
-		
-		$encryption = new Encryption($this->config->get('config_encryption'));
-		
-		$this->data['order_id'] = $encryption->encrypt($this->session->data['order_id']);
+		$this->data['order_id'] = $this->encryption->encrypt($this->session->data['order_id']);
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/moneybookers.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/payment/moneybookers.tpl';
@@ -57,12 +53,8 @@ class ControllerPaymentMoneybookers extends Controller {
 	}
 	
 	public function callback() {
-		$this->load->library('encryption');
-
-		$encryption = new Encryption($this->config->get('config_encryption'));
-
 		if (isset($this->request->post['order_id'])) {
-			$order_id = $encryption->decrypt($this->request->post['order_id']);
+			$order_id = $this->encryption->decrypt($this->request->post['order_id']);
 		} else {
 			$order_id = 0;
 		}

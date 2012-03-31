@@ -1,5 +1,5 @@
 <?php
-final class Mail {
+class Mail {
 	protected $to;
 	protected $from;
 	protected $sender;
@@ -27,11 +27,11 @@ final class Mail {
 	}
 
 	public function setSender($sender) {
-		$this->sender = html_entity_decode($sender, ENT_QUOTES, 'UTF-8');
+		$this->sender = $sender;
 	}
 
 	public function setSubject($subject) {
-		$this->subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
+		$this->subject = $subject;
 	}
 
 	public function setText($text) {
@@ -42,15 +42,8 @@ final class Mail {
 		$this->html = $html;
 	}
 
-	public function addAttachment($file, $filename = '') {
-		if (!$filename) {
-			$filename = basename($file);
-		}
-
-		$this->attachments[] = array(
-			'filename' => $filename,
-			'file'     => $file
-		);
+	public function addAttachment($filename) {
+		$this->attachments[] = $filename;
 	}
 
 	public function send() {
@@ -90,15 +83,15 @@ final class Mail {
 		$header = '';
 		
 		$header .= 'MIME-Version: 1.0' . $this->newline;
-
+		
 		if ($this->protocol != 'mail') {
 			$header .= 'To: ' . $to . $this->newline;
-			$header .= 'Subject: ' . '=?utf-8?B?'.base64_encode($this->subject).'?=' . $this->newline;
+			$header .= 'Subject: ' . $this->subject . $this->newline;
 		}
 		
 		$header .= 'Date: ' . date("D, d M Y H:i:s O") . $this->newline;
 		$header .= 'From: ' . '=?UTF-8?B?' . base64_encode($this->sender) . '?=' . '<' . $this->from . '>' . $this->newline;
-		$header .= 'Reply-To: ' . '=?utf-8?B?'.base64_encode($this->sender).'?=' . '<' . $this->from . '>' . $this->newline;
+		$header .= 'Reply-To: ' . $this->sender . '<' . $this->from . '>' . $this->newline;
 		$header .= 'Return-Path: ' . $this->from . $this->newline;
 		$header .= 'X-Mailer: PHP/' . phpversion() . $this->newline;
 		$header .= 'Content-Type: multipart/related; boundary="' . $boundary . '"' . $this->newline . $this->newline;
@@ -129,19 +122,19 @@ final class Mail {
 		}
 
 		foreach ($this->attachments as $attachment) {
-			if (file_exists($attachment['file'])) {
-				$handle = fopen($attachment['file'], 'r');
+			if (file_exists($attachment)) {
+				$handle = fopen($attachment, 'r');
 				
-				$content = fread($handle, filesize($attachment['file']));
-
+				$content = fread($handle, filesize($attachment));
+				
 				fclose($handle);
 
 				$message .= '--' . $boundary . $this->newline;
-				$message .= 'Content-Type: application/octetstream; name="' . basename($attachment['file']) . '"' . $this->newline;
+				$message .= 'Content-Type: application/octet-stream; name="' . basename($attachment) . '"' . $this->newline;
 				$message .= 'Content-Transfer-Encoding: base64' . $this->newline;
-				$message .= 'Content-Disposition: attachment; filename="' . basename($attachment['filename']) . '"' . $this->newline;
-				$message .= 'Content-ID: <' . basename($attachment['filename']) . '>' . $this->newline;
-				$message .= 'X-Attachment-Id: ' . basename($attachment['filename']) . $this->newline . $this->newline;
+				$message .= 'Content-Disposition: attachment; filename="' . basename($attachment) . '"' . $this->newline;
+				$message .= 'Content-ID: <' . basename(urlencode($attachment)) . '>' . $this->newline;
+				$message .= 'X-Attachment-Id: ' . basename(urlencode($attachment)) . $this->newline . $this->newline;
 				$message .= chunk_split(base64_encode($content));
 			}
 		}
@@ -156,7 +149,6 @@ final class Mail {
 			} else {
 				mail($to, '=?UTF-8?B?' . base64_encode($this->subject) . '?=', $message, $header);
 			}
-
 		} elseif ($this->protocol == 'smtp') {
 			$handle = fsockopen($this->hostname, $this->port, $errno, $errstr, $this->timeout);
 

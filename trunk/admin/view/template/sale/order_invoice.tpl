@@ -35,6 +35,16 @@
             <td><b><?php echo $text_order_id; ?></b></td>
             <td><?php echo $order['order_id']; ?></td>
           </tr>
+          <tr>
+            <td><b><?php echo $text_payment_method; ?></b></td>
+            <td><?php echo $order['payment_method']; ?></td>
+          </tr>
+          <?php if ($order['shipping_method']) { ?>
+          <tr>
+            <td><b><?php echo $text_shipping_method; ?></b></td>
+            <td><?php echo $order['shipping_method']; ?></td>
+          </tr>
+          <?php } ?>
         </table></td>
     </tr>
   </table>
@@ -69,6 +79,15 @@
       <td align="right"><?php echo $product['quantity']; ?></td>
       <td align="right"><?php echo $product['price']; ?></td>
       <td align="right"><?php echo $product['total']; ?></td>
+    </tr>
+    <?php } ?>
+    <?php foreach ($order['voucher'] as $voucher) { ?>
+    <tr>
+      <td align="left"><?php echo $voucher['description']; ?></td>
+      <td align="left"></td>
+      <td align="right">1</td>
+      <td align="right"><?php echo $voucher['amount']; ?></td>
+      <td align="right"><?php echo $voucher['amount']; ?></td>
     </tr>
     <?php } ?>
     <?php foreach ($order['total'] as $total) { ?>

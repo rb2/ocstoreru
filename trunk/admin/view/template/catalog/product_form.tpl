@@ -307,7 +307,7 @@
             </tr>
             <tr>
               <td>&nbsp;</td>
-              <td><div class="scrollbox" id="product-related">
+              <td><div id="product-related" class="scrollbox">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($product_related as $product_related) { ?>
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
@@ -436,6 +436,15 @@
               <tbody id="option-value-row<?php echo $option_value_row; ?>">
                 <tr>
                   <td class="left"><select name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][option_value_id]">
+                      <?php if (isset($option_values[$product_option['option_id']])) { ?>
+                      <?php foreach ($option_values[$product_option['option_id']] as $option_value) { ?>
+                      <?php if ($option_value['option_value_id'] == $product_option_value['option_value_id']) { ?>
+                      <option value="<?php echo $option_value['option_value_id']; ?>" selected="selected"><?php echo $option_value['name']; ?></option>
+                      <?php } else { ?>
+                      <option value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?></option>
+                      <?php } ?>
+                      <?php } ?>
+                      <?php } ?>
                     </select>
                     <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][product_option_value_id]" value="<?php echo $product_option_value['product_option_value_id']; ?>" /></td>
                   <td class="right"><input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][quantity]" value="<?php echo $product_option_value['quantity']; ?>" size="3" /></td>
@@ -499,23 +508,17 @@
                 </tr>
               </tfoot>
             </table>
+            <select id="option-values<?php echo $option_row; ?>" style="display: none;">
+              <?php if (isset($option_values[$product_option['option_id']])) { ?>
+              <?php foreach ($option_values[$product_option['option_id']] as $option_value) { ?>
+              <option value="<?php echo $option_value['option_value_id']; ?>"><?php echo $option_value['name']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select>
             <?php } ?>
           </div>
           <?php $option_row++; ?>
           <?php } ?>
-          <script type="text/javascript"><!--
-          <?php $option_row = 0; ?>
-          <?php $option_value_row = 0; ?>		  
-		  <?php foreach ($product_options as $product_option) { ?>
-          <?php if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') { ?>
-		  <?php foreach ($product_option['product_option_value'] as $product_option_value) { ?>
-		  $('select[name=\'product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][option_value_id]\']').load('index.php?route=catalog/product/option&token=<?php echo $token; ?>&option_id=<?php echo $product_option['option_id']; ?>&option_value_id=<?php echo $product_option_value['option_value_id']; ?>');
-		  <?php $option_value_row++; ?>
-		  <?php } ?>
-		  <?php } ?>
-		  <?php $option_row++; ?>
-          <?php } ?>
-		  //--></script> 
         </div>
         <div id="tab-discount">
           <table id="discount" class="list">
@@ -839,7 +842,8 @@ $('input[name=\'option\']').catcomplete({
 						category: item.category,
 						label: item.name,
 						value: item.option_id,
-						type: item.type
+						type: item.type,
+						option_value: item.option_value
 					}
 				}));
 			}
@@ -924,6 +928,13 @@ $('input[name=\'option\']').catcomplete({
 			html += '      </tr>';
 			html += '    </tfoot>';
 			html += '  </table>';
+            html += '  <select id="option-values' + option_row + '" style="display: none;">';
+			
+            for (i = 0; i < ui.item.option_value.length; i++) {
+				html += '  <option value="' + ui.item.option_value[i]['option_value_id'] + '">' + ui.item.option_value[i]['name'] + '</option>';
+            }
+
+            html += '  </select>';			
 			html += '</div>';	
 		}
 		
@@ -955,7 +966,9 @@ var option_value_row = <?php echo $option_value_row; ?>;
 function addOptionValue(option_row) {	
 	html  = '<tbody id="option-value-row' + option_value_row + '">';
 	html += '  <tr>';
-	html += '    <td class="left"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][option_value_id]"></select><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][product_option_value_id]" value="" /></td>';
+	html += '    <td class="left"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][option_value_id]">';
+	html += $('#option-values' + option_row).html();
+	html += '    </select><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][product_option_value_id]" value="" /></td>';
 	html += '    <td class="right"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" size="3" /></td>'; 
 	html += '    <td class="left"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]">';
 	html += '      <option value="1"><?php echo $text_yes; ?></option>';
@@ -982,8 +995,6 @@ function addOptionValue(option_row) {
 	
 	$('#option-value' + option_row + ' tfoot').before(html);
 
-	$('select[name=\'product_option[' + option_row + '][product_option_value][' + option_value_row + '][option_value_id]\']').load('index.php?route=catalog/product/option&token=<?php echo $token; ?>&option_id=' + $('input[name=\'product_option[' + option_row + '][option_id]\']').attr('value'));
-	
 	option_value_row++;
 }
 //--></script> 
@@ -1074,7 +1085,7 @@ function addImage() {
     html  = '<tbody id="image-row' + image_row + '">';
 	html += '  <tr>';
 	html += '    <td class="left"><div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + image_row + '" /><input type="hidden" name="product_image[' + image_row + '][image]" value="" id="image' + image_row + '" /><br /><a onclick="image_upload(\'image' + image_row + '\', \'thumb' + image_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + image_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + image_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div></td>';
-	html += '    <td class="right"><input type="text" name="product_image[' + image_row + '][sort_order]" value="" /></td>';
+	html += '    <td class="right"><input type="text" name="product_image[' + image_row + '][sort_order]" value="" size="2" /></td>';
 	html += '    <td class="left"><a onclick="$(\'#image-row' + image_row  + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
 	html += '  </tr>';
 	html += '</tbody>';

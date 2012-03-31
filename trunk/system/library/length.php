@@ -1,5 +1,5 @@
 <?php
-final class Length {
+class Length {
 	private $lengths = array();
 	
 	public function __construct($registry) {

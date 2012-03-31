@@ -34,7 +34,6 @@ $_['entry_language']           = 'Language:';
 $_['entry_currency']           = 'Currency:';
 $_['entry_catalog_limit'] 	   = 'Default Items Per Page (Catalog):<br /><span class="help">Determines how many catalog items are shown per page (products, categories, etc)</span>';
 $_['entry_tax']                = 'Display Prices With Tax:';
-
 $_['entry_tax_default']        = 'Use Store Tax Address:<br /><span class="help">Use the store address to calculate taxes if no one is logged in. You can choose to use the store address for the customers shipping or payment address.</span>';
 $_['entry_tax_customer']       = 'Use Customer Tax Address:<br /><span class="help">Use the customers default address when they login to calculate taxes. You can choose to use the default address for the customers shipping or payment address.</span>';
 $_['entry_customer_group']     = 'Customer Group:<br /><span class="help">Default customer group.</span>';

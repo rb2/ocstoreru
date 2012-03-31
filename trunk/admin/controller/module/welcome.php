@@ -72,8 +72,6 @@ class ControllerModuleWelcome extends Controller {
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 
 		$this->data['modules'] = array();
-
-		$this->data['modules'] = array();
 		
 		if (isset($this->request->post['welcome_module'])) {
 			$this->data['modules'] = $this->request->post['welcome_module'];

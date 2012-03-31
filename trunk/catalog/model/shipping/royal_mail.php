@@ -314,7 +314,7 @@ class ModelShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_insurance') . ' ' . $this->currency->format($insurance) . ')';
 					}		
 					
-					$quote_data['special_delivery_100'] = array(
+					$quote_data['special_delivery_1000'] = array(
 						'code'         => 'royal_mail.special_delivery_1000',
 						'title'        => $title,
 						'cost'         => $cost,
@@ -474,7 +474,7 @@ class ModelShippingRoyalMail extends Model {
 			}
 			
 			// International Signed
-			if ($this->config->get('royal_mail_international_signed_status')) {
+			if ($this->config->get('royal_mail_international_signed_status') && $address['iso_code_2'] != 'GB') {
 				$cost = 0;
 				$insurance = 0;
 				

@@ -5,10 +5,10 @@ function utf8_strlen($string) {
 
 function utf8_strpos($string, $needle, $offset = NULL) {
     if (is_null($offset)) {
-        $array = explode($needle, $string, 2);
+        $data = explode($needle, $string, 2);
        
-	   if (count($array) > 1) {
-            return utf8_strlen($array[0]);
+	   if (count($data) > 1) {
+            return utf8_strlen($data[0]);
         }
 		
         return false;
@@ -31,12 +31,12 @@ function utf8_strpos($string, $needle, $offset = NULL) {
 
 function utf8_strrpos($string, $needle, $offset = NULL) {
     if (is_null($offset)) {
-        $array = explode($needle, $string);
+        $data = explode($needle, $string);
         
-        if (count($array) > 1) {
-            array_pop($array);
+        if (count($data) > 1) {
+            array_pop($data);
            
-		    $string = join($needle, $array);
+		    $string = join($needle, $data);
             
 			return utf8_strlen($string);
         }
@@ -65,23 +65,28 @@ function utf8_substr($string, $offset, $length = null) {
 	$string = (string)$string;
 	$offset = (int)$offset;
 	
-	if (!is_null($length)) $length = (int)$length;
+	if (!is_null($length)) {
+		$length = (int)$length;
+	}
 	
 	// handle trivial cases
-	if ($length === 0) return '';
-	
-	if ($offset < 0 && $length < 0 && $length < $offset)
+	if ($length === 0) {
 		return '';
+	}
+	
+	if ($offset < 0 && $length < 0 && $length < $offset) {
+		return '';
+	}
 	
 	// normalise negative offsets (we could use a tail
 	// anchored pattern, but they are horribly slow!)
 	if ($offset < 0) {
-		
-		// see notes
 		$strlen = strlen(utf8_decode($string));
 		$offset = $strlen + $offset;
 		
-		if ($offset < 0) $offset = 0;
+		if ($offset < 0) {
+			$offset = 0;
+		}
 	}
 	
 	$Op = '';
@@ -90,56 +95,46 @@ function utf8_substr($string, $offset, $length = null) {
 	// establish a pattern for offset, a
 	// non-captured group equal in length to offset
 	if ($offset > 0) {
-		
 		$Ox = (int)($offset / 65535);
 		$Oy = $offset%65535;
 		
 		if ($Ox) {
-			$Op = '(?:.{65535}){'.$Ox.'}';
+			$Op = '(?:.{65535}){' . $Ox . '}';
 		}
 		
-		$Op = '^(?:'.$Op.'.{'.$Oy.'})';
-		
+		$Op = '^(?:' . $Op . '.{' . $Oy . '})';
 	} else {
-		
-		// offset == 0; just anchor the pattern
 		$Op = '^';
-		
 	}
 	
 	// establish a pattern for length
 	if (is_null($length)) {
-		
-		// the rest of the string
 		$Lp = '(.*)$';
-		
 	} else {
-		
 		if (!isset($strlen)) {
-			// see notes
 			$strlen = strlen(utf8_decode($string));
 		}
 		
 		// another trivial case
-		if ($offset > $strlen) return '';
+		if ($offset > $strlen) {
+			return '';
+		}
 		
 		if ($length > 0) {
-			
-			// reduce any length that would
-			// go passed the end of the string
 			$length = min($strlen - $offset, $length);
 			
-			$Lx = (int)( $length / 65535 );
+			$Lx = (int)($length / 65535);
 			$Ly = $length % 65535;
 			
 			// negative length requires a captured group
 			// of length characters
-			if ($Lx) $Lp = '(?:.{65535}){'.$Lx.'}';
-			$Lp = '('.$Lp.'.{'.$Ly.'})';
+			if ($Lx) {
+				$Lp = '(?:.{65535}){' . $Lx . '}';
+			}
 			
-		} else if ($length < 0) {
-			
-			if ( $length < ($offset - $strlen) ) {
+			$Lp = '(' . $Lp . '.{' . $Ly . '})';
+		} elseif ($length < 0) {
+			if ($length < ($offset - $strlen)) {
 				return '';
 			}
 			
@@ -149,11 +144,12 @@ function utf8_substr($string, $offset, $length = null) {
 			// negative length requires ... capture everything
 			// except a group of  -length characters
 			// anchored at the tail-end of the string
-			if ($Lx) $Lp = '(?:.{65535}){'.$Lx.'}';
-			$Lp = '(.*)(?:'.$Lp.'.{'.$Ly.'})$';
+			if ($Lx) {
+				$Lp = '(?:.{65535}){' . $Lx . '}';
+			}
 			
+			$Lp = '(.*)(?:' . $Lp . '.{' . $Ly . '})$';
 		}
-		
 	}
 	
 	if (!preg_match( '#' . $Op . $Lp . '#us', $string, $match)) {
@@ -776,53 +772,37 @@ function utf8_to_unicode($str) {
 	return $out;
 }
 
-function utf8_from_unicode($arr) {
+function utf8_from_unicode($data) {
 	ob_start();
 	
-	foreach (array_keys($arr) as $k) {
-		# ASCII range (including control chars)
-		if (($arr[$k] >= 0) && ($arr[$k] <= 0x007f)) {
-			echo chr($arr[$k]);
-		
-		# 2 byte sequence
-		} elseif ($arr[$k] <= 0x07ff) {
-			
-
-			echo chr(0xc0 | ($arr[$k] >> 6));
-			echo chr(0x80 | ($arr[$k] & 0x003f));
-		
-		# Byte order mark (skip)
-		} elseif ($arr[$k] == 0xFEFF) {
+	foreach (array_keys($data) as $key) {
+		if (($data[$key] >= 0) && ($data[$key] <= 0x007f)) {
+			echo chr($data[$key]);
+		} elseif ($data[$key] <= 0x07ff) {
+			echo chr(0xc0 | ($data[$key] >> 6));
+			echo chr(0x80 | ($data[$key] & 0x003f));
+		} elseif ($data[$key] == 0xFEFF) {
 			
 			// nop -- zap the BOM
 		
 		# Test for illegal surrogates
-		} elseif ($arr[$k] >= 0xD800 && $arr[$k] <= 0xDFFF) {
-			// found a surrogate
-			trigger_error('utf8_from_unicode: Illegal surrogate at index: ' . $k . ', value: ' . $arr[$k], E_USER_WARNING);
+		} elseif ($data[$key] >= 0xD800 && $data[$key] <= 0xDFFF) {
+			trigger_error('utf8_from_unicode: Illegal surrogate at index: ' . $key . ', value: ' . $data[$key], E_USER_WARNING);
 			
 			return false;
-		
-		# 3 byte sequence
-		} elseif ($arr[$k] <= 0xffff) {
-			
-			echo chr(0xe0 | ($arr[$k] >> 12));
-			echo chr(0x80 | (($arr[$k] >> 6) & 0x003f));
-			echo chr(0x80 | ($arr[$k] & 0x003f));
-		
-		# 4 byte sequence
-		} elseif ($arr[$k] <= 0x10ffff) {
-			
-			echo chr(0xf0 | ($arr[$k] >> 18));
-			echo chr(0x80 | (($arr[$k] >> 12) & 0x3f));
-			echo chr(0x80 | (($arr[$k] >> 6) & 0x3f));
-			echo chr(0x80 | ($arr[$k] & 0x3f));
-			
+		} elseif ($data[$key] <= 0xffff) {
+			echo chr(0xe0 | ($data[$key] >> 12));
+			echo chr(0x80 | (($data[$key] >> 6) & 0x003f));
+			echo chr(0x80 | ($data[$key] & 0x003f));
+		} elseif ($data[$key] <= 0x10ffff) {
+			echo chr(0xf0 | ($data[$key] >> 18));
+			echo chr(0x80 | (($data[$key] >> 12) & 0x3f));
+			echo chr(0x80 | (($data[$key] >> 6) & 0x3f));
+			echo chr(0x80 | ($data[$key] & 0x3f));
 		} else {
-			trigger_error('utf8_from_unicode: Codepoint out of Unicode range ' . 'at index: '.$k.', value: '.$arr[$k], E_USER_WARNING);
+			trigger_error('utf8_from_unicode: Codepoint out of Unicode range at index: ' . $key . ', value: ' . $data[$key], E_USER_WARNING);
 			
-			// out of range
-			return FALSE;
+			return false;
 		}
 	}
 	
@@ -834,22 +814,22 @@ function utf8_from_unicode($arr) {
 }
 
 function utf8_truncate($string, $length = 20, $etc = '..', $break_words = false, $middle = false) {
-    if ($length == 0) {
-        return '';
-    }
+	if ($length == 0) {
+		return '';
+	}
 
-    if (utf8_strlen($string) > $length) {
-        $length -= min($length, strlen($etc));
-        if (!$break_words && !$middle) {
-            $string = preg_replace('/\s+?(\S+)?$/', '', utf8_substr($string, 0, $length+1));
-        }
-        if(!$middle) {
-            return utf8_substr($string, 0, $length) . $etc;
-        } else {
-            return utf8_substr($string, 0, $length/2) . $etc . utf8_substr($string, -$length/2);
-        }
-    } else {
-        return $string;
-    }
+	if (utf8_strlen($string) > $length) {
+		$length -= min($length, strlen($etc));
+		if (!$break_words && !$middle) {
+			$string = preg_replace('/\s+?(\S+)?$/', '', utf8_substr($string, 0, $length+1));
+		}
+		if(!$middle) {
+			return utf8_substr($string, 0, $length) . $etc;
+		} else {
+			return utf8_substr($string, 0, $length/2) . $etc . utf8_substr($string, -$length/2);
+		}
+	} else {
+		return $string;
+	}
 }
 ?>

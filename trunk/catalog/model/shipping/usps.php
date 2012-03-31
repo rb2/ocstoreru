@@ -47,8 +47,11 @@ class ModelShippingUsps extends Model {
 				$xml .= '		<Width>' . $this->config->get('usps_width') . '</Width>';
 				$xml .= '		<Length>' . $this->config->get('usps_length') . '</Length>';
 				$xml .= '		<Height>' . $this->config->get('usps_height') . '</Height>';
-				$xml .= '		<Girth>' . $this->config->get('usps_girth') . '</Girth>';
-
+				
+				// Calculate girth based on usps calculation
+				$xml .= '		<Girth>' . (round(((float)$this->config->get('usps_length') + (float)$this->config->get('usps_width') * 2 + (float)$this->config->get('usps_height') * 2), 1)) . '</Girth>';
+				 
+				 
 				$xml .=	'		<Machinable>' . ($this->config->get('usps_machinable') ? 'true' : 'false') . '</Machinable>';
 				$xml .=	'	</Package>';
 				$xml .= '</RateV4Request>';
@@ -330,7 +333,6 @@ class ModelShippingUsps extends Model {
 				$result = str_replace('\"', '"', $result);
 
 				if ($result) {
-
 					if ($this->config->get('usps_debug')) {
 						$this->log->write("USPS DATA SENT: " . urldecode($request));
 						$this->log->write("USPS DATA RECV: " . $result);
@@ -344,7 +346,7 @@ class ModelShippingUsps extends Model {
 					$error = $dom->getElementsByTagName('Error')->item(0);
 
 					$firstclasses = array (
-						'First-Class Mail Package',
+						'First-Class Mail Parcel',
 						'First-Class Mail Large Envelope',
 						'First-Class Mail Letter',
 						'First-Class Mail Postcards'
@@ -359,14 +361,11 @@ class ModelShippingUsps extends Model {
 							$postages = $package->getElementsByTagName('Postage');
 
 							if ($postages->length) {
-
 								foreach ($postages as $postage) {
 									$classid = $postage->getAttribute('CLASSID');
 
 									if (in_array($classid, $allowed)) {
-
-										if ($classid == "0") {
-
+										if ($classid == '0') {
 											$mailservice = $postage->getElementsByTagName('MailService')->item(0)->nodeValue;
 
 											foreach ($firstclasses as $k => $firstclass)  {
@@ -377,7 +376,6 @@ class ModelShippingUsps extends Model {
 											}
 
 											if (($this->config->get('usps_domestic_' . $classid))) {
-
 												$cost = $postage->getElementsByTagName('Rate')->item(0)->nodeValue;
 
 												$quote_data[$classid] = array(
@@ -385,12 +383,11 @@ class ModelShippingUsps extends Model {
 													'title'        => $postage->getElementsByTagName('MailService')->item(0)->nodeValue,
 													'cost'         => $this->currency->convert($cost, 'USD', $this->config->get('config_currency')),
 													'tax_class_id' => $this->config->get('usps_tax_class_id'),
-													'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, 'USD', $this->currency->getCode()), $this->config->get('usps_tax_class_id'), $this->config->get('config_tax')))
+													'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, 'USD', $this->currency->getCode()), $this->config->get('usps_tax_class_id'), $this->config->get('config_tax')), $this->currency->getCode(), 1.0000000)
 												);
 											}
 
 										} elseif ($this->config->get('usps_domestic_' . $classid)) {
-
 											$cost = $postage->getElementsByTagName('Rate')->item(0)->nodeValue;
 
 											$quote_data[$classid] = array(
@@ -398,7 +395,7 @@ class ModelShippingUsps extends Model {
 												'title'        => $postage->getElementsByTagName('MailService')->item(0)->nodeValue,
 												'cost'         => $this->currency->convert($cost, 'USD', $this->config->get('config_currency')),
 												'tax_class_id' => $this->config->get('usps_tax_class_id'),
-												'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, 'USD', $this->currency->getCode()), $this->config->get('usps_tax_class_id'), $this->config->get('config_tax')))
+												'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, 'USD', $this->currency->getCode()), $this->config->get('usps_tax_class_id'), $this->config->get('config_tax')), $this->currency->getCode(), 1.0000000)
 											);
 										}
 									}
@@ -438,7 +435,7 @@ class ModelShippingUsps extends Model {
 										'title'        => $title,
 										'cost'         => $this->currency->convert($cost, 'USD', $this->config->get('config_currency')),
 										'tax_class_id' => $this->config->get('usps_tax_class_id'),
-										'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, 'USD', $this->currency->getCode()), $this->config->get('usps_tax_class_id'), $this->config->get('config_tax')))
+										'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, 'USD', $this->currency->getCode()), $this->config->get('usps_tax_class_id'), $this->config->get('config_tax')), $this->currency->getCode(), 1.0000000)
 									);
 								}
 							}
@@ -456,18 +453,12 @@ class ModelShippingUsps extends Model {
 			}
 
 	  		if ($quote_data) {
-
 				$title = $this->language->get('text_title');
 
 				if ($this->config->get('usps_display_weight')) {
 					$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('usps_weight_class_id')) . ')';
 				}
-
-				function comparecost ($a, $b) {
-				    return $a['cost'] > $b['cost'];
-				}
-				uasort($quote_data, 'comparecost');
-				
+								
       			$method_data = array(
         			'code'       => 'usps',
         			'title'      => $title,

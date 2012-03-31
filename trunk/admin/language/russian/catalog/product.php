@@ -27,7 +27,7 @@ $_['column_action']          = 'Действие';
 // Entry
 $_['entry_name']             = 'Название товара:';
 $_['entry_meta_keyword']     = 'Мета-тег Keywords:';
-$_['entry_meta_description'] = 'Мета-тег Description:';
+$_['entry_meta_description'] = 'Мета-тег "Описание":';
 $_['entry_description']      = 'Описание:';
 $_['entry_store']            = 'Магазины:';
 $_['entry_keyword']          = 'SEO URL:<br/><span class="help">Должно быть уникальным на всю систему.</span>';

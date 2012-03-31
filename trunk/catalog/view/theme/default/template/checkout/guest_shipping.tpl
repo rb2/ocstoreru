@@ -29,7 +29,7 @@
   </tr>
   <tr>
     <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-    <td><select name="country_id" class="large-field" onchange="$('#shipping-address select[name=\'zone_id\']').load('index.php?route=checkout/address/zone&country_id=' + this.value);">
+    <td><select name="country_id" class="large-field" onchange="$('#shipping-address select[name=\'zone_id\']').load('index.php?route=checkout/guest_shipping/zone&country_id=' + this.value);">
         <option value=""><?php echo $text_select; ?></option>
         <?php foreach ($countries as $country) { ?>
         <?php if ($country['country_id'] == $country_id) { ?>
@@ -48,8 +48,8 @@
 </table>
 <br />
 <div class="buttons">
-  <div class="right"><a id="button-guest-shipping" class="button"><span><?php echo $button_continue; ?></span></a></div>
+  <div class="right"><input type="button" value="<?php echo $button_continue; ?>" id="button-guest-shipping" class="button" /></div>
 </div>
 <script type="text/javascript"><!--
-$('#shipping-address select[name=\'zone_id\']').load('index.php?route=checkout/address/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
+$('#shipping-address select[name=\'zone_id\']').load('index.php?route=checkout/guest_shipping/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
 //--></script> 

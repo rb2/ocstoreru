@@ -13,7 +13,7 @@ class ModelTotalLowOrderFee extends Model {
 			);
 			
 			if ($this->config->get('low_order_fee_tax_class_id')) {
-				$tax_rates = $this->tax->getRates($this->config->get('handling_fee'), $this->config->get('handling_tax_class_id'));
+				$tax_rates = $this->tax->getRates($this->config->get('low_order_fee_fee'), $this->config->get('low_order_fee_tax_class_id'));
 				
 				foreach ($tax_rates as $tax_rate) {
 					if (!isset($taxes[$tax_rate['tax_rate_id']])) {

@@ -17,7 +17,7 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><a href="#tab-sms"><?php echo $tab_sms; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a></div>
+      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><a href="#tab-fraud"><?php echo $tab_fraud; ?></a><a href="#tab-sms"><?php echo $tab_sms; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a></div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
           <table class="form">
@@ -265,6 +265,10 @@
             <tr>
               <td><?php echo $entry_invoice_prefix; ?></td>
               <td><input type="text" name="config_invoice_prefix" value="<?php echo $config_invoice_prefix; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_order_edit; ?></td>
+              <td><input type="text" name="config_order_edit" value="<?php echo $config_order_edit; ?>" size="3" /></td>
             </tr>
             <tr>
               <td><?php echo $entry_customer_group; ?></td>
@@ -685,6 +689,44 @@
               <td><?php echo $entry_alert_emails; ?></td>
               <td><textarea name="config_alert_emails" cols="40" rows="5"><?php echo $config_alert_emails; ?></textarea></td>
             </tr>
+          </table>
+        </div>
+        <div id="tab-fraud">
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_fraud_detection; ?></td>
+              <td><?php if ($config_fraud_detection) { ?>
+                <input type="radio" name="config_fraud_detection" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_fraud_detection" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_fraud_detection" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_fraud_detection" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>          
+            <tr>
+              <td><?php echo $entry_fraud_key; ?></td>
+              <td><input type="text" name="config_fraud_key" value="<?php echo $config_fraud_key; ?>" /></td>
+            </tr>                 
+            <tr>
+              <td><?php echo $entry_fraud_score; ?></td>
+              <td><input type="text" name="config_fraud_score" value="<?php echo $config_fraud_score; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_fraud_status; ?></td>
+              <td><select name="config_fraud_status_id">
+                  <?php foreach ($order_statuses as $order_status) { ?>
+                  <?php if ($order_status['order_status_id'] == $config_fraud_status_id) { ?>
+                  <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>            
           </table>
         </div>
         <div id="tab-sms">

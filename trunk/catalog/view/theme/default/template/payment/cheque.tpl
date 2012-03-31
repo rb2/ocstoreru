@@ -5,7 +5,9 @@
 <p><?php echo $address; ?></p>
 <p><?php echo $text_payment; ?></p>
 <div class="buttons">
-  <div class="right"><a id="button-confirm" class="button"><span><?php echo $button_confirm; ?></span></a></div>
+  <div class="right">
+    <input type="button" value="<?php echo $button_confirm; ?>" id="button-confirm" class="button" />
+  </div>
 </div>
 <script type="text/javascript"><!--
 $('#button-confirm').bind('click', function() {

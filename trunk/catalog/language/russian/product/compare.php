@@ -16,8 +16,8 @@ $_['text_reviews']      = 'Отзывов: %s';
 $_['text_summary']      = 'Описание';
 $_['text_weight']       = 'Вес';
 $_['text_dimension']    = 'Размеры (Д x Ш x В)';
-$_['text_remove']       = 'Убрать из сравнения';
 $_['text_compare']      = 'Сравнить (%s)';
 $_['text_success']      = 'Вы добавили <a href="%s">%s</a> для <a href="%s">сравнения</a>!';
+$_['text_remove']       = 'Убрать из сравнения';
 $_['text_empty']        = 'Вы не выбрали товары для сравнения';
 ?>

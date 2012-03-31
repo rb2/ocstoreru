@@ -24,6 +24,10 @@
               <?php } ?></td>
           </tr>
           <tr>
+            <td><?php echo $entry_password; ?></td>
+            <td><input type="text" name="paypoint_password" value="<?php echo $paypoint_password; ?>" /></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_test; ?></td>
             <td><select name="paypoint_test">
                 <?php if ($paypoint_test == 'live') { ?>
@@ -93,4 +97,4 @@
     </div>
   </div>
 </div>
-<?php echo $footer; ?> 
+<?php echo $footer; ?>

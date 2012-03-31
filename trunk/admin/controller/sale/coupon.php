@@ -528,6 +528,16 @@ class ControllerSaleCoupon extends Controller {
       		$this->error['code'] = $this->language->get('error_code');
     	}
 		
+		$coupon_info = $this->model_sale_coupon->getCouponByCode($this->request->post['code']);
+		
+		if ($coupon_info) {
+			if (!isset($this->request->get['coupon_id'])) {
+				$this->error['warning'] = $this->language->get('error_exists');
+			} elseif ($coupon_info['coupon_id'] != $this->request->get['coupon_id'])  {
+				$this->error['warning'] = $this->language->get('error_exists');
+			}
+		}
+	
     	if (!$this->error) {
       		return true;
     	} else {

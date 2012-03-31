@@ -103,7 +103,7 @@ function addModule() {
 	html += '    <td class="left"><input type="text" name="bestseller_module[' + module_row + '][image_width]" value="80" size="3" /> <input type="text" name="bestseller_module[' + module_row + '][image_height]" value="80" size="3" /></td>';		
 	html += '    <td class="left"><select name="bestseller_module[' + module_row + '][layout_id]">';
 	<?php foreach ($layouts as $layout) { ?>
-	html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>';
+	html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo addslashes($layout['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
 	html += '    <td class="left"><select name="bestseller_module[' + module_row + '][position]">';

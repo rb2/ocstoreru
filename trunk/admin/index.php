@@ -1,6 +1,6 @@
 <?php
 // Version
-define('VERSION', '1.5.1.3');
+define('VERSION', '1.5.2.1');
 
 // Configuration
 require_once('config.php');
@@ -123,8 +123,7 @@ $language->load($languages[$config->get('config_admin_language')]['filename']);
 $registry->set('language', $language); 		
 
 // Document
-$document = new Document();
-$registry->set('document', $document); 		
+$registry->set('document', new Document()); 		
 		
 // Currency
 $registry->set('currency', new Currency($registry));		

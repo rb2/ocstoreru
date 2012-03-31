@@ -259,12 +259,18 @@ class ControllerProductProduct extends Controller {
 					
 					foreach ($option['option_value'] as $option_value) {
 						if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
+							if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
+								$price = $this->currency->format($this->tax->calculate($option_value['price'], $product_info['tax_class_id'], $this->config->get('config_tax')));
+							} else {
+								$price = false;
+							}
+							
 							$option_value_data[] = array(
 								'product_option_value_id' => $option_value['product_option_value_id'],
 								'option_value_id'         => $option_value['option_value_id'],
 								'name'                    => $option_value['name'],
 								'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
-								'price'                   => (float)$option_value['price'] ? $this->currency->format($this->tax->calculate($option_value['price'], $product_info['tax_class_id'], $this->config->get('config_tax'))) : false,
+								'price'                   => $price,
 								'price_prefix'            => $option_value['price_prefix']
 							);
 						}
@@ -456,7 +462,7 @@ class ControllerProductProduct extends Controller {
 		foreach ($results as $result) {
         	$this->data['reviews'][] = array(
         		'author'     => $result['author'],
-				'text'       => strip_tags($result['text']),
+				'text'       => $result['text'],
 				'rating'     => (int)$result['rating'],
         		'reviews'    => sprintf($this->language->get('text_reviews'), (int)$review_total),
         		'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
@@ -488,26 +494,28 @@ class ControllerProductProduct extends Controller {
 		
 		$json = array();
 		
-		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
-			$json['error'] = $this->language->get('error_name');
-		}
-		
-		if ((utf8_strlen($this->request->post['text']) < 25) || (utf8_strlen($this->request->post['text']) > 1000)) {
-			$json['error'] = $this->language->get('error_text');
-		}
-
-		if (!$this->request->post['rating']) {
-			$json['error'] = $this->language->get('error_rating');
-		}
-
-		if (!isset($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
-			$json['error'] = $this->language->get('error_captcha');
-		}
-				
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && !isset($json['error'])) {
-			$this->model_catalog_review->addReview($this->request->get['product_id'], $this->request->post);
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
+				$json['error'] = $this->language->get('error_name');
+			}
 			
-			$json['success'] = $this->language->get('text_success');
+			if ((utf8_strlen($this->request->post['text']) < 25) || (utf8_strlen($this->request->post['text']) > 1000)) {
+				$json['error'] = $this->language->get('error_text');
+			}
+	
+			if (!$this->request->post['rating']) {
+				$json['error'] = $this->language->get('error_rating');
+			}
+	
+			if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+				$json['error'] = $this->language->get('error_captcha');
+			}
+				
+			if (!isset($json['error'])) {
+				$this->model_catalog_review->addReview($this->request->get['product_id'], $this->request->post);
+				
+				$json['success'] = $this->language->get('text_success');
+			}
 		}
 		
 		$this->response->setOutput(json_encode($json));
@@ -554,16 +562,12 @@ class ControllerProductProduct extends Controller {
 			$json['error'] = $this->language->get('error_upload');
 		}
 		
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && !isset($json['error'])) {
+		if (!$json) {
 			if (is_uploaded_file($this->request->files['file']['tmp_name']) && file_exists($this->request->files['file']['tmp_name'])) {
 				$file = basename($filename) . '.' . md5(rand());
 				
-				// Hide the uploaded file name sop people can not link to it directly.
-				$this->load->library('encryption');
-				
-				$encryption = new Encryption($this->config->get('config_encryption'));
-				
-				$json['file'] = $encryption->encrypt($file);
+				// Hide the uploaded file name so people can not link to it directly.
+				$json['file'] = $this->encryption->encrypt($file);
 				
 				move_uploaded_file($this->request->files['file']['tmp_name'], DIR_DOWNLOAD . $file);
 			}
