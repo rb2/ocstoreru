@@ -34,11 +34,11 @@ $_['entry_status']      = 'Статус:';
 
 // Error
 $_['error_permission']  = 'У Вас нет прав для изменения подарочных сертификатов!';
-$_['error_exists']      = 'Warning: Voucher code is already in use!';
+$_['error_exists']      = 'Такой код подарочного сертификата уже используется!';
 $_['error_code']        = 'Код должен быть от 3 до 10 символов!';
 $_['error_to_name']     = 'Имя получателя должно быть от 1 до 64 символов!';
 $_['error_from_name']   = 'Имя отправителя должно быть от 1 до 64 символов!';
 $_['error_email']       = 'E-Mail адрес введен неверно!';
 $_['error_amount']      = 'Сумма должна быть не менее 1!';
-$_['error_order']       = 'Warning: This voucher cannot be deleted as it is part of an <a href="%s">order</a>!';
+$_['error_order']       = 'Этот подарочный сертификат не может быть удалён, так как он часть <a href="%s">заказа</a>!';
 ?>

@@ -3,23 +3,23 @@
 $_['heading_title']          = 'Корзина';
 
 // Text
-$_['text_success']           = 'Success: You have added <a href="%s">%s</a> to your <a href="%s">shopping cart</a>!';
-$_['text_remove']            = 'Success: You have modified your shopping cart!';
-$_['text_coupon']            = 'Success: Your coupon discount has been applied!';
-$_['text_voucher']           = 'Success: Your gift voucher discount has been applied!';
-$_['text_reward']            = 'Бонусных баллов: %s';
-$_['text_shipping']          = 'Success: Your shipping estimate has been applied!';
-$_['text_login']             = 'Attention: You must <a href="%s">login</a> or <a href="%s">create an account</a> to view prices!';
-$_['text_points']            = 'Reward Points: %s';
-$_['text_items']             = '%s шт. - %s';
-$_['text_next']              = 'What would you like to do next?';
-$_['text_next_choice']       = 'Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.';
-$_['text_use_coupon']        = 'Use Coupon Code';
-$_['text_use_voucher']       = 'Use Gift Voucher';
-$_['text_use_reward']        = 'Use Reward Points (Available %s)';
-$_['text_shipping_estimate'] = 'Estimate Shipping &amp; Taxes';
-$_['text_shipping_detail']   = 'Enter your destination to get a shipping estimate.';
-$_['text_shipping_method']   = 'Please select the preferred shipping method to use on this order.';
+$_['text_success']           = 'Товар <a href="%s">%s</a> добавлен в <a href="%s">корзину покупок</a>!';
+$_['text_remove']            = 'Корзина покупок обновлена!';
+$_['text_coupon']            = 'Скидка по купону успешно применена!';
+$_['text_voucher']           = 'Скидка по подарочному сертификату успешно применена!';
+$_['text_reward']            = 'Скидка по бонусным баллам успешно применена!';
+$_['text_shipping']          = 'Оценка стоимости доставки успешно применена!';
+$_['text_login']             = 'Необходимо <a href="%s">Войти в Личный кабинет</a> или <a href="%s">создать учетную запись</a> для просмотра цен!';
+$_['text_points']            = 'Бонусные баллы: %s';
+$_['text_items']             = 'Товаров: %s (%s)';
+$_['text_next']              = 'Воспользуйтесь дополнительными возможностями';
+$_['text_next_choice']       = 'Если у вас есть код купона на скидку или бонусные баллы, которые вы хотите использовать, выберите соответствующий пункт. Также можно приблизительно узнать стоимость доставки в ваш регион.';
+$_['text_use_coupon']        = 'Использовать купон на скидку';
+$_['text_use_voucher']       = 'Использовать подарочный сертификат';
+$_['text_use_reward']        = 'Использовать бонусные баллы (доступно %s)';
+$_['text_shipping_estimate'] = 'Оценка стоимости доставки и налоговых сборов';
+$_['text_shipping_detail']   = 'Укажите ваш регион для оценки слоимости доставки.';
+$_['text_shipping_method']   = 'Выберите удобный способ доставки этого заказа.';
 $_['text_empty']             = 'Ваша корзина пуста!';
 
 // Column
@@ -31,26 +31,26 @@ $_['column_price']           = 'Цена';
 $_['column_total']           = 'Итого';
 
 // Entry
-$_['entry_coupon']           = 'Enter your coupon here:';
-$_['entry_voucher']          = 'Enter your gift voucher code here:';
-$_['entry_reward']           = 'Points to use (Max %s):';
-$_['entry_country']          = 'Country:';
-$_['entry_zone']             = 'Region / State:';
-$_['entry_postcode']         = 'Post Code:';
+$_['entry_coupon']           = 'Введите код купона:';
+$_['entry_voucher']          = 'Введите код подарочного сертификата:';
+$_['entry_reward']           = 'Сколько баллов использовать (максимум %s):';
+$_['entry_country']          = 'Страна:';
+$_['entry_zone']             = 'Район / область:';
+$_['entry_postcode']         = 'Почтовый индекс:';
 
 // Error
-$_['error_stock']            = 'Товары, отмеченные ***, недоступны в нужном количестве или их нет на складе!';
+$_['error_stock']            = 'Товары, отмеченные ***, недоступны в нужном количестве или отсутствуют на складе!';
 $_['error_minimum']          = 'Минимальное количество для заказа товара %s составляет %s!';
 $_['error_required']         = 'Поле %s должно быть заполнено!';	
-$_['error_product']          = 'Warning: There are no products in your cart!';	
-$_['error_coupon']           = 'Warning: Coupon is either invalid, expired or reached it\'s usage limit!';
-$_['error_voucher']          = 'Warning: Gift Voucher is either invalid or the balance has been used up!';
-$_['error_reward']           = 'Warning: Please enter the amount of reward points to use!';	
-$_['error_points']           = 'Warning: You don\'t have %s reward points!';
-$_['error_maximum']          = 'Warning: The maximum number of points that can be applied is %s!';
-$_['error_postcode']         = 'Postcode must be between 2 and 10 characters!';
-$_['error_country']          = 'Please select a country!';
-$_['error_zone']             = 'Please select a region / state!';
-$_['error_shipping']         = 'Warning: Shipping method required!';
-$_['error_no_shipping']      = 'Warning: No Shipping options are available. Please <a href="%s">contact us</a> for assistance!';
+$_['error_product']          = 'Ваша корзина пуста!';	
+$_['error_coupon']           = 'Ошибка: купон либо недействителен, либо истек срок его действия, либо достигнут предел его использования!';
+$_['error_voucher']          = 'Ошибка: код подарочного сертификата неправильный или он уже был использован!';
+$_['error_reward']           = 'Укажите пожалуйста количество бонусных баллов для оплаты этого заказа!';
+$_['error_points']           = 'У вас нет %s бонусных баллов!';
+$_['error_maximum']          = 'Максимально возможная сумма для оплаты баллами составляет %s!';
+$_['error_postcode']         = 'Почтовый индекс должен быть длиной от 2 до 10 символов!';
+$_['error_country']          = 'Укажите страну!';
+$_['error_zone']             = 'Укажите район / область!';
+$_['error_shipping']         = 'Необходимо указать способ доставки!';
+$_['error_no_shipping']      = 'Нет доступных способов доставки для указанного региона. <a href="%s">Свяжитесь с нами</a>, мы решим этот вопрос!';
 ?>

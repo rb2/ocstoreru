@@ -1,6 +1,6 @@
 <?php
 // Entry
-$_['entry_postcode'] = 'Post Code:';
-$_['entry_country']  = 'Country:';
-$_['entry_zone']     = 'Region / State:';
+$_['entry_postcode'] = 'Индекс:';
+$_['entry_country']  = 'Страна:';
+$_['entry_zone']     = 'Регион / Область:';
 ?>

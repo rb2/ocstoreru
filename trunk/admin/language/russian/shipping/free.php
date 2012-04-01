@@ -1,9 +1,9 @@
 <?php
 // Heading
-$_['heading_title']    = 'Доставка без фиксированной оплаты';
+$_['heading_title']    = 'Бесплатная доставка';
 
 // Text 
-$_['text_shipping']    = 'Доставка';
+$_['text_shipping']    = 'Бесплатная доставка';
 $_['text_success']     = 'Настройки модуля обновлены!';
 
 // Entry

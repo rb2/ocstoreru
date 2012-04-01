@@ -19,7 +19,7 @@ $_['text_products']         = 'Товаров:';
 $_['text_total']            = 'Итого:';
 $_['text_comment']          = 'Комментарий к заказу';
 $_['text_history']          = 'История заказов';
-$_['text_success']          = 'You have successfully added the products from order ID #%s to your cart!';
+$_['text_success']          = 'Товары из заказа #%s успешно добавлены в Вашу корзину!';
 $_['text_empty']            = 'Вы еще не совершали покупок!';
 $_['text_error']            = 'Запрошенный заказ не найден!';
 
@@ -29,7 +29,7 @@ $_['column_model']          = 'Модель';
 $_['column_quantity']       = 'Количество';
 $_['column_price']          = 'Цена';
 $_['column_total']          = 'Итого';
-$_['column_action']         = 'Action';
+$_['column_action']         = 'Действие';
 $_['column_date_added']     = 'Дата';
 $_['column_status']         = 'Статус';
 $_['column_comment']        = 'Комментарий';

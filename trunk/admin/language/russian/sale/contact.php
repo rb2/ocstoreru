@@ -20,7 +20,7 @@ $_['entry_to']                 = 'Кому:';
 $_['entry_customer_group']     = 'Группа покупателя:';
 $_['entry_customer']           = 'Покупатель:';
 $_['entry_affiliate']          = 'Партнёр:';
-$_['entry_product']            = 'Товары:<br /><span class="help">Отправить покупателям, которые уже заказали товары по списку.</span>';
+$_['entry_product']            = 'Товары:<br /><span class="help">Отправить покупателям, которые уже заказали товары из списка.</span>';
 $_['entry_subject']            = 'Тема:';
 $_['entry_message']            = 'Сообщение:';
 
