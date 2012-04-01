@@ -43,8 +43,8 @@ class ModelAccountCustomer extends Model {
 		$mail->setTo($data['email']);
 		$mail->setFrom($this->config->get('config_email'));
 		$mail->setSender($this->config->get('config_name'));
-		$mail->setSubject($subject);
-		$mail->setText($message);
+		$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
+		$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 		$mail->send();
 		
 		// Send to main admin email if new account email is enabled
@@ -170,5 +170,17 @@ class ModelAccountCustomer extends Model {
 		
 		return $query->row['total'];
 	}
+	
+	public function getIps($customer_id) {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip` WHERE customer_id = '" . (int)$customer_id . "'");
+		
+		return $query->rows;
+	}	
+	
+	public function isBlacklisted($ip) {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip_blacklist` WHERE ip = '" . $this->db->escape($ip) . "'");
+		
+		return $query->num_rows;
+	}	
 }
 ?>

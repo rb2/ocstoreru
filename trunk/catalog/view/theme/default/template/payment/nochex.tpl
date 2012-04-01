@@ -1,4 +1,4 @@
-<form action="<?php echo $action; ?>" method="post" id="payment">
+<form action="<?php echo $action; ?>" method="post">
   <?php if (!$test) { ?>
   <input type="hidden" name="merchant_id" value="<?php echo $merchant_id; ?>" />
   <input type="hidden" name="success_url" value="<?php echo $success_url; ?>" />
@@ -25,5 +25,7 @@
   <input type="hidden" name="hide_billing_details" value="true" />
 </form>
 <div class="buttons">
-  <div class="right"><a onclick="$('#payment').submit();" class="button"><span><?php echo $button_confirm; ?></span></a></div>
+  <div class="right">
+    <input type="submit" value="<?php echo $button_confirm; ?>" class="button" />
+  </div>
 </div>

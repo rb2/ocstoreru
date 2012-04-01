@@ -25,7 +25,7 @@
             <td><input type="text" name="low_order_fee_fee" value="<?php echo $low_order_fee_fee; ?>" /></td>
           </tr>
           <tr>
-            <td><?php echo $entry_tax; ?></td>
+            <td><?php echo $entry_tax_class; ?></td>
             <td><select name="low_order_fee_tax_class_id">
                   <option value="0"><?php echo $text_none; ?></option>
                   <?php foreach ($tax_classes as $tax_class) { ?>

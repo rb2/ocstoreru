@@ -4,10 +4,14 @@ class ControllerCommonSeoPro extends Controller {
 		// Add rewrite to url class
 		if ($this->config->get('config_seo_url')) {
 			$this->url->addRewrite($this);
+		} else {
+			return;
 		}
 
 		// Decode URL
-		if (isset($this->request->get['_route_'])) {
+		if (!isset($this->request->get['_route_'])) {
+			$this->validate();
+		} else {
 			$route = $this->request->get['_route_'];
 			unset($this->request->get['_route_']);
 			$parts = explode('/', trim(utf8_strtolower($route), '/'));
@@ -55,9 +59,7 @@ class ControllerCommonSeoPro extends Controller {
 				$this->request->get['route'] = 'information/information';
 			}
 
-			if (isset($this->request->get['route']) && $this->request->get['route'] != 'error/not_found') {
-				$this->validate($route);
-			}
+			$this->validate();
 
 			if (isset($this->request->get['route'])) {
 				return $this->forward($this->request->get['route']);
@@ -120,7 +122,7 @@ class ControllerCommonSeoPro extends Controller {
 		$link .= 'index.php?route=' . $route;
 
 		if (count($data)) {
-			$link .= '&' . urldecode(http_build_query($data));
+			$link .= '&amp;' . urldecode(http_build_query($data, '', '&amp;'));
 		}
 
 		$queries = array();
@@ -180,7 +182,7 @@ class ControllerCommonSeoPro extends Controller {
 		}
 
 		if (count($data)) {
-			$seo_url .= '?' . urldecode(http_build_query($data));
+			$seo_url .= '?' . urldecode(http_build_query($data, '', '&amp;'));
 		}
 
 		return $seo_url;
@@ -240,48 +242,36 @@ class ControllerCommonSeoPro extends Controller {
 		return $path[$category_id];
 	}
 
-	private function validate($link) {
-		$get = array('path', 'product_id', 'manufacturer_id', 'category_id', 'information_id');
-
-		$data = array_intersect_key($this->request->get, array_flip($get));
-
-		$args = '';
-
-		if (isset($data['path'])) {
-			$args .= 'path=' . $data['path'];
-			unset($data['path']);
+	private function validate() {
+		if (empty($this->request->get['route']) || $this->request->get['route'] == 'error/not_found') {
+			return;
 		}
 
-		if (count($data)) {
-			$args .= '&' . urldecode(http_build_query($data));
+		if (isset($this->request->server['HTTP_X_REQUESTED_WITH']) && strtolower($this->request->server['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+			return;
 		}
 
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-			$scheme = 'SSL';
+			$url = str_replace('&amp;', '&', $this->config->get('config_ssl') . ltrim($this->request->server['REQUEST_URI'], '/'));
+			$seo = str_replace('&amp;', '&', $this->url->link($this->request->get['route'], $this->getQueryString(array('route')), 'SSL'));
 		} else {
-			$scheme = 'NONSSL';
+			$url = str_replace('&amp;', '&', $this->config->get('config_url') . ltrim($this->request->server['REQUEST_URI'], '/'));
+			$seo = str_replace('&amp;', '&', $this->url->link($this->request->get['route'], $this->getQueryString(array('route')), 'NONSSL'));
 		}
 
-		$seo_url = $this->url->link($this->request->get['route'], $args, $scheme);
-
-		$seo_url = str_replace('&amp;', '&', $seo_url);
-
-		$link = parse_url($this->config->get('config_url'), PHP_URL_PATH) . $link;
-
-		if ($link != rawurldecode(parse_url($seo_url, PHP_URL_PATH))) {
-			$get[] = 'route';
-
-			$data = array_diff_key($this->request->get, array_flip($get));
-
-			if (count($data)) {
-				$seo_url .= (strpos($seo_url, '?') === false) ? '?' : '&';
-				$seo_url .= urldecode(http_build_query($data));
-			}
-
+		if (rawurldecode($url) != rawurldecode($seo)) {
 			header($this->request->server['SERVER_PROTOCOL'] . ' 301 Moved Permanently');
 
-			$this->response->redirect($seo_url);
+			$this->response->redirect($seo);
 		}
+	}
+
+	private function getQueryString($exclude = array()) {
+		if (!is_array($exclude)) {
+			$exclude = array();
+		}
+
+		return urldecode(http_build_query(array_diff_key($this->request->get, array_flip($exclude))));
 	}
 }
 ?>

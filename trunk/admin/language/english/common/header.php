@@ -16,6 +16,7 @@ $_['text_coupon']                      = 'Coupons';
 $_['text_currency']                    = 'Currencies';
 $_['text_customer']                    = 'Customers';
 $_['text_customer_group']              = 'Customer Groups';
+$_['text_customer_blacklist']          = 'IP Blacklist';
 $_['text_dashboard']                   = 'Dashboard';
 $_['text_design']                      = 'Design';
 $_['text_download']                    = 'Downloads';

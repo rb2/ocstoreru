@@ -1,12 +1,12 @@
 <?php
 // Heading
-$_['heading_title']			= 'Специальные';
+$_['heading_title']			= 'Акции';
 
 // Text
 $_['text_module']			= 'Модули';
 $_['text_success']			= 'Настройки модуля обновлены!';
-$_['text_content_top']		= 'Содержание шапки';
-$_['text_content_bottom']	= 'Содержание подвала';
+$_['text_content_top']		= 'Верх страницы';
+$_['text_content_bottom']	= 'Низ страницы';
 $_['text_column_left']		= 'Левая колонка';
 $_['text_column_right']		= 'Правая колонка';
 

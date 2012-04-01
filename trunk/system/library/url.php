@@ -2,9 +2,9 @@
 class Url {
 	private $url;
 	private $ssl;
-	private $hook = array();
+	private $rewrite = array();
 	
-	public function __construct($url, $ssl) {
+	public function __construct($url, $ssl = '') {
 		$this->url = $url;
 		$this->ssl = $ssl;
 	}
@@ -22,19 +22,15 @@ class Url {
 			$url .= str_replace('&', '&amp;', '&' . ltrim($args, '&')); 
 		}
 		
-		return $this->rewrite($url);
-	}
-		
-	public function addRewrite($hook) {
-		$this->hook[] = $hook;
-	}
-
-	public function rewrite($url) {
-		foreach ($this->hook as $hook) {
-			$url = $hook->rewrite($url);
+		foreach ($this->rewrite as $rewrite) {
+			$url = $rewrite->rewrite($url);
 		}
+				
+		return $url;
+	}
 		
-		return $url;		
+	public function addRewrite($rewrite) {
+		$this->rewrite[] = $rewrite;
 	}
 }
 ?>

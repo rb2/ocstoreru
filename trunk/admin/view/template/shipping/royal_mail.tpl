@@ -183,7 +183,7 @@
             <tr>
               <td><?php echo $entry_status; ?></td>
               <td><select name="royal_mail_2nd_class_recorded_status">
-                  <?php if ($royal_mail_1st_class_standard_status) { ?>
+                  <?php if ($royal_mail_2nd_class_recorded_status) { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                   <option value="0"><?php echo $text_disabled; ?></option>
                   <?php } else { ?>

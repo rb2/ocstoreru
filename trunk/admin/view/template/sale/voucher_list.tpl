@@ -97,8 +97,8 @@
 <script type="text/javascript"><!--
 function sendVoucher(voucher_id) {
 	$.ajax({
-		type: 'POST',
 		url: 'index.php?route=sale/voucher/send&token=<?php echo $token; ?>&voucher_id=' + voucher_id,
+		type: 'post',
 		dataType: 'json',
 		beforeSend: function() {
 			$('.success, .warning').remove();

@@ -110,4 +110,4 @@ $(document).ready(function() {
 	$('#date-end').datepicker({dateFormat: 'yy-mm-dd'});
 });
 //--></script> 
-<?php echo $footer; ?> <?php echo $footer; ?>
+<?php echo $footer; ?>

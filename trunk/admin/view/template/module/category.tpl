@@ -20,6 +20,7 @@
           <tr>
             <td class="left"><?php echo $entry_layout; ?></td>
             <td class="left"><?php echo $entry_position; ?></td>
+			<td class="left"><?php echo $entry_count; ?></td>
             <td class="left"><?php echo $entry_status; ?></td>
             <td class="right"><?php echo $entry_sort_order; ?></td>
             <td></td>
@@ -60,6 +61,15 @@
                 <option value="column_right"><?php echo $text_column_right; ?></option>
                 <?php } ?>
               </select></td>
+			<td class="left"><select name="category_module[<?php echo $module_row; ?>][count]">
+                <?php if ($module['count']) { ?>
+                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                <option value="0"><?php echo $text_disabled; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_enabled; ?></option>
+                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                <?php } ?>
+              </select></td>
             <td class="left"><select name="category_module[<?php echo $module_row; ?>][status]">
                 <?php if ($module['status']) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
@@ -77,7 +87,7 @@
         <?php } ?>
         <tfoot>
           <tr>
-            <td colspan="4"></td>
+            <td colspan="5"></td>
             <td class="left"><a onclick="addModule();" class="button"><?php echo $button_add_module; ?></a></td>
           </tr>
         </tfoot>
@@ -93,7 +103,7 @@ function addModule() {
 	html += '  <tr>';
 	html += '    <td class="left"><select name="category_module[' + module_row + '][layout_id]">';
 	<?php foreach ($layouts as $layout) { ?>
-	html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>';
+	html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo addslashes($layout['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
 	html += '    <td class="left"><select name="category_module[' + module_row + '][position]">';
@@ -102,6 +112,10 @@ function addModule() {
 	html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
 	html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';
 	html += '    </select></td>';
+	html += '    <td class="left"><select name="category_module[' + module_row + '][count]">';
+    html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
+    html += '      <option value="0"><?php echo $text_disabled; ?></option>';
+    html += '    </select></td>';
 	html += '    <td class="left"><select name="category_module[' + module_row + '][status]">';
     html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
     html += '      <option value="0"><?php echo $text_disabled; ?></option>';

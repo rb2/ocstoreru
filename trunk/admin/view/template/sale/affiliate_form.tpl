@@ -256,8 +256,8 @@ $('#transaction').load('index.php?route=sale/affiliate/transaction&token=<?php e
 
 function addTransaction() {
 	$.ajax({
-		type: 'POST',
 		url: 'index.php?route=sale/affiliate/transaction&token=<?php echo $token; ?>&affiliate_id=<?php echo $affiliate_id; ?>',
+		type: 'post',
 		dataType: 'html',
 		data: 'description=' + encodeURIComponent($('#tab-transaction input[name=\'description\']').val()) + '&amount=' + encodeURIComponent($('#tab-transaction input[name=\'amount\']').val()),
 		beforeSend: function() {

@@ -9,8 +9,6 @@
   <div class="warning"><?php echo $error_warning; ?></div>
   <?php } ?>
   <div class="box">
-    <div class="left"></div>
-    <div class="right"></div>
     <div class="heading">
       <h1><img src="view/image/customer.png" alt="" /> <?php echo $heading_title; ?></h1>
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
@@ -186,14 +184,13 @@
                   <span class="error"><?php echo $error_address_zone[$address_row]; ?></span>
                   <?php } ?></td>
               </tr>
-			  <tr>
+              <tr>
                 <td><?php echo $entry_default; ?></td>
-                <td>
-                <?php if ((isset($address['default']) && $address['default']) || count($addresses) == 1) { ?>
-                <input type="radio" name="address[<?php echo $address_row; ?>][default]" value="<?php echo $address_row; ?>" checked="checked" /></td>
+                <td><?php if (($address['address_id'] == $address_id) || !$addresses) { ?>
+                  <input type="radio" name="address[<?php echo $address_row; ?>][default]" value="<?php echo $address_row; ?>" checked="checked" /></td>
                 <?php } else { ?>
                 <input type="radio" name="address[<?php echo $address_row; ?>][default]" value="<?php echo $address_row; ?>" />
-				</td>
+                  </td>
                 <?php } ?>
               </tr>
             </table>
@@ -245,6 +242,7 @@
                 <td class="left"><?php echo $column_ip; ?></td>
                 <td class="right"><?php echo $column_total; ?></td>
                 <td class="left"><?php echo $column_date_added; ?></td>
+                <td class="right"><?php echo $column_action; ?></td>
               </tr>
             </thead>
             <tbody>
@@ -254,6 +252,11 @@
                 <td class="left"><a onclick="window.open('http://www.geoiptool.com/en/?IP=<?php echo $ip['ip']; ?>');"><?php echo $ip['ip']; ?></a></td>
                 <td class="right"><a onclick="window.open('<?php echo $ip['filter_ip']; ?>');"><?php echo $ip['total']; ?></a></td>
                 <td class="left"><?php echo $ip['date_added']; ?></td>
+                <td class="right"><?php if ($ip['blacklist']) { ?>
+                  <b>[</b> <a id="<?php echo str_replace('.', '-', $ip['ip']); ?>" onclick="removeBlacklist('<?php echo $ip['ip']; ?>');"><?php echo $text_remove_blacklist; ?></a> <b>]</b>
+                  <?php } else { ?>
+                  <b>[</b> <a id="<?php echo str_replace('.', '-', $ip['ip']); ?>" onclick="addBlacklist('<?php echo $ip['ip']; ?>');"><?php echo $text_add_blacklist; ?></a> <b>]</b>
+                  <?php } ?></td>
               </tr>
               <?php } ?>
               <?php } else { ?>
@@ -344,8 +347,8 @@ $('#transaction').load('index.php?route=sale/customer/transaction&token=<?php ec
 
 function addTransaction() {
 	$.ajax({
-		type: 'POST',
 		url: 'index.php?route=sale/customer/transaction&token=<?php echo $token; ?>&customer_id=<?php echo $customer_id; ?>',
+		type: 'post',
 		dataType: 'html',
 		data: 'description=' + encodeURIComponent($('#tab-transaction input[name=\'description\']').val()) + '&amount=' + encodeURIComponent($('#tab-transaction input[name=\'amount\']').val()),
 		beforeSend: function() {
@@ -377,8 +380,8 @@ $('#reward').load('index.php?route=sale/customer/reward&token=<?php echo $token;
 
 function addRewardPoints() {
 	$.ajax({
-		type: 'POST',
 		url: 'index.php?route=sale/customer/reward&token=<?php echo $token; ?>&customer_id=<?php echo $customer_id; ?>',
+		type: 'post',
 		dataType: 'html',
 		data: 'description=' + encodeURIComponent($('#tab-reward input[name=\'description\']').val()) + '&points=' + encodeURIComponent($('#tab-reward input[name=\'points\']').val()),
 		beforeSend: function() {
@@ -398,15 +401,73 @@ function addRewardPoints() {
 		}
 	});
 }
+
+function addBlacklist(ip) {
+	$.ajax({
+		url: 'index.php?route=sale/customer/addblacklist&token=<?php echo $token; ?>',
+		type: 'post',
+		dataType: 'json',
+		data: 'ip=' + encodeURIComponent(ip),
+		beforeSend: function() {
+			$('.success, .warning').remove();
+			
+			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> Please wait!</div>');			
+		},
+		complete: function() {
+			$('.attention').remove();
+		},			
+		success: function(json) {
+			if (json['error']) {
+				 $('.box').before('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
+			}
+						
+			if (json['success']) {
+                $('.box').before('<div class="success" style="display: none;">' + json['success'] + '</div>');
+				
+				$('.success').fadeIn('slow');
+				
+				$('#' + ip.replace(/\./g, '-')).replaceWith('<a id="' + ip.replace(/\./g, '-') + '" onclick="removeBlacklist(\'' + ip + '\');"><?php echo $text_remove_blacklist; ?></a>');
+			}
+		}
+	});	
+}
+
+function removeBlacklist(ip) {
+	$.ajax({
+		url: 'index.php?route=sale/customer/removeblacklist&token=<?php echo $token; ?>',
+		type: 'post',
+		dataType: 'json',
+		data: 'ip=' + encodeURIComponent(ip),
+		beforeSend: function() {
+			$('.success, .warning').remove();
+			
+			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> Please wait!</div>');				
+		},
+		complete: function() {
+			$('.attention').remove();
+		},			
+		success: function(json) {
+			if (json['error']) {
+				 $('.box').before('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
+			}
+			
+			if (json['success']) {
+				 $('.box').before('<div class="success" style="display: none;">' + json['success'] + '</div>');
+				
+				$('.success').fadeIn('slow');
+				
+				$('#' + ip.replace(/\./g, '-')).replaceWith('<a id="' + ip.replace(/\./g, '-') + '" onclick="addBlacklist(\'' + ip + '\');"><?php echo $text_add_blacklist; ?></a>');
+			}
+		}
+	});	
+};
 //--></script> 
 <script type="text/javascript"><!--
 $('.htabs a').tabs();
 $('.vtabs a').tabs();
-//--></script>
-<script type="text/javascript"><!--
-$('form input[type=radio]').live('click', function () {
-	$('form input[type=radio]').attr('checked', false);
-	$(this).attr('checked', true);
-});
 //--></script> 
 <?php echo $footer; ?>

@@ -58,12 +58,6 @@
             <td id="return-status"><?php echo $return_status; ?></td>
           </tr>
           <?php } ?>
-          <?php if ($comment) { ?>
-          <tr>
-            <td><?php echo $text_comment; ?></td>
-            <td><?php echo $comment; ?></td>
-          </tr>
-          <?php } ?>
           <tr>
             <td><?php echo $text_date_added; ?></td>
             <td><?php echo $date_added; ?></td>
@@ -75,39 +69,45 @@
         </table>
       </div>
       <div id="tab-product" class="vtabs-content">
-        <table id="product" class="list">
-          <thead>
-            <tr>
-              <td class="left"><?php echo $column_product; ?></td>
-              <td class="left"><?php echo $column_model; ?></td>
-              <td class="right"><?php echo $column_quantity; ?></td>
-              <td class="left"><?php echo $column_reason; ?></td>
-              <td class="left"><?php echo $column_opened; ?></td>
-              <td class="left"><?php echo $column_comment; ?></td>
-              <td class="left"><?php echo $column_action; ?></td>
-            </tr>
-          </thead>
-          <?php foreach ($return_products as $return_product) { ?>
-          <tbody>
-            <tr>
-              <td class="left"><?php echo $return_product['name']; ?></td>
-              <td class="left"><?php echo $return_product['model']; ?></td>
-              <td class="right"><?php echo $return_product['quantity']; ?></td>
-              <td class="left"><?php echo $return_product['reason']; ?></td>
-              <td class="left"><?php echo $return_product['opened'] ? $text_yes : $text_no; ?></td>
-              <td class="left"><?php echo $return_product['comment']; ?></td>
-              <td class="left"><select name="return_product[<?php echo $return_product['return_product_id']; ?>][return_action_id]">
-                  <option value="0"></option>
-                  <?php foreach ($return_actions as $return_action) { ?>
-                  <?php if ($return_action['return_action_id'] == $return_product['return_action_id']) { ?>
-                  <option value="<?php echo $return_action['return_action_id']; ?>" selected="selected"><?php echo $return_action['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $return_action['return_action_id']; ?>"><?php echo $return_action['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
-          </tbody>
+        <table class="form">
+          <tr>
+            <td><?php echo $text_product; ?></td>
+            <td><?php echo $product; ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_model; ?></td>
+            <td><?php echo $model; ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_quantity; ?></td>
+            <td><?php echo $quantity; ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_return_reason; ?></td>
+            <td><?php echo $return_reason; ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_opened; ?></td>
+            <td><?php echo $opened; ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_return_action; ?></td>
+            <td><select name="return_action_id">
+                <option value="0"></option>
+                <?php foreach ($return_actions as $return_action) { ?>
+                <?php if ($return_action['return_action_id'] == $return_action_id) { ?>
+                <option value="<?php echo $return_action['return_action_id']; ?>" selected="selected"><?php echo $return_action['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $return_action['return_action_id']; ?>"><?php echo $return_action['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+              </select></td>
+          </tr>
+          <?php if ($comment) { ?>
+          <tr>
+            <td><?php echo $text_comment; ?></td>
+            <td><?php echo $comment; ?></td>
+          </tr>
           <?php } ?>
         </table>
       </div>
@@ -141,30 +141,34 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-$('#product select').bind('change', function() {
-	var element = this;
-	 
+$('select[name=\'return_action_id\']').bind('change', function() {
 	$.ajax({
-		type: 'POST',
-		url: 'index.php?route=sale/return/product&token=<?php echo $token; ?>&return_id=<?php echo $return_id; ?>',
+		url: 'index.php?route=sale/return/action&token=<?php echo $token; ?>&return_id=<?php echo $return_id; ?>',
+		type: 'post',
 		dataType: 'json',
-		data: $('#product select'),
+		data: 'return_action_id=' + this.value,
 		beforeSend: function() {
-			$(element).after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
-		},
-		complete: function() {
-			$('.wait').remove();
+			$('.success, .warning, .attention').remove();
+			
+			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
 		},
 		success: function(json) {
-			$('.success, .warning').remove();
+			$('.success, .warning, .attention').remove();
 			
 			if (json['error']) {
-				$('#product').before('<div class="warning">' + json['error'] + '</div>');
+				$('.box').before('<div class="warning" style="display: none;">' + json['error'] + '</div>');
+				
+				$('.warning').fadeIn('slow');
 			}
 			
 			if (json['success']) {
-				$('#product').before('<div class="success">' + json['success'] + '</div>');
+				$('.box').before('<div class="success" style="display: none;">' + json['success'] + '</div>');
+				
+				$('.success').fadeIn('slow');
 			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});	
 });
@@ -179,8 +183,8 @@ $('#history').load('index.php?route=sale/return/history&token=<?php echo $token;
 
 function history() {
 	$.ajax({
-		type: 'POST',
 		url: 'index.php?route=sale/return/history&token=<?php echo $token; ?>&return_id=<?php echo $return_id; ?>',
+		type: 'post',
 		dataType: 'html',
 		data: 'return_status_id=' + encodeURIComponent($('select[name=\'return_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
 		beforeSend: function() {

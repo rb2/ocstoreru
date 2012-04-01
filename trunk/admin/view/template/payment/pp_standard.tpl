@@ -24,10 +24,6 @@
               <?php } ?></td>
           </tr>
           <tr>
-            <td><?php echo $entry_pdt_token; ?></td>
-            <td><input type="text" name="pp_standard_pdt_token" value="<?php echo $pp_standard_pdt_token; ?>" size="50" /></td>
-          </tr>
-          <tr>
             <td><?php echo $entry_test; ?></td>
             <td><?php if ($pp_standard_test) { ?>
               <input type="radio" name="pp_standard_test" value="1" checked="checked" />

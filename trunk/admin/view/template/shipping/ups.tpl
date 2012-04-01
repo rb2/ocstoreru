@@ -635,7 +635,15 @@
           </tr>
           <tr>
             <td><?php echo $entry_weight_code; ?></td>
-            <td><input type="text" name="ups_weight_code" value="<?php echo $ups_weight_code; ?>" size="1" /></td>
+            <td><select name="ups_weight_code">
+                <?php if ($ups_weight_code == 'LBS') { ?>
+                <option value="LBS" selected="selected">LBS</option>
+                <option value="KGS">KGS</option>
+                <?php } else { ?>
+                <option value="LBS">LBS</option>
+                <option value="KGS" selected="selected">KGS</option>
+                <?php } ?>
+              </select></td>
           </tr>
           <tr>
             <td><?php echo $entry_weight_class; ?></td>
@@ -674,10 +682,13 @@
               </select></td>
           </tr>
           <tr>
-            <td><?php echo $entry_dimension; ?></td>
+            <td><span class="required">*</span> <?php echo $entry_dimension; ?></td>
             <td><input type="text" name="ups_length" value="<?php echo $ups_length; ?>" size="4" />
               <input type="text" name="ups_width" value="<?php echo $ups_width; ?>" size="4" />
               <input type="text" name="ups_height" value="<?php echo $ups_height; ?>" size="4" /></td>
+			  <?php if ($error_dimension) { ?>
+              <span class="error"><?php echo $error_dimension; ?></span>
+              <?php } ?></td>
           </tr>
           <tr>
             <td><?php echo $entry_tax_class; ?></td>
@@ -720,6 +731,18 @@
           <tr>
             <td><?php echo $entry_sort_order; ?></td>
             <td><input type="text" name="ups_sort_order" value="<?php echo $ups_sort_order; ?>" size="1" /></td>
+          </tr>
+		  <tr>
+            <td><?php echo $entry_debug; ?></td>
+            <td><select name="ups_debug">
+              <?php if ($ups_debug) { ?>
+              <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+              <option value="0"><?php echo $text_disabled; ?></option>
+              <?php } else { ?>
+              <option value="1"><?php echo $text_enabled; ?></option>
+              <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+              <?php } ?>
+            </select></td>
           </tr>
         </table>
       </form>

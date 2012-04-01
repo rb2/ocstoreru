@@ -1,5 +1,5 @@
 <?php
-final class Weight {
+class Weight {
 	private $weights = array();
 	
 	public function __construct($registry) {

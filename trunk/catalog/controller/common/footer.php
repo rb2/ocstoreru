@@ -6,7 +6,6 @@ class ControllerCommonFooter extends Controller {
 		$this->data['text_information'] = $this->language->get('text_information');
 		$this->data['text_service'] = $this->language->get('text_service');
 		$this->data['text_extra'] = $this->language->get('text_extra');
-		$this->data['text_account'] = $this->language->get('text_account');
 		$this->data['text_contact'] = $this->language->get('text_contact');
 		$this->data['text_return'] = $this->language->get('text_return');
     	$this->data['text_sitemap'] = $this->language->get('text_sitemap');
@@ -33,8 +32,8 @@ class ControllerCommonFooter extends Controller {
 		$this->data['contact'] = $this->url->link('information/contact');
 		$this->data['return'] = $this->url->link('account/return/insert', '', 'SSL');
     	$this->data['sitemap'] = $this->url->link('information/sitemap');
-		$this->data['manufacturer'] = $this->url->link('product/manufacturer', '', 'SSL');
-		$this->data['voucher'] = $this->url->link('checkout/voucher', '', 'SSL');
+		$this->data['manufacturer'] = $this->url->link('product/manufacturer');
+		$this->data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
 		$this->data['affiliate'] = $this->url->link('affiliate/account', '', 'SSL');
 		$this->data['special'] = $this->url->link('product/special');
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');

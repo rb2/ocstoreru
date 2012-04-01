@@ -37,11 +37,16 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_customer; ?>"><?php echo $column_customer; ?></a>
                 <?php } ?></td>
-              <td class="right"><?php if ($sort == 'quantity') { ?>
-                <a href="<?php echo $sort_quantity; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_quantity; ?></a>
+              <td class="left"><?php if ($sort == 'r.product') { ?>
+                <a href="<?php echo $sort_product; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_product; ?></a>
                 <?php } else { ?>
-                <a href="<?php echo $sort_quantity; ?>"><?php echo $column_quantity; ?></a>
+                <a href="<?php echo $sort_product; ?>"><?php echo $column_product; ?></a>
                 <?php } ?></td>
+              <td class="left"><?php if ($sort == 'r.model') { ?>
+                <a href="<?php echo $sort_model; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_model; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_model; ?>"><?php echo $column_model; ?></a>
+                <?php } ?></td>                
               <td class="left"><?php if ($sort == 'status') { ?>
                 <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                 <?php } else { ?>
@@ -66,7 +71,8 @@
               <td align="right"><input type="text" name="filter_return_id" value="<?php echo $filter_return_id; ?>" size="4" style="text-align: right;" /></td>
               <td align="right"><input type="text" name="filter_order_id" value="<?php echo $filter_order_id; ?>" size="4" style="text-align: right;" /></td>
               <td><input type="text" name="filter_customer" value="<?php echo $filter_customer; ?>" /></td>
-              <td align="right"><input type="text" name="filter_quantity" value="<?php echo $filter_quantity; ?>" size="4" style="text-align: right;" /></td>
+              <td><input type="text" name="filter_product" value="<?php echo $filter_product; ?>" /></td>
+              <td><input type="text" name="filter_model" value="<?php echo $filter_model; ?>" /></td>
               <td><select name="filter_return_status_id">
                   <option value="*"></option>
                   <?php foreach ($return_statuses as $return_status) { ?>
@@ -92,7 +98,8 @@
               <td class="right"><?php echo $return['return_id']; ?></td>
               <td class="right"><?php echo $return['order_id']; ?></td>
               <td class="left"><?php echo $return['customer']; ?></td>
-              <td class="right"><?php echo $return['quantity']; ?></td>
+              <td class="left"><?php echo $return['product']; ?></td>
+              <td class="left"><?php echo $return['model']; ?></td>
               <td class="left"><?php echo $return['status']; ?></td>
               <td class="left"><?php echo $return['date_added']; ?></td>
               <td class="left"><?php echo $return['date_modified']; ?></td>
@@ -103,7 +110,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="9"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="10"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>
@@ -135,12 +142,18 @@ function filter() {
 		url += '&filter_customer=' + encodeURIComponent(filter_customer);
 	}
 	
-	var filter_quantity = $('input[name=\'filter_quantity\']').attr('value');
+	var filter_product = $('input[name=\'filter_product\']').attr('value');
 	
-	if (filter_quantity) {
-		url += '&filter_quantity=' + encodeURIComponent(filter_quantity);
+	if (filter_product) {
+		url += '&filter_product=' + encodeURIComponent(filter_product);
 	}
+
+	var filter_model = $('input[name=\'filter_model\']').attr('value');
 	
+	if (filter_model) {
+		url += '&filter_model=' + encodeURIComponent(filter_model);
+	}
+		
 	var filter_return_status_id = $('select[name=\'filter_return_status_id\']').attr('value');
 	
 	if (filter_return_status_id != '*') {

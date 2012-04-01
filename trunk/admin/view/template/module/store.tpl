@@ -109,7 +109,7 @@ function addModule() {
 	html += '  <tr>';
 	html += '    <td class="left"><select name="store_module[' + module_row + '][layout_id]">';
 	<?php foreach ($layouts as $layout) { ?>
-	html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>';
+	html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo addslashes($layout['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
 	html += '    <td class="left"><select name="store_module[' + module_row + '][position]">';

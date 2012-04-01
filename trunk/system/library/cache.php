@@ -1,5 +1,5 @@
 <?php
-final class Cache { 
+class Cache { 
 	private $expire = 3600; 
 
   	public function __construct() {
@@ -12,7 +12,6 @@ final class Cache {
       			if ($time < time()) {
 					if (file_exists($file)) {
 						unlink($file);
-						clearstatcache();
 					}
       			}
     		}
@@ -48,7 +47,6 @@ final class Cache {
     		foreach ($files as $file) {
       			if (file_exists($file)) {
 					unlink($file);
-					clearstatcache();
 				}
     		}
 		}

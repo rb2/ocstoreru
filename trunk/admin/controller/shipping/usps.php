@@ -72,7 +72,6 @@ class ControllerShippingUsps extends Controller {
 		$this->data['entry_container'] = $this->language->get('entry_container');
 		$this->data['entry_machinable'] = $this->language->get('entry_machinable');
 		$this->data['entry_dimension'] = $this->language->get('entry_dimension');
-		$this->data['entry_girth'] = $this->language->get('entry_girth');
 		$this->data['entry_display_time'] = $this->language->get('entry_display_time');
 		$this->data['entry_display_weight'] = $this->language->get('entry_display_weight');
 		$this->data['entry_weight_class'] = $this->language->get('entry_weight_class');
@@ -84,8 +83,6 @@ class ControllerShippingUsps extends Controller {
 
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
-
-		$this->data['tab_general'] = $this->language->get('tab_general');
 
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -121,12 +118,6 @@ class ControllerShippingUsps extends Controller {
 			$this->data['error_height'] = $this->error['height'];
 		} else {
 			$this->data['error_height'] = '';
-		}
-
-		if (isset($this->error['girth'])) {
-			$this->data['error_girth'] = $this->error['girth'];
-		} else {
-			$this->data['error_girth'] = '';
 		}
 
   		$this->data['breadcrumbs'] = array();
@@ -464,12 +455,6 @@ class ControllerShippingUsps extends Controller {
 			$this->data['usps_length'] = $this->config->get('usps_length');
 		}
 
-		if (isset($this->request->post['usps_girth'])) {
-			$this->data['usps_girth'] = $this->request->post['usps_girth'];
-		} else {
-			$this->data['usps_girth'] = $this->config->get('usps_girth');
-		}
-
 		if (isset($this->request->post['usps_display_time'])) {
 			$this->data['usps_display_time'] = $this->request->post['usps_display_time'];
 		} else {
@@ -562,10 +547,6 @@ class ControllerShippingUsps extends Controller {
 
 		if (!$this->request->post['usps_length']) {
 			$this->error['length'] = $this->language->get('error_length');
-		}
-
-		if (!$this->request->post['usps_girth']) {
-			$this->error['girth'] = $this->language->get('error_girth');
 		}
 
 		if (!$this->error) {

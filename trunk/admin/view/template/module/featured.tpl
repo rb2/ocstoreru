@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td><div class="scrollbox" id="featured-product">
+          <td><div id="featured-product" class="scrollbox">
               <?php $class = 'odd'; ?>
               <?php foreach ($products as $product) { ?>
               <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
@@ -37,6 +37,7 @@
       <table id="module" class="list">
         <thead>
           <tr>
+		    <td class="left"><?php echo $entry_limit; ?></td>
             <td class="left"><?php echo $entry_image; ?></td>
             <td class="left"><?php echo $entry_layout; ?></td>
             <td class="left"><?php echo $entry_position; ?></td>
@@ -49,6 +50,7 @@
         <?php foreach ($modules as $module) { ?>
         <tbody id="module-row<?php echo $module_row; ?>">
           <tr>
+		    <td class="left"><input type="text" name="featured_module[<?php echo $module_row; ?>][limit]" value="<?php echo $module['limit']; ?>" size="1" /></td>
             <td class="left"><input type="text" name="featured_module[<?php echo $module_row; ?>][image_width]" value="<?php echo $module['image_width']; ?>" size="3" />
               <input type="text" name="featured_module[<?php echo $module_row; ?>][image_height]" value="<?php echo $module['image_height']; ?>" size="3" />
               <?php if (isset($error_image[$module_row])) { ?>
@@ -102,7 +104,7 @@
         <?php } ?>
         <tfoot>
           <tr>
-            <td colspan="5"></td>
+            <td colspan="6"></td>
             <td class="left"><a onclick="addModule();" class="button"><?php echo $button_add_module; ?></a></td>
           </tr>
         </tfoot>
@@ -165,6 +167,7 @@ var module_row = <?php echo $module_row; ?>;
 function addModule() {	
 	html  = '<tbody id="module-row' + module_row + '">';
 	html += '  <tr>';
+	html += '    <<td class="left"><input type="text" name="featured_module[' + module_row + '][limit]" value="5" size="1" /></td>';
 	html += '    <td class="left"><input type="text" name="featured_module[' + module_row + '][image_width]" value="80" size="3" /> <input type="text" name="featured_module[' + module_row + '][image_height]" value="80" size="3" /></td>';	
 	html += '    <td class="left"><select name="featured_module[' + module_row + '][layout_id]">';
 	<?php foreach ($layouts as $layout) { ?>

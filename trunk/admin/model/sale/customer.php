@@ -8,6 +8,7 @@ class ModelSaleCustomer extends Model {
       	if (isset($data['address'])) {		
       		foreach ($data['address'] as $address) {	
       			$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "', firstname = '" . $this->db->escape($address['firstname']) . "', lastname = '" . $this->db->escape($address['lastname']) . "', company = '" . $this->db->escape($address['company']) . "', address_1 = '" . $this->db->escape($address['address_1']) . "', address_2 = '" . $this->db->escape($address['address_2']) . "', city = '" . $this->db->escape($address['city']) . "', postcode = '" . $this->db->escape($address['postcode']) . "', country_id = '" . (int)$address['country_id'] . "', zone_id = '" . (int)$address['zone_id'] . "'");
+				
 				if (isset($address['default'])) {
 					$address_id = $this->db->getLastId();
 					
@@ -83,21 +84,25 @@ class ModelSaleCustomer extends Model {
 		if (!empty($data['filter_email'])) {
 			$implode[] = "LCASE(c.email) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_email'])) . "%'";
 		}
-		
-		if (!empty($data['filter_customer_group_id'])) {
-			$implode[] = "cg.customer_group_id = '" . $this->db->escape($data['filter_customer_group_id']) . "'";
+
+		if (isset($data['filter_newsletter']) && !is_null($data['filter_newsletter'])) {
+			$implode[] = "c.newsletter = '" . (int)$data['filter_newsletter'] . "'";
 		}	
-		
+				
+		if (!empty($data['filter_customer_group_id'])) {
+			$implode[] = "cg.customer_group_id = '" . (int)$data['filter_customer_group_id'] . "'";
+		}	
+			
+		if (!empty($data['filter_ip'])) {
+			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
+		}	
+				
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
 			$implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
 		}	
 		
 		if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
 			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
-		}	
-			
-		if (!empty($data['filter_ip'])) {
-			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
 		}	
 				
 		if (!empty($data['filter_date_added'])) {
@@ -113,6 +118,7 @@ class ModelSaleCustomer extends Model {
 			'c.email',
 			'customer_group',
 			'c.status',
+			'c.approved',
 			'c.ip',
 			'c.date_added'
 		);	
@@ -184,39 +190,15 @@ class ModelSaleCustomer extends Model {
 			$mail->setTo($customer_info['email']);
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setSender($store_name);
-			$mail->setSubject(sprintf($this->language->get('text_approve_subject'), $store_name));
+			$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_approve_subject'), $store_name), ENT_QUOTES, 'UTF-8'));
 			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 		}		
 	}
 		
-	public function getCustomersByNewsletter() {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE newsletter = '1' ORDER BY firstname, lastname, email");
-	
-		return $query->rows;
-	}
-	
-	public function getCustomersByCustomerGroupId($customer_group_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE customer_group_id = '" . (int)$customer_group_id . "' ORDER BY firstname, lastname, email");
-	
-		return $query->rows;
-	}
-		
-	public function getCustomersByProduct($product_id) {
-		if ($product_id) {
-			$query = $this->db->query("SELECT DISTINCT `email` FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_product op ON (o.order_id = op.order_id) WHERE op.product_id = '" . (int)$product_id . "' AND o.order_status_id <> '0'");
-	
-			return $query->rows;
-		} else {
-			return array();	
-		}
-	}
-	
 	public function getAddress($address_id) {
 		$address_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "address WHERE address_id = '" . (int)$address_id . "'");
 
-		$default_query = $this->db->query("SELECT address_id FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$address_query->row['customer_id'] . "'");
-				
 		if ($address_query->num_rows) {
 			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$address_query->row['country_id'] . "'");
 			
@@ -236,10 +218,10 @@ class ModelSaleCustomer extends Model {
 			
 			if ($zone_query->num_rows) {
 				$zone = $zone_query->row['name'];
-				$code = $zone_query->row['code'];
+				$zone_code = $zone_query->row['code'];
 			} else {
 				$zone = '';
-				$code = '';
+				$zone_code = '';
 			}		
 		
 			return array(
@@ -254,13 +236,12 @@ class ModelSaleCustomer extends Model {
 				'city'           => $address_query->row['city'],
 				'zone_id'        => $address_query->row['zone_id'],
 				'zone'           => $zone,
-				'zone_code'      => $code,
+				'zone_code'      => $zone_code,
 				'country_id'     => $address_query->row['country_id'],
 				'country'        => $country,	
 				'iso_code_2'     => $iso_code_2,
 				'iso_code_3'     => $iso_code_3,
-				'address_format' => $address_format,
-				'default'		 => ($default_query->row['address_id'] == $address_query->row['address_id']) ? true : false
+				'address_format' => $address_format
 			);
 		}
 	}
@@ -294,10 +275,18 @@ class ModelSaleCustomer extends Model {
 			$implode[] = "LCASE(email) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_email'])) . "%'";
 		}
 		
-		if (!empty($data['filter_customer_group_id'])) {
-			$implode[] = "customer_group_id = '" . $this->db->escape($data['filter_customer_group_id']) . "'";
-		}	
+		if (isset($data['filter_newsletter']) && !is_null($data['filter_newsletter'])) {
+			$implode[] = "newsletter = '" . (int)$data['filter_newsletter'] . "'";
+		}
 				
+		if (!empty($data['filter_customer_group_id'])) {
+			$implode[] = "customer_group_id = '" . (int)$data['filter_customer_group_id'] . "'";
+		}	
+		
+		if (!empty($data['filter_ip'])) {
+			$implode[] = "customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
+		}	
+						
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
 			$implode[] = "status = '" . (int)$data['filter_status'] . "'";
 		}			
@@ -385,8 +374,8 @@ class ModelSaleCustomer extends Model {
 			$mail->setTo($customer_info['email']);
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setSender($store_name);
-			$mail->setSubject(sprintf($this->language->get('text_transaction_subject'), $this->config->get('config_name')));
-			$mail->setText($message);
+			$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_transaction_subject'), $this->config->get('config_name')), ENT_QUOTES, 'UTF-8'));
+			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 		}
 	}
@@ -455,8 +444,8 @@ class ModelSaleCustomer extends Model {
 			$mail->setTo($customer_info['email']);
 			$mail->setFrom($this->config->get('config_email'));
 			$mail->setSender($store_name);
-			$mail->setSubject(sprintf($this->language->get('text_reward_subject'), $store_name));
-			$mail->setText($message);
+			$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_reward_subject'), $store_name), ENT_QUOTES, 'UTF-8'));
+			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 		}
 	}
@@ -499,6 +488,20 @@ class ModelSaleCustomer extends Model {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($ip) . "'");
 
 		return $query->row['total'];
-	}				
+	}
+	
+	public function addBlacklist($ip) {
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "customer_ip_blacklist` SET `ip` = '" . $this->db->escape($ip) . "'");
+	}
+		
+	public function deleteBlacklist($ip) {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_ip_blacklist` WHERE `ip` = '" . $this->db->escape($ip) . "'");
+	}
+			
+	public function getTotalBlacklistsByIp($ip) {
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "customer_ip_blacklist` WHERE `ip` = '" . $this->db->escape($ip) . "'");
+				 
+		return $query->row['total'];
+	}	
 }
 ?>

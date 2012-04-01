@@ -111,7 +111,11 @@ class ControllerPaymentPPPro extends Controller {
 		$request .= '&CARDSTART=' . urlencode($this->request->post['cc_start_date_month'] . $this->request->post['cc_start_date_year']);
 		$request .= '&EXPDATE=' . urlencode($this->request->post['cc_expire_date_month'] . $this->request->post['cc_expire_date_year']);
 		$request .= '&CVV2=' . urlencode($this->request->post['cc_cvv2']);
-		$request .= '&CARDISSUE=' . urlencode($this->request->post['cc_issue']);
+		
+		if ($this->request->post['cc_type'] == 'SWITCH' || $this->request->post['cc_type'] == 'SOLO') { 
+			$request .= '&CARDISSUE=' . urlencode($this->request->post['cc_issue']);
+		}
+		
 		$request .= '&FIRSTNAME=' . urlencode($order_info['payment_firstname']);
 		$request .= '&LASTNAME=' . urlencode($order_info['payment_lastname']);
 		$request .= '&EMAIL=' . urlencode($order_info['email']);
@@ -123,6 +127,22 @@ class ControllerPaymentPPPro extends Controller {
 		$request .= '&ZIP=' . urlencode($order_info['payment_postcode']);
 		$request .= '&COUNTRYCODE=' . urlencode($order_info['payment_iso_code_2']);
 		$request .= '&CURRENCYCODE=' . urlencode($order_info['currency_code']);
+		
+        if ($this->cart->hasShipping()) {
+			$request .= '&SHIPTONAME=' . urlencode($order_info['shipping_firstname'] . ' ' . $order_info['shipping_lastname']);
+			$request .= '&SHIPTOSTREET=' . urlencode($order_info['shipping_address_1']);
+			$request .= '&SHIPTOCITY=' . urlencode($order_info['shipping_city']);
+			$request .= '&SHIPTOSTATE=' . urlencode(($order_info['shipping_iso_code_2'] != 'US') ? $order_info['shipping_zone'] : $order_info['shipping_zone_code']);
+			$request .= '&SHIPTOCOUNTRYCODE=' . urlencode($order_info['shipping_iso_code_2']);
+			$request .= '&SHIPTOZIP=' . urlencode($order_info['shipping_postcode']);
+        } else {
+			$request .= '&SHIPTONAME=' . urlencode($order_info['payment_firstname'] . ' ' . $order_info['payment_lastname']);
+			$request .= '&SHIPTOSTREET=' . urlencode($order_info['payment_address_1']);
+			$request .= '&SHIPTOCITY=' . urlencode($order_info['payment_city']);
+			$request .= '&SHIPTOSTATE=' . urlencode(($order_info['payment_iso_code_2'] != 'US') ? $order_info['payment_zone'] : $order_info['payment_zone_code']);
+			$request .= '&SHIPTOCOUNTRYCODE=' . urlencode($order_info['payment_iso_code_2']);
+			$request .= '&SHIPTOZIP=' . urlencode($order_info['payment_postcode']);			
+		}		
 		
 		if (!$this->config->get('pp_pro_test')) {
 			$curl = curl_init('https://api-3t.paypal.com/nvp');

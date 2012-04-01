@@ -83,7 +83,7 @@ class ModelLocalisationZone extends Model {
 	}
 				
 	public function getTotalZonesByCountryId($country_id) {
-		$query = $this->db->query("SELECT count(*) AS total FROM " . DB_PREFIX . "zone WHERE country_id = '" . (int)$country_id . "'");
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "zone WHERE country_id = '" . (int)$country_id . "'");
 	
 		return $query->row['total'];
 	}

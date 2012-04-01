@@ -108,7 +108,7 @@ class ControllerPaymentSagepay extends Controller {
    			$crypt_data[] = $key . '=' . $value;
 		}
 
-		$this->data['crypt'] = base64_encode($this->simpleXor(implode('&', $crypt_data), $password));
+		$this->data['crypt'] = base64_encode($this->simpleXor(utf8_decode(implode('&', $crypt_data)), $password));
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/sagepay.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/payment/sagepay.tpl';
@@ -124,7 +124,7 @@ class ControllerPaymentSagepay extends Controller {
 			$string = base64_decode(str_replace(' ', '+', $this->request->get['crypt']));
 			$password = $this->config->get('sagepay_password');	
 
-			$output = $this->simpleXor($string, $password);
+			$output = utf8_encode($this->simpleXor($string, $password));
 			
 			$data = $this->getToken($output);
 		
@@ -230,7 +230,7 @@ class ControllerPaymentSagepay extends Controller {
   		for ($i = count($tokens) - 1; $i >= 0; $i--){
     		$start = strpos($string, $tokens[$i]);
     		
-			if ($start){
+			if ($start !== false) {
      			$data[$i]['start'] = $start;
      			$data[$i]['token'] = $tokens[$i];
 			}

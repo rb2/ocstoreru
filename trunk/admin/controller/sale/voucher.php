@@ -120,7 +120,7 @@ class ControllerSaleVoucher extends Controller {
 		if (isset($this->request->get['order'])) {
 			$order = $this->request->get['order'];
 		} else {
-			$order = 'ASC';
+			$order = 'DESC';
 		}
 		
 		if (isset($this->request->get['page'])) {
@@ -186,8 +186,8 @@ class ControllerSaleVoucher extends Controller {
 				'code'       => $result['code'],
 				'from'       => $result['from_name'],
 				'to'         => $result['to_name'],
-				'amount'     => $this->currency->format($result['amount'], $this->config->get('config_currency')),
 				'theme'      => $result['theme'],
+				'amount'     => $this->currency->format($result['amount'], $this->config->get('config_currency')),
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'selected'   => isset($this->request->post['selected']) && in_array($result['voucher_id'], $this->request->post['selected']),
@@ -204,8 +204,8 @@ class ControllerSaleVoucher extends Controller {
 		$this->data['column_code'] = $this->language->get('column_code');
 		$this->data['column_from'] = $this->language->get('column_from');
 		$this->data['column_to'] = $this->language->get('column_to');
-		$this->data['column_amount'] = $this->language->get('column_amount');
 		$this->data['column_theme'] = $this->language->get('column_theme');
+		$this->data['column_amount'] = $this->language->get('column_amount');
 		$this->data['column_status'] = $this->language->get('column_status');
 		$this->data['column_date_added'] = $this->language->get('column_date_added');
 		$this->data['column_action'] = $this->language->get('column_action');		
@@ -244,8 +244,8 @@ class ControllerSaleVoucher extends Controller {
 		$this->data['sort_code'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . '&sort=v.code' . $url, 'SSL');
 		$this->data['sort_from'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . '&sort=v.from_name' . $url, 'SSL');
 		$this->data['sort_to'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . '&sort=v.to_name' . $url, 'SSL');
-		$this->data['sort_amount'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . '&sort=v.amount' . $url, 'SSL');
 		$this->data['sort_theme'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . '&sort=theme' . $url, 'SSL');
+		$this->data['sort_amount'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . '&sort=v.amount' . $url, 'SSL');
 		$this->data['sort_status'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . '&sort=v.date_end' . $url, 'SSL');
 		$this->data['sort_date_added'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . '&sort=v.date_added' . $url, 'SSL');
 				
@@ -291,9 +291,9 @@ class ControllerSaleVoucher extends Controller {
 		$this->data['entry_from_email'] = $this->language->get('entry_from_email');
 		$this->data['entry_to_name'] = $this->language->get('entry_to_name');
 		$this->data['entry_to_email'] = $this->language->get('entry_to_email');
+		$this->data['entry_theme'] = $this->language->get('entry_theme');
 		$this->data['entry_message'] = $this->language->get('entry_message');
 		$this->data['entry_amount'] = $this->language->get('entry_amount');
-		$this->data['entry_theme'] = $this->language->get('entry_theme');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 
     	$this->data['button_save'] = $this->language->get('button_save');
@@ -431,7 +431,19 @@ class ControllerSaleVoucher extends Controller {
 		} else {
       		$this->data['to_email'] = '';
     	}
+ 
+ 		$this->load->model('sale/voucher_theme');
+			
+		$this->data['voucher_themes'] = $this->model_sale_voucher_theme->getVoucherThemes();
 
+    	if (isset($this->request->post['voucher_theme_id'])) {
+      		$this->data['voucher_theme_id'] = $this->request->post['voucher_theme_id'];
+    	} elseif (!empty($voucher_info)) { 
+			$this->data['voucher_theme_id'] = $voucher_info['voucher_theme_id'];
+		} else {
+      		$this->data['voucher_theme_id'] = '';
+    	}	
+		
     	if (isset($this->request->post['message'])) {
       		$this->data['message'] = $this->request->post['message'];
     	} elseif (!empty($voucher_info)) {
@@ -447,19 +459,7 @@ class ControllerSaleVoucher extends Controller {
 		} else {
       		$this->data['amount'] = '';
     	}
- 
- 		$this->load->model('sale/voucher_theme');
-			
-		$this->data['voucher_themes'] = $this->model_sale_voucher_theme->getVoucherThemes();
-
-    	if (isset($this->request->post['voucher_theme_id'])) {
-      		$this->data['voucher_theme_id'] = $this->request->post['voucher_theme_id'];
-    	} elseif (!empty($voucher_info)) { 
-			$this->data['voucher_theme_id'] = $voucher_info['voucher_theme_id'];
-		} else {
-      		$this->data['voucher_theme_id'] = '';
-    	}		
- 
+	
     	if (isset($this->request->post['status'])) { 
       		$this->data['status'] = $this->request->post['status'];
     	} elseif (!empty($voucher_info)) {
@@ -485,7 +485,17 @@ class ControllerSaleVoucher extends Controller {
     	if ((utf8_strlen($this->request->post['code']) < 3) || (utf8_strlen($this->request->post['code']) > 10)) {
       		$this->error['code'] = $this->language->get('error_code');
     	}
-			      
+		
+		$voucher_info = $this->model_sale_voucher->getVoucherByCode($this->request->post['code']);
+		
+		if ($voucher_info) {
+			if (!isset($this->request->get['voucher_id'])) {
+				$this->error['warning'] = $this->language->get('error_exists');
+			} elseif ($voucher_info['voucher_id'] != $this->request->get['voucher_id'])  {
+				$this->error['warning'] = $this->language->get('error_exists');
+			}
+		}
+					      
     	if ((utf8_strlen($this->request->post['to_name']) < 1) || (utf8_strlen($this->request->post['to_name']) > 64)) {
       		$this->error['to_name'] = $this->language->get('error_to_name');
     	}    	
@@ -517,7 +527,19 @@ class ControllerSaleVoucher extends Controller {
     	if (!$this->user->hasPermission('modify', 'sale/voucher')) {
       		$this->error['warning'] = $this->language->get('error_permission');  
     	}
-	  	
+		
+		$this->load->model('sale/order');
+		
+		foreach ($this->request->post['selected'] as $voucher_id) {
+			$order_voucher_info = $this->model_sale_order->getOrderVoucherByVoucherId($voucher_id);
+			
+			if ($order_voucher_info) {
+				$this->error['warning'] = sprintf($this->language->get('error_order'), $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $order_voucher_info['order_id'], 'SSL')); 
+				
+				break;       
+			}
+		}
+		
 		if (!$this->error) {
 	  		return true;
 		} else {
@@ -587,6 +609,6 @@ class ControllerSaleVoucher extends Controller {
 		}	
 		
 		$this->response->setOutput(json_encode($json));			
-  	}			
+  	}	
 }
 ?>

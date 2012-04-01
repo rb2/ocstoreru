@@ -105,7 +105,7 @@
             </tr>
             <tr>
               <td>&nbsp;</td>
-              <td><div class="scrollbox" id="coupon-product">
+              <td><div id="coupon-product" class="scrollbox">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($coupon_product as $coupon_product) { ?>
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>

@@ -25,6 +25,7 @@ class ControllerCommonFileManager extends Controller {
 		$this->data['button_rename'] = $this->language->get('button_rename');
 		$this->data['button_upload'] = $this->language->get('button_upload');
 		$this->data['button_refresh'] = $this->language->get('button_refresh'); 
+		$this->data['button_submit'] = $this->language->get('button_submit'); 
 		
 		$this->data['error_select'] = $this->language->get('error_select');
 		$this->data['error_directory'] = $this->language->get('error_directory');
@@ -136,8 +137,8 @@ class ControllerCommonFileManager extends Controller {
 					}
 						
 					$json[] = array(
-						'file'     => utf8_substr($file, strlen(DIR_IMAGE . 'data/')),
 						'filename' => basename($file),
+						'file'     => utf8_substr($file, strlen(DIR_IMAGE . 'data/')),
 						'size'     => round(utf8_substr($size, 0, strpos($size, '.') + 4), 2) . $suffix[$i],
 						'thumb'    => $this->model_tool_image->resize(utf8_substr($file, strlen(DIR_IMAGE)), 100, 100)
 					);

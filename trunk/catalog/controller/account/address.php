@@ -59,13 +59,13 @@ class ControllerAccountAddress extends Controller {
        		$this->model_account_address->editAddress($this->request->get['address_id'], $this->request->post);
 	  		
 			if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
-	  			unset($this->session->data['shipping_methods']);
-				unset($this->session->data['shipping_method']);	
+	  			unset($this->session->data['shipping_method']);	
+				unset($this->session->data['shipping_methods']);
 			}
 
 			if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
-	  			unset($this->session->data['payment_methods']);
-				unset($this->session->data['payment_method']);
+	  			unset($this->session->data['payment_method']);
+				unset($this->session->data['payment_methods']);
 			}
 			
 			$this->session->data['success'] = $this->language->get('text_update');
@@ -94,14 +94,14 @@ class ControllerAccountAddress extends Controller {
 
 			if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
 	  			unset($this->session->data['shipping_address_id']);
+				unset($this->session->data['shipping_method']);
 				unset($this->session->data['shipping_methods']);
-				unset($this->session->data['shipping_method']);	
 			}
 
 			if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
 	  			unset($this->session->data['payment_address_id']);
+				unset($this->session->data['payment_method']);
 				unset($this->session->data['payment_methods']);
-				unset($this->session->data['payment_method']);	
 			}
 			
 			$this->session->data['success'] = $this->language->get('text_delete');

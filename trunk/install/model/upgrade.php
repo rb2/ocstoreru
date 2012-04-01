@@ -32,19 +32,19 @@ class ModelUpgrade extends Model {
 						if ($info['Key_name'] == 'PRIMARY') { continue; }
 					}
 					if (preg_match('/^ALTER TABLE (.+?) ADD INDEX (.+?) /', $line, $matches)) {
-						if (mysql_num_rows(mysql_query(sprintf("SHOW KEYS FROM %s WHERE Key_name != 'PRIMARY' AND Column_name = '%s'",$matches[1],str_replace('`', '', $matches[2])), $connection)) > 0) { continue; }
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW KEYS FROM %s WHERE Key_name != 'PRIMARY' AND Column_name = '%s'",$matches[1],str_replace('`', '', $matches[2])), $connection)) > 0) { continue; }
 					}
 					if (preg_match('/^ALTER TABLE (.+?) ADD (.+?) /', $line, $matches)) {
-						if (mysql_num_rows(mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $connection)) > 0) { continue; }
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $connection)) > 0) { continue; }
 					}
 					if (preg_match('/^ALTER TABLE (.+?) DROP (.+?) /', $line, $matches)) {
-						if (mysql_num_rows(mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $connection)) <= 0) { continue; }
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $connection)) <= 0) { continue; }
 					}
 					if (preg_match('/^ALTER TABLE ([^\s]+) DEFAULT (.+?) /', $line, $matches)) {
-						if (mysql_num_rows(mysql_query(sprintf("SHOW TABLES LIKE '%s'", str_replace('`', '', $matches[1])), $connection)) <= 0) { continue; }
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW TABLES LIKE '%s'", str_replace('`', '', $matches[1])), $connection)) <= 0) { continue; }
 					}
 					if (preg_match('/^ALTER TABLE (.+?) MODIFY (.+?) /', $line, $matches)) {
-						if (mysql_num_rows(mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $connection)) <= 0) { continue; }
+						if (mysql_num_rows(@mysql_query(sprintf("SHOW COLUMNS FROM %s LIKE '%s'", $matches[1],str_replace('`', '', $matches[2])), $connection)) <= 0) { continue; }
 					}
 
 					$query .= $line;

@@ -54,7 +54,7 @@
   <br />
   <br />
   <span class="required">*</span> <?php echo $entry_country; ?><br />
-  <select name="country_id" class="large-field" onchange="$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/address/zone&country_id=' + this.value);">
+  <select name="country_id" class="large-field" onchange="$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/register/zone&country_id=' + this.value);">
     <option value=""><?php echo $text_select; ?></option>
     <?php foreach ($countries as $country) { ?>
     <?php if ($country['country_id'] == $country_id) { ?>
@@ -89,20 +89,20 @@
 <div class="buttons">
   <div class="right"><?php echo $text_agree; ?>
     <input type="checkbox" name="agree" value="1" />
-    <a id="button-register" class="button"><span><?php echo $button_continue; ?></span></a></div>
+    <input type="button" value="<?php echo $button_continue; ?>" id="button-register" class="button" />
+  </div>
 </div>
 <?php } else { ?>
 <div class="buttons">
-  <div class="right"><a id="button-register" class="button"><span><?php echo $button_continue; ?></span></a></div>
+  <div class="right"><input type="button" value="<?php echo $button_continue; ?>" id="button-register" class="button" /></div>
 </div>
 <?php } ?>
 <script type="text/javascript"><!--
-$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/address/zone&country_id=<?php echo $country_id; ?>');
-//--></script>
+$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/register/zone&country_id=<?php echo $country_id; ?>');
+//--></script> 
 <script type="text/javascript"><!--
-$('.fancybox').fancybox({
+$('.colorbox').colorbox({
 	width: 560,
-	height: 560,
-	autoDimensions: false
+	height: 560
 });
-//--></script>  
+//--></script> 

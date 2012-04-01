@@ -357,7 +357,7 @@ class ControllerUserUserPermission extends Controller {
 			}
 		}
 		
-		if (isset($this->request->post['permission'])) {
+		if (isset($this->request->post['permission']['access'])) {
 			$this->data['access'] = $this->request->post['permission']['access'];
 		} elseif (isset($user_group_info['permission']['access'])) {
 			$this->data['access'] = $user_group_info['permission']['access'];
@@ -365,7 +365,7 @@ class ControllerUserUserPermission extends Controller {
 			$this->data['access'] = array();
 		}
 
-		if (isset($this->request->post['permission'])) {
+		if (isset($this->request->post['permission']['modify'])) {
 			$this->data['modify'] = $this->request->post['permission']['modify'];
 		} elseif (isset($user_group_info['permission']['modify'])) {
 			$this->data['modify'] = $user_group_info['permission']['modify'];

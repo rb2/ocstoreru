@@ -10,7 +10,7 @@ $_['text_moneybookers']	      = '<a onclick="window.open(\'https://www.moneybook
 // Entry					
 $_['entry_email']		      = 'E-Mail:';
 $_['entry_secret']		      = 'Secret:';
-$_['entry_total']             = 'Total:<br /><span class="help">The checkout total the order must reach before this payment method becomes active.</span>';
+$_['entry_total']             = 'Нижняя граница:<br /><span class="help">Минимальная сумма заказа. Ниже этой суммы метод будет недоступен.</span>';
 $_['entry_order_status']      = 'Order Status:';
 $_['entry_pending_status']    = 'Pending Status :';
 $_['entry_canceled_status']   = 'Canceled Status:';
@@ -23,5 +23,4 @@ $_['entry_sort_order']        = 'Sort Order:';
 // Error					
 $_['error_permission']	      = 'Warning: You do not have permission to modify Moneybookers!'; 
 $_['error_email']		      = 'E-Mail Required!';
-$_['error_secret']		      = 'Secret Required!';
 ?>

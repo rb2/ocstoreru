@@ -19,7 +19,7 @@ class ControllerInformationContact extends Controller {
 			$mail->setTo($this->config->get('config_email'));
 	  		$mail->setFrom($this->request->post['email']);
 	  		$mail->setSender($this->request->post['name']);
-	  		$mail->setSubject(sprintf($this->language->get('email_subject'), $this->request->post['name']));
+	  		$mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
 	  		$mail->setText(strip_tags(html_entity_decode($this->request->post['enquiry'], ENT_QUOTES, 'UTF-8')));
       		$mail->send();
 
@@ -171,16 +171,6 @@ class ControllerInformationContact extends Controller {
 				
  		$this->response->setOutput($this->render()); 
 	}
-
-	public function captcha() {
-		$this->load->library('captcha');
-		
-		$captcha = new Captcha();
-		
-		$this->session->data['captcha'] = $captcha->getCode();
-		
-		$captcha->showImage();
-	}
 	
   	private function validate() {
     	if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
@@ -195,7 +185,7 @@ class ControllerInformationContact extends Controller {
       		$this->error['enquiry'] = $this->language->get('error_enquiry');
     	}
 
-    	if (!isset($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+    	if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
       		$this->error['captcha'] = $this->language->get('error_captcha');
     	}
 		
@@ -205,5 +195,15 @@ class ControllerInformationContact extends Controller {
 	  		return false;
 		}  	  
   	}
+
+	public function captcha() {
+		$this->load->library('captcha');
+		
+		$captcha = new Captcha();
+		
+		$this->session->data['captcha'] = $captcha->getCode();
+		
+		$captcha->showImage();
+	}	
 }
 ?>

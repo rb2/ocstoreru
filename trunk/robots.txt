@@ -41,7 +41,10 @@ Disallow: /*?order=
 Disallow: /*&order=
 Disallow: /*?limit=
 Disallow: /*&limit=
+Disallow: /*?filter_name=
+Disallow: /*&filter_name=
+Disallow: /*?filter_sub_category=
+Disallow: /*&filter_sub_category=
+Disallow: /*?filter_description=
+Disallow: /*&filter_description=
 Clean-param: tracking
-Clean-param: filter_name
-Clean-param: filter_sub_category
-Clean-param: filter_description
