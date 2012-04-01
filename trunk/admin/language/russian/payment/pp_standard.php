@@ -14,7 +14,7 @@ $_['entry_email']					 = 'E-Mail:';
 $_['entry_test']					 = 'Sandbox Mode:';
 $_['entry_transaction']				 = 'Transaction Method:';
 $_['entry_debug']					 = 'Debug Mode:<br/><span class="help">Logs additional information to the system log.</span>';
-$_['entry_total']					 = 'Нижняя граница:<br /><span class="help">Минимальная сумма заказа. Ниже этой суммы метод будет недоступен.</span>';
+$_['entry_total']					 = 'РќРёР¶РЅСЏСЏ РіСЂР°РЅРёС†Р°:<br /><span class="help">РњРёРЅРёРјР°Р»СЊРЅР°СЏ СЃСѓРјРјР° Р·Р°РєР°Р·Р°. РќРёР¶Рµ СЌС‚РѕР№ СЃСѓРјРјС‹ РјРµС‚РѕРґ Р±СѓРґРµС‚ РЅРµРґРѕСЃС‚СѓРїРµРЅ.</span>';
 $_['entry_canceled_reversal_status'] = 'Canceled Reversal Status:';
 $_['entry_completed_status']         = 'Completed Status:';
 $_['entry_denied_status']			 = 'Denied Status:';

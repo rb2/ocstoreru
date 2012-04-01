@@ -10,7 +10,7 @@ $_['text_moneybookers']	      = '<a onclick="window.open(\'https://www.moneybook
 // Entry					
 $_['entry_email']		      = 'E-Mail:';
 $_['entry_secret']		      = 'Secret:';
-$_['entry_total']             = 'Нижняя граница:<br /><span class="help">Минимальная сумма заказа. Ниже этой суммы метод будет недоступен.</span>';
+$_['entry_total']             = 'РќРёР¶РЅСЏСЏ РіСЂР°РЅРёС†Р°:<br /><span class="help">РњРёРЅРёРјР°Р»СЊРЅР°СЏ СЃСѓРјРјР° Р·Р°РєР°Р·Р°. РќРёР¶Рµ СЌС‚РѕР№ СЃСѓРјРјС‹ РјРµС‚РѕРґ Р±СѓРґРµС‚ РЅРµРґРѕСЃС‚СѓРїРµРЅ.</span>';
 $_['entry_order_status']      = 'Order Status:';
 $_['entry_pending_status']    = 'Pending Status :';
 $_['entry_canceled_status']   = 'Canceled Status:';

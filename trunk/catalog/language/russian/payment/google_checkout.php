@@ -1,6 +1,6 @@
 <?php
 // Entry
-$_['entry_postcode'] = 'Èíäåêñ:';
-$_['entry_country']  = 'Ñòðàíà:';
-$_['entry_zone']     = 'Ðåãèîí / Îáëàñòü:';
+$_['entry_postcode'] = 'Ð˜Ð½Ð´ÐµÐºÑ:';
+$_['entry_country']  = 'Ð¡Ñ‚Ñ€Ð°Ð½Ð°:';
+$_['entry_zone']     = 'Ð ÐµÐ³Ð¸Ð¾Ð½ / ÐžÐ±Ð»Ð°ÑÑ‚ÑŒ:';
 ?>
