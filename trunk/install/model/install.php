@@ -39,7 +39,7 @@ class ModelInstall extends Model {
 	
 			mysql_query("SET @@session.sql_mode = 'MYSQL40'", $connection);
 		
-			mysql_query("DELETE FROM from `" . $data['db_prefix'] . "user` WHERE user_id = '1'");
+			mysql_query("DELETE FROM `" . $data['db_prefix'] . "user` WHERE user_id = '1'");
 		
 			mysql_query("INSERT INTO `" . $data['db_prefix'] . "user` SET user_id = '1', user_group_id = '1', username = '" . mysql_real_escape_string($data['username']) . "', password = '" . mysql_real_escape_string(md5($data['password'])) . "', status = '1', email = '" . mysql_real_escape_string($data['email']) . "', date_added = NOW()", $connection);
 
