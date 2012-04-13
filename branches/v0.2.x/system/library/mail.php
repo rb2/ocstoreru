@@ -138,7 +138,7 @@ final class Mail {
 
 		foreach ($this->attachments as $attachment) {
 			if (file_exists($attachment['file'])) {
-				$handle = fopen($attachment['file'], 'r');
+				$handle = fopen($attachment['file'], 'rb');
 				$content = fread($handle, filesize($attachment['file']));
 
 				fclose($handle);
