@@ -144,7 +144,13 @@ final class Mail {
 				fclose($handle);
 
 				$message .= '--' . $boundary . $this->newline;
-				$message .= 'Content-Type: ' . mime_content_type($attachment['file']) . '; name="' . $attachment['filename'] . '"' . $this->newline;
+				// определяем MIME-тип вложенного изображения:
+				$mime_ctype = function_exists('mime_content_type') ? mime_content_type($attachment['file']) : '';
+				if (!$mime_ctype) {
+					$mime_ctype = getimagesize($attachment['file']); //возвращает массив или false в случае ошибки
+					$mime_ctype = $mime_ctype ? $mime_ctype['mime'] : 'application/octet-stream';
+				}
+				$message .= 'Content-Type: ' . $mime_ctype . '; name="' . $attachment['filename'] . '"' . $this->newline;
 				$message .= 'Content-Transfer-Encoding: base64' . $this->newline;
 				$message .= 'Content-Disposition: inline; filename="' . $attachment['filename'] . '"' . $this->newline;
 				$message .= 'Content-ID: <' . $attachment['filename'] . '>' . $this->newline . $this->newline;
