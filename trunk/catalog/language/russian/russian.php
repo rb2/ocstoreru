@@ -3,9 +3,9 @@
 $_['code']                  = 'ru';
 $_['direction']             = 'ltr';
 $_['date_format_short']     = 'd.m.Y';
-$_['date_format_long']      = 'l dS F Y';
-$_['time_format']           = 'h:i:s A';
-$_['decimal_point']         = ',';
+$_['date_format_long']      = 'l d F Y';
+$_['time_format']           = 'H:i:s';
+$_['decimal_point']         = '.';
 $_['thousand_point']        = '';
 
 // Text
@@ -21,13 +21,13 @@ $_['text_separator']        = ' &raquo; ';
 // Buttons
 $_['button_add_address']    = 'Добавить адрес';
 $_['button_back']           = 'Назад';
-$_['button_continue']       = 'Вперед';
+$_['button_continue']       = 'Продолжить';
 $_['button_cart']    	    = 'Купить';
-$_['button_compare']        = 'В сравнения';
-$_['button_wishlist']       = 'В заметки';
-$_['button_checkout']       = 'Оформить заказ';
-$_['button_confirm']        = 'Подтвердить заказ';
-$_['button_coupon']         = 'Применить купон';
+$_['button_compare']        = 'В сравнение';
+$_['button_wishlist']       = 'В закладки';
+$_['button_checkout']       = 'Оформление заказа';
+$_['button_confirm']        = 'Подтверждение заказа';
+$_['button_coupon']         = 'Применение купона';
 $_['button_delete']         = 'Удалить';
 $_['button_download']       = 'Скачать';
 $_['button_edit']           = 'Редактировать';
@@ -42,8 +42,8 @@ $_['button_reorder']        = 'Повторный заказ';
 $_['button_return']         = 'Возврат товара';
 $_['button_shopping']       = 'Продолжить покупки';
 $_['button_search']         = 'Поиск';
-$_['button_shipping']       = 'Подтвердить доставку';
-$_['button_guest']          = 'Оформить без регистрации';
+$_['button_shipping']       = 'Применить Доставку';
+$_['button_guest']          = 'Оформление заказа без регистрации';
 $_['button_view']           = 'Просмотр';
 $_['button_voucher']        = 'Применить подарочный сертификат';
 $_['button_upload']         = 'Загрузить файл';

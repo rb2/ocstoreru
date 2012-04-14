@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = 'Специальные предложения';
+$_['heading_title']     = 'Акции';
 
 // Text
 $_['text_empty']        = 'Нет специальных предложений.';
@@ -15,15 +15,15 @@ $_['text_compare']      = 'Сравнить (%s)';
 $_['text_display']      = 'Вид:';
 $_['text_list']         = 'Список';
 $_['text_grid']         = 'Сетка';
-$_['text_sort']         = 'Сортировать по:';
+$_['text_sort']         = 'Сортировка:';
 $_['text_default']      = 'По умолчанию';
-$_['text_name_asc']     = 'Имени (от А до Я)';
-$_['text_name_desc']    = 'Имени (от Я до А)';
-$_['text_price_asc']    = 'Ценам (Низкие &gt; Высокие)';
-$_['text_price_desc']   = 'Ценам (Высокие &lt; Низкие)';
-$_['text_rating_asc']   = 'Рейтингу (низкому)';
-$_['text_rating_desc']  = 'Рейтингу (высокому)';
-$_['text_model_asc']    = 'Модель (от А до Я)';
-$_['text_model_desc']   = 'Модель (от Я до А)';
+$_['text_name_asc']     = 'Наименование (А -&gt; Я)';
+$_['text_name_desc']    = 'Наименование (Я -&gt; А)';
+$_['text_price_asc']    = 'Цена (по возрастанию)';
+$_['text_price_desc']   = 'Цена (по убыванию)';
+$_['text_rating_asc']   = 'Рейтинг (по возрастанию)';
+$_['text_rating_desc']  = 'Рейтинг (по убыванию)';
+$_['text_model_asc']    = 'Модель (А -&gt; Я)';
+$_['text_model_desc']   = 'Модель (Я -&gt; А)';
 $_['text_limit']        = 'На странице:';
 ?>
