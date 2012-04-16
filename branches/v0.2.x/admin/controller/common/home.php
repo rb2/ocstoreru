@@ -232,6 +232,11 @@ class ControllerCommonHome extends Controller {
 			return $this->forward('common/login');
 		}
 
+		if (!isset($this->request->server['HTTP_REFERER']) or strncasecmp($this->request->server['HTTP_REFERER'], HTTP_SERVER, strlen(HTTP_SERVER))!==0
+			 or strncasecmp($this->request->server['HTTP_REFERER'], HTTPS_SERVER, strlen(HTTPS_SERVER))!==0) {
+			return $this->forward('common/login');
+		}
+
 		if (isset($this->request->get['route'])) {
 			$route = '';
 

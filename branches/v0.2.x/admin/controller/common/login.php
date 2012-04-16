@@ -7,7 +7,9 @@ class ControllerCommonLogin extends Controller {
 
 		$this->document->title = $this->language->get('heading_title');
 
-		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
+		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])
+			 && isset($this->request->server['HTTP_REFERER']) && (strncasecmp($this->request->server['HTTP_REFERER'], HTTP_SERVER, strlen(HTTP_SERVER))===0
+			 or strncasecmp($this->request->server['HTTP_REFERER'], HTTPS_SERVER, strlen(HTTPS_SERVER))===0)) {
 			$this->redirect(HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token']);
 		}
 
