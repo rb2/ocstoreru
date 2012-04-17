@@ -172,7 +172,7 @@ class ControllerAccountDownload extends Controller {
 					header('Content-Description: File Transfer');
 					header('Content-Type: ' . $mime);
 					header('Content-Transfer-Encoding: ' . $encoding);
-					header('Content-Disposition: attachment; filename=' . ($mask ? $mask : basename($file)));
+					header('Content-Disposition: attachment; filename="' . ($mask ? $mask : basename($file)) . '"');
 					header('Content-Length: ' . filesize($file));
 				
 					$file = readfile($file, 'rb');
