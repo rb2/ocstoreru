@@ -251,6 +251,10 @@ body > #container {
 	border-bottom: 1px solid #DDDDDD;
 }
 .list thead td {
+	background: -moz-linear-gradient(top, #FEFEFE, #BBB); /* Firefox 3.6+ */
+	background: -ms-linear-gradient(top, #FEFEFE, #BBB); /* IE 10.0+ */
+	background: -o-linear-gradient(top, #FEFEFE, #BBB); /* Opera 11.10+ */
+	background: -webkit-linear-gradient(top, #FEFEFE, #BBB); /* Chrome 10.0+, Safari 4.0+ */
 	background-color: #EFEFEF;
 	padding: 0px 5px;
 }
