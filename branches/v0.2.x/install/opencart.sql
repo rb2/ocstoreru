@@ -1709,7 +1709,7 @@ INSERT INTO `oc_setting` (`setting_id`, `group`, `key`, `value`) VALUES
 (NULL, 'config', 'config_account_mail', '0'),
 (NULL, 'config', 'config_alert_mail', '1'),
 (NULL, 'config', 'config_ssl', '0'),
-(NULL, 'config', 'config_encryption', '12345'),
+(NULL, 'config', 'config_encryption', SUBSTRING(MD5(RAND()) FROM 1 FOR 8)),
 (NULL, 'config', 'config_seo_url', '0'),
 (NULL, 'config', 'config_compression', '0'),
 (NULL, 'config', 'config_error_display', '1'),
