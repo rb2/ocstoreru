@@ -6,7 +6,7 @@ define('VERSION', '0.2.3_alpha');
 require_once('config.php');
 
 // Deny load admin pages in frames
-header('X-Frame-Options: DENY');
+header('X-Frame-Options: SAMEORIGIN');
 
 // Install
 if (!defined('DIR_APPLICATION')) {
