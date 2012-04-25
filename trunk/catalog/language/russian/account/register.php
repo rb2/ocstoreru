@@ -8,26 +8,26 @@ $_['text_register']        = 'Регистрация';
 $_['text_account_already'] = 'Если Вы уже зарегистрированы, перейдите на страницу <a href="%s">входа в систему</a>.';
 $_['text_your_details']    = 'Основные данные';
 $_['text_your_address']    = 'Ваш адрес';
-$_['text_newsletter']      = 'Подписка на новости';
+$_['text_newsletter']      = 'Рассылка новостей';
 $_['text_your_password']   = 'Ваш пароль';
-$_['text_agree']           = 'Я прочитал и принимаю <a class="colorbox" href="%s" alt="%s"><b>%s</b></a>';
+$_['text_agree']           = 'Я прочитал <a class="colorbox" href="%s" alt="%s"><b>%s</b></a> и согласен с условиями';
 
 // Entry
-$_['entry_firstname']      = 'Имя Отчество:';
+$_['entry_firstname']      = 'Имя,Отчество:';
 $_['entry_lastname']       = 'Фамилия:';
 $_['entry_email']          = 'E-Mail:';
 $_['entry_telephone']      = 'Телефон:';
 $_['entry_fax']            = 'Факс:';
 $_['entry_company']        = 'Компания:';
-$_['entry_address_1']      = 'Адрес 1:';
-$_['entry_address_2']      = 'Адрес 2:';
+$_['entry_address_1']      = 'Адрес:';
+$_['entry_address_2']      = 'Адрес (продолжение):';
 $_['entry_postcode']       = 'Индекс:';
 $_['entry_city']           = 'Город:';
 $_['entry_country']        = 'Страна:';
 $_['entry_zone']           = 'Регион / Область:';
-$_['entry_newsletter']     = 'Подписаться:';
+$_['entry_newsletter']     = 'Подписка на новости:';
 $_['entry_password']       = 'Пароль:';
-$_['entry_confirm']        = 'Повтор пароля:';
+$_['entry_confirm']        = 'Повторите пароль:';
 
 // Error
 $_['error_exists']         = 'Этот E-Mail уже зарегистрирован!';

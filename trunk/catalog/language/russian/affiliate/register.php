@@ -20,7 +20,7 @@ $_['text_agree']                = 'Я прочитал <a class="colorbox" href=
 $_['entry_firstname']           = 'Имя, Отчество:';
 $_['entry_lastname']            = 'Фамилия:';
 $_['entry_email']               = 'E-Mail:';
-$_['entry_telephone']           = 'Номер телефона:';
+$_['entry_telephone']           = 'Телефон:';
 $_['entry_fax']                 = 'Факс:';
 $_['entry_company']             = 'Компания:';
 $_['entry_website']             = 'Веб-сайт:';
