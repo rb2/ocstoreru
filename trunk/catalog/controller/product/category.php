@@ -80,6 +80,7 @@ class ControllerProductCategory extends Controller {
 
 			$this->document->setDescription($category_info['meta_description']);
 			$this->document->setKeywords($category_info['meta_keyword']);
+			$this->document->addLink($this->url->link('product/category', 'path=' . $this->request->get['path']), 'canonical');
 			
 			$this->data['seo_h1'] = $category_info['seo_h1'];
 
