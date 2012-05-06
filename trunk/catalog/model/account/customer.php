@@ -30,7 +30,7 @@ class ModelAccountCustomer extends Model {
 		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
 		$message .= $this->language->get('text_services') . "\n\n";
 		$message .= $this->language->get('text_thanks') . "\n";
-		$message .= $this->config->get('config_name');
+		$message .= $this->config->get('config_name') . "\n";
 		
 		$mail = new Mail();
 		$mail->protocol = $this->config->get('config_mail_protocol');
