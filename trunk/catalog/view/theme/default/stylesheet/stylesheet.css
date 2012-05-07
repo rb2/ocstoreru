@@ -15,7 +15,7 @@ body, td, th, input, textarea, select, a {
 }
 h1, .welcome {
 	color: #636E75;
-	font: Verdana;
+	font-family: Verdana;
 	margin-top: 0px;
 	margin-bottom: 20px;
 	font-size: 32px;
