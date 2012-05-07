@@ -306,6 +306,7 @@ function addAddress() {
     html += '      <td><?php echo $entry_postcode; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][postcode]" value="" /></td>';
     html += '    </tr>';
+    html += '    <tr>';
     html += '      <td><?php echo $entry_country; ?></td>';
     html += '      <td><select name="address[' + address_row + '][country_id]" onchange="$(\'select[name=\\\'address[' + address_row + '][zone_id]\\\']\').load(\'index.php?route=sale/customer/zone&token=<?php echo $token; ?>&country_id=\' + this.value + \'&zone_id=0\');">';
     html += '         <option value=""><?php echo $text_select; ?></option>';
