@@ -14,17 +14,17 @@ class ControllerCommonColumnLeft extends Controller {
 		
 		$layout_id = 0;
 		
-		if (substr($route, 0, 16) == 'product/category' && isset($this->request->get['path'])) {
+		if ($route == 'product/category' && isset($this->request->get['path'])) {
 			$path = explode('_', (string)$this->request->get['path']);
 				
 			$layout_id = $this->model_catalog_category->getCategoryLayoutId(end($path));			
 		}
 		
-		if (substr($route, 0, 15) == 'product/product' && isset($this->request->get['product_id'])) {
+		if ($route == 'product/product' && isset($this->request->get['product_id'])) {
 			$layout_id = $this->model_catalog_product->getProductLayoutId($this->request->get['product_id']);
 		}
 		
-		if (substr($route, 0, 23) == 'information/information' && isset($this->request->get['information_id'])) {
+		if ($route == 'information/information' && isset($this->request->get['information_id'])) {
 			$layout_id = $this->model_catalog_information->getInformationLayoutId($this->request->get['information_id']);
 		}
 		
