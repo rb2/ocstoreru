@@ -5,7 +5,7 @@ $_['heading_title']      = 'Klarna Part Payment';
 // Text
 $_['text_payment']       = 'Payment';
 $_['text_success']       = 'Success: You have modified Klarna Part Payment payment module!';
-$_['text_klarna']	     = '<a onclick="window.open(\'http://www.klarna.com\');"><img src="view/image/payment/klarna.png" alt="Klarna" title="Klarna" style="border: 1px solid #EEEEEE;" /></a>';
+$_['text_klarna_pp']     = '<a onclick="window.open(\'http://www.klarna.com\');"><img src="view/image/payment/klarna.png" alt="Klarna" title="Klarna" style="border: 1px solid #EEEEEE;" /></a>';
 $_['text_live']          = 'Live';
 $_['text_beta']          = 'Beta';
 

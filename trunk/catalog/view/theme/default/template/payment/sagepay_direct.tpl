@@ -1,5 +1,5 @@
 <h2><?php echo $text_credit_card; ?></h2>
-<div id="payment">
+<div class="content" id="payment">
   <table class="form">
     <tr>
       <td><?php echo $entry_cc_owner; ?></td>

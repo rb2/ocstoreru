@@ -2,7 +2,16 @@
 class ControllerPaymentKlarnaInvoice extends Controller {
 	protected function index() {
 		$this->language->load('payment/klarna_invoice');
-    	
+		
+		$this->data['text_male'] = $this->language->get('text_male');
+		$this->data['text_female'] = $this->language->get('text_female');
+		$this->data['text_wait'] = $this->language->get('text_wait');
+		
+		$this->data['entry_gender'] = $this->language->get('entry_gender');
+		$this->data['entry_dob'] = $this->language->get('entry_dob');
+		$this->data['entry_house_no'] = $this->language->get('entry_house_no');
+		$this->data['entry_house_ext'] = $this->language->get('entry_house_ext');
+
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
 
 		$this->load->model('checkout/order');
@@ -10,7 +19,6 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
  
 		if ($order_info) {
-		
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl';
 			} else {
@@ -21,7 +29,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 		}
 	}
 	
-	public function callback() {
+	public function send() {
 		$this->load->model('checkout/order');
 				
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
@@ -30,10 +38,10 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			// Server
 			switch ($this->config->get('klarna_invoice_server')) {
 				case 'live':
-					$url = 'https://payment.klarna.com';
+					$url = 'payment.klarna.com';
 					break;
 				case 'beta':
-					$url = 'https://payment-beta.klarna.com';
+					$url = 'payment-beta.klarna.com';
 					break;						
 			}
 			
@@ -86,7 +94,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 				'lname'           => $order_info['payment_firstname'],
 				'street'          => $order_info['payment_address_1'],
 				'house_number'    => $this->request->post['house_no'],
-				'house_extension' => $this->request->post['house_no'],
+				'house_extension' => $this->request->post['house_extension'],
 				'zip'             => str_replace(' ', '', $order_info['payment_postcode']),
 				'city'            => $order_info['payment_city'],
 				'country'         => $country,
@@ -181,7 +189,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			$digest = base64_encode(pack('H*', hash('sha512', $digest . $this->config->get('klarna_invoice_secret'))));
 
 			// Currency
-			switch (strtolower($order_info['currency_code'])) {
+			switch ($order_info['currency_code']) {
 				// Swedish krona
 				case 'SEK':
 					$currency = 0;
@@ -277,7 +285,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			   $encoding, // encoding
 			   -1, // pclass
 			   $goodslist, // goodslist
-			   '', // comment
+			   $order_info['comment'], // comment
 			   array('delay_adjust' => 1),
 			   array(),
 			   array(),
@@ -290,12 +298,12 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 
 			$header  = 'POST / HTTP/1.0' . "\r\n";
 			$header .= 'User-Agent: Kreditor PHP Client' . "\r\n";
-			$header .= 'Host: payment-beta.klarna.com' . "\n";
+			$header .= 'Host: ' . $url . "\n";
 			$header .= 'Connection: close' . "\r\n";
 			$header .= 'Content-Type: text/xml' . "\r\n";
 			$header .= 'Content-Length: ' . strlen($request) . "\r\n";
 			
-			$curl = curl_init($url);
+			$curl = curl_init('https://' . $url);
 			
 			curl_setopt($curl, CURLOPT_PORT, 443);
 			curl_setopt($curl, CURLOPT_HEADER, $header);
