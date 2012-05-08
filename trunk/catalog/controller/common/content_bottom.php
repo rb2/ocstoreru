@@ -7,7 +7,7 @@ class ControllerCommonContentBottom extends Controller {
 		$this->load->model('catalog/information');
 		
 		if (isset($this->request->get['route'])) {
-			$route = $this->request->get['route'];
+			$route = (string)$this->request->get['route'];
 		} else {
 			$route = 'common/home';
 		}
