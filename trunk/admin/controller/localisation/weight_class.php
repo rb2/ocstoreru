@@ -346,7 +346,7 @@ class ControllerLocalisationWeightClass extends Controller {
 
 		if (isset($this->request->post['value'])) {
 			$this->data['value'] = $this->request->post['value'];
-		} elseif (isset($weight_class_info)) {
+		} elseif (!empty($weight_class_info)) {
 			$this->data['value'] = $weight_class_info['value'];
 		} else {
 			$this->data['value'] = '';

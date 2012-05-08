@@ -275,8 +275,6 @@ class ControllerLocalisationTaxClass extends Controller {
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		$this->data['button_add_rule'] = $this->language->get('button_add_rule');
 		$this->data['button_remove'] = $this->language->get('button_remove');
-		
-		$this->data['tab_general'] = $this->language->get('tab_general');
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -338,7 +336,7 @@ class ControllerLocalisationTaxClass extends Controller {
 
 		if (isset($this->request->post['title'])) {
 			$this->data['title'] = $this->request->post['title'];
-		} elseif (isset($tax_class_info)) {
+		} elseif (!empty($tax_class_info)) {
 			$this->data['title'] = $tax_class_info['title'];
 		} else {
 			$this->data['title'] = '';
@@ -346,7 +344,7 @@ class ControllerLocalisationTaxClass extends Controller {
 
 		if (isset($this->request->post['description'])) {
 			$this->data['description'] = $this->request->post['description'];
-		} elseif (isset($tax_class_info)) {
+		} elseif (!empty($tax_class_info)) {
 			$this->data['description'] = $tax_class_info['description'];
 		} else {
 			$this->data['description'] = '';

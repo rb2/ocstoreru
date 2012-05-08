@@ -332,7 +332,7 @@ class ControllerLocalisationZone extends Controller {
 
 		if (isset($this->request->post['status'])) {
 			$this->data['status'] = $this->request->post['status'];
-		} elseif (isset($zone_info)) {
+		} elseif (!empty($zone_info)) {
 			$this->data['status'] = $zone_info['status'];
 		} else {
 			$this->data['status'] = '1';
@@ -340,7 +340,7 @@ class ControllerLocalisationZone extends Controller {
 		
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
-		} elseif (isset($zone_info)) {
+		} elseif (!empty($zone_info)) {
 			$this->data['name'] = $zone_info['name'];
 		} else {
 			$this->data['name'] = '';
@@ -348,7 +348,7 @@ class ControllerLocalisationZone extends Controller {
 
 		if (isset($this->request->post['code'])) {
 			$this->data['code'] = $this->request->post['code'];
-		} elseif (isset($zone_info)) {
+		} elseif (!empty($zone_info)) {
 			$this->data['code'] = $zone_info['code'];
 		} else {
 			$this->data['code'] = '';
@@ -356,7 +356,7 @@ class ControllerLocalisationZone extends Controller {
 
 		if (isset($this->request->post['country_id'])) {
 			$this->data['country_id'] = $this->request->post['country_id'];
-		} elseif (isset($zone_info)) {
+		} elseif (!empty($zone_info)) {
 			$this->data['country_id'] = $zone_info['country_id'];
 		} else {
 			$this->data['country_id'] = '';

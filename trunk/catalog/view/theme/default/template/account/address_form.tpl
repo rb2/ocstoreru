@@ -29,14 +29,6 @@
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
         </tr>
         <tr>
-          <td><?php echo $entry_company_id; ?></td>
-          <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" /></td>
-        </tr>
-        <tr>
-          <td><?php echo $entry_tax_id; ?></td>
-          <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" /></td>
-        </tr>                
-        <tr>
           <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
           <td><input type="text" name="address_1" value="<?php echo $address_1; ?>" />
             <?php if ($error_address_1) { ?>

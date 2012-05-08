@@ -22,7 +22,7 @@
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left"><?php if ($sort == 'name') { ?>
+              <td class="left"><?php if ($sort == 'cgd.name') { ?>
                 <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>

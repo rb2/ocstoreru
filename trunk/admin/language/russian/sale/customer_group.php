@@ -11,6 +11,11 @@ $_['column_action']    = 'Действие';
 
 // Entry
 $_['entry_name']       = 'Название группы покупателей:';
+$_['entry_description']      = 'Description:';
+$_['entry_company_display']  = 'Display Company No.:<br /><span class="help">Display a company no. field.</span>';
+$_['entry_company_required'] = 'Company No. Required:<br /><span class="help">Select which customer groups must enter their company no. for billing addresses before checkout.</span>';
+$_['entry_tax_display']      = 'Display Tax ID.:<br /><span class="help">Display a company No. field for billing addresses.</span>';
+$_['entry_tax_required']     = 'Tax ID Required:<br /><span class="help">Select which customer groups must enter their Tax ID for billing addresses before checkout.</span>';
 
 // Error
 $_['error_permission'] = 'У Вас нет прав для изменения групп покупателей!';
@@ -18,5 +23,4 @@ $_['error_name']       = 'Название группы должно быть о
 $_['error_default']    = 'Эту группу покупателей нельзя удалить, поскольку она используется по умолчанию!';
 $_['error_store']      = 'Эту группу покупателей нельзя удалить, поскольку она используется в %s магазине(ах)!';
 $_['error_customer']   = 'Эту группу покупателей нельзя удалить, поскольку в нее входит %s покупатель(ей)!';
-$_['error_registred']  = 'Эту группу покупателей нельзя удалить, поскольку она используется при региcтрации покупателей!';
 ?>

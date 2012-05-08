@@ -620,8 +620,6 @@ class ControllerSaleCustomer extends Controller {
     	$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_company'] = $this->language->get('entry_company');
-		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
-		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');
 		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
 		$this->data['entry_address_2'] = $this->language->get('entry_address_2');
 		$this->data['entry_city'] = $this->language->get('entry_city');
@@ -888,7 +886,7 @@ class ControllerSaleCustomer extends Controller {
 			
 		if (isset($this->request->post['address'])) { 
       		$this->data['addresses'] = $this->request->post['address'];
-		} elseif (!empty($this->request->get['customer_id'])) {
+		} elseif (isset($this->request->get['customer_id'])) {
 			$this->data['addresses'] = $this->model_sale_customer->getAddresses($this->request->get['customer_id']);
 		} else {
 			$this->data['addresses'] = array();

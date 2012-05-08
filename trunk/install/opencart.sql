@@ -32,8 +32,6 @@ CREATE TABLE `oc_address` (
   `firstname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `lastname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `company` varchar(32) COLLATE utf8_general_ci NOT NULL,
-  `company_id` varchar(32) COLLATE utf8_general_ci NOT NULL,
-  `tax_id` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `address_1` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `address_2` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `city` varchar(128) COLLATE utf8_general_ci NOT NULL,
@@ -959,6 +957,8 @@ CREATE TABLE `oc_customer` (
   `newsletter` tinyint(1) NOT NULL default '0',
   `address_id` int(11) NOT NULL default '0',
   `customer_group_id` int(11) NOT NULL,
+  `company_id` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `tax_id` varchar(32) COLLATE utf8_general_ci NOT NULL,
   `ip` varchar(15) COLLATE utf8_general_ci NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL,
   `approved` tinyint(1) NOT NULL,
@@ -992,6 +992,19 @@ CREATE TABLE `oc_customer_group` (
 INSERT INTO `oc_customer_group` (`customer_group_id`, `name`) VALUES
 (8, 'По умолчанию'),
 (6, 'Оптовики');
+
+--
+-- Table structure for table `oc_customer_group_description`
+--
+
+DROP TABLE IF EXISTS `oc_customer_group_description`;
+CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
+  `customer_group_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `description` text COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`customer_group_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 

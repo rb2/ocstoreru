@@ -285,8 +285,6 @@ class ControllerAccountAddress extends Controller {
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
     	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
     	$this->data['entry_company'] = $this->language->get('entry_company');
-		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
-		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');
     	$this->data['entry_address_1'] = $this->language->get('entry_address_1');
     	$this->data['entry_address_2'] = $this->language->get('entry_address_2');
     	$this->data['entry_postcode'] = $this->language->get('entry_postcode');
@@ -372,22 +370,6 @@ class ControllerAccountAddress extends Controller {
 			$this->data['company'] = $address_info['company'];
 		} else {
       		$this->data['company'] = '';
-    	}
-
-    	if (isset($this->request->post['company_id'])) {
-      		$this->data['company_id'] = $this->request->post['company_id'];
-    	} elseif (!empty($address_info)) {
-			$this->data['company_id'] = $address_info['company_id'];
-		} else {
-      		$this->data['company_id'] = '';
-    	}
-
-    	if (isset($this->request->post['tax_id'])) {
-      		$this->data['tax_id'] = $this->request->post['tax_id'];
-    	} elseif (!empty($address_info)) {
-			$this->data['tax_id'] = $address_info['tax_id'];
-		} else {
-      		$this->data['tax_id'] = '';
     	}
 				
     	if (isset($this->request->post['address_1'])) {

@@ -214,6 +214,7 @@ class ControllerSettingStore extends Controller {
 		$this->data['entry_tax_default'] = $this->language->get('entry_tax_default');
 		$this->data['entry_tax_customer'] = $this->language->get('entry_tax_customer');		
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
+		$this->data['entry_customer_group_display'] = $this->language->get('entry_customer_group_display');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
 		$this->data['entry_customer_approval'] = $this->language->get('entry_customer_approval');
 		$this->data['entry_account'] = $this->language->get('entry_account');
@@ -597,7 +598,15 @@ class ControllerSettingStore extends Controller {
 		$this->load->model('sale/customer_group');
 		
 		$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
-		
+				
+		if (isset($this->request->post['config_customer_group_display'])) {
+			$this->data['config_customer_group_display'] = $this->request->post['config_customer_group_display'];
+		} elseif (isset($store_info['config_customer_group_display'])) {
+			$this->data['config_customer_group_display'] = $store_info['config_customer_group_display'];	
+		} else {
+			$this->data['config_customer_group_display'] = array();			
+		}
+				
 		if (isset($this->request->post['config_customer_price'])) {
 			$this->data['config_customer_price'] = $this->request->post['config_customer_price'];
 		} elseif (isset($store_info['config_customer_price'])) {

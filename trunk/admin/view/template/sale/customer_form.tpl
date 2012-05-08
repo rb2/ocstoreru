@@ -137,15 +137,7 @@
               <tr>
                 <td><?php echo $entry_company; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][company]" value="<?php echo $address['company']; ?>" /></td>
-              </tr>
-              <tr>
-                <td><?php echo $entry_company_id; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][company_id]" value="<?php echo $address['company_id']; ?>" /></td>
-              </tr>
-              <tr>
-                <td><?php echo $entry_tax_id; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][tax_id]" value="<?php echo $address['tax_id']; ?>" /></td>
-              </tr>                            
+              </tr>                         
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][address_1]" value="<?php echo $address['address_1']; ?>" />
@@ -297,15 +289,7 @@ function addAddress() {
     html += '    <tr>';
     html += '      <td><?php echo $entry_company; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][company]" value="" /></td>';
-    html += '    </tr>';
-    html += '    <tr>';
-    html += '      <td><?php echo $entry_company_id; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][company_id]" value="" /></td>';
-    html += '    </tr>';
-    html += '    <tr>';
-    html += '      <td><?php echo $entry_tax_id; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][tax_id]" value="" /></td>';
-    html += '    </tr>';		
+    html += '    </tr>';	
     html += '    <tr>';
     html += '      <td><?php echo $entry_address_1; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][address_1]" value="" /></td>';

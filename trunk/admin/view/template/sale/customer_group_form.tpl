@@ -18,11 +18,77 @@
         <table class="form">
           <tr>
             <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><input type="text" name="name" value="<?php echo $name; ?>" />
-              <?php if ($error_name) { ?>
-              <span class="error"><?php echo $error_name; ?></span>
-              <?php  } ?></td>
+            <td><?php foreach ($languages as $language) { ?>
+              <input type="text" name="customer_group_description[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($customer_group_description[$language['language_id']]) ? $customer_group_description[$language['language_id']]['name'] : ''; ?>" />
+              <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />
+              <?php if (isset($error_name[$language['language_id']])) { ?>
+              <span class="error"><?php echo $error_name[$language['language_id']]; ?></span><br />
+              <?php } ?>
+              <?php } ?></td>
           </tr>
+          <?php foreach ($languages as $language) { ?>
+          <tr>
+            <td><?php echo $entry_description; ?></td>
+            <td><textarea name="customer_group_description[<?php echo $language['language_id']; ?>][description]" cols="40" rows="5"><?php echo isset($customer_group_description[$language['language_id']]) ? $customer_group_description[$language['language_id']]['description'] : ''; ?></textarea>
+              <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /></td>
+          </tr>
+          <?php } ?>
+          <tr>
+            <td><?php echo $entry_company_display; ?></td>
+            <td><?php if ($company_display) { ?>
+              <input type="radio" name="company_display" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="company_display" value="0" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="company_display" value="1" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="company_display" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_company_required; ?></td>
+            <td><?php if ($company_required) { ?>
+              <input type="radio" name="company_required" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="company_required" value="0" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="company_required" value="1" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="company_required" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_tax_display; ?></td>
+            <td><?php if ($tax_display) { ?>
+              <input type="radio" name="tax_display" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="tax_display" value="0" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="tax_display" value="1" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="tax_display" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_tax_required; ?></td>
+            <td><?php if ($tax_required) { ?>
+              <input type="radio" name="tax_required" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="tax_required" value="0" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="tax_required" value="1" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="tax_required" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } ?></td>
+          </tr>          
         </table>
       </form>
     </div>
