@@ -231,8 +231,8 @@ $('input[name=\'payment\']:checked').trigger('change');
 //--></script> 
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
-	width: 560,
-	height: 560
+	width: 640,
+	height: 480
 });
 //--></script> 
 <?php echo $footer; ?>
