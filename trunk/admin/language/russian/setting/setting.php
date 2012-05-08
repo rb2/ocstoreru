@@ -5,14 +5,14 @@ $_['heading_title']            = 'Настройки';
 // Text
 $_['text_success']             = 'Настройки успешно изменены!';
 $_['text_items']               = 'Items';
-$_['text_product']             = 'Products';
+$_['text_product']             = 'Продукты';
 $_['text_voucher']             = 'Vouchers';
 $_['text_tax']                 = 'Taxes';
 $_['text_account']             = 'Account';
 $_['text_checkout']            = 'Checkout';
 $_['text_stock']               = 'Stock';
-$_['text_affiliate']           = 'Affiliates';
-$_['text_return']              = 'Returns';
+$_['text_affiliate']           = 'Партнеры';
+$_['text_return']              = 'Возвраты';
 $_['text_image_manager']       = 'Менеджер изображений';
 $_['text_browse']              = 'Обзор';
 $_['text_clear']               = 'Очистить';
