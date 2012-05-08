@@ -53,8 +53,7 @@ class ModelCatalogProduct extends Model {
 				if (!empty($data['filter_name'])) {
 					$implode = array();
 					
-					$words = explode(' ', $data['filter_name']);
-					$words = array_filter(array_unique($words), 'strlen');
+					$words = explode(' ', trim(preg_replace('/\s\s+/', ' ', $data['filter_name'])));
 					
 					foreach ($words as $word) {
 						if (!empty($data['filter_description'])) {
@@ -76,8 +75,7 @@ class ModelCatalogProduct extends Model {
 				if (!empty($data['filter_tag'])) {
 					$implode = array();
 					
-					$words = explode(' ', $data['filter_tag']);
-					$words = array_filter(array_unique($words), 'strlen');
+					$words = explode(' ', trim(preg_replace('/\s\s+/', ' ', $data['filter_tag'])));
 					
 					foreach ($words as $word) {
 						$implode[] = "LCASE(pt.tag) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%' AND pt.language_id = '" . (int)$this->config->get('config_language_id') . "'";
@@ -431,8 +429,7 @@ class ModelCatalogProduct extends Model {
 			if (!empty($data['filter_name'])) {
 				$implode = array();
 				
-				$words = explode(' ', $data['filter_name']);
-				$words = array_filter(array_unique($words), 'strlen');
+				$words = explode(' ', trim(preg_replace('/\s\s+/', ' ', $data['filter_name'])));
 				
 				foreach ($words as $word) {
 					if (!empty($data['filter_description'])) {
@@ -454,8 +451,7 @@ class ModelCatalogProduct extends Model {
 			if (!empty($data['filter_tag'])) {
 				$implode = array();
 				
-				$words = explode(' ', $data['filter_tag']);
-				$words = array_filter(array_unique($words), 'strlen');
+				$words = explode(' ', trim(preg_replace('/\s\s+/', ' ', $data['filter_tag'])));
 				
 				foreach ($words as $word) {
 					$implode[] = "LCASE(pt.tag) LIKE '%" . $this->db->escape(utf8_strtolower($word)) . "%' AND pt.language_id = '" . (int)$this->config->get('config_language_id') . "'";
