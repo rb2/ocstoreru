@@ -145,12 +145,6 @@ class ControllerAccountOrder extends Controller {
 	}
 	
 	public function info() { 
-		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/order', 'SSL');
-			
-			$this->redirect($this->url->link('account/login', '', 'SSL'));
-    	}
-			
 		$this->language->load('account/order');
 		
 		if (isset($this->request->get['order_id'])) {
@@ -158,7 +152,13 @@ class ControllerAccountOrder extends Controller {
 		} else {
 			$order_id = 0;
 		}	
-				
+
+		if (!$this->customer->isLogged()) {
+			$this->session->data['redirect'] = $this->url->link('account/order', 'order_id=' . $order_id, 'SSL');
+			
+			$this->redirect($this->url->link('account/login', '', 'SSL'));
+    	}
+						
 		$this->load->model('account/order');
 			
 		$order_info = $this->model_account_order->getOrder($order_id);
