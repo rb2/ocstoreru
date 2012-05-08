@@ -603,7 +603,8 @@
                     <?php } ?>
                   </div>
                 </div>
-              </div></td>
+              </div>
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
           </tr>
           <tr>
             <td><?php echo $entry_insurance; ?></td>
@@ -634,18 +635,6 @@
               <?php } ?></td>
           </tr>
           <tr>
-            <td><?php echo $entry_weight_code; ?></td>
-            <td><select name="ups_weight_code">
-                <?php if ($ups_weight_code == 'LBS') { ?>
-                <option value="LBS" selected="selected">LBS</option>
-                <option value="KGS">KGS</option>
-                <?php } else { ?>
-                <option value="LBS">LBS</option>
-                <option value="KGS" selected="selected">KGS</option>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
             <td><?php echo $entry_weight_class; ?></td>
             <td><select name="ups_weight_class_id">
                 <?php foreach ($weight_classes as $weight_class) { ?>
@@ -658,25 +647,13 @@
               </select></td>
           </tr>
           <tr>
-            <td><?php echo $entry_length_code; ?></td>
-            <td><select name="ups_length_code">
-                <?php if ($ups_length_code == 'CM') { ?>
-                <option value="CM" selected="selected">CM</option>
-                <option value="IN">IN</option>
-                <?php } else { ?>
-                <option value="CM">CM</option>
-                <option value="IN" selected="selected">IN</option>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
             <td><?php echo $entry_length_class; ?></td>
-            <td><select name="ups_length_class">
+            <td><select name="ups_length_class_id">
                 <?php foreach ($length_classes as $length_class) { ?>
-                <?php if ($length_class['unit'] == $ups_length_class) { ?>
-                <option value="<?php echo $length_class['unit']; ?>" selected="selected"><?php echo $length_class['title']; ?></option>
+                <?php if ($length_class['length_class_id'] == $ups_length_class_id) { ?>
+                <option value="<?php echo $length_class['length_class_id']; ?>" selected="selected"><?php echo $length_class['title']; ?></option>
                 <?php } else { ?>
-                <option value="<?php echo $length_class['unit']; ?>"><?php echo $length_class['title']; ?></option>
+                <option value="<?php echo $length_class['length_class_id']; ?>"><?php echo $length_class['title']; ?></option>
                 <?php } ?>
                 <?php } ?>
               </select></td>

@@ -144,7 +144,7 @@ class ControllerSaleContact extends Controller {
 						break;
 					case 'customer_group':
 						$customer_data = array(
-							'filter_customer_group_id' => $this->request->post['filter_customer_group_id'],
+							'filter_customer_group_id' => $this->request->post['customer_group_id'],
 							'start'                    => ($page - 1) * 10,
 							'limit'                    => 10
 						);
@@ -195,7 +195,7 @@ class ControllerSaleContact extends Controller {
 						break;											
 					case 'product':
 						if (isset($this->request->post['product'])) {
-							$email_total = $this->model_sale_order->getEmailsByProductsOrdered($this->request->post['product']);	
+							$email_total = $this->model_sale_order->getTotalEmailsByProductsOrdered($this->request->post['product']);	
 							
 							$results = $this->model_sale_order->getEmailsByProductsOrdered($this->request->post['product'], ($page - 1) * 10, 10);
 													
@@ -243,7 +243,6 @@ class ControllerSaleContact extends Controller {
 						$mail->setFrom($this->config->get('config_email'));
 						$mail->setSender($store_name);
 						$mail->setSubject(html_entity_decode($this->request->post['subject'], ENT_QUOTES, 'UTF-8'));					
-						
 						$mail->setHtml($message);
 						$mail->send();
 					}

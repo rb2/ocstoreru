@@ -747,6 +747,9 @@ $('input[name=\'related\']').autocomplete({
 		$('#product-related div:even').attr('class', 'even');
 				
 		return false;
+	},
+	focus: function(event, ui) {
+      return false;
 	}
 });
 
@@ -819,6 +822,9 @@ function attributeautocomplete(attribute_row) {
 			$('input[name=\'product_attribute[' + attribute_row + '][attribute_id]\']').attr('value', ui.item.value);
 			
 			return false;
+		},
+		focus: function(event, ui) {
+      		return false;
 		}
 	});
 }
@@ -957,6 +963,9 @@ $('input[name=\'option\']').catcomplete({
 		option_row++;
 		
 		return false;
+	},
+	focus: function(event, ui) {
+      return false;
 	}
 });
 //--></script> 

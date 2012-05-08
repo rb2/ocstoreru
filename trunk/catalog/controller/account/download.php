@@ -169,8 +169,8 @@ class ControllerAccountDownload extends Controller {
 
 			if (!headers_sent()) {
 				if (file_exists($file)) {
-					header('Content-Description: File Transfer');
 					header('Content-Type: application/octet-stream');
+					header('Content-Description: File Transfer');
 					header('Content-Disposition: attachment; filename="' . ($mask ? $mask : basename($file)) . '"');
 					header('Content-Transfer-Encoding: binary');
 					header('Expires: 0');

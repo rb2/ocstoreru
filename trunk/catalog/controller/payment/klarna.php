@@ -2,101 +2,19 @@
 class ControllerPaymentKlarna extends Controller {
 	protected function index() {
 		$this->language->load('payment/klarna');
-		
-		$this->data['text_testmode'] = $this->language->get('text_testmode');		
     	
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
-
-		$this->data['testmode'] = $this->config->get('klarna_test');
-		
-		if (!$this->config->get('pp_standard_test')) {
-    		$this->data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
-  		} else {
-			$this->data['action'] = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-		}
 
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
-
+ 
 		if ($order_info) {
-			$this->data['business'] = $this->config->get('pp_standard_email');
-			$this->data['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');				
-			
-			$this->data['products'] = array();
-			
-			foreach ($this->cart->getProducts() as $product) {
-				$option_data = array();
-	
-				foreach ($product['option'] as $option) {
-					if ($option['type'] != 'file') {
-						$value = $option['option_value'];	
-					} else {
-						$filename = $this->encryption->decrypt($option['option_value']);
-						
-						$value = utf8_substr($filename, 0, utf8_strrpos($filename, '.'));
-					}
-										
-					$option_data[] = array(
-						'name'  => $option['name'],
-						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-					);
-				}
-				
-				$this->data['products'][] = array(
-					'name'     => $product['name'],
-					'model'    => $product['model'],
-					'price'    => $this->currency->format($product['price'], $order_info['currency_code'], false, false),
-					'quantity' => $product['quantity'],
-					'option'   => $option_data,
-					'weight'   => $product['weight']
-				);
-			}	
-			
-			$this->data['discount_amount_cart'] = 0;
-			
-			$total = $this->currency->format($order_info['total'] - $this->cart->getSubTotal(), $order_info['currency_code'], false, false);
-
-			if ($total > 0) {
-				$this->data['products'][] = array(
-					'name'     => $this->language->get('text_total'),
-					'model'    => '',
-					'price'    => $total,
-					'quantity' => 1,
-					'option'   => array(),
-					'weight'   => 0
-				);	
-			} else {
-				$this->data['discount_amount_cart'] -= $total;
-			}
-			
-			$this->data['currency_code'] = $order_info['currency_code'];
-			$this->data['first_name'] = html_entity_decode($order_info['payment_firstname'], ENT_QUOTES, 'UTF-8');	
-			$this->data['last_name'] = html_entity_decode($order_info['payment_lastname'], ENT_QUOTES, 'UTF-8');	
-			$this->data['address1'] = html_entity_decode($order_info['payment_address_1'], ENT_QUOTES, 'UTF-8');	
-			$this->data['address2'] = html_entity_decode($order_info['payment_address_2'], ENT_QUOTES, 'UTF-8');	
-			$this->data['city'] = html_entity_decode($order_info['payment_city'], ENT_QUOTES, 'UTF-8');	
-			$this->data['zip'] = html_entity_decode($order_info['payment_postcode'], ENT_QUOTES, 'UTF-8');	
-			$this->data['country'] = $order_info['payment_iso_code_2'];
-			$this->data['email'] = $order_info['email'];
-			$this->data['invoice'] = $this->session->data['order_id'] . ' - ' . html_entity_decode($order_info['payment_firstname'], ENT_QUOTES, 'UTF-8') . ' ' . html_entity_decode($order_info['payment_lastname'], ENT_QUOTES, 'UTF-8');
-			$this->data['lc'] = $this->session->data['language'];
-			$this->data['return'] = $this->url->link('checkout/success');
-			$this->data['notify_url'] = $this->url->link('payment/pp_standard/callback', '', 'SSL');
-			$this->data['cancel_return'] = $this->url->link('checkout/checkout', '', 'SSL');
-			
-			if (!$this->config->get('pp_standard_transaction')) {
-				$this->data['paymentaction'] = 'authorization';
-			} else {
-				$this->data['paymentaction'] = 'sale';
-			}
-			
-			$this->data['custom'] = $this->encryption->encrypt($this->session->data['order_id']);
 		
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/pp_standard.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/payment/pp_standard.tpl';
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/klarna.tpl')) {
+				$this->template = $this->config->get('config_template') . '/template/payment/klarna.tpl';
 			} else {
-				$this->template = 'default/template/payment/pp_standard.tpl';
+				$this->template = 'default/template/payment/klarna.tpl';
 			}
 	
 			$this->render();
@@ -104,95 +22,304 @@ class ControllerPaymentKlarna extends Controller {
 	}
 	
 	public function callback() {
-		if (isset($this->request->post['custom'])) {
-			$order_id = $this->encryption->decrypt($this->request->post['custom']);
-		} else {
-			$order_id = 0;
-		}		
-		
 		$this->load->model('checkout/order');
 				
-		$order_info = $this->model_checkout_order->getOrder($order_id);
+		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 		
-		if ($order_info) {
-			$request = 'cmd=_notify-validate';
-		
-			foreach ($this->request->post as $key => $value) {
-				$request .= '&' . $key . '=' . urlencode(html_entity_decode($value, ENT_QUOTES, 'UTF-8'));
+		if ($order_info) {	
+			// Server
+			switch ($this->config->get('klarna_server')) {
+				case 'live':
+					$url = 'https://payment.klarna.com';
+					break;
+				case 'beta':
+					$url = 'https://payment-beta.klarna.com';
+					break;
+				case 'live':
+					$url = 'https://clientstat.kreditor.se';
+					break;								
 			}
 			
-			if (!$this->config->get('pp_standard_test')) {
-				$curl = curl_init('https://www.paypal.com/cgi-bin/webscr');
-			} else {
-				$curl = curl_init('https://www.sandbox.paypal.com/cgi-bin/webscr');
-			}
-
-			curl_setopt($curl, CURLOPT_POST, true);
-			curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($curl, CURLOPT_HEADER, false);
-			curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-					
-			$response = curl_exec($curl);
-			
-			if (!$response) {
-				$this->log->write('PP_STANDARD :: CURL failed ' . curl_error($curl) . '(' . curl_errno($curl) . ')');
-			}
-					
-			if ($this->config->get('pp_standard_debug')) {
-				$this->log->write('PP_STANDARD :: IPN REQUEST: ' . $request);
-				$this->log->write('PP_STANDARD :: IPN RESPONSE: ' . $response);
+			// Gender
+			switch ($order_info['gender']) {
+				case 'M':
+					$gender = 1;
+					break;
+				case 'F':
+					$gender = 0;
+					break;
 			}
 						
-			if ((strcmp($response, 'VERIFIED') == 0 || strcmp($response, 'UNVERIFIED') == 0) && isset($this->request->post['payment_status'])) {
-				$order_status_id = $this->config->get('config_order_status_id');
+			// Payment Country
+			switch ($order_info['payment_iso_code_2']) {
+				// Sweden
+				case 'SE':
+					$country = 209;
+					break;
+				// Finland
+				case 'FI':
+					$country = 73;
+					break;
+				// Denmark
+				case 'DK':
+					$country = 59;
+					break;
+				// Norway	
+				case 'NO':
+					$country = 164;
+					break;
+				// Germany	
+				case 'DE':
+					$country = 81;
+					break;
+				// Netherlands															
+				case 'NL':
+					$country = 154;
+					break;					
+			}
+
+			// Billing Address
+            $billing = array(
+				'email'           => $order_info['email'],
+				'telno'           => $order_info['telephone'],
+				'cellno'          => '',
+				'careof'          => '',
+				'company'         => $order_info['payment_company'],
+				'fname'           => $order_info['payment_firstname'],
+				'lname'           => $order_info['payment_firstname'],
+				'street'          => $order_info['payment_address_1'],
+				'house_number'    => '',
+				'house_extension' => '',
+				'zip'             => str_replace(' ', '', $order_info['payment_postcode']),
+				'city'            => $order_info['payment_city'],
+				'country'         => $country,
+			);
+			
+			// Shipping Country
+			switch ($order_info['shipping_iso_code_2']) {
+				// Sweden
+				case 'SE':
+					$country = 209;
+					break;
+				// Finland
+				case 'FI':
+					$country = 73;
+					break;
+				// Denmark
+				case 'DK':
+					$country = 59;
+					break;
+				// Norway	
+				case 'NO':
+					$country = 164;
+					break;
+				// Germany	
+				case 'DE':
+					$country = 81;
+					break;
+				// Netherlands															
+				case 'NL':
+					$country = 154;
+					break;					
+			}
 				
-				switch($this->request->post['payment_status']) {
-					case 'Canceled_Reversal':
-						$order_status_id = $this->config->get('pp_standard_canceled_reversal_status_id');
-						break;
-					case 'Completed':
-						if ((float)$this->request->post['mc_gross'] == $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false)) {
-							$order_status_id = $this->config->get('pp_standard_completed_status_id');
-						}
-						break;
-					case 'Denied':
-						$order_status_id = $this->config->get('pp_standard_denied_status_id');
-						break;
-					case 'Expired':
-						$order_status_id = $this->config->get('pp_standard_expired_status_id');
-						break;
-					case 'Failed':
-						$order_status_id = $this->config->get('pp_standard_failed_status_id');
-						break;
-					case 'Pending':
-						$order_status_id = $this->config->get('pp_standard_pending_status_id');
-						break;
-					case 'Processed':
-						$order_status_id = $this->config->get('pp_standard_processed_status_id');
-						break;
-					case 'Refunded':
-						$order_status_id = $this->config->get('pp_standard_refunded_status_id');
-						break;
-					case 'Reversed':
-						$order_status_id = $this->config->get('pp_standard_reversed_status_id');
-						break;	 
-					case 'Voided':
-						$order_status_id = $this->config->get('pp_standard_voided_status_id');
-						break;								
-				}
+			// Shipping Address
+			$shipping = array(
+				'email'           => $order_info['email'],
+				'telno'           => $order_info['telephone'],
+				'cellno'          => '',
+				'careof'          => '',
+				'company'         => $order_info['shipping_company'],
+				'fname'           => $order_info['shipping_firstname'],
+				'lname'           => $order_info['shipping_lastname'],
+				'street'          => $order_info['shipping_address_1'],
+				'house_number'    => '',
+				'house_extension' => '',
+				'zip'             => str_replace(' ', '', $order_info['shipping_postcode']),
+				'city'            => $order_info['shipping_city'],
+				'country'         => $country,
+			);
+	
+			// IS_SHIPMENT = 8;
+			// IS_HANDLING = 16;
+			// INC_VAT = 32;			
+			
+			// Products
+			$goodslist = array();
+			
+			foreach ($this->cart->getProducts() as $product) {
+				$goodslist[] = array(
+					'qty'   => $product['quantity'],
+					'goods' => array(
+						'artNo'    => $product['model'],
+						'title'    => $product['name'],
+						'price'    => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false),
+						'vat'      => $this->currency->format($this->tax->getTax($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false),	
+						'discount' => 0,   
+						'flags'    => 32
+					)	
+				);
+			}
+
+			// Shipping
+			$goodslist[] = array(
+				'qty'   => 1,
+				'goods' => array(
+					'artNo'    => $order_info['shipping_code'],
+					'title'    => $order_info['shipping_method'],
+					'price'    => $this->currency->format($this->tax->calculate($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id']), $order_info['currency_code'], false, false),
+					'vat'      => $this->currency->format($this->tax->getTax($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id']), $order_info['currency_code'], false, false),	
+					'discount' => 0,   
+					'flags'    => 8 + 32
+				)	
+			);
 				
-				if (!$order_info['order_status_id']) {
-					$this->model_checkout_order->confirm($order_id, $order_status_id);
-				} else {
-					$this->model_checkout_order->update($order_id, $order_status_id);
-				}
-			} else {
-				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'));
+			// Digest
+			$digest = '';
+			
+			foreach ($goodslist as $goods) {
+			   $digest .= $goods['goods']['title'] . ':';
 			}
 			
-			curl_close($curl);
+			$digest = base64_encode(pack('H*', hash('sha512', $digest . $this->config->get('klarna_secret'))));
+
+			// Currency
+			switch (strtolower($order_info['currency_code'])) {
+				// Swedish krona
+				case 'SEK':
+					$currency = 0;
+					break;
+				// Norwegian krona	
+				case 'NOK':
+					$currency = 1;
+					break;	
+				// Euro					
+				case 'EUR':
+					$currency = 2;
+					break;
+				// Danish krona		
+				case 'DKK':
+					$currency = 3;
+					break;
+			}	
+						
+			// Language
+			switch (strtolower($order_info['language_code'])) {
+				// Swedish
+				case 'sv':
+					$language = 138;
+					break;
+				// Norwegian	
+				case 'nb':
+					$language = 97;
+					break;	
+				// Finnish					
+				case 'FI':
+					$language = 37;
+					break;
+				// Danish		
+				case 'DK':
+					$language = 27;
+					break;
+				// German		
+				case 'DE':
+					$language = 28;
+					break;	
+				// Dutch																
+				case 'NL':
+					$language = 101;
+					break;					
+			}			
+			
+			// Encoding
+			switch (strtolower($order_info['encoding'])) {
+				// Sweden
+				case 'SEK':
+					$encoding = 2;
+					break;
+				// Norway	
+				case 'NOK':
+					$encoding = 3;
+					break;	
+				// Finland					
+				case 'EUR':
+					$encoding = 4;
+					break;
+				// Denmark	
+				case 'DKK':
+					$encoding = 5;
+					break;
+				// Germany		
+				case 'DKK':
+					$encoding = 6;
+					break;	
+				// Netherlands		
+				case 'DKK':
+					$encoding = 7;
+					break;										
+			}	
+						
+			$data = array(
+			   '4.1',
+			   'api:opencart:VERSION',
+			   '07071960', // pno
+			   $gender, // gender
+			   '', // reference
+			   '', // reference_code
+			   $this->session->data['order_id'], // orderid1
+			   '', // orderid2
+			   $shipping, // shipping
+			   $billing, // billing
+			   $order_info['ip'], // clientip
+			   0, // flags
+			   $currency, // currency
+			   $country, // country
+			   $language, // language
+			   $this->config->get('klarna_merchant'), // eid
+			   $digest, // digest
+			   $encoding, // encoding
+			   -1, // pclass
+			   $goodslist, // goodslist
+			   '', // comment
+			   array('delay_adjust' => 1),
+			   array(),
+			   array(),
+			   array(),
+			   array(),
+			   array()
+			);
+
+			$request = xmlrpc_encode_request('add_invoice', $data);
+
+			$header  = 'POST / HTTP/1.0' . "\r\n";
+			$header .= 'User-Agent: Kreditor PHP Client' . "\r\n";
+			$header .= 'Host: payment-beta.klarna.com' . "\n";
+			$header .= 'Connection: close' . "\r\n";
+			$header .= 'Content-Type: text/xml' . "\r\n";
+			$header .= 'Content-Length: ' . strlen($request) . "\r\n";
+			
+			$curl = curl_init($url);
+			
+			curl_setopt($curl, CURLOPT_PORT, 443);
+			curl_setopt($curl, CURLOPT_HEADER, $header);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt($curl, CURLOPT_POST, 1);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
+			curl_setopt($curl, CURLOPT_VERBOSE, true);
+			
+			$response = curl_exec($curl);
+			
+			if (curl_errno($curl)) {
+				echo curl_error($curl);
+			} else {
+				curl_close($curl);
+			
+				$response = xmlrpc_decode($response);
+				
+				print_r($response);
+			}			
+							
+			//$this->model_checkout_order->confirm($order_id, $order_status_id);
 		}	
 	}
 }

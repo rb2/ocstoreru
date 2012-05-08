@@ -1,4 +1,4 @@
- <?php
+<?php
 // Text
 $_['text_title']          = 'Credit Card / Debit Card (Paymate)';
 $_['text_unable']         = 'Unable to locate or update your order status';

@@ -152,7 +152,7 @@ class ControllerAccountVoucher extends Controller {
 		if (isset($this->request->post['amount'])) {
 			$this->data['amount'] = $this->request->post['amount'];
 		} else {
-			$this->data['amount'] = '25.00';
+			$this->data['amount'] = $this->currency->format(25);
 		}
 				
 		if (isset($this->request->post['agree'])) {
@@ -245,8 +245,8 @@ class ControllerAccountVoucher extends Controller {
       		$this->error['theme'] = $this->language->get('error_theme');
     	}
 				
-		if (($this->request->post['amount'] < 1) || ($this->request->post['amount'] > 1000)) {
-      		$this->error['amount'] = sprintf($this->language->get('error_amount'), $this->currency->format(1, false, 1), $this->currency->format(1000, false, 1) . ' ' . $this->currency->getCode());
+		if (($this->currency->convert($this->request->post['amount'], $this->currency->getCode(), $this->config->get('config_currency')) < $this->config->get('config_voucher_min')) || ($this->currency->convert($this->request->post['amount'], $this->currency->getCode(), $this->config->get('config_currency')) > $this->config->get('config_voucher_max'))) {
+      		$this->error['amount'] = sprintf($this->language->get('error_amount'), $this->currency->format($this->config->get('config_voucher_min')), $this->currency->format($this->config->get('config_voucher_max')) . ' ' . $this->currency->getCode());
     	}
 				
 		if (!isset($this->request->post['agree'])) {

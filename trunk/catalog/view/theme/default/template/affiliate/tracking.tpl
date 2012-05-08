@@ -42,7 +42,10 @@ $('input[name=\'product\']').autocomplete({
 		$('textarea[name=\'link\']').attr('value', ui.item.value);
 						
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      return false;
+   }
 });
 //--></script> 
 <?php echo $footer; ?>

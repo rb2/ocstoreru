@@ -34,6 +34,10 @@ class ControllerCommonFileManager extends Controller {
 		
 		$this->data['directory'] = HTTP_IMAGE . 'data/';
 		
+		$this->load->model('tool/image');
+
+		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		
 		if (isset($this->request->get['field'])) {
 			$this->data['field'] = $this->request->get['field'];
 		} else {
@@ -107,6 +111,7 @@ class ControllerCommonFileManager extends Controller {
 		$files = glob(rtrim($directory, '/') . '/*');
 		
 		if ($files) {
+			ob_start();
 			foreach ($files as $file) {
 				if (is_file($file)) {
 					$ext = strrchr($file, '.');
@@ -137,13 +142,14 @@ class ControllerCommonFileManager extends Controller {
 					}
 						
 					$json[] = array(
+						'file'     => utf8_substr($file, utf8_strlen(DIR_IMAGE . 'data/')),
 						'filename' => basename($file),
-						'file'     => utf8_substr($file, strlen(DIR_IMAGE . 'data/')),
-						'size'     => round(utf8_substr($size, 0, strpos($size, '.') + 4), 2) . $suffix[$i],
-						'thumb'    => $this->model_tool_image->resize(utf8_substr($file, strlen(DIR_IMAGE)), 100, 100)
+						'size'     => round(utf8_substr($size, 0, utf8_strpos($size, '.') + 4), 2) . $suffix[$i],
+						'thumb'    => $this->model_tool_image->resize(utf8_substr($file, utf8_strlen(DIR_IMAGE)), 100, 100)
 					);
 				}
 			}
+			ob_end_clean();
 		}
 		
 		$this->response->setOutput(json_encode($json));	

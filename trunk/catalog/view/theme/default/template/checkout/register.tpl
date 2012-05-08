@@ -50,11 +50,11 @@
   <br />
   <br />
   <span class="required">*</span> <?php echo $entry_postcode; ?><br />
-  <input type="text" name="postcode" value="" class="large-field" />
+  <input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" />
   <br />
   <br />
   <span class="required">*</span> <?php echo $entry_country; ?><br />
-  <select name="country_id" class="large-field" onchange="$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/register/zone&country_id=' + this.value);">
+  <select name="country_id" class="large-field" onchange="$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/register/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');">
     <option value=""><?php echo $text_select; ?></option>
     <?php foreach ($countries as $country) { ?>
     <?php if ($country['country_id'] == $country_id) { ?>
@@ -98,7 +98,7 @@
 </div>
 <?php } ?>
 <script type="text/javascript"><!--
-$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/register/zone&country_id=<?php echo $country_id; ?>');
+$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/register/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
 //--></script> 
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({

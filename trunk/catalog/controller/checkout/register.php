@@ -27,8 +27,30 @@ class ControllerCheckoutRegister extends Controller {
 
 		$this->data['button_continue'] = $this->language->get('button_continue');
 
-		$this->data['country_id'] = $this->config->get('config_country_id');
-
+		if (isset($this->request->post['postcode'])) {
+    		$this->data['postcode'] = $this->request->post['postcode'];
+		} elseif (isset($this->session->data['shipping_postcode'])) {
+			$this->data['postcode'] = $this->session->data['shipping_postcode'];		
+		} else {
+			$this->data['postcode'] = '';
+		}
+		
+    	if (isset($this->request->post['country_id'])) {
+      		$this->data['country_id'] = $this->request->post['country_id'];
+		} elseif (isset($this->session->data['shipping_country_id'])) {
+			$this->data['country_id'] = $this->session->data['shipping_country_id'];		
+		} else {	
+      		$this->data['country_id'] = $this->config->get('config_country_id');
+    	}
+		
+    	if (isset($this->request->post['zone_id'])) {
+      		$this->data['zone_id'] = $this->request->post['zone_id']; 	
+		} elseif (isset($this->session->data['shipping_zone_id'])) {
+			$this->data['zone_id'] = $this->session->data['shipping_zone_id'];			
+		} else {
+      		$this->data['zone_id'] = '';
+    	}
+				
 		$this->load->model('localisation/country');
 		
 		$this->data['countries'] = $this->model_localisation_country->getCountries();
@@ -167,9 +189,14 @@ class ControllerCheckoutRegister extends Controller {
 				$this->customer->login($this->request->post['email'], $this->request->post['password']);
 				
 				$this->session->data['payment_address_id'] = $this->customer->getAddressId();
-				
+				$this->session->data['payment_country_id'] = $this->request->post['country_id'];
+				$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];
+									
 				if (!empty($this->request->post['shipping_address'])) {
 					$this->session->data['shipping_address_id'] = $this->customer->getAddressId();
+					$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
+					$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+					$this->session->data['shipping_postcode'] = $this->request->post['postcode'];					
 				}
 			} else {
 				$json['redirect'] = $this->url->link('account/success');

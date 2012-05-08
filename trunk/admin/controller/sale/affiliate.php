@@ -27,11 +27,11 @@ class ControllerSaleAffiliate extends Controller {
 			$url = '';
 
 			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 						
 			if (isset($this->request->get['filter_email'])) {
-				$url .= '&filter_email=' . $this->request->get['filter_email'];
+				$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 			}
 			
 			if (isset($this->request->get['filter_status'])) {
@@ -79,11 +79,11 @@ class ControllerSaleAffiliate extends Controller {
 			$url = '';
 
 			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 			
 			if (isset($this->request->get['filter_email'])) {
-				$url .= '&filter_email=' . $this->request->get['filter_email'];
+				$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 			}
 					
 			if (isset($this->request->get['filter_status'])) {
@@ -133,11 +133,11 @@ class ControllerSaleAffiliate extends Controller {
 			$url = '';
 
 			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 			
 			if (isset($this->request->get['filter_email'])) {
-				$url .= '&filter_email=' . $this->request->get['filter_email'];
+				$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 			}
 								
 			if (isset($this->request->get['filter_status'])) {
@@ -197,11 +197,11 @@ class ControllerSaleAffiliate extends Controller {
 			$url = '';
 		
 			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 		
 			if (isset($this->request->get['filter_email'])) {
-				$url .= '&filter_email=' . $this->request->get['filter_email'];
+				$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 			}
 		
 			if (isset($this->request->get['filter_status'])) {
@@ -286,11 +286,11 @@ class ControllerSaleAffiliate extends Controller {
 		$url = '';
 
 		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . $this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 		
 		if (isset($this->request->get['filter_email'])) {
-			$url .= '&filter_email=' . $this->request->get['filter_email'];
+			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 		}
 						
 		if (isset($this->request->get['filter_status'])) {
@@ -414,11 +414,11 @@ class ControllerSaleAffiliate extends Controller {
 		$url = '';
 
 		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . $this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 		
 		if (isset($this->request->get['filter_email'])) {
-			$url .= '&filter_email=' . $this->request->get['filter_email'];
+			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 		}
 			
 		if (isset($this->request->get['filter_status'])) {
@@ -452,11 +452,11 @@ class ControllerSaleAffiliate extends Controller {
 		$url = '';
 
 		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . $this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 		
 		if (isset($this->request->get['filter_email'])) {
-			$url .= '&filter_email=' . $this->request->get['filter_email'];
+			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 		}
 		
 		if (isset($this->request->get['filter_status'])) {
@@ -644,11 +644,11 @@ class ControllerSaleAffiliate extends Controller {
 		$url = '';
 		
 		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . $this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 		
 		if (isset($this->request->get['filter_email'])) {
-			$url .= '&filter_email=' . $this->request->get['filter_email'];
+			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
 		}
 		
 		if (isset($this->request->get['filter_status'])) {

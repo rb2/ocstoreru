@@ -31,7 +31,7 @@ class ControllerSaleOrder extends Controller {
 			}
 			
 			if (isset($this->request->get['filter_customer'])) {
-				$url .= '&filter_customer=' . $this->request->get['filter_customer'];
+				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 			}
 												
 			if (isset($this->request->get['filter_order_status_id'])) {
@@ -87,7 +87,7 @@ class ControllerSaleOrder extends Controller {
 			}
 			
 			if (isset($this->request->get['filter_customer'])) {
-				$url .= '&filter_customer=' . $this->request->get['filter_customer'];
+				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 			}
 												
 			if (isset($this->request->get['filter_order_status_id'])) {
@@ -145,7 +145,7 @@ class ControllerSaleOrder extends Controller {
 			}
 			
 			if (isset($this->request->get['filter_customer'])) {
-				$url .= '&filter_customer=' . $this->request->get['filter_customer'];
+				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 			}
 												
 			if (isset($this->request->get['filter_order_status_id'])) {
@@ -244,7 +244,7 @@ class ControllerSaleOrder extends Controller {
 		}
 		
 		if (isset($this->request->get['filter_customer'])) {
-			$url .= '&filter_customer=' . $this->request->get['filter_customer'];
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		}
 											
 		if (isset($this->request->get['filter_order_status_id'])) {
@@ -380,7 +380,7 @@ class ControllerSaleOrder extends Controller {
 		}
 		
 		if (isset($this->request->get['filter_customer'])) {
-			$url .= '&filter_customer=' . $this->request->get['filter_customer'];
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		}
 											
 		if (isset($this->request->get['filter_order_status_id'])) {
@@ -423,7 +423,7 @@ class ControllerSaleOrder extends Controller {
 		}
 		
 		if (isset($this->request->get['filter_customer'])) {
-			$url .= '&filter_customer=' . $this->request->get['filter_customer'];
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		}
 											
 		if (isset($this->request->get['filter_order_status_id'])) {
@@ -683,7 +683,7 @@ class ControllerSaleOrder extends Controller {
 		}
 		
 		if (isset($this->request->get['filter_customer'])) {
-			$url .= '&filter_customer=' . $this->request->get['filter_customer'];
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 		}
 											
 		if (isset($this->request->get['filter_order_status_id'])) {
@@ -752,7 +752,11 @@ class ControllerSaleOrder extends Controller {
 		
 		$this->data['stores'] = $this->model_setting_store->getStores();
 		
-		$this->data['store_url'] = HTTP_CATALOG;
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['store_url'] = HTTPS_CATALOG;
+		} else {
+			$this->data['store_url'] = HTTP_CATALOG;
+		}
 		
 		if (isset($this->request->post['customer'])) {
 			$this->data['customer'] = $this->request->post['customer'];
@@ -1389,7 +1393,7 @@ class ControllerSaleOrder extends Controller {
 			}
 			
 			if (isset($this->request->get['filter_customer'])) {
-				$url .= '&filter_customer=' . $this->request->get['filter_customer'];
+				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 			}
 												
 			if (isset($this->request->get['filter_order_status_id'])) {
@@ -1573,8 +1577,8 @@ class ControllerSaleOrder extends Controller {
 					'model'    		   => $product['model'],
 					'option'   		   => $option_data,
 					'quantity'		   => $product['quantity'],
-					'price'    		   => $this->currency->format($product['price'], $order_info['currency_code'], $order_info['currency_value']),
-					'total'    		   => $this->currency->format($product['total'], $order_info['currency_code'], $order_info['currency_value']),
+					'price'    		   => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'total'    		   => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'href'     		   => $this->url->link('catalog/product/update', 'token=' . $this->session->data['token'] . '&product_id=' . $product['product_id'], 'SSL')
 				);
 			}
@@ -2079,20 +2083,21 @@ class ControllerSaleOrder extends Controller {
 	public function history() {
     	$this->language->load('sale/order');
 		
+		$this->data['error'] = '';
+		$this->data['success'] = '';
+		
 		$this->load->model('sale/order');
 	
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->user->hasPermission('modify', 'sale/order')) { 
-			$this->model_sale_order->addOrderHistory($this->request->get['order_id'], $this->request->post);
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			if (!$this->user->hasPermission('modify', 'sale/order')) { 
+				$this->data['error'] = $this->language->get('error_permission');
+			}
+			
+			if (!$this->data['error']) { 
+				$this->model_sale_order->addOrderHistory($this->request->get['order_id'], $this->request->post);
 				
-			$this->data['success'] = $this->language->get('text_success');
-		} else {
-			$this->data['success'] = '';
-		}
-		
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && !$this->user->hasPermission('modify', 'sale/order')) {
-			$this->data['error_warning'] = $this->language->get('error_permission');
-		} else {
-			$this->data['error_warning'] = '';
+				$this->data['success'] = $this->language->get('text_success');
+			}
 		}
 				
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
@@ -2154,8 +2159,8 @@ class ControllerSaleOrder extends Controller {
 
 			if (!headers_sent()) {
 				if (file_exists($file)) {
-					header('Content-Description: File Transfer');
 					header('Content-Type: application/octet-stream');
+					header('Content-Description: File Transfer');
 					header('Content-Disposition: attachment; filename="' . ($mask ? $mask : basename($file)) . '"');
 					header('Content-Transfer-Encoding: binary');
 					header('Expires: 0');
@@ -2419,8 +2424,8 @@ class ControllerSaleOrder extends Controller {
 						'model'    => $product['model'],
 						'option'   => $option_data,
 						'quantity' => $product['quantity'],
-						'price'    => $this->currency->format($product['price'], $order_info['currency_code'], $order_info['currency_value']),
-						'total'    => $this->currency->format($product['total'], $order_info['currency_code'], $order_info['currency_value'])
+						'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+						'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
 					);
 				}
 				

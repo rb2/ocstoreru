@@ -453,7 +453,7 @@ class ControllerAccountReturn extends Controller {
 		if (isset($this->request->post['lastname'])) {
     		$this->data['lastname'] = $this->request->post['lastname'];
 		} elseif (!empty($order_info)) {
-			$this->data['lastname'] = $order_info['firstname'];			
+			$this->data['lastname'] = $order_info['lastname'];			
 		} else {
 			$this->data['lastname'] = $this->customer->getLastName();
 		}

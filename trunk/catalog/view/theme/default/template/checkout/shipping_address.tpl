@@ -45,11 +45,11 @@
     </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_postcode; ?></td>
-      <td><input type="text" name="postcode" value="" class="large-field" /></td>
+      <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" /></td>
     </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-      <td><select name="country_id" class="large-field" onchange="$('#shipping-address select[name=\'zone_id\']').load('index.php?route=checkout/shipping_address/zone&country_id=' + this.value);">
+      <td><select name="country_id" class="large-field" onchange="$('#shipping-address select[name=\'zone_id\']').load('index.php?route=checkout/shipping_address/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');">
           <option value=""><?php echo $text_select; ?></option>
           <?php foreach ($countries as $country) { ?>
           <?php if ($country['country_id'] == $country_id) { ?>
@@ -72,7 +72,7 @@
   <div class="right"><input type="button" value="<?php echo $button_continue; ?>" id="button-shipping-address" class="button" /></div>
 </div>
 <script type="text/javascript"><!--
-$('#shipping-address select[name=\'zone_id\']').load('index.php?route=checkout/shipping_address/zone&country_id=<?php echo $country_id; ?>');
+$('#shipping-address select[name=\'zone_id\']').load('index.php?route=checkout/shipping_address/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
 
 $('#shipping-address input[name=\'shipping_address\']').live('change', function() {
 	if (this.value == 'new') {

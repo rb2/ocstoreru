@@ -146,7 +146,7 @@ class ControllerAccountOrder extends Controller {
 	
 	public function info() { 
 		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/order/info', 'order_id=' . $order_id, 'SSL');
+			$this->session->data['redirect'] = $this->url->link('account/order/info', 'order_id=' . $this->request->get['order_id'], 'SSL');
 			
 			$this->redirect($this->url->link('account/login', '', 'SSL'));
     	}
@@ -332,8 +332,8 @@ class ControllerAccountOrder extends Controller {
           			'model'    => $product['model'],
           			'option'   => $option_data,
           			'quantity' => $product['quantity'],
-          			'price'    => $this->currency->format($product['price'], $order_info['currency_code'], $order_info['currency_value']),
-					'total'    => $this->currency->format($product['total'], $order_info['currency_code'], $order_info['currency_value']),
+          			'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'return'   => $this->url->link('account/return/insert', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], 'SSL')
         		);
       		}

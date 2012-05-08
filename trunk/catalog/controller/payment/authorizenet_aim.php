@@ -100,7 +100,7 @@ class ControllerPaymentAuthorizeNetAim extends Controller {
 		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
  
 		$response = curl_exec($curl);
 		

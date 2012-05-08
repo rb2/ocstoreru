@@ -204,7 +204,10 @@ $('input[name=\'filter_customer\']').catcomplete({
 		$('input[name=\'filter_customer\']').val(ui.item.label);
 						
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 //--></script> 
 <?php echo $footer; ?>

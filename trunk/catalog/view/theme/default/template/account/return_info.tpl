@@ -54,8 +54,8 @@
       </tr>
     </tbody>
   </table>
+  <?php if ($comment) { ?>
   <table class="list">
-    <?php if ($comment) { ?>
     <thead>
       <tr>
         <td class="left"><?php echo $text_comment; ?></td>

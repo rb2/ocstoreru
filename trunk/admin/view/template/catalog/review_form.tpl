@@ -114,7 +114,10 @@ $('input[name=\'product\']').autocomplete({
 		$('input[name=\'product_id\']').val(ui.item.value);
 		
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 //--></script> 
 <?php echo $footer; ?>

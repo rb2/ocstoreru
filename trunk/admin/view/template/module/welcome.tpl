@@ -108,6 +108,7 @@
 <?php foreach ($modules as $module) { ?>
 <?php foreach ($languages as $language) { ?>
 CKEDITOR.replace('description-<?php echo $module_row; ?>-<?php echo $language['language_id']; ?>', {
+	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
@@ -176,6 +177,7 @@ function addModule() {
 	
 	<?php foreach ($languages as $language) { ?>
 	CKEDITOR.replace('description-' + module_row + '-<?php echo $language['language_id']; ?>', {
+		filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 		filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 		filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 		filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',

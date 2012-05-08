@@ -65,8 +65,8 @@ class ControllerProductSearch extends Controller {
 			$limit = $this->config->get('config_catalog_limit');
 		}
 		
-		if (isset($this->request->get['keyword'])) {
-			$this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['keyword']);
+		if (isset($this->request->get['filter_name'])) {
+			$this->document->setTitle($this->language->get('heading_title') .  ' - ' . $this->request->get['filter_name']);
 		} else {
 			$this->document->setTitle($this->language->get('heading_title'));
 		}
@@ -82,11 +82,11 @@ class ControllerProductSearch extends Controller {
 		$url = '';
 		
 		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . $this->request->get['filter_name'];
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 		
 		if (isset($this->request->get['filter_tag'])) {
-			$url .= '&filter_tag=' . $this->request->get['filter_tag'];
+			$url .= '&filter_tag=' . urlencode(html_entity_decode($this->request->get['filter_tag'], ENT_QUOTES, 'UTF-8'));
 		}
 				
 		if (isset($this->request->get['filter_description'])) {
@@ -123,7 +123,11 @@ class ControllerProductSearch extends Controller {
       		'separator' => $this->language->get('text_separator')
    		);
 		
-    	$this->data['heading_title'] = $this->language->get('heading_title');
+		if (isset($this->request->get['filter_name'])) {
+    		$this->data['heading_title'] = $this->language->get('heading_title') .  ' - ' . $this->request->get['filter_name'];
+		} else {
+			$this->data['heading_title'] = $this->language->get('heading_title');
+		}
 		
 		$this->data['text_empty'] = $this->language->get('text_empty');
     	$this->data['text_critea'] = $this->language->get('text_critea');
@@ -259,11 +263,11 @@ class ControllerProductSearch extends Controller {
 			$url = '';
 			
 			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 			
 			if (isset($this->request->get['filter_tag'])) {
-				$url .= '&filter_tag=' . $this->request->get['filter_tag'];
+				$url .= '&filter_tag=' . urlencode(html_entity_decode($this->request->get['filter_tag'], ENT_QUOTES, 'UTF-8'));
 			}
 					
 			if (isset($this->request->get['filter_description'])) {
@@ -343,11 +347,11 @@ class ControllerProductSearch extends Controller {
 			$url = '';
 			
 			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 			
 			if (isset($this->request->get['filter_tag'])) {
-				$url .= '&filter_tag=' . $this->request->get['filter_tag'];
+				$url .= '&filter_tag=' . urlencode(html_entity_decode($this->request->get['filter_tag'], ENT_QUOTES, 'UTF-8'));
 			}
 					
 			if (isset($this->request->get['filter_description'])) {
@@ -405,11 +409,11 @@ class ControllerProductSearch extends Controller {
 			$url = '';
 	
 			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . $this->request->get['filter_name'];
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 			
 			if (isset($this->request->get['filter_tag'])) {
-				$url .= '&filter_tag=' . $this->request->get['filter_tag'];
+				$url .= '&filter_tag=' . urlencode(html_entity_decode($this->request->get['filter_tag'], ENT_QUOTES, 'UTF-8'));
 			}
 					
 			if (isset($this->request->get['filter_description'])) {

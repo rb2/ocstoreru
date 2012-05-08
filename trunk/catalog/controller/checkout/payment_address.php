@@ -29,7 +29,17 @@ class ControllerCheckoutPaymentAddress extends Controller {
 
 		$this->data['addresses'] = $this->model_account_address->getAddresses();
 
-		$this->data['country_id'] = $this->config->get('config_country_id');
+		if (isset($this->session->data['payment_country_id'])) {
+			$this->data['country_id'] = $this->session->data['payment_country_id'];		
+		} else {
+			$this->data['country_id'] = $this->config->get('config_country_id');
+		}
+				
+		if (isset($this->session->data['payment_zone_id'])) {
+			$this->data['zone_id'] = $this->session->data['payment_zone_id'];		
+		} else {
+			$this->data['zone_id'] = '';
+		}
 		
 		$this->load->model('localisation/country');
 		
@@ -87,6 +97,19 @@ class ControllerCheckoutPaymentAddress extends Controller {
 				if (!$json) {			
 					$this->session->data['payment_address_id'] = $this->request->post['address_id'];
 					
+					// Default Payment Address
+					$this->load->model('account/address');
+
+					$address_info = $this->model_account_address->getAddress($this->request->post['address_id']);
+										
+					if ($address_info) {
+						$this->session->data['payment_country_id'] = $address_info['country_id'];
+						$this->session->data['payment_zone_id'] = $address_info['zone_id'];
+					} else {
+						unset($this->session->data['payment_country_id']);	
+						unset($this->session->data['payment_zone_id']);	
+					}
+										
 					unset($this->session->data['payment_method']);	
 					unset($this->session->data['payment_methods']);
 				}
@@ -130,6 +153,9 @@ class ControllerCheckoutPaymentAddress extends Controller {
 					
 					$this->session->data['payment_address_id'] = $this->model_account_address->addAddress($this->request->post);
 					
+					$this->session->data['payment_country_id'] = $this->request->post['country_id'];
+					$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];
+															
 					unset($this->session->data['payment_method']);	
 					unset($this->session->data['payment_methods']);
 				}		

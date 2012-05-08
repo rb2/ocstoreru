@@ -445,6 +445,7 @@ class ControllerProductProduct extends Controller {
 		
 		$this->load->model('catalog/review');
 
+		$this->data['text_on'] = $this->language->get('text_on');
 		$this->data['text_no_reviews'] = $this->language->get('text_no_reviews');
 
 		if (isset($this->request->get['page'])) {

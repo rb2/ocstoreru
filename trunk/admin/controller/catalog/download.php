@@ -465,5 +465,53 @@ class ControllerCatalogDownload extends Controller {
 	  		return false;
 		} 
   	}
+
+	public function upload() {
+		$this->language->load('sale/order');
+		
+		$json = array();
+		
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			if (!empty($this->request->files['file']['name'])) {
+				$filename = html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8');
+				
+				if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 128)) {
+					$json['error'] = $this->language->get('error_filename');
+				}	  	
+				
+				$allowed = array();
+				
+				$filetypes = explode(',', $this->config->get('config_upload_allowed'));
+				
+				foreach ($filetypes as $filetype) {
+					$allowed[] = trim($filetype);
+				}
+				
+				if (!in_array(utf8_substr(strrchr($filename, '.'), 1), $allowed)) {
+					$json['error'] = $this->language->get('error_filetype');
+				}
+							
+				if ($this->request->files['file']['error'] != UPLOAD_ERR_OK) {
+					$json['error'] = $this->language->get('error_upload_' . $this->request->files['file']['error']);
+				}
+			} else {
+				$json['error'] = $this->language->get('error_upload');
+			}
+		
+			if (!isset($json['error'])) {
+				if (is_uploaded_file($this->request->files['file']['tmp_name']) && file_exists($this->request->files['file']['tmp_name'])) {
+					$file = basename($filename) . '.' . md5(rand());
+					
+					$json['file'] = $file;
+					
+					move_uploaded_file($this->request->files['file']['tmp_name'], DIR_DOWNLOAD . $file);
+				}
+							
+				$json['success'] = $this->language->get('text_upload');
+			}	
+		}
+		
+		$this->response->setOutput(json_encode($json));
+	}	
 }
 ?>

@@ -161,7 +161,7 @@ class ModelReportSale extends Model {
 	public function getTotalTaxes($data = array()) {
 		$sql = "SELECT COUNT(*) AS total FROM (SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order_total` ot LEFT JOIN `" . DB_PREFIX . "order` o ON (ot.order_id = o.order_id) WHERE ot.code = 'tax'";
 		
-		if (!is_null($data['filter_order_status_id'])) {
+		if (!empty($data['filter_order_status_id'])) {
 			$sql .= " AND order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
 		} else {
 			$sql .= " AND order_status_id > '0'";
@@ -207,7 +207,7 @@ class ModelReportSale extends Model {
 	public function getShipping($data = array()) {
 		$sql = "SELECT MIN(o.date_added) AS date_start, MAX(o.date_added) AS date_end, ot.title, SUM(ot.value) AS total, COUNT(o.order_id) AS `orders` FROM `" . DB_PREFIX . "order_total` ot LEFT JOIN `" . DB_PREFIX . "order` o ON (ot.order_id = o.order_id) WHERE ot.code = 'shipping'"; 
 
-		if (!is_null($data['filter_order_status_id'])) {
+		if (!empty($data['filter_order_status_id'])) {
 			$sql .= " AND o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
 		} else {
 			$sql .= " AND o.order_status_id > '0'";
@@ -263,7 +263,7 @@ class ModelReportSale extends Model {
 	public function getTotalShipping($data = array()) {
 		$sql = "SELECT COUNT(*) AS total FROM (SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order_total` ot LEFT JOIN `" . DB_PREFIX . "order` o ON (ot.order_id = o.order_id) WHERE ot.code = 'shipping'";
 		
-		if (!is_null($data['filter_order_status_id'])) {
+		if (!empty($data['filter_order_status_id'])) {
 			$sql .= " AND order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
 		} else {
 			$sql .= " AND order_status_id > '0'";

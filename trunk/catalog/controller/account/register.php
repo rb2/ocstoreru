@@ -14,12 +14,25 @@ class ControllerAccountRegister extends Controller {
 		$this->load->model('account/customer');
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			unset($this->session->data['guest']);
-			
 			$this->model_account_customer->addCustomer($this->request->post);
 
 			$this->customer->login($this->request->post['email'], $this->request->post['password']);
-	  	  
+			
+			unset($this->session->data['guest']);
+			
+			// Default Shipping Address
+			if ($this->config->get('config_tax_customer') == 'shipping') {
+				$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
+				$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+				$this->session->data['shipping_postcode'] = $this->request->post['postcode'];				
+			}
+			
+			// Default Payment Address
+			if ($this->config->get('config_tax_customer') == 'payment') {
+				$this->session->data['payment_country_id'] = $this->request->post['country_id'];
+				$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];			
+			}
+							  	  
 	  		$this->redirect($this->url->link('account/success'));
     	} 
 
@@ -196,6 +209,8 @@ class ControllerAccountRegister extends Controller {
 
 		if (isset($this->request->post['postcode'])) {
     		$this->data['postcode'] = $this->request->post['postcode'];
+		} elseif (isset($this->session->data['shipping_postcode'])) {
+			$this->data['postcode'] = $this->session->data['shipping_postcode'];		
 		} else {
 			$this->data['postcode'] = '';
 		}
@@ -208,12 +223,16 @@ class ControllerAccountRegister extends Controller {
 
     	if (isset($this->request->post['country_id'])) {
       		$this->data['country_id'] = $this->request->post['country_id'];
+		} elseif (isset($this->session->data['shipping_country_id'])) {
+			$this->data['country_id'] = $this->session->data['shipping_country_id'];		
 		} else {	
       		$this->data['country_id'] = $this->config->get('config_country_id');
     	}
 
     	if (isset($this->request->post['zone_id'])) {
       		$this->data['zone_id'] = $this->request->post['zone_id']; 	
+		} elseif (isset($this->session->data['shipping_zone_id'])) {
+			$this->data['zone_id'] = $this->session->data['shipping_zone_id'];			
 		} else {
       		$this->data['zone_id'] = '';
     	}

@@ -599,6 +599,9 @@ $('input[name=\'customer\']').catcomplete({
 		$('select[name=\'payment_address\']').html(html);
 			
 		return false; 
+	},
+	focus: function(event, ui) {
+      	return false;
 	}
 });
 
@@ -623,6 +626,9 @@ $('input[name=\'affiliate\']').autocomplete({
 		$('input[name=\'affiliate_id\']').attr('value', ui.item['value']);
 			
 		return false; 
+	},
+	focus: function(event, ui) {
+      	return false;
 	}
 });
 
@@ -937,6 +943,9 @@ $('input[name=\'product\']').autocomplete({
 		}
 		
 		return false;
+	},
+	focus: function(event, ui) {
+      	return false;
 	}
 });	
 //--></script> 

@@ -128,7 +128,6 @@ $('input[name=\'product\']').autocomplete({
 				}));
 			}
 		});
-		
 	}, 
 	select: function(event, ui) {
 		$('#featured-product' + ui.item.value).remove();
@@ -145,7 +144,10 @@ $('input[name=\'product\']').autocomplete({
 		$('input[name=\'featured_product\']').attr('value', data.join());
 					
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 
 $('#featured-product div img').live('click', function() {
@@ -167,7 +169,7 @@ var module_row = <?php echo $module_row; ?>;
 function addModule() {	
 	html  = '<tbody id="module-row' + module_row + '">';
 	html += '  <tr>';
-	html += '    <<td class="left"><input type="text" name="featured_module[' + module_row + '][limit]" value="5" size="1" /></td>';
+	html += '    <td class="left"><input type="text" name="featured_module[' + module_row + '][limit]" value="5" size="1" /></td>';
 	html += '    <td class="left"><input type="text" name="featured_module[' + module_row + '][image_width]" value="80" size="3" /> <input type="text" name="featured_module[' + module_row + '][image_height]" value="80" size="3" /></td>';	
 	html += '    <td class="left"><select name="featured_module[' + module_row + '][layout_id]">';
 	<?php foreach ($layouts as $layout) { ?>

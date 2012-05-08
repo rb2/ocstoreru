@@ -54,6 +54,30 @@ class ControllerCheckoutLogin extends Controller {
 			if ($this->customer->login($this->request->post['email'], $this->request->post['password'])) {
 				unset($this->session->data['guest']);
 					
+				// Default Addresses
+				$this->load->model('account/address');
+					
+				$address_info = $this->model_account_address->getAddress($this->customer->getAddressId());
+										
+				if ($address_info) {
+					if ($this->config->get('config_tax_customer') == 'shipping') {
+						$this->session->data['shipping_country_id'] = $address_info['country_id'];
+						$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
+						$this->session->data['shipping_postcode'] = $address_info['postcode'];	
+					}
+					
+					if ($this->config->get('config_tax_customer') == 'payment') {
+						$this->session->data['payment_country_id'] = $address_info['country_id'];
+						$this->session->data['payment_zone_id'] = $address_info['zone_id'];
+					}
+				} else {
+					unset($this->session->data['shipping_country_id']);	
+					unset($this->session->data['shipping_zone_id']);	
+					unset($this->session->data['shipping_postcode']);
+					unset($this->session->data['payment_country_id']);	
+					unset($this->session->data['payment_zone_id']);	
+				}					
+					
 				$json['redirect'] = $this->url->link('checkout/checkout', '', 'SSL');
 			} else {
 				$json['error']['warning'] = $this->language->get('error_login');

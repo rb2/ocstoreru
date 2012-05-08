@@ -4,6 +4,11 @@ $_['heading_title']            = 'Управление магазинами';
 
 // Text
 $_['text_success']             = 'Магазины обновлены!';
+$_['text_items']               = 'Items';
+$_['text_tax']                 = 'Taxes';
+$_['text_account']             = 'Account';
+$_['text_checkout']            = 'Checkout';
+$_['text_stock']               = 'Stock';
 $_['text_image_manager']       = 'Менеджер изображений';
 $_['text_browse']              = 'Обзор';
 $_['text_clear']               = 'Очистить';
@@ -39,13 +44,17 @@ $_['entry_tax_customer']       = 'Использовать адрес клиен
 $_['entry_customer_group']     = 'Группа для гостей:<br /><span class="help">Используется по умолчанию.</span>';
 $_['entry_customer_price']     = 'Не показывать цены гостям:';
 $_['entry_customer_approval']  = 'Активация новых пользователей:<br /><span class="help">Не позволять входить новым клиентам под своим логином и паролем до одобрения аккаунта.</span>';
-$_['entry_guest_checkout']     = 'Оформление заказа без регистрации:<br /><span class="help">Позволить клиентам оформлять заказы без регистрации Личного кабинета. Эта функция не будет доступна, если в корзине будут загружаемые в виде файла товары.</span>';
+$_['entry_company_no_display']   = 'Display Company No.:<br /><span class="help">Display a company No. field for billing addresses.</span>';
+$_['entry_company_no_required']  = 'Force Company No.:<br /><span class="help">Force customers to enter a their company no. for billing addresses.</span>';
+$_['entry_company_tax_display']  = 'Display Company No.:<br /><span class="help">Display a company No. field for billing addresses.</span>';
+$_['entry_company_tax_required'] = 'Force Company No.:<br /><span class="help">Force customers to enter a their company no. for billing addresses.</span>';
 $_['entry_account']            = 'Подтверждение при регистрации:<br /><span class="help">Требовать подтверждение согласия с правилами при регистрации аккаунта.</span>';
+$_['entry_cart_weight']        = 'Показывать вес на странице корзины:';
+$_['entry_guest_checkout']     = 'Оформление заказа без регистрации:<br /><span class="help">Позволить клиентам оформлять заказы без регистрации Личного кабинета. Эта функция не будет доступна, если в корзине будут загружаемые в виде файла товары.</span>';
 $_['entry_checkout']           = 'Подтверждение при заказе:<br /><span class="help">Требовать подтверждение согласия с правилами при оформлении заказа.</span>';
+$_['entry_order_status']       = 'Статус заказа:<br /><span class="help">Статус заказа по умолчанию.</span>';
 $_['entry_stock_display']      = 'Показывать остаток на складе:<br /><span class="help">Показывать остаток товаров на складе на странице товара.</span>';
 $_['entry_stock_checkout']     = 'Заказ при нехватке на складе:<br /><span class="help">Разрешить клиентам оформлять заказ, если заказываемых товаров на данный момент нет на складе.</span>';
-$_['entry_order_status']       = 'Статус заказа:<br /><span class="help">Статус заказа по умолчанию.</span>';
-$_['entry_cart_weight']        = 'Показывать вес на странице корзины:';
 $_['entry_logo']               = 'Логотип:';
 $_['entry_icon']               = 'Иконка:';
 $_['entry_image_category']     = 'Размер изображений списка категорий:';

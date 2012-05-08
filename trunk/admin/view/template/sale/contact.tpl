@@ -150,7 +150,10 @@ $('input[name=\'customers\']').catcomplete({
 		$('#customer div:even').attr('class', 'even');
 				
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 
 $('#customer div img').live('click', function() {
@@ -187,7 +190,10 @@ $('input[name=\'affiliates\']').autocomplete({
 		$('#affiliate div:even').attr('class', 'even');
 				
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 
 $('#affiliate div img').live('click', function() {
@@ -222,7 +228,10 @@ $('input[name=\'products\']').autocomplete({
 		$('#product div:even').attr('class', 'even');
 				
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 
 $('#product div img').live('click', function() {

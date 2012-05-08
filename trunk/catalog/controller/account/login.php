@@ -12,6 +12,30 @@ class ControllerAccountLogin extends Controller {
 			$customer_info = $this->model_account_customer->getCustomerByToken($this->request->get['token']);
 			
 		 	if ($customer_info && $this->customer->login($customer_info['email'], '', true)) {
+				// Default Addresses
+				$this->load->model('account/address');
+					
+				$address_info = $this->model_account_address->getAddress($this->customer->getAddressId());
+										
+				if ($address_info) {
+					if ($this->config->get('config_tax_customer') == 'shipping') {
+						$this->session->data['shipping_country_id'] = $address_info['country_id'];
+						$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
+						$this->session->data['shipping_postcode'] = $address_info['postcode'];	
+					}
+					
+					if ($this->config->get('config_tax_customer') == 'payment') {
+						$this->session->data['payment_country_id'] = $address_info['country_id'];
+						$this->session->data['payment_zone_id'] = $address_info['zone_id'];
+					}
+				} else {
+					unset($this->session->data['shipping_country_id']);	
+					unset($this->session->data['shipping_zone_id']);	
+					unset($this->session->data['shipping_postcode']);
+					unset($this->session->data['payment_country_id']);	
+					unset($this->session->data['payment_zone_id']);	
+				}
+									
 				$this->redirect($this->url->link('account/account', '', 'SSL')); 
 			}
 		}		
@@ -27,8 +51,32 @@ class ControllerAccountLogin extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			unset($this->session->data['guest']);
 			
+			// Default Shipping Address
+			$this->load->model('account/address');
+				
+			$address_info = $this->model_account_address->getAddress($this->customer->getAddressId());
+									
+			if ($address_info) {
+				if ($this->config->get('config_tax_customer') == 'shipping') {
+					$this->session->data['shipping_country_id'] = $address_info['country_id'];
+					$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
+					$this->session->data['shipping_postcode'] = $address_info['postcode'];	
+				}
+				
+				if ($this->config->get('config_tax_customer') == 'payment') {
+					$this->session->data['payment_country_id'] = $address_info['country_id'];
+					$this->session->data['payment_zone_id'] = $address_info['zone_id'];
+				}
+			} else {
+				unset($this->session->data['shipping_country_id']);	
+				unset($this->session->data['shipping_zone_id']);	
+				unset($this->session->data['shipping_postcode']);
+				unset($this->session->data['payment_country_id']);	
+				unset($this->session->data['payment_zone_id']);	
+			}
+							
 			// Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
-			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], HTTP_SERVER) !== false || strpos($this->request->post['redirect'], HTTPS_SERVER) !== false)) {
+			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) !== false)) {
 				$this->redirect(str_replace('&amp;', '&', $this->request->post['redirect']));
 			} else {
 				$this->redirect($this->url->link('account/account', '', 'SSL')); 
@@ -81,7 +129,7 @@ class ControllerAccountLogin extends Controller {
 		$this->data['forgotten'] = $this->url->link('account/forgotten', '', 'SSL');
 
     	// Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
-		if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], HTTP_SERVER) !== false || strpos($this->request->post['redirect'], HTTPS_SERVER) !== false)) {
+		if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) !== false)) {
 			$this->data['redirect'] = $this->request->post['redirect'];
 		} elseif (isset($this->session->data['redirect'])) {
       		$this->data['redirect'] = $this->session->data['redirect'];

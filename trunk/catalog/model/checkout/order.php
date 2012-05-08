@@ -400,8 +400,8 @@ class ModelCheckoutOrder extends Model {
 					'model'    => $product['model'],
 					'option'   => $option_data,
 					'quantity' => $product['quantity'],
-					'price'    => $this->currency->format($product['price'], $order_info['currency_code'], $order_info['currency_value']),
-					'total'    => $this->currency->format($product['total'], $order_info['currency_code'], $order_info['currency_value'])
+					'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
 				);
 			}
 	
@@ -437,10 +437,10 @@ class ModelCheckoutOrder extends Model {
 			// Products
 			$text .= $language->get('text_new_products') . "\n";
 			
-			foreach ($order_product_query->rows as $result) {
-				$text .= $result['quantity'] . 'x ' . $result['name'] . ' (' . $result['model'] . ') ' . html_entity_decode($this->currency->format($result['total'], $order_info['currency_code'], $order_info['currency_value']), ENT_NOQUOTES, 'UTF-8') . "\n";
+			foreach ($order_product_query->rows as $product) {
+				$text .= $product['quantity'] . 'x ' . $product['name'] . ' (' . $product['model'] . ') ' . html_entity_decode($this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']), ENT_NOQUOTES, 'UTF-8') . "\n";
 				
-				$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . $result['order_product_id'] . "'");
+				$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . $product['order_product_id'] . "'");
 				
 				foreach ($order_option_query->rows as $option) {
 					$text .= chr(9) . '-' . $option['name'] . ' ' . (utf8_strlen($option['value']) > 20 ? utf8_substr($option['value'], 0, 20) . '..' : $option['value']) . "\n";
@@ -455,8 +455,8 @@ class ModelCheckoutOrder extends Model {
 			
 			$text .= $language->get('text_new_order_total') . "\n";
 			
-			foreach ($order_total_query->rows as $result) {
-				$text .= $result['title'] . ': ' . html_entity_decode($result['text'], ENT_NOQUOTES, 'UTF-8') . "\n";
+			foreach ($order_total_query->rows as $total) {
+				$text .= $total['title'] . ': ' . html_entity_decode($total['text'], ENT_NOQUOTES, 'UTF-8') . "\n";
 			}			
 			
 			$text .= "\n";
@@ -505,10 +505,10 @@ class ModelCheckoutOrder extends Model {
 				$text .= $language->get('text_new_order_status') . ' ' . $order_status . "\n\n";
 				$text .= $language->get('text_new_products') . "\n";
 				
-				foreach ($order_product_query->rows as $result) {
-					$text .= $result['quantity'] . 'x ' . $result['name'] . ' (' . $result['model'] . ') ' . html_entity_decode($this->currency->format($result['total'], $order_info['currency_code'], $order_info['currency_value']), ENT_NOQUOTES, 'UTF-8') . "\n";
+				foreach ($order_product_query->rows as $product) {
+					$text .= $product['quantity'] . 'x ' . $product['name'] . ' (' . $product['model'] . ') ' . html_entity_decode($this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']), ENT_NOQUOTES, 'UTF-8') . "\n";
 					
-					$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . $result['order_product_id'] . "'");
+					$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . $product['order_product_id'] . "'");
 					
 					foreach ($order_option_query->rows as $option) {
 						if ($option['type'] != 'file') {
@@ -529,8 +529,8 @@ class ModelCheckoutOrder extends Model {
 
 				$text .= $language->get('text_new_order_total') . "\n";
 				
-				foreach ($order_total_query->rows as $result) {
-					$text .= $result['title'] . ': ' . html_entity_decode($result['text'], ENT_NOQUOTES, 'UTF-8') . "\n";
+				foreach ($order_total_query->rows as $total) {
+					$text .= $total['title'] . ': ' . html_entity_decode($total['text'], ENT_NOQUOTES, 'UTF-8') . "\n";
 				}			
 				
 				$text .= "\n";

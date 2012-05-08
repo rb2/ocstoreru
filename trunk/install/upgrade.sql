@@ -185,4 +185,17 @@ ALTER TABLE `oc_return` ADD `opened` tinyint(1) NOT NULL DEFAULT '0' AFTER `quan
 ALTER TABLE `oc_return` ADD `return_reason_id` int(11) NOT NULL DEFAULT '0' AFTER `opened`;
 ALTER TABLE `oc_return` ADD `return_action_id` int(11) NOT NULL DEFAULT '0' AFTER `return_reason_id`;
 
-DROP TABLE oc_return_product;
+DROP TABLE IF EXISTS oc_return_product;
+
+ALTER TABLE oc_tax_rate_to_customer_group DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+# Disable Category Module to force user to reenable with new settings to avoid php error
+UPDATE `oc_setting` SET `value` = replace(`value`, 's:6:"status";s:1:"1"', 's:6:"status";s:1:"0"') WHERE `key` = 'category_module';
+
+#### Start 1.5.2.2
+
+ALTER TABLE oc_address ADD company_no varchar(32) NOT NULL COLLATE utf8_general_ci AFTER company;
+ALTER TABLE oc_address ADD company_tax varchar(32) NOT NULL COLLATE utf8_general_ci AFTER company_no;
+
+# Disable UPS Extension to force user to reenable with new settings to avoid php error
+UPDATE `oc_setting` SET `value` = 0 WHERE `key` = 'ups_status';

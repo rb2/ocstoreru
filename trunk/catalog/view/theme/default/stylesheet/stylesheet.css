@@ -1146,6 +1146,23 @@ a.button:hover, input.button:hover {
 .product-info .review .share a {
 	text-decoration: none;
 }
+.review-list {
+	padding: 10px;
+	overflow: auto;
+	margin-bottom: 20px;
+	border: 1px solid #EEEEEE;	
+}
+.review-list .author {
+	float: left;
+	margin-bottom: 20px;
+}
+.review-list .rating {
+	float: right;
+	margin-bottom: 20px;
+}
+.review-list .text {
+	clear: both;
+}
 .attribute {
 	border-collapse: collapse;
 	width: 100%;

@@ -59,11 +59,20 @@ class ControllerAccountAddress extends Controller {
        		$this->model_account_address->editAddress($this->request->get['address_id'], $this->request->post);
 	  		
 			if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
-	  			unset($this->session->data['shipping_method']);	
+				// Default Shipping Address
+				$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
+				$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+				$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
+				
+				unset($this->session->data['shipping_method']);	
 				unset($this->session->data['shipping_methods']);
 			}
 
 			if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
+				// Default Payment Address
+				$this->session->data['payment_country_id'] = $this->request->post['country_id'];
+				$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];
+								
 	  			unset($this->session->data['payment_method']);
 				unset($this->session->data['payment_methods']);
 			}
@@ -91,15 +100,26 @@ class ControllerAccountAddress extends Controller {
 		
     	if (isset($this->request->get['address_id']) && $this->validateDelete()) {
 			$this->model_account_address->deleteAddress($this->request->get['address_id']);	
-
+			
 			if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
-	  			unset($this->session->data['shipping_address_id']);
+				unset($this->session->data['shipping_address_id']);
+				
+				// Default Shipping Address
+				unset($this->session->data['shipping_country_id']);
+				unset($this->session->data['shipping_zone_id']);
+				unset($this->session->data['shipping_postcode']);				
+				
 				unset($this->session->data['shipping_method']);
 				unset($this->session->data['shipping_methods']);
 			}
 
 			if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
-	  			unset($this->session->data['payment_address_id']);
+				unset($this->session->data['payment_address_id']);
+				
+				// Default Payment Address
+				unset($this->session->data['payment_country_id']);
+				unset($this->session->data['payment_zone_id']);				
+				
 				unset($this->session->data['payment_method']);
 				unset($this->session->data['payment_methods']);
 			}
@@ -265,6 +285,8 @@ class ControllerAccountAddress extends Controller {
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
     	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
     	$this->data['entry_company'] = $this->language->get('entry_company');
+		$this->data['entry_company_no'] = $this->language->get('entry_company_no');
+		$this->data['entry_company_tax'] = $this->language->get('entry_company_tax');
     	$this->data['entry_address_1'] = $this->language->get('entry_address_1');
     	$this->data['entry_address_2'] = $this->language->get('entry_address_2');
     	$this->data['entry_postcode'] = $this->language->get('entry_postcode');
@@ -330,7 +352,7 @@ class ControllerAccountAddress extends Controller {
 	
     	if (isset($this->request->post['firstname'])) {
       		$this->data['firstname'] = $this->request->post['firstname'];
-    	} elseif (isset($address_info)) {
+    	} elseif (!empty($address_info)) {
       		$this->data['firstname'] = $address_info['firstname'];
     	} else {
 			$this->data['firstname'] = '';
@@ -338,7 +360,7 @@ class ControllerAccountAddress extends Controller {
 
     	if (isset($this->request->post['lastname'])) {
       		$this->data['lastname'] = $this->request->post['lastname'];
-    	} elseif (isset($address_info)) {
+    	} elseif (!empty($address_info)) {
       		$this->data['lastname'] = $address_info['lastname'];
     	} else {
 			$this->data['lastname'] = '';
@@ -346,15 +368,31 @@ class ControllerAccountAddress extends Controller {
 
     	if (isset($this->request->post['company'])) {
       		$this->data['company'] = $this->request->post['company'];
-    	} elseif (isset($address_info)) {
+    	} elseif (!empty($address_info)) {
 			$this->data['company'] = $address_info['company'];
 		} else {
       		$this->data['company'] = '';
     	}
 
+    	if (isset($this->request->post['company_no'])) {
+      		$this->data['company_no'] = $this->request->post['company_no'];
+    	} elseif (!empty($address_info)) {
+			$this->data['company_no'] = $address_info['company_no'];
+		} else {
+      		$this->data['company_no'] = '';
+    	}
+
+    	if (isset($this->request->post['company_tax'])) {
+      		$this->data['company_tax'] = $this->request->post['company_tax'];
+    	} elseif (!empty($address_info)) {
+			$this->data['company_tax'] = $address_info['company_tax'];
+		} else {
+      		$this->data['company_tax'] = '';
+    	}
+				
     	if (isset($this->request->post['address_1'])) {
       		$this->data['address_1'] = $this->request->post['address_1'];
-    	} elseif (isset($address_info)) {
+    	} elseif (!empty($address_info)) {
 			$this->data['address_1'] = $address_info['address_1'];
 		} else {
       		$this->data['address_1'] = '';
@@ -362,7 +400,7 @@ class ControllerAccountAddress extends Controller {
 
     	if (isset($this->request->post['address_2'])) {
       		$this->data['address_2'] = $this->request->post['address_2'];
-    	} elseif (isset($address_info)) {
+    	} elseif (!empty($address_info)) {
 			$this->data['address_2'] = $address_info['address_2'];
 		} else {
       		$this->data['address_2'] = '';
@@ -370,7 +408,7 @@ class ControllerAccountAddress extends Controller {
 
     	if (isset($this->request->post['postcode'])) {
       		$this->data['postcode'] = $this->request->post['postcode'];
-    	} elseif (isset($address_info)) {
+    	} elseif (!empty($address_info)) {
 			$this->data['postcode'] = $address_info['postcode'];			
 		} else {
       		$this->data['postcode'] = '';
@@ -378,7 +416,7 @@ class ControllerAccountAddress extends Controller {
 
     	if (isset($this->request->post['city'])) {
       		$this->data['city'] = $this->request->post['city'];
-    	} elseif (isset($address_info)) {
+    	} elseif (!empty($address_info)) {
 			$this->data['city'] = $address_info['city'];
 		} else {
       		$this->data['city'] = '';
@@ -386,7 +424,7 @@ class ControllerAccountAddress extends Controller {
 
     	if (isset($this->request->post['country_id'])) {
       		$this->data['country_id'] = $this->request->post['country_id'];
-    	}  elseif (isset($address_info)) {
+    	}  elseif (!empty($address_info)) {
       		$this->data['country_id'] = $address_info['country_id'];			
     	} else {
       		$this->data['country_id'] = $this->config->get('config_country_id');
@@ -394,8 +432,8 @@ class ControllerAccountAddress extends Controller {
 
     	if (isset($this->request->post['zone_id'])) {
       		$this->data['zone_id'] = $this->request->post['zone_id'];
-    	}  elseif (isset($address_info)) {
-      		$this->data['zone_id'] = $address_info['zone_id'];			
+    	}  elseif (!empty($address_info)) {
+      		$this->data['zone_id'] = $address_info['zone_id'];
     	} else {
       		$this->data['zone_id'] = '';
     	}

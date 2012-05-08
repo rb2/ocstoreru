@@ -56,6 +56,8 @@ class ModelAccountAddress extends Model {
 				'firstname'      => $address_query->row['firstname'],
 				'lastname'       => $address_query->row['lastname'],
 				'company'        => $address_query->row['company'],
+				'company_no'     => $address_query->row['company_no'],
+				'company_tax'    => $address_query->row['company_tax'],
 				'address_1'      => $address_query->row['address_1'],
 				'address_2'      => $address_query->row['address_2'],
 				'postcode'       => $address_query->row['postcode'],
