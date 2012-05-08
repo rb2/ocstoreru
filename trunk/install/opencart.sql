@@ -981,7 +981,10 @@ CREATE TABLE `oc_customer` (
 DROP TABLE IF EXISTS `oc_customer_group`;
 CREATE TABLE `oc_customer_group` (
   `customer_group_id` int(11) NOT NULL auto_increment,
-  `name` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `company_display` int(1) NOT NULL,
+  `company_required` int(1) NOT NULL,
+  `tax_display` int(1) NOT NULL,
+  `tax_required` int(1) NOT NULL,
   PRIMARY KEY  (`customer_group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -989,9 +992,10 @@ CREATE TABLE `oc_customer_group` (
 -- Dumping data for table `oc_customer_group`
 -- 
 
-INSERT INTO `oc_customer_group` (`customer_group_id`, `name`) VALUES
-(8, 'По умолчанию'),
-(6, 'Оптовики');
+INSERT INTO `oc_customer_group` (`customer_group_id`, `company_display`, `company_required`, `tax_display`, `tax_required`) VALUES
+(1, 1, 0, 0, 1);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `oc_customer_group_description`
@@ -1005,6 +1009,14 @@ CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
   `description` text COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`customer_group_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_customer_group_description`
+--
+
+INSERT INTO `oc_customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`) VALUES
+(1, 1, 'Default', 'test'),
+(1, 2, 'Default', 'test');
 
 -- --------------------------------------------------------
 
@@ -2898,7 +2910,7 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (20553, 0, 'config', 'config_account_id', '3', 0),
 (20551, 0, 'config', 'config_customer_approval', '0', 0),
 (20550, 0, 'config', 'config_customer_price', '0', 0),
-(20549, 0, 'config', 'config_customer_group_id', '8', 0),
+(20549, 0, 'config', 'config_customer_group_id', '1', 0),
 (16017, 0, 'voucher', 'voucher_sort_order', '8', 0),
 (16016, 0, 'voucher', 'voucher_status', '1', 0),
 (20543, 0, 'config', 'config_length_class_id', '1', 0),
