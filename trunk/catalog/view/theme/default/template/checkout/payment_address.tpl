@@ -17,8 +17,21 @@
   <input type="radio" name="payment_address" value="new" id="payment-address-new" />
   <label for="payment-address-new"><?php echo $text_address_new; ?></label>
 </p>
-<div id="payment-new" style="display: none;">
+<div id="payment-new">
   <table class="form">
+    <tr>
+      <td>Use an exsiting address:</td>
+      <td>  <select name="address_id">
+      <option><?php echo $text_address_new; ?></option>
+    <?php foreach ($addresses as $address) { ?>
+    <?php if ($address['address_id'] == $address_id) { ?>
+    <option value="<?php echo $address['address_id']; ?>" selected="selected"><?php echo $address['firstname']; ?> <?php echo $address['lastname']; ?>, <?php echo $address['address_1']; ?>, <?php echo $address['city']; ?>, <?php echo $address['zone']; ?>, <?php echo $address['country']; ?></option>
+    <?php } else { ?>
+    <option value="<?php echo $address['address_id']; ?>"><?php echo $address['firstname']; ?> <?php echo $address['lastname']; ?>, <?php echo $address['address_1']; ?>, <?php echo $address['city']; ?>, <?php echo $address['zone']; ?>, <?php echo $address['country']; ?></option>
+    <?php } ?>
+    <?php } ?>
+  </select></td>
+    </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
       <td><input type="text" name="firstname" value="" class="large-field" /></td>

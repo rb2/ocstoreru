@@ -1,5 +1,5 @@
 <?php 
-class ModelPaymentPPStandard extends Model {
+class ModelPaymentKlarna extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/klarna');
 		

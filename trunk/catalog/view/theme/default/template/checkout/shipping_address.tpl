@@ -17,7 +17,7 @@
   <input type="radio" name="shipping_address" value="new" id="shipping-address-new" />
   <label for="shipping-address-new"><?php echo $text_address_new; ?></label>
 </p>
-<div id="shipping-new" style="display: none;">
+<div id="shipping-new">
   <table class="form">
     <tr>
       <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>

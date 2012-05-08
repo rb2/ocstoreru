@@ -34,10 +34,7 @@ class ControllerPaymentKlarna extends Controller {
 					break;
 				case 'beta':
 					$url = 'https://payment-beta.klarna.com';
-					break;
-				case 'live':
-					$url = 'https://clientstat.kreditor.se';
-					break;								
+					break;						
 			}
 			
 			// Gender
@@ -88,8 +85,8 @@ class ControllerPaymentKlarna extends Controller {
 				'fname'           => $order_info['payment_firstname'],
 				'lname'           => $order_info['payment_firstname'],
 				'street'          => $order_info['payment_address_1'],
-				'house_number'    => '',
-				'house_extension' => '',
+				'house_number'    => $this->request->post['house_no'],
+				'house_extension' => $this->request->post['house_no'],
 				'zip'             => str_replace(' ', '', $order_info['payment_postcode']),
 				'city'            => $order_info['payment_city'],
 				'country'         => $country,
@@ -133,7 +130,7 @@ class ControllerPaymentKlarna extends Controller {
 				'fname'           => $order_info['shipping_firstname'],
 				'lname'           => $order_info['shipping_lastname'],
 				'street'          => $order_info['shipping_address_1'],
-				'house_number'    => '',
+				'house_number'    => $this->request->post['house_no'],
 				'house_extension' => '',
 				'zip'             => str_replace(' ', '', $order_info['shipping_postcode']),
 				'city'            => $order_info['shipping_city'],
@@ -261,7 +258,7 @@ class ControllerPaymentKlarna extends Controller {
 						
 			$data = array(
 			   '4.1',
-			   'api:opencart:VERSION',
+			   'api:opencart:' . VERSION,
 			   '07071960', // pno
 			   $gender, // gender
 			   '', // reference

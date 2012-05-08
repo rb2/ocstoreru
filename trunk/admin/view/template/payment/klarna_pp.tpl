@@ -19,27 +19,27 @@
           <table class="form">
             <tr>
               <td><span class="required">*</span> <?php echo $entry_merchant; ?></td>
-              <td><input type="text" name="klarna_merchant" value="<?php echo $klarna_merchant; ?>" />
+              <td><input type="text" name="klarna_pp_merchant" value="<?php echo $klarna_pp_merchant; ?>" />
                 <?php if ($error_merchant) { ?>
                 <span class="error"><?php echo $error_merchant; ?></span>
                 <?php } ?></td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_secret; ?></td>
-              <td><input type="text" name="klarna_secret" value="<?php echo $klarna_secret; ?>" />
+              <td><input type="text" name="klarna_pp_secret" value="<?php echo $klarna_pp_secret; ?>" />
                 <?php if ($error_secret) { ?>
                 <span class="error"><?php echo $error_secret; ?></span>
                 <?php } ?></td>
             </tr>
             <tr>
               <td><?php echo $entry_server; ?></td>
-              <td><select name="klarna_server">
-                  <?php if ($klarna_server == 'live') { ?>
+              <td><select name="klarna_pp_server">
+                  <?php if ($klarna_pp_server == 'live') { ?>
                   <option value="live" selected="selected"><?php echo $text_live; ?></option>
                   <?php } else { ?>
                   <option value="live"><?php echo $text_live; ?></option>
                   <?php } ?>
-                  <?php if ($klarna_server == 'beta') { ?>
+                  <?php if ($klarna_pp_server == 'beta') { ?>
                   <option value="beta" selected="selected"><?php echo $text_beta; ?></option>
                   <?php } else { ?>
                   <option value="beta"><?php echo $text_beta; ?></option>
@@ -47,42 +47,10 @@
                 </select></td>
             </tr>
             <tr>
-              <td><?php echo $entry_test; ?></td>
-              <td><?php if ($klarna_test) { ?>
-                <input type="radio" name="klarna_test" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="klarna_test" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="klarna_test" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="klarna_test" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_invoice; ?></td>
-              <td><?php if ($klarna_invoice) { ?>
-                <input type="radio" name="klarna_invoice" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="klarna_invoice" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="klarna_invoice" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="klarna_invoice" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_invoice_delay; ?></td>
-              <td><input type="text" name="klarna_invoice_delay" value="<?php echo $klarna_invoice_delay; ?>" size="1" /></td>
-            </tr>
-            <tr>
               <td><?php echo $entry_order_status; ?></td>
-              <td><select name="klarna_order_status_id">
+              <td><select name="klarna_pp_order_status_id">
                   <?php foreach ($order_statuses as $order_status) { ?>
-                  <?php if ($order_status['order_status_id'] == $klarna_order_status_id) { ?>
+                  <?php if ($order_status['order_status_id'] == $klarna_pp_order_status_id) { ?>
                   <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
                   <?php } else { ?>
                   <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
@@ -92,8 +60,8 @@
             </tr>
             <tr>
               <td><?php echo $entry_status; ?></td>
-              <td><select name="klarna_status">
-                  <?php if ($klarna_status) { ?>
+              <td><select name="klarna_pp_status">
+                  <?php if ($klarna_pp_status) { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                   <option value="0"><?php echo $text_disabled; ?></option>
                   <?php } else { ?>
@@ -104,7 +72,7 @@
             </tr>
             <tr>
               <td><?php echo $entry_sort_order; ?></td>
-              <td><input type="text" name="klarna_sort_order" value="<?php echo $klarna_sort_order; ?>" size="1" /></td>
+              <td><input type="text" name="klarna_pp_sort_order" value="<?php echo $klarna_pp_sort_order; ?>" size="1" /></td>
             </tr>
           </table>
         </div>

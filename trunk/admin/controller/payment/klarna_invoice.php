@@ -1,16 +1,16 @@
 <?php
-class ControllerPaymentKlarna extends Controller {
+class ControllerPaymentKlarnaInvoice extends Controller {
     private $error = array();
 
     public function index() {
-		$this->load->language('payment/klarna');
+		$this->load->language('payment/klarna_invoice');
 		
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('klarna', $this->request->post);
+			$this->model_setting_setting->editSetting('klarna_invoice', $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 			
@@ -30,9 +30,6 @@ class ControllerPaymentKlarna extends Controller {
 		$this->data['entry_merchant'] = $this->language->get('entry_merchant');
 		$this->data['entry_secret'] = $this->language->get('entry_secret');
 		$this->data['entry_server'] = $this->language->get('entry_server');
-		$this->data['entry_test'] = $this->language->get('entry_test');
-		$this->data['entry_invoice'] = $this->language->get('entry_invoice');
-		$this->data['entry_invoice_delay'] = $this->language->get('entry_invoice_delay');
 		$this->data['entry_total'] = $this->language->get('entry_total');	
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');		
 		$this->data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
@@ -76,73 +73,55 @@ class ControllerPaymentKlarna extends Controller {
 
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('payment/klarna', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('payment/klarna_invoice', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 				
-		$this->data['action'] = $this->url->link('payment/klarna', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['action'] = $this->url->link('payment/klarna_invoice', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
-		if (isset($this->request->post['klarna_merchant'])) {
-			$this->data['klarna_merchant'] = $this->request->post['klarna_merchant'];
+		if (isset($this->request->post['klarna_invoice_merchant'])) {
+			$this->data['klarna_invoice_merchant'] = $this->request->post['klarna_invoice_merchant'];
 		} else {
-			$this->data['klarna_merchant'] = $this->config->get('klarna_merchant');
+			$this->data['klarna_invoice_merchant'] = $this->config->get('klarna_invoice_merchant');
 		}	
 			
-		if (isset($this->request->post['klarna_secret'])) {
-			$this->data['klarna_secret'] = $this->request->post['klarna_secret'];
+		if (isset($this->request->post['klarna_invoice_secret'])) {
+			$this->data['klarna_invoice_secret'] = $this->request->post['klarna_invoice_secret'];
 		} else {
-			$this->data['klarna_secret'] = $this->config->get('klarna_secret');
+			$this->data['klarna_invoice_secret'] = $this->config->get('klarna_invoice_secret');
 		}
 		
-		if (isset($this->request->post['klarna_server'])) {
-			$this->data['klarna_server'] = $this->request->post['klarna_server'];
+		if (isset($this->request->post['klarna_invoice_server'])) {
+			$this->data['klarna_invoice_server'] = $this->request->post['klarna_invoice_server'];
 		} else {
-			$this->data['klarna_server'] = $this->config->get('klarna_server');
+			$this->data['klarna_invoice_server'] = $this->config->get('klarna_invoice_server');
 		}
 		
-		if (isset($this->request->post['klarna_test'])) {
-			$this->data['klarna_test'] = $this->request->post['klarna_test'];
+		if (isset($this->request->post['klarna_invoice_order_status_id'])) {
+			$this->data['klarna_invoice_order_status_id'] = $this->request->post['klarna_invoice_order_status_id'];
 		} else {
-			$this->data['klarna_test'] = $this->config->get('klarna_test');
-		}
-		
-		if (isset($this->request->post['klarna_invoice'])) {
-			$this->data['klarna_invoice'] = $this->request->post['klarna_invoice'];
-		} else {
-			$this->data['klarna_invoice'] = $this->config->get('klarna_invoice');
-		}
-		
-		if (isset($this->request->post['klarna_invoice_delay'])) {
-			$this->data['klarna_invoice_delay'] = $this->request->post['klarna_invoice_delay'];
-		} else {
-			$this->data['klarna_invoice_delay'] = $this->config->get('klarna_invoice_delay');
-		}
-		
-		if (isset($this->request->post['klarna_order_status_id'])) {
-			$this->data['klarna_order_status_id'] = $this->request->post['klarna_order_status_id'];
-		} else {
-			$this->data['klarna_order_status_id'] = $this->config->get('klarna_order_status_id');
+			$this->data['klarna_invoice_order_status_id'] = $this->config->get('klarna_invoice_order_status_id');
 		}
 		
 		$this->load->model('localisation/order_status');
 
 		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 		
-		if (isset($this->request->post['klarna_status'])) {
-			$this->data['klarna_status'] = $this->request->post['klarna_status'];
+		if (isset($this->request->post['klarna_invoice_status'])) {
+			$this->data['klarna_invoice_status'] = $this->request->post['klarna_invoice_status'];
 		} else {
-			$this->data['klarna_status'] = $this->config->get('klarna_status');
+			$this->data['klarna_invoice_status'] = $this->config->get('klarna_invoice_status');
 		}
 		
-		if (isset($this->request->post['klarna_sort_order'])) {
-			$this->data['klarna_sort_order'] = $this->request->post['klarna_sort_order'];
+		if (isset($this->request->post['klarna_invoice_sort_order'])) {
+			$this->data['klarna_invoice_sort_order'] = $this->request->post['klarna_invoice_sort_order'];
 		} else {
-			$this->data['klarna_sort_order'] = $this->config->get('klarna_sort_order');
+			$this->data['klarna_invoice_sort_order'] = $this->config->get('klarna_invoice_sort_order');
 		}
 																				
-        $this->template = 'payment/klarna.tpl';
+        $this->template = 'payment/klarna_invoice.tpl';
         $this->children = array(
             'common/header',
             'common/footer',
@@ -152,15 +131,15 @@ class ControllerPaymentKlarna extends Controller {
     }
 	
 	private function validate() {
-		if (!$this->user->hasPermission('modify', 'payment/klarna')) {
+		if (!$this->user->hasPermission('modify', 'payment/klarna_invoice')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		if (!$this->request->post['klarna_merchant']) {
+		if (!$this->request->post['klarna_invoice_merchant']) {
 			$this->error['merchant'] = $this->language->get('error_merchant');
 		}
 		
-		if (!$this->request->post['klarna_secret']) {
+		if (!$this->request->post['klarna_invoice_secret']) {
 			$this->error['secret'] = $this->language->get('error_secret');
 		}
 								
