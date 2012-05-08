@@ -81,6 +81,18 @@ class ControllerAffiliateLogin extends Controller {
 		} else {
 			$this->data['success'] = '';
 		}
+
+		if (isset($this->request->post['email'])) {
+			$this->data['email'] = $this->request->post['email'];
+		} else {
+			$this->data['email'] = '';
+		}
+
+		if (isset($this->request->post['password'])) {
+			$this->data['password'] = $this->request->post['password'];
+		} else {
+			$this->data['password'] = '';
+		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/login.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/affiliate/login.tpl';
