@@ -1,7 +1,7 @@
 <?php
-class ControllerPaymentKlarna extends Controller {
+class ControllerPaymentKlarnaInvoice extends Controller {
 	protected function index() {
-		$this->language->load('payment/klarna');
+		$this->language->load('payment/klarna_invoice');
     	
 		$this->data['button_confirm'] = $this->language->get('button_confirm');
 
@@ -11,10 +11,10 @@ class ControllerPaymentKlarna extends Controller {
  
 		if ($order_info) {
 		
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/klarna.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/payment/klarna.tpl';
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl')) {
+				$this->template = $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl';
 			} else {
-				$this->template = 'default/template/payment/klarna.tpl';
+				$this->template = 'default/template/payment/klarna_invoice.tpl';
 			}
 	
 			$this->render();
@@ -28,7 +28,7 @@ class ControllerPaymentKlarna extends Controller {
 		
 		if ($order_info) {	
 			// Server
-			switch ($this->config->get('klarna_server')) {
+			switch ($this->config->get('klarna_invoice_server')) {
 				case 'live':
 					$url = 'https://payment.klarna.com';
 					break;
@@ -178,7 +178,7 @@ class ControllerPaymentKlarna extends Controller {
 			   $digest .= $goods['goods']['title'] . ':';
 			}
 			
-			$digest = base64_encode(pack('H*', hash('sha512', $digest . $this->config->get('klarna_secret'))));
+			$digest = base64_encode(pack('H*', hash('sha512', $digest . $this->config->get('klarna_invoice_secret'))));
 
 			// Currency
 			switch (strtolower($order_info['currency_code'])) {
@@ -272,7 +272,7 @@ class ControllerPaymentKlarna extends Controller {
 			   $currency, // currency
 			   $country, // country
 			   $language, // language
-			   $this->config->get('klarna_merchant'), // eid
+			   $this->config->get('klarna_invoice_merchant'), // eid
 			   $digest, // digest
 			   $encoding, // encoding
 			   -1, // pclass
