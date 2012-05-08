@@ -82,6 +82,12 @@ class ModelAccountCustomer extends Model {
 		return $query->row;
 	}
 	
+	public function getCustomerByEmail($email) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE email = '" . $this->db->escape($email) . "'");
+		
+		return $query->row;
+	}
+		
 	public function getCustomerByToken($token) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE token = '" . $this->db->escape($token) . "' AND token != ''");
 		

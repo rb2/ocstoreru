@@ -48,6 +48,12 @@ class ModelAffiliateAffiliate extends Model {
 		return $query->row;
 	}
 	
+	public function getAffiliateByEmail($email) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE email = '" . (int)$email . "'");
+		
+		return $query->row;
+	}
+		
 	public function getAffiliateByCode($code) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE code = '" . $this->db->escape($code) . "'");
 		
