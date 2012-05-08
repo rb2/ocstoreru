@@ -31,7 +31,7 @@ $('#button-confirm').bind('click', function() {
 	$.ajax({
 		url: 'index.php?route=payment/klarna_invoice/send',
 		type: 'post',
-		data: $('#payment :input'),
+		data: $('#payment :input, #payment select'),
 		dataType: 'html',		
 		beforeSend: function() {
 			$('#button-confirm').attr('disabled', true);
