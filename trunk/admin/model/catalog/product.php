@@ -438,14 +438,14 @@ class ModelCatalogProduct extends Model {
 		
 			return $query->rows;
 		} else {
-			$product_data = $this->cache->get('product.' . (int)$this->config->get('config_language_id'));
+			$product_data = $this->cache->get('product.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id'));
 		
 			if (!$product_data) {
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY pd.name ASC");
 	
 				$product_data = $query->rows;
 			
-				$this->cache->set('product.' . (int)$this->config->get('config_language_id'), $product_data);
+				$this->cache->set('product.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id'), $product_data);
 			}	
 	
 			return $product_data;
