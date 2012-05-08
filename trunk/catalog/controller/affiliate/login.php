@@ -10,6 +10,8 @@ class ControllerAffiliateLogin extends Controller {
     	$this->language->load('affiliate/login');
 
     	$this->document->setTitle($this->language->get('heading_title')); 
+		
+		$this->load->model('affiliate/affiliate');
 						
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && isset($this->request->post['email']) && isset($this->request->post['password']) && $this->validate()) {
 			if (isset($this->request->post['redirect'])) {
@@ -93,7 +95,7 @@ class ControllerAffiliateLogin extends Controller {
 		} else {
 			$this->data['password'] = '';
 		}
-		
+				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/login.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/affiliate/login.tpl';
 		} else {
@@ -116,7 +118,13 @@ class ControllerAffiliateLogin extends Controller {
     	if (!$this->affiliate->login($this->request->post['email'], $this->request->post['password'])) {
       		$this->error['warning'] = $this->language->get('error_login');
     	}
-	
+
+		$affiliate_info = $this->model_affiliate_affiliate->getAffiliateByEmail($this->request->post['email']);
+		
+    	if ($affiliate_info && !$affiliate_info['approved']) {
+      		$this->error['warning'] = $this->language->get('error_approved');
+    	}	
+			
     	if (!$this->error) {
       		return true;
     	} else {

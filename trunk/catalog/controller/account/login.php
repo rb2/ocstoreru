@@ -3,11 +3,11 @@ class ControllerAccountLogin extends Controller {
 	private $error = array();
 	
 	public function index() {
+		$this->load->model('account/customer');
+		
 		// Login override for admin users
 		if (!empty($this->request->get['token'])) {
 			$this->customer->logout();
-			
-			$this->load->model('account/customer');
 			
 			$customer_info = $this->model_account_customer->getCustomerByToken($this->request->get['token']);
 			
@@ -146,7 +146,7 @@ class ControllerAccountLogin extends Controller {
 		} else {
 			$this->data['success'] = '';
 		}
-
+		
 		if (isset($this->request->post['email'])) {
 			$this->data['email'] = $this->request->post['email'];
 		} else {
@@ -158,7 +158,7 @@ class ControllerAccountLogin extends Controller {
 		} else {
 			$this->data['password'] = '';
 		}
-
+				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/login.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/login.tpl';
 		} else {
@@ -182,6 +182,12 @@ class ControllerAccountLogin extends Controller {
       		$this->error['warning'] = $this->language->get('error_login');
     	}
 	
+		$customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
+		
+    	if ($customer_info && !$customer_info['approved']) {
+      		$this->error['warning'] = $this->language->get('error_approved');
+    	}		
+		
     	if (!$this->error) {
       		return true;
     	} else {
