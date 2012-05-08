@@ -194,8 +194,8 @@ UPDATE `oc_setting` SET `value` = replace(`value`, 's:6:"status";s:1:"1"', 's:6:
 
 #### Start 1.5.2.2
 
-ALTER TABLE oc_address ADD company_no varchar(32) NOT NULL COLLATE utf8_general_ci AFTER company;
-ALTER TABLE oc_address ADD company_tax varchar(32) NOT NULL COLLATE utf8_general_ci AFTER company_no;
+ALTER TABLE oc_address ADD company_id varchar(32) NOT NULL COLLATE utf8_general_ci AFTER company;
+ALTER TABLE oc_address ADD tax_id varchar(32) NOT NULL COLLATE utf8_general_ci AFTER company_id;
 
 # Disable UPS Extension to force user to reenable with new settings to avoid php error
 UPDATE `oc_setting` SET `value` = 0 WHERE `key` = 'ups_status';

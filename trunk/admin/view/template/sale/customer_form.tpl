@@ -139,12 +139,12 @@
                 <td><input type="text" name="address[<?php echo $address_row; ?>][company]" value="<?php echo $address['company']; ?>" /></td>
               </tr>
               <tr>
-                <td><?php echo $entry_company_no; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][company_no]" value="<?php echo $address['company_no']; ?>" /></td>
+                <td><?php echo $entry_company_id; ?></td>
+                <td><input type="text" name="address[<?php echo $address_row; ?>][company_id]" value="<?php echo $address['company_id']; ?>" /></td>
               </tr>
               <tr>
-                <td><?php echo $entry_company_tax; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][company_tax]" value="<?php echo $address['company_tax']; ?>" /></td>
+                <td><?php echo $entry_tax_id; ?></td>
+                <td><input type="text" name="address[<?php echo $address_row; ?>][tax_id]" value="<?php echo $address['tax_id']; ?>" /></td>
               </tr>                            
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
@@ -299,12 +299,12 @@ function addAddress() {
     html += '      <td><input type="text" name="address[' + address_row + '][company]" value="" /></td>';
     html += '    </tr>';
     html += '    <tr>';
-    html += '      <td><?php echo $entry_company_no; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][company_no]" value="" /></td>';
+    html += '      <td><?php echo $entry_company_id; ?></td>';
+    html += '      <td><input type="text" name="address[' + address_row + '][company_id]" value="" /></td>';
     html += '    </tr>';
     html += '    <tr>';
-    html += '      <td><?php echo $entry_company_tax; ?></td>';
-    html += '      <td><input type="text" name="address[' + address_row + '][company_tax]" value="" /></td>';
+    html += '      <td><?php echo $entry_tax_id; ?></td>';
+    html += '      <td><input type="text" name="address[' + address_row + '][tax_id]" value="" /></td>';
     html += '    </tr>';		
     html += '    <tr>';
     html += '      <td><?php echo $entry_address_1; ?></td>';

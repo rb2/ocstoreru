@@ -374,6 +374,72 @@
                 <?php } ?></td>
             </tr>
             <tr>
+              <td><?php echo $entry_company_id_display; ?></td>
+              <td><?php if ($config_company_id_display) { ?>
+                <input type="radio" name="config_company_id_display" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_company_id_display" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_company_id_display" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_company_id_display" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>    
+          <tr>
+            <td><?php echo $entry_company_id_required; ?></td>
+            <td><div class="scrollbox">
+                <?php $class = 'even'; ?>
+                <?php foreach ($customer_groups as $customer_group) { ?>
+                <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                <div class="<?php echo $class; ?>">
+                  <?php if (in_array($customer_group['customer_group_id'], $config_company_id_required)) { ?>
+                  <input type="checkbox" name="config_company_id_required[]" value="<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
+                  <?php echo $customer_group['name']; ?>
+                  <?php } else { ?>
+                  <input type="checkbox" name="config_company_id_required[]" value="<?php echo $customer_group['customer_group_id']; ?>" />
+                  <?php echo $customer_group['name']; ?>
+                  <?php } ?>
+                </div>
+                <?php } ?>
+              </div></td>
+          </tr>   
+          
+                              <tr>
+              <td><?php echo $entry_tax_id_display; ?></td>
+              <td><?php if ($config_tax_id_display) { ?>
+                <input type="radio" name="config_tax_id_display" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_tax_id_display" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_tax_id_display" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_tax_id_display" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>    
+          <tr>
+            <td><?php echo $entry_tax_id_required; ?></td>
+            <td><div class="scrollbox">
+                <?php $class = 'even'; ?>
+                <?php foreach ($customer_groups as $customer_group) { ?>
+                <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                <div class="<?php echo $class; ?>">
+                  <?php if (in_array($customer_group['customer_group_id'], $config_tax_id_required)) { ?>
+                  <input type="checkbox" name="config_tax_id_required[]" value="<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
+                  <?php echo $customer_group['name']; ?>
+                  <?php } else { ?>
+                  <input type="checkbox" name="config_tax_id_required[]" value="<?php echo $customer_group['customer_group_id']; ?>" />
+                  <?php echo $customer_group['name']; ?>
+                  <?php } ?>
+                </div>
+                <?php } ?>
+              </div></td>
+          </tr>            
+         
+            <tr>
               <td><?php echo $entry_account; ?></td>
               <td><select name="config_account_id">
                   <option value="0"><?php echo $text_none; ?></option>

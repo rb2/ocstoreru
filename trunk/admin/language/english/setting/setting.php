@@ -55,10 +55,10 @@ $_['entry_tax_customer']         = 'Use Customer Tax Address:<br /><span class="
 $_['entry_customer_group']       = 'Customer Group:<br /><span class="help">Default customer group.</span>';
 $_['entry_customer_price']       = 'Login Display Prices:<br /><span class="help">Only show prices when a customer is logged in.</span>';
 $_['entry_customer_approval']    = 'Approve New Customers:<br /><span class="help">Don\'t allow new customer to login until their account has been approved.</span>';
-$_['entry_company_no_display']   = 'Display Company No.:<br /><span class="help">Display a company No. field for billing addresses.</span>';
-$_['entry_company_no_required']  = 'Force Company No.:<br /><span class="help">Force customers to enter a their company no. for billing addresses.</span>';
-$_['entry_company_tax_display']  = 'Display Company No.:<br /><span class="help">Display a company No. field for billing addresses.</span>';
-$_['entry_company_tax_required'] = 'Force Company No.:<br /><span class="help">Force customers to enter a their company no. for billing addresses.</span>';
+$_['entry_company_id_display']   = 'Display Company No.:<br /><span class="help">Display a company No. field for billing addresses.</span>';
+$_['entry_company_id_required']  = 'Company No. Required:<br /><span class="help">Select which customer groups must enter their company no. for billing addresses before checkout.</span>';
+$_['entry_tax_id_display']       = 'Display Tax ID.:<br /><span class="help">Display a company No. field for billing addresses.</span>';
+$_['entry_tax_id_required']      = 'Tax ID Required:<br /><span class="help">Select which customer groups must enter their Tax ID for billing addresses before checkout.</span>';
 $_['entry_account']              = 'Account Terms:<br /><span class="help">Forces people to agree to terms before an account can be created.</span>';
 $_['entry_cart_weight']          = 'Display Weight on Cart Page:<br /><span class="help">Show the cart weight on the cart page</span>';
 $_['entry_guest_checkout']       = 'Guest Checkout:<br /><span class="help">Allow customers to checkout without creating an account. This will not be available when a downloadable product is in the shopping cart.</span>';

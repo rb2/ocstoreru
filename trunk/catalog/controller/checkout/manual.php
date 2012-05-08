@@ -314,10 +314,10 @@ class ControllerCheckoutManual extends Controller {
 					
 					if ($zone_info) {
 						$zone = $zone_info['name'];
-						$code = $zone_info['code'];
+						$zone_code = $zone_info['code'];
 					} else {
 						$zone = '';
-						$code = '';
+						$zone_code = '';
 					}					
 	
 					$address_data = array(
@@ -330,7 +330,7 @@ class ControllerCheckoutManual extends Controller {
 						'city'           => $this->request->post['shipping_city'],
 						'zone_id'        => $this->request->post['shipping_zone_id'],
 						'zone'           => $zone,
-						'zone_code'      => $code,
+						'zone_code'      => $zone_code,
 						'country_id'     => $this->request->post['shipping_country_id'],
 						'country'        => $country,	
 						'iso_code_2'     => $iso_code_2,
@@ -497,10 +497,10 @@ class ControllerCheckoutManual extends Controller {
 				
 				if ($zone_info) {
 					$zone = $zone_info['name'];
-					$code = $zone_info['code'];
+					$zone_code = $zone_info['code'];
 				} else {
 					$zone = '';
-					$code = '';
+					$zone_code = '';
 				}					
 				
 				$address_data = array(
@@ -513,7 +513,7 @@ class ControllerCheckoutManual extends Controller {
 					'city'           => $this->request->post['payment_city'],
 					'zone_id'        => $this->request->post['payment_zone_id'],
 					'zone'           => $zone,
-					'zone_code'      => $code,
+					'zone_code'      => $zone_code,
 					'country_id'     => $this->request->post['payment_country_id'],
 					'country'        => $country,	
 					'iso_code_2'     => $iso_code_2,

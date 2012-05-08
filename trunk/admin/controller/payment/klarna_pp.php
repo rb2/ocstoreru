@@ -41,6 +41,8 @@ class ControllerPaymentKlarnaPP extends Controller {
 		
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
+		} elseif (!function_exists('xmlrpc_encode_request')) {
+			$this->data['error_warning'] = $this->language->get('error_xmlrpc');
 		} else {
 			$this->data['error_warning'] = '';
 		}

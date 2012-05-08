@@ -20,6 +20,7 @@ $_['entry_sort_order']    = 'Sort Order:';
 
 // Error
 $_['error_permission']    = 'Warning: You do not have permission to modify payment Klarna Invoice!';
+$_['error_xmlrpc']        = 'XML-RPC PHP extension is required to be installed!';
 $_['error_merchant']      = 'Merchant ID required!';
 $_['error_secret']        = 'Secret required!';
 ?>

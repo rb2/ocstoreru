@@ -41,6 +41,8 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 		
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
+		} elseif (!function_exists('xmlrpc_encode_request')) {
+			$this->data['error_warning'] = $this->language->get('error_xmlrpc');
 		} else {
 			$this->data['error_warning'] = '';
 		}
@@ -76,7 +78,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			'href'      => $this->url->link('payment/klarna_invoice', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
-				
+
 		$this->data['action'] = $this->url->link('payment/klarna_invoice', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');

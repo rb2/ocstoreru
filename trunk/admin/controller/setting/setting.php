@@ -77,6 +77,10 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
 		$this->data['entry_customer_approval'] = $this->language->get('entry_customer_approval');
+		$this->data['entry_company_id_display'] = $this->language->get('entry_company_id_display');
+		$this->data['entry_company_id_required'] = $this->language->get('entry_company_id_required');
+		$this->data['entry_tax_id_display'] = $this->language->get('entry_tax_id_display');
+		$this->data['entry_tax_id_required'] = $this->language->get('entry_tax_id_required');
 		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_cart_weight'] = $this->language->get('entry_cart_weight');		
 		$this->data['entry_guest_checkout'] = $this->language->get('entry_guest_checkout');
@@ -542,6 +546,34 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_customer_approval'] = $this->config->get('config_customer_approval');			
 		}
 		
+		if (isset($this->request->post['config_company_id_display'])) {
+			$this->data['config_company_id_display'] = $this->request->post['config_company_id_display'];
+		} else {
+			$this->data['config_company_id_display'] = $this->config->get('config_company_id_display');			
+		}	
+			
+		if (isset($this->request->post['config_company_id_required'])) {
+			$this->data['config_company_id_required'] = $this->request->post['config_company_id_required'];
+		} elseif ($this->config->get('config_company_id_required')) {
+			$this->data['config_company_id_required'] = $this->config->get('config_company_id_required');
+		} else {
+			$this->data['config_company_id_required'] = array();			
+		}	
+		
+		if (isset($this->request->post['config_tax_id_display'])) {
+			$this->data['config_tax_id_display'] = $this->request->post['config_tax_id_display'];
+		} else {
+			$this->data['config_tax_id_display'] = $this->config->get('config_tax_id_display');			
+		}	
+			
+		if (isset($this->request->post['config_tax_id_required'])) {
+			$this->data['config_tax_id_required'] = $this->request->post['config_tax_id_required'];
+		} elseif ($this->config->get('config_tax_id_required')) {
+			$this->data['config_tax_id_required'] = $this->config->get('config_tax_id_required');			
+		} else {
+			$this->data['config_tax_id_required'] = array();	
+		}	
+						
 		if (isset($this->request->post['config_account_id'])) {
 			$this->data['config_account_id'] = $this->request->post['config_account_id'];
 		} else {

@@ -46,7 +46,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			}
 			
 			// Gender
-			switch ($order_info['gender']) {
+			switch ($this->request->post['gender']) {
 				case 'M':
 					$gender = 1;
 					break;
@@ -94,7 +94,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 				'lname'           => $order_info['payment_firstname'],
 				'street'          => $order_info['payment_address_1'],
 				'house_number'    => $this->request->post['house_no'],
-				'house_extension' => $this->request->post['house_extension'],
+				'house_extension' => $this->request->post['house_ext'],
 				'zip'             => str_replace(' ', '', $order_info['payment_postcode']),
 				'city'            => $order_info['payment_city'],
 				'country'         => $country,
@@ -129,6 +129,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			}
 				
 			// Shipping Address
+
 			$shipping = array(
 				'email'           => $order_info['email'],
 				'telno'           => $order_info['telephone'],
@@ -138,13 +139,13 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 				'fname'           => $order_info['shipping_firstname'],
 				'lname'           => $order_info['shipping_lastname'],
 				'street'          => $order_info['shipping_address_1'],
-				'house_number'    => $this->request->post['house_no'],
+				'house_number'    => '',
 				'house_extension' => '',
 				'zip'             => str_replace(' ', '', $order_info['shipping_postcode']),
 				'city'            => $order_info['shipping_city'],
 				'country'         => $country,
 			);
-	
+
 			// IS_SHIPMENT = 8;
 			// IS_HANDLING = 16;
 			// INC_VAT = 32;			
@@ -237,6 +238,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			}			
 			
 			// Encoding
+			/*
 			switch (strtolower($order_info['encoding'])) {
 				// Sweden
 				case 'SEK':
@@ -262,8 +264,11 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 				case 'DKK':
 					$encoding = 7;
 					break;										
-			}	
-						
+			}
+			*/	
+			
+			$encoding = 2;	
+			
 			$data = array(
 			   '4.1',
 			   'api:opencart:' . VERSION,
