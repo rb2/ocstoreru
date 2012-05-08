@@ -108,7 +108,7 @@ class ModelSaleOrder extends Model {
       			$this->db->query("UPDATE " . DB_PREFIX . "voucher SET order_id = '" . (int)$order_id . "' WHERE voucher_id = '" . (int)$order_voucher['voucher_id'] . "'");
 			}
 		}
-		
+
 		// Get the total
 		$total = 0;
 		
@@ -119,8 +119,24 @@ class ModelSaleOrder extends Model {
 			
 			$total += $order_total['value'];
 		}
-		 
-		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET total = '" . (float)$total . "' WHERE order_id = '" . (int)$order_id . "'"); 	
+
+		// Affiliate
+		$affiliate_id = 0;
+		$commission = 0;
+		
+		if (!empty($this->request->post['affiliate_id'])) {
+			$this->load->model('sale/affiliate');
+			
+			$affiliate_info = $this->model_sale_affiliate->getAffiliate($this->request->post['affiliate_id']);
+			
+			if ($affiliate_info) {
+				$affiliate_id = $affiliate_info['affiliate_id']; 
+				$commission = ($total / 100) * $affiliate_info['commission']; 
+			}
+		}
+		
+		// Update order total			 
+		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET total = '" . (float)$total . "', affiliate_id = '" . (int)$affiliate_id . "', commission = '" . (float)$commission . "' WHERE order_id = '" . (int)$order_id . "'"); 	
 	}
 	
 	public function editOrder($order_id, $data) {
@@ -212,8 +228,23 @@ class ModelSaleOrder extends Model {
 			
 			$total += $order_total['value'];
 		}
-		 
-		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET total = '" . (float)$total . "' WHERE order_id = '" . (int)$order_id . "'"); 
+		
+		// Affiliate
+		$affiliate_id = 0;
+		$commission = 0;
+		
+		if (!empty($this->request->post['affiliate_id'])) {
+			$this->load->model('sale/affiliate');
+			
+			$affiliate_info = $this->model_sale_affiliate->getAffiliate($this->request->post['affiliate_id']);
+			
+			if ($affiliate_info) {
+				$affiliate_id = $affiliate_info['affiliate_id']; 
+				$commission = ($total / 100) * $affiliate_info['commission']; 
+			}
+		}
+				 
+		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET total = '" . (float)$total . "', affiliate_id = '" . (int)$affiliate_id . "', commission = '" . (float)$commission . "' WHERE order_id = '" . (int)$order_id . "'"); 
 	}
 	
 	public function deleteOrder($order_id) {
