@@ -554,14 +554,6 @@ class ControllerSaleOrder extends Controller {
 		$this->data['tab_voucher'] = $this->language->get('tab_voucher');
 		$this->data['tab_total'] = $this->language->get('tab_total');
 
-		$this->data['token'] = $this->session->data['token'];
-		
-		if (isset($this->request->get['order_id'])) {
-			$this->data['order_id'] = $this->request->get['order_id'];
-		} else {
-			$this->data['order_id'] = 0;
-		}
-
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -739,7 +731,15 @@ class ControllerSaleOrder extends Controller {
     	if (isset($this->request->get['order_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$order_info = $this->model_sale_order->getOrder($this->request->get['order_id']);
     	}
-			
+
+		$this->data['token'] = $this->session->data['token'];
+		
+		if (isset($this->request->get['order_id'])) {
+			$this->data['order_id'] = $this->request->get['order_id'];
+		} else {
+			$this->data['order_id'] = 0;
+		}
+					
     	if (isset($this->request->post['store_id'])) {
       		$this->data['store_id'] = $this->request->post['store_id'];
     	} elseif (!empty($order_info)) { 

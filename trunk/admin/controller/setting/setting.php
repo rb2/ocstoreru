@@ -160,8 +160,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['sms_gatenames'][] =  basename($file, '.php');
 		}
 
-		$this->data['token'] = $this->session->data['token'];
-
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -313,6 +311,8 @@ class ControllerSettingSetting extends Controller {
 		$this->data['action'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
+		
+		$this->data['token'] = $this->session->data['token'];
 
 		if (isset($this->request->post['config_name'])) {
 			$this->data['config_name'] = $this->request->post['config_name'];

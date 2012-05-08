@@ -906,8 +906,7 @@ class ControllerSaleReturn extends Controller {
 			$this->data['tab_return'] = $this->language->get('tab_return');
 			$this->data['tab_product'] = $this->language->get('tab_product');
 			$this->data['tab_return_history'] = $this->language->get('tab_return_history');
-			
-			$this->data['token'] = $this->session->data['token'];
+
 			
 			$url = '';
 			
@@ -971,13 +970,15 @@ class ControllerSaleReturn extends Controller {
 			  
 			$this->data['cancel'] = $this->url->link('sale/return', 'token=' . $this->session->data['token'] . $url, 'SSL');			
 			
-			$this->data['return_id'] = $return_info['return_id'];
-			$this->data['order_id'] = $return_info['order_id'];
-			
 			$this->load->model('sale/order');
 
 			$order_info = $this->model_sale_order->getOrder($return_info['order_id']);
+
+			$this->data['token'] = $this->session->data['token'];
 			
+			$this->data['return_id'] = $return_info['return_id'];
+			$this->data['order_id'] = $return_info['order_id'];
+									
 			if ($return_info['order_id'] && $order_info) {
 				$this->data['order'] = $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $return_info['order_id'], 'SSL');
 			} else {

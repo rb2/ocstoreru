@@ -163,7 +163,7 @@
           <span class="required">*</span>
           <?php } ?>
           <b><?php echo $option['name']; ?>:</b><br />
-          <a id="button-option-<?php echo $option['product_option_id']; ?>" class="button"><?php echo $button_upload; ?></a>
+          <input type="button" value="<?php echo $button_upload; ?>" id="button-option-<?php echo $option['product_option_id']; ?>" class="button">
           <input type="hidden" name="option[<?php echo $option['product_option_id']; ?>]" value="" />
         </div>
         <br />
@@ -381,18 +381,21 @@ new AjaxUpload('#button-option-<?php echo $option['product_option_id']; ?>', {
 	responseType: 'json',
 	onSubmit: function(file, extension) {
 		$('#button-option-<?php echo $option['product_option_id']; ?>').after('<img src="catalog/view/theme/default/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+		$('#button-option-<?php echo $option['product_option_id']; ?>').attr('disabled', true);
 	},
 	onComplete: function(file, json) {
+		$('#button-option-<?php echo $option['product_option_id']; ?>').attr('disabled', false);
+		
 		$('.error').remove();
 		
-		if (json.success) {
-			alert(json.success);
+		if (json['success']) {
+			alert(json['success']);
 			
-			$('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json.file);
+			$('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json['file']);
 		}
 		
-		if (json.error) {
-			$('#option-<?php echo $option['product_option_id']; ?>').after('<span class="error">' + json.error + '</span>');
+		if (json['error']) {
+			$('#option-<?php echo $option['product_option_id']; ?>').after('<span class="error">' + json['error'] + '</span>');
 		}
 		
 		$('.loading').remove();	
@@ -431,12 +434,12 @@ $('#button-review').bind('click', function() {
 			$('.attention').remove();
 		},
 		success: function(data) {
-			if (data.error) {
-				$('#review-title').after('<div class="warning">' + data.error + '</div>');
+			if (data['error']) {
+				$('#review-title').after('<div class="warning">' + data['error'] + '</div>');
 			}
 			
-			if (data.success) {
-				$('#review-title').after('<div class="success">' + data.success + '</div>');
+			if (data['success']) {
+				$('#review-title').after('<div class="success">' + data['success'] + '</div>');
 								
 				$('input[name=\'name\']').val('');
 				$('textarea[name=\'text\']').val('');

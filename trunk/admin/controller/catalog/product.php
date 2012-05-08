@@ -699,12 +699,12 @@ class ControllerCatalogProduct extends Controller {
 		
 		$this->data['cancel'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
-		$this->data['token'] = $this->session->data['token'];
-
 		if (isset($this->request->get['product_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);
     	}
 
+		$this->data['token'] = $this->session->data['token'];
+		
 		$this->load->model('localisation/language');
 		
 		$this->data['languages'] = $this->model_localisation_language->getLanguages();

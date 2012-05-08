@@ -248,8 +248,6 @@ class ControllerSettingStore extends Controller {
 		$this->data['tab_image'] = $this->language->get('tab_image');
 		$this->data['tab_server'] = $this->language->get('tab_server');
 		
-		$this->data['token'] = $this->session->data['token'];
-		
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -393,6 +391,8 @@ class ControllerSettingStore extends Controller {
 			
       		$store_info = $this->model_setting_setting->getSetting('config', $this->request->get['store_id']);
     	}
+		
+		$this->data['token'] = $this->session->data['token'];
 		
 		if (isset($this->request->post['config_url'])) {
 			$this->data['config_url'] = $this->request->post['config_url'];

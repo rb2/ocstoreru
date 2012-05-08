@@ -555,14 +555,6 @@ class ControllerSaleAffiliate extends Controller {
 		$this->data['tab_payment'] = $this->language->get('tab_payment');
 		$this->data['tab_transaction'] = $this->language->get('tab_transaction');
 
-		$this->data['token'] = $this->session->data['token'];
-
-		if (isset($this->request->get['affiliate_id'])) {
-			$this->data['affiliate_id'] = $this->request->get['affiliate_id'];
-		} else {
-			$this->data['affiliate_id'] = 0;
-		}
-
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -700,7 +692,15 @@ class ControllerSaleAffiliate extends Controller {
     	if (isset($this->request->get['affiliate_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$affiliate_info = $this->model_sale_affiliate->getAffiliate($this->request->get['affiliate_id']);
     	}
-			
+
+		$this->data['token'] = $this->session->data['token'];
+
+		if (isset($this->request->get['affiliate_id'])) {
+			$this->data['affiliate_id'] = $this->request->get['affiliate_id'];
+		} else {
+			$this->data['affiliate_id'] = 0;
+		}
+					
     	if (isset($this->request->post['firstname'])) {
       		$this->data['firstname'] = $this->request->post['firstname'];
 		} elseif (!empty($affiliate_info)) { 

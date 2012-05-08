@@ -276,8 +276,6 @@ class ControllerLocalisationGeoZone extends Controller {
 				
 		$this->data['tab_general'] = $this->language->get('tab_general');
 
-		$this->data['token'] = $this->session->data['token'];
-
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -335,7 +333,9 @@ class ControllerLocalisationGeoZone extends Controller {
 		if (isset($this->request->get['geo_zone_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$geo_zone_info = $this->model_localisation_geo_zone->getGeoZone($this->request->get['geo_zone_id']);
 		}
-
+		
+		$this->data['token'] = $this->session->data['token'];
+		
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
 		} elseif (isset($geo_zone_info)) {
