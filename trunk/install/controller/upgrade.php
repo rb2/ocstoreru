@@ -3,7 +3,7 @@ class ControllerUpgrade extends Controller {
 	private $error = array();
 
 	public function index() {
-	
+
 		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -19,11 +19,11 @@ class ControllerUpgrade extends Controller {
 		);
 
 		$this->response->setOutput($this->render());
-		
+
 	}
 
 	public function success() {
-		
+
 		$this->template = 'success.tpl';
 		$this->children = array(
 			'header',
@@ -31,26 +31,28 @@ class ControllerUpgrade extends Controller {
 		);
 
 		$this->response->setOutput($this->render());
-		
+
 	}
 
 	public function upgrade() {
-		
+
 		if ($this->validate()) {
 
 			$this->load->model('upgrade');
 
 			$this->model_upgrade->mysql($this->request->post, 'upgrade.sql');
+			
+			$this->model_upgrade->modifications();
 
 			$this->redirect(HTTP_SERVER . 'index.php?route=upgrade/success');
 		} else {
 			die($this->error['warning']);
 		}
-		
+
 	}
 
 	private function validate() {
-	
+
 		if (!defined('DB_HOSTNAME')) {
 			$this->error['warning'] = 'Host required!';
 		}

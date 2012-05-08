@@ -98,5 +98,40 @@ class ModelUpgrade extends Model {
 			mysql_close($connection);
 		}
 	}
+
+	public function modifications() {
+
+		### Additional Changes
+		$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+		// Settings
+		$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0' ORDER BY store_id ASC");
+
+		foreach ($query->rows as $setting) {
+			if (!$setting['serialized']) {
+				$settings[$setting['key']] = $setting['value'];
+			} else {
+				$settings[$setting['key']] = unserialize($setting['value']);
+			}
+		}
+
+		## v1.5.1.3
+		// Set defaults for new Store Tax Address and Customer Tax Address
+		if (empty($settings['config_tax_default'])) {
+			$db->query("UPDATE " . DB_PREFIX . "setting SET value = 'shipping' WHERE `key` = 'config_tax_default'");
+		}
+		if (empty($settings['config_tax_customer'])) {
+			$db->query("UPDATE " . DB_PREFIX . "setting SET value = 'shipping' WHERE `key` = 'config_tax_customer'");
+		}
+		
+		## v1.5.2.2
+		// Set defaults for new Voucher Min/Max fields
+		if (empty($settings['config_voucher_min'])) {
+			$db->query("UPDATE " . DB_PREFIX . "setting SET value = '1' WHERE `key` = 'config_voucher_min'");
+		}
+		if (empty($settings['config_voucher_max'])) {
+			$db->query("UPDATE " . DB_PREFIX . "setting SET value = '50' WHERE `key` = 'config_voucher_max'");
+		}
+	}
 }
 ?>
