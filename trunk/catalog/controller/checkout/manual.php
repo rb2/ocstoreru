@@ -179,7 +179,7 @@ class ControllerCheckoutManual extends Controller {
 					$this->session->data['vouchers'][] = array(
 						'voucher_id'       => $voucher['voucher_id'],
 						'description'      => $voucher['description'],
-						'code'             => substr(md5(rand()), 0, 7),
+						'code'             => substr(md5(mt_rand()), 0, 7),
 						'from_name'        => $voucher['from_name'],
 						'from_email'       => $voucher['from_email'],
 						'to_name'          => $voucher['to_name'],
@@ -216,7 +216,7 @@ class ControllerCheckoutManual extends Controller {
 				if (!isset($json['error']['vouchers'])) { 
 					$voucher_data = array(
 						'order_id'         => 0,
-						'code'             => substr(md5(rand()), 0, 7),
+						'code'             => substr(md5(mt_rand()), 0, 7),
 						'from_name'        => $this->request->post['from_name'],
 						'from_email'       => $this->request->post['from_email'],
 						'to_name'          => $this->request->post['to_name'],
@@ -234,7 +234,7 @@ class ControllerCheckoutManual extends Controller {
 					$this->session->data['vouchers'][] = array(
 						'voucher_id'       => $voucher_id,
 						'description'      => sprintf($this->language->get('text_for'), $this->currency->format($this->request->post['amount'], $this->config->get('config_currency')), $this->request->post['to_name']),
-						'code'             => substr(md5(rand()), 0, 7),
+						'code'             => substr(md5(mt_rand()), 0, 7),
 						'from_name'        => $this->request->post['from_name'],
 						'from_email'       => $this->request->post['from_email'],
 						'to_name'          => $this->request->post['to_name'],

@@ -259,7 +259,7 @@ class ControllerCheckoutConfirm extends Controller {
 				foreach ($this->session->data['vouchers'] as $voucher) {
 					$voucher_data[] = array(
 						'description'      => $voucher['description'],
-						'code'             => substr(md5(rand()), 0, 7),
+						'code'             => substr(md5(mt_rand()), 0, 7),
 						'to_name'          => $voucher['to_name'],
 						'to_email'         => $voucher['to_email'],
 						'from_name'        => $voucher['from_name'],

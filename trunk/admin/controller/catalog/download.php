@@ -23,7 +23,7 @@ class ControllerCatalogDownload extends Controller {
 			$data = array();
 			
 			if (is_uploaded_file($this->request->files['download']['tmp_name'])) {
-				$filename = $this->request->files['download']['name'] . '.' . md5(rand());
+				$filename = $this->request->files['download']['name'] . '.' . md5(mt_rand());
 				
 				move_uploaded_file($this->request->files['download']['tmp_name'], DIR_DOWNLOAD . $filename);
 
@@ -68,7 +68,7 @@ class ControllerCatalogDownload extends Controller {
 			$data = array();
 			
 			if (is_uploaded_file($this->request->files['download']['tmp_name'])) {
-				$filename = $this->request->files['download']['name'] . '.' . md5(rand());
+				$filename = $this->request->files['download']['name'] . '.' . md5(mt_rand());
 				
 				move_uploaded_file($this->request->files['download']['tmp_name'], DIR_DOWNLOAD . $filename);
 
@@ -500,7 +500,7 @@ class ControllerCatalogDownload extends Controller {
 		
 			if (!isset($json['error'])) {
 				if (is_uploaded_file($this->request->files['file']['tmp_name']) && file_exists($this->request->files['file']['tmp_name'])) {
-					$file = basename($filename) . '.' . md5(rand());
+					$file = basename($filename) . '.' . md5(mt_rand());
 					
 					$json['file'] = $file;
 					
