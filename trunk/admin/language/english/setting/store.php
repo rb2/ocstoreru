@@ -80,7 +80,6 @@ $_['error_image_thumb']            = 'Product Image Thumb Size dimensions requir
 $_['error_image_popup']            = 'Product Image Popup Size dimensions required!';
 $_['error_image_product']          = 'Product List Size dimensions required!';
 $_['error_image_category']         = 'Category List Size dimensions required!';
-$_['error_image_manufacturer']     = 'Manufacturer List Size dimensions required!';
 $_['error_image_additional']       = 'Additional Product Image Size dimensions required!';
 $_['error_image_related']          = 'Related Product Image Size dimensions required!';
 $_['error_image_compare']          = 'Compare Image Size dimensions required!';
