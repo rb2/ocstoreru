@@ -179,6 +179,7 @@ class ControllerSettingStore extends Controller {
 	public function getForm() { 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		 
+		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
@@ -994,28 +995,29 @@ class ControllerSettingStore extends Controller {
 		$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
 	}		
 	
-	public function zone() {
-		$output = '';
+	public function country() {
+		$json = array();
 		
-		$this->load->model('localisation/zone');
-		
-		$results = $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']);
-		
-		foreach ($results as $result) {
-			$output .= '<option value="' . $result['zone_id'] . '"';
+		$this->load->model('localisation/country');
 
-			if (isset($this->request->get['zone_id']) && ($this->request->get['zone_id'] == $result['zone_id'])) {
-				$output .= ' selected="selected"';
-			}
+    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
+		
+		if ($country_info) {
+			$this->load->model('localisation/zone');
 
-			$output .= '>' . $result['name'] . '</option>';
+			$json = array(
+				'country_id'        => $country_info['country_id'],
+				'name'              => $country_info['name'],
+				'iso_code_2'        => $country_info['iso_code_2'],
+				'iso_code_3'        => $country_info['iso_code_3'],
+				'address_format'    => $country_info['address_format'],
+				'postcode_required' => $country_info['postcode_required'],
+				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
+				'status'            => $country_info['status']		
+			);
 		}
-
-		if (!$results) {
-			$output .= '<option value="0">' . $this->language->get('text_none') . '</option>';
-		}
-
-		$this->response->setOutput($output);
-	}		
+		
+		$this->response->setOutput(json_encode($json));
+	}	
 }
 ?>

@@ -1305,7 +1305,7 @@ class ControllerSaleCustomer extends Controller {
 	public function customer_group() {
 		$json = array();
 		
-		$this->load->model('account/customer_group');
+		$this->load->model('sale/customer_group');
 
     	$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->request->get['customer_group_id']);
 		

@@ -58,8 +58,8 @@ class ControllerAccountAddress extends Controller {
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
        		$this->model_account_address->editAddress($this->request->get['address_id'], $this->request->post);
 	  		
+			// Default Shipping Address
 			if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
-				// Default Shipping Address
 				$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
 				$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
 				$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
@@ -67,13 +67,13 @@ class ControllerAccountAddress extends Controller {
 				unset($this->session->data['shipping_method']);	
 				unset($this->session->data['shipping_methods']);
 			}
-
+			
+			// Default Payment Address
 			if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
-				// Default Payment Address
 				$this->session->data['payment_country_id'] = $this->request->post['country_id'];
 				$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];
-								
-	  			unset($this->session->data['payment_method']);
+	  			
+				unset($this->session->data['payment_method']);
 				unset($this->session->data['payment_methods']);
 			}
 			
@@ -101,21 +101,19 @@ class ControllerAccountAddress extends Controller {
     	if (isset($this->request->get['address_id']) && $this->validateDelete()) {
 			$this->model_account_address->deleteAddress($this->request->get['address_id']);	
 			
+			// Default Shipping Address
 			if (isset($this->session->data['shipping_address_id']) && ($this->request->get['address_id'] == $this->session->data['shipping_address_id'])) {
 				unset($this->session->data['shipping_address_id']);
-				
-				// Default Shipping Address
 				unset($this->session->data['shipping_country_id']);
 				unset($this->session->data['shipping_zone_id']);
 				unset($this->session->data['shipping_postcode']);				
 				unset($this->session->data['shipping_method']);
 				unset($this->session->data['shipping_methods']);
 			}
-
+			
+			// Default Payment Address
 			if (isset($this->session->data['payment_address_id']) && ($this->request->get['address_id'] == $this->session->data['payment_address_id'])) {
 				unset($this->session->data['payment_address_id']);
-				
-				// Default Payment Address
 				unset($this->session->data['payment_country_id']);
 				unset($this->session->data['payment_zone_id']);				
 				unset($this->session->data['payment_method']);
@@ -314,7 +312,7 @@ class ControllerAccountAddress extends Controller {
 		} else {
 			$this->data['error_company_id'] = '';
 		}
-				
+						
 		if (isset($this->error['address_1'])) {
     		$this->data['error_address_1'] = $this->error['address_1'];
 		} else {
@@ -532,7 +530,7 @@ class ControllerAccountAddress extends Controller {
   	}
 
   	private function validateDelete() {
-    	if ($this->model_account_address->getTotalAddresses() == 1) {
+    	if ($this->model_account_address->getTotalAddresses()) {
       		$this->error['warning'] = $this->language->get('error_delete');
     	}
 

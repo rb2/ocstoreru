@@ -44,6 +44,7 @@ class ControllerAffiliateRegister extends Controller {
     	$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_select'] = $this->language->get('text_select');
+		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('affiliate/login', '', 'SSL'));
     	$this->data['text_signup'] = $this->language->get('text_signup');
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
@@ -411,28 +412,29 @@ class ControllerAffiliateRegister extends Controller {
     	}
   	}
   
-  	public function zone() {
-		$output = '<option value="">' . $this->language->get('text_select') . '</option>';
+	public function country() {
+		$json = array();
 		
-		$this->load->model('localisation/zone');
+		$this->load->model('localisation/country');
 
-    	$results = $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']);
-        
-      	foreach ($results as $result) {
-        	$output .= '<option value="' . $result['zone_id'] . '"';
-	
-	    	if (isset($this->request->get['zone_id']) && ($this->request->get['zone_id'] == $result['zone_id'])) {
-	      		$output .= ' selected="selected"';
-	    	}
-	
-	    	$output .= '>' . $result['name'] . '</option>';
-    	} 
+    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
 		
-		if (!$results) {
-		  	$output .= '<option value="0">' . $this->language->get('text_none') . '</option>';
+		if ($country_info) {
+			$this->load->model('localisation/zone');
+
+			$json = array(
+				'country_id'        => $country_info['country_id'],
+				'name'              => $country_info['name'],
+				'iso_code_2'        => $country_info['iso_code_2'],
+				'iso_code_3'        => $country_info['iso_code_3'],
+				'address_format'    => $country_info['address_format'],
+				'postcode_required' => $country_info['postcode_required'],
+				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
+				'status'            => $country_info['status']		
+			);
 		}
-	
-		$this->response->setOutput($output);
-  	}  
+		
+		$this->response->setOutput(json_encode($json));
+	}	
 }
 ?>

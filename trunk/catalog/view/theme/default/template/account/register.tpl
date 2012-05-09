@@ -14,7 +14,7 @@
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <h2><?php echo $text_your_details; ?></h2>
     <div class="content">
-      <table class="form">
+      <table class="form">      
         <tr>
           <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
           <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
@@ -49,10 +49,14 @@
         </tr>
       </table>
     </div>
-    <?php if ($customer_groups) { ?>
-    <h2><?php echo $text_your_account; ?></h2>
+    <h2><?php echo $text_your_address; ?></h2>
     <div class="content">
-       <table class="form">
+      <table class="form">
+        <tr>
+          <td><?php echo $entry_company; ?></td>
+          <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
+        </tr>     
+        <?php if ($customer_groups) { ?>
         <tr>
           <td><?php echo $entry_account; ?></td>
           <td><select name="customer_group_id">
@@ -64,25 +68,16 @@
               <?php } ?>
               <?php } ?>
             </select></td>
-        </tr>      
-      </table>
-    </div>
-    <?php } ?>
-    <h2><?php echo $text_your_address; ?></h2>
-    <div class="content">
-      <table class="form">
-        <tr>
-          <td><?php echo $entry_company; ?></td>
-          <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
-        </tr>
-        <tr id="company-id-display" style="display: none;">
+        </tr>  
+        <?php } ?>         
+        <tr id="company-id-display" style="display: <?php echo ($company_id_display ? 'table-row' : 'none'); ?>;">
           <td><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?></td>
           <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" />
             <?php if ($error_company_id) { ?>
             <span class="error"><?php echo $error_company_id; ?></span>
             <?php } ?></td>
         </tr>
-        <tr id="tax-id-display" style="display: none;">
+        <tr id="tax-id-display" style="display: <?php echo ($tax_id_display ? 'table-row' : 'none'); ?>;">
           <td><span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?></td>
           <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
             <?php if ($error_tax_id) { ?>
@@ -274,7 +269,7 @@ $('select[name=\'country_id\']').bind('change', function() {
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0"><?php echo $text_none; ?></option>';
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 			
 			$('select[name=\'zone_id\']').html(html);

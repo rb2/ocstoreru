@@ -3,20 +3,19 @@ class ControllerCheckoutRegister extends Controller {
   	public function index() {
 		$this->language->load('checkout/checkout');
 		
-		$this->data['text_select'] = $this->language->get('text_select');
-		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
-		$this->data['text_your_account'] = $this->language->get('text_your_account');
 		$this->data['text_your_address'] = $this->language->get('text_your_address');
 		$this->data['text_your_password'] = $this->language->get('text_your_password');
-				
+		$this->data['text_select'] = $this->language->get('text_select');
+		$this->data['text_none'] = $this->language->get('text_none');
+						
 		$this->data['entry_firstname'] = $this->language->get('entry_firstname');
 		$this->data['entry_lastname'] = $this->language->get('entry_lastname');
 		$this->data['entry_email'] = $this->language->get('entry_email');
 		$this->data['entry_telephone'] = $this->language->get('entry_telephone');
 		$this->data['entry_fax'] = $this->language->get('entry_fax');
-		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_company'] = $this->language->get('entry_company');
+		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
 		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');		
 		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
@@ -239,7 +238,7 @@ class ControllerCheckoutRegister extends Controller {
 			
 			$this->session->data['account'] = 'register';
 			
-			if (!$this->config->get('config_customer_approval')) {
+			if ($customer_group && !$customer_group['approval']) {
 				$this->customer->login($this->request->post['email'], $this->request->post['password']);
 				
 				$this->session->data['payment_address_id'] = $this->customer->getAddressId();

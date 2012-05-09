@@ -101,6 +101,14 @@
               <td><input type="text" name="payment_company" value="<?php echo $payment_company; ?>" /></td>
             </tr>
             <tr>
+              <td><?php echo $entry_company_id; ?></td>
+              <td><input type="text" name="payment_company_id" value="<?php echo $payment_company_id; ?>" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_tax_id; ?></td>
+              <td><input type="text" name="payment_tax_id" value="<?php echo $payment_tax_id; ?>" /></td>
+            </tr>                        
+            <tr>
               <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
               <td><input type="text" name="payment_address_1" value="<?php echo $payment_address_1; ?>" />
                 <?php if ($error_payment_address_1) { ?>
@@ -632,7 +640,7 @@ $('input[name=\'affiliate\']').autocomplete({
 	}
 });
 
-var payment_zone_id = <?php echo $payment_zone_id; ?>;
+var payment_zone_id = '<?php echo $payment_zone_id; ?>';
 
 $('select[name=\'payment_country_id\']').bind('change', function() {
 	$.ajax({
@@ -652,8 +660,8 @@ $('select[name=\'payment_country_id\']').bind('change', function() {
 			}
 			
 			html = '<option value=""><?php echo $text_select; ?></option>';
-			
-			if (json['zone'] != '') {
+
+			if (json != '' && json['zone'] != '') {
 				for (i = 0; i < json['zone'].length; i++) {
         			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
 	    			
@@ -664,7 +672,7 @@ $('select[name=\'payment_country_id\']').bind('change', function() {
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0"><?php echo $text_none; ?></option>';
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 			
 			$('select[name=\'payment_zone_id\']').html(html);
@@ -686,6 +694,8 @@ $('select[name=\'payment_address\']').bind('change', function() {
 				$('input[name=\'payment_firstname\']').attr('value', json['firstname']);
 				$('input[name=\'payment_lastname\']').attr('value', json['lastname']);
 				$('input[name=\'payment_company\']').attr('value', json['company']);
+				$('input[name=\'payment_company_id\']').attr('value', json['company_id']);
+				$('input[name=\'payment_tax_id\']').attr('value', json['tax_id']);
 				$('input[name=\'payment_address_1\']').attr('value', json['address_1']);
 				$('input[name=\'payment_address_2\']').attr('value', json['address_2']);
 				$('input[name=\'payment_city\']').attr('value', json['city']);
@@ -700,7 +710,7 @@ $('select[name=\'payment_address\']').bind('change', function() {
 	});	
 });
 
-var shipping_zone_id = <?php echo $shipping_zone_id; ?>;
+var shipping_zone_id = '<?php echo $shipping_zone_id; ?>';
 
 $('select[name=\'shipping_country_id\']').bind('change', function() {
 	$.ajax({
@@ -721,7 +731,7 @@ $('select[name=\'shipping_country_id\']').bind('change', function() {
 			
 			html = '<option value=""><?php echo $text_select; ?></option>';
 			
-			if (json['zone'] != '') {
+			if (json != '' && json['zone'] != '') {
 				for (i = 0; i < json['zone'].length; i++) {
         			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
 	    			
@@ -732,7 +742,7 @@ $('select[name=\'shipping_country_id\']').bind('change', function() {
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0"><?php echo $text_none; ?></option>';
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 			
 			$('select[name=\'shipping_zone_id\']').html(html);

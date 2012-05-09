@@ -37,8 +37,8 @@
       <table>
         <?php foreach ($totals as $total) { ?>
         <tr>
-          <td align="right"><b><?php echo $total['title']; ?>:</b></td>
-          <td align="right"><?php echo $total['text']; ?></td>
+          <td class="right"><b><?php echo $total['title']; ?>:</b></td>
+          <td class="right"><?php echo $total['text']; ?></td>
         </tr>
         <?php } ?>
       </table>

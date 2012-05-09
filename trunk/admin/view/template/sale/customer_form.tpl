@@ -138,6 +138,14 @@
                 <td><?php echo $entry_company; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][company]" value="<?php echo $address['company']; ?>" /></td>
               </tr>
+              <tr class="company-id-display">
+                <td><?php echo $entry_company_id; ?></td>
+                <td><input type="text" name="address[<?php echo $address_row; ?>][company_id]" value="<?php echo $address['company_id']; ?>" /></td>
+              </tr> 
+              <tr class="tax-id-display">
+                <td><?php echo $entry_tax_id; ?></td>
+                <td><input type="text" name="address[<?php echo $address_row; ?>][tax_id]" value="<?php echo $address['tax_id']; ?>" /></td>
+              </tr>                            
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][address_1]" value="<?php echo $address['address_1']; ?>" />
@@ -269,6 +277,38 @@
   </div>
 </div>
 <script type="text/javascript"><!--
+$('select[name=\'customer_group_id\']').live('change', function() {
+	$.ajax({
+		url: 'index.php?route=sale/customer/customer_group&token=<?php echo $token; ?>&customer_group_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'customer_group_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
+		},		
+		complete: function() {
+			$('.wait').remove();
+		},			
+		success: function(json) {
+			if (json['company_id_display'] == '1') {
+				$('.company-id-display').show();
+			} else {
+				$('.company-id-display').hide();
+			}
+			
+			if (json['tax_id_display'] == '1') {
+				$('.tax-id-display').show();
+			} else {
+				$('.tax-id-display').hide();
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('select[name=\'customer_group_id\']').trigger('change');
+//--></script>
+<script type="text/javascript"><!--
 function country(element, index, zone_id) {
 	$.ajax({
 		url: 'index.php?route=sale/customer/country&token=<?php echo $token; ?>&country_id=' + element.value,
@@ -331,6 +371,14 @@ function addAddress() {
     html += '      <td><?php echo $entry_company; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][company]" value="" /></td>';
     html += '    </tr>';	
+    html += '    <tr class="company-id-display">';
+    html += '      <td><?php echo $entry_company_id; ?></td>';
+    html += '      <td><input type="text" name="address[' + address_row + '][company_id]" value="" /></td>';
+    html += '    </tr>';
+    html += '    <tr class="tax-id-display">';
+    html += '      <td><?php echo $entry_tax_id; ?></td>';
+    html += '      <td><input type="text" name="address[' + address_row + '][tax_id]" value="" /></td>';
+    html += '    </tr>';			
     html += '    <tr>';
     html += '      <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][address_1]" value="" /></td>';

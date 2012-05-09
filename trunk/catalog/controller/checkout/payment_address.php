@@ -6,6 +6,7 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		$this->data['text_address_existing'] = $this->language->get('text_address_existing');
 		$this->data['text_address_new'] = $this->language->get('text_address_new');
 		$this->data['text_select'] = $this->language->get('text_select');
+		$this->data['text_none'] = $this->language->get('text_none');
 
 		$this->data['entry_firstname'] = $this->language->get('entry_firstname');
 		$this->data['entry_lastname'] = $this->language->get('entry_lastname');
@@ -20,17 +21,47 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		$this->data['entry_zone'] = $this->language->get('entry_zone');
 	
 		$this->data['button_continue'] = $this->language->get('button_continue');
-		
+
 		if (isset($this->session->data['payment_address_id'])) {
 			$this->data['address_id'] = $this->session->data['payment_address_id'];
 		} else {
 			$this->data['address_id'] = $this->customer->getAddressId();
 		}
-
+		
+		$this->data['addresses'] = array();
+		
 		$this->load->model('account/address');
-
+		
 		$this->data['addresses'] = $this->model_account_address->getAddresses();
-
+		
+		$this->load->model('account/customer_group');
+		
+		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->customer->getCustomerGroupId());
+		
+		if ($customer_group_info) {
+			$this->data['company_id_display'] = $customer_group_info['company_id_display'];
+		} else {
+			$this->data['company_id_display'] = '';
+		}
+		
+		if ($customer_group_info) {
+			$this->data['company_id_required'] = $customer_group_info['company_id_required'];
+		} else {
+			$this->data['company_id_required'] = '';
+		}
+				
+		if ($customer_group_info) {
+			$this->data['tax_id_display'] = $customer_group_info['tax_id_display'];
+		} else {
+			$this->data['tax_id_display'] = '';
+		}
+		
+		if ($customer_group_info) {
+			$this->data['tax_id_required'] = $customer_group_info['tax_id_required'];
+		} else {
+			$this->data['tax_id_required'] = '';
+		}
+										
 		if (isset($this->session->data['payment_country_id'])) {
 			$this->data['country_id'] = $this->session->data['payment_country_id'];		
 		} else {
@@ -92,7 +123,11 @@ class ControllerCheckoutPaymentAddress extends Controller {
 				
 		if (!$json) {
 			if ($this->request->post['payment_address'] == 'existing') {
+				$this->load->model('account/address');
+				
 				if (empty($this->request->post['address_id'])) {
+					$json['error']['warning'] = $this->language->get('error_address');
+				} elseif (!in_array($this->request->post['address_id'], array_keys($this->model_account_address->getAddresses()))) {
 					$json['error']['warning'] = $this->language->get('error_address');
 				}
 				
@@ -126,6 +161,29 @@ class ControllerCheckoutPaymentAddress extends Controller {
 					$json['error']['lastname'] = $this->language->get('error_lastname');
 				}
 		
+				// Customer Group
+				$this->load->model('account/customer_group');
+				
+				if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+					$customer_group_id = $this->request->post['customer_group_id'];
+				} else {
+					$customer_group_id = $this->config->get('config_customer_group_id');
+				}
+				
+				$customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
+					
+				if ($customer_group) {	
+					// Company ID
+					if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && !$this->request->post['company_id']) {
+						$json['error']['company_id'] = $this->language->get('error_company_id');
+					}
+					
+					// Tax ID
+					if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
+						$json['error']['tax_id'] = $this->language->get('error_tax_id');
+					}						
+				}
+					
 				if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 64)) {
 					$json['error']['address_1'] = $this->language->get('error_address_1');
 				}
@@ -151,10 +209,10 @@ class ControllerCheckoutPaymentAddress extends Controller {
 				}
 				
 				if (!$json) {
+					// Default Payment Address
 					$this->load->model('account/address');
 					
 					$this->session->data['payment_address_id'] = $this->model_account_address->addAddress($this->request->post);
-					
 					$this->session->data['payment_country_id'] = $this->request->post['country_id'];
 					$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];
 															

@@ -59,23 +59,22 @@ class ControllerAccountRegister extends Controller {
     	$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', 'SSL'));
+		$this->data['text_your_details'] = $this->language->get('text_your_details');
+    	$this->data['text_your_address'] = $this->language->get('text_your_address');
+    	$this->data['text_your_password'] = $this->language->get('text_your_password');
+		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_none'] = $this->language->get('text_none');
-		$this->data['text_your_details'] = $this->language->get('text_your_details');
-		$this->data['text_your_account'] = $this->language->get('text_your_account');
-    	$this->data['text_your_address'] = $this->language->get('text_your_address');
-    	$this->data['text_your_password'] = $this->language->get('text_your_password');
-		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
-				
+						
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
     	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
     	$this->data['entry_email'] = $this->language->get('entry_email');
     	$this->data['entry_telephone'] = $this->language->get('entry_telephone');
     	$this->data['entry_fax'] = $this->language->get('entry_fax');
-    	$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_company'] = $this->language->get('entry_company');
+		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
 		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');
     	$this->data['entry_address_1'] = $this->language->get('entry_address_1');
@@ -175,36 +174,6 @@ class ControllerAccountRegister extends Controller {
 		}
 		
     	$this->data['action'] = $this->url->link('account/register', '', 'SSL');
-
-		$customer_group_data = array();
-		
-		if (is_array($this->config->get('config_customer_group_display'))) {
-			$this->load->model('account/customer_group');
-			
-			$customer_groups = $this->model_account_customer_group->getCustomerGroups();
-			
-			foreach ($customer_groups  as $customer_group) {
-				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
-					$customer_group_data[] = array(
-						'customer_group_id' => $customer_group['customer_group_id'],
-						'name'              => $customer_group['name'],
-						'description'       => $customer_group['description']
-					);
-				}
-			}
-		}
-		
-		if (count($customer_group_data) > 1) {
-			$this->data['customer_groups'] = $customer_group_data;
-		} else {
-			$this->data['customer_groups'] = array();
-		}
-		
-		if (isset($this->request->post['customer_group_id'])) {
-    		$this->data['customer_group_id'] = $this->request->post['customer_group_id'];
-		} else {
-			$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
-		}
 		
 		if (isset($this->request->post['firstname'])) {
     		$this->data['firstname'] = $this->request->post['firstname'];
@@ -241,17 +210,75 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['company'] = '';
 		}
+
+		$this->load->model('account/customer_group');
 		
+		$customer_group_data = array();
+		
+		if (is_array($this->config->get('config_customer_group_display'))) {
+			$customer_groups = $this->model_account_customer_group->getCustomerGroups();
+			
+			foreach ($customer_groups  as $customer_group) {
+				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+					$customer_group_data[] = array(
+						'customer_group_id' => $customer_group['customer_group_id'],
+						'name'              => $customer_group['name'],
+						'description'       => $customer_group['description']
+					);
+				}
+			}
+		}
+		
+		if (count($customer_group_data) > 1) {
+			$this->data['customer_groups'] = $customer_group_data;
+		} else {
+			$this->data['customer_groups'] = array();
+		}
+		
+		if (isset($this->request->post['customer_group_id'])) {
+    		$this->data['customer_group_id'] = $this->request->post['customer_group_id'];
+		} else {
+			$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
+		}
+		
+		// Company ID
 		if (isset($this->request->post['company_id'])) {
     		$this->data['company_id'] = $this->request->post['company_id'];
 		} else {
 			$this->data['company_id'] = '';
 		}
+				
+		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->config->get('config_customer_group_id'));
 		
+		if ($customer_group_info) {
+			$this->data['company_id_display'] = $customer_group_info['company_id_display'];
+		} else {
+			$this->data['company_id_display'] = '';
+		}
+		
+		if ($customer_group_info) {
+			$this->data['company_id_required'] = $customer_group_info['company_id_required'];
+		} else {
+			$this->data['company_id_required'] = '';
+		}
+		
+		// Tax ID
 		if (isset($this->request->post['tax_id'])) {
     		$this->data['tax_id'] = $this->request->post['tax_id'];
 		} else {
 			$this->data['tax_id'] = '';
+		}				
+				
+		if ($customer_group_info) {
+			$this->data['tax_id_display'] = $customer_group_info['tax_id_display'];
+		} else {
+			$this->data['tax_id_display'] = '';
+		}
+		
+		if ($customer_group_info) {
+			$this->data['tax_id_required'] = $customer_group_info['tax_id_required'];
+		} else {
+			$this->data['tax_id_required'] = '';
 		}
 						
 		if (isset($this->request->post['address_1'])) {

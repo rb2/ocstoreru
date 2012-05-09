@@ -28,21 +28,17 @@
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
         </tr>
-        <?php if ($company_id_display) { ?>
-        <tr>
+        <tr style="display: <?php echo ($company_id_display ? 'table-row' : 'none'); ?>;">
           <td><?php echo $entry_company_id; ?></td>
           <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" />
             <?php if ($error_company_id) { ?>
             <span class="error"><?php echo $error_company_id; ?></span>
             <?php } ?></td>
         </tr>
-        <?php } ?>
-        <?php if ($tax_id_display) { ?>
-        <tr>
+        <tr style="display: <?php echo ($tax_id_display ? 'table-row' : 'none'); ?>;">
           <td><?php echo $entry_tax_id; ?></td>
           <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" /></td>
         </tr>
-        <?php } ?>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
           <td><input type="text" name="address_1" value="<?php echo $address_1; ?>" />
@@ -114,12 +110,6 @@
         <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
       </div>
     </div>
-    <?php if (!$company_id_display) { ?>
-    <input type="hidden" name="company_id" value="" />
-    <?php } ?>
-    <?php if (!$tax_id_display) { ?>
-    <input type="hidden" name="tax_id" value="" />
-    <?php } ?>
   </form>
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
@@ -143,7 +133,6 @@ $('select[name=\'country_id\']').bind('change', function() {
 			html = '<option value=""><?php echo $text_select; ?></option>';
 			
 			if (json['zone'] != '') {
-
 				for (i = 0; i < json['zone'].length; i++) {
         			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
 	    			
@@ -154,7 +143,7 @@ $('select[name=\'country_id\']').bind('change', function() {
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0"><?php echo $text_none; ?></option>';
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 			
 			$('select[name=\'zone_id\']').html(html);

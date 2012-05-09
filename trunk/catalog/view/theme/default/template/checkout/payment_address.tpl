@@ -12,12 +12,12 @@
     <?php } ?>
   </select>
 </div>
-<?php } ?>
 <p>
   <input type="radio" name="payment_address" value="new" id="payment-address-new" />
   <label for="payment-address-new"><?php echo $text_address_new; ?></label>
 </p>
-<div id="payment-new" style="display: none;">
+<?php } ?>
+<div id="payment-new" style="display: <?php echo ($addresses ? 'none' : 'block'); ?>;">
   <table class="form">
     <tr>
       <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
@@ -30,6 +30,14 @@
     <tr>
       <td><?php echo $entry_company; ?></td>
       <td><input type="text" name="company" value="" class="large-field" /></td>
+    </tr>
+    <tr style="display: <?php echo ($company_id_display ? 'table-row' : 'none'); ?>;">
+      <td><span style="display: <?php echo ($company_id_required ? 'table-row' : 'none'); ?>;" class="required">*</span> <?php echo $entry_company_id; ?></td>
+      <td><input type="text" name="company_id" value="" class="large-field" /></td>
+    </tr>
+    <tr style="display: <?php echo ($tax_id_display ? 'table-row' : 'none'); ?>;">
+      <td><span style="display: <?php echo ($tax_id_required ? 'table-row' : 'none'); ?>;" class="required">*</span> <?php echo $entry_tax_id; ?></td>
+      <td><input type="text" name="tax_id" value="" class="large-field" /></td>
     </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
@@ -69,7 +77,9 @@
 </div>
 <br />
 <div class="buttons">
-  <div class="right"><input type="button" value="<?php echo $button_continue; ?>" id="button-payment-address" class="button" /></div>
+  <div class="right">
+    <input type="button" value="<?php echo $button_continue; ?>" id="button-payment-address" class="button" />
+  </div>
 </div>
 <script type="text/javascript"><!--
 $('#payment-address input[name=\'payment_address\']').live('change', function() {
@@ -113,7 +123,7 @@ $('#payment-address select[name=\'country_id\']').bind('change', function() {
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0"><?php echo $text_none; ?></option>';
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 			
 			$('#payment-address select[name=\'zone_id\']').html(html);

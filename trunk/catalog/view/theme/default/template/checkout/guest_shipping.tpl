@@ -81,7 +81,7 @@ $('#shipping-address select[name=\'country_id\']').bind('change', function() {
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0"><?php echo $text_none; ?></option>';
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 			
 			$('#shipping-address select[name=\'zone_id\']').html(html);

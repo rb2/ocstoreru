@@ -12,12 +12,12 @@
     <?php } ?>
   </select>
 </div>
-<?php } ?>
 <p>
   <input type="radio" name="shipping_address" value="new" id="shipping-address-new" />
   <label for="shipping-address-new"><?php echo $text_address_new; ?></label>
 </p>
-<div id="shipping-new" style="display: none;">
+<?php } ?>
+<div id="shipping-new" style="display: <?php echo ($addresses ? 'none' : 'block'); ?>;">
   <table class="form">
     <tr>
       <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
@@ -69,7 +69,9 @@
 </div>
 <br />
 <div class="buttons">
-  <div class="right"><input type="button" value="<?php echo $button_continue; ?>" id="button-shipping-address" class="button" /></div>
+  <div class="right">
+    <input type="button" value="<?php echo $button_continue; ?>" id="button-shipping-address" class="button" />
+  </div>
 </div>
 <script type="text/javascript"><!--
 $('#shipping-address input[name=\'shipping_address\']').live('change', function() {
@@ -81,7 +83,7 @@ $('#shipping-address input[name=\'shipping_address\']').live('change', function(
 		$('#shipping-new').hide();
 	}
 });
-//--></script>
+//--></script> 
 <script type="text/javascript"><!--
 $('#shipping-address select[name=\'country_id\']').bind('change', function() {
 	$.ajax({
@@ -113,7 +115,7 @@ $('#shipping-address select[name=\'country_id\']').bind('change', function() {
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0"><?php echo $text_none; ?></option>';
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 			
 			$('#shipping-address select[name=\'zone_id\']').html(html);

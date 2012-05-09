@@ -19,9 +19,15 @@
   <?php echo $entry_fax; ?><br />
   <input type="text" name="fax" value="<?php echo $fax; ?>" class="large-field" />
   <br />
+  <br /> 
+</div>
+<div class="right">
+  <h2><?php echo $text_your_address; ?></h2>
+  <?php echo $entry_company; ?><br />
+  <input type="text" name="company" value="<?php echo $company; ?>" class="large-field" />
+  <br />
   <br />
   <?php if ($customer_groups) { ?>
-  <h2><?php echo $text_your_account; ?></h2>
   <?php echo $entry_account; ?><br />
   <select name="customer_group_id" class="large-field">
     <?php foreach ($customer_groups as $customer_group) { ?>
@@ -34,21 +40,14 @@
   </select>
   <br />
   <br />
-  <?php } ?>  
-</div>
-<div class="right">
-  <h2><?php echo $text_your_address; ?></h2>
-  <?php echo $entry_company; ?><br />
-  <input type="text" name="company" value="<?php echo $company; ?>" class="large-field" />
-  <br />
-  <br />
+  <?php } ?>   
   <div id="company-id-display"><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?><br />
-    <input type="text" name="company_id" value="" class="large-field" />
+    <input type="text" name="company_id" value="<?php echo $company_id; ?>" class="large-field" />
     <br />
     <br />
   </div>
   <div id="tax-id-display"><span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?><br />
-    <input type="text" name="tax_id" value="" class="large-field" />
+    <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" class="large-field" />
     <br />
     <br />
   </div>  
@@ -179,7 +178,7 @@ $('#payment-address select[name=\'country_id\']').bind('change', function() {
 	    			html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0"><?php echo $text_none; ?></option>';
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
 			}
 			
 			$('#payment-address select[name=\'zone_id\']').html(html);

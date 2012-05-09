@@ -6,8 +6,6 @@ $_['heading_title']        = 'Register Account';
 $_['text_account']         = 'Account';
 $_['text_register']        = 'Register';
 $_['text_account_already'] = 'If you already have an account with us, please login at the <a href="%s">login page</a>.';
-$_['text_your_account']    = 'Your Account';
-$_['text_account_type']    = 'Please select the type of account you are registering for.';
 $_['text_your_details']    = 'Your Personal Details';
 $_['text_your_address']    = 'Your Address';
 $_['text_newsletter']      = 'Newsletter';

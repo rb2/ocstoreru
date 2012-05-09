@@ -108,7 +108,7 @@ class ModelAccountAddress extends Model {
 				$zone_code = '';
 			}		
 		
-			$address_data[] = array(
+			$address_data[$result['address_id']] = array(
 				'address_id'     => $result['address_id'],
 				'firstname'      => $result['firstname'],
 				'lastname'       => $result['lastname'],
