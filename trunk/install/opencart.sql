@@ -1868,6 +1868,25 @@ CREATE TABLE `oc_order_history` (
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `oc_order_misc`
+--
+
+DROP TABLE IF EXISTS `oc_order_misc`;
+CREATE TABLE `oc_order_misc` (
+  `order_id` int(11) NOT NULL,
+  `key` varchar(64) COLLATE utf8_general_ci NOT NULL,
+  `value` text COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`order_id`,`key`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_order_misc`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `oc_order_option`
 -- 
 

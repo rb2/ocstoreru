@@ -219,3 +219,13 @@ ALTER TABLE oc_customer_group ADD sort_order int(3) NOT NULL DEFAULT 0 COMMENT '
 
 ### This line is executed using php in the upgrade model file so we dont lose names
 #ALTER TABLE oc_customer_group DROP name;
+
+ALTER TABLE `oc_order` ADD payment_company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company;
+ALTER TABLE `oc_order` ADD payment_tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company_id;
+
+CREATE TABLE IF NOT EXISTS oc_order_misc (
+    order_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+    `key` varchar(64) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin,
+    value text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin,
+    PRIMARY KEY (order_id, `key`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
