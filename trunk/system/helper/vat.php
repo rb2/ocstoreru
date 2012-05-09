@@ -3,6 +3,7 @@ function vat_validation($prefix, $number) {
 	$iso_code_2_data = array(
 		'AT' => 'AT', //Austria
 		'BE' => 'BE', //Belgium
+		'BG' => 'BG', //Bulgaria
 		'DK' => 'DK', //Denmark
 		'FI' => 'FI', //Finland
 		'FR' => 'FR', //France
@@ -24,6 +25,7 @@ function vat_validation($prefix, $number) {
 		'LT' => 'LT', //Lithuania
 		'MT' => 'MT', //Malta
 		'PL' => 'PL', //Poland
+		'RO' => 'RO', //Romania
 		'SK' => 'SK', //Slovakia
 		'CZ' => 'CZ', //Czech Republic
 		'SI' => 'SI'  //Slovania
