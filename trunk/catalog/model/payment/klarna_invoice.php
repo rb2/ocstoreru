@@ -49,7 +49,20 @@ class ModelPaymentKlarnaInvoice extends Model {
 		if (!in_array(strtoupper($this->currency->getCode()), $currencies)) {
 			$status = false;
 		}	
+					
+		$countries = array(
+			'SE',
+			'FI',
+			'DK',
+			'NO',
+			'DE',
+			'NL'
+		);
 		
+		if (!in_array(strtoupper($address['iso_code_2']), $countries)) {
+			$status = false;
+		}	
+											
 		$method_data = array();
 	
 		if ($status) {  

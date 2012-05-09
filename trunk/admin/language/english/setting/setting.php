@@ -55,7 +55,6 @@ $_['entry_tax_customer']         = 'Use Customer Tax Address:<br /><span class="
 $_['entry_customer_group']       = 'Customer Group:<br /><span class="help">Default customer group.</span>';
 $_['entry_customer_group_display'] = 'Customer Groups:<br /><span class="help">Display customer groups that new customers can select to use such as wholesale and business when signing up.</span>';
 $_['entry_customer_price']       = 'Login Display Prices:<br /><span class="help">Only show prices when a customer is logged in.</span>';
-$_['entry_customer_approval']    = 'Approve New Customers:<br /><span class="help">Don\'t allow new customer to login until their account has been approved.</span>';
 $_['entry_account']              = 'Account Terms:<br /><span class="help">Forces people to agree to terms before an account can be created.</span>';
 $_['entry_cart_weight']          = 'Display Weight on Cart Page:<br /><span class="help">Show the cart weight on the cart page</span>';
 $_['entry_guest_checkout']       = 'Guest Checkout:<br /><span class="help">Allow customers to checkout without creating an account. This will not be available when a downloadable product is in the shopping cart.</span>';
@@ -105,18 +104,18 @@ $_['entry_error_display']        = 'Display Errors:';
 $_['entry_error_log']            = 'Log Errors:';
 $_['entry_error_filename']       = 'Error Log Filename:';
 $_['entry_google_analytics']     = 'Google Analytics Code:<br /><span class="help">Login to your <a onclick="window.open(\'http://www.google.com/analytics/\');"><u>Google Analytics</u></a> account and after creating your web site profile copy and paste the analytics code into this field.</span>';
-$_['entry_sms_gatename']         = 'SMS РіРµР№С‚:<br/><span class="help">РЎРµСЂРІРёСЃ РґР»СЏ РѕС‚РїСЂР°РІРєРё SMS<br/> РќР°РїСЂРёРјРµСЂ <a target="_blank" href="http://avisosms.ru?refer=3502">avisosms</a></span>';
-$_['entry_sms_to']               = 'РўРµР»РµС„РѕРЅ Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР°:<br/><span class="help">Р¤РѕСЂРјР°С‚: 7926xxxxxxx</span>';
-$_['entry_sms_from']             = 'РџСЃРµРІРґРѕРЅРёРј РѕС‚РїСЂР°РІРёС‚РµР»СЏ:<br/><span class="help">РќР°РїСЂРёРјРµСЂ: Domenam.ru</span>';
-$_['entry_sms_message']          = 'РўРµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ:<br/><span class="help">РњРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚РµРіРё:<br/>{ID} - РЅРѕРјРµСЂ Р·Р°РєР°Р·Р°<br/>{DATE},{TIME} - РґР°С‚Р° Рё РІСЂРµРјСЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р·Р°РєР°Р·Р°<br/>{SUM} - СЃСѓРјРјР° Р·Р°РєР°Р·Р°</span>';
-$_['entry_sms_gate_username']    = 'Р›РѕРіРёРЅ РЅР° SMS РіРµР№С‚:';
-$_['entry_sms_gate_password']    = 'РџР°СЂРѕР»СЊ РЅР° SMS РіРµР№С‚:';
-$_['entry_sms_alert']            = 'Р’РєР»СЋС‡РёС‚СЊ SMS СѓРІРµРґРѕРјР»РµРЅРёСЏ:';
-$_['entry_sms_copy']             = 'Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РЅРѕРјРµСЂР°:<br/><span class="help">Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РЅРѕРјРµСЂР° С‚РµР»РµС„РѕРЅРѕРІ РїРѕР»СѓС‡Р°С‚РµР»РµР№ SMS</span>';
-$_['entry_seo_url_type']         = 'РўРёРї Р§РџРЈ:';
-$_['entry_seo_url_include_path'] = 'Р§РџРЈ С‚РѕРІР°СЂРѕРІ СЃ РєР°С‚РµРіРѕСЂРёСЏРјРё:<span class="help">/category/subcategory/product<br />(С‚РѕР»СЊРєРѕ РґР»СЏ SeoPro)</span>';
-$_['entry_seo_url_postfix']      = 'РћРєРѕРЅС‡Р°РЅРёРµ Р§РџРЈ:<span class="help">РќР°РїСЂРёРјРµСЂ .html<br />(С‚РѕР»СЊРєРѕ РґР»СЏ SeoPro)</span>';
-$_['entry_registred_group']      = 'Р“СЂСѓРїРїР° Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹С…:<br /><span class="help">РќР°Р·РЅР°С‡Р°РµС‚СЃСЏ РїСЂРё СЂРµРіРёСЃС‚СЂР°С†РёРё.</span>';
+$_['entry_sms_gatename']         = 'SMS гейт:<br/><span class="help">Сервис для отправки SMS<br/> Например <a target="_blank" href="http://avisosms.ru?refer=3502">avisosms</a></span>';
+$_['entry_sms_to']               = 'Телефон администратора:<br/><span class="help">Формат: 7926xxxxxxx</span>';
+$_['entry_sms_from']             = 'Псевдоним отправителя:<br/><span class="help">Например: Domenam.ru</span>';
+$_['entry_sms_message']          = 'Текст сообщения:<br/><span class="help">Можно использовать теги:<br/>{ID} - номер заказа<br/>{DATE},{TIME} - дата и время формирования заказа<br/>{SUM} - сумма заказа</span>';
+$_['entry_sms_gate_username']    = 'Логин на SMS гейт:';
+$_['entry_sms_gate_password']    = 'Пароль на SMS гейт:';
+$_['entry_sms_alert']            = 'Включить SMS уведомления:';
+$_['entry_sms_copy']             = 'Дополнительные номера:<br/><span class="help">Дополнительные номера телефонов получателей SMS</span>';
+$_['entry_seo_url_type']         = 'Тип ЧПУ:';
+$_['entry_seo_url_include_path'] = 'ЧПУ товаров с категориями:<span class="help">/category/subcategory/product<br />(только для SeoPro)</span>';
+$_['entry_seo_url_postfix']      = 'Окончание ЧПУ:<span class="help">Например .html<br />(только для SeoPro)</span>';
+$_['entry_registred_group']      = 'Группа зарегистрированных:<br /><span class="help">Назначается при регистрации.</span>';
 
 // Error
 $_['error_warning']              = 'Warning: Please check the form carefully for errors!';
@@ -128,6 +127,7 @@ $_['error_email']                = 'E-Mail Address does not appear to be valid!'
 $_['error_telephone']            = 'Telephone must be between 3 and 32 characters!';
 $_['error_title']                = 'Title must be between 3 and 32 characters!';
 $_['error_limit']       	     = 'Limit required!';
+$_['error_customer_group_display'] = 'You must include the default customer group if you are going to use this feature!';
 $_['error_voucher_min']          = 'Minimum voucher amount required!';
 $_['error_voucher_max']          = 'Maximum voucher amount required!';
 $_['error_image_thumb']          = 'Product Image Thumb Size dimensions required!';

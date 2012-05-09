@@ -34,6 +34,20 @@
           </tr>
           <?php } ?>
           <tr>
+            <td><?php echo $entry_approve; ?></td>
+            <td><?php if ($approve) { ?>
+              <input type="radio" name="approve" value="1" checked="checked" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="approve" value="0" />
+              <?php echo $text_no; ?>
+              <?php } else { ?>
+              <input type="radio" name="approve" value="1" />
+              <?php echo $text_yes; ?>
+              <input type="radio" name="approve" value="0" checked="checked" />
+              <?php echo $text_no; ?>
+              <?php } ?></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_company_display; ?></td>
             <td><?php if ($company_display) { ?>
               <input type="radio" name="company_display" value="1" checked="checked" />
@@ -88,7 +102,11 @@
               <input type="radio" name="tax_required" value="0" checked="checked" />
               <?php echo $text_no; ?>
               <?php } ?></td>
-          </tr>          
+          </tr>
+          <tr>
+            <td><?php echo $entry_sort_order; ?></td>
+            <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="1" /></td>
+          </tr>
         </table>
       </form>
     </div>

@@ -1,7 +1,7 @@
 <?php
 class ModelSaleCustomerGroup extends Model {
 	public function addCustomerGroup($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "customer_group SET company_display = '" . (int)$data['company_display'] . "', company_required = '" . (int)$data['company_required'] . "', tax_display = '" . (int)$data['tax_display'] . "', tax_required = '" . (int)$data['tax_required'] . "'");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "customer_group SET approve = '" . (int)$data['approve'] . "', company_display = '" . (int)$data['company_display'] . "', company_required = '" . (int)$data['company_required'] . "', tax_display = '" . (int)$data['tax_display'] . "', tax_required = '" . (int)$data['tax_required'] . "', sort_order = '" . (int)$data['sort_order'] . "'");
 	
 		$customer_group_id = $this->db->getLastId();
 		
@@ -11,7 +11,7 @@ class ModelSaleCustomerGroup extends Model {
 	}
 	
 	public function editCustomerGroup($customer_group_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer_group SET company_display = '" . (int)$data['company_display'] . "', company_required = '" . (int)$data['company_required'] . "', tax_display = '" . (int)$data['tax_display'] . "', tax_required = '" . (int)$data['tax_required'] . "' WHERE customer_group_id = '" . (int)$customer_group_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "customer_group SET approve = '" . (int)$data['approve'] . "', company_display = '" . (int)$data['company_display'] . "', company_required = '" . (int)$data['company_required'] . "', tax_display = '" . (int)$data['tax_display'] . "', tax_required = '" . (int)$data['tax_required'] . "', sort_order = '" . (int)$data['sort_order'] . "' WHERE customer_group_id = '" . (int)$customer_group_id . "'");
 	
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_group_description WHERE customer_group_id = '" . (int)$customer_group_id . "'");
 
@@ -37,7 +37,16 @@ class ModelSaleCustomerGroup extends Model {
 	public function getCustomerGroups($data = array()) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "customer_group cg LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (cg.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		
-		$sql .= " ORDER BY cgd.name";	
+		$sort_data = array(
+			'cgd.name',
+			'cg.sort_order'
+		);	
+			
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];	
+		} else {
+			$sql .= " ORDER BY cgd.name";	
+		}
 			
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
 			$sql .= " DESC";

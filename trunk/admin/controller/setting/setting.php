@@ -77,7 +77,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_group_display'] = $this->language->get('entry_customer_group_display');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
-		$this->data['entry_customer_approval'] = $this->language->get('entry_customer_approval');
 		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_cart_weight'] = $this->language->get('entry_cart_weight');		
 		$this->data['entry_guest_checkout'] = $this->language->get('entry_guest_checkout');
@@ -203,6 +202,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['error_title'] = '';
 		}
 		
+  		if (isset($this->error['customer_group_display'])) {
+			$this->data['error_customer_group_display'] = $this->error['customer_group_display'];
+		} else {
+			$this->data['error_customer_group_display'] = '';
+		}
+				
   		if (isset($this->error['voucher_min'])) {
 			$this->data['error_voucher_min'] = $this->error['voucher_min'];
 		} else {
@@ -543,12 +548,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_customer_price'] = $this->request->post['config_customer_price'];
 		} else {
 			$this->data['config_customer_price'] = $this->config->get('config_customer_price');			
-		}
-		
-		if (isset($this->request->post['config_customer_approval'])) {
-			$this->data['config_customer_approval'] = $this->request->post['config_customer_approval'];
-		} else {
-			$this->data['config_customer_approval'] = $this->config->get('config_customer_approval');			
 		}
 						
 		if (isset($this->request->post['config_account_id'])) {
@@ -1051,6 +1050,18 @@ class ControllerSettingSetting extends Controller {
 			$this->error['title'] = $this->language->get('error_title');
 		}	
 		
+		if (!empty($this->request->post['config_customer_group_display']) && !in_array($this->request->post['config_customer_group_id'], $this->request->post['config_customer_group_display'])) {
+			$this->error['customer_group_display'] = $this->language->get('error_customer_group_display');
+		}	
+		
+		if (!$this->request->post['config_voucher_min']) {
+			$this->error['voucher_min'] = $this->language->get('error_voucher_min');
+		}	
+		
+		if (!$this->request->post['config_voucher_max']) {
+			$this->error['voucher_max'] = $this->language->get('error_voucher_max');
+		}	
+								
 		if (!$this->request->post['config_image_category_width'] || !$this->request->post['config_image_category_height']) {
 			$this->error['image_category'] = $this->language->get('error_image_category');
 		} 

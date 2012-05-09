@@ -236,6 +236,27 @@
                 </select></td>
             </tr>
             <tr>
+              <td><?php echo $entry_customer_group_display; ?></td>
+              <td><div class="scrollbox">
+                  <?php $class = 'odd'; ?>
+                  <?php foreach ($customer_groups as $customer_group) { ?>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div class="<?php echo $class; ?>">
+                    <?php if (in_array($customer_group['customer_group_id'], $config_customer_group_display)) { ?>
+                    <input type="checkbox" name="config_customer_group_display[]" value="<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
+                    <?php echo $customer_group['name']; ?>
+                    <?php } else { ?>
+                    <input type="checkbox" name="config_customer_group_display[]" value="<?php echo $customer_group['customer_group_id']; ?>" />
+                    <?php echo $customer_group['name']; ?>
+                    <?php } ?>
+                  </div>
+                  <?php } ?>
+                </div>
+                <?php if ($error_customer_group_display) { ?>
+                <span class="error"><?php echo $error_customer_group_display; ?></span>
+                <?php } ?></td>
+            </tr>            
+            <tr>
               <td><?php echo $entry_registred_group; ?></td>
               <td><select name="config_registred_group_id">
                   <?php foreach ($customer_groups as $customer_group) { ?>
@@ -258,20 +279,6 @@
                 <input type="radio" name="config_customer_price" value="1" />
                 <?php echo $text_yes; ?>
                 <input type="radio" name="config_customer_price" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_customer_approval; ?></td>
-              <td><?php if ($config_customer_approval) { ?>
-                <input type="radio" name="config_customer_approval" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_customer_approval" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="config_customer_approval" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_customer_approval" value="0" checked="checked" />
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>

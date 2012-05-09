@@ -12,6 +12,25 @@
   <h1><?php echo $heading_title; ?></h1>
   <p><?php echo $text_account_already; ?></p>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+    <?php if ($customer_groups) { ?>
+    <h2><?php echo $text_your_account; ?></h2>
+    <div class="content">
+      <p>Please select the type of account you are registering for.</p>
+      <table class="radio">
+        <?php foreach ($customer_groups as $customer_group) { ?>
+        <tr class="highlight">
+          <td><?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
+            <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
+            <?php } else { ?>
+            <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group<?php echo $customer_group['customer_group_id']; ?>" />
+            <?php } ?></td>
+          <td><label for="customer_group<?php echo $customer_group['customer_group_id']; ?>"><b><?php echo $customer_group['name']; ?></b> <br />
+              <?php echo $customer_group['description']; ?></label><br /><br /></td>
+        </tr>
+        <?php } ?>
+      </table>
+    </div>
+    <?php } ?>
     <h2><?php echo $text_your_details; ?></h2>
     <div class="content">
       <table class="form">
@@ -49,7 +68,7 @@
         </tr>
       </table>
     </div>
-    <h2><?php echo $text_your_address; ?> </h2>
+    <h2><?php echo $text_your_address; ?></h2>
     <div class="content">
       <table class="form">
         <tr>

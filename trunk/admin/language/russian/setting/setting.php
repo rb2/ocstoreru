@@ -55,7 +55,6 @@ $_['entry_tax_customer']       = 'Использовать адрес клиен
 $_['entry_customer_group']     = 'Группа для гостей:<br /><span class="help">Используется по умолчанию.</span>';
 $_['entry_customer_group_display'] = 'Customer Groups:<br /><span class="help">Display customer groups that new customers can select to use such as wholesale and business when signing up.</span>';
 $_['entry_customer_price']     = 'Не показывать цены гостям:';
-$_['entry_customer_approval']  = 'Активация новых пользователей:<br /><span class="help">Не позволять входить новым клиентам под своим логином и паролем до одобрения аккаунта.</span>';
 $_['entry_account']            = 'Подтверждение при регистрации:<br /><span class="help">Требовать подтверждение согласия с правилами при регистрации аккаунта.</span>';
 $_['entry_cart_weight']        = 'Показывать вес на странице корзины:<br /><span class="help">Показывает вес заказанных товаров на странице корзины</span>';
 $_['entry_guest_checkout']     = 'Оформление заказа без регистрации:<br /><span class="help">Позволить клиентам оформлять заказы без регистрации Личного кабинета. Эта функция не будет доступна, если в корзине будут загружаемые в виде файла товары.</span>';
@@ -129,6 +128,7 @@ $_['error_email']              = 'E-Mail адрес введен неверно!
 $_['error_telephone']          = 'Телефон должен быть от 3 до 32 символов!';
 $_['error_title']              = 'Заголовок магазина должен быть от 3 до 32 символов!';
 $_['error_limit']            = 'Не введены лимиты!';
+$_['error_customer_group_display'] = 'You must include the default customer group if you are going to use this feature!';
 $_['error_voucher_min']        = 'Minimum voucher amount required!';
 $_['error_voucher_max']        = 'Maximum voucher amount required!';
 $_['error_image_thumb']        = 'Необходимо установить размер большого изображения товара!';

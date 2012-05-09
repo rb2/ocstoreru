@@ -62,7 +62,8 @@ class ControllerAccountRegister extends Controller {
 		$this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_select'] = $this->language->get('text_select');
     	$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', 'SSL'));
-    	$this->data['text_your_details'] = $this->language->get('text_your_details');
+    	$this->data['text_your_account'] = $this->language->get('text_your_account');
+		$this->data['text_your_details'] = $this->language->get('text_your_details');
     	$this->data['text_your_address'] = $this->language->get('text_your_address');
     	$this->data['text_your_password'] = $this->language->get('text_your_password');
 		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
@@ -159,9 +160,36 @@ class ControllerAccountRegister extends Controller {
 		
     	$this->data['action'] = $this->url->link('account/register', '', 'SSL');
 
-
-
-
+		$customer_group_data = array();
+		
+		if (is_array($this->config->get('config_customer_group_display'))) {
+			$this->load->model('account/customer_group');
+			
+			$customer_groups = $this->model_account_customer_group->getCustomerGroups();
+			
+			foreach ($customer_groups  as $customer_group) {
+				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+					$customer_group_data[] = array(
+						'customer_group_id' => $customer_group['customer_group_id'],
+						'name'              => $customer_group['name'],
+						'description'       => $customer_group['description']
+					);
+				}
+			}
+		}
+		
+		if (count($customer_group_data) > 1) {
+			$this->data['customer_groups'] = $customer_group_data;
+		} else {
+			$this->data['customer_groups'] = array();
+		}
+		
+		if (isset($this->request->post['customer_group_id'])) {
+    		$this->data['customer_group_id'] = $this->request->post['customer_group_id'];
+		} else {
+			$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
+		}
+		
 		if (isset($this->request->post['firstname'])) {
     		$this->data['firstname'] = $this->request->post['firstname'];
 		} else {
@@ -301,6 +329,12 @@ class ControllerAccountRegister extends Controller {
   	}
 
   	private function validate() {
+		if (is_array($this->config->get('config_customer_group_display')) && count($this->config->get('config_customer_group_display') > 1)) {
+			if (!in_array($this->request->post['config_customer_group_id'], $this->config->get('config_customer_group_display'))) {
+				$this->error['warning'] = $this->language->get('error_customer_group');
+			}	
+		}
+		
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}

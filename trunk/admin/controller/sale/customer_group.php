@@ -184,6 +184,7 @@ class ControllerSaleCustomerGroup extends Controller {
 			$this->data['customer_groups'][] = array(
 				'customer_group_id' => $result['customer_group_id'],
 				'name'              => $result['name'] . (($result['customer_group_id'] == $this->config->get('config_customer_group_id')) ? $this->language->get('text_default') : null),
+				'sort_order'        => $result['sort_order'],
 				'selected'          => isset($this->request->post['selected']) && in_array($result['customer_group_id'], $this->request->post['selected']),
 				'action'            => $action
 			);
@@ -194,6 +195,7 @@ class ControllerSaleCustomerGroup extends Controller {
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
 		$this->data['column_name'] = $this->language->get('column_name');
+		$this->data['column_sort_order'] = $this->language->get('column_sort_order');
 		$this->data['column_action'] = $this->language->get('column_action');
 
 		$this->data['button_insert'] = $this->language->get('button_insert');
@@ -267,6 +269,7 @@ class ControllerSaleCustomerGroup extends Controller {
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_description'] = $this->language->get('entry_description');
+		$this->data['entry_approve'] = $this->language->get('entry_approve');
 		$this->data['entry_company_display'] = $this->language->get('entry_company_display');
 		$this->data['entry_company_required'] = $this->language->get('entry_company_required');
 		$this->data['entry_tax_display'] = $this->language->get('entry_tax_display');
@@ -339,7 +342,15 @@ class ControllerSaleCustomerGroup extends Controller {
 		} else {
 			$this->data['customer_group_description'] = array();
 		}	
-			
+		
+		if (isset($this->request->post['approve'])) {
+			$this->data['approve'] = $this->request->post['approve'];
+		} elseif (!empty($customer_group_info)) {
+			$this->data['approve'] = $customer_group_info['approve'];
+		} else {
+			$this->data['approve'] = '';
+		}	
+					
 		if (isset($this->request->post['company_display'])) {
 			$this->data['company_display'] = $this->request->post['company_display'];
 		} elseif (!empty($customer_group_info)) {

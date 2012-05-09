@@ -216,7 +216,6 @@ class ControllerSettingStore extends Controller {
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_group_display'] = $this->language->get('entry_customer_group_display');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
-		$this->data['entry_customer_approval'] = $this->language->get('entry_customer_approval');
 		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_cart_weight'] = $this->language->get('entry_cart_weight');
 		$this->data['entry_guest_checkout'] = $this->language->get('entry_guest_checkout');
@@ -297,6 +296,12 @@ class ControllerSettingStore extends Controller {
 			$this->data['error_title'] = '';
 		}
 		
+  		if (isset($this->error['customer_group_display'])) {
+			$this->data['error_customer_group_display'] = $this->error['customer_group_display'];
+		} else {
+			$this->data['error_customer_group_display'] = '';
+		}
+				
  		if (isset($this->error['image_category'])) {
 			$this->data['error_image_category'] = $this->error['image_category'];
 		} else {
@@ -615,14 +620,6 @@ class ControllerSettingStore extends Controller {
 			$this->data['config_customer_price'] = '';
 		}
 		
-		if (isset($this->request->post['config_customer_approval'])) {
-			$this->data['config_customer_approval'] = $this->request->post['config_customer_approval'];
-		} elseif (isset($store_info['config_customer_approval'])) {
-			$this->data['config_customer_approval'] = $store_info['config_customer_approval'];			
-		} else {
-			$this->data['config_customer_approval'] = '';
-		}
-		
 		if (isset($this->request->post['config_account_id'])) {
 			$this->data['config_account_id'] = $this->request->post['config_account_id'];
 		} elseif (isset($store_info['config_account_id'])) {
@@ -913,6 +910,10 @@ class ControllerSettingStore extends Controller {
 			$this->error['title'] = $this->language->get('error_title');
 		}	
 		
+		if (!empty($this->request->post['config_customer_group_display']) && !in_array($this->request->post['config_customer_group_id'], $this->request->post['config_customer_group_display'])) {
+			$this->error['customer_group_display'] = $this->language->get('error_customer_group_display');
+		}	
+				
 		if (!$this->request->post['config_image_category_width'] || !$this->request->post['config_image_category_height']) {
 			$this->error['image_category'] = $this->language->get('error_image_category');
 		}
