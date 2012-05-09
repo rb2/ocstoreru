@@ -979,7 +979,7 @@ CREATE TABLE `oc_customer` (
 -- 
 
 DROP TABLE IF EXISTS `oc_customer_group`;
-CREATE TABLE IF NOT EXISTS `oc_customer_group` (
+CREATE TABLE `oc_customer_group` (
   `customer_group_id` int(11) NOT NULL auto_increment,
   `approval` int(1) NOT NULL,
   `company_id_display` int(1) NOT NULL,
@@ -1004,7 +1004,7 @@ INSERT INTO `oc_customer_group` (`customer_group_id`, `approval`, `company_id_di
 --
 
 DROP TABLE IF EXISTS `oc_customer_group_description`;
-CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
+CREATE TABLE `oc_customer_group_description` (
   `customer_group_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
   `name` varchar(32) COLLATE utf8_general_ci NOT NULL,
