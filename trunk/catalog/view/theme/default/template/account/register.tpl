@@ -16,7 +16,7 @@
     <h2><?php echo $text_your_account; ?></h2>
     <div class="content">
       <p>Please select the type of account you are registering for.</p>
-      <table class="radio">
+      <table>
         <?php foreach ($customer_groups as $customer_group) { ?>
         <tr class="highlight">
           <td><?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>

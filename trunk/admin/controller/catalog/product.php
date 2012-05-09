@@ -1208,26 +1208,6 @@ class ControllerCatalogProduct extends Controller {
 		}
   	}
 	
-	public function option() {
-		$output = ''; 
-		
-		$this->load->model('catalog/option');
-		
-		$results = $this->model_catalog_option->getOptionValues($this->request->get['option_id']);
-		
-		foreach ($results as $result) {
-			$output .= '<option value="' . $result['option_value_id'] . '"';
-
-			if (isset($this->request->get['option_value_id']) && ($this->request->get['option_value_id'] == $result['option_value_id'])) {
-				$output .= ' selected="selected"';
-			}
-
-			$output .= '>' . $result['name'] . '</option>';
-		}
-
-		$this->response->setOutput($output);
-	}
-		
 	public function autocomplete() {
 		$json = array();
 		

@@ -61,7 +61,7 @@ class ModelAffiliateAffiliate extends Model {
 	}
 			
 	public function getTotalAffiliatesByEmail($email) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE email = '" . $this->db->escape($email) . "'");
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE LOWER(email) = '" . $this->db->escape(strtolower($email)) . "'");
 		
 		return $query->row['total'];
 	}

@@ -137,7 +137,6 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_sms_gate_password'] = $this->language->get('entry_sms_gate_password');
 		$this->data['entry_sms_alert'] = $this->language->get('entry_sms_alert');
 		$this->data['entry_sms_copy'] = $this->language->get('entry_sms_copy');
-		$this->data['entry_registred_group'] = $this->language->get('entry_registred_group');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -524,12 +523,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_customer_group_id'] = $this->request->post['config_customer_group_id'];
 		} else {
 			$this->data['config_customer_group_id'] = $this->config->get('config_customer_group_id');			
-		}
-		
-		if (isset($this->request->post['config_registred_group_id'])) {
-			$this->data['config_registred_group_id'] = $this->request->post['config_registred_group_id'];
-		} else {
-			$this->data['config_registred_group_id'] = $this->config->get('config_registred_group_id');			
 		}
 		
 		$this->load->model('sale/customer_group');

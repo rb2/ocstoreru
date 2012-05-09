@@ -195,9 +195,9 @@ class ModelCatalogProduct extends Model {
 		}
 		
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
-			$sql .= " DESC, pd.name DESC";
+			$sql .= " DESC, LCASE(pd.name) DESC";
 		} else {
-			$sql .= " ASC, pd.name ASC";
+			$sql .= " ASC, LCASE(pd.name) ASC";
 		}
 	
 		if (isset($data['start']) || isset($data['limit'])) {

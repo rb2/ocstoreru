@@ -37,6 +37,7 @@ class ModelUpgrade extends Model {
 					// For example, ALTER TABLE will error if the table has since been removed,
 					// So validate the table exists first, etc.
 					if (preg_match('/^ALTER TABLE (.+?) ADD PRIMARY KEY/', $line, $matches)) {
+//					$res = mysql_query(sprintf("SHOW KEYS FROM %s",$matches[1]), $connection);
 						$info = mysql_fetch_assoc(mysql_query(sprintf("SHOW KEYS FROM %s",$matches[1]), $connection));
 						if ($info['Key_name'] == 'PRIMARY') { continue; }
 					}
@@ -44,10 +45,12 @@ class ModelUpgrade extends Model {
 //						if (@mysql_num_rows(@mysql_query(sprintf("SHOW KEYS FROM %s WHERE Key_name != 'PRIMARY' AND Column_name = '%s'",$matches[1],str_replace('`', '', $matches[2])), $connection)) > 0) { continue; }
 //					}
 					if (preg_match('/^ALTER TABLE (.+?) ADD INDEX (.+?) /', $line, $matches)) {
+//					$res = mysql_query(sprintf("SHOW KEYS FROM %s",$matches[1]), $connection);
 						$info = mysql_fetch_assoc(mysql_query(sprintf("SHOW INDEX FROM %s",$matches[1]), $connection));
 						if ($info['Key_name'] == 'PRIMARY') { continue; }
 					}
 					if (preg_match('/^ALTER TABLE (.+?) ADD PRIMARY KEY/', $line, $matches)) {
+//					$res = mysql_query(sprintf("SHOW KEYS FROM %s",$matches[1]), $connection);
 						$info = mysql_fetch_assoc(mysql_query(sprintf("SHOW KEYS FROM %s",$matches[1]), $connection));
 						if ($info['Key_name'] == 'PRIMARY') { continue; }
 					}

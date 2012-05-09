@@ -19,10 +19,10 @@ $_['entry_keyword']         = 'SEO URL:<br/><span class="help">Должно бы
 $_['entry_status']          = 'Статус:';
 $_['entry_sort_order']  	  = 'Порядок сортировки:<br/><span class="help">-1 для скрытия</span>';
 $_['entry_layout']      	  = 'Выберите схему:';
-$_['entry_meta_keyword']    = 'Мета-тег Keywords:';
-$_['entry_meta_description']= 'Мета-тег Description:';
 $_['entry_seo_title']       = 'HTML-тег Title:';
 $_['entry_seo_h1']          = 'HTML-тег H1:';
+$_['entry_meta_keyword']    = 'Мета-тег Keywords:';
+$_['entry_meta_description']= 'Мета-тег Description:';
 
 // Error
 $_['error_warning']         = 'Внимательно проверьте форму на ошибки!';

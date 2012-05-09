@@ -59,7 +59,7 @@ class ModelSaleCustomer extends Model {
 	}
 	
 	public function getCustomerByEmail($email) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "customer WHERE email = '" . $this->db->escape($email) . "'");
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "customer WHERE LCASE(email) = '" . $this->db->escape(strtolower($email)) . "'");
 	
 		return $query->row;
 	}

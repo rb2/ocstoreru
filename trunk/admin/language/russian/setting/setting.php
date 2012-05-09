@@ -115,8 +115,6 @@ $_['entry_sms_copy']           = 'Дополнительные номера:<br/
 $_['entry_seo_url_type']       = 'Тип ЧПУ:';
 $_['entry_seo_url_include_path'] = 'ЧПУ товаров с категориями:<span class="help">/category/subcategory/product<br />(только для SeoPro)</span>';
 $_['entry_seo_url_postfix']    = 'Окончание ЧПУ:<span class="help">Например .html<br />(только для SeoPro)</span>';
-$_['entry_registred_group']    = 'Группа зарегистрированных:<br /><span class="help">Назначается при регистрации.</span>';
-$_['entry_invoice']            = 'Начальный № счета-фактуры:<br /><span class="help">Установите стартовый номер счета-фактуры.</span>';
 
 // Error
 $_['error_warning']            = 'Внимательно проверьте форму на ошибки!';

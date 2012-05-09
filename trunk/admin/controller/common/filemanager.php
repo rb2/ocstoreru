@@ -142,8 +142,8 @@ class ControllerCommonFileManager extends Controller {
 					}
 						
 					$json[] = array(
-						'file'     => utf8_substr($file, utf8_strlen(DIR_IMAGE . 'data/')),
 						'filename' => basename($file),
+						'file'     => utf8_substr($file, utf8_strlen(DIR_IMAGE . 'data/')),
 						'size'     => round(utf8_substr($size, 0, utf8_strpos($size, '.') + 4), 2) . $suffix[$i],
 						'thumb'    => $this->model_tool_image->resize(utf8_substr($file, utf8_strlen(DIR_IMAGE)), 100, 100)
 					);

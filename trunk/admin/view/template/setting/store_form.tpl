@@ -257,18 +257,6 @@
                 <?php } ?></td>
             </tr>            
             <tr>
-              <td><?php echo $entry_registred_group; ?></td>
-              <td><select name="config_registred_group_id">
-                  <?php foreach ($customer_groups as $customer_group) { ?>
-                  <?php if ($customer_group['customer_group_id'] == $config_registred_group_id) { ?>
-                  <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
-            <tr>
               <td><?php echo $entry_customer_price; ?></td>
               <td><?php if ($config_customer_price) { ?>
                 <input type="radio" name="config_customer_price" value="1" checked="checked" />

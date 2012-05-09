@@ -24,7 +24,7 @@ class ModelSaleAffiliate extends Model {
 	}
 	
 	public function getAffiliateByEmail($email) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "affiliate WHERE email = '" . $this->db->escape($email) . "'");
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "affiliate WHERE LCASE(email) = '" . $this->db->escape(strtolower($email)) . "'");
 	
 		return $query->row;
 	}

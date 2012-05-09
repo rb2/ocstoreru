@@ -66,7 +66,7 @@ final class Razoshlem extends SmsGate {
 
 	private function truncate($string) {
 		if (preg_match('/[^0-9]/', $string)) {
-			$string = utf8_truncate($string, 11, '');
+			$string = utf8_substr($string, 0, 11);
 		} else {
 			$string = substr($string, 0, 15);
 		}

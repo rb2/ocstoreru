@@ -34,16 +34,16 @@
           </tr>
           <?php } ?>
           <tr>
-            <td><?php echo $entry_approve; ?></td>
-            <td><?php if ($approve) { ?>
-              <input type="radio" name="approve" value="1" checked="checked" />
+            <td><?php echo $entry_approval; ?></td>
+            <td><?php if ($approval) { ?>
+              <input type="radio" name="approval" value="1" checked="checked" />
               <?php echo $text_yes; ?>
-              <input type="radio" name="approve" value="0" />
+              <input type="radio" name="approval" value="0" />
               <?php echo $text_no; ?>
               <?php } else { ?>
-              <input type="radio" name="approve" value="1" />
+              <input type="radio" name="approval" value="1" />
               <?php echo $text_yes; ?>
-              <input type="radio" name="approve" value="0" checked="checked" />
+              <input type="radio" name="approval" value="0" checked="checked" />
               <?php echo $text_no; ?>
               <?php } ?></td>
           </tr>

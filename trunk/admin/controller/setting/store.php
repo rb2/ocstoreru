@@ -236,7 +236,6 @@ class ControllerSettingStore extends Controller {
 		$this->data['entry_image_wishlist'] = $this->language->get('entry_image_wishlist');
 		$this->data['entry_image_cart'] = $this->language->get('entry_image_cart');
 		$this->data['entry_use_ssl'] = $this->language->get('entry_use_ssl');
-		$this->data['entry_registred_group'] = $this->language->get('entry_registred_group');
 				
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -583,21 +582,13 @@ class ControllerSettingStore extends Controller {
 		} else {
 			$this->data['config_tax_customer'] = '';
 		}
-		
+
 		if (isset($this->request->post['config_customer_group_id'])) {
 			$this->data['config_customer_group_id'] = $this->request->post['config_customer_group_id'];
 		} elseif (isset($store_info['config_customer_group_id'])) {
 			$this->data['config_customer_group_id'] = $store_info['config_customer_group_id'];			
 		} else {
 			$this->data['config_customer_group_id'] = '';
-		}
-		
-		if (isset($this->request->post['config_registred_group_id'])) {
-			$this->data['config_registred_group_id'] = $this->request->post['config_registred_group_id'];
-		} elseif (isset($store_info['config_registred_group_id'])) {
-			$this->data['config_registred_group_id'] = $store_info['config_registred_group_id'];			
-		} else {
-			$this->data['config_registred_group_id'] = '';
 		}
 		
 		$this->load->model('sale/customer_group');
@@ -626,12 +617,12 @@ class ControllerSettingStore extends Controller {
 			$this->data['config_account_id'] = $store_info['config_account_id'];			
 		} else {
 			$this->data['config_account_id'] = '';
-		}
-		
+		}		
+
 		$this->load->model('catalog/information');
 		
 		$this->data['informations'] = $this->model_catalog_information->getInformations();
-
+				
 		if (isset($this->request->post['config_cart_weight'])) {
 			$this->data['config_cart_weight'] = $this->request->post['config_cart_weight'];
 		} elseif (isset($store_info['config_cart_weight'])) {
@@ -683,7 +674,7 @@ class ControllerSettingStore extends Controller {
 		} else {
 			$this->data['config_stock_checkout'] = '';
 		}
-		
+				
 		$this->load->model('tool/image');
 
 		if (isset($this->request->post['config_logo'])) {

@@ -329,8 +329,8 @@ class ControllerAccountRegister extends Controller {
   	}
 
   	private function validate() {
-		if (is_array($this->config->get('config_customer_group_display')) && count($this->config->get('config_customer_group_display') > 1)) {
-			if (!in_array($this->request->post['config_customer_group_id'], $this->config->get('config_customer_group_display'))) {
+		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display'))) {
+			if (!in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 				$this->error['warning'] = $this->language->get('error_customer_group');
 			}	
 		}

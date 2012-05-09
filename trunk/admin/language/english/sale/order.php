@@ -112,8 +112,6 @@ $_['text_risk_score']                         = 'Risk Score:<br /><span class="h
 $_['text_queries_remaining']                  = 'Queries Remaining:<br /><span class="help">Number of queries remaining in your account, can be used to alert you when you may need to add more queries to your account.</span>';
 $_['text_maxmind_id']                         = 'Maxmind ID:<br /><span class="help">Unique identifier, used to reference transactions when reporting fraudulent activity back to MaxMind. This reporting will help MaxMind improve its service to you and will enable a planned feature to customize the fraud scoring formula based on your chargeback history.</span>';
 $_['text_error']                              = 'Error:<br /><span class="help">Returns an error string with a warning message or a reason why the request failed.</span>';
-$_['text_create_invoice_no']                  = 'Создать счет-фактуру №';
-$_['text_abandoned_orders']                   = 'Брошенные заказы';
 
 // Column
 $_['column_order_id']                         = 'Order ID';

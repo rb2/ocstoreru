@@ -72,7 +72,6 @@ class ModelCatalogManufacturer extends Model {
 	}
 	
 	public function getManufacturers($data = array()) {
-		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "manufacturer";
 			
 			$sort_data = array(
@@ -107,19 +106,6 @@ class ModelCatalogManufacturer extends Model {
 			$query = $this->db->query($sql);
 		
 			return $query->rows;
-		} else {
-			$manufacturer_data = $this->cache->get('manufacturer');
-		
-			if (!$manufacturer_data) {
-				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer ORDER BY name");
-	
-				$manufacturer_data = $query->rows;
-			
-				$this->cache->set('manufacturer', $manufacturer_data);
-			}
-		 
-			return $manufacturer_data;
-		}
 	}
 	
 	public function getManufacturerStores($manufacturer_id) {

@@ -13,7 +13,7 @@ $_['column_action']           = 'Action';
 // Entry
 $_['entry_name']              = 'Customer Group Name:';
 $_['entry_description']       = 'Description:';
-$_['entry_approve']           = 'Approve New Customers:<br /><span class="help">Customers must be approved by and administrator before they can login.</span>';
+$_['entry_approval']          = 'Approve New Customers:<br /><span class="help">Customers must be approved by and administrator before they can login.</span>';
 $_['entry_company_display']   = 'Display Company No.:<br /><span class="help">Display a company no. field.</span>';
 $_['entry_company_required']  = 'Company No. Required:<br /><span class="help">Select which customer groups must enter their company no. for billing addresses before checkout.</span>';
 $_['entry_tax_display']       = 'Display Tax ID.:<br /><span class="help">Display a company No. field for billing addresses.</span>';
