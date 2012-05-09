@@ -196,3 +196,26 @@ UPDATE `oc_setting` SET `value` = replace(`value`, 's:6:"status";s:1:"1"', 's:6:
 
 # Disable UPS Extension to force user to reenable with new settings to avoid php error
 UPDATE `oc_setting` SET `value` = 0 WHERE `key` = 'ups_status';
+
+CREATE TABLE IF NOT EXISTS oc_customer_group_description (
+    customer_group_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+    language_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+    name varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+    description text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+    PRIMARY KEY (customer_group_id, language_id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+ALTER TABLE oc_address ADD company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER company;
+ALTER TABLE oc_address ADD tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER company_id;
+ALTER TABLE oc_address DROP company_no;
+ALTER TABLE oc_address DROP company_tax;
+
+ALTER TABLE oc_customer_group ADD approval int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER customer_group_id;
+ALTER TABLE oc_customer_group ADD company_id_display int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER approval;
+ALTER TABLE oc_customer_group ADD company_id_required int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER company_id_display;
+ALTER TABLE oc_customer_group ADD tax_id_display int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER company_id_required;
+ALTER TABLE oc_customer_group ADD tax_id_required int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER tax_id_display;
+ALTER TABLE oc_customer_group ADD sort_order int(3) NOT NULL DEFAULT 0 COMMENT '' AFTER tax_id_required;
+
+### This line is executed using php in the upgrade model file so we dont lose names
+#ALTER TABLE oc_customer_group DROP name;

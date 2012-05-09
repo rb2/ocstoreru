@@ -126,7 +126,7 @@ class ModelUpgrade extends Model {
 		if (empty($settings['config_tax_customer'])) {
 			$db->query("UPDATE " . DB_PREFIX . "setting SET value = 'shipping' WHERE `key` = 'config_tax_customer'");
 		}
-		
+
 		## v1.5.2.2
 		// Set defaults for new Voucher Min/Max fields
 		if (empty($settings['config_voucher_min'])) {
@@ -135,6 +135,7 @@ class ModelUpgrade extends Model {
 		if (empty($settings['config_voucher_max'])) {
 			$db->query("UPDATE " . DB_PREFIX . "setting SET value = '50' WHERE `key` = 'config_voucher_max'");
 		}
+
 		// Layout routes now require "%" for wildcard paths
 		$layout_route_query = $db->query("SELECT * FROM " . DB_PREFIX . "layout_route");
 		foreach ($layout_route_query->rows as $layout_route) {
@@ -143,6 +144,18 @@ class ModelUpgrade extends Model {
 			} elseif (strrchr($layout_route['route'], '/') == "/") { // If has the trailing slash, then just add "%"
 					$db->query("UPDATE " . DB_PREFIX . "layout_route SET route = '" . $layout_route['route'] . "%' WHERE `layout_route_id` = '" . $layout_route['layout_route_id'] . "'");
 			}
+		}
+
+		// Customer Group 'name' field moved to new customer_group_description table. Need to loop through and move over.
+		$column_query = $db->query("DESC " . DB_PREFIX . "customer_group `name`");
+		if ($column_query->num_rows) {
+			$customer_group_query = $db->query("SELECT * FROM " . DB_PREFIX . "customer_group");
+			$default_language_query = $db->query("SELECT language_id FROM " . DB_PREFIX . "language WHERE code = '" . $settings['config_admin_language'] . "'");
+			$default_language_id = $default_language_query->row['language_id'];
+			foreach ($customer_group_query->rows as $customer_group) {
+				$db->query("INSERT INTO " . DB_PREFIX . "customer_group_description SET customer_group_id = '" . (int)$customer_group['customer_group_id'] . "', language_id = '" . (int)$default_language_id . "', `name` = '" . $db->escape($customer_group['name']) . "' ON DUPLICATE KEY UPDATE customer_group_id=customer_group_id");
+			}
+			$db->query("ALTER TABLE " . DB_PREFIX . "customer_group DROP `name`");
 		}
 	}
 }
