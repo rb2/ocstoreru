@@ -220,19 +220,19 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 					$language = 97;
 					break;	
 				// Finnish					
-				case 'FI':
+				case 'fi':
 					$language = 37;
 					break;
 				// Danish		
-				case 'DK':
+				case 'dk':
 					$language = 27;
 					break;
 				// German		
-				case 'DE':
+				case 'de':
 					$language = 28;
 					break;	
 				// Dutch																
-				case 'NL':
+				case 'nl':
 					$language = 101;
 					break;					
 			}			

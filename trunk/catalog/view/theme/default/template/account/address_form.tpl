@@ -28,17 +28,21 @@
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
         </tr>
-         <tr>
+        <?php if ($company_id_display) { ?>
+        <tr>
           <td><?php echo $entry_company_id; ?></td>
           <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" />
             <?php if ($error_company_id) { ?>
             <span class="error"><?php echo $error_company_id; ?></span>
             <?php } ?></td>
         </tr>
+        <?php } ?>
+        <?php if ($tax_id_display) { ?>
         <tr>
           <td><?php echo $entry_tax_id; ?></td>
           <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" /></td>
-        </tr>       
+        </tr>
+        <?php } ?>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
           <td><input type="text" name="address_1" value="<?php echo $address_1; ?>" />
@@ -106,7 +110,9 @@
     </div>
     <div class="buttons">
       <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
-      <div class="right"><input type="submit" value="<?php echo $button_continue; ?>" class="button" /></div>
+      <div class="right">
+        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
+      </div>
     </div>
   </form>
   <?php echo $content_bottom; ?></div>
@@ -133,5 +139,5 @@ $('select[name=\'country_id\']').bind('change', function() {
 });
 
 $('select[name=\'country_id\']').trigger('change');
-//--></script>
+//--></script> 
 <?php echo $footer; ?>

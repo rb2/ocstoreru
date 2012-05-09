@@ -20,30 +20,10 @@ class ModelPaymentKlarnaInvoice extends Model {
 		}	
 			
 		$currencies = array(
-			'AUD',
-			'CAD',
-			'EUR',
-			'GBP',
-			'JPY',
-			'USD',
-			'NZD',
-			'CHF',
-			'HKD',
-			'SGD',
 			'SEK',
-			'DKK',
-			'PLN',
 			'NOK',
-			'HUF',
-			'CZK',
-			'ILS',
-			'MXN',
-			'MYR',
-			'BRL',
-			'PHP',
-			'TWD',
-			'THB',
-			'TRY'
+			'EUR',
+			'DKK'
 		);
 		
 		if (!in_array(strtoupper($this->currency->getCode()), $currencies)) {

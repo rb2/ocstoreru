@@ -285,6 +285,8 @@ class ControllerAccountAddress extends Controller {
     	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
     	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
     	$this->data['entry_company'] = $this->language->get('entry_company');
+		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
+		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');		
     	$this->data['entry_address_1'] = $this->language->get('entry_address_1');
     	$this->data['entry_address_2'] = $this->language->get('entry_address_2');
     	$this->data['entry_postcode'] = $this->language->get('entry_postcode');
@@ -308,6 +310,12 @@ class ControllerAccountAddress extends Controller {
 			$this->data['error_lastname'] = '';
 		}
 		
+  		if (isset($this->error['company_id'])) {
+			$this->data['error_company_id'] = $this->error['company_id'];
+		} else {
+			$this->data['error_company_id'] = '';
+		}
+				
 		if (isset($this->error['address_1'])) {
     		$this->data['error_address_1'] = $this->error['address_1'];
 		} else {
@@ -371,7 +379,39 @@ class ControllerAccountAddress extends Controller {
 		} else {
       		$this->data['company'] = '';
     	}
-				
+		
+		if (isset($this->request->post['company_id'])) {
+    		$this->data['company_id'] = $this->request->post['company_id'];
+    	} elseif (!empty($address_info)) {
+			$this->data['company_id'] = $address_info['company_id'];			
+		} else {
+			$this->data['company_id'] = '';
+		}
+		
+		if (isset($this->request->post['tax_id'])) {
+    		$this->data['tax_id'] = $this->request->post['tax_id'];
+    	} elseif (!empty($address_info)) {
+			$this->data['tax_id'] = $address_info['tax_id'];			
+		} else {
+			$this->data['tax_id'] = '';
+		}
+		
+		$this->load->model('account/customer_group');
+		
+		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->customer->getCustomerGroupId());
+		
+		if ($customer_group_info) {
+			$this->data['company_id_display'] = $customer_group_info['company_id_display'];
+		} else {
+			$this->data['company_id_display'] = '';
+		}
+		
+		if ($customer_group_info) {
+			$this->data['tax_id_display'] = $customer_group_info['tax_id_display'];
+		} else {
+			$this->data['tax_id_display'] = '';
+		}
+								
     	if (isset($this->request->post['address_1'])) {
       		$this->data['address_1'] = $this->request->post['address_1'];
     	} elseif (!empty($address_info)) {
