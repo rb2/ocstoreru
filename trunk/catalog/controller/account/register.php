@@ -142,7 +142,7 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['error_tax_id'] = '';
 		}
-						
+								
   		if (isset($this->error['address_1'])) {
 			$this->data['error_address_1'] = $this->error['address_1'];
 		} else {
@@ -421,17 +421,9 @@ class ControllerAccountRegister extends Controller {
 				$this->error['company_id'] = $this->language->get('error_company_id');
 			}
 			
-			// Tax ID
+			// Tax ID 
 			if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
 				$this->error['tax_id'] = $this->language->get('error_tax_id');
-
-				$this->load->helper('vat');
-				
-				$result = vat_validate($country_info['iso_code_2'], $this->request->post['tax_id']);
-				
-				if ($country_info && $result) {
-					
-				}
 			}						
 		}
 		
@@ -449,6 +441,13 @@ class ControllerAccountRegister extends Controller {
 		
 		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 			$this->error['postcode'] = $this->language->get('error_postcode');
+			
+			// VAT Validation
+			$this->load->helper('vat');
+			
+			if ($this->config->get('config_vat') && $this->request->post['tax_id'] && vat_validation($country_info['iso_code_2'], $this->request->post['tax_id'])) {
+				$this->error['tax_id'] = $this->language->get('error_vat');
+			}
 		}
 
     	if ($this->request->post['country_id'] == '') {

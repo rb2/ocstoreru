@@ -312,7 +312,13 @@ class ControllerAccountAddress extends Controller {
 		} else {
 			$this->data['error_company_id'] = '';
 		}
-						
+		
+  		if (isset($this->error['tax_id'])) {
+			$this->data['error_tax_id'] = $this->error['tax_id'];
+		} else {
+			$this->data['error_tax_id'] = '';
+		}
+										
 		if (isset($this->error['address_1'])) {
     		$this->data['error_address_1'] = $this->error['address_1'];
 		} else {
@@ -512,6 +518,13 @@ class ControllerAccountAddress extends Controller {
 		
 		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
 			$this->error['postcode'] = $this->language->get('error_postcode');
+		
+			// VAT Validation
+			$this->load->helper('vat');
+			
+			if ($this->config->get('config_vat') && $this->request->post['tax_id'] && vat_validation($country_info['iso_code_2'], $this->request->post['tax_id'])) {
+				$this->error['vat'] = $this->language->get('error_vat');
+			}		
 		}
 		
     	if ($this->request->post['country_id'] == '') {

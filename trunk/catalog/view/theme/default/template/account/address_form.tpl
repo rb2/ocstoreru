@@ -37,7 +37,10 @@
         </tr>
         <tr style="display: <?php echo ($tax_id_display ? 'table-row' : 'none'); ?>;">
           <td><?php echo $entry_tax_id; ?></td>
-          <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" /></td>
+          <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
+            <?php if ($error_tax) { ?>
+            <span class="error"><?php echo $error_tax; ?></span>
+            <?php } ?></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
