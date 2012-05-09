@@ -115,15 +115,6 @@
               </tr>
             </table>
           </div>
-          <?php 
-$postcode_required_data = array(); 
-
-foreach ($countries as $country) {
-	if ($country['postcode_required']) {
-		$postcode_required_data[] = '\'' . $country['country_id'] . '\'';
-	} 
-} 
-?>
           <?php $address_row = 1; ?>
           <?php foreach ($addresses as $address) { ?>
           <div id="tab-address-<?php echo $address_row; ?>" class="vtabs-content">
@@ -171,7 +162,7 @@ foreach ($countries as $country) {
               </tr>
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-                <td><select name="address[<?php echo $address_row; ?>][country_id]">
+                <td><select name="address[<?php echo $address_row; ?>][country_id]" onchange="country(this, '<?php echo $address_row; ?>', '<?php echo $address['zone_id']; ?>');">
                     <option value=""><?php echo $text_select; ?></option>
                     <?php foreach ($countries as $country) { ?>
                     <?php if ($country['country_id'] == $address['country_id']) { ?>
@@ -203,21 +194,6 @@ foreach ($countries as $country) {
                 <?php } ?>
               </tr>
             </table>
-            <script type="text/javascript"><!--
-$('select[name=\'address[<?php echo $address_row; ?>][country_id]\']').live('change', function() {
-	var postcode_required = [<?php echo implode(',', $postcode_required_data); ?>];
-	
-	if ($.inArray(this.value, postcode_required) >= 0) {
-		$('#postcode-required<?php echo $address_row; ?>').show();
-	} else {
-		$('#postcode-required<?php echo $address_row; ?>').hide();
-	}
-	
-	$('select[name=\'address[<?php echo $address_row; ?>][zone_id]\']').load('index.php?route=sale/customer/zone&token=<?php echo $token; ?>&country_id=' + this.value + '&zone_id=<?php echo $address['zone_id']; ?>');
-});
-
-$('select[name=\'address[<?php echo $address_row; ?>][country_id]\']').trigger('change');
-//--></script> 
           </div>
           <?php $address_row++; ?>
           <?php } ?>
@@ -293,6 +269,50 @@ $('select[name=\'address[<?php echo $address_row; ?>][country_id]\']').trigger('
   </div>
 </div>
 <script type="text/javascript"><!--
+function country(element, index, zone_id) {
+	$.ajax({
+		url: 'index.php?route=sale/customer/country&token=<?php echo $token; ?>&country_id=' + element.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'address[' + index + '][country_id]\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+		},			
+		success: function(json) {
+			if (json['postcode_required'] == '1') {
+				$('#postcode-required' + index).show();
+			} else {
+				$('#postcode-required' + index).hide();
+			}
+			
+			html = '<option value=""><?php echo $text_select; ?></option>';
+			
+			if (json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+	    			
+					if (json['zone'][i]['zone_id'] == zone_id) {
+	      				html += ' selected="selected"';
+	    			}
+	
+	    			html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0"><?php echo $text_none; ?></option>';
+			}
+			
+			$('select[name=\'address[' + index + '][zone_id]\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+
+$('select[name$=\'[country_id]\']').trigger('change');
+//--></script> 
+<script type="text/javascript"><!--
 var address_row = <?php echo $address_row; ?>;
 
 function addAddress() {	
@@ -329,7 +349,7 @@ function addAddress() {
     html += '    </tr>';
     html += '    <tr>';
     html += '      <td><span class="required">*</span> <?php echo $entry_country; ?></td>';
-    html += '      <td><select name="address[' + address_row + '][country_id]">';
+    html += '      <td><select name="address[' + address_row + '][country_id]" onchange="country(this, \'' + address_row + '\', \'0\');">';
     html += '         <option value=""><?php echo $text_select; ?></option>';
     <?php foreach ($countries as $country) { ?>
     html += '         <option value="<?php echo $country['country_id']; ?>"><?php echo addslashes($country['name']); ?></option>';
@@ -349,23 +369,6 @@ function addAddress() {
 	
 	$('#tab-general').append(html);
 	
-	$('select[name=\'address[' + address_row + '][country_id]\']').live('change', function() {
-		var start = ($(this).attr('name').indexOf('[', 0) + 1);
-		var length = ($(this).attr('name').indexOf(']', 0)) - start;
-		
-		index = $(this).attr('name').substr(start, length);
-		
-		var postcode_required = [<?php echo implode(',', $postcode_required_data); ?>];
-		
-		if ($.inArray(this.value, postcode_required) >= 0) {
-			$('#postcode-required' + index).show();
-		} else {
-			$('#postcode-required' + index).hide();
-		}
-		
-		$('select[name=\'address[' + index + '][zone_id]\']').load('index.php?route=sale/customer/zone&token=<?php echo $token; ?>&country_id=' + this.value);
-	});
-
 	$('select[name=\'address[' + address_row + '][country_id]\']').trigger('change');	
 	
 	$('#address-add').before('<a href="#tab-address-' + address_row + '" id="address-' + address_row + '"><?php echo $tab_address; ?> ' + address_row + '&nbsp;<img src="view/image/delete.png" alt="" onclick="$(\'#vtabs a:first\').trigger(\'click\'); $(\'#address-' + address_row + '\').remove(); $(\'#tab-address-' + address_row + '\').remove(); return false;" /></a>');
