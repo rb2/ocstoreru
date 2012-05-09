@@ -49,7 +49,7 @@
     </tr>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-      <td><select name="country_id" class="large-field" onchange="$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/payment_address/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');">
+      <td><select name="country_id" class="large-field">
           <option value=""><?php echo $text_select; ?></option>
           <?php foreach ($countries as $country) { ?>
           <?php if ($country['country_id'] == $country_id) { ?>
@@ -100,10 +100,9 @@ $('#payment-address select[name=\'country_id\']').bind('change', function() {
 	} else {
 		$('#payment-postcode-required').hide();
 	}
+	
+	$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/payment_address/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');
 });
 
 $('#payment-address select[name=\'country_id\']').trigger('change');
-//--></script>
-<script type="text/javascript"><!--
-$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/payment_address/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
 //--></script>

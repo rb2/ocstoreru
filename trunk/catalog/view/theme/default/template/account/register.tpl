@@ -101,7 +101,7 @@
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-          <td><select name="country_id" onchange="$('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');">
+          <td><select name="country_id">
               <option value=""><?php echo $text_select; ?></option>
               <?php foreach ($countries as $country) { ?>
               <?php if ($country['country_id'] == $country_id) { ?>
@@ -243,12 +243,11 @@ $('select[name=\'country_id\']').bind('change', function() {
 	} else {
 		$('#postcode-required').hide();
 	}
-})
+	
+	$('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');
+});
 
 $('select[name=\'country_id\']').trigger('change');
-//--></script>
-<script type="text/javascript"><!--
-$('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
 //--></script>
 <?php 
 $company_id_display_data = array();
