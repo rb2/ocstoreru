@@ -34,11 +34,12 @@
             <tr>
               <td><?php echo $entry_customer; ?></td>
               <td><input type="text" name="customer" value="<?php echo $customer; ?>" />
-                <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>" /></td>
+                <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>" />
+                <input type="hidden" name="customer_group_id" value="<?php echo $customer_group_id; ?>" /></td>
             </tr>
             <tr>
               <td class="left"><?php echo $entry_customer_group; ?></td>
-              <td class="left"><select name="customer_group_id" <?php echo ($customer_id ? 'disabled="disabled"' : ''); ?>>
+              <td class="left"><select id="customer_group_id" <?php echo ($customer_id ? 'disabled="disabled"' : ''); ?>>
                   <?php foreach ($customer_groups as $customer_group) { ?>
                   <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
                   <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
@@ -498,7 +499,10 @@
                     <?php } ?>
                   </select>
                   <input type="hidden" name="shipping_method" value="<?php echo $shipping_method; ?>" />
-                  <input type="hidden" name="shipping_code" value="<?php echo $shipping_code; ?>" /></td>
+                  <input type="hidden" name="shipping_code" value="<?php echo $shipping_code; ?>" />
+                  <?php if ($error_shipping_method) { ?>
+                  <span class="error"><?php echo $error_shipping_method; ?></span>
+                  <?php } ?></td>
               </tr>
               <tr>
                 <td class="left"><?php echo $entry_payment; ?></td>
@@ -509,7 +513,10 @@
                     <?php } ?>
                   </select>
                   <input type="hidden" name="payment_method" value="<?php echo $payment_method; ?>" />
-                  <input type="hidden" name="payment_code" value="<?php echo $payment_code; ?>" /></td>
+                  <input type="hidden" name="payment_code" value="<?php echo $payment_code; ?>" />
+                  <?php if ($error_payment_method) { ?>
+                  <span class="error"><?php echo $error_payment_method; ?></span>
+                  <?php } ?></td>
               </tr>
               <tr>
                 <td class="left"><?php echo $entry_coupon; ?></td>
@@ -601,7 +608,6 @@ $('input[name=\'customer\']').catcomplete({
 	select: function(event, ui) { 
 		$('input[name=\'customer\']').attr('value', ui.item['label']);
 		$('input[name=\'customer_id\']').attr('value', ui.item['value']);
-		$('select[name=\'customer_group_id\']').attr('value', ui.item['customer_group_id']);
 		$('input[name=\'firstname\']').attr('value', ui.item['firstname']);
 		$('input[name=\'lastname\']').attr('value', ui.item['lastname']);
 		$('input[name=\'email\']').attr('value', ui.item['email']);
@@ -616,8 +622,11 @@ $('input[name=\'customer\']').catcomplete({
 		
 		$('select[name=\'shipping_address\']').html(html);
 		$('select[name=\'payment_address\']').html(html);
-			 		
-		$('select[name=\'customer_group_id\']').trigger('change');
+			
+		$('select[id=\'customer_group_id\']').attr('value', ui.item['customer_group_id']);
+		$('select[id=\'customer_group_id\']').attr('disabled', true); 
+		
+		$('select[id=\'customer_group_id\']').trigger('change');
 					 	
 		return false; 
 	},
@@ -626,12 +635,14 @@ $('input[name=\'customer\']').catcomplete({
 	}
 });
 
-$('select[name=\'customer_group_id\']').live('change', function() {
+$('select[id=\'customer_group_id\']').live('change', function() {
+	$('input[name=\'customer_group_id\']').attr('value', this.value);
+	 
 	$.ajax({
 		url: 'index.php?route=sale/customer/customer_group&token=<?php echo $token; ?>&customer_group_id=' + this.value,
 		dataType: 'json',
 		beforeSend: function() {
-			$('select[name=\'customer_group_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
+			$('select[id=\'customer_group_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
 		},		
 		complete: function() {
 			$('.wait').remove();
@@ -667,7 +678,7 @@ $('select[name=\'customer_group_id\']').live('change', function() {
 	});
 });
 
-$('select[name=\'customer_group_id\']').trigger('change');
+$('select[id=\'customer_group_id\']').trigger('change');
 
 $('input[name=\'affiliate\']').autocomplete({
 	delay: 0,

@@ -627,7 +627,13 @@ class ControllerSaleOrder extends Controller {
 		} else {
 			$this->data['error_shipping_zone'] = '';
 		}
-				
+		
+		if (isset($this->error['shipping_method'])) {
+			$this->data['error_shipping_method'] = $this->error['shipping_method'];
+		} else {
+			$this->data['error_shipping_method'] = '';
+		}
+						
  		if (isset($this->error['payment_firstname'])) {
 			$this->data['error_payment_firstname'] = $this->error['payment_firstname'];
 		} else {
@@ -669,7 +675,13 @@ class ControllerSaleOrder extends Controller {
 		} else {
 			$this->data['error_payment_zone'] = '';
 		}
-				
+		
+		if (isset($this->error['payment_method'])) {
+			$this->data['error_payment_method'] = $this->error['payment_method'];
+		} else {
+			$this->data['error_payment_method'] = '';
+		}
+						
 		$url = '';
 
 		if (isset($this->request->get['filter_order_id'])) {
@@ -1198,6 +1210,14 @@ class ControllerSaleOrder extends Controller {
       		$this->error['payment_zone'] = $this->language->get('error_zone');
     	}	
 		
+    	if ($this->request->post['payment_method'] == '') {
+      		$this->error['payment_zone'] = $this->language->get('error_zone');
+    	}			
+		
+		if (!$this->request->post['payment_method']) {
+			$this->error['payment_method'] = $this->language->get('error_payment');
+		}	
+					
 		// Check if any products require shipping
 		$shipping = false;
 		
@@ -1245,6 +1265,10 @@ class ControllerSaleOrder extends Controller {
 			if ($this->request->post['shipping_zone_id'] == '') {
 				$this->error['shipping_zone'] = $this->language->get('error_zone');
 			}
+			
+			if (!$this->request->post['shipping_method']) {
+				$this->error['shipping_method'] = $this->language->get('error_shipping');
+			}			
 		}
 		
 		if ($this->error && !isset($this->error['warning'])) {

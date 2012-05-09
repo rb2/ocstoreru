@@ -43,10 +43,10 @@ class ControllerCheckoutManual extends Controller {
 				} else {
 					$json['error']['customer'] = $this->language->get('error_customer');
 				}
+			} else {
+				// Customer Group
+				$this->config->set('config_customer_group_id', $this->request->post['customer_group_id']);
 			}
-			
-			// Customer Group
-			$this->config->set('config_customer_group_id', $this->request->post['customer_group_id']);
 				
 			// Product
 			$this->load->model('catalog/product');
@@ -370,7 +370,7 @@ class ControllerCheckoutManual extends Controller {
 
 					if (!$json['shipping_method']) {
 						$json['error']['shipping_method'] = $this->language->get('error_no_shipping');
-					} elseif ($this->request->post['shipping_code']) { {
+					} elseif ($this->request->post['shipping_code']) {
 						$shipping = explode('.', $this->request->post['shipping_code']);
 						
 						if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($json['shipping_method'][$shipping[0]]['quote'][$shipping[1]])) {		
