@@ -159,6 +159,9 @@ class ControllerAccountRegister extends Controller {
 		
     	$this->data['action'] = $this->url->link('account/register', '', 'SSL');
 
+
+
+
 		if (isset($this->request->post['firstname'])) {
     		$this->data['firstname'] = $this->request->post['firstname'];
 		} else {

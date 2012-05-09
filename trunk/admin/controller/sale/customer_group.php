@@ -226,6 +226,7 @@ class ControllerSaleCustomerGroup extends Controller {
 		}
 
 		$this->data['sort_name'] = $this->url->link('sale/customer_group', 'token=' . $this->session->data['token'] . '&sort=cgd.name' . $url, 'SSL');
+		$this->data['sort_sort_order'] = $this->url->link('sale/customer_group', 'token=' . $this->session->data['token'] . '&sort=cg.sort_order' . $url, 'SSL');
 		
 		$url = '';
 
@@ -270,6 +271,7 @@ class ControllerSaleCustomerGroup extends Controller {
 		$this->data['entry_company_required'] = $this->language->get('entry_company_required');
 		$this->data['entry_tax_display'] = $this->language->get('entry_tax_display');
 		$this->data['entry_tax_required'] = $this->language->get('entry_tax_required');
+		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -369,7 +371,15 @@ class ControllerSaleCustomerGroup extends Controller {
 		} else {
 			$this->data['tax_required'] = '';
 		}	
-							
+		
+		if (isset($this->request->post['sort_order'])) {
+			$this->data['sort_order'] = $this->request->post['sort_order'];
+		} elseif (!empty($customer_group_info)) {
+			$this->data['sort_order'] = $customer_group_info['sort_order'];
+		} else {
+			$this->data['sort_order'] = '';
+		}	
+									
 		$this->template = 'sale/customer_group_form.tpl';
 		$this->children = array(
 			'common/header',
