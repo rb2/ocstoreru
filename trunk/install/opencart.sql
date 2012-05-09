@@ -994,8 +994,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer_group` (
 -- Dumping data for table `oc_customer_group`
 -- 
 
-INSERT INTO `oc_customer_group` (`customer_group_id`, `company_display`, `company_required`, `tax_display`, `tax_required`) VALUES
-(1, 1, 0, 0, 1);
+INSERT INTO `oc_customer_group` (`customer_group_id`, `approval`, `company_id_display`, `company_id_required`, `tax_id_display`, `tax_id_required`, `sort_order`) VALUES
+(1, 0, 1, 0, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1017,8 +1017,7 @@ CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
 --
 
 INSERT INTO `oc_customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`) VALUES
-(1, 1, 'Default', 'test'),
-(1, 2, 'Default', 'test');
+(1, 1, 'Default', 'test');
 
 -- --------------------------------------------------------
 
