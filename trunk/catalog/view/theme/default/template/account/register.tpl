@@ -26,7 +26,6 @@
             <?php } ?></td>
           <td style="vertical-align: top;"><label for="customer_group<?php echo $customer_group['customer_group_id']; ?>"><b><?php echo $customer_group['name']; ?></b></label>
               <?php if ($customer_group['description']) { ?>
-              <br />
               <label for="customer_group<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['description']; ?></label>
               <?php } ?>
             <br /></td>
@@ -205,12 +204,15 @@
 <script type="text/javascript"><!--
 $('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
 //--></script> 
-<?php $postcode_required_data = array(); ?>
-<?php foreach ($countries as $country) { ?>
-<?php if ($country['postcode_required']) { ?>
-<?php $postcode_required_data[] = '"' . $country['country_id'] . '"'; ?>
-<?php } ?> 
-<?php } ?> 
+<?php 
+$postcode_required_data = array(); 
+
+foreach ($countries as $country) {
+	if ($country['postcode_required']) {
+		$postcode_required_data[] = '"' . $country['country_id'] . '"';
+	} 
+} 
+?> 
 <script type="text/javascript"><!--
 $('select[name=\'country_id\']').bind('change', function() {
 	$('#postcode_required .required').remove();
@@ -228,34 +230,31 @@ $('select[name=\'country_id\']').bind('change', function() {
 
 $('select[name=\'country_id\']').trigger('change');
 //--></script>
+<?php 
+$company_id_display_data = array();
+$company_id_required_data = array();
+$tax_id_display_data = array();
+$tax_id_required_data = array();
 
-<?php $company_id_display_data = array(); ?>
-<?php $company_id_required_data = array(); ?>
-<?php $tax_id_display_data = array(); ?>
-<?php $tax_id_required_data = array(); ?>
+foreach ($customer_groups as $customer_group) {
+	if ($customer_group['company_id_display']) {
+		$company_id_display_data[] = '\'' . $customer_group['customer_group_id'] . '\'';
+	}
 
-<?php foreach ($customer_groups as $customer_group) { ?>
-
-<?php if ($customer_group['company_id_display']) { ?>
-<?php $company_id_display_data[] = '\'' . $customer_group['customer_group_id'] . '\''; ?>
-<?php } ?> 
-
-<?php if ($customer_group['company_id_required']) { ?>
-<?php $company_id_required_data[] = '\'' . $customer_group['customer_group_id'] . '\''; ?>
-<?php } ?> 
-
-
-<?php if ($customer_group['tax_id_display']) { ?>
-<?php $tax_id_display_data[] = '\'' . $customer_group['customer_group_id'] . '\''; ?>
-<?php } ?> 
-
-<?php if ($customer_group['tax_id_required']) { ?>
-<?php $tax_id_required_data[] = '\'' . $customer_group['customer_group_id'] . '\''; ?>
-<?php } ?> 
+    if ($customer_group['company_id_required']) {
+    	$company_id_required_data[] = '\'' . $customer_group['customer_group_id'] . '\'';
+    }
 
 
-<?php } ?>
+	if ($customer_group['tax_id_display']) {
+		$tax_id_display_data[] = '\'' . $customer_group['customer_group_id'] . '\'';
+	}
 
+	if ($customer_group['tax_id_required']) {
+		$tax_id_required_data[] = '\'' . $customer_group['customer_group_id'] . '\'';
+	}
+} 
+?>
 <script type="text/javascript"><!--
 $('input[name=\'customer_group_id\']').bind('click', function() {
 	var company_id_display = [<?php echo implode(',', $company_id_display_data); ?>];
@@ -289,7 +288,7 @@ $('input[name=\'customer_group_id\']').bind('click', function() {
 	if ($.inArray(this.value, tax_id_required) >= 0) {
 		$('#tax_id_required').prepend('<span class="required">*</span> ');
 	}
-})
+});
 
 $('input[name=\'customer_group_id\']:checked').trigger('click');
 //--></script>

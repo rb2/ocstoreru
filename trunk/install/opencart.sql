@@ -1017,7 +1017,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer_group_description` (
 --
 
 INSERT INTO `oc_customer_group_description` (`customer_group_id`, `language_id`, `name`, `description`) VALUES
-(1, 1, 'Default', 'test');
+(1, 1, 'Default', 'test'),
+(1, 2, 'Default', 'test');
 
 -- --------------------------------------------------------
 
@@ -1715,6 +1716,8 @@ CREATE TABLE `oc_order` (
   `payment_firstname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `payment_lastname` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `payment_company` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `payment_company_id` varchar(32) COLLATE utf8_general_ci NOT NULL,
+  `payment_tax_id` varchar(32) COLLATE utf8_general_ci NOT NULL,    
   `payment_address_1` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `payment_address_2` varchar(128) COLLATE utf8_general_ci NOT NULL,
   `payment_city` varchar(128) COLLATE utf8_general_ci NOT NULL,
@@ -4916,6 +4919,7 @@ INSERT INTO `oc_zone` (`zone_id`, `country_id`, `code`, `name`, `status`) VALUES
 (1581, 102, 'NN', 'Ninawa', 1),
 (1582, 102, 'DH', 'Dahuk', 1),
 (1583, 102, 'AL', 'Arbil', 1),
+
 (1584, 102, 'TM', 'At Ta''mim', 1),
 (1585, 102, 'SL', 'As Sulaymaniyah', 1),
 (1586, 103, 'CA', 'Carlow', 1),

@@ -142,6 +142,8 @@ class ControllerCheckoutConfirm extends Controller {
 			$data['payment_firstname'] = $payment_address['firstname'];
 			$data['payment_lastname'] = $payment_address['lastname'];	
 			$data['payment_company'] = $payment_address['company'];	
+			$data['payment_company_id'] = $payment_address['company_id'];	
+			$data['payment_tax_id'] = $payment_address['tax_id'];	
 			$data['payment_address_1'] = $payment_address['address_1'];
 			$data['payment_address_2'] = $payment_address['address_2'];
 			$data['payment_city'] = $payment_address['city'];

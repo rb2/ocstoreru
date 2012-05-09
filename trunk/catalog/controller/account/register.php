@@ -360,7 +360,7 @@ class ControllerAccountRegister extends Controller {
   	}
 
   	private function validate() {
-		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && !in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 			$customer_group_id = $this->request->post['customer_group_id'];
 		} else {
 			$customer_group_id = $this->config->get('config_customer_group_id');
@@ -376,8 +376,6 @@ class ControllerAccountRegister extends Controller {
 			if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
 				$this->error['tax_id'] = $this->language->get('error_tax_id');
 			}						
-		} else {
-			$this->error['warning'] = $this->language->get('error_customer_group');
 		}
 		
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
