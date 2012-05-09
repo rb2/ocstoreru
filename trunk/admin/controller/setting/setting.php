@@ -73,11 +73,11 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_voucher_min'] = $this->language->get('entry_voucher_min');
 		$this->data['entry_voucher_max'] = $this->language->get('entry_voucher_max');
 		$this->data['entry_tax'] = $this->language->get('entry_tax');
+		$this->data['entry_vat'] = $this->language->get('entry_vat');
 		$this->data['entry_tax_default'] = $this->language->get('entry_tax_default');
 		$this->data['entry_tax_customer'] = $this->language->get('entry_tax_customer');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_group_display'] = $this->language->get('entry_customer_group_display');
-		$this->data['entry_vat'] = $this->language->get('entry_vat');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
 		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_cart_weight'] = $this->language->get('entry_cart_weight');		
@@ -509,6 +509,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_tax'] = $this->config->get('config_tax');			
 		}
 		
+		if (isset($this->request->post['config_vat'])) {
+			$this->data['config_vat'] = $this->request->post['config_vat'];
+		} else {
+			$this->data['config_vat'] = $this->config->get('config_vat');			
+		}
+				
 		if (isset($this->request->post['config_tax_default'])) {
 			$this->data['config_tax_default'] = $this->request->post['config_tax_default'];
 		} else {
@@ -537,12 +543,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_customer_group_display'] = $this->config->get('config_customer_group_display');	
 		} else {
 			$this->data['config_customer_group_display'] = array();			
-		}
-		
-		if (isset($this->request->post['config_vat'])) {
-			$this->data['config_vat'] = $this->request->post['config_vat'];
-		} else {
-			$this->data['config_vat'] = $this->config->get('config_vat');			
 		}
 								
 		if (isset($this->request->post['config_customer_price'])) {
