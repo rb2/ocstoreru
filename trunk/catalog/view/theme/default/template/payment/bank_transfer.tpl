@@ -12,7 +12,7 @@
 <script type="text/javascript"><!--
 $('#button-confirm').bind('click', function() {
 	$.ajax({ 
-		type: 'GET',
+		type: 'get',
 		url: 'index.php?route=payment/bank_transfer/confirm',
 		success: function() {
 			location = '<?php echo $continue; ?>';

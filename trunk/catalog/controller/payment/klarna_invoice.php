@@ -3,6 +3,8 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 	protected function index() {
 		$this->language->load('payment/klarna_invoice');
 		
+		$this->data['text_information'] = $this->language->get('text_information');
+		$this->data['text_additional'] = $this->language->get('text_additional');
 		$this->data['text_male'] = $this->language->get('text_male');
 		$this->data['text_female'] = $this->language->get('text_female');
 		$this->data['text_wait'] = $this->language->get('text_wait');
@@ -18,15 +20,14 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
  
-		if ($order_info) {
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl';
-			} else {
-				$this->template = 'default/template/payment/klarna_invoice.tpl';
-			}
-	
-			$this->render();
+			
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl';
+		} else {
+			$this->template = 'default/template/payment/klarna_invoice.tpl';
 		}
+
+		$this->render();
 	}
 	
 	public function send() {
@@ -87,7 +88,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
             $billing = array(
 				'email'           => $order_info['email'],
 				'telno'           => $order_info['telephone'],
-				'cellno'          => '',
+				'cellno'          => $order_info['telephone'],
 				'careof'          => '',
 				'company'         => $order_info['payment_company'],
 				'fname'           => $order_info['payment_firstname'],
@@ -129,7 +130,6 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			}
 				
 			// Shipping Address
-
 			$shipping = array(
 				'email'           => $order_info['email'],
 				'telno'           => $order_info['telephone'],
@@ -159,8 +159,8 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 					'goods' => array(
 						'artNo'    => $product['model'],
 						'title'    => $product['name'],
-						'price'    => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false),
-						'vat'      => $this->currency->format($this->tax->getTax($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false),	
+						'price'    => str_replace('.', '', $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false)),
+						'vat'      => str_replace('.', '', $this->currency->format($this->tax->getTax($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false)),	
 						'discount' => 0,   
 						'flags'    => 32
 					)	
@@ -173,8 +173,8 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 				'goods' => array(
 					'artNo'    => $order_info['shipping_code'],
 					'title'    => $order_info['shipping_method'],
-					'price'    => $this->currency->format($this->tax->calculate($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id']), $order_info['currency_code'], false, false),
-					'vat'      => $this->currency->format($this->tax->getTax($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id']), $order_info['currency_code'], false, false),	
+					'price'    => str_replace('.', '', $this->currency->format($this->tax->calculate($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id']), $order_info['currency_code'], false, false)),
+					'vat'      => str_replace('.', '', $this->currency->format($this->tax->getTax($this->session->data['shipping_method']['cost'], $this->session->data['shipping_method']['tax_class_id']), $order_info['currency_code'], false, false)),	
 					'discount' => 0,   
 					'flags'    => 8 + 32
 				)	
@@ -208,9 +208,9 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 					$currency = 3;
 					break;
 			}	
-						
+			
 			// Language
-			switch (strtolower($order_info['language_code'])) {
+			switch (substr(strtolower($order_info['language_code']), 0, 2)) {
 				// Swedish
 				case 'sv':
 					$language = 138;
@@ -238,36 +238,32 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			}			
 			
 			// Encoding
-			/*
-			switch (strtolower($order_info['encoding'])) {
+			switch ($order_info['payment_iso_code_2']) {
 				// Sweden
-				case 'SEK':
+				case 'SE':
 					$encoding = 2;
 					break;
 				// Norway	
-				case 'NOK':
+				case 'NO':
 					$encoding = 3;
-					break;	
-				// Finland					
-				case 'EUR':
+					break;				
+				// Finland
+				case 'FI':
 					$encoding = 4;
-					break;
-				// Denmark	
-				case 'DKK':
+					break;				
+				// Denmark
+				case 'DK':
 					$encoding = 5;
 					break;
-				// Germany		
-				case 'DKK':
+				// Germany	
+				case 'DE':
 					$encoding = 6;
-					break;	
-				// Netherlands		
-				case 'DKK':
+					break;
+				// Netherlands															
+				case 'NL':
 					$encoding = 7;
-					break;										
+					break;	
 			}
-			*/	
-			
-			$encoding = 2;	
 			
 			$data = array(
 			   '4.1',
@@ -324,9 +320,10 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			} else {
 				curl_close($curl);
 			
-				$response = xmlrpc_decode($response);
+				$decoded_xml = xmlrpc_decode($response);
 				
-				print_r($response);
+				
+				print_r($decoded_xml);
 			}			
 							
 			//$this->model_checkout_order->confirm($order_id, $order_status_id);

@@ -1,11 +1,13 @@
+<h2><?php echo $text_information; ?></h2>
 <div id="payment" class="content">
+  <p><?php echo $text_additional; ?></p>
   <table class="form">
     <tr>
       <td><?php echo $entry_gender; ?></td>
-      <td><select name="gender">
-          <option value="M"><?php echo $text_male; ?></option>
-          <option value="F"><?php echo $text_female; ?></option>
-        </select></td>
+      <td><input type="radio" name="gender" value="M" id="male" checked="checked" />
+        <label for="male"><?php echo $text_male; ?></label>
+        <input type="radio" name="gender" value="F" id="female" />
+        <label for="female"><?php echo $text_female; ?></label></td>
     </tr>
     <tr>
       <td><?php echo $entry_dob; ?></td>
@@ -13,11 +15,11 @@
     </tr>
     <tr>
       <td><?php echo $entry_house_no; ?></td>
-      <td><input type="text" name="house_no" value="" /></td>
+      <td><input type="text" name="house_no" value="" size="3" /></td>
     </tr>
     <tr>
       <td><?php echo $entry_house_ext; ?></td>
-      <td><input type="text" name="house_ext" value="" /></td>
+      <td><input type="text" name="house_ext" value="" size="3" /></td>
     </tr>
   </table>
 </div>
@@ -35,23 +37,26 @@ $('#button-confirm').bind('click', function() {
 		dataType: 'html',		
 		beforeSend: function() {
 			$('#button-confirm').attr('disabled', true);
-			
 			$('#payment').before('<div class="attention"><img src="catalog/view/theme/default/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
 		},
+		complete: function() {
+			$('#button-confirm').attr('disabled', false);
+			$('.attention').remove();
+		},		
 		success: function(json) {
 			alert(json);
-			
+		
 			if (json['error']) {
-				alert(json['error']);
 				
-				$('#button-confirm').attr('disabled', false);
 			}
 			
-			$('.attention').remove();
+			
+			/*
 			
 			if (json['success']) {
 				location = json['success'];
 			}
+			*/
 		}
 	});
 });
