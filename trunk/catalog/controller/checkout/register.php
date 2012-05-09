@@ -4,6 +4,7 @@ class ControllerCheckoutRegister extends Controller {
 		$this->language->load('checkout/checkout');
 		
 		$this->data['text_select'] = $this->language->get('text_select');
+		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
 		$this->data['text_your_account'] = $this->language->get('text_your_account');
 		$this->data['text_your_address'] = $this->language->get('text_your_address');
@@ -41,13 +42,9 @@ class ControllerCheckoutRegister extends Controller {
 			foreach ($customer_groups  as $customer_group) {
 				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 					$customer_group_data[] = array(
-						'customer_group_id'   => $customer_group['customer_group_id'],
-						'name'                => $customer_group['name'],
-						'description'         => $customer_group['description'],
-						'company_id_display'  => $customer_group['company_id_display'],
-						'company_id_required' => $customer_group['company_id_required'],
-						'tax_id_display'      => $customer_group['tax_id_display'],
-						'tax_id_required'     => $customer_group['tax_id_required']
+						'customer_group_id' => $customer_group['customer_group_id'],
+						'name'              => $customer_group['name'],
+						'description'       => $customer_group['description'],
 					);
 				}
 			}
@@ -267,30 +264,6 @@ class ControllerCheckoutRegister extends Controller {
 		}	
 		
 		$this->response->setOutput(json_encode($json));	
-	}
-	
-  	public function zone() {
-		$output = '<option value="">' . $this->language->get('text_select') . '</option>';
-		
-		$this->load->model('localisation/zone');
-
-    	$results = $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']);
-        
-      	foreach ($results as $result) {
-        	$output .= '<option value="' . $result['zone_id'] . '"';
-	
-	    	if (isset($this->request->get['zone_id']) && ($this->request->get['zone_id'] == $result['zone_id'])) {
-	      		$output .= ' selected="selected"';
-	    	}
-	
-	    	$output .= '>' . $result['name'] . '</option>';
-    	} 
-		
-		if (!$results) {
-		  	$output .= '<option value="0">' . $this->language->get('text_none') . '</option>';
-		}
-	
-		$this->response->setOutput($output);
-  	}	
+	} 
 }
 ?>

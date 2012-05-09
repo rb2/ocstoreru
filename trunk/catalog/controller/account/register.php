@@ -57,11 +57,12 @@ class ControllerAccountRegister extends Controller {
       	);
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');
-
+		
+		$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', 'SSL'));
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_select'] = $this->language->get('text_select');
-    	$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', 'SSL'));
+		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
 		$this->data['text_your_account'] = $this->language->get('text_your_account');
     	$this->data['text_your_address'] = $this->language->get('text_your_address');
@@ -185,13 +186,9 @@ class ControllerAccountRegister extends Controller {
 			foreach ($customer_groups  as $customer_group) {
 				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 					$customer_group_data[] = array(
-						'customer_group_id'   => $customer_group['customer_group_id'],
-						'name'                => $customer_group['name'],
-						'description'         => $customer_group['description'],
-						'company_id_display'  => $customer_group['company_id_display'],
-						'company_id_required' => $customer_group['company_id_required'],
-						'tax_id_display'      => $customer_group['tax_id_display'],
-						'tax_id_required'     => $customer_group['tax_id_required']
+						'customer_group_id' => $customer_group['customer_group_id'],
+						'name'              => $customer_group['name'],
+						'description'       => $customer_group['description']
 					);
 				}
 			}
@@ -451,29 +448,44 @@ class ControllerAccountRegister extends Controller {
       		return false;
     	}
   	}
-	 
-  	public function zone() {
-		$output = '<option value="">' . $this->language->get('text_select') . '</option>';
+	
+	public function customer_group() {
+		$json = array();
 		
-		$this->load->model('localisation/zone');
+		$this->load->model('account/customer_group');
 
-    	$results = $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']);
-        
-      	foreach ($results as $result) {
-        	$output .= '<option value="' . $result['zone_id'] . '"';
-	
-	    	if (isset($this->request->get['zone_id']) && ($this->request->get['zone_id'] == $result['zone_id'])) {
-	      		$output .= ' selected="selected"';
-	    	}
-	
-	    	$output .= '>' . $result['name'] . '</option>';
-    	} 
+    	$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->request->get['customer_group_id']);
 		
-		if (!$results) {
-		  	$output .= '<option value="0">' . $this->language->get('text_none') . '</option>';
+		if ($customer_group_info) {
+			$json = $customer_group_info;
 		}
+		
+		$this->response->setOutput(json_encode($json));
+	}
 	
-		$this->response->setOutput($output);
-  	}  
+	public function country() {
+		$json = array();
+		
+		$this->load->model('localisation/country');
+
+    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
+		
+		if ($country_info) {
+			$this->load->model('localisation/zone');
+
+			$json = array(
+				'country_id'        => $country_info['country_id'],
+				'name'              => $country_info['name'],
+				'iso_code_2'        => $country_info['iso_code_2'],
+				'iso_code_3'        => $country_info['iso_code_3'],
+				'address_format'    => $country_info['address_format'],
+				'postcode_required' => $country_info['postcode_required'],
+				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
+				'status'            => $country_info['status']		
+			);
+		}
+		
+		$this->response->setOutput(json_encode($json));
+	}	
 }
 ?>

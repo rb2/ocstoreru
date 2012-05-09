@@ -632,26 +632,45 @@ $('input[name=\'affiliate\']').autocomplete({
 	}
 });
 
-<?php 
-$postcode_required_data = array(); 
-
-foreach ($countries as $country) {
-	if ($country['postcode_required']) {
-		$postcode_required_data[] = '\'' . $country['country_id'] . '\'';
-	} 
-} 
-?>
-
 $('select[name=\'payment_country_id\']').bind('change', function() {
-	var postcode_required = [<?php echo implode(',', $postcode_required_data); ?>];
+	$.ajax({
+		url: 'index.php?route=sale/order/country&token=<?php echo $token; ?>&country_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'payment_country_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+		},			
+		success: function(json) {
+			if (json['postcode_required'] == '1') {
+				$('#payment-postcode-required').show();
+			} else {
+				$('#payment-postcode-required').hide();
+			}
+			
+			html = '<option value=""><?php echo $text_select; ?></option>';
+			
+			if (json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+	    			
+					if (json['zone'][i]['zone_id'] == '<?php echo $payment_zone_id; ?>') {
+	      				html += ' selected="selected"';
+	    			}
 	
-	if ($.inArray(this.value, postcode_required) >= 0) {
-		$('#payment-postcode-required').show();
-	} else {
-		$('#payment-postcode-required').hide();
-	}
-	
-	$('select[name=\'payment_zone_id\']').load('index.php?route=sale/order/zone&token=<?php echo $token; ?>&country_id=' + this.value + '&zone_id=<?php echo $payment_zone_id; ?>');
+	    			html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0"><?php echo $text_none; ?></option>';
+			}
+			
+			$('select[name=\'payment_zone_id\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
 });
 
 $('select[name=\'payment_country_id\']').trigger('change');
@@ -671,29 +690,50 @@ $('select[name=\'payment_address\']').bind('change', function() {
 				$('input[name=\'payment_postcode\']').attr('value', json['postcode']);
 				$('select[name=\'payment_country_id\']').attr('value', json['country_id']);
 				$('select[name=\'payment_zone_id\']').load('index.php?route=sale/order/zone&token=<?php echo $token; ?>&country_id=' + json['country_id'] + '&zone_id=' + json['zone_id']);
-				
-				var postcode_required = [<?php echo implode(',', $postcode_required_data); ?>];
-				
-				if ($.inArray(json['country_id'], postcode_required) >= 0) {
-					$('#payment-postcode-required').show();
-				} else {
-					$('#payment-postcode-required').hide();
-				}
 			}
 		}
 	});	
 });
 
 $('select[name=\'shipping_country_id\']').bind('change', function() {
-	var postcode_required = [<?php echo implode(',', $postcode_required_data); ?>];
+	$.ajax({
+		url: 'index.php?route=sale/order/country&token=<?php echo $token; ?>&country_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'payment_country_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+		},			
+		success: function(json) {
+			if (json['postcode_required'] == '1') {
+				$('#shipping-postcode-required').show();
+			} else {
+				$('#shipping-postcode-required').hide();
+			}
+			
+			html = '<option value=""><?php echo $text_select; ?></option>';
+			
+			if (json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+	    			
+					if (json['zone'][i]['zone_id'] == '<?php echo $shipping_zone_id; ?>') {
+	      				html += ' selected="selected"';
+	    			}
 	
-	if ($.inArray(this.value, postcode_required) >= 0) {
-		$('#shipping-postcode-required').show();
-	} else {
-		$('#shipping-postcode-required').hide();
-	}
-	
-	$('select[name=\'shipping_zone_id\']').load('index.php?route=sale/order/zone&token=<?php echo $token; ?>&country_id=' + this.value + '&zone_id=<?php echo $shipping_zone_id; ?>');
+	    			html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0"><?php echo $text_none; ?></option>';
+			}
+			
+			$('select[name=\'shipping_zone_id\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
 });
 
 $('select[name=\'shipping_country_id\']').trigger('change');
@@ -713,14 +753,6 @@ $('select[name=\'shipping_address\']').bind('change', function() {
 				$('input[name=\'shipping_postcode\']').attr('value', json['postcode']);
 				$('select[name=\'shipping_country_id\']').attr('value', json['country_id']);
 				$('select[name=\'shipping_zone_id\']').load('index.php?route=sale/order/zone&token=<?php echo $token; ?>&country_id=' + json['country_id'] + '&zone_id=' + json['zone_id']);
-				
-				var postcode_required = [<?php echo implode(',', $postcode_required_data); ?>];
-				
-				if ($.inArray(json['country_id'], postcode_required) >= 0) {
-					$('#shipping-postcode-required').show();
-				} else {
-					$('#shipping-postcode-required').hide();
-				}
 			}
 		}
 	});	

@@ -1266,6 +1266,31 @@ class ControllerSaleOrder extends Controller {
 		}
   	}
 	
+	public function country() {
+		$json = array();
+		
+		$this->load->model('localisation/country');
+
+    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
+		
+		if ($country_info) {
+			$this->load->model('localisation/zone');
+
+			$json = array(
+				'country_id'        => $country_info['country_id'],
+				'name'              => $country_info['name'],
+				'iso_code_2'        => $country_info['iso_code_2'],
+				'iso_code_3'        => $country_info['iso_code_3'],
+				'address_format'    => $country_info['address_format'],
+				'postcode_required' => $country_info['postcode_required'],
+				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
+				'status'            => $country_info['status']		
+			);
+		}
+		
+		$this->response->setOutput(json_encode($json));
+	}
+		
 	public function info() {
 		$this->load->model('sale/order');
 
@@ -1884,30 +1909,6 @@ class ControllerSaleOrder extends Controller {
 		}	
 	}
 
-	public function zone() {
-		$output = '<option value="">' . $this->language->get('text_select') . '</option>'; 
-		
-		$this->load->model('localisation/zone');
-		
-		$results = $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']);
-		
-		foreach ($results as $result) {
-			$output .= '<option value="' . $result['zone_id'] . '"';
-
-			if (isset($this->request->get['zone_id']) && ($this->request->get['zone_id'] == $result['zone_id'])) {
-				$output .= ' selected="selected"';
-			}
-
-			$output .= '>' . $result['name'] . '</option>';
-		}
-
-		if (!$results) {
-			$output .= '<option value="0">' . $this->language->get('text_none') . '</option>';
-		}
-
-		$this->response->setOutput($output);
-	}
-	
 	public function createInvoiceNo() {
 		$this->language->load('sale/order');
 

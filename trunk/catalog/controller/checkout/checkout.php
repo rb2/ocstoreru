@@ -78,5 +78,44 @@ class ControllerCheckoutCheckout extends Controller {
 				
 		$this->response->setOutput($this->render());
   	}
+	
+	public function customer_group() {
+		$json = array();
+		
+		$this->load->model('account/customer_group');
+
+    	$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->request->get['customer_group_id']);
+		
+		if ($customer_group_info) {
+			$json = $customer_group_info;
+		}
+		
+		$this->response->setOutput(json_encode($json));
+	}
+	
+	public function country() {
+		$json = array();
+		
+		$this->load->model('localisation/country');
+
+    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
+		
+		if ($country_info) {
+			$this->load->model('localisation/zone');
+
+			$json = array(
+				'country_id'        => $country_info['country_id'],
+				'name'              => $country_info['name'],
+				'iso_code_2'        => $country_info['iso_code_2'],
+				'iso_code_3'        => $country_info['iso_code_3'],
+				'address_format'    => $country_info['address_format'],
+				'postcode_required' => $country_info['postcode_required'],
+				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
+				'status'            => $country_info['status']		
+			);
+		}
+		
+		$this->response->setOutput(json_encode($json));
+	}
 }
 ?>
