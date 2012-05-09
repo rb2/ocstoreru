@@ -16,16 +16,20 @@
     <h2><?php echo $text_your_account; ?></h2>
     <div class="content">
       <p>Please select the type of account you are registering for.</p>
-      <table>
+      <table class="radio">
         <?php foreach ($customer_groups as $customer_group) { ?>
-        <tr class="highlight">
-          <td><?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
+        <tr class="highlight" onclick="$('#customer_group<?php echo $customer_group['customer_group_id']; ?>').attr('checked', true);">
+          <td style="vertical-align: top;"><?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
             <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
             <?php } else { ?>
             <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group<?php echo $customer_group['customer_group_id']; ?>" />
             <?php } ?></td>
-          <td><label for="customer_group<?php echo $customer_group['customer_group_id']; ?>"><b><?php echo $customer_group['name']; ?></b> <br />
-              <?php echo $customer_group['description']; ?></label><br /><br /></td>
+          <td style="vertical-align: top;"><b><?php echo $customer_group['name']; ?></b>
+              <?php if ($customer_group['description']) { ?>
+              <br />
+              <?php echo $customer_group['description']; ?>
+              <?php } ?>
+            <br /></td>
         </tr>
         <?php } ?>
       </table>
@@ -74,6 +78,20 @@
         <tr>
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
+        </tr>
+        <tr>
+          <td><?php echo $entry_company_id; ?></td>
+          <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" />
+            <?php if ($error_company_id) { ?>
+            <span class="error"><?php echo $error_company_id; ?></span>
+            <?php } ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $entry_tax_id; ?></td>
+          <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
+            <?php if ($error_tax_id) { ?>
+            <span class="error"><?php echo $error_tax_id; ?></span>
+            <?php } ?></td>
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
@@ -186,6 +204,14 @@
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
 $('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
+//--></script> 
+<script type="text/javascript"><!--
+country = new Array();
+              <?php if ($country['country_id'] == $country_id) { ?>
+              <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+              <?php } else { ?>
+              <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+              <?php } ?>
 //--></script> 
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({

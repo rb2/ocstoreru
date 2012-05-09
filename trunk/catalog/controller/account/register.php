@@ -74,6 +74,8 @@ class ControllerAccountRegister extends Controller {
     	$this->data['entry_telephone'] = $this->language->get('entry_telephone');
     	$this->data['entry_fax'] = $this->language->get('entry_fax');
     	$this->data['entry_company'] = $this->language->get('entry_company');
+		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
+		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');
     	$this->data['entry_address_1'] = $this->language->get('entry_address_1');
     	$this->data['entry_address_2'] = $this->language->get('entry_address_2');
     	$this->data['entry_postcode'] = $this->language->get('entry_postcode');
@@ -128,6 +130,18 @@ class ControllerAccountRegister extends Controller {
 			$this->data['error_confirm'] = '';
 		}
 		
+  		if (isset($this->error['company_id'])) {
+			$this->data['error_company_id'] = $this->error['company_id'];
+		} else {
+			$this->data['error_company_id'] = '';
+		}
+		
+  		if (isset($this->error['tax_id'])) {
+			$this->data['error_tax_id'] = $this->error['tax_id'];
+		} else {
+			$this->data['error_tax_id'] = '';
+		}
+						
   		if (isset($this->error['address_1'])) {
 			$this->data['error_address_1'] = $this->error['address_1'];
 		} else {
@@ -172,7 +186,11 @@ class ControllerAccountRegister extends Controller {
 					$customer_group_data[] = array(
 						'customer_group_id' => $customer_group['customer_group_id'],
 						'name'              => $customer_group['name'],
-						'description'       => $customer_group['description']
+						'description'       => $customer_group['description'],
+						'company_display'   => $customer_group['company_display'],
+						'company_required'  => $customer_group['company_required'],
+						'tax_display'       => $customer_group['tax_display'],
+						'tax_required'      => $customer_group['tax_required']
 					);
 				}
 			}
@@ -226,6 +244,18 @@ class ControllerAccountRegister extends Controller {
 			$this->data['company'] = '';
 		}
 		
+		if (isset($this->request->post['company_id'])) {
+    		$this->data['company_id'] = $this->request->post['company_id'];
+		} else {
+			$this->data['company_id'] = '';
+		}
+		
+		if (isset($this->request->post['tax_id'])) {
+    		$this->data['tax_id'] = $this->request->post['tax_id'];
+		} else {
+			$this->data['tax_id'] = '';
+		}
+						
 		if (isset($this->request->post['address_1'])) {
     		$this->data['address_1'] = $this->request->post['address_1'];
 		} else {
@@ -403,7 +433,23 @@ class ControllerAccountRegister extends Controller {
       		return false;
     	}
   	}
-  
+ 
+    public function customer_group() {
+		$output = '';
+		
+		$this->response->setOutput($output);
+  	}  
+	
+   	public function postcode() {
+		$this->load->model('localisation/country');
+
+    	$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
+		
+		if ($country_info && $country_info['postcode_required']) {
+		  	$this->response->setOutput('<span class="required">*</span>');
+		}
+  	}  
+	 
   	public function zone() {
 		$output = '<option value="">' . $this->language->get('text_select') . '</option>';
 		

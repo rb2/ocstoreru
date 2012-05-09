@@ -516,19 +516,17 @@ table.radio {
 }
 table.radio td {
 	padding: 5px;
-	vertical-align: middle;
+	vertical-align: top;
 }
 table.radio tr td:first-child {
 	width: 1px;
 }
+table.radio tr td:first-child input {
+	margin-top: 1px;
+}
 table.radio tr.highlight:hover td {
 	background: #F1FFDD;
 	cursor: pointer;
-}
-table.radio label {
-	width: 100%;
-	height: 15px;
-	display: inline-block;
 }
 .pagination {
 	border-top: 1px solid #EEEEEE;
