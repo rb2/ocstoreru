@@ -30,17 +30,17 @@ CREATE TABLE IF NOT EXISTS oc_manufacturer_description (
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS oc_tax_rate_to_customer_group (
-  tax_rate_id int(11) NOT NULL,
-  customer_group_id int(11) NOT NULL,
+  tax_rate_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  customer_group_id int(11) NOT NULL DEFAULT 0 COMMENT '',
   PRIMARY KEY (tax_rate_id, customer_group_id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS oc_tax_rule (
-  tax_rule_id int(11) NOT NULL auto_increment,
-  tax_class_id int(11) NOT NULL,
-  tax_rate_id int(11) NOT NULL,
-  based varchar(10) NOT NULL COLLATE utf8_general_ci,
-  priority int(5) NOT NULL DEFAULT '1',
+  tax_rule_id int(11) NOT NULL DEFAULT 0 COMMENT '' auto_increment,
+  tax_class_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  tax_rate_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  based varchar(10) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  priority int(5) NOT NULL DEFAULT '1' COMMENT '',
   PRIMARY KEY (tax_rule_id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -84,106 +84,106 @@ INSERT IGNORE INTO oc_manufacturer_description (manufacturer_id, language_id) SE
 #### START UPGRADE OCSTORE 1.5.2
 
 CREATE TABLE IF NOT EXISTS oc_customer_ip_blacklist (
-  customer_ip_blacklist_id int(11) NOT NULL auto_increment,
-  ip varchar(15) NOT NULL COLLATE utf8_general_ci,
+  customer_ip_blacklist_id int(11) NOT NULL DEFAULT 0 COMMENT '' auto_increment,
+  ip varchar(15) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
   PRIMARY KEY (customer_ip_blacklist_id),
   INDEX ip (ip)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS oc_order_fraud (
-  order_id int(11) NOT NULL DEFAULT 0,
-  customer_id int(11) NOT NULL DEFAULT 0,
-  country_match varchar(3) NOT NULL COLLATE utf8_general_ci,
-  country_code varchar(2) NOT NULL COLLATE utf8_general_ci,
-  high_risk_country varchar(3) NOT NULL COLLATE utf8_general_ci,
-  distance int(11) NOT NULL DEFAULT 0,
-  ip_region varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_city varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_latitude decimal(10,6) NOT NULL,
-  ip_longitude decimal(10,6) NOT NULL,
-  ip_isp varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_org varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_asnum int(11) NOT NULL DEFAULT 0,
-  ip_user_type varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_country_confidence varchar(3) NOT NULL COLLATE utf8_general_ci,
-  ip_region_confidence varchar(3) NOT NULL COLLATE utf8_general_ci,
-  ip_city_confidence varchar(3) NOT NULL COLLATE utf8_general_ci,
-  ip_postal_confidence varchar(3) NOT NULL COLLATE utf8_general_ci,
-  ip_postal_code varchar(10) NOT NULL COLLATE utf8_general_ci,
-  ip_accuracy_radius int(11) NOT NULL DEFAULT 0,
-  ip_net_speed_cell varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_metro_code int(3) NOT NULL DEFAULT 0,
-  ip_area_code int(3) NOT NULL DEFAULT 0,
-  ip_time_zone varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_region_name varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_domain varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_country_name varchar(255) NOT NULL COLLATE utf8_general_ci,
-  ip_continent_code varchar(2) NOT NULL COLLATE utf8_general_ci,
-  ip_corporate_proxy varchar(3) NOT NULL COLLATE utf8_general_ci,
-  anonymous_proxy varchar(3) NOT NULL COLLATE utf8_general_ci,
-  proxy_score int(3) NOT NULL DEFAULT 0,
-  is_trans_proxy varchar(3) NOT NULL COLLATE utf8_general_ci,
-  free_mail varchar(3) NOT NULL COLLATE utf8_general_ci,
-  carder_email varchar(3) NOT NULL COLLATE utf8_general_ci,
-  high_risk_username varchar(3) NOT NULL COLLATE utf8_general_ci,
-  high_risk_password varchar(3) NOT NULL COLLATE utf8_general_ci,
-  bin_match varchar(10) NOT NULL COLLATE utf8_general_ci,
-  bin_country varchar(2) NOT NULL COLLATE utf8_general_ci,
-  bin_name_match varchar(3) NOT NULL COLLATE utf8_general_ci,
-  bin_name varchar(255) NOT NULL COLLATE utf8_general_ci,
-  bin_phone_match varchar(3) NOT NULL COLLATE utf8_general_ci,
-  bin_phone varchar(32) NOT NULL COLLATE utf8_general_ci,
-  customer_phone_in_billing_location varchar(8) NOT NULL COLLATE utf8_general_ci,
-  ship_forward varchar(3) NOT NULL COLLATE utf8_general_ci,
-  city_postal_match varchar(3) NOT NULL COLLATE utf8_general_ci,
-  ship_city_postal_match varchar(3) NOT NULL COLLATE utf8_general_ci,
-  score decimal(10,5) NOT NULL,
-  explanation text NOT NULL COLLATE utf8_general_ci,
-  risk_score decimal(10,5) NOT NULL,
-  queries_remaining int(11) NOT NULL DEFAULT 0,
-  maxmind_id varchar(8) NOT NULL COLLATE utf8_general_ci,
-  error text NOT NULL COLLATE utf8_general_ci,
-  date_added datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  order_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  customer_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  country_match varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  country_code varchar(2) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  high_risk_country varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  distance int(11) NOT NULL DEFAULT 0 COMMENT '',
+  ip_region varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_city varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_latitude decimal(10,6) NOT NULL DEFAULT '' COMMENT '',
+  ip_longitude decimal(10,6) NOT NULL DEFAULT '' COMMENT '',
+  ip_isp varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_org varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_asnum int(11) NOT NULL DEFAULT 0 COMMENT '',
+  ip_user_type varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_country_confidence varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_region_confidence varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_city_confidence varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_postal_confidence varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_postal_code varchar(10) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_accuracy_radius int(11) NOT NULL DEFAULT 0 COMMENT '',
+  ip_net_speed_cell varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_metro_code int(3) NOT NULL DEFAULT 0 COMMENT '',
+  ip_area_code int(3) NOT NULL DEFAULT 0 COMMENT '',
+  ip_time_zone varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_region_name varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_domain varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_country_name varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_continent_code varchar(2) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ip_corporate_proxy varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  anonymous_proxy varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  proxy_score int(3) NOT NULL DEFAULT 0 COMMENT '',
+  is_trans_proxy varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  free_mail varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  carder_email varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  high_risk_username varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  high_risk_password varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  bin_match varchar(10) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  bin_country varchar(2) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  bin_name_match varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  bin_name varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  bin_phone_match varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  bin_phone varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  customer_phone_in_billing_location varchar(8) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ship_forward varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  city_postal_match varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  ship_city_postal_match varchar(3) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  score decimal(10,5) NOT NULL DEFAULT '' COMMENT '',
+  explanation text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  risk_score decimal(10,5) NOT NULL DEFAULT '' COMMENT '',
+  queries_remaining int(11) NOT NULL DEFAULT 0 COMMENT '',
+  maxmind_id varchar(8) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  error text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  date_added datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '',
   PRIMARY KEY (order_id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS oc_order_voucher (
-  order_voucher_id int(11) NOT NULL auto_increment,
-  order_id int(11) NOT NULL DEFAULT 0,
-  voucher_id int(11) NOT NULL DEFAULT 0,
-  description varchar(255) NOT NULL COLLATE utf8_general_ci,
-  code varchar(10) NOT NULL COLLATE utf8_general_ci,
-  from_name varchar(64) NOT NULL COLLATE utf8_general_ci,
-  from_email varchar(96) NOT NULL COLLATE utf8_general_ci,
-  to_name varchar(64) NOT NULL COLLATE utf8_general_ci,
-  to_email varchar(96) NOT NULL COLLATE utf8_general_ci,
-  voucher_theme_id int(11) NOT NULL DEFAULT 0,
-  message text NOT NULL COLLATE utf8_general_ci,
-  amount decimal(15,4) NOT NULL,
+  order_voucher_id int(11) NOT NULL DEFAULT 0 COMMENT '' auto_increment,
+  order_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  voucher_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  description varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  code varchar(10) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  from_name varchar(64) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  from_email varchar(96) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  to_name varchar(64) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  to_email varchar(96) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  voucher_theme_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  message text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  amount decimal(15,4) NOT NULL DEFAULT '' COMMENT '',
   PRIMARY KEY (order_voucher_id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-ALTER TABLE `oc_order` ADD shipping_code varchar(128) NOT NULL COLLATE utf8_general_ci AFTER shipping_method;
-ALTER TABLE `oc_order` ADD payment_code varchar(128) NOT NULL COLLATE utf8_general_ci AFTER payment_method;
-ALTER TABLE `oc_order` ADD forwarded_ip varchar(15) NOT NULL COLLATE utf8_general_ci AFTER ip;
-ALTER TABLE `oc_order` ADD user_agent varchar(255) NOT NULL COLLATE utf8_general_ci AFTER forwarded_ip;
-ALTER TABLE `oc_order` ADD accept_language varchar(255) NOT NULL COLLATE utf8_general_ci AFTER user_agent;
-ALTER TABLE `oc_order` DROP reward;
+ALTER TABLE oc_order ADD shipping_code varchar(128) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER shipping_method;
+ALTER TABLE oc_order ADD payment_code varchar(128) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER payment_method;
+ALTER TABLE oc_order ADD forwarded_ip varchar(15) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER ip;
+ALTER TABLE oc_order ADD user_agent varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER forwarded_ip;
+ALTER TABLE oc_order ADD accept_language varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER user_agent;
+ALTER TABLE oc_order DROP reward;
 
-ALTER TABLE oc_order_product ADD reward int(8) NOT NULL DEFAULT 0 AFTER tax;
+ALTER TABLE oc_order_product ADD reward int(8) NOT NULL DEFAULT 0 COMMENT '' AFTER tax;
 
-ALTER TABLE oc_product MODIFY `weight` decimal(15,8) NOT NULL DEFAULT '0.00000000';
-ALTER TABLE oc_product MODIFY `length` decimal(15,8) NOT NULL DEFAULT '0.00000000';
-ALTER TABLE oc_product MODIFY `width` decimal(15,8) NOT NULL DEFAULT '0.00000000';
-ALTER TABLE oc_product MODIFY `height` decimal(15,8) NOT NULL DEFAULT '0.00000000';
+ALTER TABLE oc_product MODIFY `weight` decimal(15,8) NOT NULL DEFAULT '0.00000000' COMMENT '';
+ALTER TABLE oc_product MODIFY `length` decimal(15,8) NOT NULL DEFAULT '0.00000000' COMMENT '';
+ALTER TABLE oc_product MODIFY `width` decimal(15,8) NOT NULL DEFAULT '0.00000000' COMMENT '';
+ALTER TABLE oc_product MODIFY `height` decimal(15,8) NOT NULL DEFAULT '0.00000000' COMMENT '';
 
-ALTER TABLE `oc_return` ADD `product_id` int(11) NOT NULL DEFAULT '0' AFTER `order_id`;
-ALTER TABLE `oc_return` ADD `product` varchar(255) NOT NULL COLLATE utf8_general_ci AFTER `telephone`;
-ALTER TABLE `oc_return` ADD `model` varchar(64) NOT NULL COLLATE utf8_general_ci AFTER `product`;
-ALTER TABLE `oc_return` ADD `quantity` int(4) NOT NULL DEFAULT '0' AFTER `model`;
-ALTER TABLE `oc_return` ADD `opened` tinyint(1) NOT NULL DEFAULT '0' AFTER `quantity`;
-ALTER TABLE `oc_return` ADD `return_reason_id` int(11) NOT NULL DEFAULT '0' AFTER `opened`;
-ALTER TABLE `oc_return` ADD `return_action_id` int(11) NOT NULL DEFAULT '0' AFTER `return_reason_id`;
+ALTER TABLE `oc_return` ADD `product_id` int(11) NOT NULL DEFAULT '0' COMMENT '' AFTER `order_id`;
+ALTER TABLE `oc_return` ADD `product` varchar(255) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER `telephone`;
+ALTER TABLE `oc_return` ADD `model` varchar(64) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER `product`;
+ALTER TABLE `oc_return` ADD `quantity` int(4) NOT NULL DEFAULT '0' COMMENT '' AFTER `model`;
+ALTER TABLE `oc_return` ADD `opened` tinyint(1) NOT NULL DEFAULT '0' COMMENT '' AFTER `quantity`;
+ALTER TABLE `oc_return` ADD `return_reason_id` int(11) NOT NULL DEFAULT '0' COMMENT '' AFTER `opened`;
+ALTER TABLE `oc_return` ADD `return_action_id` int(11) NOT NULL DEFAULT '0' COMMENT '' AFTER `return_reason_id`;
 
 DROP TABLE IF EXISTS oc_return_product;
 
@@ -198,11 +198,11 @@ UPDATE `oc_setting` SET `value` = replace(`value`, 's:6:"status";s:1:"1"', 's:6:
 UPDATE `oc_setting` SET `value` = 0 WHERE `key` = 'ups_status';
 
 CREATE TABLE IF NOT EXISTS oc_customer_group_description (
-    customer_group_id int(11) NOT NULL DEFAULT 0 COMMENT '',
-    language_id int(11) NOT NULL DEFAULT 0 COMMENT '',
-    name varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
-    description text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
-    PRIMARY KEY (customer_group_id, language_id)
+  customer_group_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  language_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  name varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  description text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  PRIMARY KEY (customer_group_id, language_id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 ALTER TABLE oc_address ADD company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER company;
@@ -220,12 +220,12 @@ ALTER TABLE oc_customer_group ADD sort_order int(3) NOT NULL DEFAULT 0 COMMENT '
 ### This line is executed using php in the upgrade model file so we dont lose names
 #ALTER TABLE oc_customer_group DROP name;
 
-ALTER TABLE `oc_order` ADD payment_company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company;
-ALTER TABLE `oc_order` ADD payment_tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company_id;
+ALTER TABLE `oc_order` ADD payment_company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER payment_company;
+ALTER TABLE `oc_order` ADD payment_tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER payment_company_id;
 
 CREATE TABLE IF NOT EXISTS oc_order_misc (
-    order_id int(11) NOT NULL DEFAULT 0 COMMENT '',
-    `key` varchar(64) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin,
-    value text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin,
-    PRIMARY KEY (order_id, `key`)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  order_id int(11) NOT NULL DEFAULT 0 COMMENT '',
+  `key` varchar(64) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  `value` text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
+  PRIMARY KEY (order_id, `key`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

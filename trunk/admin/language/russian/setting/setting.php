@@ -50,6 +50,7 @@ $_['entry_upload_allowed']     = 'Разрешенные для загрузки
 $_['entry_voucher_min']        = 'Voucher Min:<br /><span class="help">Minimum amount a customer can purchase a voucher for.</span>';
 $_['entry_voucher_max']        = 'Voucher Max:<br /><span class="help">Maximum amount a customer can purchase a voucher for.</span>';
 $_['entry_tax']                = 'Отображать цены с налогом:';
+$_['entry_vat']                = 'VAT Number Validate:<br /><span class="help">Validate VAT number with http://ec.europa.eu service.</span>';
 $_['entry_tax_default']        = 'Использовать адрес магазина для налогов:<br /><span class="help">Использовать адрес магазина для подсчёта налогов, если клиент не авторизовался. Можно выбрать адрес магазина или адрес платежа для доставки товара клиенту.</span>';
 $_['entry_tax_customer']       = 'Использовать адрес клиента для налогов:<br /><span class="help">Использовать заданный по умолчанию адрес клиента для подсчёта налогов. Можно выбрать заданный по умолчанию адрес клиента или адрес платежа для доставки товара клиенту.</span>';
 $_['entry_customer_group']     = 'Группа для гостей:<br /><span class="help">Используется по умолчанию.</span>';
@@ -133,7 +134,6 @@ $_['error_image_thumb']        = 'Необходимо установить ра
 $_['error_image_popup']        = 'Необходимо установить размер всплывающего изображения товара!';
 $_['error_image_product']      = 'Необходимо установить размер изображения списка товаров!';
 $_['error_image_category']     = 'Необходимо установить размер изображения списка категорий!';
-$_['error_image_manufacturer'] = 'Необходимо установить размер изображения списка производителей!';
 $_['error_image_additional']   = 'Необходимо установить размер дополнительных изображений товаров!';
 $_['error_image_related']      = 'Необходимо установить размер изображения аналогичных товаров!';
 $_['error_image_compare']      = 'Необходимо установить размер изображения списка сравнения!';
