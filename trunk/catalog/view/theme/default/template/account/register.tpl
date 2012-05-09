@@ -71,6 +71,7 @@
     <h2><?php echo $text_your_address; ?></h2>
     <div class="content">
       <table class="form">
+      
         <tr>
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>

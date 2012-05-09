@@ -20,6 +20,21 @@
   <input type="text" name="fax" value="<?php echo $fax; ?>" class="large-field" />
   <br />
   <br />
+  <?php if ($customer_groups) { ?>
+  <h2><?php echo $text_your_account; ?></h2>
+  <?php echo $entry_account; ?><br />
+  <select name="customer_group_id" class="large-field">
+    <?php foreach ($customer_groups as $customer_group) { ?>
+    <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
+    <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
+    <?php } else { ?>
+    <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>
+    <?php } ?>
+    <?php } ?>
+  </select>
+  <br />
+  <br />
+  <?php } ?>  
 </div>
 <div class="right">
   <h2><?php echo $text_your_address; ?></h2>
@@ -27,6 +42,16 @@
   <input type="text" name="company" value="<?php echo $company; ?>" class="large-field" />
   <br />
   <br />
+  <div id="company-id-display"><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?><br />
+    <input type="text" name="company_id" value="" class="large-field" />
+    <br />
+    <br />
+  </div>
+  <div id="tax-id-display"><span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?><br />
+    <input type="text" name="tax_id" value="" class="large-field" />
+    <br />
+    <br />
+  </div>  
   <span class="required">*</span> <?php echo $entry_address_1; ?><br />
   <input type="text" name="address_1" value="<?php echo $address_1; ?>" class="large-field" />
   <br />
@@ -102,4 +127,66 @@ $('#payment-address select[name=\'country_id\']').bind('change', function() {
 });
 
 $('#payment-address select[name=\'country_id\']').trigger('change');
+//--></script>
+<?php 
+$company_id_display_data = array();
+$company_id_required_data = array();
+$tax_id_display_data = array();
+$tax_id_required_data = array();
+
+foreach ($customer_groups as $customer_group) {
+	if ($customer_group['company_id_display']) {
+		$company_id_display_data[] = '\'' . $customer_group['customer_group_id'] . '\'';
+	}
+
+    if ($customer_group['company_id_required']) {
+    	$company_id_required_data[] = '\'' . $customer_group['customer_group_id'] . '\'';
+    }
+
+
+	if ($customer_group['tax_id_display']) {
+		$tax_id_display_data[] = '\'' . $customer_group['customer_group_id'] . '\'';
+	}
+
+	if ($customer_group['tax_id_required']) {
+		$tax_id_required_data[] = '\'' . $customer_group['customer_group_id'] . '\'';
+	}
+} 
+?>
+<script type="text/javascript"><!--
+$('select[name=\'customer_group_id\']').live('change', function() {
+	var company_id_display = [<?php echo implode(',', $company_id_display_data); ?>];
+	
+	if ($.inArray(this.value, company_id_display) >= 0) {
+		$('#company-id-display').show();
+	} else {
+		$('#company-id-display').hide();
+	}
+	
+	var company_id_required = [<?php echo implode(',', $company_id_required_data); ?>];
+	
+	if ($.inArray(this.value, company_id_required) >= 0) {
+		$('#company-id-required').show();
+	} else {
+		$('#company-id-required').hide();
+	}
+	
+	var tax_id_display = [<?php echo implode(',', $tax_id_display_data); ?>];
+	
+	if ($.inArray(this.value, tax_id_display) >= 0) {
+		$('#tax-id-display').show();
+	} else {
+		$('#tax-id-display').hide();
+	}
+	
+	var tax_id_required = [<?php echo implode(',', $tax_id_required_data); ?>];
+	
+	if ($.inArray(this.value, tax_id_required) >= 0) {
+		$('#tax-id-required').show();
+	} else {
+		$('#tax-id-required').hide();
+	}
+});
+
+$('select[name=\'customer_group_id\']').trigger('change');
 //--></script>

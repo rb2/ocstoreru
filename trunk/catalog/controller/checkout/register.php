@@ -31,11 +31,11 @@ class ControllerCheckoutRegister extends Controller {
 
 		$this->data['button_continue'] = $this->language->get('button_continue');
 
-		$this->load->model('account/customer_group');
-
 		$customer_group_data = array();
 		
 		if (is_array($this->config->get('config_customer_group_display'))) {
+			$this->load->model('account/customer_group');
+			
 			$customer_groups = $this->model_account_customer_group->getCustomerGroups();
 			
 			foreach ($customer_groups  as $customer_group) {
@@ -59,11 +59,7 @@ class ControllerCheckoutRegister extends Controller {
 			$this->data['customer_groups'] = array();
 		}
 		
-		if (isset($this->request->post['customer_group_id'])) {
-    		$this->data['customer_group_id'] = $this->request->post['customer_group_id'];
-		} else {
-			$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
-		}
+		$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
 		
 		if (isset($this->request->post['postcode'])) {
     		$this->data['postcode'] = $this->request->post['postcode'];
@@ -176,21 +172,23 @@ class ControllerCheckoutRegister extends Controller {
 			}
 	
 			// Customer Group
+			$this->load->model('account/customer_group');
+			
 			if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 				$customer_group_id = $this->request->post['customer_group_id'];
 			} else {
 				$customer_group_id = $this->config->get('config_customer_group_id');
 			}
 			
-			$this->load->model('account/customer_group');
-			
 			$customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 				
 			if ($customer_group) {	
+				// Company ID
 				if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && !$this->request->post['company_id']) {
 					$json['error']['company_id'] = $this->language->get('error_company_id');
 				}
 				
+				// Tax ID
 				if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
 					$json['error']['tax_id'] = $this->language->get('error_tax_id');
 				}						

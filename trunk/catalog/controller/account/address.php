@@ -108,7 +108,6 @@ class ControllerAccountAddress extends Controller {
 				unset($this->session->data['shipping_country_id']);
 				unset($this->session->data['shipping_zone_id']);
 				unset($this->session->data['shipping_postcode']);				
-				
 				unset($this->session->data['shipping_method']);
 				unset($this->session->data['shipping_methods']);
 			}
@@ -119,7 +118,6 @@ class ControllerAccountAddress extends Controller {
 				// Default Payment Address
 				unset($this->session->data['payment_country_id']);
 				unset($this->session->data['payment_zone_id']);				
-				
 				unset($this->session->data['payment_method']);
 				unset($this->session->data['payment_methods']);
 			}

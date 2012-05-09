@@ -13,8 +13,6 @@ class ControllerAccountRegister extends Controller {
 		
 		$this->load->model('account/customer');
 		
-		$this->load->model('account/customer_group');
-		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_customer->addCustomer($this->request->post);
 
@@ -180,6 +178,8 @@ class ControllerAccountRegister extends Controller {
 		$customer_group_data = array();
 		
 		if (is_array($this->config->get('config_customer_group_display'))) {
+			$this->load->model('account/customer_group');
+			
 			$customer_groups = $this->model_account_customer_group->getCustomerGroups();
 			
 			foreach ($customer_groups  as $customer_group) {
@@ -381,6 +381,8 @@ class ControllerAccountRegister extends Controller {
     	}
 		
 		// Customer Group
+		$this->load->model('account/customer_group');
+		
 		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 			$customer_group_id = $this->request->post['customer_group_id'];
 		} else {
@@ -390,10 +392,12 @@ class ControllerAccountRegister extends Controller {
 		$customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 			
 		if ($customer_group) {	
+			// Company ID
 			if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && !$this->request->post['company_id']) {
 				$this->error['company_id'] = $this->language->get('error_company_id');
 			}
 			
+			// Tax ID
 			if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
 				$this->error['tax_id'] = $this->language->get('error_tax_id');
 			}						

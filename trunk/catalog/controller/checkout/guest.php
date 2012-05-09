@@ -5,6 +5,7 @@ class ControllerCheckoutGuest extends Controller {
 		
 		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
+		$this->data['text_your_account'] = $this->language->get('text_your_account');
 		$this->data['text_your_address'] = $this->language->get('text_your_address');
 		
 		$this->data['entry_firstname'] = $this->language->get('entry_firstname');
@@ -12,7 +13,10 @@ class ControllerCheckoutGuest extends Controller {
 		$this->data['entry_email'] = $this->language->get('entry_email');
 		$this->data['entry_telephone'] = $this->language->get('entry_telephone');
 		$this->data['entry_fax'] = $this->language->get('entry_fax');
+		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_company'] = $this->language->get('entry_company');
+		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
+		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');			
 		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
 		$this->data['entry_address_2'] = $this->language->get('entry_address_2');
 		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
@@ -23,6 +27,40 @@ class ControllerCheckoutGuest extends Controller {
 		
 		$this->data['button_continue'] = $this->language->get('button_continue');
 
+		$this->load->model('account/customer_group');
+
+		$customer_group_data = array();
+		
+		if (is_array($this->config->get('config_customer_group_display'))) {
+			$customer_groups = $this->model_account_customer_group->getCustomerGroups();
+			
+			foreach ($customer_groups  as $customer_group) {
+				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+					$customer_group_data[] = array(
+						'customer_group_id'   => $customer_group['customer_group_id'],
+						'name'                => $customer_group['name'],
+						'description'         => $customer_group['description'],
+						'company_id_display'  => $customer_group['company_id_display'],
+						'company_id_required' => $customer_group['company_id_required'],
+						'tax_id_display'      => $customer_group['tax_id_display'],
+						'tax_id_required'     => $customer_group['tax_id_required']
+					);
+				}
+			}
+		}
+		
+		if (count($customer_group_data) > 1) {
+			$this->data['customer_groups'] = $customer_group_data;
+		} else {
+			$this->data['customer_groups'] = array();
+		}
+		
+		if (isset($this->session->data['guest']['customer_group_id'])) {
+    		$this->data['customer_group_id'] = $this->session->data['guest']['customer_group_id'];
+		} else {
+			$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
+		}
+		
 		if (isset($this->session->data['guest']['firstname'])) {
 			$this->data['firstname'] = $this->session->data['guest']['firstname'];
 		} else {
@@ -158,7 +196,30 @@ class ControllerCheckoutGuest extends Controller {
 			if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
 				$json['error']['telephone'] = $this->language->get('error_telephone');
 			}
+
+			// Customer Group
+			$this->load->model('account/customer_group');
 			
+			if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+				$customer_group_id = $this->request->post['customer_group_id'];
+			} else {
+				$customer_group_id = $this->config->get('config_customer_group_id');
+			}
+			
+			$customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
+				
+			if ($customer_group) {	
+				// Company ID
+				if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && !$this->request->post['company_id']) {
+					$json['error']['company_id'] = $this->language->get('error_company_id');
+				}
+				
+				// Tax ID
+				if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
+					$json['error']['tax_id'] = $this->language->get('error_tax_id');
+				}						
+			}
+						
 			if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
 				$json['error']['address_1'] = $this->language->get('error_address_1');
 			}
@@ -185,6 +246,7 @@ class ControllerCheckoutGuest extends Controller {
 		}
 			
 		if (!$json) {
+			$this->session->data['guest']['customer_group_id'] = $customer_group_id;
 			$this->session->data['guest']['firstname'] = $this->request->post['firstname'];
 			$this->session->data['guest']['lastname'] = $this->request->post['lastname'];
 			$this->session->data['guest']['email'] = $this->request->post['email'];
@@ -194,6 +256,8 @@ class ControllerCheckoutGuest extends Controller {
 			$this->session->data['guest']['payment']['firstname'] = $this->request->post['firstname'];
 			$this->session->data['guest']['payment']['lastname'] = $this->request->post['lastname'];				
 			$this->session->data['guest']['payment']['company'] = $this->request->post['company'];
+			$this->session->data['guest']['payment']['company_id'] = $this->request->post['company_id'];
+			$this->session->data['guest']['payment']['tax_id'] = $this->request->post['tax_id'];
 			$this->session->data['guest']['payment']['address_1'] = $this->request->post['address_1'];
 			$this->session->data['guest']['payment']['address_2'] = $this->request->post['address_2'];
 			$this->session->data['guest']['payment']['postcode'] = $this->request->post['postcode'];
