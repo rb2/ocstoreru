@@ -10,15 +10,15 @@
   </tr>
   <?php if (!$shipping_method['error']) { ?>
   <?php foreach ($shipping_method['quote'] as $quote) { ?>
-  <tr class="highlight" onclick="$('#<?php echo $quote['code']; ?>').attr('checked', true);">
+  <tr class="highlight">
     <td><?php if ($quote['code'] == $code || !$code) { ?>
       <?php $code = $quote['code']; ?>
       <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" checked="checked" />
       <?php } else { ?>
       <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" />
       <?php } ?></td>
-    <td><?php echo $quote['title']; ?></td>
-    <td style="text-align: right;"><?php echo $quote['text']; ?></td>
+    <td><label for="<?php echo $quote['code']; ?>"><?php echo $quote['title']; ?></label></td>
+    <td style="text-align: right;"><label for="<?php echo $quote['code']; ?>"><?php echo $quote['text']; ?></label></td>
   </tr>
   <?php } ?>
   <?php } else { ?>

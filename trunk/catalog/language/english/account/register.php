@@ -7,6 +7,7 @@ $_['text_account']         = 'Account';
 $_['text_register']        = 'Register';
 $_['text_account_already'] = 'If you already have an account with us, please login at the <a href="%s">login page</a>.';
 $_['text_your_account']    = 'Your Account';
+$_['text_account_type']    = 'Please select the type of account you are registering for.';
 $_['text_your_details']    = 'Your Personal Details';
 $_['text_your_address']    = 'Your Address';
 $_['text_newsletter']      = 'Newsletter';
@@ -34,6 +35,7 @@ $_['entry_confirm']        = 'Password Confirm:';
 
 // Error
 $_['error_exists']         = 'Warning: E-Mail Address is already registered!';
+$_['error_customer_group'] = 'Customer group selected is invalid!';
 $_['error_firstname']      = 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']       = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']          = 'E-Mail Address does not appear to be valid!';

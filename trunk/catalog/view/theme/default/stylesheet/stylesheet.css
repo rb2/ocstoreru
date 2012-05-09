@@ -518,6 +518,9 @@ table.radio td {
 	padding: 5px;
 	vertical-align: top;
 }
+table.radio td label {
+	display: block;
+}
 table.radio tr td:first-child {
 	width: 1px;
 }

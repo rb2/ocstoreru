@@ -982,10 +982,10 @@ DROP TABLE IF EXISTS `oc_customer_group`;
 CREATE TABLE IF NOT EXISTS `oc_customer_group` (
   `customer_group_id` int(11) NOT NULL auto_increment,
   `approval` int(1) NOT NULL,
-  `company_display` int(1) NOT NULL,
-  `company_required` int(1) NOT NULL,
-  `tax_display` int(1) NOT NULL,
-  `tax_required` int(1) NOT NULL,
+  `company_id_display` int(1) NOT NULL,
+  `company_id_required` int(1) NOT NULL,
+  `tax_id_display` int(1) NOT NULL,
+  `tax_id_required` int(1) NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`customer_group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
