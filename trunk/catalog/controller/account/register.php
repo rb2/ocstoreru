@@ -64,9 +64,8 @@ class ControllerAccountRegister extends Controller {
 		$this->data['text_no'] = $this->language->get('text_no');
 		$this->data['text_select'] = $this->language->get('text_select');
     	$this->data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', 'SSL'));
-    	$this->data['text_your_account'] = $this->language->get('text_your_account');
-		$this->data['text_account_type'] = $this->language->get('text_account_type');
 		$this->data['text_your_details'] = $this->language->get('text_your_details');
+		$this->data['text_your_account'] = $this->language->get('text_your_account');
     	$this->data['text_your_address'] = $this->language->get('text_your_address');
     	$this->data['text_your_password'] = $this->language->get('text_your_password');
 		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
@@ -76,7 +75,8 @@ class ControllerAccountRegister extends Controller {
     	$this->data['entry_email'] = $this->language->get('entry_email');
     	$this->data['entry_telephone'] = $this->language->get('entry_telephone');
     	$this->data['entry_fax'] = $this->language->get('entry_fax');
-    	$this->data['entry_company'] = $this->language->get('entry_company');
+    	$this->data['entry_account'] = $this->language->get('entry_account');
+		$this->data['entry_company'] = $this->language->get('entry_company');
 		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
 		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');
     	$this->data['entry_address_1'] = $this->language->get('entry_address_1');
@@ -360,24 +360,6 @@ class ControllerAccountRegister extends Controller {
   	}
 
   	private function validate() {
-		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
-			$customer_group_id = $this->request->post['customer_group_id'];
-		} else {
-			$customer_group_id = $this->config->get('config_customer_group_id');
-		}
-
-		$customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
-			
-		if ($customer_group) {	
-			if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && !$this->request->post['company_id']) {
-				$this->error['company_id'] = $this->language->get('error_company_id');
-			}
-			
-			if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
-				$this->error['tax_id'] = $this->language->get('error_tax_id');
-			}						
-		}
-		
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
@@ -397,7 +379,26 @@ class ControllerAccountRegister extends Controller {
     	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
       		$this->error['telephone'] = $this->language->get('error_telephone');
     	}
+		
+		// Customer Group
+		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+			$customer_group_id = $this->request->post['customer_group_id'];
+		} else {
+			$customer_group_id = $this->config->get('config_customer_group_id');
+		}
 
+		$customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
+			
+		if ($customer_group) {	
+			if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && !$this->request->post['company_id']) {
+				$this->error['company_id'] = $this->language->get('error_company_id');
+			}
+			
+			if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
+				$this->error['tax_id'] = $this->language->get('error_tax_id');
+			}						
+		}
+		
     	if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
       		$this->error['address_1'] = $this->language->get('error_address_1');
     	}

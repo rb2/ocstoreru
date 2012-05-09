@@ -197,8 +197,16 @@ $('#button-register').live('click', function() {
 				
 				if (json['error']['telephone']) {
 					$('#payment-address input[name=\'telephone\'] + br').after('<span class="error">' + json['error']['telephone'] + '</span>');
-				}		
-										
+				}	
+					
+				if (json['error']['company_id']) {
+					$('#payment-address input[name=\'company_id\'] + br').after('<span class="error">' + json['error']['company_id'] + '</span>');
+				}	
+				
+				if (json['error']['tax_id']) {
+					$('#payment-address input[name=\'tax_id\'] + br').after('<span class="error">' + json['error']['tax_id'] + '</span>');
+				}	
+																		
 				if (json['error']['address_1']) {
 					$('#payment-address input[name=\'address_1\'] + br').after('<span class="error">' + json['error']['address_1'] + '</span>');
 				}	
@@ -366,7 +374,15 @@ $('#button-payment-address').live('click', function() {
 				if (json['error']['telephone']) {
 					$('#payment-address input[name=\'telephone\']').after('<span class="error">' + json['error']['telephone'] + '</span>');
 				}		
-										
+				
+				if (json['error']['company_id']) {
+					$('#payment-address input[name=\'company_id\'] + br').after('<span class="error">' + json['error']['company_id'] + '</span>');
+				}	
+				
+				if (json['error']['tax_id']) {
+					$('#payment-address input[name=\'tax_id\'] + br').after('<span class="error">' + json['error']['tax_id'] + '</span>');
+				}	
+														
 				if (json['error']['address_1']) {
 					$('#payment-address input[name=\'address_1\']').after('<span class="error">' + json['error']['address_1'] + '</span>');
 				}	
@@ -584,8 +600,16 @@ $('#button-guest').live('click', function() {
 				
 				if (json['error']['telephone']) {
 					$('#payment-address input[name=\'telephone\'] + br').after('<span class="error">' + json['error']['telephone'] + '</span>');
-				}		
-										
+				}	
+					
+				if (json['error']['company_id']) {
+					$('#payment-address input[name=\'company_id\'] + br').after('<span class="error">' + json['error']['company_id'] + '</span>');
+				}	
+				
+				if (json['error']['tax_id']) {
+					$('#payment-address input[name=\'tax_id\'] + br').after('<span class="error">' + json['error']['tax_id'] + '</span>');
+				}	
+																		
 				if (json['error']['address_1']) {
 					$('#payment-address input[name=\'address_1\'] + br').after('<span class="error">' + json['error']['address_1'] + '</span>');
 				}	

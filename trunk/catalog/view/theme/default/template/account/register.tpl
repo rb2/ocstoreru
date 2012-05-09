@@ -49,13 +49,28 @@
         </tr>
       </table>
     </div>
+    <?php if ($customer_groups) { ?>
+    <h2><?php echo $text_your_account; ?></h2>
+    <div class="content">
+       <table class="form">
+        <tr>
+          <td><?php echo $entry_account; ?></td>
+          <td><select name="customer_group_id">
+              <?php foreach ($customer_groups as $customer_group) { ?>
+              <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
+              <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
+              <?php } else { ?>
+              <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select></td>
+        </tr>      
+      </table>
+    </div>
+    <?php } ?>
     <h2><?php echo $text_your_address; ?></h2>
     <div class="content">
       <table class="form">
-        <tr>
-          <td>Account Type:</td>
-          <td>Indvidual (<a id="button-account">Change</a>)</td>
-        </tr>      
         <tr>
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
@@ -183,48 +198,6 @@
     <?php } ?>
   </form>
   <?php echo $content_bottom; ?></div>
-<?php if ($customer_groups) { ?>
-<script type="text/javascript"><!--
-$('#button-account').bind('click', function() {
-	html  = '<h2><?php echo $text_your_account; ?></h2>';     
-	html += '<div class="content">';
-	html += '  <p><?php echo $text_account_type; ?></p>';
-	html += '  <table class="radio">';
-	<?php foreach ($customer_groups as $customer_group) { ?>
-	
-	html += '    <tr class="highlight">';
-	html += '      <td style="vertical-align: top;">';
-	
-	<?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
-	html += '<input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer-group<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />';
-	<?php } else { ?>
-	html += '<input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer-group<?php echo $customer_group['customer_group_id']; ?>" />';
-	<?php } ?>
-	
-	html += '      </td>';
-	html += '      <td style="vertical-align: top;"><label for="customer-group<?php echo $customer_group['customer_group_id']; ?>"><b><?php echo $customer_group['name']; ?></b></label>';
-	
-	<?php if ($customer_group['description']) { ?>
-	html += '      <label for="customer-group<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['description']; ?></label>';
-	<?php } ?>
-	
-	html += '    <br /></td>';
-	html += '  </tr>';
-	<?php } ?>
-	html += '  </table>';
-	html += '</div>';
-	
-	$.colorbox({
-		overlayClose: true,
-		opacity: 0.5,
-		width: '600px',
-		height: '400px',
-		href: false,
-		html: html
-	});
-})
-//--></script>
-<?php } ?>
 <?php 
 $postcode_required_data = array(); 
 
@@ -275,7 +248,7 @@ foreach ($customer_groups as $customer_group) {
 } 
 ?>
 <script type="text/javascript"><!--
-$('input[name=\'customer_group_id\']').live('click', function() {
+$('select[name=\'customer_group_id\']').live('change', function() {
 	var company_id_display = [<?php echo implode(',', $company_id_display_data); ?>];
 	
 	if ($.inArray(this.value, company_id_display) >= 0) {
@@ -309,7 +282,7 @@ $('input[name=\'customer_group_id\']').live('click', function() {
 	}
 });
 
-$('input[name=\'customer_group_id\']:checked').trigger('click');
+$('select[name=\'customer_group_id\']').trigger('change');
 //--></script> 
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
