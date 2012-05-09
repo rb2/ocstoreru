@@ -783,7 +783,11 @@ class ControllerSaleOrder extends Controller {
 		} else {
 			$this->data['customer_group_id'] = '';
 		}
-						
+		
+		$this->load->model('sale/customer_group');
+		
+		$this->data['customer_groups'] = $this->model_sale_customer_group->getCustomerGroups();
+								
     	if (isset($this->request->post['firstname'])) {
       		$this->data['firstname'] = $this->request->post['firstname'];
 		} elseif (!empty($order_info)) { 

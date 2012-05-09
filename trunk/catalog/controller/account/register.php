@@ -424,6 +424,14 @@ class ControllerAccountRegister extends Controller {
 			// Tax ID
 			if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
 				$this->error['tax_id'] = $this->language->get('error_tax_id');
+
+				$this->load->helper('vat');
+				
+				$result = vat_validate($country_info['iso_code_2'], $this->request->post['tax_id']);
+				
+				if ($country_info && $result) {
+					
+				}
 			}						
 		}
 		

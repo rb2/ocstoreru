@@ -44,6 +44,9 @@ class ControllerCheckoutManual extends Controller {
 					$json['error']['customer'] = $this->language->get('error_customer');
 				}
 			}
+			
+			// Customer Group
+			$this->config->set('config_customer_group_id', $this->request->post['customer_group_id']);
 				
 			// Product
 			$this->load->model('catalog/product');
@@ -367,18 +370,14 @@ class ControllerCheckoutManual extends Controller {
 
 					if (!$json['shipping_method']) {
 						$json['error']['shipping_method'] = $this->language->get('error_no_shipping');
-					} else {
-						if (!$this->request->post['shipping_code']) {
+					} elseif ($this->request->post['shipping_code']) { {
+						$shipping = explode('.', $this->request->post['shipping_code']);
+						
+						if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($json['shipping_method'][$shipping[0]]['quote'][$shipping[1]])) {		
 							$json['error']['shipping_method'] = $this->language->get('error_shipping');
 						} else {
-							$shipping = explode('.', $this->request->post['shipping_code']);
-							
-							if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($json['shipping_method'][$shipping[0]]['quote'][$shipping[1]])) {		
-								$json['error']['shipping_method'] = $this->language->get('error_shipping');
-							} else {
-								$this->session->data['shipping_method'] = $json['shipping_method'][$shipping[0]]['quote'][$shipping[1]];
-							}				
-						}
+							$this->session->data['shipping_method'] = $json['shipping_method'][$shipping[0]]['quote'][$shipping[1]];
+						}				
 					}					
 				}
 			}

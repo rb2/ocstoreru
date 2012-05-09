@@ -34,8 +34,19 @@
             <tr>
               <td><?php echo $entry_customer; ?></td>
               <td><input type="text" name="customer" value="<?php echo $customer; ?>" />
-                <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>" />
-                <input type="hidden" name="customer_group_id" value="<?php echo $customer_group_id; ?>" /></td>
+                <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>" /></td>
+            </tr>
+            <tr>
+              <td class="left"><?php echo $entry_customer_group; ?></td>
+              <td class="left"><select name="customer_group_id" <?php echo ($customer_id ? 'disabled="disabled"' : ''); ?>>
+                  <?php foreach ($customer_groups as $customer_group) { ?>
+                  <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
+                  <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
@@ -100,12 +111,12 @@
               <td><?php echo $entry_company; ?></td>
               <td><input type="text" name="payment_company" value="<?php echo $payment_company; ?>" /></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_company_id; ?></td>
+            <tr id="company-id-display">
+              <td><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?></td>
               <td><input type="text" name="payment_company_id" value="<?php echo $payment_company_id; ?>" /></td>
             </tr>
-            <tr>
-              <td><?php echo $entry_tax_id; ?></td>
+            <tr id="tax-id-display">
+              <td><span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?></td>
               <td><input type="text" name="payment_tax_id" value="<?php echo $payment_tax_id; ?>" /></td>
             </tr>                        
             <tr>
@@ -590,7 +601,7 @@ $('input[name=\'customer\']').catcomplete({
 	select: function(event, ui) { 
 		$('input[name=\'customer\']').attr('value', ui.item['label']);
 		$('input[name=\'customer_id\']').attr('value', ui.item['value']);
-		$('input[name=\'customer_group_id\']').attr('value', ui.item['customer_group_id']);
+		$('select[name=\'customer_group_id\']').attr('value', ui.item['customer_group_id']);
 		$('input[name=\'firstname\']').attr('value', ui.item['firstname']);
 		$('input[name=\'lastname\']').attr('value', ui.item['lastname']);
 		$('input[name=\'email\']').attr('value', ui.item['email']);
@@ -599,19 +610,64 @@ $('input[name=\'customer\']').catcomplete({
 			
 		html = '<option value="0"><?php echo $text_none; ?></option>'; 
 			
-		for (i = 0; i < ui.item['address'].length; i++) {
+		for (i in  ui.item['address']) {
 			html += '<option value="' + ui.item['address'][i]['address_id'] + '">' + ui.item['address'][i]['firstname'] + ' ' + ui.item['address'][i]['lastname'] + ', ' + ui.item['address'][i]['address_1'] + ', ' + ui.item['address'][i]['city'] + ', ' + ui.item['address'][i]['country'] + '</option>';
 		}
 		
 		$('select[name=\'shipping_address\']').html(html);
 		$('select[name=\'payment_address\']').html(html);
-			
+			 		
+		$('select[name=\'customer_group_id\']').trigger('change');
+					 	
 		return false; 
 	},
 	focus: function(event, ui) {
       	return false;
 	}
 });
+
+$('select[name=\'customer_group_id\']').live('change', function() {
+	$.ajax({
+		url: 'index.php?route=sale/customer/customer_group&token=<?php echo $token; ?>&customer_group_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'customer_group_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
+		},		
+		complete: function() {
+			$('.wait').remove();
+		},			
+		success: function(json) {
+			if (json['company_id_display'] == '1') {
+				$('#company-id-display').show();
+			} else {
+				$('#company-id-display').hide();
+			}
+			
+			if (json['company_id_required'] == '1') {
+				$('#company-id-required').show();
+			} else {
+				$('#company-id-required').hide();
+			}
+			
+			if (json['tax_id_display'] == '1') {
+				$('#tax-id-display').show();
+			} else {
+				$('#tax-id-display').hide();
+			}
+			
+			if (json['tax_id_required'] == '1') {
+				$('#tax-id-required').show();
+			} else {
+				$('#tax-id-required').hide();
+			}						
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('select[name=\'customer_group_id\']').trigger('change');
 
 $('input[name=\'affiliate\']').autocomplete({
 	delay: 0,

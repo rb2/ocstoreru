@@ -1278,15 +1278,16 @@ class ControllerSaleCustomer extends Controller {
 			
 			foreach ($results as $result) {
 				$json[] = array(
-					'customer_id'    => $result['customer_id'], 
-					'name'           => html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'),
-					'customer_group' => $result['customer_group'],
-					'firstname'      => $result['firstname'],
-					'lastname'       => $result['lastname'],
-					'email'          => $result['email'],
-					'telephone'      => $result['telephone'],
-					'fax'            => $result['fax'],
-					'address'        => $this->model_sale_customer->getAddresses($result['customer_id'])
+					'customer_id'       => $result['customer_id'], 
+					'customer_group_id' => $result['customer_group_id'],
+					'name'              => html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'),
+					'customer_group'    => $result['customer_group'],
+					'firstname'         => $result['firstname'],
+					'lastname'          => $result['lastname'],
+					'email'             => $result['email'],
+					'telephone'         => $result['telephone'],
+					'fax'               => $result['fax'],
+					'address'           => $this->model_sale_customer->getAddresses($result['customer_id'])
 				);					
 			}
 		}
@@ -1307,7 +1308,7 @@ class ControllerSaleCustomer extends Controller {
 		
 		$this->load->model('sale/customer_group');
 
-    	$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->request->get['customer_group_id']);
+    	$customer_group_info = $this->model_sale_customer_group->getCustomerGroup($this->request->get['customer_group_id']);
 		
 		if ($customer_group_info) {
 			$json = $customer_group_info;
