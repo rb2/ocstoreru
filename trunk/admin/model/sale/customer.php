@@ -222,6 +222,8 @@ class ModelSaleCustomer extends Model {
 				'firstname'      => $address_query->row['firstname'],
 				'lastname'       => $address_query->row['lastname'],
 				'company'        => $address_query->row['company'],
+				'company_id'     => $address_query->row['company_id'],
+				'tax_id'         => $address_query->row['company_id'],
 				'address_1'      => $address_query->row['address_1'],
 				'address_2'      => $address_query->row['address_2'],
 				'postcode'       => $address_query->row['postcode'],

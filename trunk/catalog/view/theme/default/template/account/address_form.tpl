@@ -47,7 +47,7 @@
             <?php } ?></td>
         </tr>
         <tr>
-          <td><span class="required">*</span> <?php echo $entry_postcode; ?></td>
+          <td><span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
           <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" />
             <?php if ($error_postcode) { ?>
             <span class="error"><?php echo $error_postcode; ?></span>
@@ -99,6 +99,28 @@
     </div>
   </form>
   <?php echo $content_bottom; ?></div>
+<?php 
+$postcode_required_data = array(); 
+
+foreach ($countries as $country) {
+	if ($country['postcode_required']) {
+		$postcode_required_data[] = '\'' . $country['country_id'] . '\'';
+	} 
+} 
+?>
+<script type="text/javascript"><!--
+$('select[name=\'country_id\']').bind('change', function() {
+	var postcode_required = [<?php echo implode(',', $postcode_required_data); ?>];
+	
+	if ($.inArray(this.value, postcode_required) >= 0) {
+		$('#postcode-required').show();
+	} else {
+		$('#postcode-required').hide();
+	}
+});
+
+$('select[name=\'country_id\']').trigger('change');
+//--></script>
 <script type="text/javascript"><!--
 $('select[name=\'zone_id\']').load('index.php?route=account/address/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
 //--></script> 

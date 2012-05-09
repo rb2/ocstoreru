@@ -44,7 +44,7 @@
       <td><input type="text" name="city" value="" class="large-field" /></td>
     </tr>
     <tr>
-      <td><span class="required">*</span> <?php echo $entry_postcode; ?></td>
+      <td><span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
       <td><input type="text" name="postcode" value="" class="large-field" /></td>
     </tr>
     <tr>
@@ -72,8 +72,6 @@
   <div class="right"><input type="button" value="<?php echo $button_continue; ?>" id="button-payment-address" class="button" /></div>
 </div>
 <script type="text/javascript"><!--
-$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/payment_address/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
-
 $('#payment-address input[name=\'payment_address\']').live('change', function() {
 	if (this.value == 'new') {
 		$('#payment-existing').hide();
@@ -84,3 +82,28 @@ $('#payment-address input[name=\'payment_address\']').live('change', function() 
 	}
 });
 //--></script> 
+<?php 
+$postcode_required_data = array(); 
+
+foreach ($countries as $country) {
+	if ($country['postcode_required']) {
+		$postcode_required_data[] = '\'' . $country['country_id'] . '\'';
+	} 
+} 
+?>
+<script type="text/javascript"><!--
+$('#payment-address select[name=\'country_id\']').bind('change', function() {
+	var postcode_required = [<?php echo implode(',', $postcode_required_data); ?>];
+	
+	if ($.inArray(this.value, postcode_required) >= 0) {
+		$('#payment-postcode-required').show();
+	} else {
+		$('#payment-postcode-required').hide();
+	}
+});
+
+$('#payment-address select[name=\'country_id\']').trigger('change');
+//--></script>
+<script type="text/javascript"><!--
+$('#payment-address select[name=\'zone_id\']').load('index.php?route=checkout/payment_address/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
+//--></script>
