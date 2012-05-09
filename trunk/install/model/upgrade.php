@@ -135,6 +135,15 @@ class ModelUpgrade extends Model {
 		if (empty($settings['config_voucher_max'])) {
 			$db->query("UPDATE " . DB_PREFIX . "setting SET value = '50' WHERE `key` = 'config_voucher_max'");
 		}
+		// Layout routes now require "%" for wildcard paths
+		$layout_route_query = $db->query("SELECT * FROM " . DB_PREFIX . "layout_route");
+		foreach ($layout_route_query->rows as $layout_route) {
+			if (strpos($layout_route['route'], '/') === false) { // If missing the trailing slash, add "/%"
+					$db->query("UPDATE " . DB_PREFIX . "layout_route SET route = '" . $layout_route['route'] . "/%' WHERE `layout_route_id` = '" . $layout_route['layout_route_id'] . "'");
+			} elseif (strrchr($layout_route['route'], '/') == "/") { // If has the trailing slash, then just add "%"
+					$db->query("UPDATE " . DB_PREFIX . "layout_route SET route = '" . $layout_route['route'] . "%' WHERE `layout_route_id` = '" . $layout_route['layout_route_id'] . "'");
+			}
+		}
 	}
 }
 ?>
