@@ -282,8 +282,6 @@ class ControllerDesignBanner extends Controller {
 		$this->data['button_add_banner'] = $this->language->get('button_add_banner');
 		$this->data['button_remove'] = $this->language->get('button_remove');
 
-		$this->data['token'] = $this->session->data['token'];
-
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -341,6 +339,8 @@ class ControllerDesignBanner extends Controller {
 		if (isset($this->request->get['banner_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$banner_info = $this->model_design_banner->getBanner($this->request->get['banner_id']);
 		}
+
+		$this->data['token'] = $this->session->data['token'];
 
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];

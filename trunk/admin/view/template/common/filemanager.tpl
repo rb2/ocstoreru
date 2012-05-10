@@ -5,6 +5,7 @@
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
 <script type="text/javascript" src="view/javascript/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="view/javascript/jquery/lazyload/jquery.lazyload.min.js"></script>
 <script type="text/javascript" src="view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
 <link rel="stylesheet" type="text/css" href="view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
 <script type="text/javascript" src="view/javascript/jquery/ui/external/jquery.bgiframe-2.1.2.js"></script>
@@ -169,25 +170,15 @@ $(document).ready(function() {
 								
 								name += json[i]['size'];
 								
-								html += '<a>' + name + '<input type="hidden" name="image" value="' + json[i]['file'] + '" /></a>';
+								html += '<a file="' + json[i]['file'] + '"><img src="<?php echo $no_image; ?>" data-original="' + json[i]['thumb'] + '" width="100" height="100" /><br />' + name + '</a>';
 							}
 						}
 						
 						html += '</div>';
 						
 						$('#column-right').html(html);
-						
-						$('#column-right a').each(function(index, element) {
-							$.ajax({
-								url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent('data/' + $(element).find('input[name=\'image\']').attr('value')),
-								dataType: 'html',
-								success: function(html) {
-									$(element).prepend('<img src="' + html + '" title="" style="display: none;" /><br />');
-									
-									$(element).find('img').fadeIn();
-								}
-							});
-						});
+
+						$('#column-right img').lazyload({ container: $('#column-right') });
 					},
 					error: function(xhr, ajaxOptions, thrownError) {
 						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -209,11 +200,11 @@ $(document).ready(function() {
 	
 	$('#column-right a').live('dblclick', function() {
 		<?php if ($fckeditor) { ?>
-		window.opener.CKEDITOR.tools.callFunction(<?php echo $fckeditor; ?>, '<?php echo $directory; ?>' + $(this).find('input[name=\'image\']').attr('value'));
+		window.opener.CKEDITOR.tools.callFunction(<?php echo $fckeditor; ?>, '<?php echo $directory; ?>' + $(this).attr('file'));
 		
 		self.close();	
 		<?php } else { ?>
-		parent.$('#<?php echo $field; ?>').attr('value', 'data/' + $(this).find('input[name=\'image\']').attr('value'));
+		parent.$('#<?php echo $field; ?>').attr('value', 'data/' + $(this).attr('file'));
 		parent.$('#dialog').dialog('close');
 		
 		parent.$('#dialog').remove();	
@@ -265,7 +256,7 @@ $(document).ready(function() {
 	});
 	
 	$('#delete').bind('click', function() {
-		path = $('#column-right a.selected').find('input[name=\'image\']').attr('value');
+		path = $('#column-right a.selected').attr('file');
 							 
 		if (path) {
 			$.ajax({
@@ -339,7 +330,7 @@ $(document).ready(function() {
 		$('#dialog select[name=\'to\']').load('index.php?route=common/filemanager/folders&token=<?php echo $token; ?>');
 		
 		$('#dialog input[type=\'button\']').bind('click', function() {
-			path = $('#column-right a.selected').find('input[name=\'image\']').attr('value');
+			path = $('#column-right a.selected').attr('file');
 							 
 			if (path) {																
 				$.ajax({
@@ -414,7 +405,7 @@ $(document).ready(function() {
 		$('#dialog select[name=\'to\']').load('index.php?route=common/filemanager/folders&token=<?php echo $token; ?>');
 		
 		$('#dialog input[type=\'button\']').bind('click', function() {
-			path = $('#column-right a.selected').find('input[name=\'image\']').attr('value');
+			path = $('#column-right a.selected').attr('file');
 							 
 			if (path) {																
 				$.ajax({
@@ -487,7 +478,7 @@ $(document).ready(function() {
 		});
 		
 		$('#dialog input[type=\'button\']').bind('click', function() {
-			path = $('#column-right a.selected').find('input[name=\'image\']').attr('value');
+			path = $('#column-right a.selected').attr('file');
 							 
 			if (path) {		
 				$.ajax({

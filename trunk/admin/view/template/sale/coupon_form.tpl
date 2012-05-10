@@ -205,7 +205,10 @@ $('input[name=\'product\']').autocomplete({
 		$('input[name=\'product\']').val('');
 		
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 
 $('#coupon-product div img').live('click', function() {

@@ -57,9 +57,9 @@ class ControllerModuleCurrency extends Controller {
 			}	
 					
 			if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-				$connection = 'NOSSL';
-			} else {
 				$connection = 'SSL';
+			} else {
+				$connection = 'NONSSL';
 			}
 						
 			$this->data['redirect'] = $this->url->link($route, $url, $connection);

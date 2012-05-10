@@ -273,10 +273,6 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		$this->data['button_add_geo_zone'] = $this->language->get('button_add_geo_zone');
 		$this->data['button_remove'] = $this->language->get('button_remove');
-				
-		$this->data['tab_general'] = $this->language->get('tab_general');
-
-		$this->data['token'] = $this->session->data['token'];
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -335,10 +331,12 @@ class ControllerLocalisationGeoZone extends Controller {
 		if (isset($this->request->get['geo_zone_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$geo_zone_info = $this->model_localisation_geo_zone->getGeoZone($this->request->get['geo_zone_id']);
 		}
-
+		
+		$this->data['token'] = $this->session->data['token'];
+		
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
-		} elseif (isset($geo_zone_info)) {
+		} elseif (!empty($geo_zone_info)) {
 			$this->data['name'] = $geo_zone_info['name'];
 		} else {
 			$this->data['name'] = '';
@@ -346,7 +344,7 @@ class ControllerLocalisationGeoZone extends Controller {
 
 		if (isset($this->request->post['description'])) {
 			$this->data['description'] = $this->request->post['description'];
-		} elseif (isset($geo_zone_info)) {
+		} elseif (!empty($geo_zone_info)) {
 			$this->data['description'] = $geo_zone_info['description'];
 		} else {
 			$this->data['description'] = '';

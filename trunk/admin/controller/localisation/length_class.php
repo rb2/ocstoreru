@@ -274,8 +274,6 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 
-		$this->data['tab_general'] = $this->language->get('tab_general');
-
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -348,7 +346,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		
 		if (isset($this->request->post['value'])) {
 			$this->data['value'] = $this->request->post['value'];
-		} elseif (isset($length_class_info)) {
+		} elseif (!empty($length_class_info)) {
 			$this->data['value'] = $length_class_info['value'];
 		} else {
 			$this->data['value'] = '';

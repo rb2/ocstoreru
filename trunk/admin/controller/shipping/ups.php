@@ -63,7 +63,6 @@ class ControllerShippingUPS extends Controller {
 		$this->data['entry_service'] = $this->language->get('entry_service');
 		$this->data['entry_insurance'] = $this->language->get('entry_insurance');
 		$this->data['entry_display_weight'] = $this->language->get('entry_display_weight');
-		$this->data['entry_weight_code'] = $this->language->get('entry_weight_code');
 		$this->data['entry_weight_class'] = $this->language->get('entry_weight_class');
 		$this->data['entry_length_code'] = $this->language->get('entry_length_code');
 		$this->data['entry_length_class'] = $this->language->get('entry_length_class');
@@ -360,6 +359,7 @@ class ControllerShippingUPS extends Controller {
 			'value' => 'commercial',
 			'text'  => $this->language->get('text_commercial')
 		);
+		
 		// US
 		if (isset($this->request->post['ups_us_01'])) {
 			$this->data['ups_us_01'] = $this->request->post['ups_us_01'];
@@ -672,12 +672,6 @@ class ControllerShippingUPS extends Controller {
 			$this->data['ups_insurance'] = $this->config->get('ups_insurance');
 		}	
 		
-		if (isset($this->request->post['ups_weight_code'])) {
-			$this->data['ups_weight_code'] = $this->request->post['ups_weight_code'];
-		} else {
-			$this->data['ups_weight_code'] = $this->config->get('ups_weight_code');
-		}
-		
 		if (isset($this->request->post['ups_weight_class_id'])) {
 			$this->data['ups_weight_class_id'] = $this->request->post['ups_weight_class_id'];
 		} else {
@@ -694,10 +688,10 @@ class ControllerShippingUPS extends Controller {
 			$this->data['ups_length_code'] = $this->config->get('ups_length_code');
 		}
 		
-		if (isset($this->request->post['ups_length_class'])) {
-			$this->data['ups_length_class'] = $this->request->post['ups_length_class'];
+		if (isset($this->request->post['ups_length_class_id'])) {
+			$this->data['ups_length_class_id'] = $this->request->post['ups_length_class_id'];
 		} else {
-			$this->data['ups_length_class'] = $this->config->get('ups_length_class');
+			$this->data['ups_length_class_id'] = $this->config->get('ups_length_class_id');
 		}
 				
 		$this->load->model('localisation/length_class');

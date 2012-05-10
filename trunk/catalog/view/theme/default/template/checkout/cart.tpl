@@ -66,7 +66,7 @@
             <td class="name"><?php echo $vouchers['description']; ?></td>
             <td class="model"></td>
             <td class="quantity"><input type="text" name="" value="1" size="1" disabled="disabled" />
-              &nbsp;<a href="<?php echo $vouchers['remove']; ?>"><img src="catalog/view/theme/default/image/remove.png" alt="<?php echo $text_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
+              &nbsp;<a href="<?php echo $vouchers['remove']; ?>"><img src="catalog/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
             <td class="price"><?php echo $vouchers['amount']; ?></td>
             <td class="total"><?php echo $vouchers['amount']; ?></td>
           </tr>
@@ -82,32 +82,48 @@
     <table class="radio">
       <?php if ($coupon_status) { ?>
       <tr class="highlight">
-        <td><input type="radio" name="next" value="coupon" id="use_coupon" /></td>
+        <td><?php if ($next == 'coupon') { ?>
+          <input type="radio" name="next" value="coupon" id="use_coupon" checked="checked" />
+          <?php } else { ?>
+          <input type="radio" name="next" value="coupon" id="use_coupon" />
+          <?php } ?></td>
         <td><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
       </tr>
       <?php } ?>
       <?php if ($voucher_status) { ?>
       <tr class="highlight">
-        <td><input type="radio" name="next" value="voucher" id="use_voucher" /></td>
+        <td><?php if ($next == 'voucher') { ?>
+          <input type="radio" name="next" value="voucher" id="use_voucher" checked="checked" />
+          <?php } else { ?>
+          <input type="radio" name="next" value="voucher" id="use_voucher" />
+          <?php } ?></td>
         <td><label for="use_voucher"><?php echo $text_use_voucher; ?></label></td>
       </tr>
       <?php } ?>
       <?php if ($reward_status) { ?>
       <tr class="highlight">
-        <td><input type="radio" name="next" value="reward" id="use_reward" /></td>
+        <td><?php if ($next == 'reward') { ?>
+          <input type="radio" name="next" value="reward" id="use_reward" checked="checked" />
+          <?php } else { ?>
+          <input type="radio" name="next" value="reward" id="use_reward" />
+          <?php } ?></td>
         <td><label for="use_reward"><?php echo $text_use_reward; ?></label></td>
       </tr>
       <?php } ?>
       <?php if ($shipping_status) { ?>
       <tr class="highlight">
-        <td><input type="radio" name="next" value="shipping" id="shipping_estimate" /></td>
+        <td><?php if ($next == 'shipping') { ?>
+          <input type="radio" name="next" value="shipping" id="shipping_estimate" checked="checked" />
+          <?php } else { ?>
+          <input type="radio" name="next" value="shipping" id="shipping_estimate" />
+          <?php } ?></td>
         <td><label for="shipping_estimate"><?php echo $text_shipping_estimate; ?></label></td>
       </tr>
       <?php } ?>
     </table>
   </div>
   <div class="cart-module">
-    <div id="coupon" class="content">
+    <div id="coupon" class="content" style="display: <?php echo ($next == 'coupon' ? 'block' : 'none'); ?>;">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
         <?php echo $entry_coupon; ?>&nbsp;
         <input type="text" name="coupon" value="<?php echo $coupon; ?>" />
@@ -116,7 +132,7 @@
         <input type="submit" value="<?php echo $button_coupon; ?>" class="button" />
       </form>
     </div>
-    <div id="voucher" class="content">
+    <div id="voucher" class="content" style="display: <?php echo ($next == 'voucher' ? 'block' : 'none'); ?>;">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
         <?php echo $entry_voucher; ?>&nbsp;
         <input type="text" name="voucher" value="<?php echo $voucher; ?>" />
@@ -125,7 +141,7 @@
         <input type="submit" value="<?php echo $button_voucher; ?>" class="button" />
       </form>
     </div>
-    <div id="reward" class="content">
+    <div id="reward" class="content" style="display: <?php echo ($next == 'reward' ? 'block' : 'none'); ?>;">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
         <?php echo $entry_reward; ?>&nbsp;
         <input type="text" name="reward" value="<?php echo $reward; ?>" />
@@ -134,12 +150,12 @@
         <input type="submit" value="<?php echo $button_reward; ?>" class="button" />
       </form>
     </div>
-    <div id="shipping" class="content">
+    <div id="shipping" class="content" style="display: <?php echo ($next == 'shipping' ? 'block' : 'none'); ?>;">
       <p><?php echo $text_shipping_detail; ?></p>
       <table>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-          <td><select name="country_id" onchange="$('select[name=\'zone_id\']').load('index.php?route=checkout/cart/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');">
+          <td><select name="country_id">
               <option value=""><?php echo $text_select; ?></option>
               <?php foreach ($countries as $country) { ?>
               <?php if ($country['country_id'] == $country_id) { ?>
@@ -156,14 +172,14 @@
             </select></td>
         </tr>
         <tr>
-          <td><span class="required">*</span> <?php echo $entry_postcode; ?></td>
+          <td><span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?></td>
           <td><input type="text" name="postcode" value="<?php echo $postcode; ?>" /></td>
         </tr>
       </table>
       <input type="button" value="<?php echo $button_quote; ?>" id="button-quote" class="button" />
     </div>
-    <?php } ?>
   </div>
+  <?php } ?>
   <div class="cart-total">
     <table id="total">
       <?php foreach ($totals as $total) { ?>
@@ -185,19 +201,6 @@ $('input[name=\'next\']').bind('change', function() {
 	
 	$('#' + this.value).show();
 });
-
-<?php if ($next == 'coupon') { ?>
-$('#use_coupon').trigger('click');
-<?php } ?>
-<?php if ($next == 'voucher') { ?>
-$('#use_voucher').trigger('click');
-<?php } ?>
-<?php if ($next == 'reward') { ?>
-$('#use_reward').trigger('click');
-<?php } ?>
-<?php if ($next == 'shipping') { ?>
-$('#shipping_estimate').trigger('click');
-<?php } ?>
 //--></script>
 <?php if ($shipping_status) { ?>
 <script type="text/javascript"><!--
@@ -274,7 +277,13 @@ $('#button-quote').live('click', function() {
 				html += '  </table>';
 				html += '  <br />';
 				html += '  <input type="hidden" name="next" value="shipping" />';
-				html += '  <input type="submit" value="<?php echo $button_shipping; ?>" class="button" />';				
+				
+				<?php if ($shipping_method) { ?>
+				html += '  <input type="submit" value="<?php echo $button_shipping; ?>" id="button-shipping" class="button" />';	
+				<?php } else { ?>
+				html += '  <input type="submit" value="<?php echo $button_shipping; ?>" id="button-shipping" class="button" disabled="disabled" />';	
+				<?php } ?>
+							
 				html += '</form>';
 				
 				$.colorbox({
@@ -285,13 +294,59 @@ $('#button-quote').live('click', function() {
 					href: false,
 					html: html
 				});
+				
+				$('input[name=\'shipping_method\']').bind('change', function() {
+					$('#button-shipping').attr('disabled', false);
+				});
 			}
 		}
 	});
 });
 //--></script> 
 <script type="text/javascript"><!--
-$('select[name=\'zone_id\']').load('index.php?route=checkout/cart/zone&country_id=<?php echo $country_id; ?>&zone_id=<?php echo $zone_id; ?>');
+$('select[name=\'country_id\']').bind('change', function() {
+	$.ajax({
+		url: 'index.php?route=checkout/cart/country&country_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+		},			
+		success: function(json) {
+			if (json['postcode_required'] == '1') {
+				$('#postcode-required').show();
+			} else {
+				$('#postcode-required').hide();
+			}
+			
+			html = '<option value=""><?php echo $text_select; ?></option>';
+			
+			if (json['zone'] != '') {
+
+				for (i = 0; i < json['zone'].length; i++) {
+        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+	    			
+					if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
+	      				html += ' selected="selected"';
+	    			}
+	
+	    			html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
+			}
+			
+			$('select[name=\'zone_id\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('select[name=\'country_id\']').trigger('change');
 //--></script>
 <?php } ?>
 <?php echo $footer; ?>

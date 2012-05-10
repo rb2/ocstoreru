@@ -15,7 +15,7 @@ body, td, th, input, textarea, select, a {
 }
 h1, .welcome {
 	color: #636E75;
-	font: Verdana;
+	font-family: Verdana;
 	margin-top: 0px;
 	margin-bottom: 20px;
 	font-size: 32px;
@@ -516,19 +516,20 @@ table.radio {
 }
 table.radio td {
 	padding: 5px;
-	vertical-align: middle;
+	vertical-align: top;
+}
+table.radio td label {
+	display: block;
 }
 table.radio tr td:first-child {
 	width: 1px;
 }
+table.radio tr td:first-child input {
+	margin-top: 1px;
+}
 table.radio tr.highlight:hover td {
 	background: #F1FFDD;
 	cursor: pointer;
-}
-table.radio label {
-	width: 100%;
-	height: 15px;
-	display: inline-block;
 }
 .pagination {
 	border-top: 1px solid #EEEEEE;
@@ -567,7 +568,7 @@ a.button, input.button {
 	line-height: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
-	font-weight: bold;	
+	font-weight: bold;
 	background: url('../image/button.png') top left repeat-x;
 	-webkit-border-radius: 7px 7px 7px 7px;
 	-moz-border-radius: 7px 7px 7px 7px;
@@ -575,7 +576,7 @@ a.button, input.button {
 	border-radius: 7px 7px 7px 7px;
 	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
-	box-shadow: 0px 2px 2px #DDDDDD;	
+	box-shadow: 0px 2px 2px #DDDDDD;
 }
 a.button {
 	display: inline-block;
@@ -1145,6 +1146,23 @@ a.button:hover, input.button:hover {
 }
 .product-info .review .share a {
 	text-decoration: none;
+}
+.review-list {
+	padding: 10px;
+	overflow: auto;
+	margin-bottom: 20px;
+	border: 1px solid #EEEEEE;
+}
+.review-list .author {
+	float: left;
+	margin-bottom: 20px;
+}
+.review-list .rating {
+	float: right;
+	margin-bottom: 20px;
+}
+.review-list .text {
+	clear: both;
 }
 .attribute {
 	border-collapse: collapse;

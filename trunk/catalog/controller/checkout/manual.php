@@ -43,6 +43,9 @@ class ControllerCheckoutManual extends Controller {
 				} else {
 					$json['error']['customer'] = $this->language->get('error_customer');
 				}
+			} else {
+				// Customer Group
+				$this->config->set('config_customer_group_id', $this->request->post['customer_group_id']);
 			}
 				
 			// Product
@@ -179,7 +182,7 @@ class ControllerCheckoutManual extends Controller {
 					$this->session->data['vouchers'][] = array(
 						'voucher_id'       => $voucher['voucher_id'],
 						'description'      => $voucher['description'],
-						'code'             => substr(md5(rand()), 0, 7),
+						'code'             => substr(md5(mt_rand()), 0, 10),
 						'from_name'        => $voucher['from_name'],
 						'from_email'       => $voucher['from_email'],
 						'to_name'          => $voucher['to_name'],
@@ -216,7 +219,7 @@ class ControllerCheckoutManual extends Controller {
 				if (!isset($json['error']['vouchers'])) { 
 					$voucher_data = array(
 						'order_id'         => 0,
-						'code'             => substr(md5(rand()), 0, 7),
+						'code'             => substr(md5(mt_rand()), 0, 10),
 						'from_name'        => $this->request->post['from_name'],
 						'from_email'       => $this->request->post['from_email'],
 						'to_name'          => $this->request->post['to_name'],
@@ -234,7 +237,7 @@ class ControllerCheckoutManual extends Controller {
 					$this->session->data['vouchers'][] = array(
 						'voucher_id'       => $voucher_id,
 						'description'      => sprintf($this->language->get('text_for'), $this->currency->format($this->request->post['amount'], $this->config->get('config_currency')), $this->request->post['to_name']),
-						'code'             => substr(md5(rand()), 0, 7),
+						'code'             => substr(md5(mt_rand()), 0, 10),
 						'from_name'        => $this->request->post['from_name'],
 						'from_email'       => $this->request->post['from_email'],
 						'to_name'          => $this->request->post['to_name'],
@@ -314,10 +317,10 @@ class ControllerCheckoutManual extends Controller {
 					
 					if ($zone_info) {
 						$zone = $zone_info['name'];
-						$code = $zone_info['code'];
+						$zone_code = $zone_info['code'];
 					} else {
 						$zone = '';
-						$code = '';
+						$zone_code = '';
 					}					
 	
 					$address_data = array(
@@ -330,7 +333,7 @@ class ControllerCheckoutManual extends Controller {
 						'city'           => $this->request->post['shipping_city'],
 						'zone_id'        => $this->request->post['shipping_zone_id'],
 						'zone'           => $zone,
-						'zone_code'      => $code,
+						'zone_code'      => $zone_code,
 						'country_id'     => $this->request->post['shipping_country_id'],
 						'country'        => $country,	
 						'iso_code_2'     => $iso_code_2,
@@ -367,18 +370,14 @@ class ControllerCheckoutManual extends Controller {
 
 					if (!$json['shipping_method']) {
 						$json['error']['shipping_method'] = $this->language->get('error_no_shipping');
-					} else {
-						if (!$this->request->post['shipping_code']) {
+					} elseif ($this->request->post['shipping_code']) {
+						$shipping = explode('.', $this->request->post['shipping_code']);
+						
+						if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($json['shipping_method'][$shipping[0]]['quote'][$shipping[1]])) {		
 							$json['error']['shipping_method'] = $this->language->get('error_shipping');
 						} else {
-							$shipping = explode('.', $this->request->post['shipping_code']);
-							
-							if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($json['shipping_method'][$shipping[0]]['quote'][$shipping[1]])) {		
-								$json['error']['shipping_method'] = $this->language->get('error_shipping');
-							} else {
-								$this->session->data['shipping_method'] = $json['shipping_method'][$shipping[0]]['quote'][$shipping[1]];
-							}				
-						}
+							$this->session->data['shipping_method'] = $json['shipping_method'][$shipping[0]]['quote'][$shipping[1]];
+						}				
 					}					
 				}
 			}
@@ -497,10 +496,10 @@ class ControllerCheckoutManual extends Controller {
 				
 				if ($zone_info) {
 					$zone = $zone_info['name'];
-					$code = $zone_info['code'];
+					$zone_code = $zone_info['code'];
 				} else {
 					$zone = '';
-					$code = '';
+					$zone_code = '';
 				}					
 				
 				$address_data = array(
@@ -513,7 +512,7 @@ class ControllerCheckoutManual extends Controller {
 					'city'           => $this->request->post['payment_city'],
 					'zone_id'        => $this->request->post['payment_zone_id'],
 					'zone'           => $zone,
-					'zone_code'      => $code,
+					'zone_code'      => $zone_code,
 					'country_id'     => $this->request->post['payment_country_id'],
 					'country'        => $country,	
 					'iso_code_2'     => $iso_code_2,

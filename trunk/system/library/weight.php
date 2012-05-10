@@ -23,14 +23,19 @@ class Weight {
       		return $value;
 		}
 		
-		if (!isset($this->weights[$from]) || !isset($this->weights[$to])) {
-			return $value;
-		} else {			
+		if (isset($this->weights[$from])) {
 			$from = $this->weights[$from]['value'];
-			$to = $this->weights[$to]['value'];
-		
-			return $value * ($to / $from);
+		} else {
+			$from = 0;
 		}
+		
+		if (isset($this->weights[$to])) {
+			$to = $this->weights[$to]['value'];
+		} else {
+			$to = 0;
+		}	
+		
+		return $value * ($to / $from);
   	}
 
 	public function format($value, $weight_class_id, $decimal_point = '.', $thousand_point = ',') {

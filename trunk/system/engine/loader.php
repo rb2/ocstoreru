@@ -25,6 +25,17 @@ final class Loader {
 		}
 	}
 	
+	public function helper($helper) {
+		$file = DIR_SYSTEM . 'helper/' . $helper . '.php';
+		
+		if (file_exists($file)) {
+			include_once($file);
+		} else {
+			trigger_error('Error: Could not load helper ' . $helper . '!');
+			exit();					
+		}
+	}
+		
 	public function model($model) {
 		$file  = DIR_APPLICATION . 'model/' . $model . '.php';
 		$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $model);

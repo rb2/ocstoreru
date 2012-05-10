@@ -48,6 +48,12 @@ class ModelAffiliateAffiliate extends Model {
 		return $query->row;
 	}
 	
+	public function getAffiliateByEmail($email) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE email = '" . (int)$email . "'");
+		
+		return $query->row;
+	}
+		
 	public function getAffiliateByCode($code) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE code = '" . $this->db->escape($code) . "'");
 		
@@ -55,7 +61,7 @@ class ModelAffiliateAffiliate extends Model {
 	}
 			
 	public function getTotalAffiliatesByEmail($email) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE email = '" . $this->db->escape($email) . "'");
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE LOWER(email) = '" . $this->db->escape(strtolower($email)) . "'");
 		
 		return $query->row['total'];
 	}

@@ -120,7 +120,7 @@
           <table class="form">
             <tr>
               <td><?php echo $entry_country; ?></td>
-              <td><select name="config_country_id" onchange="$('select[name=\'config_zone_id\']').load('index.php?route=setting/store/zone&token=<?php echo $token; ?>&country_id=' + this.value + '&zone_id=<?php echo $config_zone_id; ?>');">
+              <td><select name="config_country_id">
                   <?php foreach ($countries as $country) { ?>
                   <?php if ($country['country_id'] == $config_country_id) { ?>
                   <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
@@ -162,6 +162,7 @@
           </table>
         </div>
         <div id="tab-option">
+          <h2><?php echo $text_items; ?></h2>
           <table class="form">
             <tr>
               <td><span class="required">*</span> <?php echo $entry_catalog_limit; ?></td>
@@ -170,6 +171,9 @@
                 <span class="error"><?php echo $error_catalog_limit; ?></span>
                 <?php } ?></td>
             </tr>
+          </table>
+          <h2><?php echo $text_tax; ?></h2>
+          <table class="form">
             <tr>
               <td><?php echo $entry_tax; ?></td>
               <td><?php if ($config_tax) { ?>
@@ -216,6 +220,9 @@
                   <?php } ?>
                 </select></td>
             </tr>
+          </table>
+          <h2><?php echo $text_account; ?></h2>
+          <table class="form">
             <tr>
               <td><?php echo $entry_customer_group; ?></td>
               <td><select name="config_customer_group_id">
@@ -229,17 +236,26 @@
                 </select></td>
             </tr>
             <tr>
-              <td><?php echo $entry_registred_group; ?></td>
-              <td><select name="config_registred_group_id">
+              <td><?php echo $entry_customer_group_display; ?></td>
+              <td><div class="scrollbox">
+                  <?php $class = 'odd'; ?>
                   <?php foreach ($customer_groups as $customer_group) { ?>
-                  <?php if ($customer_group['customer_group_id'] == $config_registred_group_id) { ?>
-                  <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div class="<?php echo $class; ?>">
+                    <?php if (in_array($customer_group['customer_group_id'], $config_customer_group_display)) { ?>
+                    <input type="checkbox" name="config_customer_group_display[]" value="<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
+                    <?php echo $customer_group['name']; ?>
+                    <?php } else { ?>
+                    <input type="checkbox" name="config_customer_group_display[]" value="<?php echo $customer_group['customer_group_id']; ?>" />
+                    <?php echo $customer_group['name']; ?>
+                    <?php } ?>
+                  </div>
                   <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
+                </div>
+                <?php if ($error_customer_group_display) { ?>
+                <span class="error"><?php echo $error_customer_group_display; ?></span>
+                <?php } ?></td>
+            </tr>            
             <tr>
               <td><?php echo $entry_customer_price; ?></td>
               <td><?php if ($config_customer_price) { ?>
@@ -255,16 +271,32 @@
                 <?php } ?></td>
             </tr>
             <tr>
-              <td><?php echo $entry_customer_approval; ?></td>
-              <td><?php if ($config_customer_approval) { ?>
-                <input type="radio" name="config_customer_approval" value="1" checked="checked" />
+              <td><?php echo $entry_account; ?></td>
+              <td><select name="config_account_id">
+                  <option value="0"><?php echo $text_none; ?></option>
+                  <?php foreach ($informations as $information) { ?>
+                  <?php if ($information['information_id'] == $config_account_id) { ?>
+                  <option value="<?php echo $information['information_id']; ?>" selected="selected"><?php echo $information['title']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $information['information_id']; ?>"><?php echo $information['title']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+          </table>
+          <h2><?php echo $text_checkout; ?></h2>
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_cart_weight; ?></td>
+              <td><?php if ($config_cart_weight) { ?>
+                <input type="radio" name="config_cart_weight" value="1" checked="checked" />
                 <?php echo $text_yes; ?>
-                <input type="radio" name="config_customer_approval" value="0" />
+                <input type="radio" name="config_cart_weight" value="0" />
                 <?php echo $text_no; ?>
                 <?php } else { ?>
-                <input type="radio" name="config_customer_approval" value="1" />
+                <input type="radio" name="config_cart_weight" value="1" />
                 <?php echo $text_yes; ?>
-                <input type="radio" name="config_customer_approval" value="0" checked="checked" />
+                <input type="radio" name="config_cart_weight" value="0" checked="checked" />
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
@@ -283,19 +315,6 @@
                 <?php } ?></td>
             </tr>
             <tr>
-              <td><?php echo $entry_account; ?></td>
-              <td><select name="config_account_id">
-                  <option value="0"><?php echo $text_none; ?></option>
-                  <?php foreach ($informations as $information) { ?>
-                  <?php if ($information['information_id'] == $config_account_id) { ?>
-                  <option value="<?php echo $information['information_id']; ?>" selected="selected"><?php echo $information['title']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $information['information_id']; ?>"><?php echo $information['title']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
-            <tr>
               <td><?php echo $entry_checkout; ?></td>
               <td><select name="config_checkout_id">
                   <option value="0"><?php echo $text_none; ?></option>
@@ -308,6 +327,21 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <tr>
+              <td><?php echo $entry_order_status; ?></td>
+              <td><select name="config_order_status_id">
+                  <?php foreach ($order_statuses as $order_status) { ?>
+                  <?php if ($order_status['order_status_id'] == $config_order_status_id) { ?>
+                  <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+          </table>
+          <h2><?php echo $text_stock; ?></h2>
+          <table class="form">
             <tr>
               <td><?php echo $entry_stock_display; ?></td>
               <td><?php if ($config_stock_display) { ?>
@@ -333,32 +367,6 @@
                 <input type="radio" name="config_stock_checkout" value="1" />
                 <?php echo $text_yes; ?>
                 <input type="radio" name="config_stock_checkout" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_order_status; ?></td>
-              <td><select name="config_order_status_id">
-                  <?php foreach ($order_statuses as $order_status) { ?>
-                  <?php if ($order_status['order_status_id'] == $config_order_status_id) { ?>
-                  <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_cart_weight; ?></td>
-              <td><?php if ($config_cart_weight) { ?>
-                <input type="radio" name="config_cart_weight" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_cart_weight" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="config_cart_weight" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_cart_weight" value="0" checked="checked" />
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
@@ -487,8 +495,50 @@
 </div>
 <script type="text/javascript"><!--
 $('#template').load('index.php?route=setting/store/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name=\'config_template\']').attr('value')));
+//--></script>
+<script type="text/javascript"><!--
+$('select[name=\'config_country_id\']').bind('change', function() {
+	$.ajax({
+		url: 'index.php?route=setting/store/country&token=<?php echo $token; ?>&country_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+		},		
+		complete: function() {
+			$('.wait').remove();
+		},			
+		success: function(json) {
+			if (json['postcode_required'] == '1') {
+				$('#postcode-required').show();
+			} else {
+				$('#postcode-required').hide();
+			}
+			
+			html = '<option value=""><?php echo $text_select; ?></option>';
+			
+			if (json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+	    			
+					if (json['zone'][i]['zone_id'] == '<?php echo $config_zone_id; ?>') {
+	      				html += ' selected="selected"';
+	    			}
+	
+	    			html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0" selected="selected><?php echo $text_none; ?></option>';
+			}
+			
+			$('select[name=\'config_zone_id\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
 
-$('select[name=\'config_zone_id\']').load('index.php?route=setting/store/zone&token=<?php echo $token; ?>&country_id=<?php echo $config_country_id; ?>&zone_id=<?php echo $config_zone_id; ?>');
+$('select[name=\'config_country_id\']').trigger('change');
 //--></script> 
 <script type="text/javascript"><!--
 function image_upload(field, thumb) {

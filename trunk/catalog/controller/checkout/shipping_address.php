@@ -6,6 +6,7 @@ class ControllerCheckoutShippingAddress extends Controller {
 		$this->data['text_address_existing'] = $this->language->get('text_address_existing');
 		$this->data['text_address_new'] = $this->language->get('text_address_new');
 		$this->data['text_select'] = $this->language->get('text_select');
+		$this->data['text_none'] = $this->language->get('text_none');
 
 		$this->data['entry_firstname'] = $this->language->get('entry_firstname');
 		$this->data['entry_lastname'] = $this->language->get('entry_lastname');
@@ -28,9 +29,25 @@ class ControllerCheckoutShippingAddress extends Controller {
 		$this->load->model('account/address');
 
 		$this->data['addresses'] = $this->model_account_address->getAddresses();
-		
-		$this->data['country_id'] = $this->config->get('config_country_id');
-		
+
+		if (isset($this->session->data['shipping_postcode'])) {
+			$this->data['postcode'] = $this->session->data['shipping_postcode'];		
+		} else {
+			$this->data['postcode'] = '';
+		}
+				
+		if (isset($this->session->data['shipping_country_id'])) {
+			$this->data['country_id'] = $this->session->data['shipping_country_id'];		
+		} else {
+			$this->data['country_id'] = $this->config->get('config_country_id');
+		}
+				
+		if (isset($this->session->data['shipping_zone_id'])) {
+			$this->data['zone_id'] = $this->session->data['shipping_zone_id'];		
+		} else {
+			$this->data['zone_id'] = '';
+		}
+						
 		$this->load->model('localisation/country');
 		
 		$this->data['countries'] = $this->model_localisation_country->getCountries();
@@ -85,12 +102,31 @@ class ControllerCheckoutShippingAddress extends Controller {
 								
 		if (!$json) {
 			if ($this->request->post['shipping_address'] == 'existing') {
+				$this->load->model('account/address');
+				
 				if (empty($this->request->post['address_id'])) {
 					$json['error']['warning'] = $this->language->get('error_address');
+				} elseif (!in_array($this->request->post['address_id'], array_keys($this->model_account_address->getAddresses()))) {
+					$json['error']['warning'] = $this->language->get('error_address');
 				}
-				
+						
 				if (!$json) {			
 					$this->session->data['shipping_address_id'] = $this->request->post['address_id'];
+					
+					// Default Shipping Address
+					$this->load->model('account/address');
+
+					$address_info = $this->model_account_address->getAddress($this->request->post['address_id']);
+					
+					if ($address_info) {
+						$this->session->data['shipping_country_id'] = $address_info['country_id'];
+						$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
+						$this->session->data['shipping_postcode'] = $address_info['postcode'];						
+					} else {
+						unset($this->session->data['shipping_country_id']);	
+						unset($this->session->data['shipping_zone_id']);	
+						unset($this->session->data['shipping_postcode']);
+					}
 					
 					unset($this->session->data['shipping_method']);							
 					unset($this->session->data['shipping_methods']);
@@ -131,10 +167,14 @@ class ControllerCheckoutShippingAddress extends Controller {
 				}
 				
 				if (!$json) {						
+					// Default Shipping Address
 					$this->load->model('account/address');		
 					
 					$this->session->data['shipping_address_id'] = $this->model_account_address->addAddress($this->request->post);
-					
+					$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
+					$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+					$this->session->data['shipping_postcode'] = $this->request->post['postcode'];
+									
 					unset($this->session->data['shipping_method']);						
 					unset($this->session->data['shipping_methods']);
 				}
@@ -143,29 +183,5 @@ class ControllerCheckoutShippingAddress extends Controller {
 		
 		$this->response->setOutput(json_encode($json));
 	}
-	
-  	public function zone() {
-		$output = '<option value="">' . $this->language->get('text_select') . '</option>';
-		
-		$this->load->model('localisation/zone');
-
-    	$results = $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']);
-        
-      	foreach ($results as $result) {
-        	$output .= '<option value="' . $result['zone_id'] . '"';
-	
-	    	if (isset($this->request->get['zone_id']) && ($this->request->get['zone_id'] == $result['zone_id'])) {
-	      		$output .= ' selected="selected"';
-	    	}
-	
-	    	$output .= '>' . $result['name'] . '</option>';
-    	} 
-		
-		if (!$results) {
-		  	$output .= '<option value="0">' . $this->language->get('text_none') . '</option>';
-		}
-	
-		$this->response->setOutput($output);
-  	}	
 }
 ?>

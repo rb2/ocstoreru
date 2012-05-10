@@ -445,6 +445,7 @@ class ControllerProductProduct extends Controller {
 		
 		$this->load->model('catalog/review');
 
+		$this->data['text_on'] = $this->language->get('text_on');
 		$this->data['text_no_reviews'] = $this->language->get('text_no_reviews');
 
 		if (isset($this->request->get['page'])) {
@@ -503,7 +504,7 @@ class ControllerProductProduct extends Controller {
 				$json['error'] = $this->language->get('error_text');
 			}
 	
-			if (!$this->request->post['rating']) {
+			if (empty($this->request->post['rating'])) {
 				$json['error'] = $this->language->get('error_rating');
 			}
 	
@@ -537,7 +538,7 @@ class ControllerProductProduct extends Controller {
 		$json = array();
 		
 		if (!empty($this->request->files['file']['name'])) {
-			$filename = basename(html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8'));
+			$filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
 			
 			if ((strlen($filename) < 3) || (strlen($filename) > 128)) {
         		$json['error'] = $this->language->get('error_filename');
@@ -564,7 +565,7 @@ class ControllerProductProduct extends Controller {
 		
 		if (!$json) {
 			if (is_uploaded_file($this->request->files['file']['tmp_name']) && file_exists($this->request->files['file']['tmp_name'])) {
-				$file = basename($filename) . '.' . md5(rand());
+				$file = basename($filename) . '.' . md5(mt_rand());
 				
 				// Hide the uploaded file name so people can not link to it directly.
 				$json['file'] = $this->encryption->encrypt($file);

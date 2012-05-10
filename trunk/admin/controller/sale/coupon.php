@@ -468,7 +468,7 @@ class ControllerSaleCoupon extends Controller {
 					
 		if (isset($this->request->post['date_start'])) {
        		$this->data['date_start'] = $this->request->post['date_start'];
-		} elseif (isset($coupon_info)) {
+		} elseif (!empty($coupon_info)) {
 			$this->data['date_start'] = date('Y-m-d', strtotime($coupon_info['date_start']));
 		} else {
 			$this->data['date_start'] = date('Y-m-d', time());
@@ -476,7 +476,7 @@ class ControllerSaleCoupon extends Controller {
 
 		if (isset($this->request->post['date_end'])) {
        		$this->data['date_end'] = $this->request->post['date_end'];
-		} elseif (isset($coupon_info)) {
+		} elseif (!empty($coupon_info)) {
 			$this->data['date_end'] = date('Y-m-d', strtotime($coupon_info['date_end']));
 		} else {
 			$this->data['date_end'] = date('Y-m-d', time());
@@ -484,7 +484,7 @@ class ControllerSaleCoupon extends Controller {
 
     	if (isset($this->request->post['uses_total'])) {
       		$this->data['uses_total'] = $this->request->post['uses_total'];
-		} elseif (isset($coupon_info)) {
+		} elseif (!empty($coupon_info)) {
 			$this->data['uses_total'] = $coupon_info['uses_total'];
     	} else {
       		$this->data['uses_total'] = 1;
@@ -492,7 +492,7 @@ class ControllerSaleCoupon extends Controller {
   
     	if (isset($this->request->post['uses_customer'])) {
       		$this->data['uses_customer'] = $this->request->post['uses_customer'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['uses_customer'] = $coupon_info['uses_customer'];
 		} else {
       		$this->data['uses_customer'] = 1;
@@ -500,7 +500,7 @@ class ControllerSaleCoupon extends Controller {
  
     	if (isset($this->request->post['status'])) { 
       		$this->data['status'] = $this->request->post['status'];
-    	} elseif (isset($coupon_info)) {
+    	} elseif (!empty($coupon_info)) {
 			$this->data['status'] = $coupon_info['status'];
 		} else {
       		$this->data['status'] = 1;

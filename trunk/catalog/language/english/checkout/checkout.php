@@ -46,7 +46,10 @@ $_['entry_firstname']                = 'First Name:';
 $_['entry_lastname']                 = 'Last Name:';
 $_['entry_telephone']                = 'Telephone:';
 $_['entry_fax']                      = 'Fax:';
+$_['entry_account']                  = 'Account:';
 $_['entry_company']                  = 'Company:';
+$_['entry_company_id']               = 'Company ID:';
+$_['entry_tax_id']                   = 'Tax ID:';
 $_['entry_address_1']                = 'Address 1:';
 $_['entry_address_2']                = 'Address 2:';
 $_['entry_postcode']                 = 'Post Code:';
@@ -59,6 +62,7 @@ $_['entry_shipping'] 	             = 'My delivery and billing addresses are the 
 // Error
 $_['error_warning']                  = 'There was a problem while trying to process your order! If the problem persists please try selecting a different payment method or you can contact the store owner by <a href="%s">clicking here</a>.';
 $_['error_login']                    = 'Warning: No match for E-Mail Address and/or Password.';
+$_['error_approved']                 = 'Warning: Your account requires approval before you can login.'; 
 $_['error_exists']                   = 'Warning: E-Mail Address is already registered!';
 $_['error_firstname']                = 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']                 = 'Last Name must be between 1 and 32 characters!';
@@ -66,6 +70,8 @@ $_['error_email']                    = 'E-Mail Address does not appear to be val
 $_['error_telephone']                = 'Telephone must be between 3 and 32 characters!';
 $_['error_password']                 = 'Password must be between 3 and 20 characters!';
 $_['error_confirm']                  = 'Password confirmation does not match password!';
+$_['error_company_id']               = 'Company ID required!';
+$_['error_tax_id']                   = 'Tax ID required!';
 $_['error_address_1']                = 'Address 1 must be between 3 and 128 characters!';
 $_['error_city']                     = 'City must be between 2 and 128 characters!';
 $_['error_postcode']                 = 'Postcode must be between 2 and 10 characters!';

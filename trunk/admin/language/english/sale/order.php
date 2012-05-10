@@ -31,6 +31,8 @@ $_['text_date_modified']                      = 'Date Modified:';
 $_['text_firstname']                          = 'First Name:';
 $_['text_lastname']                           = 'Last Name:';
 $_['text_company']                            = 'Company:';
+$_['text_company_id']                         = 'Company ID:';
+$_['text_tax_id']                             = 'Tax ID:';
 $_['text_address_1']                          = 'Address 1:';
 $_['text_address_2']                          = 'Address 2:';
 $_['text_postcode']                           = 'Postcode:';
@@ -112,8 +114,6 @@ $_['text_risk_score']                         = 'Risk Score:<br /><span class="h
 $_['text_queries_remaining']                  = 'Queries Remaining:<br /><span class="help">Number of queries remaining in your account, can be used to alert you when you may need to add more queries to your account.</span>';
 $_['text_maxmind_id']                         = 'Maxmind ID:<br /><span class="help">Unique identifier, used to reference transactions when reporting fraudulent activity back to MaxMind. This reporting will help MaxMind improve its service to you and will enable a planned feature to customize the fraud scoring formula based on your chargeback history.</span>';
 $_['text_error']                              = 'Error:<br /><span class="help">Returns an error string with a warning message or a reason why the request failed.</span>';
-$_['text_create_invoice_no']                  = 'Создать счет-фактуру №';
-$_['text_abandoned_orders']                   = 'Брошенные заказы';
 
 // Column
 $_['column_order_id']                         = 'Order ID';
@@ -144,6 +144,8 @@ $_['entry_telephone']                         = 'Telephone:';
 $_['entry_fax']                               = 'Fax:';
 $_['entry_address']                           = 'Choose Address:';
 $_['entry_company']                           = 'Company:';
+$_['entry_company_id']                        = 'Company ID:';
+$_['entry_tax_id']                            = 'Tax ID:';
 $_['entry_address_1']                         = 'Address 1:';
 $_['entry_address_2']                         = 'Address 2:';
 $_['entry_city']                              = 'City:';
@@ -185,6 +187,8 @@ $_['error_city']                              = 'City must be between 3 and 128 
 $_['error_postcode']                          = 'Postcode must be between 2 and 10 characters for this country!';
 $_['error_country']                           = 'Please select a country!';
 $_['error_zone']                              = 'Please select a region / state!';
+$_['error_shipping']                          = 'Warning: Shipping method required!';
+$_['error_payment']                           = 'Warning: Payment method required!';
 $_['error_upload']                            = 'Upload required!';
 $_['error_filename']                          = 'Filename must be between 3 and 128 characters!';
 $_['error_filetype']                          = 'Invalid file type!';

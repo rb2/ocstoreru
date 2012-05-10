@@ -6,7 +6,7 @@ class ModelCatalogManufacturer extends Model {
 		$manufacturer_id = $this->db->getLastId();
 
 		if (isset($data['image'])) {
-			$this->db->query("UPDATE " . DB_PREFIX . "manufacturer SET image = '" . $this->db->escape($data['image']) . "' WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+			$this->db->query("UPDATE " . DB_PREFIX . "manufacturer SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 		}
 		
 		foreach ($data['manufacturer_description'] as $language_id => $value) {
@@ -30,7 +30,7 @@ class ModelCatalogManufacturer extends Model {
       	$this->db->query("UPDATE " . DB_PREFIX . "manufacturer SET name = '" . $this->db->escape($data['name']) . "', sort_order = '" . (int)$data['sort_order'] . "' WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 
 		if (isset($data['image'])) {
-			$this->db->query("UPDATE " . DB_PREFIX . "manufacturer SET image = '" . $this->db->escape($data['image']) . "' WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+			$this->db->query("UPDATE " . DB_PREFIX . "manufacturer SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 		}
 		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_description WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
@@ -72,7 +72,6 @@ class ModelCatalogManufacturer extends Model {
 	}
 	
 	public function getManufacturers($data = array()) {
-		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "manufacturer";
 			
 			$sort_data = array(
@@ -107,19 +106,6 @@ class ModelCatalogManufacturer extends Model {
 			$query = $this->db->query($sql);
 		
 			return $query->rows;
-		} else {
-			$manufacturer_data = $this->cache->get('manufacturer');
-		
-			if (!$manufacturer_data) {
-				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer ORDER BY name");
-	
-				$manufacturer_data = $query->rows;
-			
-				$this->cache->set('manufacturer', $manufacturer_data);
-			}
-		 
-			return $manufacturer_data;
-		}
 	}
 	
 	public function getManufacturerStores($manufacturer_id) {

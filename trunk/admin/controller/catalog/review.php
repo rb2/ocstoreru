@@ -355,11 +355,11 @@ class ControllerCatalogReview extends Controller {
 		
 		$this->data['cancel'] = $this->url->link('catalog/review', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
-		$this->data['token'] = $this->session->data['token'];
-
 		if (isset($this->request->get['review_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$review_info = $this->model_catalog_review->getReview($this->request->get['review_id']);
 		}
+		
+		$this->data['token'] = $this->session->data['token'];
 			
 		$this->load->model('catalog/product');
 		

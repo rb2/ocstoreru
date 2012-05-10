@@ -302,8 +302,6 @@ class ControllerSaleVoucher extends Controller {
 		$this->data['tab_general'] = $this->language->get('tab_general');
 		$this->data['tab_voucher_history'] = $this->language->get('tab_voucher_history');
 		
-		$this->data['token'] = $this->session->data['token'];
-		
 		if (isset($this->request->get['voucher_id'])) {
 			$this->data['voucher_id'] = $this->request->get['voucher_id'];
 		} else {
@@ -391,6 +389,8 @@ class ControllerSaleVoucher extends Controller {
 		if (isset($this->request->get['voucher_id']) && (!$this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$voucher_info = $this->model_sale_voucher->getVoucher($this->request->get['voucher_id']);
     	}
+		
+		$this->data['token'] = $this->session->data['token'];
 
     	if (isset($this->request->post['code'])) {
       		$this->data['code'] = $this->request->post['code'];

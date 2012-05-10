@@ -189,7 +189,10 @@ $('input[name=\'customer\']').catcomplete({
 		$('input[name=\'telephone\']').attr('value', ui.item.telephone);
 
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 //--></script> 
 <script type="text/javascript"><!--
@@ -216,7 +219,10 @@ $('input[name=\'product\']').autocomplete({
 		$('input[name=\'model\']').attr('value', ui.item.model);
 		
 		return false;
-	}
+	},
+	focus: function(event, ui) {
+      	return false;
+   	}
 });
 //--></script> 
 <script type="text/javascript"><!--

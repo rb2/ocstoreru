@@ -5,7 +5,7 @@ class ModelAccountReturn extends Model {
 	}
 	
 	public function getReturn($return_id) {
-		$query = $this->db->query("SELECT r.return_id, r.order_id, r.firstname, r.lastname, r.email, r.telephone, r.product, r.model, r.quantity, r.opened, rr.name as reason, ra.name as action, rs.name as status, r.comment, r.date_ordered, r.date_added, r.date_modified FROM `" . DB_PREFIX . "return` r LEFT JOIN " . DB_PREFIX . "return_reason rr ON (r.return_reason_id = rr.return_reason_id) LEFT JOIN " . DB_PREFIX . "return_action ra ON (r.return_action_id = ra.return_action_id) LEFT JOIN " . DB_PREFIX . "return_status rs ON (r.return_status_id = rs.return_status_id) WHERE return_id = '" . (int)$return_id . "' AND customer_id = '" . $this->customer->getId() . "'");
+		$query = $this->db->query("SELECT r.return_id, r.order_id, r.firstname, r.lastname, r.email, r.telephone, r.product, r.model, r.quantity, r.opened, rr.name as reason, ra.name as action, rs.name as status, r.comment, r.date_ordered, r.date_added, r.date_modified FROM `" . DB_PREFIX . "return` r LEFT JOIN " . DB_PREFIX . "return_reason rr ON (r.return_reason_id = rr.return_reason_id) LEFT JOIN " . DB_PREFIX . "return_action ra ON (r.return_action_id = ra.return_action_id) LEFT JOIN " . DB_PREFIX . "return_status rs ON (r.return_status_id = rs.return_status_id) WHERE return_id = '" . (int)$return_id . "' AND customer_id = '" . $this->customer->getId() . "' AND rr.language_id = '" . (int)$this->config->get('config_language_id') . "' AND ra.language_id = '" . (int)$this->config->get('config_language_id') . "' AND rs.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 		
 		return $query->row;
 	}
