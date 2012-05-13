@@ -25,6 +25,8 @@ class ControllerShippingRoyalMail extends Controller {
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
+		$this->data['text_select_all'] = $this->language->get('text_select_all');
+		$this->data['text_unselect_all'] = $this->language->get('text_unselect_all');		
 
 		$this->data['entry_rate'] = $this->language->get('entry_rate');
 		$this->data['entry_insurance'] = $this->language->get('entry_insurance');

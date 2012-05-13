@@ -16,7 +16,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['scripts'] = $this->document->getScripts();
 		$this->data['lang'] = $this->language->get('code');
 		$this->data['direction'] = $this->language->get('direction');
-				
+		
 		$this->load->language('common/header');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -49,7 +49,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_information'] = $this->language->get('text_information');
 		$this->data['text_language'] = $this->language->get('text_language');
 		$this->data['text_layout'] = $this->language->get('text_layout');
-      	$this->data['text_localisation'] = $this->language->get('text_localisation');
+		$this->data['text_localisation'] = $this->language->get('text_localisation');
 		$this->data['text_logout'] = $this->language->get('text_logout');
 		$this->data['text_contact'] = $this->language->get('text_contact');
 		$this->data['text_manufacturer'] = $this->language->get('text_manufacturer');
@@ -83,7 +83,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_return_status'] = $this->language->get('text_return_status');
 		$this->data['text_support'] = $this->language->get('text_support'); 
 		$this->data['text_shipping'] = $this->language->get('text_shipping');		
-     	$this->data['text_setting'] = $this->language->get('text_setting');
+		$this->data['text_setting'] = $this->language->get('text_setting');
 		$this->data['text_stock_status'] = $this->language->get('text_stock_status');
 		$this->data['text_system'] = $this->language->get('text_system');
 		$this->data['text_tax'] = $this->language->get('text_tax');
@@ -95,19 +95,17 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_users'] = $this->language->get('text_users');
 		$this->data['text_voucher'] = $this->language->get('text_voucher');
 		$this->data['text_voucher_theme'] = $this->language->get('text_voucher_theme');
-      	$this->data['text_weight_class'] = $this->language->get('text_weight_class');
+		$this->data['text_weight_class'] = $this->language->get('text_weight_class');
 		$this->data['text_length_class'] = $this->language->get('text_length_class');
-      	$this->data['text_zone'] = $this->language->get('text_zone');
-		$this->data['text_select_all'] = $this->language->get('text_select_all');
-		$this->data['text_unselect_all'] = $this->language->get('text_unselect_all');
+		$this->data['text_zone'] = $this->language->get('text_zone');
 		
 		if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
 			$this->data['logged'] = '';
 			
 			$this->data['home'] = $this->url->link('common/login', '', 'SSL');
-		} else {			
+		} else {
 			$this->data['logged'] = sprintf($this->language->get('text_logged'), $this->user->getUserName());
-
+	
 			$this->data['home'] = $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['affiliate'] = $this->url->link('sale/affiliate', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['attribute'] = $this->url->link('catalog/attribute', 'token=' . $this->session->data['token'], 'SSL');
