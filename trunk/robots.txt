@@ -7,7 +7,6 @@ Disallow: /index.php?route=product/product*&manufacturer_id=
 Disallow: /admin
 Disallow: /catalog
 Disallow: /download
-Disallow: /export
 Disallow: /system
 Disallow: /*?sort=
 Disallow: /*&sort=
@@ -33,7 +32,6 @@ Disallow: /index.php?route=product/product*&manufacturer_id=
 Disallow: /admin
 Disallow: /catalog
 Disallow: /download
-Disallow: /export
 Disallow: /system
 Disallow: /*?sort=
 Disallow: /*&sort=
