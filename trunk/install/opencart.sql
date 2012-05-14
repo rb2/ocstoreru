@@ -1207,6 +1207,7 @@ INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`
 DROP TABLE IF EXISTS `oc_information`;
 CREATE TABLE `oc_information` (
   `information_id` int(11) NOT NULL auto_increment,
+  `bottom` int(1) NOT NULL default '0',
   `sort_order` int(3) NOT NULL default '0',
   `status` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`information_id`)
@@ -1217,10 +1218,10 @@ CREATE TABLE `oc_information` (
 -- 
 
 INSERT INTO `oc_information` (`information_id`, `sort_order`, `status`) VALUES
-(3, 3, 1),
-(4, 1, 1),
-(5, 4, 1),
-(6, 2, 1);
+(3, 1, 3, 1),
+(4, 1, 1, 1),
+(5, 1, 4, 1),
+(6, 1, 2, 1);
 
 -- --------------------------------------------------------
 

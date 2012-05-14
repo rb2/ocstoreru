@@ -93,6 +93,14 @@
               <td><input type="text" name="keyword" value="<?php echo $keyword; ?>" /></td>
             </tr>
             <tr>
+              <td><?php echo $entry_bottom; ?></td>
+              <td><?php if ($bottom) { ?>
+                <input type="checkbox" name="bottom" value="1" checked="checked" />
+                <?php } else { ?>
+                <input type="checkbox" name="bottom" value="1" />
+                <?php } ?></td>
+            </tr>            
+            <tr>
               <td><?php echo $entry_status; ?></td>
               <td><select name="status">
                   <?php if ($status) { ?>

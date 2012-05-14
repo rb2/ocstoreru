@@ -16,6 +16,7 @@ $_['entry_title']       = 'Information Title:';
 $_['entry_description'] = 'Description:';
 $_['entry_store']       = 'Stores:';
 $_['entry_keyword']     = 'SEO Keyword:<br /><span class="help">Do not use spaces instead replace spaces with - and make sure the keyword is globally unique.</span>';
+$_['entry_bottom']      = 'Bottom:<br/><span class="help">Display in the bottom footer.</span>';
 $_['entry_status']      = 'Status:';
 $_['entry_sort_order']  = 'Sort Order:<br/><span class="help">Set to -1 to hide from listing</span>';
 $_['entry_layout']      = 'Layout Override:';

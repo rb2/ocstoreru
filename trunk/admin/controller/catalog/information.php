@@ -272,6 +272,7 @@ class ControllerCatalogInformation extends Controller {
 		$this->data['entry_description'] = $this->language->get('entry_description');
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
+		$this->data['entry_bottom'] = $this->language->get('entry_bottom');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
@@ -359,14 +360,6 @@ class ControllerCatalogInformation extends Controller {
 			$this->data['information_description'] = array();
 		}
 
-		if (isset($this->request->post['status'])) {
-			$this->data['status'] = $this->request->post['status'];
-		} elseif (!empty($information_info)) {
-			$this->data['status'] = $information_info['status'];
-		} else {
-			$this->data['status'] = 1;
-		}
-		
 		$this->load->model('setting/store');
 		
 		$this->data['stores'] = $this->model_setting_store->getStores();
@@ -387,6 +380,22 @@ class ControllerCatalogInformation extends Controller {
 			$this->data['keyword'] = '';
 		}
 		
+		if (isset($this->request->post['bottom'])) {
+			$this->data['bottom'] = $this->request->post['bottoms'];
+		} elseif (!empty($information_info)) {
+			$this->data['bottom'] = $information_info['bottom'];
+		} else {
+			$this->data['bottom'] = 0;
+		}
+		
+		if (isset($this->request->post['status'])) {
+			$this->data['status'] = $this->request->post['status'];
+		} elseif (!empty($information_info)) {
+			$this->data['status'] = $information_info['status'];
+		} else {
+			$this->data['status'] = 1;
+		}
+				
 		if (isset($this->request->post['sort_order'])) {
 			$this->data['sort_order'] = $this->request->post['sort_order'];
 		} elseif (!empty($information_info)) {
