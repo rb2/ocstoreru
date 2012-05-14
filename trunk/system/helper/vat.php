@@ -35,14 +35,14 @@ function vat_validation($prefix, $number) {
 		$response = file_get_contents('http://ec.europa.eu/taxation_customs/vies/viesquer.do?ms=' . $prefix . '&iso=' . $prefix . '&vat=' . $number);
 		
 		if (preg_match('/\bvalid VAT number\b/i', $response)) {
-			return true;
+			return 'valid';
 		}		
 		
 		if (preg_match('/\binvalid VAT number\b/i', $response)) {
-			return false;
+			return 'invalid';
 		} 
 	} else {
-		return true;
+		return 'unknown';
 	}
 }
 ?>

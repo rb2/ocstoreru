@@ -393,7 +393,7 @@ function addAddress() {
     html += '      <td><span id="postcode-required' + address_row + '" class="required">*</span> <?php echo $entry_postcode; ?></td>';
     html += '      <td><input type="text" name="address[' + address_row + '][postcode]" value="" /></td>';
     html += '    </tr>';
-    html += '    <tr>';
+	html += '    <tr>';
     html += '      <td><span class="required">*</span> <?php echo $entry_country; ?></td>';
     html += '      <td><select name="address[' + address_row + '][country_id]" onchange="country(this, \'' + address_row + '\', \'0\');">';
     html += '         <option value=""><?php echo $text_select; ?></option>';
