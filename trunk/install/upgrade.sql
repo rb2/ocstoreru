@@ -229,3 +229,5 @@ CREATE TABLE IF NOT EXISTS oc_order_misc (
   `value` text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
   PRIMARY KEY (order_id, `key`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+ALTER TABLE `oc_information` ADD bottom int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER information_id;
