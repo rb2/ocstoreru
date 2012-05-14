@@ -63,7 +63,7 @@ class Image {
 
 		$scale = min($width / $this->info['width'], $height / $this->info['height']);
 		
-		if ($scale == 1) {
+		if ($scale == 1 && $this->info['mime'] != 'image/png') {
 			return;
 		}
 		

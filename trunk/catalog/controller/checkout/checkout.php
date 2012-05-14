@@ -79,20 +79,6 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->response->setOutput($this->render());
   	}
 	
-	public function customer_group() {
-		$json = array();
-		
-		$this->load->model('account/customer_group');
-
-    	$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->request->get['customer_group_id']);
-		
-		if ($customer_group_info) {
-			$json = $customer_group_info;
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
-	
 	public function country() {
 		$json = array();
 		

@@ -546,14 +546,10 @@ class ControllerCheckoutManual extends Controller {
 				
 				if (!$json['payment_method']) {
 					$json['error']['payment_method'] = $this->language->get('error_no_payment');
-				} else {			
-					if (!$this->request->post['payment_code']) {
+				} elseif ($this->request->post['payment_code']) {			
+					if (!isset($json['payment_method'][$this->request->post['payment_code']])) {
 						$json['error']['payment_method'] = $this->language->get('error_payment');
-					} else {
-						if (!isset($json['payment_method'][$this->request->post['payment_code']])) {
-							$json['error']['payment_method'] = $this->language->get('error_payment');
-						}
-					}	
+					}
 				}
 			}
 			

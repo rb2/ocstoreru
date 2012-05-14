@@ -31,7 +31,7 @@ class ControllerCheckoutRegister extends Controller {
 
 		$this->data['button_continue'] = $this->language->get('button_continue');
 
-		$customer_group_data = array();
+		$this->data['customer_groups'] = array();
 		
 		if (is_array($this->config->get('config_customer_group_display'))) {
 			$this->load->model('account/customer_group');
@@ -40,42 +40,26 @@ class ControllerCheckoutRegister extends Controller {
 			
 			foreach ($customer_groups  as $customer_group) {
 				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
-					$customer_group_data[] = array(
-						'customer_group_id' => $customer_group['customer_group_id'],
-						'name'              => $customer_group['name'],
-						'description'       => $customer_group['description'],
-					);
+					$this->data['customer_groups'][] = $customer_group;
 				}
 			}
 		}
 		
-		if (count($customer_group_data) > 1) {
-			$this->data['customer_groups'] = $customer_group_data;
-		} else {
-			$this->data['customer_groups'] = array();
-		}
-		
 		$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
 		
-		if (isset($this->request->post['postcode'])) {
-    		$this->data['postcode'] = $this->request->post['postcode'];
-		} elseif (isset($this->session->data['shipping_postcode'])) {
+		if (isset($this->session->data['shipping_postcode'])) {
 			$this->data['postcode'] = $this->session->data['shipping_postcode'];		
 		} else {
 			$this->data['postcode'] = '';
 		}
 		
-    	if (isset($this->request->post['country_id'])) {
-      		$this->data['country_id'] = $this->request->post['country_id'];
-		} elseif (isset($this->session->data['shipping_country_id'])) {
+    	if (isset($this->session->data['shipping_country_id'])) {
 			$this->data['country_id'] = $this->session->data['shipping_country_id'];		
 		} else {	
       		$this->data['country_id'] = $this->config->get('config_country_id');
     	}
 		
-    	if (isset($this->request->post['zone_id'])) {
-      		$this->data['zone_id'] = $this->request->post['zone_id']; 	
-		} elseif (isset($this->session->data['shipping_zone_id'])) {
+    	if (isset($this->session->data['shipping_zone_id'])) {
 			$this->data['zone_id'] = $this->session->data['shipping_zone_id'];			
 		} else {
       		$this->data['zone_id'] = '';
@@ -202,8 +186,17 @@ class ControllerCheckoutRegister extends Controller {
 			
 			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 			
-			if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-				$json['error']['postcode'] = $this->language->get('error_postcode');
+			if ($country_info) {
+				if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
+					$json['error']['postcode'] = $this->language->get('error_postcode');
+				}
+				 
+				// VAT Validation
+				$this->load->helper('vat');
+				
+				if ($this->config->get('config_vat') && $this->request->post['tax_id'] && !vat_validation($country_info['iso_code_2'], $this->request->post['tax_id'])) {
+					$json['error']['tax_id'] = $this->language->get('error_vat');
+				}				
 			}
 	
 			if ($this->request->post['country_id'] == '') {

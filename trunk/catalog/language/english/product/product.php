@@ -47,6 +47,6 @@ $_['error_text']        = 'Warning: Review Text must be between 25 and 1000 char
 $_['error_rating']      = 'Warning: Please select a review rating!';
 $_['error_captcha']     = 'Warning: Verification code does not match the image!';
 $_['error_upload']      = 'Upload required!';
-$_['error_filename']    = 'Filename must be between 3 and 128 characters!';
+$_['error_filename']    = 'Filename must be between 3 and 64 characters!';
 $_['error_filetype']    = 'Invalid file type!';
 ?>

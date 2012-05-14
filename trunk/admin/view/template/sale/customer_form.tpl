@@ -141,11 +141,14 @@
               <tr class="company-id-display">
                 <td><?php echo $entry_company_id; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][company_id]" value="<?php echo $address['company_id']; ?>" /></td>
-              </tr> 
+              </tr>
               <tr class="tax-id-display">
                 <td><?php echo $entry_tax_id; ?></td>
-                <td><input type="text" name="address[<?php echo $address_row; ?>][tax_id]" value="<?php echo $address['tax_id']; ?>" /></td>
-              </tr>                            
+                <td><input type="text" name="address[<?php echo $address_row; ?>][tax_id]" value="<?php echo $address['tax_id']; ?>" />
+                  <?php if (isset($error_address_tax_id[$address_row])) { ?>
+                  <span class="error"><?php echo $error_address_tax_id[$address_row]; ?></span>
+                  <?php } ?></td>
+              </tr>
               <tr>
                 <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
                 <td><input type="text" name="address[<?php echo $address_row; ?>][address_1]" value="<?php echo $address['address_1']; ?>" />
@@ -278,36 +281,31 @@
 </div>
 <script type="text/javascript"><!--
 $('select[name=\'customer_group_id\']').live('change', function() {
-	$.ajax({
-		url: 'index.php?route=sale/customer/customer_group&token=<?php echo $token; ?>&customer_group_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('select[name=\'customer_group_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
-		},		
-		complete: function() {
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			if (json['company_id_display'] == '1') {
-				$('.company-id-display').show();
-			} else {
-				$('.company-id-display').hide();
-			}
-			
-			if (json['tax_id_display'] == '1') {
-				$('.tax-id-display').show();
-			} else {
-				$('.tax-id-display').hide();
-			}
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+	var customer_group = [];
+	
+<?php foreach ($customer_groups as $customer_group) { ?>
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
+<?php } ?>	
+
+	if (customer_group[this.value]) {
+		if (customer_group[this.value]['company_id_display'] == '1') {
+			$('.company-id-display').show();
+		} else {
+			$('.company-id-display').hide();
 		}
-	});
+		
+		if (customer_group[this.value]['tax_id_display'] == '1') {
+			$('.tax-id-display').show();
+		} else {
+			$('.tax-id-display').hide();
+		}
+	}
 });
 
 $('select[name=\'customer_group_id\']').trigger('change');
-//--></script>
+//--></script> 
 <script type="text/javascript"><!--
 function country(element, index, zone_id) {
 	$.ajax({

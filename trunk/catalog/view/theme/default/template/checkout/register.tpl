@@ -37,20 +37,19 @@
   <input type="text" name="company" value="" class="large-field" />
   <br />
   <br />
-  <?php if ($customer_groups) { ?>
-  <?php echo $entry_account; ?><br />
-  <select name="customer_group_id" class="large-field">
-    <?php foreach ($customer_groups as $customer_group) { ?>
-    <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
-    <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
-    <?php } else { ?>
-    <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>
-    <?php } ?>
-    <?php } ?>
-  </select>
-  <br />
-  <br />
-  <?php } ?>  
+  <div style="display: <?php echo (count($customer_groups) > 1 ? 'block' : 'none'); ?>;"><?php echo $entry_account; ?><br />
+    <select name="customer_group_id" class="large-field">
+      <?php foreach ($customer_groups as $customer_group) { ?>
+      <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
+      <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
+      <?php } else { ?>
+      <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>
+      <?php } ?>
+      <?php } ?>
+    </select>
+    <br />
+    <br />
+  </div>
   <div id="company-id-display"><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?><br />
     <input type="text" name="company_id" value="" class="large-field" />
     <br />
@@ -124,48 +123,45 @@
 </div>
 <?php } ?>
 <script type="text/javascript"><!--
-$('#payment-address select[name=\'customer_group_id\']').bind('change', function() {
-	$.ajax({
-		url: 'index.php?route=checkout/checkout/customer_group&customer_group_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('#payment-address select[name=\'customer_group_id\']').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-		},		
-		complete: function() {
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			if (json['company_id_display'] == '1') {
-				$('#company-id-display').show();
-			} else {
-				$('#company-id-display').hide();
-			}
-			
-			if (json['company_id_required'] == '1') {
-				$('#company-id-required').show();
-			} else {
-				$('#company-id-required').hide();
-			}
-			
-			if (json['tax_id_display'] == '1') {
-				$('#tax-id-display').show();
-			} else {
-				$('#tax-id-display').hide();
-			}
-			
-			if (json['tax_id_required'] == '1') {
-				$('#tax-id-required').show();
-			} else {
-				$('#tax-id-required').hide();
-			}						
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+$('#payment-address select[name=\'customer_group_id\']').live('change', function() {
+	var customer_group = [];
+	
+<?php foreach ($customer_groups as $customer_group) { ?>
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_required'] = '<?php echo $customer_group['company_id_required']; ?>';
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_required'] = '<?php echo $customer_group['tax_id_required']; ?>';
+<?php } ?>	
+
+	if (customer_group[this.value]) {
+		if (customer_group[this.value]['company_id_display'] == '1') {
+			$('#company-id-display').show();
+		} else {
+			$('#company-id-display').hide();
 		}
-	});
+		
+		if (customer_group[this.value]['company_id_required'] == '1') {
+			$('#company-id-required').show();
+		} else {
+			$('#company-id-required').hide();
+		}
+		
+		if (customer_group[this.value]['tax_id_display'] == '1') {
+			$('#tax-id-display').show();
+		} else {
+			$('#tax-id-display').hide();
+		}
+		
+		if (customer_group[this.value]['tax_id_required'] == '1') {
+			$('#tax-id-required').show();
+		} else {
+			$('#tax-id-required').hide();
+		}	
+	}
 });
 
-$('select[name=\'customer_group_id\']').trigger('change');
+$('#payment-address select[name=\'customer_group_id\']').trigger('change');
 //--></script> 
 <script type="text/javascript"><!--
 $('#payment-address select[name=\'country_id\']').bind('change', function() {
@@ -211,7 +207,7 @@ $('#payment-address select[name=\'country_id\']').bind('change', function() {
 });
 
 $('#payment-address select[name=\'country_id\']').trigger('change');
-//--></script>
+//--></script> 
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
 	width: 640,

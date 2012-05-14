@@ -56,8 +56,7 @@
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
         </tr>     
-        <?php if ($customer_groups) { ?>
-        <tr>
+        <tr style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
           <td><?php echo $entry_account; ?></td>
           <td><select name="customer_group_id">
               <?php foreach ($customer_groups as $customer_group) { ?>
@@ -68,16 +67,15 @@
               <?php } ?>
               <?php } ?>
             </select></td>
-        </tr>  
-        <?php } ?>         
-        <tr id="company-id-display" style="display: <?php echo ($company_id_display ? 'table-row' : 'none'); ?>;">
+        </tr>         
+        <tr id="company-id-display">
           <td><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?></td>
           <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" />
             <?php if ($error_company_id) { ?>
             <span class="error"><?php echo $error_company_id; ?></span>
             <?php } ?></td>
         </tr>
-        <tr id="tax-id-display" style="display: <?php echo ($tax_id_display ? 'table-row' : 'none'); ?>;">
+        <tr id="tax-id-display">
           <td><span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?></td>
           <td><input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
             <?php if ($error_tax_id) { ?>
@@ -195,44 +193,41 @@
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
 $('select[name=\'customer_group_id\']').live('change', function() {
-	$.ajax({
-		url: 'index.php?route=account/register/customer_group&customer_group_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('select[name=\'customer_group_id\']').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-		},		
-		complete: function() {
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			if (json['company_id_display'] == '1') {
-				$('#company-id-display').show();
-			} else {
-				$('#company-id-display').hide();
-			}
-			
-			if (json['company_id_required'] == '1') {
-				$('#company-id-required').show();
-			} else {
-				$('#company-id-required').hide();
-			}
-			
-			if (json['tax_id_display'] == '1') {
-				$('#tax-id-display').show();
-			} else {
-				$('#tax-id-display').hide();
-			}
-			
-			if (json['tax_id_required'] == '1') {
-				$('#tax-id-required').show();
-			} else {
-				$('#tax-id-required').hide();
-			}						
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+	var customer_group = [];
+	
+<?php foreach ($customer_groups as $customer_group) { ?>
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>] = [];
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_display'] = '<?php echo $customer_group['company_id_display']; ?>';
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['company_id_required'] = '<?php echo $customer_group['company_id_required']; ?>';
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_display'] = '<?php echo $customer_group['tax_id_display']; ?>';
+	customer_group[<?php echo $customer_group['customer_group_id']; ?>]['tax_id_required'] = '<?php echo $customer_group['tax_id_required']; ?>';
+<?php } ?>	
+
+	if (customer_group[this.value]) {
+		if (customer_group[this.value]['company_id_display'] == '1') {
+			$('#company-id-display').show();
+		} else {
+			$('#company-id-display').hide();
 		}
-	});
+		
+		if (customer_group[this.value]['company_id_required'] == '1') {
+			$('#company-id-required').show();
+		} else {
+			$('#company-id-required').hide();
+		}
+		
+		if (customer_group[this.value]['tax_id_display'] == '1') {
+			$('#tax-id-display').show();
+		} else {
+			$('#tax-id-display').hide();
+		}
+		
+		if (customer_group[this.value]['tax_id_required'] == '1') {
+			$('#tax-id-required').show();
+		} else {
+			$('#tax-id-required').hide();
+		}	
+	}
 });
 
 $('select[name=\'customer_group_id\']').trigger('change');
@@ -258,7 +253,6 @@ $('select[name=\'country_id\']').bind('change', function() {
 			html = '<option value=""><?php echo $text_select; ?></option>';
 			
 			if (json['zone'] != '') {
-
 				for (i = 0; i < json['zone'].length; i++) {
         			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
 	    			

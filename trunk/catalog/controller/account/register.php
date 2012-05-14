@@ -213,26 +213,16 @@ class ControllerAccountRegister extends Controller {
 
 		$this->load->model('account/customer_group');
 		
-		$customer_group_data = array();
+		$this->data['customer_groups'] = array();
 		
 		if (is_array($this->config->get('config_customer_group_display'))) {
 			$customer_groups = $this->model_account_customer_group->getCustomerGroups();
 			
-			foreach ($customer_groups  as $customer_group) {
+			foreach ($customer_groups as $customer_group) {
 				if (in_array($customer_group['customer_group_id'], $this->config->get('config_customer_group_display'))) {
-					$customer_group_data[] = array(
-						'customer_group_id' => $customer_group['customer_group_id'],
-						'name'              => $customer_group['name'],
-						'description'       => $customer_group['description']
-					);
+					$this->data['customer_groups'][] = $customer_group;
 				}
 			}
-		}
-		
-		if (count($customer_group_data) > 1) {
-			$this->data['customer_groups'] = $customer_group_data;
-		} else {
-			$this->data['customer_groups'] = array();
 		}
 		
 		if (isset($this->request->post['customer_group_id'])) {
@@ -247,38 +237,12 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['company_id'] = '';
 		}
-				
-		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->config->get('config_customer_group_id'));
-		
-		if ($customer_group_info) {
-			$this->data['company_id_display'] = $customer_group_info['company_id_display'];
-		} else {
-			$this->data['company_id_display'] = '';
-		}
-		
-		if ($customer_group_info) {
-			$this->data['company_id_required'] = $customer_group_info['company_id_required'];
-		} else {
-			$this->data['company_id_required'] = '';
-		}
 		
 		// Tax ID
 		if (isset($this->request->post['tax_id'])) {
     		$this->data['tax_id'] = $this->request->post['tax_id'];
 		} else {
 			$this->data['tax_id'] = '';
-		}				
-				
-		if ($customer_group_info) {
-			$this->data['tax_id_display'] = $customer_group_info['tax_id_display'];
-		} else {
-			$this->data['tax_id_display'] = '';
-		}
-		
-		if ($customer_group_info) {
-			$this->data['tax_id_required'] = $customer_group_info['tax_id_required'];
-		} else {
-			$this->data['tax_id_required'] = '';
 		}
 						
 		if (isset($this->request->post['address_1'])) {
@@ -439,8 +403,10 @@ class ControllerAccountRegister extends Controller {
 		
 		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 		
-		if ($country_info && $country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-			$this->error['postcode'] = $this->language->get('error_postcode');
+		if ($country_info) {
+			if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
+				$this->error['postcode'] = $this->language->get('error_postcode');
+			}
 			
 			// VAT Validation
 			$this->load->helper('vat');
@@ -482,20 +448,6 @@ class ControllerAccountRegister extends Controller {
       		return false;
     	}
   	}
-	
-	public function customer_group() {
-		$json = array();
-		
-		$this->load->model('account/customer_group');
-
-    	$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->request->get['customer_group_id']);
-		
-		if ($customer_group_info) {
-			$json = $customer_group_info;
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
 	
 	public function country() {
 		$json = array();

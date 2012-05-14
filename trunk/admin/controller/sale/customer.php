@@ -709,6 +709,12 @@ class ControllerSaleCustomer extends Controller {
 			$this->data['error_address_lastname'] = '';
 		}
 		
+  		if (isset($this->error['address_tax_id'])) {
+			$this->data['error_address_tax_id'] = $this->error['address_tax_id'];
+		} else {
+			$this->data['error_address_tax_id'] = '';
+		}
+				
 		if (isset($this->error['address_address_1'])) {
 			$this->data['error_address_address_1'] = $this->error['address_address_1'];
 		} else {
@@ -995,8 +1001,17 @@ class ControllerSaleCustomer extends Controller {
 				
 				$country_info = $this->model_localisation_country->getCountry($value['country_id']);
 						
-				if ($country_info && $country_info['postcode_required'] && (utf8_strlen($value['postcode']) < 2) || (utf8_strlen($value['postcode']) > 10)) {
-					$this->error['address_postcode'][$key] = $this->language->get('error_postcode');
+				if ($country_info) {
+					if ($country_info['postcode_required'] && (utf8_strlen($value['postcode']) < 2) || (utf8_strlen($value['postcode']) > 10)) {
+						$this->error['address_postcode'][$key] = $this->language->get('error_postcode');
+					}
+					
+					// VAT Validation
+					$this->load->helper('vat');
+					
+					if ($this->config->get('config_vat') && $this->request->post['tax_id'] && !vat_validation($country_info['iso_code_2'], $this->request->post['tax_id'])) {
+						$this->error['address_tax_id'][$key] = $this->language->get('error_vat');
+					}
 				}
 			
 				if ($value['country_id'] == '') {
@@ -1222,7 +1237,7 @@ class ControllerSaleCustomer extends Controller {
 		$this->response->setOutput($this->render());
 	}
 	
-	public function addblacklist() {
+	public function addBlacklist() {
 		$this->language->load('sale/customer');
 		
 		$json = array();
@@ -1242,7 +1257,7 @@ class ControllerSaleCustomer extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 	
-	public function removeblacklist() {
+	public function removeBlacklist() {
 		$this->language->load('sale/customer');
 		
 		$json = array();
@@ -1302,20 +1317,6 @@ class ControllerSaleCustomer extends Controller {
 
 		$this->response->setOutput(json_encode($json));
 	}		
-	
-	public function customer_group() {
-		$json = array();
-		
-		$this->load->model('sale/customer_group');
-
-    	$customer_group_info = $this->model_sale_customer_group->getCustomerGroup($this->request->get['customer_group_id']);
-		
-		if ($customer_group_info) {
-			$json = $customer_group_info;
-		}
-		
-		$this->response->setOutput(json_encode($json));
-	}
 		
 	public function country() {
 		$json = array();

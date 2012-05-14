@@ -184,7 +184,7 @@
     <table id="total">
       <?php foreach ($totals as $total) { ?>
       <tr>
-        <td colspan="5" class="right"><b><?php echo $total['title']; ?>:</b></td>
+        <td class="right"><b><?php echo $total['title']; ?>:</b></td>
         <td class="right"><?php echo $total['text']; ?></td>
       </tr>
       <?php } ?>
@@ -324,7 +324,6 @@ $('select[name=\'country_id\']').bind('change', function() {
 			html = '<option value=""><?php echo $text_select; ?></option>';
 			
 			if (json['zone'] != '') {
-
 				for (i = 0; i < json['zone'].length; i++) {
         			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
 	    			
