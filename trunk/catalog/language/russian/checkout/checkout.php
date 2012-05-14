@@ -72,6 +72,7 @@ $_['error_password']                 = 'Пароль должен быть от 
 $_['error_confirm']                  = 'Пароли не совпадают!';
 $_['error_company_id']               = 'Company ID required!';
 $_['error_tax_id']                   = 'Tax ID required!';
+$_['error_vat']                      = 'VAT number is invalid!';
 $_['error_address_1']                = 'Адрес должен быть от 3 до 128 символов!';
 $_['error_city']                     = 'Название города должно быть от 2 до 128 символов!';
 $_['error_postcode']                 = 'Индекс должен быть от 2 до 10 символов!';
