@@ -625,11 +625,11 @@ $('input[name=\'customer\']').catcomplete({
 		
 		$('select[name=\'shipping_address\']').html(html);
 		$('select[name=\'payment_address\']').html(html);
-			
+		
+		$('select[id=\'customer_group_id\']').attr('disabled', false);
 		$('select[id=\'customer_group_id\']').attr('value', ui.item['customer_group_id']);
-		$('select[id=\'customer_group_id\']').attr('disabled', true); 
-		alert(ui.item['customer_group_id']);
 		$('select[id=\'customer_group_id\']').trigger('change');
+		$('select[id=\'customer_group_id\']').attr('disabled', true); 
 					 	
 		return false; 
 	},
@@ -639,7 +639,6 @@ $('input[name=\'customer\']').catcomplete({
 });
 
 $('select[id=\'customer_group_id\']').live('change', function() {
-	alert(this.value);
 	$('input[name=\'customer_group_id\']').attr('value', this.value);
 	
 	var customer_group = [];
@@ -653,7 +652,6 @@ $('select[id=\'customer_group_id\']').live('change', function() {
 <?php } ?>	
 
 	if (customer_group[this.value]) {
-		alert('hi');
 		if (customer_group[this.value]['company_id_display'] == '1') {
 			$('#company-id-display').show();
 		} else {
@@ -678,48 +676,6 @@ $('select[id=\'customer_group_id\']').live('change', function() {
 			$('#tax-id-required').hide();
 		}	
 	}
-		
-	/* 
-	$.ajax({
-		url: 'index.php?route=sale/customer/customer_group&token=<?php echo $token; ?>&customer_group_id=' + this.value,
-		dataType: 'json',
-		beforeSend: function() {
-			$('select[id=\'customer_group_id\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
-		},		
-		complete: function() {
-			$('.wait').remove();
-		},			
-		success: function(json) {
-			if (json['company_id_display'] == '1') {
-				$('#company-id-display').show();
-			} else {
-				$('#company-id-display').hide();
-			}
-			
-			if (json['company_id_required'] == '1') {
-				$('#company-id-required').show();
-			} else {
-				$('#company-id-required').hide();
-			}
-			
-			if (json['tax_id_display'] == '1') {
-				$('#tax-id-display').show();
-			} else {
-				$('#tax-id-display').hide();
-			}
-			
-			if (json['tax_id_required'] == '1') {
-				$('#tax-id-required').show();
-			} else {
-				$('#tax-id-required').hide();
-			}						
-		},
-		error: function(xhr, ajaxOptions, thrownError) {
-			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-		}
-	});
-	
-	*/
 });
 
 $('select[id=\'customer_group_id\']').trigger('change');
