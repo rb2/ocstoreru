@@ -30,6 +30,10 @@ function vat_validation($prefix, $number) {
 		'CZ' => 'CZ', //Czech Republic
 		'SI' => 'SI'  //Slovania
 	);	
+	 
+	if (array_search(substr($number, 0, 2), $iso_code_2_data)) {
+		$number = substr($number, 2);
+	}
 	
 	if (array_search($prefix, $iso_code_2_data)) {
 		$response = file_get_contents('http://ec.europa.eu/taxation_customs/vies/viesquer.do?ms=' . $prefix . '&iso=' . $prefix . '&vat=' . $number);
