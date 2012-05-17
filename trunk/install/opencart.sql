@@ -2898,7 +2898,7 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (54, 0, 'reward', 'reward_status', '1', 0),
 (55, 0, 'config', 'config_image_related_height', '80', 0),
 (56, 0, 'affiliate', 'affiliate_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:2:"10";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
-(57, 0, 'category', 'category_module', 'a:2:{i:0;a:5:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:5:"count";s:1:"1";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}i:1;a:5:{s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:5:"count";s:1:"1";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
+(57, 0, 'category', 'category_module', 'a:2:{i:0;a:5:{s:9:"layout_id";s:1:"3";s:8:"position";s:11:"column_left";s:5:"count";s:1:"0";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}i:1;a:5:{s:9:"layout_id";s:1:"2";s:8:"position";s:11:"column_left";s:5:"count";s:1:"0";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
 (58, 0, 'config', 'config_image_related_width', '80', 0),
 (59, 0, 'config', 'config_image_additional_height', '74', 0),
 (60, 0, 'account', 'account_module', 'a:1:{i:0;a:4:{s:9:"layout_id";s:1:"6";s:8:"position";s:12:"column_right";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"1";}}', 1),
@@ -2936,7 +2936,7 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (93, 0, 'voucher', 'voucher_sort_order', '8', 0),
 (94, 0, 'voucher', 'voucher_status', '1', 0),
 (95, 0, 'config', 'config_length_class_id', '1', 0),
-(96, 0, 'config', 'config_invoice_prefix', 'INV-2011-00', 0),
+(96, 0, 'config', 'config_invoice_prefix', 'INV-2012-00', 0),
 (97, 0, 'config', 'config_tax', '1', 0),
 (98, 0, 'config', 'config_tax_customer', 'shipping', 0),
 (99, 0, 'config', 'config_tax_default', 'shipping', 0),
@@ -2965,7 +2965,8 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (122, 0, 'config', 'config_admin_language', 'ru', 0),
 (123, 0, 'config', 'config_order_edit', '100', 0),
 (124, 0, 'config', 'config_voucher_min', '1', 0),
-(125, 0, 'config', 'config_voucher_max', '1000', 0);
+(125, 0, 'config', 'config_voucher_max', '1000', 0),
+(126, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:\"1\";}', 1);
 
 -- --------------------------------------------------------
 

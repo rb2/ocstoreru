@@ -1,6 +1,6 @@
 <?php
 // Version
-define('VERSION', '1.5.2.2');
+define('VERSION', '1.5.3');
 
 // Configuration
 require_once('config.php');

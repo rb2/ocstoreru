@@ -121,13 +121,13 @@ class ModelUpgrade extends Model {
 			$db->query("UPDATE " . DB_PREFIX . "setting SET value = 'shipping' WHERE `key` = 'config_tax_customer'");
 		}
 
-		## v1.5.2.2
+		## v1.5.3
 		// Set defaults for new Voucher Min/Max fields
 		if (empty($settings['config_voucher_min'])) {
 			$db->query("UPDATE " . DB_PREFIX . "setting SET value = '1' WHERE `key` = 'config_voucher_min'");
 		}
 		if (empty($settings['config_voucher_max'])) {
-			$db->query("UPDATE " . DB_PREFIX . "setting SET value = '50' WHERE `key` = 'config_voucher_max'");
+			$db->query("UPDATE " . DB_PREFIX . "setting SET value = '1000' WHERE `key` = 'config_voucher_max'");
 		}
 
 		// Layout routes now require "%" for wildcard paths
@@ -153,6 +153,9 @@ class ModelUpgrade extends Model {
 		}
 		
 		// Default to "default" customer group display for registration if this is the first time using this version to avoid registration confusion.
+		// In 1.5.2 and earlier, the default install uses "8" as the "Default" customer group
+		// In 1.5.3 the default install uses "1" as the "Default" customer group.
+		// Since this is an upgrade script and only triggers if the checkboxes aren't selected, I use 8 since that is what people will be upgrading from.
 		$query = $db->query("SELECT setting_id FROM " . DB_PREFIX . "setting WHERE `group` = 'config' AND `key` = 'config_customer_group_display'");
 		if (!$query->num_rows) {
 			$db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = 0, `group` = 'config', `key` = 'config_customer_group_display', `value` = 'a:1:{i:0;s:1:\"8\";}', `serialized` = 1");
