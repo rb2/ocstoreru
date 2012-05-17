@@ -151,6 +151,12 @@ class ModelUpgrade extends Model {
 			}
 			$db->query("ALTER TABLE " . DB_PREFIX . "customer_group DROP `name`");
 		}
+		
+		// Default to "default" customer group display for registration if this is the first time using this version to avoid registration confusion.
+		$query = $db->query("SELECT setting_id FROM " . DB_PREFIX . "setting WHERE `group` = 'config' AND `key` = 'config_customer_group_display'");
+		if (!$query->num_rows) {
+			$db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = 0, `group` = 'config', `key` = 'config_customer_group_display', `value` = 'a:1:{i:0;s:1:\"8\";}', `serialized` = 1");
+		}
 	}
 }
 ?>
