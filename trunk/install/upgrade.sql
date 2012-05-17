@@ -222,6 +222,7 @@ ALTER TABLE oc_customer_group ADD sort_order int(3) NOT NULL DEFAULT 0 COMMENT '
 
 ALTER TABLE `oc_order` ADD payment_company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER payment_company;
 ALTER TABLE `oc_order` ADD payment_tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci AFTER payment_company_id;
+ALTER TABLE `oc_information` ADD bottom int(1) NOT NULL DEFAULT '1' COMMENT '' AFTER information_id;
 
 CREATE TABLE IF NOT EXISTS oc_order_misc (
   order_id int(11) NOT NULL DEFAULT 0 COMMENT '',
@@ -229,5 +230,3 @@ CREATE TABLE IF NOT EXISTS oc_order_misc (
   `value` text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
   PRIMARY KEY (order_id, `key`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-ALTER TABLE `oc_information` ADD bottom int(1) NOT NULL DEFAULT 0 COMMENT '' AFTER information_id;
