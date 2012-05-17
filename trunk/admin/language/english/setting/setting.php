@@ -99,6 +99,7 @@ $_['entry_fraud_status']         = 'MaxMind Fraud Order Status:<br /><span class
 $_['entry_use_ssl']              = 'Use SSL:<br /><span class="help">To use SSL check with your host if a SSL certificate is installed and added the SSL URL to the catalog and admin config files.</span>';
 $_['entry_seo_url']              = 'Use SEO URL\'s:<br /><span class="help">To use SEO URL\'s apache module mod-rewrite must be installed and you need to rename the htaccess.txt to .htaccess.</span>';
 $_['entry_maintenance']          = 'Maintenance Mode:<br /><span class="help">Prevents customers from browsing your store. They will instead see a maintenance message. If logged in as admin, you will see the store as normal.</span>';
+$_['entry_product_count']          = 'Category Product Count:<br /><span class="help">Show the number of products inside the subcategories in the storefront header category menu. <b>Be warned, this will cause an extreme performance hit for stores with a lot of subcategories!</b></span>';
 $_['entry_encryption']           = 'Encryption Key:<br /><span class="help">Please provide a secret key that will be used to encrypt private information when processing orders.</span>';
 $_['entry_compression']          = 'Output Compression Level:<br /><span class="help">GZIP for more efficient transfer to requesting clients. Compression level must be between 0 - 9</span>';
 $_['entry_error_display']        = 'Display Errors:';

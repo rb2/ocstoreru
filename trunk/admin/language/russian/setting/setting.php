@@ -99,6 +99,7 @@ $_['entry_fraud_status']       = 'Статус подозрительного п
 $_['entry_use_ssl']            = 'Использовать SSL:<br /><span class="help">Для использования SSL убедитесь что Ваш хостинг поддерживает SSL сертификат и пропишите SSL адреса в файле конфигурации.</span>';
 $_['entry_seo_url']            = 'Включить ЧПУ:<span class="help">Необходимо настроить файл .htaccess в корневом каталоге магазина</span>';
 $_['entry_maintenance']        = 'Режим обслуживания:<br /><span class="help">Отключает отображение магазина клиентам. Им будет отображаться сообщение об обслуживании. После авторизации админом, магазин будет нормально отображаться.</span>';
+$_['entry_product_count']          = 'Category Product Count:<br /><span class="help">Show the number of products inside the subcategories in the storefront header category menu. <b>Be warned, this will cause an extreme performance hit for stores with a lot of subcategories!</b></span>';
 $_['entry_encryption']         = 'Ключ шифрования:<br /><span class="help">Ключ, который будет использоваться для шифрования конфиденциальной информации при обработке заказов.</span>';
 $_['entry_compression']        = 'Уровень сжатия:<br /><span class="help">Задайте значение от 0 до 9.</span>';
 $_['entry_error_display']      = 'Показывать ошибки:';
