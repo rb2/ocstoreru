@@ -9,7 +9,7 @@
         <input type="radio" name="gender" value="F" id="female" />
         <label for="female"><?php echo $text_female; ?></label></td>
     </tr>
-    <tr>
+    <tr style="display: <?php echo ($iso_code_2 == 'SE' ? 'table-row' : 'none'); ?>;">
       <td><?php echo $entry_dob; ?></td>
       <td><input type="text" name="dob" value="" /></td>
     </tr>

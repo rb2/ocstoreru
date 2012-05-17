@@ -9,9 +9,10 @@ $_['text_female']      = 'Female';
 
 // Entry
 $_['entry_gender']     = 'Gender:';
-$_['entry_dob']        = 'Date of Birth:';
+$_['entry_dob']        = 'PNO/BIRTH DATA:';
 $_['entry_house_no']   = 'House No.:';
 $_['entry_house_ext']  = 'House Ext.:';
+$_['entry_mobile']     = 'Cell Phone:';
 
 // Error
 $_['error_gender']     = 'Gender Required!';

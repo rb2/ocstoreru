@@ -21,7 +21,9 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
  		
 		if ($order_info) {
- 			$this->data['button_confirm'] = 
+ 			$this->data['iso_code_2'] = $order_info['payment_iso_code_2'];
+		} else {
+			$this->data['iso_code_2'] = '';
 		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl')) {
