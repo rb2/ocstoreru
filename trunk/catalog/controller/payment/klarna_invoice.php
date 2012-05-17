@@ -19,8 +19,11 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
- 
-			
+ 		
+		if ($order_info) {
+ 			$this->data['button_confirm'] = 
+		}
+		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/payment/klarna_invoice.tpl';
 		} else {

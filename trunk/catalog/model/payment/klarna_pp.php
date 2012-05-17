@@ -20,36 +20,29 @@ class ModelPaymentKlarnaPP extends Model {
 		}	
 			
 		$currencies = array(
-			'AUD',
-			'CAD',
-			'EUR',
-			'GBP',
-			'JPY',
-			'USD',
-			'NZD',
-			'CHF',
-			'HKD',
-			'SGD',
 			'SEK',
-			'DKK',
-			'PLN',
 			'NOK',
-			'HUF',
-			'CZK',
-			'ILS',
-			'MXN',
-			'MYR',
-			'BRL',
-			'PHP',
-			'TWD',
-			'THB',
-			'TRY'
+			'EUR',
+			'DKK'
 		);
 		
 		if (!in_array(strtoupper($this->currency->getCode()), $currencies)) {
 			$status = false;
 		}	
+					
+		$countries = array(
+			'SE',
+			'FI',
+			'DK',
+			'NO',
+			'DE',
+			'NL'
+		);
 		
+		if (!in_array(strtoupper($address['iso_code_2']), $countries)) {
+			$status = false;
+		}	
+				
 		$method_data = array();
 	
 		if ($status) {  
