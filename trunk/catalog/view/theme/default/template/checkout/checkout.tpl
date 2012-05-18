@@ -140,9 +140,7 @@ $('#button-login').live('click', function() {
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-									
-			if (json['error']) {
+			} else if (json['error']) {
 				$('#checkout .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '</div>');
 				
 				$('.warning').fadeIn('slow');
@@ -173,10 +171,8 @@ $('#button-register').live('click', function() {
 			$('.warning, .error').remove();
 						
 			if (json['redirect']) {
-				location = json['redirect'];
-			}
-						
-			if (json['error']) {
+				location = json['redirect'];				
+			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
@@ -360,9 +356,7 @@ $('#button-payment-address').live('click', function() {
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
@@ -491,9 +485,7 @@ $('#button-shipping-address').live('click', function() {
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
@@ -595,9 +587,7 @@ $('#button-guest').live('click', function() {
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
@@ -757,9 +747,7 @@ $('#button-guest-shipping').live('click', function() {
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#shipping-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
@@ -841,9 +829,7 @@ $('#button-shipping-method').live('click', function() {
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#shipping-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
@@ -897,9 +883,7 @@ $('#button-payment-method').live('click', function() {
 			
 			if (json['redirect']) {
 				location = json['redirect'];
-			}
-			
-			if (json['error']) {
+			} else if (json['error']) {
 				if (json['error']['warning']) {
 					$('#payment-method .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
