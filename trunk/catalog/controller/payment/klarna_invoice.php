@@ -62,7 +62,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			}
 						
 			// Payment Country
-			switch ($order_info['payment_iso_code_2']) {
+			switch (strtoupper($order_info['payment_iso_code_2'])) {
 				// Sweden
 				case 'SE':
 					$country = 209;
@@ -90,14 +90,15 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			}
 
 			// Billing Address
+			// $order_info['email']
             $billing = array(
-				'email'           => $order_info['email'],
+				'email'           => 'always_accepted@klarna.com',
 				'telno'           => $order_info['telephone'],
-				'cellno'          => $order_info['telephone'],
-				'careof'          => '',
+				'cellno'          => '01522113356',
 				'company'         => $order_info['payment_company'],
+				'careof'          => '',
 				'fname'           => $order_info['payment_firstname'],
-				'lname'           => $order_info['payment_firstname'],
+				'lname'           => $order_info['payment_lastname'],
 				'street'          => $order_info['payment_address_1'],
 				'house_number'    => $this->request->post['house_no'],
 				'house_extension' => $this->request->post['house_ext'],
@@ -107,7 +108,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			);
 			
 			// Shipping Country
-			switch ($order_info['shipping_iso_code_2']) {
+			switch (strtoupper($order_info['shipping_iso_code_2'])) {
 				// Sweden
 				case 'SE':
 					$country = 209;
@@ -135,17 +136,18 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			}
 				
 			// Shipping Address
+			//$order_info['email']
 			$shipping = array(
-				'email'           => $order_info['email'],
+				'email'           => 'always_accepted@klarna.com',
 				'telno'           => $order_info['telephone'],
-				'cellno'          => '',
-				'careof'          => '',
+				'cellno'          => '01522113356',
 				'company'         => $order_info['shipping_company'],
+				'careof'          => '',
 				'fname'           => $order_info['shipping_firstname'],
 				'lname'           => $order_info['shipping_lastname'],
 				'street'          => $order_info['shipping_address_1'],
-				'house_number'    => '',
-				'house_extension' => '',
+				'house_number'    => $this->request->post['house_no'],
+				'house_extension' => $this->request->post['house_ext'],
 				'zip'             => str_replace(' ', '', $order_info['shipping_postcode']),
 				'city'            => $order_info['shipping_city'],
 				'country'         => $country,
@@ -162,16 +164,16 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 				$goodslist[] = array(
 					'qty'   => $product['quantity'],
 					'goods' => array(
-						'artNo'    => $product['model'],
+						'artno'    => $product['model'],
 						'title'    => $product['name'],
-						'price'    => str_replace('.', '', $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false)),
-						'vat'      => str_replace('.', '', $this->currency->format($this->tax->getTax($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false)),	
+						'price'    => (int)str_replace('.', '', $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false)),
+						'vat'      => (float)str_replace('.', '', $this->currency->format($this->tax->getTax($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false)),	
 						'discount' => 0,   
 						'flags'    => 32
 					)	
 				);
 			}
-
+/*
 			// Shipping
 			$goodslist[] = array(
 				'qty'   => 1,
@@ -184,7 +186,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 					'flags'    => 8 + 32
 				)	
 			);
-				
+*/				
 			// Digest
 			$digest = '';
 			
@@ -195,7 +197,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			$digest = base64_encode(pack('H*', hash('sha512', $digest . $this->config->get('klarna_invoice_secret'))));
 
 			// Currency
-			switch ($order_info['currency_code']) {
+			switch (strtoupper($order_info['currency_code'])) {
 				// Swedish krona
 				case 'SEK':
 					$currency = 0;
@@ -217,10 +219,12 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			// Language
 			switch (substr(strtolower($order_info['language_code']), 0, 2)) {
 				// Swedish
+				case 'se':
 				case 'sv':
 					$language = 138;
 					break;
 				// Norwegian	
+				case 'no':
 				case 'nb':
 					$language = 97;
 					break;	
@@ -241,9 +245,9 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 					$language = 101;
 					break;					
 			}			
-			
+			echo $language;
 			// Encoding
-			switch ($order_info['payment_iso_code_2']) {
+			switch (strtoupper($order_info['payment_iso_code_2'])) {
 				// Sweden
 				case 'SE':
 					$encoding = 2;
@@ -277,7 +281,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			   $gender, // gender
 			   '', // reference
 			   '', // reference_code
-			   $this->session->data['order_id'], // orderid1
+			   (string)$this->session->data['order_id'], // orderid1
 			   '', // orderid2
 			   $shipping, // shipping
 			   $billing, // billing
@@ -286,7 +290,7 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			   $currency, // currency
 			   $country, // country
 			   $language, // language
-			   $this->config->get('klarna_invoice_merchant'), // eid
+			   (int)$this->config->get('klarna_invoice_merchant'), // eid
 			   $digest, // digest
 			   $encoding, // encoding
 			   -1, // pclass
@@ -302,6 +306,8 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 
 			$request = xmlrpc_encode_request('add_invoice', $data);
 
+			$this->log->write($request);
+			
 			$header  = 'POST / HTTP/1.0' . "\r\n";
 			$header .= 'User-Agent: Kreditor PHP Client' . "\r\n";
 			$header .= 'Host: ' . $url . "\n";

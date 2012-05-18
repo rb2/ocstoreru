@@ -9,8 +9,11 @@
         <input type="radio" name="gender" value="F" id="female" />
         <label for="female"><?php echo $text_female; ?></label></td>
     </tr>
-    <tr style="display: <?php echo ($iso_code_2 == 'SE' ? 'table-row' : 'none'); ?>;">
-      <td><?php echo $entry_dob; ?></td>
+    <tr>
+      <td><?php if ($iso_code_2 == 'SE') { ?>
+        <div class="required">*</div>
+        <?php } ?>
+        <?php echo $entry_dob; ?></td>
       <td><input type="text" name="dob" value="" /></td>
     </tr>
     <tr>
@@ -33,7 +36,7 @@ $('#button-confirm').bind('click', function() {
 	$.ajax({
 		url: 'index.php?route=payment/klarna_invoice/send',
 		type: 'post',
-		data: $('#payment :input, #payment select'),
+		data: $('#payment input[type=\'text\'], #payment input[type=\'password\'], #payment input[type=\'checkbox\']:checked, #payment input[type=\'radio\']:checked, #payment input[type=\'hidden\'], #payment select'),
 		dataType: 'html',		
 		beforeSend: function() {
 			$('#button-confirm').attr('disabled', true);

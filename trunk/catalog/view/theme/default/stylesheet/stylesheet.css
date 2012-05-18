@@ -104,13 +104,14 @@ label {
 #language {
 	position: absolute;
 	top: 15px;
-	left: 335px;
-	width: 75px;
+	left: 320px;
+	width: 80px;
 	color: #999;
 	line-height: 17px;
 }
 #language img {
 	cursor: pointer;
+	margin-right: 5px;
 }
 #currency {
 	width: 75px;
