@@ -151,7 +151,7 @@ class ModelUpgrade extends Model {
 			}
 			$db->query("ALTER TABLE " . DB_PREFIX . "customer_group DROP `name`");
 		}
-		
+
 		// Default to "default" customer group display for registration if this is the first time using this version to avoid registration confusion.
 		// In 1.5.2 and earlier, the default install uses "8" as the "Default" customer group
 		// In 1.5.3 the default install uses "1" as the "Default" customer group.
@@ -159,6 +159,65 @@ class ModelUpgrade extends Model {
 		$query = $db->query("SELECT setting_id FROM " . DB_PREFIX . "setting WHERE `group` = 'config' AND `key` = 'config_customer_group_display'");
 		if (!$query->num_rows) {
 			$db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = 0, `group` = 'config', `key` = 'config_customer_group_display', `value` = 'a:1:{i:0;s:1:\"8\";}', `serialized` = 1");
+		}
+
+		// Attempt to add new HTTPS_CATALOG to the admin/config.php
+		// Get HTTP_ADMIN from main config.php to find out what the admin folder name is incase it was renamed
+		$file = file(DIR_OPENCART . 'config.php');
+
+		foreach ($file as $num => $line) {
+			if (strpos(strtoupper($line), 'HTTP_ADMIN') !== false) {
+				eval($line);
+				break;
+			}
+		}
+
+		if (defined('HTTP_ADMIN')) {
+			$adminFolder = trim(str_replace(str_replace('install/', '', HTTP_SERVER), '', HTTP_ADMIN), '/');
+
+			$dirAdmin = str_replace("\\", "/", realpath(DIR_SYSTEM . '../' . $adminFolder . '/') . '/');
+
+			// If directory exists...
+			if (is_dir($dirAdmin)) {
+
+				// If config.php exists and is writable...
+				if (is_writable($dirAdmin . 'config.php')) {
+					$lines = file($dirAdmin . 'config.php');
+
+					// Loop through and seee if HTTPS_CATALOG already exists and get the values for HTTP_CATALOG and HTTPS_SERVER
+					$exists = false;
+					$schema = 'http';
+					$http_catalog = false;
+					$https_server_idx = false;
+					foreach ($lines as $i => $line) {
+						if (strpos($line, 'HTTPS_CATALOG') !== false) {
+							$exists = true;
+							break;
+						} elseif (strpos($line, 'HTTP_CATALOG') !== false) {
+							$http_catalog = $lines[$i];
+						} elseif (strpos($line, 'HTTPS_SERVER')) {
+							$https_server_idx = $i;
+							if (strpos($lines[$i], 'https://') !== false) {
+								$schema = 'https';
+							}
+						}
+					}
+
+					// If not exists, add it
+					if (!$exists && $http_catalog && $https_server_idx !== false){
+						//$https_catalog_line = "define('HTTPS_CATALOG', " . str_replace(array('http','https'), $schema, $http_catalog) . ");";
+						$https_catalog = str_replace('HTTP_CATALOG', 'HTTPS_CATALOG', str_replace(array('http','https'), $schema, $http_catalog));
+						$lines[$https_server_idx] = $lines[$https_server_idx] . $https_catalog;
+
+						// Write the data back to the config file
+						$data = '';
+						foreach ($lines as $line) {
+							$data .= $line;
+						}
+						file_put_contents($dirAdmin . 'config.php', $data);
+					}
+				}
+			}
 		}
 	}
 }
