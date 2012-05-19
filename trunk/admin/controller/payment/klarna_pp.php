@@ -111,6 +111,16 @@ class ControllerPaymentKlarnaPP extends Controller {
 
 		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 		
+		if (isset($this->request->post['klarna_pp_geo_zone_id'])) {
+			$this->data['klarna_pp_geo_zone_id'] = $this->request->post['klarna_pp_geo_zone_id'];
+		} else {
+			$this->data['klarna_pp_geo_zone_id'] = $this->config->get('klarna_pp_geo_zone_id');
+		}
+
+		$this->load->model('localisation/geo_zone');
+
+		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
+				
 		if (isset($this->request->post['klarna_pp_status'])) {
 			$this->data['klarna_pp_status'] = $this->request->post['klarna_pp_status'];
 		} else {

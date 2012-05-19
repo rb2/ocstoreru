@@ -110,13 +110,23 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 		$this->load->model('localisation/order_status');
 
 		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
-		
+
+		if (isset($this->request->post['klarna_invoice_geo_zone_id'])) {
+			$this->data['klarna_invoice_geo_zone_id'] = $this->request->post['klarna_invoice_geo_zone_id'];
+		} else {
+			$this->data['klarna_invoice_geo_zone_id'] = $this->config->get('klarna_invoice_geo_zone_id');
+		}
+
+		$this->load->model('localisation/geo_zone');
+
+		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
+				
 		if (isset($this->request->post['klarna_invoice_status'])) {
 			$this->data['klarna_invoice_status'] = $this->request->post['klarna_invoice_status'];
 		} else {
 			$this->data['klarna_invoice_status'] = $this->config->get('klarna_invoice_status');
 		}
-		
+				
 		if (isset($this->request->post['klarna_invoice_sort_order'])) {
 			$this->data['klarna_invoice_sort_order'] = $this->request->post['klarna_invoice_sort_order'];
 		} else {

@@ -3,6 +3,8 @@ class ControllerPaymentKlarnaPP extends Controller {
 	protected function index() {
 		$this->language->load('payment/klarna_invoice');
 		
+		$this->data['text_information'] = $this->language->get('text_information');
+		$this->data['text_additional'] = $this->language->get('text_additional');		
 		$this->data['text_male'] = $this->language->get('text_male');
 		$this->data['text_female'] = $this->language->get('text_female');
 		$this->data['text_wait'] = $this->language->get('text_wait');

@@ -15,6 +15,7 @@ $_['entry_secret']       = 'Klarna Secret:<br /><span class="help">Shared secret
 $_['entry_server']       = 'Server:';
 $_['entry_total']        = 'Total:<br /><span class="help">The checkout total the order must reach before this payment method becomes active.</span>';		
 $_['entry_order_status'] = 'Order Status:';
+$_['entry_geo_zone']     = 'Geo Zone:';
 $_['entry_status']       = 'Status:';
 $_['entry_sort_order']   = 'Sort Order:';
 
