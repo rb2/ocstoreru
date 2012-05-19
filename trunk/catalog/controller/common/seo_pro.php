@@ -105,6 +105,7 @@ class ControllerCommonSeoPro extends Controller {
 				}
 				break;
 
+			case 'product/product/review':
 			case 'information/information/info':
 				return $link;
 				break;
