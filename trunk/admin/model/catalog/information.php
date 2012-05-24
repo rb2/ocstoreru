@@ -38,7 +38,9 @@ class ModelCatalogInformation extends Model {
 		$this->db->query("UPDATE " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "' WHERE information_id = '" . (int)$information_id . "'");
 
 		if (isset($data['bottom'])) {
-			$this->db->query("UPDATE " . DB_PREFIX . "information SET bottom = '" . (int)$data['bottom'] . "' WHERE information_id = '" . (int)$information_id . "'");
+			$this->db->query("UPDATE " . DB_PREFIX . "information SET bottom = '1' WHERE information_id = '" . (int)$information_id . "'");
+		} else {
+			$this->db->query("UPDATE " . DB_PREFIX . "information SET bottom = '0' WHERE information_id = '" . (int)$information_id . "'");
 		}
 		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
