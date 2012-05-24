@@ -149,7 +149,9 @@ class ModelUpgrade extends Model {
 			foreach ($customer_group_query->rows as $customer_group) {
 				$db->query("INSERT INTO " . DB_PREFIX . "customer_group_description SET customer_group_id = '" . (int)$customer_group['customer_group_id'] . "', language_id = '" . (int)$default_language_id . "', `name` = '" . $db->escape($customer_group['name']) . "' ON DUPLICATE KEY UPDATE customer_group_id=customer_group_id");
 			}
-			$db->query("ALTER TABLE " . DB_PREFIX . "customer_group DROP `name`");
+			// Comment this for now in case people want to roll back to 1.5.2 from 1.5.3
+			// Uncomment it when 1.5.4 is out.
+			//$db->query("ALTER TABLE " . DB_PREFIX . "customer_group DROP `name`");
 		}
 
 		// Default to "default" customer group display for registration if this is the first time using this version to avoid registration confusion.
