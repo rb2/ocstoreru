@@ -67,6 +67,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_weight_class'] = $this->language->get('entry_weight_class');
 		$this->data['entry_catalog_limit'] = $this->language->get('entry_catalog_limit');
 		$this->data['entry_admin_limit'] = $this->language->get('entry_admin_limit');
+		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
 		$this->data['entry_review'] = $this->language->get('entry_review');
 		$this->data['entry_download'] = $this->language->get('entry_download');
 		$this->data['entry_upload_allowed'] = $this->language->get('entry_upload_allowed');
@@ -121,7 +122,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_fraud_status'] = $this->language->get('entry_fraud_status');
 		$this->data['entry_use_ssl'] = $this->language->get('entry_use_ssl');
 		$this->data['entry_maintenance'] = $this->language->get('entry_maintenance');
-		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
+		
 		$this->data['entry_encryption'] = $this->language->get('entry_encryption');
 		$this->data['entry_seo_url'] = $this->language->get('entry_seo_url');
 		$this->data['entry_seo_url_type'] = $this->language->get('entry_seo_url_type');
@@ -474,6 +475,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_admin_limit'] = $this->config->get('config_admin_limit');
 		}
 		
+		if (isset($this->request->post['config_product_count'])) {
+			$this->data['config_product_count'] = $this->request->post['config_product_count'];
+		} else {
+			$this->data['config_product_count'] = $this->config->get('config_product_count');
+		}
+				
 		if (isset($this->request->post['config_review_status'])) {
 			$this->data['config_review_status'] = $this->request->post['config_review_status'];
 		} else {
@@ -928,12 +935,6 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_maintenance'] = $this->request->post['config_maintenance'];
 		} else {
 			$this->data['config_maintenance'] = $this->config->get('config_maintenance');
-		}
-		
-		if (isset($this->request->post['config_product_count'])) {
-			$this->data['config_product_count'] = $this->request->post['config_product_count'];
-		} else {
-			$this->data['config_product_count'] = $this->config->get('config_product_count');
 		}
 		
 		if (isset($this->request->post['config_encryption'])) {

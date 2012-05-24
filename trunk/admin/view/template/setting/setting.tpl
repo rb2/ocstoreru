@@ -221,6 +221,20 @@
           <h2><?php echo $text_product; ?></h2>
           <table class="form">
             <tr>
+              <td><?php echo $entry_product_count; ?></td>
+              <td><?php if ($config_product_count) { ?>
+                <input type="radio" name="config_product_count" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_product_count" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_product_count" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_product_count" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_review; ?></td>
               <td><?php if ($config_review_status) { ?>
                 <input type="radio" name="config_review_status" value="1" checked="checked" />
@@ -904,20 +918,6 @@
                 <input type="radio" name="config_maintenance" value="1" />
                 <?php echo $text_yes; ?>
                 <input type="radio" name="config_maintenance" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-            </tr>
-			<tr>
-              <td><?php echo $entry_product_count; ?></td>
-              <td><?php if ($config_product_count) { ?>
-                <input type="radio" name="config_product_count" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_product_count" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="config_product_count" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="config_product_count" value="0" checked="checked" />
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
