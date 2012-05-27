@@ -4,6 +4,7 @@
 <head>
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
+<meta name="robots" content="noindex, nofollow" />
 <link rel="stylesheet" type="text/css" href="view/javascript/jquery/ui/themes/ui-lightness/ui.all.css" />
 <script type="text/javascript" src="view/javascript/jquery/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="view/javascript/jquery/ui/ui.core.js"></script>

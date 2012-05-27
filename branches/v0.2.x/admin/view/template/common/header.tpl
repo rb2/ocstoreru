@@ -4,6 +4,7 @@
 <head>
 <title><?php echo $title; ?></title>
 <base href="<?php echo $base; ?>" />
+<meta name="robots" content="noindex, nofollow" />
 <?php foreach ($links as $link) { ?>
 <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
 <?php } ?>
