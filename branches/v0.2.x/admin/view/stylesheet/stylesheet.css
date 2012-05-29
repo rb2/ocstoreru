@@ -255,6 +255,7 @@ body > #container {
 	background: -ms-linear-gradient(top, #FEFEFE, #BBB); /* IE 10.0+ */
 	background: -o-linear-gradient(top, #FEFEFE, #BBB); /* Opera 11.10+ */
 	background: -webkit-linear-gradient(top, #FEFEFE, #BBB); /* Chrome 10.0+, Safari 4.0+ */
+	background: linear-gradient(top, #FEFEFE, #BBB);
 	background-color: #EFEFEF;
 	padding: 0px 5px;
 }
