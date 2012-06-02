@@ -3344,8 +3344,8 @@ DROP TABLE IF EXISTS `oc_zone`;
 CREATE TABLE `oc_zone` (
   `zone_id` int(11) NOT NULL auto_increment,
   `country_id` int(11) NOT NULL,
-  `code` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `name` varchar(128) COLLATE utf8_general_ci NOT NULL,
+  `code` varchar(32) COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`zone_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
