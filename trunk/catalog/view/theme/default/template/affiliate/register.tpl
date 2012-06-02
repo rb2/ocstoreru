@@ -88,7 +88,7 @@
         </tr>
         <tr>
           <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-          <td><select name="country_id" onchange="$('select[name=\'zone_id\']').load('index.php?route=account/register/zone&country_id=' + this.value + '&zone_id=<?php echo $zone_id; ?>');">
+          <td><select name="country_id">
               <option value="false"><?php echo $text_select; ?></option>
               <?php foreach ($countries as $country) { ?>
               <?php if ($country['country_id'] == $country_id) { ?>
