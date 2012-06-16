@@ -381,7 +381,7 @@ class ControllerCatalogInformation extends Controller {
 		}
 		
 		if (isset($this->request->post['bottom'])) {
-			$this->data['bottom'] = $this->request->post['bottoms'];
+			$this->data['bottom'] = $this->request->post['bottom'];
 		} elseif (!empty($information_info)) {
 			$this->data['bottom'] = $information_info['bottom'];
 		} else {

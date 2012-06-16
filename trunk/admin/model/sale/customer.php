@@ -70,7 +70,7 @@ class ModelSaleCustomer extends Model {
 		$implode = array();
 		
 		if (!empty($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
+			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
 		}
 		
 		if (!empty($data['filter_email'])) {
@@ -262,7 +262,7 @@ class ModelSaleCustomer extends Model {
 		$implode = array();
 		
 		if (!empty($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(firstname, ' ', lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
+			$implode[] = "LCASE(CONCAT(firstname, ' ', lastname)) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
 		}
 		
 		if (!empty($data['filter_email'])) {
