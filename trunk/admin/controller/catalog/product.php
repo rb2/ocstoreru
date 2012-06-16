@@ -1308,6 +1308,10 @@ class ControllerCatalogProduct extends Controller {
 
 		$this->response->setOutput(json_encode($json));
 	}
+	
+	public function sync() {
+		
+	}
 
 	private function getAllCategories($categories, $parent_id = 0, $parent_name = '') {
 		$output = array();

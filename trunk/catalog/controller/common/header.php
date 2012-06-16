@@ -83,19 +83,8 @@ class ControllerCommonHeader extends Controller {
 				$children = $this->model_catalog_category->getCategories($category['category_id']);
 				
 				foreach ($children as $child) {
-					$data = array(
-						'filter_category_id'  => $child['category_id'],
-						'filter_sub_category' => true	
-					);		
-						
-					if ($this->config->get('config_product_count')) {
-						$product_total = $this->model_catalog_product->getTotalProducts($data);
-						
-						$child['name'] .= ' (' . $product_total . ')';
-					}
-								
 					$children_data[] = array(
-						'name'  => $child['name'],
+						'name'  => $child['name'] . ' (' . $child['product'] . ')',
 						'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
 					);					
 				}
