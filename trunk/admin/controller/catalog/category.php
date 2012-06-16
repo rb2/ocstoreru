@@ -70,6 +70,28 @@ class ControllerCatalogCategory extends Controller {
 		$this->getList();
 	}
 
+	public function sync() {
+		$this->load->language('catalog/category');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+		
+		$this->load->model('catalog/category');
+		
+		if ($this->user->hasPermission('modify', 'catalog/category')) {
+			$this->model_catalog_category->syncProductCategories(0);
+					
+			$this->session->data['success'] = $this->language->get('text_success');
+	
+			$this->redirect($this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL'));
+	
+			$this->getList();
+		} else {
+			$this->error['warning'] = $this->language->get('error_permission');
+			
+			$this->getList();			
+		}
+	}
+	
 	private function getList() {
    		$this->data['breadcrumbs'] = array();
 
@@ -87,6 +109,7 @@ class ControllerCatalogCategory extends Controller {
 									
 		$this->data['insert'] = $this->url->link('catalog/category/insert', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['sync'] = $this->url->link('catalog/category/sync', 'token=' . $this->session->data['token'], 'SSL');
 		
 		if (isset($this->request->get['path'])) {
 			if ($this->request->get['path'] != '') {
@@ -103,6 +126,23 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->data['categories'] = $this->getCategories(0);
 
+		foreach ($results as $result) {
+			$action = array();
+			
+			$action[] = array(
+				'text' => $this->language->get('text_edit'),
+				'href' => $this->url->link('catalog/category/update', 'token=' . $this->session->data['token'] . '&category_id=' . $result['category_id'], 'SSL')
+			);
+					
+			$this->data['categories'][] = array(
+				'category_id' => $result['category_id'],
+				'name'        => $result['name'] . ' (' . $result['product'] . ')',
+				'sort_order'  => $result['sort_order'],
+				'selected'    => isset($this->request->post['selected']) && in_array($result['category_id'], $this->request->post['selected']),
+				'action'      => $action
+			);
+		}
+		
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
@@ -113,7 +153,7 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
- 		$this->data['button_product_sync'] = $this->language->get('button_product_sync');
+ 		$this->data['button_sync'] = $this->language->get('button_sync');
  
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];

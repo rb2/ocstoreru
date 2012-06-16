@@ -1310,7 +1310,7 @@ class ControllerCatalogProduct extends Controller {
 	}
 	
 	public function sync() {
-		
+		$this->load->model('catalog/product');
 	}
 
 	private function getAllCategories($categories, $parent_id = 0, $parent_name = '') {

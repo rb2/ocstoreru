@@ -109,6 +109,7 @@ class ModelCatalogCategory extends Model {
 				$category_data[] = array(
 					'category_id' => $result['category_id'],
 					'name'        => $this->getPath($result['category_id'], $this->config->get('config_language_id')),
+					'product'  	  => $result['product'],
 					'status'  	  => $result['status'],
 					'sort_order'  => $result['sort_order']
 				);
@@ -121,7 +122,7 @@ class ModelCatalogCategory extends Model {
 		
 		return $category_data;
 	}
-	
+		
 	public function getPath($category_id) {
 		$query = $this->db->query("SELECT name, parent_id FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY c.sort_order, cd.name ASC");
 		
@@ -131,7 +132,25 @@ class ModelCatalogCategory extends Model {
 			return $query->row['name'];
 		}
 	}
-	
+
+	public function syncProductCategories($category_id) {
+		$product_total = 0;
+		
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product_to_category WHERE category_id = '" . (int)$category_id . "'");
+
+		$product_total += $query->row['total'];
+		
+		$query = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "category WHERE parent_id = '" . (int)$category_id . "'");
+		
+		foreach ($query->rows as $result) {
+			$product_total += $this->syncProductCategories($result['category_id']);
+		}
+		
+		$this->db->query("UPDATE " . DB_PREFIX . "category SET product = '" . (int)$product_total . "' WHERE category_id = '" . (int)$category_id . "'");
+		
+		return $product_total;
+	}
+		
 	public function getCategoryDescriptions($category_id) {
 		$category_description_data = array();
 		
