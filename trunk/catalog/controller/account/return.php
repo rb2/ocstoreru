@@ -123,7 +123,7 @@ class ControllerAccountReturn extends Controller {
 		$this->load->model('account/return');
 						
 		$return_info = $this->model_account_return->getReturn($return_id);
-		
+
 		if ($return_info) {
 			$this->document->setTitle($this->language->get('text_return'));
 
