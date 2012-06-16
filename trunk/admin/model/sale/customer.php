@@ -379,6 +379,14 @@ class ModelSaleCustomer extends Model {
 	}
 	
 	public function getTransactions($customer_id, $start = 0, $limit = 10) {
+		if ($start < 0) {
+			$start = 0;
+		}
+		
+		if ($limit < 1) {
+			$limit = 10;
+		}	
+				
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_transaction WHERE customer_id = '" . (int)$customer_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
 	
 		return $query->rows;

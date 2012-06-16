@@ -222,6 +222,14 @@ class ModelSaleAffiliate extends Model {
 	}
 	
 	public function getTransactions($affiliate_id, $start = 0, $limit = 10) {
+		if ($start < 0) {
+			$start = 0;
+		}
+		
+		if ($limit < 1) {
+			$limit = 10;
+		}	
+				
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate_transaction WHERE affiliate_id = '" . (int)$affiliate_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
 	
 		return $query->rows;
