@@ -94,7 +94,7 @@ class ControllerPaymentPaypoint extends Controller {
 			$status = true;
 		}
 									
-		if ($order_info && $status) {
+		if ($order_info) {
 			$this->language->load('payment/paypoint');
 	
 			$this->data['title'] = sprintf($this->language->get('heading_title'), $this->config->get('config_name'));
@@ -116,7 +116,7 @@ class ControllerPaymentPaypoint extends Controller {
 			$this->data['text_failure'] = $this->language->get('text_failure');
 			$this->data['text_failure_wait'] = sprintf($this->language->get('text_failure_wait'), $this->url->link('checkout/cart'));
 	
-			if (isset($this->request->get['code']) && $this->request->get['code'] == 'A') {
+			if (isset($this->request->get['code']) && $this->request->get['code'] == 'A' && $status) {
 				$this->load->model('checkout/order');
 	
 				$this->model_checkout_order->confirm($this->request->get['trans_id'], $this->config->get('config_order_status_id'));
