@@ -48,9 +48,9 @@ class ControllerProductCategory extends Controller {
 		
 			foreach ($parts as $path_id) {
 				if (!$path) {
-					$path = $path_id;
+					$path = (int)$path_id;
 				} else {
-					$path .= '_' . $path_id;
+					$path .= '_' . (int)$path_id;
 				}
 									
 				$category_info = $this->model_catalog_category->getCategory($path_id);
@@ -64,7 +64,7 @@ class ControllerProductCategory extends Controller {
 				}
 			}		
 		
-			$category_id = array_pop($parts);
+			$category_id = (int)array_pop($parts);
 		} else {
 			$category_id = 0;
 		}

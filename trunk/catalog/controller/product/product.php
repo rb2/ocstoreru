@@ -51,7 +51,7 @@ class ControllerProductProduct extends Controller {
 			if ($manufacturer_info) {	
 				$this->data['breadcrumbs'][] = array(
 					'text'	    => $manufacturer_info['name'],
-					'href'	    => $this->url->link('product/manufacturer/product', 'manufacturer_id=' . $this->request->get['manufacturer_id']),					
+					'href'	    => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id']),					
 					'separator' => $this->language->get('text_separator')
 				);
 			}
@@ -80,11 +80,11 @@ class ControllerProductProduct extends Controller {
 				'text'      => $this->language->get('text_search'),
 				'href'      => $this->url->link('product/search', $url),
 				'separator' => $this->language->get('text_separator')
-			);	
+			); 	
 		}
 		
 		if (isset($this->request->get['product_id'])) {
-			$product_id = $this->request->get['product_id'];
+			$product_id = (int)$this->request->get['product_id'];
 		} else {
 			$product_id = 0;
 		}
@@ -92,8 +92,6 @@ class ControllerProductProduct extends Controller {
 		$this->load->model('catalog/product');
 		
 		$product_info = $this->model_catalog_product->getProduct($product_id);
-		
-		$this->data['product_info'] = $product_info;
 		
 		if ($product_info) {
 			$url = '';
@@ -184,7 +182,7 @@ class ControllerProductProduct extends Controller {
 			
 			$this->data['product_id'] = $this->request->get['product_id'];
 			$this->data['manufacturer'] = $product_info['manufacturer'];
-			$this->data['manufacturers'] = $this->url->link('product/manufacturer/product', 'manufacturer_id=' . $product_info['manufacturer_id']);
+			$this->data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);
 			$this->data['model'] = $product_info['model'];
 			$this->data['reward'] = $product_info['reward'];
 			$this->data['points'] = $product_info['points'];

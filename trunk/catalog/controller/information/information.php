@@ -14,7 +14,7 @@ class ControllerInformationInformation extends Controller {
       	);
 		
 		if (isset($this->request->get['information_id'])) {
-			$information_id = $this->request->get['information_id'];
+			$information_id = (int)$this->request->get['information_id'];
 		} else {
 			$information_id = 0;
 		}
@@ -102,7 +102,7 @@ class ControllerInformationInformation extends Controller {
 		$this->load->model('catalog/information');
 		
 		if (isset($this->request->get['information_id'])) {
-			$information_id = $this->request->get['information_id'];
+			$information_id = (int)$this->request->get['information_id'];
 		} else {
 			$information_id = 0;
 		}      

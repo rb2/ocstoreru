@@ -17,7 +17,30 @@ class ControllerCommonHeader extends Controller {
 		$this->data['lang'] = $this->language->get('code');
 		$this->data['direction'] = $this->language->get('direction');
 		$this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
+
+		// Whos Online
+		$this->load->model('tool/online');
+
+		if (isset($this->request->server['REMOTE_ADDR'])) {
+			$ip = $this->request->server['REMOTE_ADDR'];	
+		} else {
+			$ip = ''; 
+		}
 		
+		if (isset($this->request->server['HTTP_HOST']) && isset($this->request->server['REQUEST_URI'])) {
+			$url = 'http://' . $this->request->server['HTTP_HOST'] . $this->request->server['REQUEST_URI'];	
+		} else {
+			$url = '';
+		}
+		
+		if (isset($this->request->server['HTTP_REFERER'])) {
+			$referer = $this->request->server['HTTP_REFERER'];	
+		} else {
+			$referer = '';
+		}
+					
+		$this->model_tool_online->whosonline($ip, $this->customer->getId(), $url, $referer);
+				
 		$this->language->load('common/header');
 		
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {

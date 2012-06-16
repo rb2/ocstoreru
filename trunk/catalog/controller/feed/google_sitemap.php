@@ -28,7 +28,7 @@ class ControllerFeedGoogleSitemap extends Controller {
 
 			foreach ($manufacturers as $manufacturer) {
 				$output .= '<url>';
-				$output .= '<loc>' . str_replace('&', '&amp;', str_replace('&amp;', '&', $this->url->link('product/manufacturer/product', 'manufacturer_id=' . $manufacturer['manufacturer_id']))) . '</loc>';
+				$output .= '<loc>' . str_replace('&', '&amp;', str_replace('&amp;', '&', $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $manufacturer['manufacturer_id']))) . '</loc>';
 				$output .= '<changefreq>weekly</changefreq>';
 				$output .= '<priority>0.7</priority>';
 				$output .= '</url>';
