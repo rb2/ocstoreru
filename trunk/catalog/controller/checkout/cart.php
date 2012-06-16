@@ -61,7 +61,7 @@ class ControllerCheckoutCart extends Controller {
 
 		// Reward
 		if (isset($this->request->post['reward']) && $this->validateReward()) { 
-			$this->session->data['reward'] = $this->request->post['reward'];
+			$this->session->data['reward'] = abs($this->request->post['reward']);
 				
 			$this->session->data['success'] = $this->language->get('text_reward');
 				
