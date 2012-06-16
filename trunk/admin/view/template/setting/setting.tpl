@@ -256,14 +256,14 @@
           <h2><?php echo $text_voucher; ?></h2>
           <table class="form">
             <tr>
-              <td><?php echo $entry_voucher_min; ?></td>
+              <td><span class="required">*</span> <?php echo $entry_voucher_min; ?></td>
               <td><input type="text" name="config_voucher_min" value="<?php echo $config_voucher_min; ?>" />
                 <?php if ($error_voucher_min) { ?>
                 <span class="error"><?php echo $error_voucher_min; ?></span>
                 <?php } ?></td>
             </tr>
             <tr>
-              <td><?php echo $entry_voucher_max; ?></td>
+              <td><span class="required">*</span> <?php echo $entry_voucher_max; ?></td>
               <td><input type="text" name="config_voucher_max" value="<?php echo $config_voucher_max; ?>" />
                 <?php if ($error_voucher_max) { ?>
                 <span class="error"><?php echo $error_voucher_max; ?></span>
