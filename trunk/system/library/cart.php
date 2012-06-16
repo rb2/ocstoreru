@@ -319,21 +319,13 @@ class Cart {
 		
 		foreach ($this->getProducts() as $product) {
 			if ($product['tax_class_id']) {
-				$tax_rates = $this->tax->getRates($product['total'], $product['tax_class_id']);
+				$tax_rates = $this->tax->getRates($product['price'], $product['tax_class_id']);
 				
 				foreach ($tax_rates as $tax_rate) {
-					$amount = 0;
-					
-					if ($tax_rate['type'] == 'F') {
-						$amount = ($tax_rate['amount'] * $product['quantity']);
-					} elseif ($tax_rate['type'] == 'P') {
-						$amount = $tax_rate['amount'];
-					}
-					
 					if (!isset($tax_data[$tax_rate['tax_rate_id']])) {
-						$tax_data[$tax_rate['tax_rate_id']] = $amount;
+						$tax_data[$tax_rate['tax_rate_id']] = ($tax_rate['amount'] * $product['quantity']);
 					} else {
-						$tax_data[$tax_rate['tax_rate_id']] += $amount;
+						$tax_data[$tax_rate['tax_rate_id']] += ($tax_rate['amount'] * $product['quantity']);
 					}
 				}
 			}
@@ -346,7 +338,7 @@ class Cart {
 		$total = 0;
 		
 		foreach ($this->getProducts() as $product) {
-			$total += $this->tax->calculate($product['total'], $product['tax_class_id'], $this->config->get('config_tax'));
+			$total += $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
 		}
 
 		return $total;
