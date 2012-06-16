@@ -169,7 +169,7 @@ class ControllerCheckoutManual extends Controller {
 					'quantity'   => $product['quantity'],
 					'price'      => $product['price'],	
 					'total'      => $product['total'],	
-					'tax'        => $this->tax->getTax($product['total'], $product['tax_class_id']),
+					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
 					'reward'     => $product['reward']				
 				);
 			}
