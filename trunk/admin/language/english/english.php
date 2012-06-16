@@ -67,6 +67,7 @@ $_['button_add_link']         = 'Add Link';
 $_['button_update_total']     = 'Update Totals';
 $_['button_approve']          = 'Approve';
 $_['button_reset']            = 'Reset';
+$_['button_product_sync']     = 'Sync Product Count';
 
 // Tab
 $_['tab_address']             = 'Address';

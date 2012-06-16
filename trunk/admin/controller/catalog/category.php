@@ -113,6 +113,7 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+ 		$this->data['button_product_sync'] = $this->language->get('button_product_sync');
  
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];

@@ -1,5 +1,7 @@
 <?php
 class Cart {
+	private $config;
+	private $db;
 	private $data = array();
 	
   	public function __construct($registry) {
