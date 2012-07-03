@@ -53,6 +53,7 @@ $_['entry_tax']                  = 'Display Prices With Tax:';
 $_['entry_vat']                    = 'VAT Number Validate:<br /><span class="help">Validate VAT number with http://ec.europa.eu service.</span>';
 $_['entry_tax_default']          = 'Use Store Tax Address:<br /><span class="help">Use the store address to calculate taxes if no one is logged in. You can choose to use the store address for the customers shipping or payment address.</span>';
 $_['entry_tax_customer']         = 'Use Customer Tax Address:<br /><span class="help">Use the customers default address when they login to calculate taxes. You can choose to use the default address for the customers shipping or payment address.</span>';
+$_['entry_customer_online']        = 'Customers Online:<br /><span class="help">Track customers online via the customer reports section.</span>';
 $_['entry_customer_group']       = 'Customer Group:<br /><span class="help">Default customer group.</span>';
 $_['entry_customer_group_display'] = 'Customer Groups:<br /><span class="help">Display customer groups that new customers can select to use such as wholesale and business when signing up.</span>';
 $_['entry_customer_price']       = 'Login Display Prices:<br /><span class="help">Only show prices when a customer is logged in.</span>';

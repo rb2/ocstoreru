@@ -76,6 +76,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_vat'] = $this->language->get('entry_vat');
 		$this->data['entry_tax_default'] = $this->language->get('entry_tax_default');
 		$this->data['entry_tax_customer'] = $this->language->get('entry_tax_customer');
+		$this->data['entry_customer_online'] = $this->language->get('entry_customer_online');
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_group_display'] = $this->language->get('entry_customer_group_display');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
@@ -533,7 +534,13 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_tax_customer'] = $this->config->get('config_tax_customer');			
 		}	
-								
+		
+		if (isset($this->request->post['config_customer_online'])) {
+			$this->data['config_customer_online'] = $this->request->post['config_customer_online'];
+		} else {
+			$this->data['config_customer_online'] = $this->config->get('config_customer_online');			
+		}
+						
 		if (isset($this->request->post['config_customer_group_id'])) {
 			$this->data['config_customer_group_id'] = $this->request->post['config_customer_group_id'];
 		} else {
