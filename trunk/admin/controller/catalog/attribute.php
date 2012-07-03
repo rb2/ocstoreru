@@ -426,7 +426,7 @@ class ControllerCatalogAttribute extends Controller {
 			foreach ($results as $result) {
 				$json[] = array(
 					'attribute_id'    => $result['attribute_id'], 
-					'name'            => $result['name'],
+					'name'            => html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'),
 					'attribute_group' => $result['attribute_group']
 				);		
 			}		

@@ -10,6 +10,7 @@ class ControllerPaymentMoneybookers extends Controller {
 		$this->data['action'] = 'https://www.moneybookers.com/app/payment.pl?p=OpenCart';
 
 		$this->data['pay_to_email'] = $this->config->get('moneybookers_email');
+		$this->data['platform'] = '31974336';
 		$this->data['description'] = $this->config->get('config_name');
 		$this->data['transaction_id'] = $this->session->data['order_id'];
         $this->data['return_url'] = $this->url->link('checkout/success');

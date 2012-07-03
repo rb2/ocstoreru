@@ -144,34 +144,34 @@ class ControllerPaymentPPProUK extends Controller {
 			$this->log->write('DoDirectPayment failed: ' . curl_error($curl) . '(' . curl_errno($curl) . ')');
 		}
 		 
- 		$response_data = array();
+ 		$response_info = array();
  
-		parse_str($response, $response_data);
+		parse_str($response, $response_info);
 
 		$json = array();
 
-		if ($response_data['RESULT'] == '0') {
+		if ($response_info['RESULT'] == '0') {
 			$this->model_checkout_order->confirm($this->session->data['order_id'], $this->config->get('config_order_status_id'));
 			
 			$message = '';
 			
-			if (isset($response_data['AVSCODE'])) {
-				$message .= 'AVSCODE: ' . $response_data['AVSCODE'] . "\n";
+			if (isset($response_info['AVSCODE'])) {
+				$message .= 'AVSCODE: ' . $response_info['AVSCODE'] . "\n";
 			}
 
-			if (isset($response_data['CVV2MATCH'])) {
-				$message .= 'CVV2MATCH: ' . $response_data['CVV2MATCH'] . "\n";
+			if (isset($response_info['CVV2MATCH'])) {
+				$message .= 'CVV2MATCH: ' . $response_info['CVV2MATCH'] . "\n";
 			}
 
-			if (isset($response_data['TRANSACTIONID'])) {
-				$message .= 'TRANSACTIONID: ' . $response_data['TRANSACTIONID'] . "\n";
+			if (isset($response_info['TRANSACTIONID'])) {
+				$message .= 'TRANSACTIONID: ' . $response_info['TRANSACTIONID'] . "\n";
 			}
 			
 			$this->model_checkout_order->update($this->session->data['order_id'], $this->config->get('pp_pro_uk_order_status_id'), $message, false);
 		
 			$json['success'] = $this->url->link('checkout/success'); 
 		} else {
-			switch ($response_data['RESULT']) {
+			switch ($response_info['RESULT']) {
 				case '1':
 				case '26':
 					$json['error'] = $this->language->get('error_config');
