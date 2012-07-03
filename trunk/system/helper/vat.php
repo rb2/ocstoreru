@@ -32,11 +32,11 @@ function vat_validation($prefix, $number) {
 	);	
 	 
 	if (array_search(substr($number, 0, 2), $iso_code_2_data)) {
-		$number = substr($number, 2);
+		$number = str_replace(' ','', substr($number, 2));
 	}
 	
-	if (array_search($prefix, $iso_code_2_data)) {
-		$response = file_get_contents('http://ec.europa.eu/taxation_customs/vies/viesquer.do?ms=' . $prefix . '&iso=' . $prefix . '&vat=' . $number);
+	if (array_key_exists($prefix, $iso_code_2_data)) {
+		$response = file_get_contents('http://ec.europa.eu/taxation_customs/vies/viesquer.do?ms=' . $iso_code_2_data[$prefix] . '&iso=' . $iso_code_2_data[$prefix] . '&vat=' . $number);
 		
 		if (preg_match('/\bvalid VAT number\b/i', $response)) {
 			return 'valid';
