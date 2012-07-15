@@ -184,7 +184,7 @@ class ControllerCheckoutPaymentAddress extends Controller {
 					}						
 				}
 					
-				if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 64)) {
+				if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
 					$json['error']['address_1'] = $this->language->get('error_address_1');
 				}
 		
