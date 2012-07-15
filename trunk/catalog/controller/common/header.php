@@ -42,7 +42,7 @@ class ControllerCommonHeader extends Controller {
 						
 			$this->model_tool_online->whosonline($ip, $this->customer->getId(), $url, $referer);
 		}
-		
+				
 		$this->language->load('common/header');
 		
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -109,9 +109,9 @@ class ControllerCommonHeader extends Controller {
 				
 				foreach ($children as $child) {
 					$children_data[] = array(
-						'name'  => $child['name'] . ' (' . $child['product'] . ')',
+						'name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProductsByCategoryId($child['category_id']) . ')' : ''),
 						'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
-					);					
+					);						
 				}
 				
 				// Level 1

@@ -38,17 +38,17 @@ class ControllerModuleCategory extends Controller {
 			foreach ($children as $child) {
 				$children_data[] = array(
 					'category_id' => $child['category_id'],
-					'name'        => $child['name'] . ' (' . $child['product'] . ')',
+					'name'        => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProductsByCategoryId($child['category_id']) . ')' : ''),
 					'href'        => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
-				);						
+				);		
 			}
 			
 			$this->data['categories'][] = array(
 				'category_id' => $category['category_id'],
-				'name'        => $category['name'] . ' (' . $category['product'] . ')',
+				'name'        => $category['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProductsByCategoryId($category['category_id']) . ')' : ''),
 				'children'    => $children_data,
 				'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
-			);				
+			);	
 		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/category.tpl')) {

@@ -134,7 +134,7 @@ class ControllerProductCategory extends Controller {
 			
 			foreach ($results as $result) {
 				$this->data['categories'][] = array(
-					'name'  => $result['name'] . ' (' . $result['product'] . ')',
+					'name'  => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProductsByCategoryId($result['category_id']) . ')' : ''),
 					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
 				);
 			}
