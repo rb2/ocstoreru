@@ -79,9 +79,11 @@ class ControllerCatalogCategory extends Controller {
 		
 		if ($this->user->hasPermission('modify', 'catalog/category')) {
 			$this->model_catalog_category->syncProductCategories(0);
+			
+			$this->cache->delete('category');
 					
 			$this->session->data['success'] = $this->language->get('text_success');
-	
+			
 			$this->redirect($this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL'));
 	
 			$this->getList();
