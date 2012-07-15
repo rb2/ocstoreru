@@ -230,3 +230,12 @@ CREATE TABLE IF NOT EXISTS oc_order_misc (
   `value` text NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_general_ci,
   PRIMARY KEY (order_id, `key`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `oc_customer_online` (
+  `ip` bigint(10) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `url` text COLLATE utf8_general_ci NOT NULL,
+  `referer` text COLLATE utf8_general_ci NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
