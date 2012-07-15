@@ -31,14 +31,24 @@
       <td><?php echo $entry_company; ?></td>
       <td><input type="text" name="company" value="" class="large-field" /></td>
     </tr>
-    <tr style="display: <?php echo ($company_id_display ? 'table-row' : 'none'); ?>;">
-      <td><span style="display: <?php echo ($company_id_required ? 'inline' : 'none'); ?>;" class="required">*</span> <?php echo $entry_company_id; ?></td>
+    <?php if ($company_id_display) { ?>
+    <tr>
+      <td><?php if ($company_id_required) { ?>
+        <span class="required">*</span>
+        <?php } ?>
+        <?php echo $entry_company_id; ?></td>
       <td><input type="text" name="company_id" value="" class="large-field" /></td>
     </tr>
-    <tr style="display: <?php echo ($tax_id_display ? 'table-row' : 'none'); ?>;">
-      <td><span style="display: <?php echo ($tax_id_required ? 'inline' : 'none'); ?>;" class="required">*</span> <?php echo $entry_tax_id; ?></td>
+    <?php } ?>
+    <?php if ($tax_id_display) { ?>
+    <tr>
+      <td><?php if ($tax_id_required) { ?>
+        <span class="required">*</span>
+        <?php } ?>
+        <?php echo $entry_tax_id; ?></td>
       <td><input type="text" name="tax_id" value="" class="large-field" /></td>
     </tr>
+    <?php } ?>
     <tr>
       <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
       <td><input type="text" name="address_1" value="" class="large-field" /></td>

@@ -14,7 +14,7 @@
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
     <h2><?php echo $text_your_details; ?></h2>
     <div class="content">
-      <table class="form">      
+      <table class="form">
         <tr>
           <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
           <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
@@ -55,19 +55,21 @@
         <tr>
           <td><?php echo $entry_company; ?></td>
           <td><input type="text" name="company" value="<?php echo $company; ?>" /></td>
-        </tr>     
+        </tr>        
         <tr style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
-          <td><?php echo $entry_account; ?></td>
-          <td><select name="customer_group_id">
-              <?php foreach ($customer_groups as $customer_group) { ?>
-              <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
-              <option value="<?php echo $customer_group['customer_group_id']; ?>" selected="selected"><?php echo $customer_group['name']; ?></option>
-              <?php } else { ?>
-              <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>
-              <?php } ?>
-              <?php } ?>
-            </select></td>
-        </tr>         
+          <td><?php echo $entry_customer_group; ?></td>
+          <td><?php foreach ($customer_groups as $customer_group) { ?>
+            <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
+            <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
+            <label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
+            <br />
+            <?php } else { ?>
+            <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" />
+            <label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
+            <br />
+            <?php } ?>
+            <?php } ?></td>
+        </tr>      
         <tr id="company-id-display">
           <td><span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?></td>
           <td><input type="text" name="company_id" value="<?php echo $company_id; ?>" />
@@ -192,7 +194,7 @@
   </form>
   <?php echo $content_bottom; ?></div>
 <script type="text/javascript"><!--
-$('select[name=\'customer_group_id\']').live('change', function() {
+$('input[name=\'customer_group_id\']:checked').live('change', function() {
 	var customer_group = [];
 	
 <?php foreach ($customer_groups as $customer_group) { ?>
@@ -230,8 +232,8 @@ $('select[name=\'customer_group_id\']').live('change', function() {
 	}
 });
 
-$('select[name=\'customer_group_id\']').trigger('change');
-//--></script>   
+$('input[name=\'customer_group_id\']:checked').trigger('change');
+//--></script> 
 <script type="text/javascript"><!--
 $('select[name=\'country_id\']').bind('change', function() {
 	$.ajax({
@@ -275,7 +277,7 @@ $('select[name=\'country_id\']').bind('change', function() {
 });
 
 $('select[name=\'country_id\']').trigger('change');
-//--></script>
+//--></script> 
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
 	width: 640,

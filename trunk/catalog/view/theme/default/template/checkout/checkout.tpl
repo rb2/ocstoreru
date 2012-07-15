@@ -376,11 +376,11 @@ $('#button-payment-address').live('click', function() {
 				}		
 				
 				if (json['error']['company_id']) {
-					$('#payment-address input[name=\'company_id\'] + br').after('<span class="error">' + json['error']['company_id'] + '</span>');
+					$('#payment-address input[name=\'company_id\']').after('<span class="error">' + json['error']['company_id'] + '</span>');
 				}	
 				
 				if (json['error']['tax_id']) {
-					$('#payment-address input[name=\'tax_id\'] + br').after('<span class="error">' + json['error']['tax_id'] + '</span>');
+					$('#payment-address input[name=\'tax_id\']').after('<span class="error">' + json['error']['tax_id'] + '</span>');
 				}	
 														
 				if (json['error']['address_1']) {

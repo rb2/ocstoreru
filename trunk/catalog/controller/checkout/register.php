@@ -15,7 +15,7 @@ class ControllerCheckoutRegister extends Controller {
 		$this->data['entry_telephone'] = $this->language->get('entry_telephone');
 		$this->data['entry_fax'] = $this->language->get('entry_fax');
 		$this->data['entry_company'] = $this->language->get('entry_company');
-		$this->data['entry_account'] = $this->language->get('entry_account');
+		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
 		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');		
 		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
@@ -164,12 +164,12 @@ class ControllerCheckoutRegister extends Controller {
 				
 			if ($customer_group) {	
 				// Company ID
-				if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && !$this->request->post['company_id']) {
+				if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && empty($this->request->post['company_id'])) {
 					$json['error']['company_id'] = $this->language->get('error_company_id');
 				}
 				
 				// Tax ID
-				if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
+				if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && empty($this->request->post['tax_id'])) {
 					$json['error']['tax_id'] = $this->language->get('error_tax_id');
 				}						
 			}
