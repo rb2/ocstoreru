@@ -15,6 +15,8 @@ class ModelCatalogProduct extends Model {
 		
 		if ($query->num_rows) {
 			return array(
+				'seo_title'        => $query->row['seo_title'],
+				'seo_h1'           => $query->row['seo_h1'],
 				'product_id'       => $query->row['product_id'],
 				'name'             => $query->row['name'],
 				'description'      => $query->row['description'],
