@@ -1295,7 +1295,7 @@ class ControllerSaleCustomer extends Controller {
 				$json[] = array(
 					'customer_id'       => $result['customer_id'], 
 					'customer_group_id' => $result['customer_group_id'],
-					'name'              => html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'),
+					'name'              => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
 					'customer_group'    => $result['customer_group'],
 					'firstname'         => $result['firstname'],
 					'lastname'          => $result['lastname'],
