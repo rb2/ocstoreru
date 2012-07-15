@@ -161,4 +161,8 @@ class ControllerPaymentKlarnaInvoice extends Controller {
 			return false;
 		}	
 	}
+	
+	public function order() {
+		
+	}
 }
