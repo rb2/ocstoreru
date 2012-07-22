@@ -231,6 +231,8 @@ CREATE TABLE IF NOT EXISTS oc_order_misc (
   PRIMARY KEY (order_id, `key`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+#### Start 1.5.4
+
 CREATE TABLE IF NOT EXISTS `oc_customer_online` (
   `ip` bigint(10) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -239,3 +241,8 @@ CREATE TABLE IF NOT EXISTS `oc_customer_online` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+UPDATE `oc_setting` set `group` = replace(`group`, 'alertpay', 'payza');
+UPDATE `oc_setting` set `key` = replace(`key`, 'alertpay', 'payza');
+UPDATE `oc_order` set `payment_method` = replace(`payment_method`, 'AlertPay', 'Payza');
+UPDATE `oc_order` set `payment_code` = replace(`payment_code`, 'alertpay', 'payza');

@@ -18,14 +18,14 @@
         <table class="form">
           <tr>
             <td><span class="required">*</span> <?php echo $entry_merchant; ?></td>
-            <td><input type="text" name="alertpay_merchant" value="<?php echo $alertpay_merchant; ?>" />
+            <td><input type="text" name="payza_merchant" value="<?php echo $payza_merchant; ?>" />
               <?php if ($error_merchant) { ?>
               <span class="error"><?php echo $error_merchant; ?></span>
               <?php } ?></td>
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_security; ?></td>
-            <td><input type="text" name="alertpay_security" value="<?php echo $alertpay_security; ?>" />
+            <td><input type="text" name="payza_security" value="<?php echo $payza_security; ?>" />
               <?php if ($error_security) { ?>
               <span class="error"><?php echo $error_security; ?></span>
               <?php } ?></td>
@@ -36,13 +36,13 @@
           </tr>
           <tr>
             <td><?php echo $entry_total; ?></td>
-            <td><input type="text" name="alertpay_total" value="<?php echo $alertpay_total; ?>" /></td>
+            <td><input type="text" name="payza_total" value="<?php echo $payza_total; ?>" /></td>
           </tr>
           <tr>
             <td><?php echo $entry_order_status; ?></td>
-            <td><select name="alertpay_order_status_id">
+            <td><select name="payza_order_status_id">
                 <?php foreach ($order_statuses as $order_status) { ?>
-                <?php if ($order_status['order_status_id'] == $alertpay_order_status_id) { ?>
+                <?php if ($order_status['order_status_id'] == $payza_order_status_id) { ?>
                 <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
                 <?php } else { ?>
                 <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
@@ -52,10 +52,10 @@
           </tr>
           <tr>
             <td><?php echo $entry_geo_zone; ?></td>
-            <td><select name="alertpay_geo_zone_id">
+            <td><select name="payza_geo_zone_id">
                 <option value="0"><?php echo $text_all_zones; ?></option>
                 <?php foreach ($geo_zones as $geo_zone) { ?>
-                <?php if ($geo_zone['geo_zone_id'] == $alertpay_geo_zone_id) { ?>
+                <?php if ($geo_zone['geo_zone_id'] == $payza_geo_zone_id) { ?>
                 <option value="<?php echo $geo_zone['geo_zone_id']; ?>" selected="selected"><?php echo $geo_zone['name']; ?></option>
                 <?php } else { ?>
                 <option value="<?php echo $geo_zone['geo_zone_id']; ?>"><?php echo $geo_zone['name']; ?></option>
@@ -65,8 +65,8 @@
           </tr>
           <tr>
             <td><?php echo $entry_status; ?></td>
-            <td><select name="alertpay_status">
-                <?php if ($alertpay_status) { ?>
+            <td><select name="payza_status">
+                <?php if ($payza_status) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
                 <?php } else { ?>
@@ -77,7 +77,7 @@
           </tr>
           <tr>
             <td><?php echo $entry_sort_order; ?></td>
-            <td><input type="text" name="alertpay_sort_order" value="<?php echo $alertpay_sort_order; ?>" size="1" /></td>
+            <td><input type="text" name="payza_sort_order" value="<?php echo $payza_sort_order; ?>" size="1" /></td>
           </tr>
         </table>
       </form>

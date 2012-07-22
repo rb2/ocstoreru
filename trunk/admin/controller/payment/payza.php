@@ -1,16 +1,16 @@
 <?php
-class ControllerPaymentAlertPay extends Controller {
+class ControllerPaymentPayza extends Controller {
 	private $error = array(); 
 
 	public function index() {
-		$this->load->language('payment/alertpay');
+		$this->load->language('payment/payza');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 			
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('alertpay', $this->request->post);				
+			$this->model_setting_setting->editSetting('payza', $this->request->post);				
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -69,67 +69,67 @@ class ControllerPaymentAlertPay extends Controller {
 
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('payment/alertpay', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('payment/payza', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 				
-		$this->data['action'] = $this->url->link('payment/alertpay', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['action'] = $this->url->link('payment/payza', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
-		if (isset($this->request->post['alertpay_merchant'])) {
-			$this->data['alertpay_merchant'] = $this->request->post['alertpay_merchant'];
+		if (isset($this->request->post['payza_merchant'])) {
+			$this->data['payza_merchant'] = $this->request->post['payza_merchant'];
 		} else {
-			$this->data['alertpay_merchant'] = $this->config->get('alertpay_merchant');
+			$this->data['payza_merchant'] = $this->config->get('payza_merchant');
 		}
 
-		if (isset($this->request->post['alertpay_security'])) {
-			$this->data['alertpay_security'] = $this->request->post['alertpay_security'];
+		if (isset($this->request->post['payza_security'])) {
+			$this->data['payza_security'] = $this->request->post['payza_security'];
 		} else {
-			$this->data['alertpay_security'] = $this->config->get('alertpay_security');
+			$this->data['payza_security'] = $this->config->get('payza_security');
 		}
 		
-		$this->data['callback'] = HTTP_CATALOG . 'index.php?route=payment/alertpay/callback';
+		$this->data['callback'] = HTTP_CATALOG . 'index.php?route=payment/payza/callback';
 		
-		if (isset($this->request->post['alertpay_total'])) {
-			$this->data['alertpay_total'] = $this->request->post['alertpay_total'];
+		if (isset($this->request->post['payza_total'])) {
+			$this->data['payza_total'] = $this->request->post['payza_total'];
 		} else {
-			$this->data['alertpay_total'] = $this->config->get('alertpay_total'); 
+			$this->data['payza_total'] = $this->config->get('payza_total'); 
 		} 
 				
-		if (isset($this->request->post['alertpay_order_status_id'])) {
-			$this->data['alertpay_order_status_id'] = $this->request->post['alertpay_order_status_id'];
+		if (isset($this->request->post['payza_order_status_id'])) {
+			$this->data['payza_order_status_id'] = $this->request->post['payza_order_status_id'];
 		} else {
-			$this->data['alertpay_order_status_id'] = $this->config->get('alertpay_order_status_id'); 
+			$this->data['payza_order_status_id'] = $this->config->get('payza_order_status_id'); 
 		} 
 		
 		$this->load->model('localisation/order_status');
 		
 		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 		
-		if (isset($this->request->post['alertpay_geo_zone_id'])) {
-			$this->data['alertpay_geo_zone_id'] = $this->request->post['alertpay_geo_zone_id'];
+		if (isset($this->request->post['payza_geo_zone_id'])) {
+			$this->data['payza_geo_zone_id'] = $this->request->post['payza_geo_zone_id'];
 		} else {
-			$this->data['alertpay_geo_zone_id'] = $this->config->get('alertpay_geo_zone_id'); 
+			$this->data['payza_geo_zone_id'] = $this->config->get('payza_geo_zone_id'); 
 		} 
 
 		$this->load->model('localisation/geo_zone');
 										
 		$this->data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 		
-		if (isset($this->request->post['alertpay_status'])) {
-			$this->data['alertpay_status'] = $this->request->post['alertpay_status'];
+		if (isset($this->request->post['payza_status'])) {
+			$this->data['payza_status'] = $this->request->post['payza_status'];
 		} else {
-			$this->data['alertpay_status'] = $this->config->get('alertpay_status');
+			$this->data['payza_status'] = $this->config->get('payza_status');
 		}
 		
-		if (isset($this->request->post['alertpay_sort_order'])) {
-			$this->data['alertpay_sort_order'] = $this->request->post['alertpay_sort_order'];
+		if (isset($this->request->post['payza_sort_order'])) {
+			$this->data['payza_sort_order'] = $this->request->post['payza_sort_order'];
 		} else {
-			$this->data['alertpay_sort_order'] = $this->config->get('alertpay_sort_order');
+			$this->data['payza_sort_order'] = $this->config->get('payza_sort_order');
 		}
 
-		$this->template = 'payment/alertpay.tpl';
+		$this->template = 'payment/payza.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -139,15 +139,15 @@ class ControllerPaymentAlertPay extends Controller {
 	}
 
 	private function validate() {
-		if (!$this->user->hasPermission('modify', 'payment/alertpay')) {
+		if (!$this->user->hasPermission('modify', 'payment/payza')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		if (!$this->request->post['alertpay_merchant']) {
+		if (!$this->request->post['payza_merchant']) {
 			$this->error['merchant'] = $this->language->get('error_merchant');
 		}
 
-		if (!$this->request->post['alertpay_security']) {
+		if (!$this->request->post['payza_security']) {
 			$this->error['security'] = $this->language->get('error_security');
 		}
 		
