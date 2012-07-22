@@ -2159,8 +2159,11 @@ CREATE TABLE `oc_product_description` (
   `meta_keyword` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `seo_title` varchar(255) COLLATE utf8_general_ci NOT NULL, 
   `seo_h1` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `tag` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY  (`product_id`,`language_id`),
-  KEY `name` (`name`)
+  KEY `name` (`name`),
+  FULLTEXT KEY `description` (`description`),
+  FULLTEXT KEY `tag` (`tag`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- 
@@ -2492,35 +2495,6 @@ INSERT INTO `oc_product_special` (`product_special_id`, `product_id`, `customer_
 (419, 42, 1, 1, '90.0000', '0000-00-00', '0000-00-00'),
 (439, 30, 1, 2, '90.0000', '0000-00-00', '0000-00-00'),
 (438, 30, 1, 1, '80.0000', '0000-00-00', '0000-00-00');
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `oc_product_tag`
--- 
-
-DROP TABLE IF EXISTS `oc_product_tag`;
-CREATE TABLE `oc_product_tag` (
-  `product_tag_id` int(11) NOT NULL auto_increment,
-  `product_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `tag` varchar(32) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY  (`product_tag_id`),
-  KEY `product_id` (`product_id`),
-  KEY `language_id` (`language_id`),
-  KEY `tag` (`tag`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
--- 
--- Dumping data for table `oc_product_tag`
--- 
-
-INSERT INTO `oc_product_tag` (`product_tag_id`, `product_id`, `language_id`, `tag`) VALUES
-(341, 42, 1, 'тест 1'),
-(342, 42, 1, 'тест 2'),
-(343, 42, 2, 'test 1'),
-(344, 42, 2, 'test 2');
 
 -- --------------------------------------------------------
 
