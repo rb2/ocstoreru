@@ -68,14 +68,14 @@
               <td><input type="text" name="email" value="<?php echo $email; ?>" />
                 <?php if ($error_email) { ?>
                 <span class="error"><?php echo $error_email; ?></span>
-                <?php  } ?></td>
+                <?php } ?></td>
             </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_telephone; ?></td>
               <td><input type="text" name="telephone" value="<?php echo $telephone; ?>" />
                 <?php if ($error_telephone) { ?>
                 <span class="error"><?php echo $error_telephone; ?></span>
-                <?php  } ?></td>
+                <?php } ?></td>
             </tr>
             <tr>
               <td><?php echo $entry_fax; ?></td>
@@ -122,7 +122,7 @@
                 <?php if ($error_payment_tax_id) { ?>
                 <span class="error"><?php echo $error_payment_tax_id; ?></span>
                 <?php } ?></td>
-            </tr>                        
+            </tr>
             <tr>
               <td><span class="required">*</span> <?php echo $entry_address_1; ?></td>
               <td><input type="text" name="payment_address_1" value="<?php echo $payment_address_1; ?>" />
@@ -263,8 +263,8 @@
                 <td class="right"><?php echo $column_total; ?></td>
               </tr>
             </thead>
-              <?php $product_row = 0; ?>
-              <?php $option_row = 0; ?>
+            <?php $product_row = 0; ?>
+            <?php $option_row = 0; ?>
             <?php $download_row = 0; ?>
             <tbody id="product">
               <?php if ($order_products) { ?>
@@ -635,7 +635,7 @@ $('input[name=\'customer\']').catcomplete({
 	},
 	focus: function(event, ui) {
       	return false;
-	}
+   	}
 });
 
 $('select[id=\'customer_group_id\']').live('change', function() {
@@ -704,7 +704,7 @@ $('input[name=\'affiliate\']').autocomplete({
 	},
 	focus: function(event, ui) {
       	return false;
-	}
+   	}
 });
 
 var payment_zone_id = '<?php echo $payment_zone_id; ?>';
@@ -850,7 +850,7 @@ $('input[name=\'product\']').autocomplete({
 	delay: 0,
 	source: function(request, response) {
 		$.ajax({
-			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' + encodeURIComponent(request.term),
 			dataType: 'json',
 			success: function(json) {	
 				response($.map(json, function(item) {
@@ -930,7 +930,7 @@ $('input[name=\'product\']').autocomplete({
 					html += '</div>';
 					html += '<br />';
 				}
-				
+					
 				if (option['type'] == 'checkbox') {
 					html += '<div id="option-' + option['product_option_id'] + '">';
 					
@@ -985,7 +985,7 @@ $('input[name=\'product\']').autocomplete({
 					html += '</div>';
 					html += '<br />';
 				}
-								
+						
 				if (option['type'] == 'text') {
 					html += '<div id="option-' + option['product_option_id'] + '">';
 					
@@ -1115,7 +1115,7 @@ $('input[name=\'product\']').autocomplete({
 	},
 	focus: function(event, ui) {
       	return false;
-	}
+   	}
 });	
 //--></script> 
 <script type="text/javascript"><!--
@@ -1166,7 +1166,7 @@ $('#button-product, #button-voucher, #button-update').live('click', function() {
 		dataType: 'json',	
 		beforeSend: function() {
 			$('.success, .warning, .attention, .error').remove();
-				
+			
 			$('.box').before('<div class="attention"><img src="view/image/loading.gif" alt="" /> <?php echo $text_wait; ?></div>');
 		},			
 		success: function(json) {
@@ -1177,12 +1177,12 @@ $('#button-product, #button-voucher, #button-update').live('click', function() {
 				if (json['error']['warning']) {
 					$('.box').before('<div class="warning">' + json['error']['warning'] + '</div>');
 				}
-				
+							
 				// Order Details
 				if (json['error']['customer']) {
 					$('.box').before('<span class="error">' + json['error']['customer'] + '</span>');
-			}	
-			
+				}	
+								
 				if (json['error']['firstname']) {
 					$('input[name=\'firstname\']').after('<span class="error">' + json['error']['firstname'] + '</span>');
 				}
@@ -1372,21 +1372,21 @@ $('#button-product, #button-voucher, #button-update').live('click', function() {
 					html += '<tr id="product-row' + product_row + '">';
 					html += '  <td class="center" style="width: 3px;"><img src="view/image/delete.png" title="<?php echo $button_remove; ?>" alt="<?php echo $button_remove; ?>" style="cursor: pointer;" onclick="$(\'#product-row' + product_row + '\').remove(); $(\'#button-update\').trigger(\'click\');" /></td>';
 					html += '  <td class="left">' + product['name'] + '<br /><input type="hidden" name="order_product[' + product_row + '][order_product_id]" value="" /><input type="hidden" name="order_product[' + product_row + '][product_id]" value="' + product['product_id'] + '" /><input type="hidden" name="order_product[' + product_row + '][name]" value="' + product['name'] + '" />';
-						  
+					
 					if (product['option']) {
-					for (j = 0; j < product['option'].length; j++) {
-						option = product['option'][j];
-						
-						html += '  - <small>' + option['name'] + ': ' + option['value'] + '</small><br />';
+						for (j = 0; j < product['option'].length; j++) {
+							option = product['option'][j];
+							
+							html += '  - <small>' + option['name'] + ': ' + option['value'] + '</small><br />';
 							html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][order_option_id]" value="' + option['order_option_id'] + '" />';
-						html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][product_option_id]" value="' + option['product_option_id'] + '" />';
-						html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][product_option_value_id]" value="' + option['product_option_value_id'] + '" />';
-						html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][name]" value="' + option['name'] + '" />';
-						html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][value]" value="' + option['value'] + '" />';
-						html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][type]" value="' + option['type'] + '" />';
-						
-						option_row++;
-					}
+							html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][product_option_id]" value="' + option['product_option_id'] + '" />';
+							html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][product_option_value_id]" value="' + option['product_option_value_id'] + '" />';
+							html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][name]" value="' + option['name'] + '" />';
+							html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][value]" value="' + option['value'] + '" />';
+							html += '  <input type="hidden" name="order_product[' + product_row + '][order_option][' + option_row + '][type]" value="' + option['type'] + '" />';
+							
+							option_row++;
+						}
 					}
 					
 					if (product['download']) {

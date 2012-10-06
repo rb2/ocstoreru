@@ -26,6 +26,10 @@ class ModelCatalogProduct extends Model {
 				'model'            => $query->row['model'],
 				'sku'              => $query->row['sku'],
 				'upc'              => $query->row['upc'],
+				'ean'              => $query->row['ean'],
+				'jan'              => $query->row['jan'],
+				'isbn'             => $query->row['isbn'],
+				'mpn'              => $query->row['mpn'],
 				'location'         => $query->row['location'],
 				'quantity'         => $query->row['quantity'],
 				'stock_status'     => $query->row['stock_status'],
@@ -84,9 +88,9 @@ class ModelCatalogProduct extends Model {
 				
 				if (!empty($data['filter_name'])) {					
 					if (!empty($data['filter_description'])) {
-						$sql .= "MATCH(pd.name) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "') OR MATCH(pd.description) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "')";
+						$sql .= "LCASE(pd.name) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%' OR MATCH(pd.description) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "')";
 					} else {
-						$sql .= "LCASE(pd.name) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "')";
+						$sql .= "LCASE(pd.name) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
 					}
 				}
 				
@@ -95,27 +99,55 @@ class ModelCatalogProduct extends Model {
 				}
 				
 				if (!empty($data['filter_tag'])) {
-					$sql .= "MATCH(pd.tag) LIKE AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_tag'])) . "')";
+					$sql .= "MATCH(pd.tag) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_tag'])) . "')";
 				}
 			
 				$sql .= ")";
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.model) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.sku) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}	
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.upc) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}		
+
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.ean) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}
+
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.jan) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.isbn) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}		
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.mpn) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}					
 			}
 			
 			if (!empty($data['filter_category_id'])) {
 				if (!empty($data['filter_sub_category'])) {
 					$implode_data = array();
 					
-					$implode_data[] = "p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
+					$implode_data[] = (int)$data['filter_category_id'];
 					
 					$this->load->model('catalog/category');
 					
 					$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
 										
 					foreach ($categories as $category_id) {
-						$implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
+						$implode_data[] = (int)$category_id;
 					}
 								
-					$sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
+					$sql .= " AND p2c.category_id IN (" . implode(', ', $implode_data) . ")";			
 				} else {
 					$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
 				}
@@ -417,6 +449,12 @@ class ModelCatalogProduct extends Model {
 	}	
 		
 	public function getTotalProducts($data = array()) {
+		if ($this->customer->isLogged()) {
+			$customer_group_id = $this->customer->getCustomerGroupId();
+		} else {
+			$customer_group_id = $this->config->get('config_customer_group_id');
+		}	
+				
 		$cache = md5(http_build_query($data));
 		
 		$product_data = $this->cache->get('product.total.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache);
@@ -435,9 +473,9 @@ class ModelCatalogProduct extends Model {
 				
 				if (!empty($data['filter_name'])) {					
 					if (!empty($data['filter_description'])) {
-						$sql .= "MATCH(pd.name) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "') OR MATCH(pd.description) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "')";
+						$sql .= "LCASE(pd.name) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%' OR MATCH(pd.description) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "')";
 					} else {
-						$sql .= "LCASE(pd.name) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "')";
+						$sql .= "LCASE(pd.name) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
 					}
 				}
 				
@@ -446,27 +484,55 @@ class ModelCatalogProduct extends Model {
 				}
 				
 				if (!empty($data['filter_tag'])) {
-					$sql .= "MATCH(pd.tag) LIKE AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_tag'])) . "')";
+					$sql .= "MATCH(pd.tag) AGAINST('" . $this->db->escape(utf8_strtolower($data['filter_tag'])) . "')";
 				}
 			
 				$sql .= ")";
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.model) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.sku) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}	
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.upc) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}		
+
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.ean) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}
+
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.jan) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.isbn) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}		
+				
+				if (!empty($data['filter_name'])) {
+					$sql .= " OR LCASE(p.mpn) = '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "'";
+				}				
 			}
 						
 			if (!empty($data['filter_category_id'])) {
 				if (!empty($data['filter_sub_category'])) {
 					$implode_data = array();
 					
-					$implode_data[] = "p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
+					$implode_data[] = (int)$data['filter_category_id'];
 					
 					$this->load->model('catalog/category');
 					
 					$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
-						
+										
 					foreach ($categories as $category_id) {
-						$implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
+						$implode_data[] = (int)$category_id;
 					}
 								
-					$sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
+					$sql .= " AND p2c.category_id IN (" . implode(', ', $implode_data) . ")";			
 				} else {
 					$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
 				}
@@ -501,21 +567,5 @@ class ModelCatalogProduct extends Model {
 			return 0;	
 		}
 	}
-
-	public function getTotalProductsByCategoryId($category_id) {
-		$product_total = 0;
-		
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p.status = '1' AND p.date_available <= NOW() AND p2c.category_id = '" . (int)$category_id . "' AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
-
-		$product_total += $query->row['total'];
-		
-		$query = $this->db->query("SELECT c.category_id FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$category_id . "' AND c.status = '1' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
-		
-		foreach ($query->rows as $result) {
-			$product_total += $this->getTotalProductsByCategoryId($result['category_id']);
-		}
-		
-		return $product_total;
-	}		
 }
 ?>

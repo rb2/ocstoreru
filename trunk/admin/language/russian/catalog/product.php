@@ -34,6 +34,10 @@ $_['entry_keyword']          = 'SEO URL:<br/><span class="help">Должно б�
 $_['entry_model']            = 'Модель:';
 $_['entry_sku']              = 'Артикул (SKU, код производителя):';
 $_['entry_upc']              = 'UPC:';
+$_['entry_ean']              = 'EAN:<br/><span class="help">European Article Number</span>';
+$_['entry_jan']              = 'JAN:<br/><span class="help">Japanese Article Number</span>';
+$_['entry_isbn']             = 'ISBN:<br/><span class="help">International Standard Book Number</span>';
+$_['entry_mpn']              = 'MPN:<br/><span class="help">Manufacturer Part Number</span>';
 $_['entry_location']         = 'Расположение:';
 $_['entry_manufacturer']     = 'Производитель:';
 $_['entry_shipping']         = 'Необходима доставка:';

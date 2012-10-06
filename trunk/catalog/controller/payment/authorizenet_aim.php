@@ -84,6 +84,16 @@ class ControllerPaymentAuthorizeNetAim extends Controller {
 		$data['x_exp_date'] = $this->request->post['cc_expire_date_month'] . $this->request->post['cc_expire_date_year'];
 		$data['x_card_code'] = $this->request->post['cc_cvv2'];
 		$data['x_invoice_num'] = $this->session->data['order_id'];
+
+		/* Customer Shipping Address Fields */
+		$data['x_ship_to_first_name'] = html_entity_decode($order_info['shipping_firstname'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_last_name'] = html_entity_decode($order_info['shipping_lastname'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_company'] = html_entity_decode($order_info['shipping_company'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_address'] = html_entity_decode($order_info['shipping_address_1'], ENT_QUOTES, 'UTF-8') . ' ' . html_entity_decode($order_info['shipping_address_2'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_city'] = html_entity_decode($order_info['shipping_city'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_state'] = html_entity_decode($order_info['shipping_zone'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_zip'] = html_entity_decode($order_info['shipping_postcode'], ENT_QUOTES, 'UTF-8');
+		$data['x_ship_to_country'] = html_entity_decode($order_info['shipping_country'], ENT_QUOTES, 'UTF-8');
 	
 		if ($this->config->get('authorizenet_aim_mode') == 'test') {
 			$data['x_test_request'] = 'true';
@@ -124,7 +134,7 @@ class ControllerPaymentAuthorizeNetAim extends Controller {
 			}
 		
 			if ($response_info[1] == '1') {
-				if (strtoupper($response_info[38]) != strtoupper(md5($this->config->get('authorizenet_aim_hash') . $this->config->get('authorizenet_aim_login') . $response_info[6] . $this->currency->format($order_info['total'], $order_info['currency_code'], 1.00000, false)))) {
+				if (strtoupper($response_info[38]) == strtoupper(md5($this->config->get('authorizenet_aim_hash') . $response_info[6] . $this->currency->format($order_info['total'], $order_info['currency_code'], 1.00000, false)))) {
 					$this->model_checkout_order->confirm($this->session->data['order_id'], $this->config->get('config_order_status_id'));
 					
 					$message = '';
