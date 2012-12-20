@@ -3,25 +3,25 @@
 $_['heading_title']      = 'PayPal Website Payment Pro (UK)';
 
 // Text 
-$_['text_payment']       = 'Оплата';
-$_['text_success']       = 'Настройки PayPal Website Payment Pro (UK) изменены!';
+$_['text_payment']       = 'РћРїР»Р°С‚Р°';
+$_['text_success']       = 'РќР°СЃС‚СЂРѕР№РєРё PayPal Website Payment Pro (UK) РёР·РјРµРЅРµРЅС‹!';
 $_['text_pp_pro_uk']     = '<a onclick="window.open(\'https://www.paypal.com/uk/mrb/pal=W9TBB5DTD6QJW\');"><img src="view/image/payment/paypal.png" alt="PayPal Website Payment Pro (UK)" title="PayPal Website Payment Pro (UK)" style="border: 1px solid #EEEEEE;" /></a>';
-$_['text_authorization'] = 'Авторизация';
-$_['text_sale']          = 'Продажа';
+$_['text_authorization'] = 'РђРІС‚РѕСЂРёР·Р°С†РёСЏ';
+$_['text_sale']          = 'РџСЂРѕРґР°Р¶Р°';
 
 // Entry
-$_['entry_vendor']       = 'Продавец:<br/><span class="help">идентификатор продавца в системе Website Payments Pro</span>';
-$_['entry_user']         = 'Пользователь<br/><span class="help">Если вы установите один или несколько дополнительных пользователей на счету, это значение идентификатора пользователя, уполномоченного для обработки транзакций. Однако, если вы еще не создали дополнительных пользователей на счете, пользователь имеет то же значение, как и поставщик</ span>
+$_['entry_vendor']       = 'РџСЂРѕРґР°РІРµС†:<br/><span class="help">РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РїСЂРѕРґР°РІС†Р° РІ СЃРёСЃС‚РµРјРµ Website Payments Pro</span>';
+$_['entry_user']         = 'РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ<br/><span class="help">Р•СЃР»Рё РІС‹ СѓСЃС‚Р°РЅРѕРІРёС‚Рµ РѕРґРёРЅ РёР»Рё РЅРµСЃРєРѕР»СЊРєРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РЅР° СЃС‡РµС‚Сѓ, СЌС‚Рѕ Р·РЅР°С‡РµРЅРёРµ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ, СѓРїРѕР»РЅРѕРјРѕС‡РµРЅРЅРѕРіРѕ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё С‚СЂР°РЅР·Р°РєС†РёР№. РћРґРЅР°РєРѕ, РµСЃР»Рё РІС‹ РµС‰Рµ РЅРµ СЃРѕР·РґР°Р»Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РЅР° СЃС‡РµС‚Рµ, РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РёРјРµРµС‚ С‚Рѕ Р¶Рµ Р·РЅР°С‡РµРЅРёРµ, РєР°Рє Рё РїРѕСЃС‚Р°РІС‰РёРє</ span>
 ';
-$_['entry_password']     = 'Пароль <br /> <span class="help"> Пароль к аккаунту PayPal Website Payment Pro (UK), должен содержать от 6 до 32 символов </ span>';
+$_['entry_password']     = 'РџР°СЂРѕР»СЊ <br /><span class="help"> РџР°СЂРѕР»СЊ Рє Р°РєРєР°СѓРЅС‚Сѓ PayPal Website Payment Pro (UK), РґРѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ РѕС‚ 6 РґРѕ 32 СЃРёРјРІРѕР»РѕРІ </ span>';
 $_['entry_partner']      = 'Partner:<br /><span class="help">The ID provided to you by the authorised PayPal Reseller who registered you for the Payflow SDK. If you purchased your account directly from PayPal, use PayPalUK.</span>';
 $_['entry_test']         = 'Test Mode:<br /><span class="help">Use the live or testing (sandbox) gateway server to process transactions?</span>';
 $_['entry_transaction']  = 'Transaction Method:';
 $_['entry_total']        = 'Total:<br /><span class="help">The checkout total the order must reach before this payment method becomes active.</span>';
-$_['entry_order_status'] = 'Статус заказа:';
-$_['entry_geo_zone']     = 'Гео-зона:';
-$_['entry_status']       = 'Статус:';
-$_['entry_sort_order']   = 'Порядок сортировки:';
+$_['entry_order_status'] = 'РЎС‚Р°С‚СѓСЃ Р·Р°РєР°Р·Р°:';
+$_['entry_geo_zone']     = 'Р“РµРѕ-Р·РѕРЅР°:';
+$_['entry_status']       = 'РЎС‚Р°С‚СѓСЃ:';
+$_['entry_sort_order']   = 'РџРѕСЂСЏРґРѕРє СЃРѕСЂС‚РёСЂРѕРІРєРё:';
 
 // Error
 $_['error_permission']   = 'Warning: You do not have permission to modify payment PayPal Website Payment Pro (UK)!';
