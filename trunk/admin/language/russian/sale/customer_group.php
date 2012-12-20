@@ -7,18 +7,18 @@ $_['text_success']            = 'Группы покупателей измен�
 
 // Column
 $_['column_name']             = 'Название группы покупателей';
-$_['column_sort_order']       = 'Sort Order';
+$_['column_sort_order']       = 'Порядок сортировки';
 $_['column_action']           = 'Действие';
 
 // Entry
 $_['entry_name']              = 'Название группы покупателей:';
-$_['entry_description']         = 'Description:';
-$_['entry_approval']            = 'Approve New Customers:<br /><span class="help">Customers must be approved by and administrator before they can login.</span>';
-$_['entry_company_id_display']  = 'Display Company No.:<br /><span class="help">Display a company no. field.</span>';
-$_['entry_company_id_required'] = 'Company No. Required:<br /><span class="help">Select which customer groups must enter their company no. for billing addresses before checkout.</span>';
-$_['entry_tax_id_display']      = 'Display Tax ID.:<br /><span class="help">Display a Tax ID. field for billing addresses.</span>';
-$_['entry_tax_id_required']     = 'Tax ID Required:<br /><span class="help">Select which customer groups must enter their Tax ID for billing addresses before checkout.</span>';
-$_['entry_sort_order']          = 'Sort Order:';
+$_['entry_description']         = 'Описание:';
+$_['entry_approval']            = 'Утверждение новых клиентов <br/><span class="help">Клиенты должны быть одобрены администратором перед тем как войти в систему. </span>';
+$_['entry_company_id_display']  = 'Отображение номера компании <br/><span class="help">Поле отображения номера компании.</span>';
+$_['entry_company_id_required'] = 'Необходимо указать номер компании<br/><span class="help">Укажите группу пользователей которой необходимо указывать номер компании в платежном адресе, перед подтверждением покупки.</span>';
+$_['entry_tax_id_display']      = 'Отображение ID налоговика<br /><span class="help">Отображение номера компании в платежном адресе.</span>';
+$_['entry_tax_id_required']     = 'Необходимость указывать ID налога<br /><span class="help">Укажите группу пользователей которые должны указывать ID налога в платежном адресе, перед подтверждением покупки.</span>';
+$_['entry_sort_order']          = 'Порядок сортування:';
 
 // Error
 $_['error_permission']        = 'У Вас нет прав для изменения групп покупателей!';

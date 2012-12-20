@@ -8,8 +8,8 @@ $_['text_default']            = 'По умолчанию';
 $_['text_approved']           = 'Вы активировали %s аккаунт!';
 $_['text_wait']               = 'Подождите!';
 $_['text_balance']            = 'Баланс:';
-$_['text_add_blacklist']      = 'Добавить IP в Черный список';
-$_['text_remove_blacklist']   = 'Удалить IP из Черного списка';
+$_['text_add_blacklist']      = 'Добавить черный список';
+$_['text_remove_blacklist']   = 'Удалить черный список';
 
 // Column
 $_['column_name']             = 'Имя покупателя';
